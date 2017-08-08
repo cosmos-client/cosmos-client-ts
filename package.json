@@ -1,0 +1,24 @@
+{
+  "name": "js-weave",
+  "version": "1.0.0",
+  "description": "JavaScript API client for Weave RPC",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "old": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tendermint/js-weave.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tendermint/js-weave/issues"
+  },
+  "homepage": "https://github.com/tendermint/js-weave#readme"
+}

@@ -1,31 +1,24 @@
 'use strict'
 
-const request = require('request-promise-native')
+const request = require('axios')
 const old = require('old')
 
-function apiFunc (method, rootPath, propNames = [], nPathArgs = 0) {
-  return async function (...args) {
-    let path = rootPath
-
-    // add path args (e.g. 'name' in '/foo/${name}') to path
-    if (nPathArgs) {
-      let pathArgs = args.slice(0, nPathArgs)
-      path += '/' + pathArgs.join('/')
-    }
-
-    // create JSON object from list of property names and list of values
-    let data = {}
-    for (let i = 0; i < propNames.length; i++) {
-      data[propNames[i]] = args[i]
-    }
-
+// returns an async function which makes a request for the given
+// HTTP method (GET/POST/DELETE/etc) and path (/foo/bar)
+function req (method, path) {
+  return async function (data) {
     return await this.request(method, path, data)
   }
 }
 
-const getReq = (...args) => apiFunc('GET', ...args)
-const postReq = (...args) => apiFunc('POST', ...args)
-const deleteReq = (...args) => apiFunc('DELETE', ...args)
+// returns an async function which makes a request for the given
+// HTTP method and path, which accepts an argument to be appended
+// to the path (/foo/{arg})
+function argReq (method, path) {
+  return async function (arg, data) {
+    return await this.request(method, `${path}/${arg}`, data)
+  }
+}
 
 class Client {
   constructor (server = 'http://localhost:8998') {
@@ -33,20 +26,31 @@ class Client {
   }
 
   async request (method, path, data) {
-    return await request({
+    let res = await request({
       method,
-      uri: this.server + path,
-      json: data || true
+      url: this.server + path,
+      data
     })
+    return res.data
   }
 }
 
 Object.assign(Client.prototype, {
-  generateKey: postReq('/keys', [ 'name', 'password' ]),
-  listKeys: getReq('/keys'),
-  getKey: getReq('/keys', [ 'name' ], 1),
-  updateKey: postReq('/keys', [ 'name', 'password', 'new_passphrase' ], 1),
-  deleteKey: deleteReq('/keys', [ 'name', 'password' ], 1)
+  // sign tx
+  sign: req('POST', '/sign'),
+
+  // keys
+  generateKey: req('POST', '/keys'),
+  listKeys: req('GET', '/keys'),
+  getKey: argReq('GET', '/keys'),
+  updateKey: argReq('PUT', '/keys'),
+  deleteKey: argReq('DELETE', '/keys'),
+
+  // coins
+  buildSend: req('POST', '/build/send'),
+  buildSend: argReq('GET', '/query/account'),
+
+  // TODO: separate API registration for different modules
 })
 
 module.exports = old(Client)
