@@ -47,8 +47,8 @@ class Client {
 let fetchAccount = argReq('GET', '/query/account')
 
 Object.assign(Client.prototype, {
-  // sign tx
   sign: req('POST', '/sign'),
+  postTx: req('POST', '/tx'),
 
   // keys
   generateKey: req('POST', '/keys'),
