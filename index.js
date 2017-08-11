@@ -45,6 +45,8 @@ class Client {
   }
 }
 
+let fetchAccount = argReq('GET', '/query/account')
+
 Object.assign(Client.prototype, {
   // sign tx
   sign: req('POST', '/sign'),
@@ -58,7 +60,20 @@ Object.assign(Client.prototype, {
 
   // coins
   buildSend: req('POST', '/build/send'),
-  buildSend: argReq('GET', '/query/account'),
+  async queryAccount (address) {
+    try {
+      return await fetchAccount.call(this, address)
+    } catch (err) {
+      // if account not found, return null instead of throwing
+      if (err.message.includes('account bytes are empty')) {
+        return null
+      }
+      throw err
+    }
+  },
+
+  // Tendermint RPC
+  status: req('GET', '/tendermint/status')
 
   // TODO: separate API registration for different modules
 })
