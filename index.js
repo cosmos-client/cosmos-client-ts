@@ -26,7 +26,6 @@ class Client {
   }
 
   async request (method, path, data) {
-    console.log('request', method, path, data)
     try {
       let res = await request({
         method,
