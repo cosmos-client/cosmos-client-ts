@@ -26,12 +26,22 @@ class Client {
   }
 
   async request (method, path, data) {
-    let res = await request({
-      method,
-      url: this.server + path,
-      data
-    })
-    return res.data
+    console.log('request', method, path, data)
+    try {
+      let res = await request({
+        method,
+        url: this.server + path,
+        data
+      })
+      return res.data
+    } catch (resError) {
+      let data = resError.response.data
+      if (!data) throw resError
+      // server responded with error message, create an Error from that
+      let error = Error(data.error)
+      error.code = data.code
+      throw error
+    }
   }
 }
 
