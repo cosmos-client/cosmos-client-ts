@@ -45,6 +45,7 @@ class Client {
 }
 
 let fetchAccount = argReq('GET', '/query/account')
+let fetchNonce = argReq('GET', '/query/nonce')
 
 Object.assign(Client.prototype, {
   sign: req('POST', '/sign'),
@@ -66,6 +67,19 @@ Object.assign(Client.prototype, {
       // if account not found, return null instead of throwing
       if (err.message.includes('account bytes are empty')) {
         return null
+      }
+      throw err
+    }
+  },
+
+  // nonce
+  async queryNonce (address) {
+    try {
+      return await fetchNonce.call(this, address)
+    } catch (err) {
+      // if nonce not found, return 0 instead of throwing
+      if (err.message.includes('nonce empty')) {
+        return 0
       }
       throw err
     }
