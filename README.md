@@ -1,14 +1,14 @@
-# Weave
-JavaScript API client for Weave RPC
+# cosmos-sdk-js
+JavaScript client for the Cosmos SDK API
 
 ## Usage
 
 ```
-npm install --save tendermint-weave
+npm install --save cosmos-sdk
 ```
 
 ```js
-let client = require('tendermint-weave')('http://localhost:45512')
+let client = require('cosmos-sdk')('http://localhost:45512')
 
 // create a key
 let key = await client.generateKey({ name: 'matt', passphrase: 'top secret' })
