@@ -88,6 +88,13 @@ Object.assign(Client.prototype, {
   // Tendermint RPC
   status: req('GET', '/tendermint/status')
 
+  // staking
+  candidate: argReq('GET', '/query/stake/candidate'),
+  candidates: req('GET', '/query/stake/candidate'),
+  buildCandidacy: argReq('POST', '/tx/stake/declare-candidacy'),
+  buildDelegate: argReq('POST', '/tx/stake/delegate'),
+  buildUnbond: argReq('POST', '/tx/stake/unbond')
+
   // TODO: separate API registration for different modules
 })
 
