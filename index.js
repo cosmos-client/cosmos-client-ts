@@ -12,11 +12,15 @@ function req (method, path) {
 }
 
 // returns an async function which makes a request for the given
-// HTTP method and path, which accepts an argument to be appended
-// to the path (/foo/{arg})
+// HTTP method and path, which accepts arguments to be appended
+// to the path (/foo/{arg}/...)
 function argReq (method, path) {
-  return async function (arg, data) {
-    return await this.request(method, `${path}/${arg}`, data)
+  return async function (args, data) {
+    // `args` can either be a single value or an array
+    if (Array.isArray(args)) {
+      args = args.join('/')
+    }
+    return await this.request(method, `${path}/${args}`, data)
   }
 }
 
@@ -86,7 +90,14 @@ Object.assign(Client.prototype, {
   },
 
   // Tendermint RPC
-  status: req('GET', '/tendermint/status')
+  status: req('GET', '/tendermint/status'),
+
+  // staking
+  candidate: argReq('GET', '/query/stake/candidate'),
+  candidates: req('GET', '/query/stake/candidate'),
+  buildCandidacy: argReq('POST', '/tx/stake/declare-candidacy'),
+  buildDelegate: argReq('POST', '/tx/stake/delegate'),
+  buildUnbond: argReq('POST', '/tx/stake/unbond')
 
   // TODO: separate API registration for different modules
 })
