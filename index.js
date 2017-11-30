@@ -50,6 +50,7 @@ class Client {
 
 let fetchAccount = argReq('GET', '/query/account')
 let fetchNonce = argReq('GET', '/query/nonce')
+let fetchCandidates = argReq('GET', '/query/stake/candidates')
 
 Object.assign(Client.prototype, {
   sign: req('POST', '/sign'),
@@ -93,9 +94,17 @@ Object.assign(Client.prototype, {
   status: req('GET', '/tendermint/status'),
 
   // staking
-  candidate: argReq('GET', '/query/stake/candidate'),
-  candidates: req('GET', '/query/stake/candidate'),
-  buildCandidacy: argReq('POST', '/tx/stake/declare-candidacy'),
+  candidate: argReq('GET', '/query/stake/candidates'),
+  async candidates (address) {
+    try {
+      return await fetchCandidates.call(this, address)
+    } catch (err) {
+      if (err.message.includes('No data returned')) {
+        return []
+      }
+      throw err
+    }
+  },
   buildDelegate: argReq('POST', '/tx/stake/delegate'),
   buildUnbond: argReq('POST', '/tx/stake/unbond')
 
