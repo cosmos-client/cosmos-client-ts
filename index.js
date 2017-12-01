@@ -96,7 +96,7 @@ Object.assign(Client.prototype, {
 
   // staking
   candidate: argReq('GET', '/query/stake/candidates'),
-  candidates: req('GET', '/candidates'),
+  candidates: req('GET', '/query/stake/candidates'),
   buildDelegate: argReq('POST', '/tx/stake/delegate'),
   buildUnbond: argReq('POST', '/tx/stake/unbond'),
   bondingsByDelegator: argReq('GET', '/tx/bondings/delegator'),
