@@ -1,6 +1,6 @@
 {
   "name": "cosmos-sdk",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "description": "JavaScript client for the Cosmos SDK API",
   "main": "index.js",
   "dependencies": {
