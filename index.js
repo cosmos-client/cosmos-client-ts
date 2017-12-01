@@ -76,7 +76,7 @@ Object.assign(Client.prototype, {
       throw err
     }
   },
-  coinTxs: req('GET', '/tx/coins'),
+  coinTxs: argReq('GET', '/tx/coins'),
 
   // nonce
   async queryNonce (address) {
@@ -99,8 +99,8 @@ Object.assign(Client.prototype, {
   candidates: req('GET', '/candidates'),
   buildDelegate: argReq('POST', '/tx/stake/delegate'),
   buildUnbond: argReq('POST', '/tx/stake/unbond'),
-  bondingsByDelegator: req('GET', '/tx/bondings/delegator'),
-  bondingsByValidator: req('GET', '/tx/bondings/validator')
+  bondingsByDelegator: argReq('GET', '/tx/bondings/delegator'),
+  bondingsByValidator: argReq('GET', '/tx/bondings/validator')
 
   // TODO: separate API registration for different modules
 })
