@@ -62,6 +62,7 @@ Object.assign(Client.prototype, {
   getKey: argReq('GET', '/keys'),
   updateKey: argReq('PUT', '/keys'),
   deleteKey: argReq('DELETE', '/keys'),
+  recoverKey: req('POST', '/keys/recover'),
 
   // coins
   buildSend: req('POST', '/build/send'),
