@@ -77,7 +77,7 @@ Object.assign(Client.prototype, {
       throw err
     }
   },
-  coinTxs: argReq('GET', '/tx/coins'),
+  coinTxs: argReq('GET', '/tx/coin'),
 
   // nonce
   async queryNonce (address) {
@@ -98,8 +98,8 @@ Object.assign(Client.prototype, {
   // staking
   candidate: argReq('GET', '/query/stake/candidates'),
   candidates: req('GET', '/query/stake/candidates'),
-  buildDelegate: argReq('POST', '/tx/stake/delegate'),
-  buildUnbond: argReq('POST', '/tx/stake/unbond'),
+  buildDelegate: req('POST', '/build/stake/delegate'),
+  buildUnbond: req('POST', '/build/stake/unbond'),
   bondingsByDelegator: argReq('GET', '/tx/bondings/delegator'),
   bondingsByValidator: argReq('GET', '/tx/bondings/validator')
 
