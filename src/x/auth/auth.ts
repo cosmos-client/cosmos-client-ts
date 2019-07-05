@@ -9,7 +9,14 @@ export module Auth {
     return host.get<{}>(`/txs/${hash}`)
   }
 
-  export function getTransactions(host: CosmosSdkHost, params: { tags: string[]; page: number; limit: number; }) {
+  export function getTransactions(
+    host: CosmosSdkHost,
+    params: {
+      tags?: string[];
+      page?: number;
+      limit?: number;
+    }
+  ) {
     return host.get<{}>(`/txs`, params)
   }
 

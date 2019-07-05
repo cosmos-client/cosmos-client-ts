@@ -1,5 +1,5 @@
 import { Coin } from "./coin";
-import { DecimalCoin } from "./decimal-coin";
+import { DecCoin } from "./deccoin";
 
 export interface BaseReq {
   from: string;
@@ -8,7 +8,7 @@ export interface BaseReq {
   account_number: number;
   sequence: number;
   fees: Coin[];
-  gas_prices: DecimalCoin[];
+  gas_prices: DecCoin[];
   gas: string;
   gas_adjustment: string;
   simulate: boolean;

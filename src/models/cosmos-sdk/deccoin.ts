@@ -1,4 +1,4 @@
-export interface DecimalCoin {
+export interface DecCoin {
   denom: string;
   amount: number;
 }
