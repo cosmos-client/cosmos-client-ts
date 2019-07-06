@@ -1,5 +1,6 @@
-import { Msg } from "../../models/cosmos-sdk/msg";
-import { Coin } from "../../models/cosmos-sdk/coin";
+import { Msg } from "../../cosmos-sdk/msg";
+import { Coin } from "../../cosmos-sdk/coin/coin";
+import { PubKey } from "../../tendermint/crypto/crypto";
 
 export interface StdTx {
   msg: Msg[];
@@ -23,6 +24,6 @@ export interface StdSignDoc {
 }
 
 export interface StdSignature {
-  pub_key: unknown[]; //todo
-  signature: string;
+  pub_key: PubKey[]; //todo
+  signature: Uint8Array;
 }

@@ -1,5 +1,5 @@
-import { Coin } from "./coin";
-import { DecCoin } from "./deccoin";
+import { Coin } from "./coin/coin";
+import { DecCoin } from "./coin/deccoin";
 
 export interface BaseReq {
   from: string;

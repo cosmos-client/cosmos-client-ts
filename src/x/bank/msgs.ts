@@ -1,8 +1,9 @@
-import { Coin } from "../../models/cosmos-sdk/coin";
+import { Coin } from "../../cosmos-sdk/coin/coin";
+import { AccAddress } from "../../cosmos-sdk/address/acc-address";
 
 export interface MsgSend {
-  from_address: string;
-  to_address: string;
+  from_address: AccAddress;
+  to_address: AccAddress;
   amount: Coin[];
 }
 
