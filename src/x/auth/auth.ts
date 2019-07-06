@@ -1,8 +1,9 @@
 import { CosmosSdkHost } from "../..";
+import { Account } from "../../cosmos-sdk/account";
 
 export module Auth {
   export function getAccount(host: CosmosSdkHost, address: string) {
-    return host.get<{}>(`/auth/accounts/${address}`)
+    return host.get<Account>(`/auth/accounts/${address}`)
   }
 
   export function getTransaction(host: CosmosSdkHost, hash: string) {

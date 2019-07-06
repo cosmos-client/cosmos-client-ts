@@ -1,29 +1,42 @@
 import { Msg } from "../../cosmos-sdk/msg";
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
+import { Tx } from "../../cosmos-sdk/tx";
 
-export interface StdTx {
+export class StdTx implements Tx {
   msg: Msg[];
   fee: StdFee;
   signatures: StdSignature[];
   memo: string;
+
+  constructor(
+    msgs: Msg[],
+    fee: StdFee,
+    sigs: StdSignature[],
+    memo: string
+  ) {
+    this.msg = msgs;
+    this.fee = fee;
+    this.signatures = sigs;
+    this.memo = memo;
+  }
 }
 
 export interface StdFee {
   amount: Coin[];
-  gas: number; //u64
+  gas: bigint;
 }
 
 export interface StdSignDoc {
-  account_number: number; //u64
+  account_number: bigint;
   chain_id: string;
-  fee: unknown;
+  fee: StdFee;
   memo: string;
-  msgs: unknown[];
-  sequence: number; //u64
+  msgs: Msg[];
+  sequence: bigint;
 }
 
 export interface StdSignature {
-  pub_key: PubKey[]; //todo
+  pub_key: PubKey[];
   signature: Uint8Array;
 }
