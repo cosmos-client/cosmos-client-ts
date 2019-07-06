@@ -17,7 +17,12 @@ export class CosmosSdkHost {
           json: true,
           qs: params
         },
-        (body) => {
+        (error, response, body) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
           resolve(body);
         }
       );
@@ -33,7 +38,12 @@ export class CosmosSdkHost {
           json: true,
           body: params
         },
-        (body) => {
+        (error, response, body) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
           resolve(body);
         }
       );
