@@ -1,4 +1,3 @@
-import * as bitcoinjs from 'bitcoinjs-lib';
 import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
 import { PubKey, PrivKey } from "./crypto";
@@ -36,10 +35,8 @@ export class PrivKeySecp256k1 implements PrivKey {
   constructor(
     privateKey: Buffer
   ) {
-    const ecPair = bitcoinjs.ECPair.fromPrivateKey(privateKey, { compressed: false });
-
     this.value = privateKey.toString('base64');
-    this._pubKey = new PubKeySecp256k1(ecPair.publicKey);
+    this._pubKey = new PubKeySecp256k1(secp256k1.publicKeyCreate(privateKey));
     this._privateKey = privateKey;
   }
 
