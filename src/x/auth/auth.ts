@@ -1,10 +1,10 @@
 import { CosmosSdkHost } from "../..";
-import { Account } from "../../cosmos-sdk/account";
 import { SignedTx } from "./signed-tx";
+import { BaseAccount } from "./account";
 
 export module Auth {
   export function getAccount(host: CosmosSdkHost, address: string) {
-    return host.get<Account>(`/auth/accounts/${address}`)
+    return host.get<BaseAccount>(`/auth/accounts/${address}`)
   }
 
   export function getTransaction(host: CosmosSdkHost, hash: string) {
