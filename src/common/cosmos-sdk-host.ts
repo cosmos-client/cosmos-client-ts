@@ -1,4 +1,6 @@
 import * as request from 'request';
+import { StdSignDoc, StdFee } from '../x/auth/stdtx';
+import { Msg } from '../cosmos-sdk/msg';
 
 export class CosmosSdkHost {
   constructor(
@@ -48,5 +50,22 @@ export class CosmosSdkHost {
         }
       );
     });
+  }
+
+  public createStdSignDoc(
+    accountNumber: bigint,
+    fee: StdFee,
+    memo: string,
+    msgs: Msg[],
+    sequence: string
+  ): StdSignDoc {
+    return {
+      account_number: accountNumber,
+      chain_id: this.chainId,
+      fee: fee,
+      memo: memo,
+      msgs: msgs,
+      sequence: sequence
+    }
   }
 }

@@ -4,14 +4,13 @@ import * as secp256k1 from 'secp256k1';
 import { PubKey, PrivKey } from "./crypto";
 
 export class PubKeySecp256k1 implements PubKey {
-  public readonly type: string;
+  public readonly type = 'tendermint/PubKeySecp256k1';
   public readonly value: string;
   private _publicKey: Buffer;
 
   constructor(
     publicKey: Buffer
   ) {
-    this.type = 'tendermint/PubKeySecp256k1'
     this.value = publicKey.toString('base64');
     this._publicKey = publicKey;
   }
@@ -28,20 +27,24 @@ export class PubKeySecp256k1 implements PubKey {
   }
 }
 
-export class PrivKeySecp256k1 extends PubKeySecp256k1 implements PrivKey {
-  public readonly type: string;
+export class PrivKeySecp256k1 implements PrivKey {
+  public readonly type = 'tendermint/PrivKeySecp256k1';
   public readonly value: string;
+  private _pubKey: PubKey;
   private _privateKey: Buffer;
 
   constructor(
     privateKey: Buffer
   ) {
     const ecPair = bitcoinjs.ECPair.fromPrivateKey(privateKey, { compressed: false });
-    super(ecPair.publicKey);
 
-    this.type = 'tendermint/PrivKeySecp256k1';
     this.value = privateKey.toString('base64');
+    this._pubKey = new PubKeySecp256k1(ecPair.publicKey);
     this._privateKey = privateKey;
+  }
+
+  public get pubKey() {
+    return this._pubKey;
   }
 
   public get privKeyBuffer() {

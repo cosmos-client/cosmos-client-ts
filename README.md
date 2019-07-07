@@ -21,8 +21,8 @@ import {
 const host = new CosmosSdkHost('http://localhost:45512');
 const privKeyBuffer = await HdWallet.generatePrivateKeyByBip39('mnemonic', HdWallet.getBip32PathByBip44(0));
 const privKey = new PrivKeySecp256k1(privKeyBuffer);
-const signedTx = new SignedTx(privKey, { ... } as StdSignDoc);
-await Auth.postTransaction(host, signedTx);
+const broadcastReq = new BroadcastReq(privKey, host.createStdSignDoc(...));
+await Auth.postTransaction(host, broadcastReq);
 
 const accountInfo = await Auth.getAccount(host, privateKey.bech32Address);
 

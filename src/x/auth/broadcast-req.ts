@@ -1,8 +1,7 @@
 import { StdTx, StdSignDoc } from "./stdtx";
 import { PrivKey } from "../../tendermint/crypto/crypto";
-import { PubKeySecp256k1 } from "../../tendermint/crypto/secp256k1";
 
-export class SignedTx {
+export class BroadcastReq {
   public tx: StdTx;
   public mode: string;
 
@@ -15,7 +14,7 @@ export class SignedTx {
       signatures: [
         {
           signature: signature.toString('base64'),
-          pub_key: new PubKeySecp256k1(privKey.pubKeyBuffer)
+          pub_key: privKey.pubKey
         }
       ],
       memo: stdSignDoc.memo

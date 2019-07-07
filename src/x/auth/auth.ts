@@ -1,5 +1,5 @@
 import { CosmosSdkHost } from "../..";
-import { SignedTx } from "./signed-tx";
+import { BroadcastReq } from "./broadcast-req";
 import { BaseAccount } from "./account";
 
 export module Auth {
@@ -22,8 +22,8 @@ export module Auth {
     return host.get<{}>(`/txs`, params)
   }
 
-  export function postTransaction(host: CosmosSdkHost, signedTx: SignedTx) {
-    return host.post<{}>(`/txs`, signedTx);
+  export function postTransaction(host: CosmosSdkHost, broadcastReq: BroadcastReq) {
+    return host.post<{}>(`/txs`, broadcastReq);
   }
 
   export function postEncodeTransaction(host: CosmosSdkHost) {

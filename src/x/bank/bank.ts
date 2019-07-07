@@ -1,6 +1,5 @@
 import { CosmosSdkHost } from "../..";
-import { BaseReq } from "../../cosmos-sdk/rest";
-import { Coin } from "../../cosmos-sdk/coin/coin";
+import { SendReq } from "./send-req";
 
 export module Bank {
   export function postTransfer(host: CosmosSdkHost, address: string, params: SendReq) {
@@ -9,10 +8,5 @@ export module Bank {
 
   export function getBalance(host: CosmosSdkHost, address: string) {
     return host.get<{}>(`/bank/balances/${address}`);
-  }
-
-  export interface SendReq {
-    base_req: BaseReq;
-    amount: Coin[];
   }
 }
