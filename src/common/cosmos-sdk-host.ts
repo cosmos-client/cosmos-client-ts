@@ -57,7 +57,7 @@ export class CosmosSdkHost {
     fee: StdFee,
     memo: string,
     msgs: Msg[],
-    sequence: string
+    sequence: bigint
   ): StdSignDoc {
     return {
       account_number: accountNumber,
