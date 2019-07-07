@@ -14,7 +14,7 @@ export class BroadcastReq {
       signatures: [
         {
           signature: signature.toString('base64'),
-          pub_key: privKey.pubKey
+          pub_key: privKey.getPubKey()
         }
       ],
       memo: stdSignDoc.memo

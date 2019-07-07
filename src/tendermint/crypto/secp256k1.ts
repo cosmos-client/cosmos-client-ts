@@ -15,7 +15,7 @@ export class PubKeySecp256k1 implements PubKey {
     this._publicKey = publicKey;
   }
 
-  public get pubKeyBuffer() {
+  public getPubKeyBuffer() {
     return this._publicKey;
   }
 
@@ -43,11 +43,11 @@ export class PrivKeySecp256k1 implements PrivKey {
     this._privateKey = privateKey;
   }
 
-  public get pubKey() {
+  public getPubKey() {
     return this._pubKey;
   }
 
-  public get privKeyBuffer() {
+  public getPrivKeyBuffer() {
     return this._privateKey;
   }
 

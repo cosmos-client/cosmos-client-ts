@@ -1,12 +1,12 @@
 import { Amino } from "../amino";
 
 export interface PubKey extends Amino<string> {
-  readonly pubKeyBuffer: Buffer;
+  getPubKeyBuffer(): Buffer;
   verify(message: string, signature: Buffer): boolean;
 }
 
 export interface PrivKey extends Amino<string> {
-  readonly pubKey: PubKey;
-  readonly privKeyBuffer: Buffer;
+  getPubKey(): PubKey;
+  getPrivKeyBuffer(): Buffer;
   sign(message: string): Buffer;
 }
