@@ -1,9 +1,8 @@
-import { AccAddress } from "../../cosmos-sdk/address/acc-address";
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
-import { Account } from "../../cosmos-sdk/account";
+import { AccAddress } from "../../cosmos-sdk/address";
 
-export class BaseAccount implements Account {
+export class BaseAccount {
   address: AccAddress;
   coins: Coin[];
   public_key: PubKey;

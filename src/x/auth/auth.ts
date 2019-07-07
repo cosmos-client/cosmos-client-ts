@@ -1,5 +1,6 @@
 import { CosmosSdkHost } from "../..";
 import { Account } from "../../cosmos-sdk/account";
+import { SignedTx } from "./signed-tx";
 
 export module Auth {
   export function getAccount(host: CosmosSdkHost, address: string) {
@@ -21,8 +22,8 @@ export module Auth {
     return host.get<{}>(`/txs`, params)
   }
 
-  export function postTransaction(host: CosmosSdkHost) {
-    return host.post<{}>(`/txs`, {});
+  export function postTransaction(host: CosmosSdkHost, signedTx: SignedTx) {
+    return host.post<{}>(`/txs`, signedTx);
   }
 
   export function postEncodeTransaction(host: CosmosSdkHost) {

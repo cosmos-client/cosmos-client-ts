@@ -1,25 +1,12 @@
-import { Msg } from "../../cosmos-sdk/msg";
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
-import { Tx } from "../../cosmos-sdk/tx";
+import { Msg } from "../../cosmos-sdk/msg";
 
-export class StdTx implements Tx {
+export interface StdTx {
   msg: Msg[];
   fee: StdFee;
   signatures: StdSignature[];
   memo: string;
-
-  constructor(
-    msgs: Msg[],
-    fee: StdFee,
-    sigs: StdSignature[],
-    memo: string
-  ) {
-    this.msg = msgs;
-    this.fee = fee;
-    this.signatures = sigs;
-    this.memo = memo;
-  }
 }
 
 export interface StdFee {
@@ -37,6 +24,6 @@ export interface StdSignDoc {
 }
 
 export interface StdSignature {
-  pub_key: PubKey[];
-  signature: Uint8Array;
+  pub_key: PubKey;
+  signature: string;
 }

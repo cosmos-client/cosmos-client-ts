@@ -1,9 +1,5 @@
-import { AccAddress } from "./address/acc-address";
+import { Amino } from "../tendermint/amino";
 
-export interface Msg {
-  route(): string;
-  type(): string;
-  validateBasic(): Error;
-  getSignBytes(): Uint8Array;
-  getSigners(): AccAddress[];
+export interface Msg extends Amino<any> {
+  
 }

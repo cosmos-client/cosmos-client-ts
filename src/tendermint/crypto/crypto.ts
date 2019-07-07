@@ -1,13 +1,9 @@
-export interface PubKey {
-  address(): Uint8Array;
-  bytes(): Uint8Array;
-  verifyBytes(msg: Uint8Array, sig: Uint8Array): boolean;
-  equals(pubKey: PubKey): boolean;
+import { Amino } from "../amino";
+
+export interface PubKey extends Amino<string> {
+
 }
 
-export interface PrivKey {
-  bytes(): Uint8Array;
-  sign(msg: Uint8Array): [Uint8Array, Error];
-  pubKey(): PubKey;
-  equals(privKey: PrivKey): boolean;
+export interface PrivKey extends Amino<string> {
+
 }

@@ -1,5 +1,6 @@
 import * as crypto from 'crypto';
 import * as bech32 from 'bech32';
+import { AccAddress } from '../cosmos-sdk/address';
 
 export class PublicKey {
   private _publicKey: Buffer;
@@ -29,7 +30,7 @@ export class PublicKey {
     }
   }
 
-  public get bech32Address(): string {
+  public get accAddress(): AccAddress {
     const identifier = this.hash160(this._publicKey);
 
     const words = bech32.toWords(identifier);
