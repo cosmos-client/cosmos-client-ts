@@ -12,14 +12,17 @@ npm install --save cosmos-sdk
 ```ts
 import {
   CosmosSdkHost,
-  PublicKey,
-  PrivateKey,
+  PubKeySecp256k1,
+  PrivKeySecp256k1,
+  HdWallet,
   Auth
 } from 'cosmos-sdk';
 
 const host = new CosmosSdkHost('http://localhost:45512');
-const privateKey = PrivateKey.fromBip39Mnemonic('...');
-const signed = privateKey.sign('...');
+const privKeyBuffer = await HdWallet.generatePrivateKeyByBip39('mnemonic', HdWallet.getBip32PathByBip44(0));
+const privKey = new PrivKeySecp256k1(privKeyBuffer);
+const signedTx = new SignedTx(privKey, { ... } as StdSignDoc);
+await Auth.postTransaction(host, signedTx);
 
 const accountInfo = await Auth.getAccount(host, privateKey.bech32Address);
 

@@ -3,7 +3,7 @@ import { Msg } from "../../cosmos-sdk/msg";
 import { AccAddress } from "../../cosmos-sdk/address";
 
 export class MsgSend implements Msg {
-  public type = 'cosmos-sdk/MsgSend';
+  public readonly type = 'cosmos-sdk/MsgSend';
   public value: {
     from_address: AccAddress;
     to_address: AccAddress;
@@ -34,7 +34,7 @@ export interface Output {
 }
 
 export class MsgMultiSend implements Msg {
-  public type = 'cosmos-sdk/MsgMultiSend';
+  public readonly type = 'cosmos-sdk/MsgMultiSend';
   public value: {
     inputs: Input[];
     outputs: Output[];
