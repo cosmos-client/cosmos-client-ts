@@ -1,7 +1,6 @@
 import * as bech32 from 'bech32';
 import * as crypto from 'crypto';
 
-const addressLength = 20;
 const prefix = {
   main: 'cosmos',
   account: 'acc',
@@ -20,39 +19,47 @@ const bech32Prefix = {
   consPub: prefix.main + prefix.validator + prefix.consensus + prefix.public
 };
 
-export class AccAddress extends String {
-  constructor(value: string) {
-    if (!AccAddress.validateFormat(value)) {
+export class Address extends Uint8Array {
+  constructor(value: Uint8Array) {
+    const addressLength = 20;
+    if (value.length !== addressLength) {
       throw Error();
     }
     super(value);
   }
 
-  public static fromPublicKey(publicKey: Buffer) {
-    const identifier = hash160(publicKey);
-
-    const words = bech32.toWords(identifier);
-    const address = bech32.encode('cosmos', words);
-
-    return new AccAddress(address);
+  private static hash160(buffer: Buffer): Buffer {
+    const sha256Hash: Buffer = crypto.createHash('sha256')
+      .update(buffer)
+      .digest();
+    try {
+      return crypto.createHash('rmd160')
+        .update(sha256Hash)
+        .digest();
+    } catch (err) {
+      return crypto.createHash('ripemd160')
+        .update(sha256Hash)
+        .digest();
+    }
   }
 
-  public static validateFormat(value: string): boolean {
-    return value.length === addressLength && value.startsWith(bech32Prefix.accAddr);
+  public static fromPublicKey(publicKey: Buffer) {
+    return new Address(this.hash160(publicKey));
   }
 }
 
-function hash160(buffer: Buffer): Buffer {
-  const sha256Hash: Buffer = crypto.createHash('sha256')
-    .update(buffer)
-    .digest();
-  try {
-    return crypto.createHash('rmd160')
-      .update(sha256Hash)
-      .digest();
-  } catch (err) {
-    return crypto.createHash('ripemd160')
-      .update(sha256Hash)
-      .digest();
+export class AccAddress extends Address {
+  public toBech32() {
+    const words = bech32.toWords(Buffer.from(this));
+    return bech32.encode(bech32Prefix.accAddr, words);
+  }
+
+  public static fromBech32(accAddress: string) {
+    const { prefix, words } = bech32.decode(accAddress)
+    if (prefix !== bech32Prefix.accAddr) {
+      throw Error();
+    }
+
+    return new AccAddress(bech32.fromWords(words));
   }
 }

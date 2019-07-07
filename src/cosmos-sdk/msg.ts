@@ -1,5 +1,5 @@
-import { Amino } from "../tendermint/amino";
+import { AminoRegisteredConcrete } from "../tendermint/amino";
 
-export interface Msg extends Amino<any> {
+export interface Msg extends AminoRegisteredConcrete {
   
 }

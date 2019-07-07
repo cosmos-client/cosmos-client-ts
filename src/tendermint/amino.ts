@@ -1,4 +1,4 @@
-export interface Amino<T> {
+export interface AminoRegisteredConcrete {
   type: string;
-  value: T;
+  value: unknown;
 }

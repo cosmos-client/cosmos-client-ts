@@ -8,17 +8,17 @@ export class BroadcastReq {
   constructor(privKey: PrivKey, stdSignDoc: StdSignDoc, modeType = "sync") {
     const signature = privKey.sign(JSON.stringify(stdSignDoc));
 
-    this.tx = {
-      msg: stdSignDoc.msgs,
-      fee: stdSignDoc.fee,
-      signatures: [
+    this.tx = new StdTx(
+      stdSignDoc.msgs,
+      stdSignDoc.fee,
+      [
         {
           signature: signature.toString('base64'),
           pub_key: privKey.getPubKey()
         }
       ],
-      memo: stdSignDoc.memo
-    };
+      stdSignDoc.memo
+    );
     this.mode = modeType;
   }
 }
