@@ -19,7 +19,7 @@ import {
 } from 'cosmos-sdk';
 
 const host = new CosmosSdkHost('http://localhost:45512');
-const privKeyBuffer = await HdWallet.generatePrivateKeyByBip39('mnemonic', HdWallet.getBip32PathByBip44(0));
+const privKeyBuffer = await HdWallet.generatePrivKeyByBip39('mnemonic', HdWallet.getBip32PathByBip44(0));
 const privKey = new PrivKeySecp256k1(privKeyBuffer);
 const broadcastReq = new BroadcastReq(privKey, host.createStdSignDoc(...));
 await Auth.postTransaction(host, broadcastReq);

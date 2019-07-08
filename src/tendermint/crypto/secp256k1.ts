@@ -2,60 +2,81 @@ import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
 import { PubKey, PrivKey } from "./crypto";
 import { AminoRegisterConcrete } from '../amino';
+import { TextEncoder } from 'util';
 
 @AminoRegisterConcrete('tendermint/PubKeySecp256k1')
 export class PubKeySecp256k1 implements PubKey {
-  public _publicKey: Buffer;
+  private pubKey: Buffer;
 
   constructor(
-    publicKey: Buffer
+    pubKey: Buffer
   ) {
-    this._publicKey = publicKey;
-  }
-
-  public toString() {
-    return this._publicKey.toString('base64');
+    this.pubKey = pubKey;
   }
 
   public verify(message: string, signature: Buffer): boolean {
     const hash = crypto.createHash('sha256').update(message).digest('hex');
     const buffer = Buffer.from(hash, 'hex');
 
-    return secp256k1.verify(buffer, signature, this._publicKey);
+    return secp256k1.verify(buffer, signature, this.pubKey);
+  }
+
+  public toBuffer() {
+    return this.pubKey;
+  }
+
+  public toString() {
+    return this.pubKey.toString('base64');
   }
 
   public toJSON() {
     return this.toString();
   }
+
+  public static fromJSON(value: string) {
+    const buffer = Buffer.from(new TextEncoder().encode(value));
+    return new this(buffer);
+  }
 }
 
+@AminoRegisterConcrete('tendermint/PrivKeySecp256k1')
 export class PrivKeySecp256k1 implements PrivKey {
-  public readonly type = 'tendermint/PrivKeySecp256k1';
-  public readonly value: string;
-  private _pubKey: PubKey;
-  private _privateKey: Buffer;
+  private pubKey: PubKey;
+  private privKey: Buffer;
 
   constructor(
-    privateKey: Buffer
+    privKey: Buffer
   ) {
-    this.value = privateKey.toString('base64');
-    this._pubKey = new PubKeySecp256k1(secp256k1.publicKeyCreate(privateKey));
-    this._privateKey = privateKey;
+    this.pubKey = new PubKeySecp256k1(secp256k1.publicKeyCreate(privKey));
+    this.privKey = privKey;
   }
 
   public getPubKey() {
-    return this._pubKey;
-  }
-
-  public getPrivKeyBuffer() {
-    return this._privateKey;
+    return this.pubKey;
   }
 
   public sign(message: string): Buffer {
     const hash = crypto.createHash('sha256').update(message).digest('hex');
     const buffer = Buffer.from(hash, 'hex');
-    const signature = secp256k1.sign(buffer, this._privateKey);
+    const signature = secp256k1.sign(buffer, this.privKey);
 
     return signature.signature;
+  }
+
+  public toBuffer() {
+    return this.privKey;
+  }
+
+  public toString() {
+    return this.privKey.toString('base64');
+  }
+
+  public toJSON() {
+    return this.toString();
+  }
+
+  public static fromJSON(value: string) {
+    const buffer = Buffer.from(new TextEncoder().encode(value));
+    return new this(buffer);
   }
 }

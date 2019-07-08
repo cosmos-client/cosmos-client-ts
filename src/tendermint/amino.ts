@@ -19,12 +19,15 @@ export const AminoRegisterConcrete = (type: string) => {
 }
 
 export const reviver = (key: string, value: any) => {
+  if (key === '') {
+    return value;
+  }
   if (!value.type || !constructors[value.type]) {
     return value;
   }
 
   if (constructors[value.type].fromJSON) {
-    return constructors[value.type].fromJSON(value);
+    return constructors[value.type].fromJSON(value.value);
   }
 
   const obj = new constructors[value.type]();

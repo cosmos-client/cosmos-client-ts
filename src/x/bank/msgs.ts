@@ -11,6 +11,14 @@ export class MsgSend implements Msg {
     public amount: Coin[]
   ) {
   }
+
+  public static fromJSON(obj: any) {
+    return new this(
+      AccAddress.fromBech32(obj.from_Address),
+      AccAddress.fromBech32(obj.to_address),
+      obj.amount
+    )
+  }
 }
 
 export interface Input {

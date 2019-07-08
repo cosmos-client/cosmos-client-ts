@@ -14,4 +14,14 @@ export class BaseAccount {
   ) {
     
   }
+
+  public static fromJSON(obj: any) {
+    return new this(
+      AccAddress.fromBech32(obj.address),
+      obj.coins,
+      obj.public_key,
+      obj.account_number,
+      obj.sequence
+    );
+  }
 }
