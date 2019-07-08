@@ -1,29 +1,17 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
 import { Msg } from "../../cosmos-sdk/msg";
-import { AminoRegisteredConcrete } from "../../tendermint/amino";
+import { AminoRegisterConcrete } from "../../tendermint/amino";
 
-export class StdTx implements AminoRegisteredConcrete {
-  public readonly type = 'auth/StdTx';
-  public value: {
-    msg: Msg[];
-    fee: StdFee;
-    signatures: StdSignature[];
-    memo: string;
-  }
-
+@AminoRegisterConcrete('auth/StdTx')
+export class StdTx {
   constructor(
-    msg: Msg[],
-    fee: StdFee,
-    signatures: StdSignature[],
-    memo: string
+    public msg: Msg[],
+    public fee: StdFee,
+    public signatures: StdSignature[],
+    public memo: string
   ) {
-    this.value = {
-      msg: msg,
-      fee: fee,
-      signatures: signatures,
-      memo: memo
-    }
+    
   }
 }
 

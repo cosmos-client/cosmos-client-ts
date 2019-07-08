@@ -1,12 +1,10 @@
-import { AminoRegisteredConcrete } from "../amino";
-
-export interface PubKey extends AminoRegisteredConcrete {
-  getPubKeyBuffer(): Buffer;
+export interface PubKey {
+  toString(): string;
   verify(message: string, signature: Buffer): boolean;
 }
 
-export interface PrivKey extends AminoRegisteredConcrete {
+export interface PrivKey {
   getPubKey(): PubKey;
-  getPrivKeyBuffer(): Buffer;
+  toString(): string;
   sign(message: string): Buffer;
 }

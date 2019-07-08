@@ -1,21 +1,20 @@
 import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
 import { PubKey, PrivKey } from "./crypto";
+import { AminoRegisterConcrete } from '../amino';
 
+@AminoRegisterConcrete('tendermint/PubKeySecp256k1')
 export class PubKeySecp256k1 implements PubKey {
-  public readonly type = 'tendermint/PubKeySecp256k1';
-  public readonly value: string;
-  private _publicKey: Buffer;
+  public _publicKey: Buffer;
 
   constructor(
     publicKey: Buffer
   ) {
-    this.value = publicKey.toString('base64');
     this._publicKey = publicKey;
   }
 
-  public getPubKeyBuffer() {
-    return this._publicKey;
+  public toString() {
+    return this._publicKey.toString('base64');
   }
 
   public verify(message: string, signature: Buffer): boolean {
@@ -23,6 +22,10 @@ export class PubKeySecp256k1 implements PubKey {
     const buffer = Buffer.from(hash, 'hex');
 
     return secp256k1.verify(buffer, signature, this._publicKey);
+  }
+
+  public toJSON() {
+    return this.toString();
   }
 }
 

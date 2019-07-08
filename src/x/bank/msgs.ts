@@ -1,25 +1,15 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { Msg } from "../../cosmos-sdk/msg";
 import { AccAddress } from "../../cosmos-sdk/address";
+import { AminoRegisterConcrete } from "../../tendermint/amino";
 
+@AminoRegisterConcrete('cosmos-sdk/MsgSend')
 export class MsgSend implements Msg {
-  public readonly type = 'cosmos-sdk/MsgSend';
-  public value: {
-    from_address: AccAddress;
-    to_address: AccAddress;
-    amount: Coin[];
-  }
-
   constructor(
-    fromAddr: AccAddress,
-    toAddr: AccAddress,
-    amount: Coin[]
+    public from_address: AccAddress,
+    public to_address: AccAddress,
+    public amount: Coin[]
   ) {
-    this.value = {
-      from_address: fromAddr,
-      to_address: toAddr,
-      amount: amount
-    };
   }
 }
 
@@ -33,20 +23,12 @@ export interface Output {
   coins: Coin[];
 }
 
+@AminoRegisterConcrete('cosmos-sdk/MsgMultiSend')
 export class MsgMultiSend implements Msg {
-  public readonly type = 'cosmos-sdk/MsgMultiSend';
-  public value: {
-    inputs: Input[];
-    outputs: Output[];
-  }
-
   constructor(
-    inputs: Input[],
-    outputs: Output[]
+    public inputs: Input[],
+    public outputs: Output[]
   ) {
-    this.value = {
-      inputs: inputs,
-      outputs: outputs
-    };
+    
   }
 }

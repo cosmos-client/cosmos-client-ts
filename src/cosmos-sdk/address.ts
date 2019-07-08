@@ -19,13 +19,14 @@ const bech32Prefix = {
   consPub: prefix.main + prefix.validator + prefix.consensus + prefix.public
 };
 
-export class Address extends Uint8Array {
+export class Address {
+  protected _value: Uint8Array;
   constructor(value: Uint8Array) {
     const addressLength = 20;
     if (value.length !== addressLength) {
       throw Error();
     }
-    super(value);
+    this._value = value;
   }
 
   private static hash160(buffer: Buffer): Buffer {
@@ -50,7 +51,7 @@ export class Address extends Uint8Array {
 
 export class AccAddress extends Address {
   public toBech32() {
-    const words = bech32.toWords(Buffer.from(this));
+    const words = bech32.toWords(Buffer.from(this._value));
     return bech32.encode(bech32Prefix.accAddr, words);
   }
 
@@ -61,5 +62,9 @@ export class AccAddress extends Address {
     }
 
     return new AccAddress(bech32.fromWords(words));
+  }
+
+  public toJSON() {
+    return this.toBech32();
   }
 }

@@ -1,6 +1,7 @@
 import * as request from 'request';
 import { StdSignDoc, StdFee } from '../x/auth/stdtx';
 import { Msg } from '../cosmos-sdk/msg';
+import { reviver } from '../tendermint/amino';
 
 export class CosmosSdkHost {
   constructor(
@@ -16,7 +17,7 @@ export class CosmosSdkHost {
         {
           uri: this.url + path,
           method: 'GET',
-          json: true,
+          json: false,
           qs: params
         },
         (error, response, body) => {
@@ -25,7 +26,7 @@ export class CosmosSdkHost {
             return;
           }
 
-          resolve(body);
+          resolve(JSON.parse(body, reviver));
         }
       );
     });
@@ -37,7 +38,7 @@ export class CosmosSdkHost {
         {
           uri: this.url + path,
           method: 'POST',
-          json: true,
+          json: false,
           body: params
         },
         (error, response, body) => {
@@ -46,7 +47,7 @@ export class CosmosSdkHost {
             return;
           }
 
-          resolve(body);
+          resolve(JSON.parse(body, reviver));
         }
       );
     });
