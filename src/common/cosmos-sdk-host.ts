@@ -3,7 +3,15 @@ import { StdSignDoc, StdFee } from '../x/auth/stdtx';
 import { Msg } from '../cosmos-sdk/msg';
 import { reviver } from '../tendermint/amino';
 
+/**
+ * 
+ */
 export class CosmosSdkHost {
+  /**
+   * 
+   * @param url 
+   * @param chainId 
+   */
   constructor(
     private url: string,
     private chainId: string
@@ -11,6 +19,11 @@ export class CosmosSdkHost {
 
   }
 
+  /**
+   * 
+   * @param path 
+   * @param params 
+   */
   public get<T>(path: string, params?: any): Promise<T> {
     return new Promise((resolve, reject) => {
       request.get(
@@ -32,6 +45,11 @@ export class CosmosSdkHost {
     });
   }
 
+  /**
+   * 
+   * @param path 
+   * @param params 
+   */
   public post<T>(path: string, params: any): Promise<T> {
     return new Promise((resolve, reject) => {
       request.post(
@@ -53,6 +71,14 @@ export class CosmosSdkHost {
     });
   }
 
+  /**
+   * 
+   * @param accountNumber 
+   * @param fee 
+   * @param memo 
+   * @param msgs 
+   * @param sequence 
+   */
   public createStdSignDoc(
     accountNumber: bigint,
     fee: StdFee,

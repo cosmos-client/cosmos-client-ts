@@ -19,8 +19,16 @@ const bech32Prefix = {
   consPub: prefix.main + prefix.validator + prefix.consensus + prefix.public
 };
 
+/**
+ * 
+ */
 export class Address {
   protected _value: Uint8Array;
+
+  /**
+   * 
+   * @param value 
+   */
   constructor(value: Uint8Array) {
     const addressLength = 20;
     if (value.length !== addressLength) {
@@ -44,17 +52,31 @@ export class Address {
     }
   }
 
+  /**
+   * 
+   * @param publicKey 
+   */
   public static fromPublicKey(publicKey: Buffer) {
     return new Address(this.hash160(publicKey));
   }
 }
 
+/**
+ * 
+ */
 export class AccAddress extends Address {
+  /**
+   * 
+   */
   public toBech32() {
     const words = bech32.toWords(Buffer.from(this._value));
     return bech32.encode(bech32Prefix.accAddr, words);
   }
 
+  /**
+   * 
+   * @param accAddress 
+   */
   public static fromBech32(accAddress: string) {
     const { prefix, words } = bech32.decode(accAddress)
     if (prefix !== bech32Prefix.accAddr) {
@@ -64,6 +86,9 @@ export class AccAddress extends Address {
     return new AccAddress(bech32.fromWords(words));
   }
 
+  /**
+   * 
+   */
   public toJSON() {
     return this.toBech32();
   }

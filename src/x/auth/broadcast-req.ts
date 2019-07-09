@@ -1,10 +1,19 @@
 import { StdTx, StdSignDoc } from "./stdtx";
 import { PrivKey } from "../../tendermint/crypto/crypto";
 
+/**
+ * 
+ */
 export class BroadcastReq {
   public tx: StdTx;
   public mode: string;
 
+  /**
+   * 
+   * @param privKey 
+   * @param stdSignDoc 
+   * @param modeType 
+   */
   constructor(privKey: PrivKey, stdSignDoc: StdSignDoc, modeType = "sync") {
     const signature = privKey.sign(JSON.stringify(stdSignDoc));
 

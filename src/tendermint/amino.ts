@@ -1,5 +1,9 @@
 const constructors: { [key: string]: any } = {};
 
+/**
+ * 
+ * @param type 
+ */
 export const AminoRegisterConcrete = (type: string) => {
   return <TFunc extends Function>(target: TFunc) => {
     constructors[type] = target;
@@ -18,6 +22,11 @@ export const AminoRegisterConcrete = (type: string) => {
   };
 }
 
+/**
+ * 
+ * @param key 
+ * @param value 
+ */
 export const reviver = (key: string, value: any) => {
   if (key === '') {
     return value;

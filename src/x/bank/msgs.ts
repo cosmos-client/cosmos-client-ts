@@ -3,8 +3,17 @@ import { Msg } from "../../cosmos-sdk/msg";
 import { AccAddress } from "../../cosmos-sdk/address";
 import { AminoRegisterConcrete } from "../../tendermint/amino";
 
+/**
+ * 
+ */
 @AminoRegisterConcrete('cosmos-sdk/MsgSend')
 export class MsgSend implements Msg {
+  /**
+   * 
+   * @param from_address 
+   * @param to_address 
+   * @param amount 
+   */
   constructor(
     public from_address: AccAddress,
     public to_address: AccAddress,
@@ -12,6 +21,10 @@ export class MsgSend implements Msg {
   ) {
   }
 
+  /**
+   * 
+   * @param obj 
+   */
   public static fromJSON(obj: any) {
     return new this(
       AccAddress.fromBech32(obj.from_Address),
@@ -31,8 +44,16 @@ export interface Output {
   coins: Coin[];
 }
 
+/**
+ * 
+ */
 @AminoRegisterConcrete('cosmos-sdk/MsgMultiSend')
 export class MsgMultiSend implements Msg {
+  /**
+   * 
+   * @param inputs 
+   * @param outputs 
+   */
   constructor(
     public inputs: Input[],
     public outputs: Output[]

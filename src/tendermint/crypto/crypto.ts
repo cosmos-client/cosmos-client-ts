@@ -1,10 +1,10 @@
 export interface PubKey {
-  toString(): string;
+  toBase64(): string;
   verify(message: string, signature: Buffer): boolean;
 }
 
 export interface PrivKey {
   getPubKey(): PubKey;
-  toString(): string;
+  toBase64(): string;
   sign(message: string): Buffer;
 }
