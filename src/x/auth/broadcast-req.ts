@@ -2,7 +2,7 @@ import { StdTx, StdSignDoc } from "./stdtx";
 import { PrivKey } from "../../tendermint/crypto/crypto";
 
 /**
- * 
+ * @see Auth.postTransaction
  */
 export class BroadcastReq {
   public tx: StdTx;

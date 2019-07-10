@@ -2,11 +2,11 @@ import * as bip32 from 'bip32';
 import * as bip39 from 'bip39';
 
 /**
- * 
+ * 階層的決定性ウォレットのモジュール。
  */
 export module HdWallet {
   /**
-   * 
+   * BIP44に従ってBIP32鍵導出パスを作る。
    * @param index 
    */
   export function getBip32PathByBip44(index: string): string {
@@ -16,7 +16,7 @@ export module HdWallet {
   }
 
   /**
-   * 
+   * BIP39に従ってニーモニックから秘密鍵を生成する。
    * @param mnemonic 
    * @param bip32Path 
    */

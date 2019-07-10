@@ -2,9 +2,12 @@ import { CosmosSdkHost } from "../..";
 import { BroadcastReq } from "./broadcast-req";
 import { BaseAccount } from "./account";
 
+/**
+ * Cosmos SDKにおけるx/authのRest APIをまとめたモジュール。
+ */
 export module Auth {
   /**
-   * 
+   * /auth/accounts/${address}
    * @param host 
    * @param address 
    */
@@ -13,7 +16,7 @@ export module Auth {
   }
 
   /**
-   * 
+   * /txs/${hash}
    * @param host 
    * @param hash 
    */
@@ -22,7 +25,7 @@ export module Auth {
   }
 
   /**
-   * 
+   * /txs
    * @param host 
    * @param params 
    */
@@ -38,7 +41,7 @@ export module Auth {
   }
 
   /**
-   * 
+   * /txs
    * @param host 
    * @param broadcastReq 
    */
@@ -47,7 +50,7 @@ export module Auth {
   }
 
   /**
-   * 
+   * /txs/encode
    * @param host 
    */
   export function postEncodeTransaction(host: CosmosSdkHost) {

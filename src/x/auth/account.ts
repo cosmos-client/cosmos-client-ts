@@ -1,12 +1,12 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
 import { AccAddress } from "../../cosmos-sdk/address";
-import { AminoRegisterConcrete } from "../../tendermint/amino";
+import { Amino } from "../../tendermint/amino";
 
 /**
- * 
+ * アカウントのクラス。
  */
-@AminoRegisterConcrete('auth/Account')
+@Amino.RegisterConcrete('auth/Account')
 export class BaseAccount {
   /**
    * 
@@ -27,7 +27,8 @@ export class BaseAccount {
   }
 
   /**
-   * 
+   * addressはAccAddress型として読み込むためのfromJSONメソッド。
+   * @see Amino.reviver
    * @param obj 
    */
   public static fromJSON(obj: any) {

@@ -1,9 +1,12 @@
 import { CosmosSdkHost } from "../..";
 import { SendReq } from "./send-req";
 
+/**
+ * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。
+ */
 export module Bank {
   /**
-   * 
+   * /bank/accounts/${address}/transfers
    * @param host 
    * @param address 
    * @param params 
@@ -13,7 +16,7 @@ export module Bank {
   }
 
   /**
-   * 
+   * /bank/balances/${address}
    * @param host 
    * @param address 
    */

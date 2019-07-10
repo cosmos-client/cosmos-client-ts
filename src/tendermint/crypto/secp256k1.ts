@@ -1,12 +1,12 @@
 import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
 import { PubKey, PrivKey } from "./crypto";
-import { AminoRegisterConcrete } from '../amino';
+import { Amino } from '../amino';
 
 /**
- * 
+ * secp256k1公開鍵。
  */
-@AminoRegisterConcrete('tendermint/PubKeySecp256k1')
+@Amino.RegisterConcrete('tendermint/PubKeySecp256k1')
 export class PubKeySecp256k1 implements PubKey {
   private pubKey: Buffer;
 
@@ -21,7 +21,7 @@ export class PubKeySecp256k1 implements PubKey {
   }
 
   /**
-   * 
+   * 署名がこの公開鍵から作られたものであるか検証する。
    * @param message 
    * @param signature 
    */
@@ -63,9 +63,9 @@ export class PubKeySecp256k1 implements PubKey {
 }
 
 /**
- * 
+ * secp256k1秘密鍵。
  */
-@AminoRegisterConcrete('tendermint/PrivKeySecp256k1')
+@Amino.RegisterConcrete('tendermint/PrivKeySecp256k1')
 export class PrivKeySecp256k1 implements PrivKey {
   private pubKey: PubKey;
   private privKey: Buffer;
@@ -89,7 +89,7 @@ export class PrivKeySecp256k1 implements PrivKey {
   }
 
   /**
-   * 
+   * 署名を作成する。
    * @param message 
    */
   public sign(message: string): Buffer {

@@ -1,12 +1,12 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
 import { Msg } from "../../cosmos-sdk/msg";
-import { AminoRegisterConcrete } from "../../tendermint/amino";
+import { Amino } from "../../tendermint/amino";
 
 /**
- * 
+ * 署名済みトランザクションのクラス。
  */
-@AminoRegisterConcrete('auth/StdTx')
+@Amino.RegisterConcrete('auth/StdTx')
 export class StdTx {
   /**
    * 

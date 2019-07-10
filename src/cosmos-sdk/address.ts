@@ -20,7 +20,7 @@ const bech32Prefix = {
 };
 
 /**
- * 
+ * 各種アドレスの基底クラス。
  */
 export class Address {
   protected _value: Uint8Array;
@@ -53,7 +53,7 @@ export class Address {
   }
 
   /**
-   * 
+   * 公開鍵からアドレスのインスタンスを作成する。
    * @param publicKey 
    */
   public static fromPublicKey(publicKey: Buffer) {
@@ -62,11 +62,11 @@ export class Address {
 }
 
 /**
- * 
+ * AccAddressのクラス。
  */
 export class AccAddress extends Address {
   /**
-   * 
+   * Bech32フォーマットのアドレスに変換する。
    */
   public toBech32() {
     const words = bech32.toWords(Buffer.from(this._value));
@@ -74,7 +74,7 @@ export class AccAddress extends Address {
   }
 
   /**
-   * 
+   * Bech32フォーマットのアドレスからインスタンスを作成する。
    * @param accAddress 
    */
   public static fromBech32(accAddress: string) {

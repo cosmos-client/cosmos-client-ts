@@ -1,12 +1,13 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { Msg } from "../../cosmos-sdk/msg";
 import { AccAddress } from "../../cosmos-sdk/address";
-import { AminoRegisterConcrete } from "../../tendermint/amino";
+import { Amino } from "../../tendermint/amino";
 
 /**
- * 
+ * MsgSendのクラス。
+ * アセット送信するMsg。
  */
-@AminoRegisterConcrete('cosmos-sdk/MsgSend')
+@Amino.RegisterConcrete('cosmos-sdk/MsgSend')
 export class MsgSend implements Msg {
   /**
    * 
@@ -22,7 +23,7 @@ export class MsgSend implements Msg {
   }
 
   /**
-   * 
+   * @see Amino.reviver
    * @param obj 
    */
   public static fromJSON(obj: any) {
@@ -47,7 +48,7 @@ export interface Output {
 /**
  * 
  */
-@AminoRegisterConcrete('cosmos-sdk/MsgMultiSend')
+@Amino.RegisterConcrete('cosmos-sdk/MsgMultiSend')
 export class MsgMultiSend implements Msg {
   /**
    * 

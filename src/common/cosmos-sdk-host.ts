@@ -1,7 +1,7 @@
 import * as request from 'request';
 import { StdSignDoc, StdFee } from '../x/auth/stdtx';
 import { Msg } from '../cosmos-sdk/msg';
-import { reviver } from '../tendermint/amino';
+import { Amino } from '../tendermint/amino';
 
 /**
  * 
@@ -20,7 +20,7 @@ export class CosmosSdkHost {
   }
 
   /**
-   * 
+   * 登録されたurlにGETする。
    * @param path 
    * @param params 
    */
@@ -39,14 +39,14 @@ export class CosmosSdkHost {
             return;
           }
 
-          resolve(JSON.parse(body, reviver));
+          resolve(JSON.parse(body, Amino.reviver));
         }
       );
     });
   }
 
   /**
-   * 
+   * 登録されたurlにPOSTする。
    * @param path 
    * @param params 
    */
@@ -65,14 +65,14 @@ export class CosmosSdkHost {
             return;
           }
 
-          resolve(JSON.parse(body, reviver));
+          resolve(JSON.parse(body, Amino.reviver));
         }
       );
     });
   }
 
   /**
-   * 
+   * 登録されたchain idのチェーンのための署名前トランザクションオブジェクトをつくる。
    * @param accountNumber 
    * @param fee 
    * @param memo 
