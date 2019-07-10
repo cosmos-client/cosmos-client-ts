@@ -1,7 +1,14 @@
 /**
  * Aminoは、Protocol Buffers v3 (proto3)のサブセット実装。
  * Tendermint間通信に使われている。型情報を保持するバイナリデータであるのが特徴。
- * JSONオブジェクトをAminoオブジェクトを変換するために、Cosmos SDKが取り扱うJSONにはJSON Schemaに近い書き方で型情報を保持することが求められる。
+ * JSONオブジェクトをAminoオブジェクトを変換するために、AminoにConcreteとしてRegisterされたthisをJSONシリアライズすると
+ * <pre><code>
+ * {
+ *   type: string;
+ *   value: this
+ * }
+ * </pre></code>
+ * このようなラッパーインターフェイスが入るようにする必要がある。
  * Rest API Client側には、Aminoバイナリデータ変換機能実装は必要ない。
  */
 export module Amino {

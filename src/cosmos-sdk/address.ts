@@ -87,7 +87,7 @@ export class AccAddress extends Address {
   }
 
   /**
-   * 
+   * JSON.stringify時に参照される。
    */
   public toJSON() {
     return this.toBech32();

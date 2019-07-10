@@ -47,7 +47,7 @@ export class PubKeySecp256k1 implements PubKey {
   }
 
   /**
-   * 
+   * JSON.stringify時に参照される。
    */
   public toJSON() {
     return this.toBase64();
@@ -115,7 +115,7 @@ export class PrivKeySecp256k1 implements PrivKey {
   }
 
   /**
-   * 
+   * JSON.stringify時に参照される。
    */
   public toJSON() {
     return this.toBase64();
