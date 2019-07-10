@@ -1,4 +1,4 @@
-import { CosmosSdkHost } from "../..";
+import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 import { SendReq } from "./send-req";
 
 /**

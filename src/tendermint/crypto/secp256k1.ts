@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import * as secp256k1 from 'secp256k1';
+import * as secp256k1 from 'tiny-secp256k1';
 import { PubKey, PrivKey } from "./crypto";
 import { Amino } from '../amino';
 
@@ -77,7 +77,7 @@ export class PrivKeySecp256k1 implements PrivKey {
   constructor(
     privKey: Buffer
   ) {
-    this.pubKey = new PubKeySecp256k1(secp256k1.publicKeyCreate(privKey));
+    this.pubKey = new PubKeySecp256k1(secp256k1.pointFromScalar(privKey)!);
     this.privKey = privKey;
   }
 
@@ -97,7 +97,7 @@ export class PrivKeySecp256k1 implements PrivKey {
     const buffer = Buffer.from(hash, 'hex');
     const signature = secp256k1.sign(buffer, this.privKey);
 
-    return signature.signature;
+    return signature;
   }
 
   /**

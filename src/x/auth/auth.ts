@@ -1,6 +1,6 @@
-import { CosmosSdkHost } from "../..";
 import { BroadcastReq } from "./broadcast-req";
 import { BaseAccount } from "./account";
+import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 
 /**
  * Cosmos SDKにおけるx/authのRest APIをまとめたモジュール。

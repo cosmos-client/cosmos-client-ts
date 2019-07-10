@@ -1,4 +1,4 @@
-import { CosmosSdkHost } from "../..";
+import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
