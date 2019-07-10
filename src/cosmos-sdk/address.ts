@@ -28,6 +28,7 @@ export class Address {
   /**
    * 
    * @param value 
+   * @throws Error アドレスの長さが20でない場合、エラーがスローされます。
    */
   constructor(value: Uint8Array) {
     const addressLength = 20;
