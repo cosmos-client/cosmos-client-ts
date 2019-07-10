@@ -4,7 +4,8 @@ import { Msg } from '../cosmos-sdk/msg';
 import { Amino } from '../tendermint/amino';
 
 /**
- * 
+ * Cosmos SDK Rest APIのホスト情報を保持するオブジェクト。
+ * chain idは、異なるidのチェーン間のリプレイアタックを防ぐために必要。
  */
 export class CosmosSdkHost {
   /**

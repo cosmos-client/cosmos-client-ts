@@ -1,3 +1,9 @@
+/**
+ * Aminoは、Protocol Buffers v3 (proto3)のサブセット実装。
+ * Tendermint間通信に使われている。型情報を保持するバイナリデータであるのが特徴。
+ * JSONオブジェクトをAminoオブジェクトを変換するために、Cosmos SDKが取り扱うJSONにはJSON Schemaに近い書き方で型情報を保持することが求められる。
+ * Rest API Client側には、Aminoバイナリデータ変換機能実装は必要ない。
+ */
 export module Amino {
 
   const constructors: { [key: string]: any } = {};
@@ -5,6 +11,8 @@ export module Amino {
   /**
    * 
    * TendermintのAmino codecにconcreteとしてregisterされたクラスにつける、デコレータ。
+   * JSON Schemaに近い形で型情報を保持する必要があるクラスにつけられる。
+   * 型情報を保持する必要があるのは、基底クラスにJSONデシリアライズされる拡張クラスなどである。
    * JSON.stringify時に参照するtoJSONメソッドを付与する。
    * @param type 
    */
@@ -12,9 +20,9 @@ export module Amino {
     return (target: Function) => {
       constructors[type] = target;
   
-      const _toJSON = target.prototype.toJSON;
+      target.prototype.__toJSON = target.prototype.toJSON;
       target.prototype.toJSON = function (key: string) {
-        const value = _toJSON ? _toJSON() : this;
+        const value = this.__toJSON ? this.__toJSON() : this;
         if (key === 'value') { // 入れ子ループ防止用
           return value;
         }
