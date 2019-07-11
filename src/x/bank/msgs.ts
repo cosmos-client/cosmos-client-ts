@@ -1,5 +1,5 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
-import { Msg } from "../../cosmos-sdk/msg";
+import { Msg } from "../../cosmos-sdk/tx_msg";
 import { AccAddress } from "../../cosmos-sdk/address";
 import { Amino } from "../../tendermint/amino";
 

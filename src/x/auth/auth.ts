@@ -1,6 +1,7 @@
 import { BroadcastReq } from "./broadcast-req";
 import { BaseAccount } from "./account";
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
+import { TxResponse, SearchTxsResult } from "../../cosmos-sdk/result";
 
 /**
  * Cosmos SDKにおけるx/authのRest APIをまとめたモジュール。
@@ -12,7 +13,7 @@ export module Auth {
    * @param address 
    */
   export function getAccount(host: CosmosSdkHost, address: string) {
-    return host.get<BaseAccount>(`/auth/accounts/${address}`)
+    return host.get<BaseAccount>(`/auth/accounts/${address}`);
   }
 
   /**
@@ -21,7 +22,7 @@ export module Auth {
    * @param hash 
    */
   export function getTransaction(host: CosmosSdkHost, hash: string) {
-    return host.get<{}>(`/txs/${hash}`)
+    return host.get<TxResponse>(`/txs/${hash}`);
   }
 
   /**
@@ -37,7 +38,7 @@ export module Auth {
       limit?: number;
     }
   ) {
-    return host.get<{}>(`/txs`, params)
+    return host.get<SearchTxsResult>(`/txs`, params);
   }
 
   /**

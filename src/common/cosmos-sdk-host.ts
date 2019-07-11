@@ -1,6 +1,6 @@
 import * as request from 'request';
 import { StdSignDoc, StdFee } from '../x/auth/stdtx';
-import { Msg } from '../cosmos-sdk/msg';
+import { Msg } from '../cosmos-sdk/tx_msg';
 import { Amino } from '../tendermint/amino';
 
 /**

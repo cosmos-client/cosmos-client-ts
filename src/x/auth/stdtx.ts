@@ -1,6 +1,6 @@
 import { Coin } from "../../cosmos-sdk/coin/coin";
 import { PubKey } from "../../tendermint/crypto/crypto";
-import { Msg } from "../../cosmos-sdk/msg";
+import { Msg } from "../../cosmos-sdk/tx_msg";
 import { Amino } from "../../tendermint/amino";
 
 /**
