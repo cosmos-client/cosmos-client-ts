@@ -1,4 +1,5 @@
 import { Tx } from "./tx_msg";
+import { StringEvent } from "./events";
 
 export interface ABCIMessageLog {
   msg_index: number;
@@ -16,7 +17,7 @@ export interface TxResponse {
   info?: string;
   gas_wanted?: bigint;
   gas_used?: bigint;
-  events?: unknown; //todo
+  events?: StringEvent;
   codespace?: string;
   tx?: Tx;
   timestamp?: string;

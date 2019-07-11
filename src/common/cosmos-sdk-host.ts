@@ -2,6 +2,7 @@ import * as request from 'request';
 import { StdSignDoc, StdFee } from '../x/auth/stdtx';
 import { Msg } from '../cosmos-sdk/tx_msg';
 import { Amino } from '../tendermint/amino';
+import { ErrorResponse } from '../cosmos-sdk/rest';
 
 /**
  * Cosmos SDK Rest APIのホスト情報を保持するオブジェクト。
@@ -24,6 +25,8 @@ export class CosmosSdkHost {
    * 登録されたurlにGETする。
    * @param path 
    * @param params 
+   * @returns Promise resolve: T, reject: ErrorResponse
+   * @see ErrorResponse
    */
   public get<T>(path: string, params?: any): Promise<T> {
     return new Promise((resolve, reject) => {
@@ -36,11 +39,11 @@ export class CosmosSdkHost {
         },
         (error, response, body) => {
           if (error) {
-            reject(error);
+            reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
             return;
           }
 
-          resolve(JSON.parse(body, Amino.reviver));
+          resolve(JSON.parse(body, Amino.reviver) as T);
         }
       );
     });
@@ -50,6 +53,8 @@ export class CosmosSdkHost {
    * 登録されたurlにPOSTする。
    * @param path 
    * @param params 
+   * @returns Promise resolve: T, reject: ErrorResponse
+   * @see ErrorResponse
    */
   public post<T>(path: string, params: any): Promise<T> {
     return new Promise((resolve, reject) => {
@@ -62,11 +67,11 @@ export class CosmosSdkHost {
         },
         (error, response, body) => {
           if (error) {
-            reject(error);
+            reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
             return;
           }
 
-          resolve(JSON.parse(body, Amino.reviver));
+          resolve(JSON.parse(body, Amino.reviver) as T);
         }
       );
     });
