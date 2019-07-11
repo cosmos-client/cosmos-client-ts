@@ -1,5 +1,6 @@
-import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { SendReq } from "./send-req";
+import { CosmosSdkHost } from '../../common/cosmos-sdk-host';
+import { SendReq } from './send-req';
+import { Coin } from '../../cosmos-sdk/coin/coin';
 
 /**
  * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。
@@ -21,6 +22,6 @@ export module Bank {
    * @param address 
    */
   export function getBalance(host: CosmosSdkHost, address: string) {
-    return host.get<{}>(`/bank/balances/${address}`);
+    return host.get<Coin>(`/bank/balances/${address}`);
   }
 }
