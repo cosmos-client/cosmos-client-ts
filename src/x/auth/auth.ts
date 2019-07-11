@@ -47,7 +47,7 @@ export module Auth {
    * @param broadcastReq 
    */
   export function postTransaction(host: CosmosSdkHost, broadcastReq: BroadcastReq) {
-    return host.post<{}>(`/txs`, broadcastReq);
+    return host.post<TxResponse>(`/txs`, broadcastReq);
   }
 
   /**
