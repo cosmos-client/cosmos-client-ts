@@ -23,6 +23,6 @@ export module Bank {
    * @param address 
    */
   export function getBalance(host: CosmosSdkHost, address: string) {
-    return host.get<Coin>(`/bank/balances/${address}`);
+    return host.get<Coin[]>(`/bank/balances/${address}`);
   }
 }
