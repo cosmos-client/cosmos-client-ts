@@ -7,3 +7,10 @@
 export interface Msg {
   
 }
+
+/**
+ * 空でよい。
+ */
+export interface Tx {
+
+}

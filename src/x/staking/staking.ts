@@ -9,7 +9,7 @@ export module Staking {
    * @param host /staking/delegators/${delegatorAddress}/delegations
    * @param delegatorAddress 
    */
-  export function postDelegations(host: CosmosSdkHost, delegatorAddress: string) {
+  export function postDelegation(host: CosmosSdkHost, delegatorAddress: string) {
     return host.post<{}>(`/staking/delegators/${delegatorAddress}/delegations`, {});
   }
 
@@ -18,7 +18,7 @@ export module Staking {
    * @param host 
    * @param delegatorAddress 
    */
-  export function postUnbondingDelegations(host: CosmosSdkHost, delegatorAddress: string) {
+  export function postUnbondingDelegation(host: CosmosSdkHost, delegatorAddress: string) {
     return host.post<{}>(`/staking/delegators/${delegatorAddress}/unbonding_delegations`, {});
   }
 
@@ -27,7 +27,7 @@ export module Staking {
    * @param host 
    * @param delegatorAddress 
    */
-  export function postTransfer(host: CosmosSdkHost, delegatorAddress: string) {
+  export function postRedelegation(host: CosmosSdkHost, delegatorAddress: string) {
     return host.post<{}>(`/staking/delegators/${delegatorAddress}/redelegations`, {});
   }
 }
