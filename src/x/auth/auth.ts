@@ -2,6 +2,8 @@ import { BroadcastReq } from "./broadcast-req";
 import { BaseAccount } from "./account";
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 import { TxResponse, SearchTxsResult } from "../../cosmos-sdk/result";
+import { StdTx } from "./stdtx";
+import { EncodeResp } from "./encode-resp";
 
 /**
  * Cosmos SDKにおけるx/authのRest APIをまとめたモジュール。
@@ -54,7 +56,7 @@ export module Auth {
    * /txs/encode
    * @param host 
    */
-  export function postEncodeTransaction(host: CosmosSdkHost) {
-    return host.post<{}>(`/txs/encode`, {});
+  export function postEncodeTransaction(host: CosmosSdkHost, tx: StdTx) {
+    return host.post<EncodeResp>(`/txs/encode`, tx);
   }
 }
