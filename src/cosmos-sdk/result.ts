@@ -12,14 +12,14 @@ export interface TxResponse {
   code?: number;
   data?: string;
   raw_log?: string;
-  logs: ABCIMessageLog[];
-  info: string;
-  gas_wanted: bigint;
-  gas_used: bigint;
-  events: unknown; //todo
-  codespace: string;
-  tx: Tx;
-  timestamp: string;
+  logs?: ABCIMessageLog[];
+  info?: string;
+  gas_wanted?: bigint;
+  gas_used?: bigint;
+  events?: unknown; //todo
+  codespace?: string;
+  tx?: Tx;
+  timestamp?: string;
 }
 
 export interface SearchTxsResult {
