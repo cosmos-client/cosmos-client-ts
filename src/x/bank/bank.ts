@@ -1,5 +1,6 @@
 import { CosmosSdkHost } from '../../common/cosmos-sdk-host';
 import { SendReq } from './send-req';
+import { StdTx } from '../auth/stdtx';
 import { Coin } from '../../cosmos-sdk/coin/coin';
 
 /**
@@ -13,7 +14,7 @@ export module Bank {
    * @param params 
    */
   export function postTransfer(host: CosmosSdkHost, address: string, params: SendReq) {
-    return host.post<{}>(`/bank/accounts/${address}/transfers`, params);
+    return host.post<StdTx>(`/bank/accounts/${address}/transfers`, params);
   }
 
   /**
