@@ -1,4 +1,5 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
+import { StdTx } from '../auth/stdtx';
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
@@ -10,7 +11,7 @@ export module Staking {
    * @param delegatorAddress 
    */
   export function postDelegation(host: CosmosSdkHost, delegatorAddress: string) {
-    return host.post<{}>(`/staking/delegators/${delegatorAddress}/delegations`, {});
+    return host.post<StdTx>(`/staking/delegators/${delegatorAddress}/delegations`, {});
   }
 
   /**
