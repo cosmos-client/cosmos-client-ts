@@ -18,8 +18,7 @@ export module Amino {
   /**
    * 
    * TendermintのAmino codecにconcreteとしてregisterされたクラスにつける、デコレータ。
-   * JSON Schemaに近い形で型情報を保持する必要があるクラスにつけられる。
-   * 型情報を保持する必要があるのは、基底クラスにJSONデシリアライズされる拡張クラスなどである。
+   * 型情報を保持する必要があるのは、共用型である。基底クラスにJSONデシリアライズされる拡張クラスを含む。
    * JSON.stringify時に参照するtoJSONメソッドを付与する。
    * @param type 
    */

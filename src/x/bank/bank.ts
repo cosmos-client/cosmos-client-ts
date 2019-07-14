@@ -1,7 +1,7 @@
 import { CosmosSdkHost } from '../../common/cosmos-sdk-host';
-import { SendReq } from './send-req';
-import { StdTx } from '../auth/stdtx';
-import { Coin } from '../../cosmos-sdk/coin/coin';
+import { SendReq } from './types/send-req';
+import { StdTx } from '../auth/types/stdtx';
+import { Coin } from '../../types/cosmos-sdk/coin';
 
 /**
  * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。

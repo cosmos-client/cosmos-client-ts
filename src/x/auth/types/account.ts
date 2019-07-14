@@ -1,7 +1,7 @@
-import { Coin } from "../../cosmos-sdk/coin/coin";
-import { PubKey } from "../../tendermint/crypto/crypto";
-import { AccAddress } from "../../cosmos-sdk/address";
-import { Amino } from "../../tendermint/amino";
+import { Coin } from "../../../types/cosmos-sdk/coin";
+import { AccAddress } from "../../../types/cosmos-sdk/address";
+import { Amino } from "../../../tendermint/amino";
+import { PubKey } from "../../../types/tendermint/pub-key";
 
 /**
  * アカウントのクラス。

@@ -1,5 +1,5 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { StdTx } from '../auth/stdtx';
+import { StdTx } from '../auth/types/stdtx';
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。

@@ -1,7 +1,7 @@
-import { Coin } from "../../cosmos-sdk/coin/coin";
-import { Msg } from "../../cosmos-sdk/tx_msg";
-import { AccAddress } from "../../cosmos-sdk/address";
-import { Amino } from "../../tendermint/amino";
+import { Coin } from "../../../types/cosmos-sdk/coin";
+import { Msg } from "../../../types/cosmos-sdk/tx_msg";
+import { AccAddress } from "../../../types/cosmos-sdk/address";
+import { Amino } from "../../../tendermint/amino";
 
 /**
  * MsgSendのクラス。

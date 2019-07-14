@@ -1,5 +1,5 @@
 import { StdTx, StdSignDoc } from "./stdtx";
-import { PrivKey } from "../../tendermint/crypto/crypto";
+import { PrivKey } from "../../../types/tendermint/priv-key";
 
 /**
  * @see Auth.postTransaction
