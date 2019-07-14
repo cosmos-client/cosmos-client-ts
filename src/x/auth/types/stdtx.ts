@@ -1,7 +1,7 @@
-import { Coin } from "../../cosmos-sdk/coin/coin";
-import { PubKey } from "../../tendermint/crypto/crypto";
-import { Msg } from "../../cosmos-sdk/tx_msg";
-import { Amino } from "../../tendermint/amino";
+import { Amino } from "../../../tendermint/amino";
+import { Msg } from "../../../types/cosmos-sdk/tx_msg";
+import { Coin } from "../../../types/cosmos-sdk/coin";
+import { PubKey } from "../../../types/tendermint/pub-key";
 
 /**
  * 署名済みトランザクションのクラス。

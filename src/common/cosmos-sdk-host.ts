@@ -1,8 +1,8 @@
 import * as request from 'request';
-import { StdSignDoc, StdFee } from '../x/auth/stdtx';
-import { Msg } from '../cosmos-sdk/tx_msg';
+import { Msg } from '../types/cosmos-sdk/tx_msg';
 import { Amino } from '../tendermint/amino';
-import { ErrorResponse } from '../cosmos-sdk/rest';
+import { ErrorResponse } from '../types/cosmos-sdk/rest';
+import { StdFee, StdSignDoc } from '../x/auth/types/stdtx';
 
 /**
  * Cosmos SDK Rest APIのホスト情報を保持するオブジェクト。

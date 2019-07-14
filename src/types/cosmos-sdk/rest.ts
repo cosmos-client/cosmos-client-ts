@@ -1,5 +1,5 @@
-import { Coin } from "./coin/coin";
-import { DecCoin } from "./coin/deccoin";
+import { Coin } from "./coin";
+import { DecCoin } from "./deccoin";
 
 export interface GasEstimateResponse {
   gas_estimate: bigint;
