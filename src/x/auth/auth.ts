@@ -4,6 +4,7 @@ import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 import { TxResponse, SearchTxsResult } from "../../types/cosmos-sdk/result";
 import { StdTx } from "./types/stdtx";
 import { EncodeResp } from "./types/encode-resp";
+import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 
 /**
  * Cosmos SDKにおけるx/authのRest APIをまとめたモジュール。
@@ -14,8 +15,8 @@ export module Auth {
    * @param host 
    * @param address 
    */
-  export function getAccount(host: CosmosSdkHost, address: string) {
-    return host.get<BaseAccount>(`/auth/accounts/${address}`);
+  export function getAccount(host: CosmosSdkHost, address: AccAddress) {
+    return host.get<BaseAccount>(`/auth/accounts/${address.toBech32()}`);
   }
 
   /**
