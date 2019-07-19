@@ -37,15 +37,15 @@ export module Staking {
    * @param redelegateRequest
    */
   export function postRedelegation(host: CosmosSdkHost, delegatorAddr: AccAddress, redelegateRequest: RedelegateRequest) {
-    return host.post<{}>(`/staking/delegators/${delegatorAddr.toBech32()}/redelegations`, redelegateRequest);
+    return host.post<StdTx>(`/staking/delegators/${delegatorAddr.toBech32()}/redelegations`, redelegateRequest);
   }
 
   export function getDelegatorDelegations(host: CosmosSdkHost, delegatorAddr: AccAddress) {
-    return host.get<{}>(`/staking/delegators/${delegatorAddr.toBech32()}/delegations`);
+    return host.get<QueryDelegatorParams>(`/staking/delegators/${delegatorAddr.toBech32()}/delegations`);
   }
 
   export function getDelegatorUnbondingDelegations(host: CosmosSdkHost, delegatorAddr: AccAddress) {
-    return host.get<{}>(`/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`);
+    return host.get<QueryDelegatorParams>(`/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`);
   }
 
   export function getDelegatorTxs(host: CosmosSdkHost, delegatorAddr: AccAddress) {
@@ -53,11 +53,11 @@ export module Staking {
   }
 
   export function getDelegatorValidators(host: CosmosSdkHost, delegatorAddr: AccAddress) {
-    return host.get<{}>(`/staking/delegators/${delegatorAddr.toBech32()}/validators`);
+    return host.get<Validator>(`/staking/delegators/${delegatorAddr.toBech32()}/validators`);
   }
 
   export function getDelegatorValidator(host: CosmosSdkHost, delegatorAddr: AccAddress, validatorAddr: ValAddress) {
-    return host.get<{}>(`/staking/delegators/${delegatorAddr}/validators/${validatorAddr}`);
+    return host.get<Validator>(`/staking/delegators/${delegatorAddr}/validators/${validatorAddr}`);
   }
 
   export function getDelegation(host: CosmosSdkHost, delegationAddr: AccAddress, validatorAddr: ValAddress) {
