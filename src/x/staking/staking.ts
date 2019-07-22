@@ -81,8 +81,8 @@ export module Staking {
     return host.get<Validator[]>(`/staking/validators`, queryValidatorParams);
   }
 
-  export function getValidator(host: CosmosSdkHost, validatorAddr: ValAddress) {
-    return host.get<{}>(`/staking/validators/${validatorAddr.toBech32()}`);
+  export function getValidator(host: CosmosSdkHost, validatorAddr: ValAddress, queryValidatorParams: QueryValidatorParams) {
+    return host.get<Validator>(`/staking/validators/${validatorAddr.toBech32()}`, queryValidatorParams);
   }
 
   export function getValidatorDelegations(host: CosmosSdkHost, validatorAddr: ValAddress) {

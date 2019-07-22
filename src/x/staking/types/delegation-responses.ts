@@ -3,8 +3,8 @@ import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { Dec } from "../../../types/cosmos-sdk/decimal";
 
 export interface Delegation{
-    DelegatorAddress : AccAddress
-    ValidatorAdress: ValAddress
-    Shares: Dec
-    Balance: Int16Array
+    delegator_address : AccAddress
+    validator_address: ValAddress
+    shares: Dec
+    balance: Int16Array
 }
