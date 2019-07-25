@@ -14,9 +14,9 @@ import { UnbondingDelegation } from "./types/unbounding-delegation-responses";
 import { DelegationResponse } from "./types/delegation-response";
 import { QueryRedelegationParams } from "./types/query-redelegation-params";
 import { RedelegationResponse } from "./types/redelegation-response";
-import { ModuleCdc } from "./types/module-cdc";
-import { AnyTxtRecord } from "dns";
 import { txs } from "./types/txs";
+import { pool } from "./types/pool";
+import { params } from "./types/params";
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
@@ -101,10 +101,10 @@ export module Staking {
   }
 
   export function getPool(host: CosmosSdkHost) {
-    return host.get<ModuleCdc>(`/staking/pool`);
+    return host.get<pool>(`/staking/pool`);
   }
 
   export function getParameters(host: CosmosSdkHost) {
-    return host.get<ModuleCdc>(`/staking/parameters`);
+    return host.get<params>(`/staking/parameters`);
   }
 }
