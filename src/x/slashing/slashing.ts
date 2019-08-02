@@ -1,6 +1,6 @@
 import { params } from "../staking/types/params";
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { signingInfo } from "./type/signing-info";
+import { signingInfo } from "./types/signing-info";
 
 export module Slashing {
 

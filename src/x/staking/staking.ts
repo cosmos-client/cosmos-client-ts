@@ -15,8 +15,9 @@ import { DelegationResponse } from "./types/delegation-response";
 import { QueryRedelegationParams } from "./types/query-redelegation-params";
 import { RedelegationResponse } from "./types/redelegation-response";
 import { txs } from "./types/txs";
-import { pool } from "./types/pool";
-import { params } from "./types/params";
+import { Pool } from "./types/pool";
+import { Params } from "./types/params";
+import { ResultABCIQuery } from "../mint/types/result-abci-query";
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
@@ -101,10 +102,10 @@ export module Staking {
   }
 
   export function getPool(host: CosmosSdkHost) {
-    return host.get<pool>(`/staking/pool`);
+    return host.get<ResultABCIQuery>(`/staking/pool`);
   }
 
   export function getParameters(host: CosmosSdkHost) {
-    return host.get<params>(`/staking/parameters`);
+    return host.get<ResultABCIQuery>(`/staking/parameters`);
   }
 }
