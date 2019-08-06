@@ -4,19 +4,19 @@ import { ResultABCIQuery } from "./types/result-abci-query";
 export module Mint {
 
 /**
- *  @host 
+ *  @host /minting/parameters
  */
 
- export function getParams(host: CosmosSdkHost, resultABCIQuery: ResultABCIQuery){
-     return host.get<ResultABCIQuery>(`/minting/parameters`, resultABCIQuery)
+ export function getParams(host: CosmosSdkHost){
+     return host.get<ResultABCIQuery>(`/minting/parameters`)
  }
 
  export function getInflation(host: CosmosSdkHost){
-    return host.get<ResultABCIQuery>()
+    return host.get<ResultABCIQuery>(`/minting/inflation`)
 }
 
 export function getAnnualProvisions(host: CosmosSdkHost){
-    return host.get<ResultABCIQuery>()
+    return host.get<ResultABCIQuery>(`/minting/annual-provisions`)
 }
 
 }
