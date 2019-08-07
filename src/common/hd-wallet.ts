@@ -9,7 +9,7 @@ export module HdWallet {
    * BIP44に従ってBIP32鍵導出パスを作る。
    * @param index 
    */
-  export function getBip32PathByBip44(index: string): string {
+  export function getBip32PathByBip44(index: number): string {
     const bip32CoinType = 118;
 
     return  `m/44'/${bip32CoinType}'/0'/0/${index}`;
