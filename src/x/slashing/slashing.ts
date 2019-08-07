@@ -21,5 +21,4 @@ export module Slashing {
 export function getSignInfos(host: CosmosSdkHost){
     return host.get<ResultABCIQuery>('/slashing/parameters')
 }
-
 }
