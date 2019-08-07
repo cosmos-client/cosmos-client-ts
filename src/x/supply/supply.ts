@@ -8,19 +8,20 @@ export module Supply {
 
     /**
      * @param /supply/total
-     * 
+     * @param supplyQuery
      */
 
     export function getTotalSupply(host: CosmosSdkHost, supplyQuery: SupplyQuery){
-        return host.get<ResultABCIQuery>(`/supply/total`, supplyQuery)
+        return host.get<ResultABCIQuery>('/supply/total', supplyQuery)
     }
 
     /**
      * @param /supply/total/{denom}
-     * 
+     * @param supplyQuery
+     * @param denom
      */
 
-    export function getSupplyOf(host: CosmosSdkHost, supplyQuery: SupplyQuery){
-        return host.get<ResultABCIQuery>(`/supply/total/{denom}`, supplyQuery)
+    export function getSupplyOf(host: CosmosSdkHost, denom: string, supplyQuery: SupplyQuery){
+        return host.get<ResultABCIQuery>('/supply/total/${denom}', supplyQuery)
     }
 }

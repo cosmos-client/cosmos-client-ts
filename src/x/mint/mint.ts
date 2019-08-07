@@ -8,15 +8,15 @@ export module Mint {
  */
 
  export function getParams(host: CosmosSdkHost){
-     return host.get<ResultABCIQuery>(`/minting/parameters`)
+     return host.get<ResultABCIQuery>('/minting/parameters')
  }
 
  export function getInflation(host: CosmosSdkHost){
-    return host.get<ResultABCIQuery>(`/minting/inflation`)
+    return host.get<ResultABCIQuery>('/minting/inflation')
 }
 
 export function getAnnualProvisions(host: CosmosSdkHost){
-    return host.get<ResultABCIQuery>(`/minting/annual-provisions`)
+    return host.get<ResultABCIQuery>('/minting/annual-provisions')
 }
 
 }
