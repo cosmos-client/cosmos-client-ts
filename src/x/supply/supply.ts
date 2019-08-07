@@ -1,18 +1,27 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { GetSupply } from "./types/total_supply";
+import { ResultABCIQuery } from "../mint/types/result-abci-query";
+import { SupplyQuery } from "./types/supply-query";
+
+
 
 export module Supply {
 
-/**
-* @param host /supply/TotalSupply
-*/
+    /**
+     * @param /supply/total
+     * @param supplyQuery
+     */
 
- export function getTotalSupply(host: CosmosSdkHost){
-    return host.get<GetSupply>()
- }
+    export function getTotalSupply(host: CosmosSdkHost, supplyQuery: SupplyQuery){
+        return host.get<ResultABCIQuery>('/supply/total', supplyQuery)
+    }
 
- export function getSupplyOf(host: CosmosSdkHost){
-     return host.get<GetSupply>()
- }
+    /**
+     * @param /supply/total/{denom}
+     * @param supplyQuery
+     * @param denom
+     */
 
+    export function getSupplyOf(host: CosmosSdkHost, denom: string, supplyQuery: SupplyQuery){
+        return host.get<ResultABCIQuery>('/supply/total/${denom}', supplyQuery)
+    }
 }
