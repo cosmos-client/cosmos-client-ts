@@ -8,13 +8,15 @@ import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { QueryDelegatorParams } from "./types/query-delegator-params";
 import { QueryValidatorParams } from "./types/query-validator-params";
 import { QueryBondsParams } from "./types/query-bonds-params";
-import { DelegationResponse } from "./types/delegation-response";
 import { QueryRedelegationParams } from "./types/query-redelegation-params";
 import { txs } from "./types/txs";
 import { ResultABCIQuery } from "../mint/types/result-abci-query";
 import { TxsQueryType } from "./types/txs-query-params";
 import { BroadcastTxCommitResult } from "./types/broadcast-tx-commit-result";
 import { Delegation } from "./types/delegation";
+import { UnboundingDelegation } from "./types/unbounding-delegation";
+import { TxQuery } from "./types/tx-query";
+import { Validator } from "./types/validator";
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
@@ -51,11 +53,11 @@ export module Staking {
   }
 
   export function getDelegatorDelegations(host: CosmosSdkHost, delegatorAddr: AccAddress, queryDelegatorParams: QueryDelegatorParams) {
-    return host.get<ResultABCIQuery>(`/staking/delegators/${delegatorAddr.toBech32()}/delegations`, queryDelegatorParams);
+    return host.get<Delegation>(`/staking/delegators/${delegatorAddr.toBech32()}/delegations`, queryDelegatorParams);
   }
 
   export function getDelegatorUnbondingDelegations(host: CosmosSdkHost, delegatorAddr: AccAddress, queryValidatorParams: QueryValidatorParams) {
-    return host.get<ResultABCIQuery>(`/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`, queryValidatorParams);
+    return host.get<UnboundingDelegation>(`/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`, queryValidatorParams);
   }
 
   export function getDelegatorTxs(host: CosmosSdkHost, delegatorAddr: AccAddress, txsQueryType: TxsQueryType) {
@@ -69,19 +71,19 @@ export module Staking {
     if (txsQueryType.redelegate) {
       types += 'redelegate ;'
     }
-    return host.get<txs>(`/staking/delegators/${delegatorAddr.toBech32()}/txs`, txsQueryType);
+    return host.get<TxQuery>(`/staking/delegators/${delegatorAddr.toBech32()}/txs`, txsQueryType);
   }
 
   export function getDelegatorValidators(host: CosmosSdkHost, delegatorAddr: AccAddress, queryDelegatorParams: QueryDelegatorParams) {
-    return host.get<Delegation>(`/staking/delegators/${delegatorAddr.toBech32()}/validators`, queryDelegatorParams);
+    return host.get<Validator>(`/staking/delegators/${delegatorAddr.toBech32()}/validators`, queryDelegatorParams);
   }
 
   export function getDelegatorValidator(host: CosmosSdkHost, delegatorAddr: AccAddress, validatorAddr: ValAddress, queryBondsParams: QueryBondsParams) {
-    return host.get<ResultABCIQuery>(`/staking/delegators/${delegatorAddr}/validators/${validatorAddr}`, queryBondsParams);
+    return host.get<Validator>(`/staking/delegators/${delegatorAddr}/validators/${validatorAddr}`, queryBondsParams);
   }
 
-  export function getDelegation(host: CosmosSdkHost, delegationAddr: AccAddress, validatorAddr: ValAddress, queryBondsParams: QueryBondsParams) {
-    return host.get<DelegationResponse>(`/staking/delegators/${delegationAddr}/delegations/${validatorAddr}`, queryBondsParams);
+  export function getDelegation(host: CosmosSdkHost, delegatorAddr: AccAddress, validatorAddr: ValAddress, queryBondsParams: QueryBondsParams) {
+    return host.get<Delegation>(`/staking/delegators/${delegatorAddr}/delegations/${validatorAddr}`, queryBondsParams);
   }
 
   export function getUnbondingDelegation(host: CosmosSdkHost, delegatorAddr: AccAddress, validatorAddr: ValAddress, queryBondsParams: QueryBondsParams) {
