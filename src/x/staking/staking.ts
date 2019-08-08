@@ -13,6 +13,7 @@ import { QueryRedelegationParams } from "./types/query-redelegation-params";
 import { txs } from "./types/txs";
 import { ResultABCIQuery } from "../mint/types/result-abci-query";
 import { TxsQueryType } from "./types/txs-query-params";
+import { BroadcastTxCommitResult } from "./types/broadcast-tx-commit-result";
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
@@ -25,7 +26,7 @@ export module Staking {
    * @param delegateRequest 
    */
   export function postDelegation(host: CosmosSdkHost, delegatorAddr: AccAddress, delegateRequest: DelegateRequest) {
-    return host.post<StdTx>(`/staking/delegators/${delegatorAddr.toBech32()}/delegations`, delegateRequest);
+    return host.post<BroadcastTxCommitResult>(`/staking/delegators/${delegatorAddr.toBech32()}/delegations`, delegateRequest);
   }
 
   /**
