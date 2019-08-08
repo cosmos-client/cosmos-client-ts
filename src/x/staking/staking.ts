@@ -14,6 +14,7 @@ import { txs } from "./types/txs";
 import { ResultABCIQuery } from "../mint/types/result-abci-query";
 import { TxsQueryType } from "./types/txs-query-params";
 import { BroadcastTxCommitResult } from "./types/broadcast-tx-commit-result";
+import { Delegation } from "./types/delegation";
 
 /**
  * Cosmos SDKにおけるx/stakingのRest APIをまとめたモジュール。
@@ -36,7 +37,7 @@ export module Staking {
    * @param undelegateRequest 
    */
   export function postUnbondingDelegation(host: CosmosSdkHost, delegatorAddr: AccAddress, undelegateRequest: UndelegateRequest) {
-    return host.post<StdTx>(`/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`, undelegateRequest);
+    return host.post<BroadcastTxCommitResult>(`/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`, undelegateRequest);
   }
 
   /**
@@ -72,7 +73,7 @@ export module Staking {
   }
 
   export function getDelegatorValidators(host: CosmosSdkHost, delegatorAddr: AccAddress, queryDelegatorParams: QueryDelegatorParams) {
-    return host.get<ResultABCIQuery>(`/staking/delegators/${delegatorAddr.toBech32()}/validators`, queryDelegatorParams);
+    return host.get<Delegation>(`/staking/delegators/${delegatorAddr.toBech32()}/validators`, queryDelegatorParams);
   }
 
   export function getDelegatorValidator(host: CosmosSdkHost, delegatorAddr: AccAddress, validatorAddr: ValAddress, queryBondsParams: QueryBondsParams) {
