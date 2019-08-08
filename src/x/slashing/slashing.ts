@@ -1,6 +1,5 @@
 import { ResultABCIQuery } from "../mint/types/result-abci-query";
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { signingInfo } from "./types/signing-info";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 
 export module Slashing {
