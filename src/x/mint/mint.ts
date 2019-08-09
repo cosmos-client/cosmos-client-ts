@@ -1,5 +1,6 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 import { ResultABCIQuery } from "./types/result-abci-query";
+import { MintParameter } from "./types/mint-parameter";
 
 export module Mint {
 
@@ -8,15 +9,15 @@ export module Mint {
  */
 
  export function getParams(host: CosmosSdkHost){
-     return host.get<ResultABCIQuery>('/minting/parameters')
+     return host.get<MintParameter>('/minting/parameters')
  }
 
  export function getInflation(host: CosmosSdkHost){
-    return host.get<ResultABCIQuery>('/minting/inflation')
+    return host.get<string>('/minting/inflation')
 }
 
 export function getAnnualProvisions(host: CosmosSdkHost){
-    return host.get<ResultABCIQuery>('/minting/annual-provisions')
+    return host.get<string>('/minting/annual-provisions')
 }
 
 }
