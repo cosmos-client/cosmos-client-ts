@@ -1,5 +1,4 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { ResultABCIQuery } from "./types/result-abci-query";
 import { MintParameter } from "./types/mint-parameter";
 
 export module Mint {
