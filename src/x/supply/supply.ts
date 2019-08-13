@@ -1,5 +1,4 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { ResultABCIQuery } from "../mint/types/result-abci-query";
 import { SupplyQuery } from "./types/supply-query";
 
 

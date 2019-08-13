@@ -7,7 +7,7 @@ import { Amino } from "../../../tendermint/amino";
  * ed25519秘密鍵。
  */
 @Amino.RegisterConcrete('tendermint/PrivKeyEd25519')
-export class PrivKeySecp256k1 implements PrivKey {
+export class PrivKeyEd25519 implements PrivKey {
   private pubKey: PubKey;
   private privKey: Buffer;
 
