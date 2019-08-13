@@ -1,4 +1,3 @@
-import { ResultABCIQuery } from "../mint/types/result-abci-query";
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { SigningInfo } from "./types/signing-info";
