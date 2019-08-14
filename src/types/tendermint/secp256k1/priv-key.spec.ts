@@ -3,15 +3,22 @@ import { PubKey } from "../pub-key";
 import { PrivKeySecp256k1 } from './priv-key';
 
 describe('PrivKeySecp256k1', () => {
-    let privKey = PrivKeySecp256k1;
-    
-    
+    let privKey: PrivKeySecp256k1(privKey);
+    let pubkey: PrivKeySecp256k1(pubkey);
+
+
     it(‘公開鍵を取得する’, () => {
-        
-    expect(privKey).toEqual(PrivKeySecp256k1);
+
+        expect(pubkey).toEqual(getPubKey(privKey));
     });
 
-    //署名を作成する
+    it(‘署名を作成する’, () => {
 
-    //JSON.stringify時に参照される
- });
+        expect(signature).toEqual(sign(signature));
+    });
+
+    it(‘JSON.stringify時に参照される’, () => {
+
+        expect().toEqual();
+    });
+});
