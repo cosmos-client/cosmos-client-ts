@@ -7,17 +7,17 @@ describe('PrivKeySecp256k1', () => {
     let pubkey: PrivKeySecp256k1(pubkey);
 
 
-    it(‘公開鍵を取得する’, () => {
+    it('公開鍵を取得する', () => {
 
         expect(pubkey).toEqual(getPubKey(privKey));
     });
 
-    it(‘署名を作成する’, () => {
+    it('署名を作成する', () => {
 
         expect(signature).toEqual(sign(signature));
     });
 
-    it(‘JSON.stringify時に参照される’, () => {
+    it('JSON.stringify時に参照される', () => {
 
         expect().toEqual();
     });
