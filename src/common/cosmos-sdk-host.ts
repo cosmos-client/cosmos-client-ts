@@ -77,6 +77,27 @@ export class CosmosSdkHost {
     });
   }
 
+  public put<T>(path: string, params: any): Promise<T> {
+    return new Promise((resolve, reject) => {
+      request.post(
+        {
+          uri: this.url + path,
+          method: 'PUT',
+          json: false,
+          body: params
+        },
+        (error, response, body) => {
+          if (error) {
+            reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+            return;
+          }
+
+          resolve(JSON.parse(body, Amino.reviver) as T);
+        }
+      );
+    });
+  }
+
   /**
    * 登録されたchain idのチェーンのための署名前トランザクションオブジェクトをつくる。
    * @param accountNumber 
