@@ -1,10 +1,14 @@
 import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { StdTx } from "../auth/types/stdtx";
-import { TransferNFTReq } from "./types/transferNFTReq";
-import { EditNFTMetadataReq } from "./types/editNFTMetadataReq";
-import { MintNFTReq } from "./types/mintNFTReq";
-import { BurnNFTReq } from "./types/burnNFTReq";
+import { TransferNFTReq } from "./types/transfer-nft-req";
+import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
+import { MintNFTReq } from "./types/mint-nft-req";
+import { BurnNFTReq } from "./types/burn-nft-req";
+import { MsgTransferNFT } from "./types/msg-transfer-nft";
+import { MsgEditNFTMetadata } from "./types/msg-edit-nft-metadata";
+import { MsgMintNFT } from "./types/msg-mint-nft";
+import { MsgBurnNFT } from "./types/msg-burn-nft";
 
 export module Nft {
 
@@ -37,18 +41,18 @@ export module Nft {
     }
 
     export function postTransferNFT(host: CosmosSdkHost, transferNFTReq: TransferNFTReq){
-        return host.post<StdTx>('/nfts/transfer', transferNFTReq)
+        return host.post<StdTx<MsgTransferNFT>>('/nfts/transfer', transferNFTReq)
     }
 
-    export function postEditNFTMetadata(host: CosmosSdkHost, denom: string, id: string, editNFTMetadataReq: EditNFTMetadataReq){
-        return host.post<StdTx>(`/nfts/collection/${denom}/nft/${id}/metadata`, editNFTMetadataReq)
+    export function postEditNFTMetadata(host: CosmosSdkHost, editNFTMetadataReq: EditNFTMetadataReq){
+        return host.post<StdTx<MsgEditNFTMetadata>>(`/nfts/collection/${editNFTMetadataReq.denom}/nft/${editNFTMetadataReq.id}/metadata`, editNFTMetadataReq)
     }
 
     export function postMintNFT(host: CosmosSdkHost, mintNFTReq: MintNFTReq){
-        return host.post<StdTx>(`/nfts/mint`, mintNFTReq)
+        return host.post<StdTx<MsgMintNFT>>(`/nfts/mint`, mintNFTReq)
     }
 
-    export function putBurnNFT(host: CosmosSdkHost, denom: string, id: number, burnNFTReq: BurnNFTReq){
-        return host.put<StdTx>(`/nfts/collection/${denom}/nft/${id}/burn`, burnNFTReq)
+    export function putBurnNFT(host: CosmosSdkHost, burnNFTReq: BurnNFTReq){
+        return host.put<StdTx<MsgBurnNFT>>(`/nfts/collection/${burnNFTReq.denom}/nft/${burnNFTReq.id}/burn`, burnNFTReq)
     }
 }

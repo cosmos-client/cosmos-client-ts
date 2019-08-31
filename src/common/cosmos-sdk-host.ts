@@ -1,16 +1,13 @@
 import * as request from 'request';
-import { Msg } from '../types/cosmos-sdk/tx_msg';
 import { Amino } from '../tendermint/amino';
 import { ErrorResponse } from '../types/cosmos-sdk/rest';
 import { StdFee, StdSignDoc } from '../x/auth/types/stdtx';
 
 /**
- * Cosmos SDK Rest APIのホスト情報を保持するオブジェクト。
- * chain idは、異なるidのチェーン間のリプレイアタックを防ぐために必要。
+ * 
  */
 export class CosmosSdkHost {
   /**
-   * 
    * @param url 
    * @param chainId 
    */
@@ -22,7 +19,7 @@ export class CosmosSdkHost {
   }
 
   /**
-   * 登録されたurlにGETする。
+   * 
    * @param path 
    * @param params 
    * @returns Promise resolve: T, reject: ErrorResponse
@@ -50,7 +47,7 @@ export class CosmosSdkHost {
   }
 
   /**
-   * 登録されたurlにPOSTする。
+   * 
    * @param path 
    * @param params 
    * @returns Promise resolve: T, reject: ErrorResponse
@@ -77,6 +74,11 @@ export class CosmosSdkHost {
     });
   }
 
+  /**
+   * 
+   * @param path 
+   * @param params 
+   */
   public put<T>(path: string, params: any): Promise<T> {
     return new Promise((resolve, reject) => {
       request.post(
@@ -99,20 +101,20 @@ export class CosmosSdkHost {
   }
 
   /**
-   * 登録されたchain idのチェーンのための署名前トランザクションオブジェクトをつくる。
+   * 
    * @param accountNumber 
    * @param fee 
    * @param memo 
    * @param msgs 
    * @param sequence 
    */
-  public createStdSignDoc(
+  public createStdSignDoc<Msg>(
     accountNumber: bigint,
     fee: StdFee,
     memo: string,
     msgs: Msg[],
     sequence: bigint
-  ): StdSignDoc {
+  ): StdSignDoc<Msg> {
     return {
       account_number: accountNumber,
       chain_id: this.chainId,

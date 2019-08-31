@@ -4,7 +4,7 @@ import { Amino } from "../../../tendermint/amino";
 import { PubKey } from "../../../types/tendermint/pub-key";
 
 /**
- * アカウントのクラス。
+ * 
  */
 @Amino.RegisterConcrete('auth/Account')
 export class BaseAccount {
@@ -27,7 +27,6 @@ export class BaseAccount {
   }
 
   /**
-   * addressはAccAddress型として読み込むためのfromJSONメソッド。
    * @see Amino.reviver
    * @param obj 
    */

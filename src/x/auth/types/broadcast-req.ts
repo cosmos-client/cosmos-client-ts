@@ -4,8 +4,8 @@ import { PrivKey } from "../../../types/tendermint/priv-key";
 /**
  * @see Auth.postTransaction
  */
-export class BroadcastReq {
-  public tx: StdTx;
+export class BroadcastReq<Msg> {
+  public tx: StdTx<Msg>;
   public mode: string;
 
   /**
@@ -14,7 +14,7 @@ export class BroadcastReq {
    * @param stdSignDoc 
    * @param modeType 
    */
-  constructor(privKey: PrivKey, stdSignDoc: StdSignDoc, modeType = "sync") {
+  constructor(privKey: PrivKey, stdSignDoc: StdSignDoc<Msg>, modeType = "sync") {
     const signature = privKey.sign(JSON.stringify(stdSignDoc));
 
     this.tx = new StdTx(

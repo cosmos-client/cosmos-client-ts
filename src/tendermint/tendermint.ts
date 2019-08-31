@@ -1,7 +1,7 @@
 import { CosmosSdkHost } from "../common/cosmos-sdk-host";
 
 /**
- * TendermintのRest APIをまとめたモジュール。
+ * Tendermint Rest API
  */
 export module Tendermint {
   /**

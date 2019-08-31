@@ -1,14 +1,12 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
-import { Msg } from "../../../types/cosmos-sdk/tx_msg";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { Amino } from "../../../tendermint/amino";
 
 /**
- * MsgSendのクラス。
- * アセット送信するMsg。
+ * 
  */
 @Amino.RegisterConcrete('cosmos-sdk/MsgSend')
-export class MsgSend implements Msg {
+export class MsgSend {
   /**
    * 
    * @param from_address 
@@ -32,33 +30,5 @@ export class MsgSend implements Msg {
       AccAddress.fromBech32(obj.to_address),
       obj.amount
     )
-  }
-}
-
-export interface Input {
-  address: string;
-  coins: Coin[];
-}
-
-export interface Output {
-  address: string;
-  coins: Coin[];
-}
-
-/**
- * 
- */
-@Amino.RegisterConcrete('cosmos-sdk/MsgMultiSend')
-export class MsgMultiSend implements Msg {
-  /**
-   * 
-   * @param inputs 
-   * @param outputs 
-   */
-  constructor(
-    public inputs: Input[],
-    public outputs: Output[]
-  ) {
-    
   }
 }

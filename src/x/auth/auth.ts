@@ -49,7 +49,7 @@ export module Auth {
    * @param host 
    * @param broadcastReq 
    */
-  export function postTransaction(host: CosmosSdkHost, broadcastReq: BroadcastReq) {
+  export function postTransaction<Msg>(host: CosmosSdkHost, broadcastReq: BroadcastReq<Msg>) {
     return host.post<TxResponse>(`/txs`, broadcastReq);
   }
 
@@ -57,7 +57,7 @@ export module Auth {
    * /txs/encode
    * @param host 
    */
-  export function postEncodeTransaction(host: CosmosSdkHost, tx: StdTx) {
+  export function postEncodeTransaction<Msg>(host: CosmosSdkHost, tx: StdTx<Msg>) {
     return host.post<EncodeResp>(`/txs/encode`, tx);
   }
 }
