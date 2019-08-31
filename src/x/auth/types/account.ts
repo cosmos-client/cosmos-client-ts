@@ -1,6 +1,6 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { Amino } from "../../../tendermint/amino";
+import { Amino } from "../../../common/amino";
 import { PubKey } from "../../../types/tendermint/pub-key";
 
 /**

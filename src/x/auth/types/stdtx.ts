@@ -1,4 +1,4 @@
-import { Amino } from "../../../tendermint/amino";
+import { Amino } from "../../../common/amino";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { PubKey } from "../../../types/tendermint/pub-key";
 

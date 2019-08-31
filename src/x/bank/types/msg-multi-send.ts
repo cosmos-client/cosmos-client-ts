@@ -1,5 +1,5 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
-import { Amino } from "../../../tendermint/amino";
+import { Amino } from "../../../common/amino";
 
 export interface Input {
   address: string;

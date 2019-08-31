@@ -3,10 +3,14 @@ import { ValidatorDistInfo } from "./types/validator-dist-info";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
-import { BroadcastTxCommitResult } from "../staking/types/broadcast-tx-commit-result";
 import { Coin } from "../../types/cosmos-sdk/coin";
 import { Address } from "../../types/cosmos-sdk/address/address";
 import { DistributionParameter } from "./types/distribution-parameter";
+import { StdTx } from "../auth/types/stdtx";
+import { MsgWithdrawDelegationReward } from "./types/msg-withdraw-delegation-reward";
+import { MsgWithdrawDelegatorReward } from "./types/msg-withdraw-delegator-reward";
+import { MsgSetWithdrawAddress } from "./types/msg-set-withdraw-address";
+import { MsgWithdrawValidatorCommission } from "./types/msg-withdraw-validator-commision";
 
 export module Distribution {
 
@@ -17,19 +21,19 @@ export module Distribution {
      */
 
     export function postWithdrawDelegatorRewards(host: CosmosSdkHost, delegatorAddr: AccAddress, baseReq: BaseReq) {
-        return host.post<BroadcastTxCommitResult>(`/distribution/delegators/${delegatorAddr}/rewards`, baseReq)
+        return host.post<StdTx<MsgWithdrawDelegatorReward>>(`/distribution/delegators/${delegatorAddr}/rewards`, baseReq)
     }
 
     export function postWithdrawDelegationRewards(host: CosmosSdkHost, delegatorAddr: AccAddress, validatorAddr: ValAddress, baseReq: BaseReq) {
-        return host.post<BroadcastTxCommitResult>(`/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`, baseReq)
+        return host.post<StdTx<MsgWithdrawDelegationReward>>(`/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`, baseReq)
     }
 
     export function postSetDelegatorWithdrawalAddr(host: CosmosSdkHost, delegatorAddr: AccAddress, baseReq: BaseReq) {
-        return host.post<BroadcastTxCommitResult>(`/distribution/delegators/${delegatorAddr}/withdraw_address`, baseReq)
+        return host.post<StdTx<MsgSetWithdrawAddress>>(`/distribution/delegators/${delegatorAddr}/withdraw_address`, baseReq)
     }
 
     export function postWithdrawValidatorRewards(host: CosmosSdkHost, validatorAddr: ValAddress, baseReq: BaseReq) {
-        return host.post<BroadcastTxCommitResult>(`/distribution/validators/${validatorAddr}/rewards`, baseReq)
+        return host.post<StdTx<MsgWithdrawValidatorCommission>>(`/distribution/validators/${validatorAddr}/rewards`, baseReq)
     }
 
     export function getDelegatorRewards(host: CosmosSdkHost, delegatorAddr: AccAddress) {

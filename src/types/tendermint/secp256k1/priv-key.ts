@@ -1,6 +1,6 @@
 import { PrivKey } from "../priv-key";
 import { PubKey } from "../pub-key";
-import { Amino } from "../../../tendermint/amino";
+import { Amino } from "../../../common/amino";
 import { PubKeySecp256k1 } from "./pub-key";
 import * as crypto from 'crypto';
 import * as secp256k1 from 'tiny-secp256k1';

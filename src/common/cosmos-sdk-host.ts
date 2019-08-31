@@ -1,5 +1,5 @@
 import * as request from 'request';
-import { Amino } from '../tendermint/amino';
+import { Amino } from './amino';
 import { ErrorResponse } from '../types/cosmos-sdk/rest';
 import { StdFee, StdSignDoc } from '../x/auth/types/stdtx';
 

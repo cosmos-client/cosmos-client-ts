@@ -1,4 +1,4 @@
-import { Amino } from "../../../tendermint/amino";
+import { Amino } from "../../../common/amino";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 
 @Amino.RegisterConcrete('cosmos-sdk/MsgTransferNFT')

@@ -1,7 +1,7 @@
 import { PrivKey } from "../priv-key";
 import { PubKey } from "../pub-key";
 import { PubKeyEd25519 } from "./pub-key";
-import { Amino } from "../../../tendermint/amino";
+import { Amino } from "../../../common/amino";
 
 /**
  * ed25519秘密鍵。
