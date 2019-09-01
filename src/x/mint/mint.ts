@@ -1,22 +1,20 @@
-import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
+import { CosmosSDK } from "../..";
 import { MintParameter } from "./types/mint-parameter";
 
 export module Mint {
+  /**
+   *  
+   */
 
-/**
- *  @host /minting/parameters
- */
+  export function getParams(host: CosmosSDK) {
+    return host.get<MintParameter>("/minting/parameters");
+  }
 
- export function getParams(host: CosmosSdkHost){
-     return host.get<MintParameter>('/minting/parameters')
- }
+  export function getInflation(host: CosmosSDK) {
+    return host.get<string>("/minting/inflation");
+  }
 
- export function getInflation(host: CosmosSdkHost){
-    return host.get<string>('/minting/inflation')
-}
-
-export function getAnnualProvisions(host: CosmosSdkHost){
-    return host.get<string>('/minting/annual-provisions')
-}
-
+  export function getAnnualProvisions(host: CosmosSDK) {
+    return host.get<string>("/minting/annual-provisions");
+  }
 }

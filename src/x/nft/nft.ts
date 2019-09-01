@@ -1,4 +1,4 @@
-import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
+import { CosmosSDK } from "../..";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { StdTx } from "../auth/types/stdtx";
 import { TransferNFTReq } from "./types/transfer-nft-req";
@@ -11,48 +11,66 @@ import { MsgMintNFT } from "./types/msg-mint-nft";
 import { MsgBurnNFT } from "./types/msg-burn-nft";
 
 export module Nft {
+  /**
+   * 
+   */
 
-    /**
-     * @param host 
-     */
+  export function getSupply(host: CosmosSDK, denom: string) {
+    return host.get<{}>(`/nft/supply/${denom}`, denom);
+  }
 
-    export function getSupply(host: CosmosSdkHost, denom: string) {
-        return host.get<{}>(`/nft/supply/${denom}`, denom)
-    }
+  export function getOwner(host: CosmosSDK, delegatorAddr: AccAddress) {
+    return host.get<{}>(`/nft/owner/${delegatorAddr}`, delegatorAddr);
+  }
 
-    export function getOwner(host: CosmosSdkHost, delegatorAddr: AccAddress){
-        return host.get<{}>(`/nft/owner/${delegatorAddr}`, delegatorAddr)
-    }
+  export function getOwnerByDenom(
+    host: CosmosSDK,
+    delegatorAddr: AccAddress,
+    denom: string
+  ) {
+    return host.get<{}>(
+      `/nft/owner/${delegatorAddr}/collection/${denom}`,
+      delegatorAddr
+    );
+  }
 
-    export function getOwnerByDenom(host: CosmosSdkHost, delegatorAddr: AccAddress, denom: string){
-        return host.get <{}> (`/nft/owner/${delegatorAddr}/collection/${denom}`, delegatorAddr)
-    }
+  export function getCollection(host: CosmosSDK, denom: string) {
+    return host.get<{}>(`/nft/collection/${denom}`, denom);
+  }
 
-    export function getCollection(host: CosmosSdkHost, denom: string){
-        return host.get<{}>(`/nft/collection/${denom}`, denom)
-    }
+  export function getDenoms(host: CosmosSDK) {
+    return host.get<{}>(`/nft/denoms`);
+  }
 
-    export function getDenoms(host: CosmosSdkHost){
-        return host.get<{}>(`/nft/denoms`)
-    }
+  export function getNFT(host: CosmosSDK, denom: string, id: string) {
+    return host.get<{}>(`/nft/collection/${denom}/nft/${id}`);
+  }
 
-    export function getNFT(host: CosmosSdkHost, denom: string, id: string){
-        return host.get<{}>(`/nft/collection/${denom}/nft/${id}`)
-    }
+  export function postTransferNFT(
+    host: CosmosSDK,
+    transferNFTReq: TransferNFTReq
+  ) {
+    return host.post<StdTx<MsgTransferNFT>>("/nfts/transfer", transferNFTReq);
+  }
 
-    export function postTransferNFT(host: CosmosSdkHost, transferNFTReq: TransferNFTReq){
-        return host.post<StdTx<MsgTransferNFT>>('/nfts/transfer', transferNFTReq)
-    }
+  export function postEditNFTMetadata(
+    host: CosmosSDK,
+    editNFTMetadataReq: EditNFTMetadataReq
+  ) {
+    return host.post<StdTx<MsgEditNFTMetadata>>(
+      `/nfts/collection/${editNFTMetadataReq.denom}/nft/${editNFTMetadataReq.id}/metadata`,
+      editNFTMetadataReq
+    );
+  }
 
-    export function postEditNFTMetadata(host: CosmosSdkHost, editNFTMetadataReq: EditNFTMetadataReq){
-        return host.post<StdTx<MsgEditNFTMetadata>>(`/nfts/collection/${editNFTMetadataReq.denom}/nft/${editNFTMetadataReq.id}/metadata`, editNFTMetadataReq)
-    }
+  export function postMintNFT(host: CosmosSDK, mintNFTReq: MintNFTReq) {
+    return host.post<StdTx<MsgMintNFT>>(`/nfts/mint`, mintNFTReq);
+  }
 
-    export function postMintNFT(host: CosmosSdkHost, mintNFTReq: MintNFTReq){
-        return host.post<StdTx<MsgMintNFT>>(`/nfts/mint`, mintNFTReq)
-    }
-
-    export function putBurnNFT(host: CosmosSdkHost, burnNFTReq: BurnNFTReq){
-        return host.put<StdTx<MsgBurnNFT>>(`/nfts/collection/${burnNFTReq.denom}/nft/${burnNFTReq.id}/burn`, burnNFTReq)
-    }
+  export function putBurnNFT(host: CosmosSDK, burnNFTReq: BurnNFTReq) {
+    return host.put<StdTx<MsgBurnNFT>>(
+      `/nfts/collection/${burnNFTReq.denom}/nft/${burnNFTReq.id}/burn`,
+      burnNFTReq
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import { CosmosSdkHost } from "../common/cosmos-sdk-host";
+import { CosmosSDK } from "..";
 
 /**
  * Tendermint Rest API
@@ -8,7 +8,7 @@ export module Tendermint {
    * /tendermint/status
    * @param host 
    */
-  export function getStatus(host: CosmosSdkHost) {
+  export function getStatus(host: CosmosSDK) {
     return host.get<{}>(`/tendermint/status`)
   }
 }

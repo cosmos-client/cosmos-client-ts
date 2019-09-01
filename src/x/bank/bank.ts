@@ -1,8 +1,9 @@
-import { CosmosSdkHost } from '../../common/cosmos-sdk-host';
+import { CosmosSDK } from '../..';
 import { SendReq } from './types/send-req';
 import { StdTx } from '../auth/types/stdtx';
 import { Coin } from '../../types/cosmos-sdk/coin';
 import { AccAddress } from '../../types/cosmos-sdk/address/acc-address';
+import { MsgSend } from './types/msg-send';
 
 /**
  * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。
@@ -14,8 +15,8 @@ export module Bank {
    * @param address 
    * @param params 
    */
-  export function postTransfer(host: CosmosSdkHost, address: AccAddress, params: SendReq) {
-    return host.post<StdTx>(`/bank/accounts/${address.toBech32()}/transfers`, params);
+  export function postTransfer(host: CosmosSDK, address: AccAddress, params: SendReq) {
+    return host.post<StdTx<MsgSend>>(`/bank/accounts/${address.toBech32()}/transfers`, params);
   }
 
   /**
@@ -23,7 +24,7 @@ export module Bank {
    * @param host 
    * @param address 
    */
-  export function getBalance(host: CosmosSdkHost, address: AccAddress) {
+  export function getBalance(host: CosmosSDK, address: AccAddress) {
     return host.get<Coin[]>(`/bank/balances/${address.toBech32()}`);
   }
 }

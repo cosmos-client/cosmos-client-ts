@@ -1,65 +1,85 @@
-import { CosmosSdkHost } from "../../common/cosmos-sdk-host";
-import { Proposal } from "./types/proposal_params";
+import { CosmosSDK } from "../..";
 import { Deposit } from "./types/deposit_params";
 import { Vote } from "./types/vote_params";
 import { StdTx } from "../auth/types/stdtx";
-import { BroadcastTxCommitResult } from "../staking/types/broadcast-tx-commit-result";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { TextProposal } from "./types/text-proposal";
 import { Proposer } from "./types/proposer";
 import { TallyResult } from "./types/tally_result";
+import { MsgSubmitProposal } from "./types/msg-submit-proposal";
+import { MsgDeposit } from "./types/msg-deposit";
+import { MsgVote } from "./types/msg-vote";
 
 export module Gov {
-
   /**
-  *  @host /gov/proposals
-  */
+   * 
+   */
 
-  export function postProposal(host: CosmosSdkHost, baseReq: BaseReq) {
-    return host.post<StdTx>('/gov/proposals', baseReq);
+  export function postProposal(host: CosmosSDK, baseReq: BaseReq) {
+    return host.post<StdTx<MsgSubmitProposal>>("/gov/proposals", baseReq);
   }
 
-  export function postDeposit(host: CosmosSdkHost, proposalId: string, baseReq: BaseReq) {
-    return host.post<BroadcastTxCommitResult>(`/gov/proposals/${proposalId}/deposits`, baseReq);
+  export function postDeposit(
+    host: CosmosSDK,
+    proposalId: string,
+    baseReq: BaseReq
+  ) {
+    return host.post<StdTx<MsgDeposit>>(
+      `/gov/proposals/${proposalId}/deposits`,
+      baseReq
+    );
   }
 
-  export function postVote(host: CosmosSdkHost, proposalId: string, baseReq: BaseReq) {
-    return host.post<BroadcastTxCommitResult>(`/gov/proposals/${proposalId}/votes`, baseReq);
+  export function postVote(
+    host: CosmosSDK,
+    proposalId: string,
+    baseReq: BaseReq
+  ) {
+    return host.post<StdTx<MsgVote>>(
+      `/gov/proposals/${proposalId}/votes`,
+      baseReq
+    );
   }
 
-  export function getParameters(host: CosmosSdkHost, type: string) {
+  export function getParameters(host: CosmosSDK, type: string) {
     return host.get<{}>(`/gob/parameters/${type}`);
   }
 
-  export function getProposals(host: CosmosSdkHost) {
-    return host.get<TextProposal[]>('/gov/proposals');
+  export function getProposals(host: CosmosSDK) {
+    return host.get<TextProposal[]>("/gov/proposals");
   }
 
-  export function getProposal(host: CosmosSdkHost, proposalId: string) {
+  export function getProposal(host: CosmosSDK, proposalId: string) {
     return host.get<TextProposal>(`/gov/proposals/${proposalId}`);
   }
 
-  export function getProposer(host: CosmosSdkHost, proposalId: string,) {
+  export function getProposer(host: CosmosSDK, proposalId: string) {
     return host.get<Proposer>(`/gov/proposals/${proposalId}/proposer`);
   }
 
-  export function getDeposits(host: CosmosSdkHost, proposalId: string) {
+  export function getDeposits(host: CosmosSDK, proposalId: string) {
     return host.get<Deposit[]>(`/gov/proposals/${proposalId}/deposits`);
   }
 
-  export function getDeposit(host: CosmosSdkHost, proposalId: string, depositer: string) {
-    return host.get<Deposit>(`/gov/proposals/${proposalId}/deposits/${depositer}`);
+  export function getDeposit(
+    host: CosmosSDK,
+    proposalId: string,
+    depositer: string
+  ) {
+    return host.get<Deposit>(
+      `/gov/proposals/${proposalId}/deposits/${depositer}`
+    );
   }
 
-  export function getTally(host: CosmosSdkHost, proposalId: string) {
+  export function getTally(host: CosmosSDK, proposalId: string) {
     return host.get<TallyResult>(`/gov/proposals/${proposalId}/tally`);
   }
 
-  export function getVotes(host: CosmosSdkHost, proposalId: string) {
+  export function getVotes(host: CosmosSDK, proposalId: string) {
     return host.get<Vote[]>(`/gov/proposals/${proposalId}/votes`);
   }
 
-  export function getVote(host: CosmosSdkHost, proposalId: string, voter: string) {
+  export function getVote(host: CosmosSDK, proposalId: string, voter: string) {
     return host.get<Vote>(`/gov/proposals/${proposalId}/votes/${voter}`);
   }
 }

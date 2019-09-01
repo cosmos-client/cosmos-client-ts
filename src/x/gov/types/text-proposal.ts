@@ -1,14 +1,18 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { TallyResult } from "./tally_result";
+import { Amino } from "../../../common/amino";
 
-export interface TextProposal {
-    proposal_id: number;
-    title: string;
-    description: string;
-    proposal_type: string;
-    proposal_status: string;
-    final_tally_result: TallyResult;
-    submit_time: string;
-    total_deposit: Coin;
-    voting_start_time: string;
+@Amino.RegisterConcrete('cosmos-sdk/TextProposal')
+export class TextProposal {
+  constructor(
+    public proposal_id: number,
+    public title: string,
+    public description: string,
+    public proposal_type: string,
+    public proposal_status: string,
+    public final_tally_result: TallyResult,
+    public submit_time: string,
+    public total_deposit: Coin,
+    public voting_start_time: string
+  ) {}
 }

@@ -1,8 +1,8 @@
-import * as bech32 from 'bech32';
-import { Address, bech32Prefix } from './address';
+import * as bech32 from "bech32";
+import { Address, bech32Prefix } from "./address";
 
 /**
- * ValAddressのクラス。
+ * ValAddress
  */
 export class ValAddress extends Address {
   /**
@@ -14,11 +14,11 @@ export class ValAddress extends Address {
   }
 
   /**
-   * Bech32フォーマットのアドレスからインスタンスを作成する。
-   * @param valAddress 
+   *
+   * @param valAddress
    */
   public static fromBech32(valAddress: string) {
-    const { prefix, words } = bech32.decode(valAddress)
+    const { prefix, words } = bech32.decode(valAddress);
     if (prefix !== bech32Prefix.valAddr) {
       throw Error();
     }
@@ -27,7 +27,7 @@ export class ValAddress extends Address {
   }
 
   /**
-   * JSON.stringify時に参照される。
+   * JSON.stringify
    */
   public toJSON() {
     return this.toBech32();

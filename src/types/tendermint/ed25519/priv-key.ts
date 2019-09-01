@@ -4,7 +4,7 @@ import { PubKeyEd25519 } from "./pub-key";
 import { Amino } from "../../../common/amino";
 
 /**
- * ed25519秘密鍵。
+ * ed25519
  */
 @Amino.RegisterConcrete('tendermint/PrivKeyEd25519')
 export class PrivKeyEd25519 implements PrivKey {
@@ -30,7 +30,7 @@ export class PrivKeyEd25519 implements PrivKey {
   }
 
   /**
-   * 署名を作成する。
+   * 
    * @param message 
    */
   public sign(message: string): Buffer {

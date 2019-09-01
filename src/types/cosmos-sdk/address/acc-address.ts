@@ -1,5 +1,5 @@
-import * as bech32 from 'bech32';
-import { Address, bech32Prefix } from './address';
+import * as bech32 from "bech32";
+import { Address, bech32Prefix } from "./address";
 
 /**
  * AccAddressのクラス。
@@ -15,10 +15,10 @@ export class AccAddress extends Address {
 
   /**
    * Bech32フォーマットのアドレスからインスタンスを作成する。
-   * @param accAddress 
+   * @param accAddress
    */
   public static fromBech32(accAddress: string) {
-    const { prefix, words } = bech32.decode(accAddress)
+    const { prefix, words } = bech32.decode(accAddress);
     if (prefix !== bech32Prefix.accAddr) {
       throw Error();
     }
