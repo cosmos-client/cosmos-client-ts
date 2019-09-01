@@ -24,7 +24,7 @@ export module Distribution {
     delegatorAddr: AccAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgWithdrawDelegatorReward>>(
+    return host.post<StdTx>(
       `/distribution/delegators/${delegatorAddr}/rewards`,
       baseReq
     );
@@ -36,7 +36,7 @@ export module Distribution {
     validatorAddr: ValAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgWithdrawDelegationReward>>(
+    return host.post<StdTx>(
       `/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`,
       baseReq
     );
@@ -47,7 +47,7 @@ export module Distribution {
     delegatorAddr: AccAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgSetWithdrawAddress>>(
+    return host.post<StdTx>(
       `/distribution/delegators/${delegatorAddr}/withdraw_address`,
       baseReq
     );
@@ -58,7 +58,7 @@ export module Distribution {
     validatorAddr: ValAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgWithdrawValidatorCommission>>(
+    return host.post<StdTx>(
       `/distribution/validators/${validatorAddr}/rewards`,
       baseReq
     );

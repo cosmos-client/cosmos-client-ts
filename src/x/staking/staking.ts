@@ -36,7 +36,7 @@ export module Staking {
     delegatorAddr: AccAddress,
     delegateRequest: DelegateRequest
   ) {
-    return host.post<StdTx<MsgDelegate>>(
+    return host.post<StdTx>(
       `/staking/delegators/${delegatorAddr.toBech32()}/delegations`,
       delegateRequest
     );
@@ -53,7 +53,7 @@ export module Staking {
     delegatorAddr: AccAddress,
     undelegateRequest: UndelegateRequest
   ) {
-    return host.post<StdTx<MsgUndelegate>>(
+    return host.post<StdTx>(
       `/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`,
       undelegateRequest
     );
@@ -70,7 +70,7 @@ export module Staking {
     delegatorAddr: AccAddress,
     redelegateRequest: RedelegateRequest
   ) {
-    return host.post<StdTx<MsgBeginRedelegate>>(
+    return host.post<StdTx>(
       `/staking/delegators/${delegatorAddr.toBech32()}/redelegations`,
       redelegateRequest
     );

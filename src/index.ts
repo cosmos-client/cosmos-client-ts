@@ -2,6 +2,7 @@ import * as request from "request";
 import { Amino } from "./common/amino";
 import { ErrorResponse } from "./types/cosmos-sdk/rest";
 import { StdFee, StdSignDoc } from "./x/auth/types/stdtx";
+import { Msg } from "./types/cosmos-sdk/msg";
 
 /**
  *
@@ -13,22 +14,22 @@ export class CosmosSDK {
    */
   constructor(private url: string, private chainId: string) {}
 
-  /**
-   *
-   * @param path
-   * @param params
-   * @returns Promise resolve: T, reject: ErrorResponse
-   * @see ErrorResponse
-   */
-  public get<T>(path: string, params?: any): Promise<T> {
+  private http<T>(path: string, params: any, method: "GET" | "POST" | "PUT"): Promise<T> {
     return new Promise((resolve, reject) => {
       request.get(
-        {
-          uri: this.url + path,
-          method: "GET",
-          json: false,
-          qs: params
-        },
+        method === "GET"
+          ? {
+              uri: this.url + path,
+              method: method,
+              json: false,
+              qs: params
+            }
+          : {
+              uri: this.url + path,
+              method: method,
+              json: false,
+              body: params
+            },
         (error, response, body) => {
           if (error) {
             reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
@@ -39,6 +40,17 @@ export class CosmosSDK {
         }
       );
     });
+  }
+
+  /**
+   *
+   * @param path
+   * @param params
+   * @returns Promise resolve: T, reject: ErrorResponse
+   * @see ErrorResponse
+   */
+  public get<T>(path: string, params?: any): Promise<T> {
+    return this.http<T>(path, params, 'GET');
   }
 
   /**
@@ -49,24 +61,7 @@ export class CosmosSDK {
    * @see ErrorResponse
    */
   public post<T>(path: string, params: any): Promise<T> {
-    return new Promise((resolve, reject) => {
-      request.post(
-        {
-          uri: this.url + path,
-          method: "POST",
-          json: false,
-          body: params
-        },
-        (error, response, body) => {
-          if (error) {
-            reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-            return;
-          }
-
-          resolve(JSON.parse(body, Amino.reviver) as T);
-        }
-      );
-    });
+    return this.http<T>(path, params, 'POST');
   }
 
   /**
@@ -75,24 +70,7 @@ export class CosmosSDK {
    * @param params
    */
   public put<T>(path: string, params: any): Promise<T> {
-    return new Promise((resolve, reject) => {
-      request.post(
-        {
-          uri: this.url + path,
-          method: "PUT",
-          json: false,
-          body: params
-        },
-        (error, response, body) => {
-          if (error) {
-            reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-            return;
-          }
-
-          resolve(JSON.parse(body, Amino.reviver) as T);
-        }
-      );
-    });
+    return this.http<T>(path, params, 'PUT');
   }
 
   /**
@@ -103,13 +81,13 @@ export class CosmosSDK {
    * @param msgs
    * @param sequence
    */
-  public createStdSignDoc<Msg>(
+  public createStdSignDoc(
     accountNumber: bigint,
     fee: StdFee,
     memo: string,
     msgs: Msg[],
     sequence: bigint
-  ): StdSignDoc<Msg> {
+  ): StdSignDoc {
     return {
       account_number: accountNumber,
       chain_id: this.chainId,

@@ -1,12 +1,13 @@
 import { Amino } from "../../../common/amino";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { PubKey } from "../../../types/tendermint/pub-key";
+import { Msg } from "../../../types/cosmos-sdk/msg";
 
 /**
  * 署名済みトランザクションのクラス。
  */
 @Amino.RegisterConcrete('auth/StdTx')
-export class StdTx<Msg> {
+export class StdTx {
   /**
    * 
    * @param msg 
@@ -29,7 +30,7 @@ export interface StdFee {
   gas: bigint;
 }
 
-export interface StdSignDoc<Msg> {
+export interface StdSignDoc {
   account_number: bigint;
   chain_id: string;
   fee: StdFee;

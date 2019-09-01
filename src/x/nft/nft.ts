@@ -50,25 +50,25 @@ export module Nft {
     host: CosmosSDK,
     transferNFTReq: TransferNFTReq
   ) {
-    return host.post<StdTx<MsgTransferNFT>>("/nfts/transfer", transferNFTReq);
+    return host.post<StdTx>("/nfts/transfer", transferNFTReq);
   }
 
   export function postEditNFTMetadata(
     host: CosmosSDK,
     editNFTMetadataReq: EditNFTMetadataReq
   ) {
-    return host.post<StdTx<MsgEditNFTMetadata>>(
+    return host.post<StdTx>(
       `/nfts/collection/${editNFTMetadataReq.denom}/nft/${editNFTMetadataReq.id}/metadata`,
       editNFTMetadataReq
     );
   }
 
   export function postMintNFT(host: CosmosSDK, mintNFTReq: MintNFTReq) {
-    return host.post<StdTx<MsgMintNFT>>(`/nfts/mint`, mintNFTReq);
+    return host.post<StdTx>(`/nfts/mint`, mintNFTReq);
   }
 
   export function putBurnNFT(host: CosmosSDK, burnNFTReq: BurnNFTReq) {
-    return host.put<StdTx<MsgBurnNFT>>(
+    return host.put<StdTx>(
       `/nfts/collection/${burnNFTReq.denom}/nft/${burnNFTReq.id}/burn`,
       burnNFTReq
     );

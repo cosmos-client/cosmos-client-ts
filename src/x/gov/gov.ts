@@ -16,7 +16,7 @@ export module Gov {
    */
 
   export function postProposal(host: CosmosSDK, baseReq: BaseReq) {
-    return host.post<StdTx<MsgSubmitProposal>>("/gov/proposals", baseReq);
+    return host.post<StdTx>("/gov/proposals", baseReq);
   }
 
   export function postDeposit(
@@ -24,7 +24,7 @@ export module Gov {
     proposalId: string,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgDeposit>>(
+    return host.post<StdTx>(
       `/gov/proposals/${proposalId}/deposits`,
       baseReq
     );
@@ -35,7 +35,7 @@ export module Gov {
     proposalId: string,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgVote>>(
+    return host.post<StdTx>(
       `/gov/proposals/${proposalId}/votes`,
       baseReq
     );

@@ -16,7 +16,7 @@ export module Bank {
    * @param params 
    */
   export function postTransfer(host: CosmosSDK, address: AccAddress, params: SendReq) {
-    return host.post<StdTx<MsgSend>>(`/bank/accounts/${address.toBech32()}/transfers`, params);
+    return host.post<StdTx>(`/bank/accounts/${address.toBech32()}/transfers`, params);
   }
 
   /**

@@ -17,7 +17,7 @@ export module Slashing {
     validatorAddr: ValAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx<MsgUnjail>>(
+    return host.post<StdTx>(
       `/slashing/validators/${validatorAddr}/unjail`,
       baseReq
     );
