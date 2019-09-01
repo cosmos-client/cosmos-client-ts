@@ -1,33 +1,15 @@
-import { StdTx, StdSignDoc } from "./stdtx";
+import { StdTx } from "./std-tx";
 import { PrivKey } from "../../../types/tendermint/priv-key";
+import { StdSignDoc } from "./std-sign-doc";
 
 /**
  * @see Auth.postTransaction
  */
-export class BroadcastReq<Msg> {
-  public tx: StdTx<Msg>;
-  public mode: string;
-
+export class BroadcastReq {
   /**
    * 
-   * @param privKey 
-   * @param stdSignDoc 
-   * @param modeType 
+   * @param tx 
+   * @param mode 
    */
-  constructor(privKey: PrivKey, stdSignDoc: StdSignDoc<Msg>, modeType = "sync") {
-    const signature = privKey.sign(JSON.stringify(stdSignDoc));
-
-    this.tx = new StdTx(
-      stdSignDoc.msgs,
-      stdSignDoc.fee,
-      [
-        {
-          signature: signature.toString('base64'),
-          pub_key: privKey.getPubKey()
-        }
-      ],
-      stdSignDoc.memo
-    );
-    this.mode = modeType;
-  }
+  constructor(public tx: StdTx, public mode: "sync" = "sync") {}
 }

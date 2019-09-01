@@ -1,6 +1,6 @@
 import { CosmosSDK } from '../..';
 import { SendReq } from './types/send-req';
-import { StdTx } from '../auth/types/stdtx';
+import { StdTx } from '../auth/types/std-tx';
 import { Coin } from '../../types/cosmos-sdk/coin';
 import { AccAddress } from '../../types/cosmos-sdk/address/acc-address';
 import { MsgSend } from './types/msg-send';

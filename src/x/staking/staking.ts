@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../..";
-import { StdTx } from "../auth/types/stdtx";
+import { StdTx } from "../auth/types/std-tx";
 import { DelegateRequest } from "./types/delegate-request";
 import { UndelegateRequest } from "./types/undelegate-request";
 import { RedelegateRequest } from "./types/redelegate-request";
@@ -113,7 +113,7 @@ export module Staking {
     if (txsQueryType.redelegate) {
       types += "redelegate ;";
     }
-    return host.get<TxQuery<MsgDelegate | MsgUndelegate | MsgBeginRedelegate>>(
+    return host.get<TxQuery>(
       `/staking/delegators/${delegatorAddr.toBech32()}/txs`,
       { types }
     );

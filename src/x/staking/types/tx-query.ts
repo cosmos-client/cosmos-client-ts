@@ -1,9 +1,9 @@
-import { StdTx } from "../../auth/types/stdtx";
+import { StdTx } from "../../auth/types/std-tx";
 import { result } from "./result";
 
-export interface TxQuery<Msg> {
+export interface TxQuery {
     hash: string;
     height: number;
-    tx: StdTx<Msg>;
+    tx: StdTx;
     result: result;
 }

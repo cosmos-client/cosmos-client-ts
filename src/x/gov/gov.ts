@@ -1,7 +1,7 @@
 import { CosmosSDK } from "../..";
 import { Deposit } from "./types/deposit_params";
 import { Vote } from "./types/vote_params";
-import { StdTx } from "../auth/types/stdtx";
+import { StdTx } from "../auth/types/std-tx";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { TextProposal } from "./types/text-proposal";
 import { Proposer } from "./types/proposer";

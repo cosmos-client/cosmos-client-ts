@@ -2,7 +2,7 @@ import { BroadcastReq } from "./types/broadcast-req";
 import { BaseAccount } from "./types/account";
 import { CosmosSDK } from "../..";
 import { TxResponse, SearchTxsResult } from "../../types/cosmos-sdk/result";
-import { StdTx } from "./types/stdtx";
+import { StdTx } from "./types/std-tx";
 import { EncodeResp } from "./types/encode-resp";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 
@@ -49,9 +49,9 @@ export module Auth {
    * @param host
    * @param broadcastReq
    */
-  export function postTransaction<Msg>(
+  export function postTransaction(
     host: CosmosSDK,
-    broadcastReq: BroadcastReq<Msg>
+    broadcastReq: BroadcastReq
   ) {
     return host.post<TxResponse>(`/txs`, broadcastReq);
   }
@@ -60,7 +60,7 @@ export module Auth {
    * /txs/encode
    * @param host
    */
-  export function postEncodeTransaction<Msg>(host: CosmosSDK, tx: StdTx<Msg>) {
+  export function postEncodeTransaction(host: CosmosSDK, tx: StdTx) {
     return host.post<EncodeResp>(`/txs/encode`, tx);
   }
 }

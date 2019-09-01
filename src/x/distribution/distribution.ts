@@ -6,7 +6,7 @@ import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { Coin } from "../../types/cosmos-sdk/coin";
 import { Address } from "../../types/cosmos-sdk/address/address";
 import { DistributionParameter } from "./types/distribution-parameter";
-import { StdTx } from "../auth/types/stdtx";
+import { StdTx } from "../auth/types/std-tx";
 import { MsgWithdrawDelegationReward } from "./types/msg-withdraw-delegation-reward";
 import { MsgWithdrawDelegatorReward } from "./types/msg-withdraw-delegator-reward";
 import { MsgSetWithdrawAddress } from "./types/msg-set-withdraw-address";

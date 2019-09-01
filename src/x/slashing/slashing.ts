@@ -4,7 +4,7 @@ import { SigningInfo } from "./types/signing-info";
 import { SignParameter } from "./types/sign-parameter";
 import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
-import { StdTx } from "../auth/types/stdtx";
+import { StdTx } from "../auth/types/std-tx";
 import { MsgUnjail } from "./types/msg-unjail";
 
 export module Slashing {
