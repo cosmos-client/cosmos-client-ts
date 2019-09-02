@@ -7,10 +7,6 @@ import { Coin } from "../../types/cosmos-sdk/coin";
 import { Address } from "../../types/cosmos-sdk/address/address";
 import { DistributionParameter } from "./types/distribution-parameter";
 import { StdTx } from "../auth/types/std-tx";
-import { MsgWithdrawDelegationReward } from "./types/msg-withdraw-delegation-reward";
-import { MsgWithdrawDelegatorReward } from "./types/msg-withdraw-delegator-reward";
-import { MsgSetWithdrawAddress } from "./types/msg-set-withdraw-address";
-import { MsgWithdrawValidatorCommission } from "./types/msg-withdraw-validator-commision";
 
 export module Distribution {
   /**

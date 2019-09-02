@@ -1,5 +1,5 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
-import { TallyResult } from "./tally_result";
+import { TallyResult } from "./tally-result";
 import { Amino } from "../../../common/amino";
 
 @Amino.RegisterConcrete('cosmos-sdk/TextProposal')

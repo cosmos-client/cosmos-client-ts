@@ -17,9 +17,6 @@ import { Validator } from "./types/validator";
 import { Redelegation } from "./types/redelegation";
 import { Pool } from "./types/pool";
 import { Parameters } from "./types/parameters";
-import { MsgDelegate } from "./types/msg-delegate";
-import { MsgBeginRedelegate } from "./types/msg-begin-redelegate";
-import { MsgUndelegate } from "./types/msg-undelegate";
 
 /**
  *

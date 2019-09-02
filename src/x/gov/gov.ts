@@ -1,14 +1,11 @@
 import { CosmosSDK } from "../..";
-import { Deposit } from "./types/deposit_params";
-import { Vote } from "./types/vote_params";
+import { Deposit } from "./types/deposit-params";
+import { Vote } from "./types/vote-params";
 import { StdTx } from "../auth/types/std-tx";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { TextProposal } from "./types/text-proposal";
 import { Proposer } from "./types/proposer";
-import { TallyResult } from "./types/tally_result";
-import { MsgSubmitProposal } from "./types/msg-submit-proposal";
-import { MsgDeposit } from "./types/msg-deposit";
-import { MsgVote } from "./types/msg-vote";
+import { TallyResult } from "./types/tally-result";
 
 export module Gov {
   /**
