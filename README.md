@@ -10,19 +10,12 @@ npm install --save cosmos-sdk
 ```
 
 ```ts
-import {
-  CosmosSdkHost,
-  PubKeySecp256k1,
-  PrivKeySecp256k1,
-  HdWallet,
-  Auth
-} from 'cosmos-sdk';
-
 const sdk = new CosmosSdkHost('http://localsdk:45512');
 const privKeyBuffer = await HdWallet.generatePrivKeyByBip39('mnemonic', HdWallet.getBip32PathByBip44(0));
 const privKey = new PrivKeySecp256k1(privKeyBuffer);
-const broadcastReq = new BroadcastReq(privKey, sdk.createStdSignDoc(...));
-await Auth.postTransaction(sdk, broadcastReq);
+const stdTx = await Bank.postTransfer(sdk, ...);
+const signedStdTx = sdk.signStdTx(privKey, stdTx, ...);
+await Auth.postTransaction(sdk, new BroadcastReq(signedStdTx));
 
 const accountInfo = await Auth.getAccount(sdk, privateKey.bech32Address);
 
