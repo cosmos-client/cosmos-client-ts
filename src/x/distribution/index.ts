@@ -10,109 +10,109 @@ import { StdTx } from "../auth/types/std-tx";
 
 export module Distribution {
   /**
-   * @param host /slashing/validators/{validatorPubKey}/signing_info
+   * @param sdk /slashing/validators/{validatorPubKey}/signing_info
    * @param delegatorAddr
    * @param validatorAddr
    */
 
   export function postWithdrawDelegatorRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     delegatorAddr: AccAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx>(
+    return sdk.post<StdTx>(
       `/distribution/delegators/${delegatorAddr}/rewards`,
       baseReq
     );
   }
 
   export function postWithdrawDelegationRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     delegatorAddr: AccAddress,
     validatorAddr: ValAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx>(
+    return sdk.post<StdTx>(
       `/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`,
       baseReq
     );
   }
 
   export function postSetDelegatorWithdrawalAddr(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     delegatorAddr: AccAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx>(
+    return sdk.post<StdTx>(
       `/distribution/delegators/${delegatorAddr}/withdraw_address`,
       baseReq
     );
   }
 
   export function postWithdrawValidatorRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     validatorAddr: ValAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx>(
+    return sdk.post<StdTx>(
       `/distribution/validators/${validatorAddr}/rewards`,
       baseReq
     );
   }
 
   export function getDelegatorRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     delegatorAddr: AccAddress
   ) {
-    return host.get<Coin>(`/distribution/delegators/${delegatorAddr}/rewards`);
+    return sdk.get<Coin>(`/distribution/delegators/${delegatorAddr}/rewards`);
   }
 
   export function getDelegationRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     delegatorAddr: AccAddress,
     validatorAddr: ValAddress
   ) {
-    return host.get<Coin>(
+    return sdk.get<Coin>(
       `/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`
     );
   }
 
   export function getDelegatorWithdrawalAddr(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     delegatorAddr: AccAddress
   ) {
-    return host.get<Address>(
+    return sdk.get<Address>(
       `/distribution/delegators/${delegatorAddr}/withdraw_address`
     );
   }
 
-  export function getValidatorInfo(host: CosmosSDK, validatorAddr: ValAddress) {
-    return host.get<ValidatorDistInfo>(
+  export function getValidatorInfo(sdk: CosmosSDK, validatorAddr: ValAddress) {
+    return sdk.get<ValidatorDistInfo>(
       `/distribution/validators/${validatorAddr}`
     );
   }
 
   export function getValidatorRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     validatorAddr: ValAddress
   ) {
-    return host.get<Coin>(`/distribution/validators/${validatorAddr}/rewards`);
+    return sdk.get<Coin>(`/distribution/validators/${validatorAddr}/rewards`);
   }
 
-  export function getCommunityPool(host: CosmosSDK) {
-    return host.get<Coin>("/distribution/community_pool");
+  export function getCommunityPool(sdk: CosmosSDK) {
+    return sdk.get<Coin>("/distribution/community_pool");
   }
 
   export function getOutstandingRewards(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     validatorAddr: ValAddress
   ) {
-    return host.get<Coin>(
+    return sdk.get<Coin>(
       `/distribution/validators/${validatorAddr}/outstanding_rewards`
     );
   }
 
-  export function getParams(host: CosmosSDK) {
-    return host.get<DistributionParameter>("/distribution/parameters");
+  export function getParams(sdk: CosmosSDK) {
+    return sdk.get<DistributionParameter>("/distribution/parameters");
   }
 }

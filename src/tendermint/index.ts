@@ -6,9 +6,9 @@ import { CosmosSDK } from "..";
 export module Tendermint {
   /**
    * /tendermint/status
-   * @param host 
+   * @param sdk 
    */
-  export function getStatus(host: CosmosSDK) {
-    return host.get<{}>(`/tendermint/status`)
+  export function getStatus(sdk: CosmosSDK) {
+    return sdk.get<{}>(`/tendermint/status`)
   }
 }
