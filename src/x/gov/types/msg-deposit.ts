@@ -1,7 +1,7 @@
 import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { Coin } from "../../../types/cosmos-sdk/coin";
+import { Coins } from "./coins";
 
 @Amino.RegisterConcrete('cosmos-sdk/MsgDeposit')
 export class MsgDeposit implements Msg {
@@ -13,7 +13,7 @@ export class MsgDeposit implements Msg {
     constructor(
         public proposal_id: number,
         public depositor: AccAddress,
-        public amount: Coin
+        public amount: Coins
     ) { }
 
     /**
