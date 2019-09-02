@@ -1,4 +1,4 @@
-import { BaseReq } from "../../../types/cosmos-sdk/rest";
+import { BaseReq } from "../../../../types/cosmos-sdk/rest";
 
 export interface BurnNFTReq {
     base_req: BaseReq;

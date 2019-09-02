@@ -1,14 +1,14 @@
 import { CosmosSDK } from "../..";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { StdTx } from "../auth/types/std-tx";
-import { TransferNFTReq } from "./types/transfer-nft-req";
-import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
-import { MintNFTReq } from "./types/mint-nft-req";
-import { BurnNFTReq } from "./types/burn-nft-req";
-import { MsgTransferNFT } from "./types/msg-transfer-nft";
-import { MsgEditNFTMetadata } from "./types/msg-edit-nft-metadata";
-import { MsgMintNFT } from "./types/msg-mint-nft";
-import { MsgBurnNFT } from "./types/msg-burn-nft";
+import { TransferNFTReq } from "./internal/types/transfer-nft-req";
+import { EditNFTMetadataReq } from "./internal/types/edit-nft-metadata-req";
+import { MintNFTReq } from "./internal/types/mint-nft-req";
+import { BurnNFTReq } from "./internal/types/burn-nft-req";
+import { MsgTransferNFT } from "./internal/types/msg-transfer-nft";
+import { MsgEditNFTMetadata } from "./internal/types/msg-edit-nft-metadata";
+import { MsgMintNFT } from "./internal/types/msg-mint-nft";
+import { MsgBurnNFT } from "./internal/types/msg-burn-nft";
 
 export module Nft {
   /**
