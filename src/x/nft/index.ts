@@ -5,10 +5,6 @@ import { TransferNFTReq } from "./types/transfer-nft-req";
 import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
 import { MintNFTReq } from "./types/mint-nft-req";
 import { BurnNFTReq } from "./types/burn-nft-req";
-import { MsgTransferNFT } from "./types/msg-transfer-nft";
-import { MsgEditNFTMetadata } from "./types/msg-edit-nft-metadata";
-import { MsgMintNFT } from "./types/msg-mint-nft";
-import { MsgBurnNFT } from "./types/msg-burn-nft";
 
 export module Nft {
   /**
