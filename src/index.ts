@@ -5,7 +5,7 @@ import { StdTx } from "./x/auth/types/std-tx";
 import { Msg } from "./types/cosmos-sdk/msg";
 import { PrivKey } from "./types/tendermint/priv-key";
 import { StdFee } from "./x/auth/types/std-fee";
-import { StdSignDoc } from "./x/auth/types/std-sign-doc";
+import { StdSignMsg } from "./x/auth/types/std-sign-msg";
 
 /**
  *
@@ -88,13 +88,13 @@ export class CosmosSDK {
    * @param msgs
    * @param sequence
    */
-  public createStdSignDoc(
+  public createStdSignMsg(
     accountNumber: bigint,
     fee: StdFee,
     memo: string,
     msgs: Msg[],
     sequence: bigint
-  ): StdSignDoc {
+  ): StdSignMsg {
     return {
       account_number: accountNumber,
       chain_id: this.chainId,
@@ -113,15 +113,16 @@ export class CosmosSDK {
    * @param sequence 
    */
   public signStdTx(privKey: PrivKey, stdTx: StdTx, accountNumber: bigint, sequence: bigint) {
-    const stdSignDoc = this.createStdSignDoc(
+    const stdSignMsg = this.createStdSignMsg(
       accountNumber,
       stdTx.fee,
       stdTx.memo,
       stdTx.msg,
       sequence
     );
+    const sortedJSON = JSON.stringify(stdSignMsg, (_, v) => (!(v instanceof Array || v === null) && typeof v == "object") ? Object.keys(v).sort().reduce((r: any, k) => { r[k] = v[k]; return r }, {}) : v);
     const signature = {
-      signature: privKey.sign(JSON.stringify(stdSignDoc)).toString("base64"),
+      signature: privKey.sign(sortedJSON).toString("base64"),
       pub_key: privKey.getPubKey()
     };
 

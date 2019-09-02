@@ -1,11 +1,11 @@
 import { StdFee } from "./std-fee";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 
-export interface StdSignDoc {
-  account_number: bigint;
+export interface StdSignMsg {
   chain_id: string;
-  fee: StdFee;
-  memo: string;
-  msgs: Msg[];
+  account_number: bigint;
   sequence: bigint;
+  fee: StdFee;
+  msgs: Msg[];
+  memo: string;
 }
