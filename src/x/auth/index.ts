@@ -12,55 +12,55 @@ import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 export module Auth {
   /**
    * /auth/accounts/${address}
-   * @param host
+   * @param sdk
    * @param address
    */
-  export function getAccount(host: CosmosSDK, address: AccAddress) {
-    return host.get<BaseAccount>(`/auth/accounts/${address.toBech32()}`);
+  export function getAccount(sdk: CosmosSDK, address: AccAddress) {
+    return sdk.get<BaseAccount>(`/auth/accounts/${address.toBech32()}`);
   }
 
   /**
    * /txs/${hash}
-   * @param host
+   * @param sdk
    * @param hash
    */
-  export function getTransaction(host: CosmosSDK, hash: string) {
-    return host.get<TxResponse>(`/txs/${hash}`);
+  export function getTransaction(sdk: CosmosSDK, hash: string) {
+    return sdk.get<TxResponse>(`/txs/${hash}`);
   }
 
   /**
    * /txs
-   * @param host
+   * @param sdk
    * @param params
    */
   export function getTransactions(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     params: {
       tags?: string[];
       page?: number;
       limit?: number;
     }
   ) {
-    return host.get<SearchTxsResult>(`/txs`, params);
+    return sdk.get<SearchTxsResult>(`/txs`, params);
   }
 
   /**
    * /txs
-   * @param host
+   * @param sdk
    * @param broadcastReq
    */
   export function postTransaction(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     broadcastReq: BroadcastReq
   ) {
-    return host.post<TxResponse>(`/txs`, broadcastReq);
+    return sdk.post<TxResponse>(`/txs`, broadcastReq);
   }
 
   /**
    * /txs/encode
-   * @param host
+   * @param sdk
    */
-  export function postEncodeTransaction(host: CosmosSDK, tx: StdTx) {
-    return host.post<EncodeResp>(`/txs/encode`, tx);
+  export function postEncodeTransaction(sdk: CosmosSDK, tx: StdTx) {
+    return sdk.post<EncodeResp>(`/txs/encode`, tx);
   }
 }

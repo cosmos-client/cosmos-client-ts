@@ -13,27 +13,27 @@ export module Slashing {
    */
 
   export function postUnjail(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     validatorAddr: ValAddress,
     baseReq: BaseReq
   ) {
-    return host.post<StdTx>(
+    return sdk.post<StdTx>(
       `/slashing/validators/${validatorAddr}/unjail`,
       baseReq
     );
   }
 
-  export function getParams(host: CosmosSDK, validatorPubKey: AccAddress) {
-    return host.get<SigningInfo>(
+  export function getParams(sdk: CosmosSDK, validatorPubKey: AccAddress) {
+    return sdk.get<SigningInfo>(
       `/slashing/validators/${validatorPubKey}/signing_info`
     );
   }
 
-  export function getSignInfo(host: CosmosSDK) {
-    return host.get<SignParameter>("/slashing/signing_infos");
+  export function getSignInfo(sdk: CosmosSDK) {
+    return sdk.get<SignParameter>("/slashing/signing_infos");
   }
 
-  export function getSignInfos(host: CosmosSDK) {
-    return host.get<SigningInfo>("/slashing/parameters");
+  export function getSignInfos(sdk: CosmosSDK) {
+    return sdk.get<SigningInfo>("/slashing/parameters");
   }
 }

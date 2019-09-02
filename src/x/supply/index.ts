@@ -7,8 +7,8 @@ export module Supply {
    * @param supplyQuery
    */
 
-  export function getTotalSupply(host: CosmosSDK, supplyQuery: SupplyQuery) {
-    return host.get<{}>("/supply/total", supplyQuery);
+  export function getTotalSupply(sdk: CosmosSDK, supplyQuery: SupplyQuery) {
+    return sdk.get<{}>("/supply/total", supplyQuery);
   }
 
   /**
@@ -18,10 +18,10 @@ export module Supply {
    */
 
   export function getSupplyOf(
-    host: CosmosSDK,
+    sdk: CosmosSDK,
     denom: string,
     supplyQuery: SupplyQuery
   ) {
-    return host.get<{}>("/supply/total/${denom}", supplyQuery);
+    return sdk.get<{}>("/supply/total/${denom}", supplyQuery);
   }
 }

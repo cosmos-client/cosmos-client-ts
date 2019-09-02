@@ -10,20 +10,20 @@ import { AccAddress } from '../../types/cosmos-sdk/address/acc-address';
 export module Bank {
   /**
    * /bank/accounts/${address}/transfers
-   * @param host 
+   * @param sdk 
    * @param address 
    * @param params 
    */
-  export function postTransfer(host: CosmosSDK, address: AccAddress, params: SendReq) {
-    return host.post<StdTx>(`/bank/accounts/${address.toBech32()}/transfers`, params);
+  export function postTransfer(sdk: CosmosSDK, address: AccAddress, params: SendReq) {
+    return sdk.post<StdTx>(`/bank/accounts/${address.toBech32()}/transfers`, params);
   }
 
   /**
    * /bank/balances/${address}
-   * @param host 
+   * @param sdk 
    * @param address 
    */
-  export function getBalance(host: CosmosSDK, address: AccAddress) {
-    return host.get<Coin[]>(`/bank/balances/${address.toBech32()}`);
+  export function getBalance(sdk: CosmosSDK, address: AccAddress) {
+    return sdk.get<Coin[]>(`/bank/balances/${address.toBech32()}`);
   }
 }
