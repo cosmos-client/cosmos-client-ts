@@ -1,4 +1,4 @@
 export interface Proposer {
-    proposal_id: number;
-    proposer: string;
+  proposal_id: number;
+  proposer: string;
 }
