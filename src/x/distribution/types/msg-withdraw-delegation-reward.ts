@@ -3,5 +3,8 @@ import { Msg } from "../../../types/cosmos-sdk/msg";
 
 @Amino.RegisterConcrete('cosmos-sdk/MsgWithdrawDelegationReward')
 export class MsgWithdrawDelegationReward implements Msg {
-
+/**
+ * 
+ * @param 
+ */
 }

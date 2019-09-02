@@ -17,7 +17,8 @@ export class MsgSetWithdrawAddress implements Msg {
     * @see Amino.reviver
     */
     public static fromJSON(obj: any) {
-        AccAddress.fromBech32(obj.delegator_address),
-            AccAddress.fromBech32(obj.withdraw_address)
+        return new this(
+            AccAddress.fromBech32(obj.delegator_address),
+            AccAddress.fromBech32(obj.withdraw_address));
     }
 }
