@@ -13,7 +13,7 @@ export class MsgDeposit implements Msg {
     constructor(
         public proposal_id: number,
         public depositor: AccAddress,
-        public amount: Coin
+        public amount: Coin[]
     ) { }
 
     /**
