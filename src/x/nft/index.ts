@@ -6,7 +6,7 @@ import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
 import { MintNFTReq } from "./types/mint-nft-req";
 import { BurnNFTReq } from "./types/burn-nft-req";
 
-export module Nft {
+export module NFT {
   /**
    * 
    */
