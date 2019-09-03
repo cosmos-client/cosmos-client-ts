@@ -1,6 +1,6 @@
+import { commissionRates } from "./commission-rates";
+
 export interface commission {
-    rate: string;
-    max_rate: string;
-    max_change_rate: string;
+    commission: commissionRates;
     update_date: string;
 }
