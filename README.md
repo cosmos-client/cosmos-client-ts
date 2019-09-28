@@ -1,4 +1,4 @@
-# cosmos-sdk-js
+# cosmos-client-ts
 JavaScript client for the Cosmos SDK API.
 Made with TypeScript.
 
@@ -6,7 +6,7 @@ Made with TypeScript.
 
 Caution: Cannot be used until merged.
 ```
-npm install --save cosmos-sdk
+npm install --save cosmos-client-ts
 ```
 
 ```ts

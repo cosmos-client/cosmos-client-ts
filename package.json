@@ -1,5 +1,5 @@
 {
-  "name": "cosmos-sdk",
+  "name": "cosmos-client-ts",
   "version": "1.5.1",
   "description": "JavaScript client for the Cosmos SDK API",
   "main": "index.js",
@@ -28,12 +28,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cosmos/cosmos-sdk-js.git"
+    "url": "git+https://github.com/lcnem/cosmos-client-ts.git"
   },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cosmos/cosmos-sdk-js/issues"
-  },
-  "homepage": "https://github.com/cosmos/cosmos-sdk-js#readme"
+  "license": "ISC"
 }

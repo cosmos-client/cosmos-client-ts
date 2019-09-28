@@ -12,11 +12,11 @@ import { QueryRedelegationParams } from "./types/query-redelegation-params";
 import { TxsQueryType } from "./types/txs-query-params";
 import { Delegation } from "./types/delegation";
 import { UnboundingDelegation } from "./types/unbounding-delegation";
-import { TxQuery } from "./types/tx-query";
 import { Validator } from "./types/validator";
 import { Redelegation } from "./types/redelegation";
 import { Pool } from "./types/pool";
 import { Parameters } from "./types/parameters";
+import { SearchTxsResult } from "../../types/cosmos-sdk/result";
 
 /**
  *
@@ -110,7 +110,7 @@ export module Staking {
     if (txsQueryType.redelegate) {
       types += "redelegate ;";
     }
-    return sdk.get<TxQuery>(
+    return sdk.get<SearchTxsResult>(
       `/staking/delegators/${delegatorAddr.toBech32()}/txs`,
       { types }
     );

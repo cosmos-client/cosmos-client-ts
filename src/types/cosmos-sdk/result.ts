@@ -1,4 +1,4 @@
-import { Tx } from "./tx_msg";
+import { Tx } from "./tx";
 import { StringEvent } from "./events";
 
 export interface ABCIMessageLog {
