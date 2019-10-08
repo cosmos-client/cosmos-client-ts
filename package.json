@@ -1,8 +1,12 @@
 {
   "name": "cosmos-client-ts",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "karma start"
   },
