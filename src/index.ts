@@ -20,7 +20,7 @@ export class CosmosSDK {
   private http<T>(
     path: string,
     params: any,
-    method: "GET" | "POST" | "PUT"
+    method: "GET" | "POST" | "PUT" | "DELETE"
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       request.get(
@@ -78,6 +78,15 @@ export class CosmosSDK {
    */
   public put<T>(path: string, params: any): Promise<T> {
     return this.http<T>(path, params, "PUT");
+  }
+
+  /**
+   *
+   * @param path
+   * @param params
+   */
+  public delete<T>(path: string, params: any): Promise<T> {
+    return this.http<T>(path, params, "DELETE");
   }
 
   /**
