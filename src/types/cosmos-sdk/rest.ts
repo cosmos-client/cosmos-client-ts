@@ -2,15 +2,15 @@ import { Coin } from "./coin";
 import { DecCoin } from "./deccoin";
 
 export interface GasEstimateResponse {
-  gas_estimate: bigint;
+  gas_estimate: number;
 }
 
 export interface BaseReq {
   from: string;
   memo: string;
   chain_id: string;
-  account_number: bigint;
-  sequence: bigint;
+  account_number: number;
+  sequence: number;
   fees: Coin[];
   gas_prices: DecCoin[];
   gas: string;
