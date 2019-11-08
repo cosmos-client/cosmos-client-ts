@@ -23,13 +23,13 @@ export class CosmosSDK {
           ? {
               uri: this.url + path,
               method: method,
-              json: false,
+              json: true,
               qs: params
             }
           : {
               uri: this.url + path,
               method: method,
-              json: false,
+              json: true,
               body: params
             },
         (error, _, body) => {
