@@ -1,11 +1,6 @@
 import * as request from "request";
 import { Amino } from "./common/amino";
 import { ErrorResponse } from "./types/cosmos-sdk/rest";
-import { StdTx } from "./x/auth/types/std-tx";
-import { Msg } from "./types/cosmos-sdk/msg";
-import { PrivKey } from "./types/tendermint/priv-key";
-import { StdFee } from "./x/auth/types/std-fee";
-import { StdSignMsg } from "./x/auth/types/std-sign-msg";
 
 /**
  *
@@ -13,9 +8,9 @@ import { StdSignMsg } from "./x/auth/types/std-sign-msg";
 export class CosmosSDK {
   /**
    * @param url
-   * @param chainId
+   * @param chainID
    */
-  constructor(private url: string, private chainId: string) {}
+  constructor(public url: string, public chainID: string) {}
 
   private http<T>(
     path: string,
@@ -28,16 +23,16 @@ export class CosmosSDK {
           ? {
               uri: this.url + path,
               method: method,
-              json: false,
+              json: true,
               qs: params
             }
           : {
               uri: this.url + path,
               method: method,
-              json: false,
+              json: true,
               body: params
             },
-        (error, response, body) => {
+        (error, _, body) => {
           if (error) {
             reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
             return;
@@ -87,57 +82,5 @@ export class CosmosSDK {
    */
   public delete<T>(path: string, params: any): Promise<T> {
     return this.http<T>(path, params, "DELETE");
-  }
-
-  /**
-   *
-   * @param accountNumber
-   * @param fee
-   * @param memo
-   * @param msgs
-   * @param sequence
-   */
-  public createStdSignMsg(
-    accountNumber: bigint,
-    fee: StdFee,
-    memo: string,
-    msgs: Msg[],
-    sequence: bigint
-  ): StdSignMsg {
-    return {
-      account_number: accountNumber,
-      chain_id: this.chainId,
-      fee: fee,
-      memo: memo,
-      msgs: msgs,
-      sequence: sequence
-    };
-  }
-
-  /**
-   * 
-   * @param privKey 
-   * @param stdTx 
-   * @param accountNumber 
-   * @param sequence 
-   */
-  public signStdTx(privKey: PrivKey, stdTx: StdTx, accountNumber: bigint, sequence: bigint) {
-    const stdSignMsg = this.createStdSignMsg(
-      accountNumber,
-      stdTx.fee,
-      stdTx.memo,
-      stdTx.msg,
-      sequence
-    );
-    const sortedJSON = JSON.stringify(stdSignMsg, (_, v) => (!(v instanceof Array || v === null) && typeof v == "object") ? Object.keys(v).sort().reduce((r: any, k) => { r[k] = v[k]; return r }, {}) : v);
-    const signature = {
-      signature: privKey.sign(sortedJSON).toString("base64"),
-      pub_key: privKey.getPubKey()
-    };
-
-    const newStdTx = { ...stdTx };
-    newStdTx.signatures = newStdTx.signatures ? [...newStdTx.signatures, signature] : [signature];
-
-    return newStdTx;
   }
 }

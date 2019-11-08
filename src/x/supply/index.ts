@@ -22,6 +22,6 @@ export module Supply {
     denom: string,
     supplyQuery: SupplyQuery
   ) {
-    return sdk.get<{}>("/supply/total/${denom}", supplyQuery);
+    return sdk.get<{}>(`/supply/total/${denom}`, supplyQuery);
   }
 }

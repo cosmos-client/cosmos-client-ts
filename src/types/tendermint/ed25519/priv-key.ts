@@ -34,7 +34,7 @@ export class PrivKeyEd25519 implements PrivKey {
    * @param message 
    */
   public sign(message: string): Buffer {
-    return new Buffer('');
+    return new Buffer(message);
   }
 
   /**
