@@ -20,10 +20,10 @@ export class BaseAccount {
     public address: AccAddress,
     public coins: Coin[],
     public public_key: PubKey,
-    public account_number: bigint,
-    public sequence: bigint
+    public account_number: number,
+    public sequence: number
   ) {
-    
+
   }
 
   /**

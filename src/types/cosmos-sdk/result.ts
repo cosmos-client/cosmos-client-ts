@@ -8,15 +8,15 @@ export interface ABCIMessageLog {
 }
 
 export interface TxResponse {
-  height: bigint;
+  height: number;
   txhash: string;
   code?: number;
   data?: string;
   raw_log?: string;
   logs?: ABCIMessageLog[];
   info?: string;
-  gas_wanted?: bigint;
-  gas_used?: bigint;
+  gas_wanted?: number;
+  gas_used?: number;
   events?: StringEvent;
   codespace?: string;
   tx?: Tx;
