@@ -1,1 +1,1 @@
-export type Dec = bigint;
+export type Dec = number;

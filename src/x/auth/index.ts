@@ -14,7 +14,7 @@ import { StdSignMsg } from "../../x/auth/types/std-sign-msg";
  * 
  */
 export module Auth {
-  
+
   /**
    *
    * @param accountNumber
@@ -24,12 +24,12 @@ export module Auth {
    * @param sequence
    */
   export function createStdSignMsg(
-    accountNumber: bigint,
+    accountNumber: number,
     chainID: string,
     fee: StdFee,
     memo: string,
     msgs: Msg[],
-    sequence: bigint
+    sequence: number
   ): StdSignMsg {
     return {
       account_number: accountNumber,
@@ -44,11 +44,11 @@ export module Auth {
   /**
    * 
    * @param privKey 
-   * @param stdTx 
+   * @param stdTx
    * @param accountNumber 
    * @param sequence 
    */
-  export function signStdTx(sdk: CosmosSDK, privKey: PrivKey, stdTx: StdTx, accountNumber: bigint, sequence: bigint) {
+  export function signStdTx(sdk: CosmosSDK, privKey: PrivKey, stdTx: StdTx, accountNumber: number, sequence: number) {
     const stdSignMsg = createStdSignMsg(
       accountNumber,
       sdk.chainID,
