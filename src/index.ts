@@ -10,37 +10,76 @@ export class CosmosSDK {
    * @param url
    * @param chainID
    */
-  constructor(public url: string, public chainID: string) {}
+  constructor(public url: string, public chainID: string) { }
 
+  /**
+   * Handle request
+   * @param path 
+   * @param params 
+   * @param method 
+   */
   private http<T>(
     path: string,
     params: any,
     method: "GET" | "POST" | "PUT" | "DELETE"
   ): Promise<T> {
     return new Promise((resolve, reject) => {
-      request.get(
-        method === "GET"
-          ? {
-              uri: this.url + path,
-              method: method,
-              json: true,
-              qs: params
+      if (method === "GET") {
+        request.get(
+          {
+            uri: this.url + path,
+            method: method,
+            json: false,
+            qs: params
+          },
+          (error, _, body) => {
+            if (error) {
+              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              return;
             }
-          : {
-              uri: this.url + path,
-              method: method,
-              json: true,
-              body: params
-            },
-        (error, _, body) => {
-          if (error) {
-            reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-            return;
-          }
 
-          resolve(JSON.parse(body, Amino.reviver) as T);
+            resolve(JSON.parse(body, Amino.reviver) as T);
+          }
+        );
+      } else {
+        const options = {
+          uri: this.url + path,
+          method: method,
+          json: true,
+          body: params
         }
-      );
+
+        if (method === "PUT") {
+          request.put(options, (error, _, body) => {
+            if (error) {
+              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              return;
+            }
+
+            resolve(JSON.parse(body, Amino.reviver) as T);
+          });
+
+        } else if (method === "POST") {
+          request.post(options, (error, _, body) => {
+            if (error) {
+              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              return;
+            }
+
+            resolve(JSON.parse(body, Amino.reviver) as T);
+          });
+        } else if (method === "DELETE") {
+          request.delete(options, (error, _, body) => {
+            if (error) {
+              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              return;
+            }
+
+            resolve(JSON.parse(body, Amino.reviver) as T);
+          });
+        }
+        return;
+      }
     });
   }
 
