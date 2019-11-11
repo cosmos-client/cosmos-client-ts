@@ -12,7 +12,11 @@ const address: string = "cosmos15g0309kcs0nfed829cwyc07s6ydpaalel6676h";
 
 async function getIdentity() {
     const path = `/identity/accounts/${address}`;
-    console.log(await sdk.get<{ [key: string]: string }>(path));
+    try {
+        console.log(await sdk.get<{ [key: string]: string }>(path));
+    } catch (error) {
+        console.error("*** Error:", error);
+    }
 }
 
 getIdentity();
