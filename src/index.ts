@@ -52,11 +52,12 @@ export class CosmosSDK {
         if (method === "PUT") {
           request.put(options, (error, _, body) => {
             if (error) {
+              console.log("エラー:", error);
               reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
               return;
             }
 
-            resolve(JSON.parse(body, Amino.reviver) as T);
+            resolve(body.value as T);
           });
 
         } else if (method === "POST") {
@@ -66,7 +67,7 @@ export class CosmosSDK {
               return;
             }
 
-            resolve(JSON.parse(body, Amino.reviver) as T);
+            resolve(body.value as T);
           });
         } else if (method === "DELETE") {
           request.delete(options, (error, _, body) => {
@@ -75,7 +76,7 @@ export class CosmosSDK {
               return;
             }
 
-            resolve(JSON.parse(body, Amino.reviver) as T);
+            resolve(body.value as T);
           });
         }
         return;
