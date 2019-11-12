@@ -1,1 +1,1 @@
-export type Dec = number;
+export type Dec = string;
