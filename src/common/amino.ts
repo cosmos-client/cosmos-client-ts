@@ -31,7 +31,7 @@ export namespace Amino {
    * @param key
    * @param value
    */
-  export const replacer = (key: string, value: any) => {
+  export const reviver = (key: string, value: any) => {
     if (!key) {
       return value;
     }
