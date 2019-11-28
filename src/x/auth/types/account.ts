@@ -6,7 +6,7 @@ import { PubKey } from "../../../types/tendermint/pub-key";
 /**
  * 
  */
-@Amino.RegisterConcrete('auth/Account')
+@Amino.RegisterConcrete('cosmos-sdk/Account')
 export class BaseAccount {
   /**
    * 

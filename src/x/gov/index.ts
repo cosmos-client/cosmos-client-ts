@@ -7,7 +7,7 @@ import { TextProposal } from "./types/text-proposal";
 import { Proposer } from "./types/proposer";
 import { TallyResult } from "./types/tally-result";
 
-export module Gov {
+export namespace Gov {
   /**
    * 
    */

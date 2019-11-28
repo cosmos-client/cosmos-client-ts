@@ -1,7 +1,7 @@
 /**
  *
  */
-export module Amino {
+export namespace Amino {
   const constructors: { [key: string]: any } = {};
 
   /**
@@ -31,8 +31,8 @@ export module Amino {
    * @param key
    * @param value
    */
-  export const reviver = (key: string, value: any) => {
-    if (key === "") {
+  export const replacer = (key: string, value: any) => {
+    if (!key) {
       return value;
     }
     if (!value.type || !constructors[value.type]) {

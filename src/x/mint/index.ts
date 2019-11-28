@@ -1,7 +1,7 @@
 import { CosmosSDK } from "../..";
 import { MintParameter } from "./types/mint-parameter";
 
-export module Mint {
+export namespace Mint {
   /**
    *  
    */

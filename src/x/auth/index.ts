@@ -13,7 +13,7 @@ import { StdSignMsg } from "../../x/auth/types/std-sign-msg";
 /**
  * 
  */
-export module Auth {
+export namespace Auth {
 
   /**
    *

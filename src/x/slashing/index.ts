@@ -6,7 +6,7 @@ import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { StdTx } from "../auth/types/std-tx";
 
-export module Slashing {
+export namespace Slashing {
   /**
    *
    */

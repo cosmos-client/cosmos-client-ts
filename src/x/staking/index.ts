@@ -21,7 +21,7 @@ import { SearchTxsResult } from "../../types/cosmos-sdk/result";
 /**
  *
  */
-export module Staking {
+export namespace Staking {
   /**
    *
    * /staking/delegators/${delegatorAddress}/delegations

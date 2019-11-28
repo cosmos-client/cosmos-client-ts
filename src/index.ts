@@ -34,18 +34,18 @@ export class CosmosSDK {
           },
           (error, _, body) => {
             if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              reject(JSON.parse(body, Amino.replacer) as ErrorResponse);
               return;
             }
 
-            resolve(JSON.parse(body, Amino.reviver) as T);
+            resolve(JSON.parse(body, Amino.replacer) as T);
           }
         );
       } else {
         const options = {
           uri: this.url + path,
           method: method,
-          json: true,
+          json: false,
           body: params
         }
 
@@ -53,7 +53,7 @@ export class CosmosSDK {
           request.put(options, (error, _, body) => {
             if (error) {
               console.log("エラー:", error);
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              reject(JSON.parse(body, Amino.replacer) as ErrorResponse);
               return;
             }
 
@@ -63,7 +63,7 @@ export class CosmosSDK {
         } else if (method === "POST") {
           request.post(options, (error, _, body) => {
             if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              reject(JSON.parse(body, Amino.replacer) as ErrorResponse);
               return;
             }
 
@@ -72,7 +72,7 @@ export class CosmosSDK {
         } else if (method === "DELETE") {
           request.delete(options, (error, _, body) => {
             if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
+              reject(JSON.parse(body, Amino.replacer) as ErrorResponse);
               return;
             }
 

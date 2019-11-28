@@ -7,7 +7,7 @@ import { AccAddress } from '../../types/cosmos-sdk/address/acc-address';
 /**
  * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。
  */
-export module Bank {
+export namespace Bank {
   /**
    * /bank/accounts/${address}/transfers
    * @param sdk 

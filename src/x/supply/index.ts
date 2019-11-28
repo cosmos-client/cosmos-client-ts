@@ -1,7 +1,7 @@
 import { CosmosSDK } from "../..";
 import { SupplyQuery } from "./types/supply-query";
 
-export module Supply {
+export namespace Supply {
   /**
    * /supply/total
    * @param supplyQuery

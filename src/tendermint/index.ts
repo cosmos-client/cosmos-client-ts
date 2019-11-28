@@ -3,7 +3,7 @@ import { CosmosSDK } from "..";
 /**
  * Tendermint Rest API
  */
-export module Tendermint {
+export namespace Tendermint {
   /**
    * /tendermint/status
    * @param sdk 

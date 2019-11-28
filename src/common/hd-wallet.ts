@@ -4,7 +4,7 @@ import * as bip39 from "bip39";
 /**
  * Hierarchy Deterministic Wallet
  */
-export module HDWallet {
+export namespace HDWallet {
   /**
    *
    * @param index

@@ -6,7 +6,7 @@ import { StdSignature } from "./std-signature";
 /**
  * 
  */
-@Amino.RegisterConcrete('auth/StdTx')
+@Amino.RegisterConcrete('cosmos-sdk/StdTx')
 export class StdTx {
   /**
    * 
