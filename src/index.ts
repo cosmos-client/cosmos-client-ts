@@ -57,7 +57,7 @@ export class CosmosSDK {
               return;
             }
 
-            resolve(body.value as T);
+            resolve(JSON.parse(body, Amino.reviver) as T);
           });
 
         } else if (method === "POST") {
@@ -67,7 +67,7 @@ export class CosmosSDK {
               return;
             }
 
-            resolve(body.value as T);
+            resolve(JSON.parse(body, Amino.reviver) as T);
           });
         } else if (method === "DELETE") {
           request.delete(options, (error, _, body) => {
@@ -76,7 +76,7 @@ export class CosmosSDK {
               return;
             }
 
-            resolve(body.value as T);
+            resolve(JSON.parse(body, Amino.reviver) as T);
           });
         }
         return;
