@@ -32,21 +32,23 @@ export namespace Amino {
    * @param value
    */
   export const reviver = (key: string, value: any) => {
-    if (!key) {
-      return value;
-    }
-    if (!value.type || !constructors[value.type]) {
-      return value;
+    // 最後に空keyで呼ばれ、最終仕上げをできるようになっている
+    if (key === '') {
+      if (!value.type || !constructors[value.type]) {
+        return value;
+      }
+  
+      if (constructors[value.type].fromJSON) {
+        return constructors[value.type].fromJSON(value.value);
+      }
+  
+      const obj = new constructors[value.type]();
+      for (let k in value.value) {
+        obj[k] = value.value[k];
+      }
+      return obj;
     }
 
-    if (constructors[value.type].fromJSON) {
-      return constructors[value.type].fromJSON(value.value);
-    }
-
-    const obj = new constructors[value.type]();
-    for (let k in value.value) {
-      obj[k] = value.value[k];
-    }
-    return obj;
+    return value;
   };
 }
