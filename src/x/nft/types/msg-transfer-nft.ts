@@ -1,8 +1,6 @@
-import { Amino } from "../../../common/amino";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 
-@Amino.RegisterConcrete('cosmos-sdk/MsgTransferNFT')
 export class MsgTransferNFT implements Msg {
   constructor(
     public Sender: AccAddress,

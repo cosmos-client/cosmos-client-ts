@@ -1,4 +1,3 @@
-import { Amino } from "../../../common/amino";
 import { PubKey } from "../pub-key";
 import * as crypto from 'crypto';
 import * as secp256k1 from 'tiny-secp256k1';
@@ -6,7 +5,6 @@ import * as secp256k1 from 'tiny-secp256k1';
 /**
  * secp256k1公開鍵。
  */
-@Amino.RegisterConcrete('tendermint/PubKeySecp256k1')
 export class PubKeySecp256k1 implements PubKey {
   private pubKey: Buffer;
 
@@ -61,3 +59,4 @@ export class PubKeySecp256k1 implements PubKey {
     return new this(buffer);
   }
 }
+

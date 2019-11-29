@@ -1,10 +1,8 @@
-import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 
-@Amino.RegisterConcrete('cosmos-sdk/MsgDelegate')
 export class MsgDelegate implements Msg {
     /**
      * @param delegator_address

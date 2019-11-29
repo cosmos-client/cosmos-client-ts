@@ -1,12 +1,10 @@
 import { PrivKey } from "../priv-key";
 import { PubKey } from "../pub-key";
 import { PubKeyEd25519 } from "./pub-key";
-import { Amino } from "../../../common/amino";
 
 /**
  * ed25519
  */
-@Amino.RegisterConcrete('tendermint/PrivKeyEd25519')
 export class PrivKeyEd25519 implements PrivKey {
   private pubKey: PubKey;
   private privKey: Buffer;

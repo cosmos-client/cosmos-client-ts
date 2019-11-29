@@ -1,4 +1,3 @@
-import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { description } from "./description";
 import { commissionRates } from "./commission-rates";
@@ -7,7 +6,6 @@ import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { PubKey } from "../../../types/tendermint/pub-key";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 
-@Amino.RegisterConcrete('cosmos-sdk/MsgCreateValidator')
 export class MsgCreateValidator implements Msg {
     /**
      * @param description
