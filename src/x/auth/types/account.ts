@@ -1,12 +1,10 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { Amino } from "../../../common/amino";
 import { PubKey } from "../../../types/tendermint/pub-key";
 
 /**
  * 
  */
-@Amino.RegisterConcrete('cosmos-sdk/Account')
 export class BaseAccount {
   /**
    * 

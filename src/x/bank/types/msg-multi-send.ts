@@ -1,5 +1,4 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
-import { Amino } from "../../../common/amino";
 
 export interface Input {
   address: string;
@@ -14,7 +13,6 @@ export interface Output {
 /**
  * 
  */
-@Amino.RegisterConcrete('cosmos-sdk/MsgMultiSend')
 export class MsgMultiSend {
   /**
    * 

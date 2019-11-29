@@ -1,4 +1,3 @@
-import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { StdFee } from "./std-fee";
 import { StdSignature } from "./std-signature";
@@ -6,7 +5,6 @@ import { StdSignature } from "./std-signature";
 /**
  * 
  */
-@Amino.RegisterConcrete('cosmos-sdk/StdTx')
 export class StdTx {
   /**
    * 

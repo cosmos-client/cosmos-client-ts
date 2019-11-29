@@ -1,12 +1,10 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 
 /**
  * 
  */
-@Amino.RegisterConcrete('cosmos-sdk/MsgSend')
 export class MsgSend implements Msg {
   /**
    * 

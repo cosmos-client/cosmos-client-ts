@@ -1,13 +1,11 @@
 import { PrivKey } from "../priv-key";
 import { PubKey } from "../pub-key";
-import { Amino } from "../../../common/amino";
 import { PubKeySecp256k1 } from "./pub-key";
 import * as crypto from "crypto";
 import * as secp256k1 from "tiny-secp256k1";
 /**
  * secp256k1
  */
-@Amino.RegisterConcrete("tendermint/PrivKeySecp256k1")
 export class PrivKeySecp256k1 implements PrivKey {
   private pubKey: PubKey;
   private privKey: Buffer;
