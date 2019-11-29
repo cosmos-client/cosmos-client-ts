@@ -1,9 +1,7 @@
-import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 
-@Amino.RegisterConcrete('cosmos-sdk/MsgDeposit')
 export class MsgDeposit implements Msg {
     /**
     * @param proposal_id

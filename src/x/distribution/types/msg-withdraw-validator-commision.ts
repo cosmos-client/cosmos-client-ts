@@ -1,8 +1,6 @@
-import { Amino } from "../../../common/amino";
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 
-@Amino.RegisterConcrete('cosmos-sdk/MsgWithdrawValidatorCommission')
 export class MsgWithdrawValidatorCommission implements Msg {
     /** 
     * @param validator_address

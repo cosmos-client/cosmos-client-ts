@@ -1,8 +1,6 @@
 import { Coin } from "../../../types/cosmos-sdk/coin";
 import { TallyResult } from "./tally-result";
-import { Amino } from "../../../common/amino";
 
-@Amino.RegisterConcrete('cosmos-sdk/TextProposal')
 export class TextProposal {
   constructor(
     public proposal_id: number,
