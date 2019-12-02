@@ -2,6 +2,12 @@ import * as request from "request";
 import { Amino } from "./common/amino";
 import { ErrorResponse } from "./types/cosmos-sdk/rest";
 
+export * from "./common";
+export * from "./tendermint";
+export * from "./x";
+export * from "./types/cosmos-sdk";
+export * from "./types/tendermint";
+
 /**
  *
  */
@@ -10,13 +16,13 @@ export class CosmosSDK {
    * @param url
    * @param chainID
    */
-  constructor(public url: string, public chainID: string) { }
+  constructor(public url: string, public chainID: string) {}
 
   /**
    * Handle request
-   * @param path 
-   * @param params 
-   * @param method 
+   * @param path
+   * @param params
+   * @param method
    */
   private http<T>(
     path: string,
@@ -47,7 +53,7 @@ export class CosmosSDK {
           method: method,
           json: false,
           body: params
-        }
+        };
 
         if (method === "PUT") {
           request.put(options, (error, _, body) => {
@@ -59,7 +65,6 @@ export class CosmosSDK {
 
             resolve(JSON.parse(body, Amino.reviver) as T);
           });
-
         } else if (method === "POST") {
           request.post(options, (error, _, body) => {
             if (error) {

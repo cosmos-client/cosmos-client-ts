@@ -10,11 +10,12 @@ import { PrivKey } from "../../types/tendermint/priv-key";
 import { StdFee } from "../../x/auth/types/std-fee";
 import { StdSignMsg } from "../../x/auth/types/std-sign-msg";
 
+export * from "./types";
+
 /**
- * 
+ *
  */
 export namespace Auth {
-
   /**
    *
    * @param accountNumber
@@ -42,13 +43,19 @@ export namespace Auth {
   }
 
   /**
-   * 
-   * @param privKey 
+   *
+   * @param privKey
    * @param stdTx
-   * @param accountNumber 
-   * @param sequence 
+   * @param accountNumber
+   * @param sequence
    */
-  export function signStdTx(sdk: CosmosSDK, privKey: PrivKey, stdTx: StdTx, accountNumber: number, sequence: number) {
+  export function signStdTx(
+    sdk: CosmosSDK,
+    privKey: PrivKey,
+    stdTx: StdTx,
+    accountNumber: number,
+    sequence: number
+  ) {
     const stdSignMsg = createStdSignMsg(
       accountNumber,
       sdk.chainID,
@@ -57,14 +64,25 @@ export namespace Auth {
       stdTx.msg,
       sequence
     );
-    const sortedJSON = JSON.stringify(stdSignMsg, (_, v) => (!(v instanceof Array || v === null) && typeof v == "object") ? Object.keys(v).sort().reduce((r: any, k) => { r[k] = v[k]; return r }, {}) : v);
+    const sortedJSON = JSON.stringify(stdSignMsg, (_, v) =>
+      !(v instanceof Array || v === null) && typeof v == "object"
+        ? Object.keys(v)
+            .sort()
+            .reduce((r: any, k) => {
+              r[k] = v[k];
+              return r;
+            }, {})
+        : v
+    );
     const signature = {
       signature: privKey.sign(sortedJSON).toString("base64"),
       pub_key: privKey.getPubKey()
     };
 
     const newStdTx = { ...stdTx };
-    newStdTx.signatures = newStdTx.signatures ? [...newStdTx.signatures, signature] : [signature];
+    newStdTx.signatures = newStdTx.signatures
+      ? [...newStdTx.signatures, signature]
+      : [signature];
 
     return newStdTx;
   }
@@ -108,10 +126,7 @@ export namespace Auth {
    * @param sdk
    * @param broadcastReq
    */
-  export function postTransaction(
-    sdk: CosmosSDK,
-    broadcastReq: BroadcastReq
-  ) {
+  export function postTransaction(sdk: CosmosSDK, broadcastReq: BroadcastReq) {
     return sdk.post<TxResponse>(`/txs`, broadcastReq);
   }
 

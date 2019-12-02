@@ -8,6 +8,8 @@ import { Address } from "../../types/cosmos-sdk/address/address";
 import { DistributionParameter } from "./types/distribution-parameter";
 import { StdTx } from "../auth/types/std-tx";
 
+export * from "./types";
+
 export namespace Distribution {
   /**
    * @param sdk /slashing/validators/{validatorPubKey}/signing_info

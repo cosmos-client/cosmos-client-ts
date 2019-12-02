@@ -7,9 +7,11 @@ import { TextProposal } from "./types/text-proposal";
 import { Proposer } from "./types/proposer";
 import { TallyResult } from "./types/tally-result";
 
+export * from "./types";
+
 export namespace Gov {
   /**
-   * 
+   *
    */
 
   export function postProposal(sdk: CosmosSDK, baseReq: BaseReq) {
@@ -21,10 +23,7 @@ export namespace Gov {
     proposalId: string,
     baseReq: BaseReq
   ) {
-    return sdk.post<StdTx>(
-      `/gov/proposals/${proposalId}/deposits`,
-      baseReq
-    );
+    return sdk.post<StdTx>(`/gov/proposals/${proposalId}/deposits`, baseReq);
   }
 
   export function postVote(
@@ -32,10 +31,7 @@ export namespace Gov {
     proposalId: string,
     baseReq: BaseReq
   ) {
-    return sdk.post<StdTx>(
-      `/gov/proposals/${proposalId}/votes`,
-      baseReq
-    );
+    return sdk.post<StdTx>(`/gov/proposals/${proposalId}/votes`, baseReq);
   }
 
   export function getParameters(sdk: CosmosSDK, type: string) {

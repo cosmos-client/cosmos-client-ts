@@ -6,9 +6,11 @@ import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
 import { MintNFTReq } from "./types/mint-nft-req";
 import { BurnNFTReq } from "./types/burn-nft-req";
 
+export * from "./types";
+
 export namespace NFT {
   /**
-   * 
+   *
    */
 
   export function getSupply(sdk: CosmosSDK, denom: string) {

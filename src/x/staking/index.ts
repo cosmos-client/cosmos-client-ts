@@ -18,6 +18,8 @@ import { Pool } from "./types/pool";
 import { Parameters } from "./types/parameters";
 import { SearchTxsResult } from "../../types/cosmos-sdk/result";
 
+export * from "./types";
+
 /**
  *
  */

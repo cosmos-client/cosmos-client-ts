@@ -6,6 +6,8 @@ import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { StdTx } from "../auth/types/std-tx";
 
+export * from "./types";
+
 export namespace Slashing {
   /**
    *
@@ -36,3 +38,4 @@ export namespace Slashing {
     return sdk.get<SigningInfo>("/slashing/parameters");
   }
 }
+

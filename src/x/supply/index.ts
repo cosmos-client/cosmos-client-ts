@@ -1,6 +1,8 @@
 import { CosmosSDK } from "../..";
 import { SupplyQuery } from "./types/supply-query";
 
+export * from "./types";
+
 export namespace Supply {
   /**
    * /supply/total
