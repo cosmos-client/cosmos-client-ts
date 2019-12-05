@@ -1,6 +1,7 @@
 import * as request from "request";
 import { Amino } from "./common/amino";
 import { ErrorResponse } from "./types/cosmos-sdk/rest";
+import { Auth } from "./x/auth"
 
 export * from "./common";
 export * from "./tendermint";
@@ -16,7 +17,7 @@ export class CosmosSDK {
    * @param url
    * @param chainID
    */
-  constructor(public url: string, public chainID: string) {}
+  constructor(public url: string, public chainID: string) { }
 
   /**
    * Handle request
@@ -30,6 +31,7 @@ export class CosmosSDK {
     method: "GET" | "POST" | "PUT" | "DELETE"
   ): Promise<T> {
     return new Promise((resolve, reject) => {
+      Auth.init();
       if (method === "GET") {
         request.get(
           {
@@ -52,13 +54,12 @@ export class CosmosSDK {
           uri: this.url + path,
           method: method,
           json: false,
-          body: params
+          body: JSON.stringify(params)
         };
 
         if (method === "PUT") {
           request.put(options, (error, _, body) => {
             if (error) {
-              console.log("エラー:", error);
               reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
               return;
             }
