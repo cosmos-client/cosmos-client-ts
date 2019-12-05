@@ -1,4 +1,3 @@
-export * from "./codec";
 export * from "./commission-rates";
 export * from "./commition";
 export * from "./delegate-request";
