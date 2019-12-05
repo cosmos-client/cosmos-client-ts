@@ -1,4 +1,3 @@
-export * from "./codec";
 export * from "./content";
 export * from "./deposit-params";
 export * from "./msg-deposit";
