@@ -31,7 +31,6 @@ export class CosmosSDK {
     method: "GET" | "POST" | "PUT" | "DELETE"
   ): Promise<T> {
     return new Promise((resolve, reject) => {
-      Auth.init();
       if (method === "GET") {
         request.get(
           {
