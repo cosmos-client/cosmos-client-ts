@@ -8,9 +8,23 @@ import { Address } from "../../types/cosmos-sdk/address/address";
 import { DistributionParameter } from "./types/distribution-parameter";
 import { StdTx } from "../auth/types/std-tx";
 
+import { Amino } from "../../common/amino";
+import { CommunityPoolSpendProposal } from "./types/community-pool-spend-proposal";
+import { MsgSetWithdrawAddress } from "./types/msg-set-withdraw-address";
+import { MsgWithdrawValidatorCommission } from "./types/msg-withdraw-validator-commision";
+
 export * from "./types";
 
 export namespace Distribution {
+  /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/CommunityPoolSpendProposal', CommunityPoolSpendProposal);
+    Amino.RegisterConcrete('cosmos-sdk/MsgModifyWithdrawAddress', MsgSetWithdrawAddress);
+    Amino.RegisterConcrete('cosmos-sdk/MsgWithdrawValidatorCommission', MsgWithdrawValidatorCommission);
+  }
+
   /**
    * @param sdk /slashing/validators/{validatorPubKey}/signing_info
    * @param delegatorAddr

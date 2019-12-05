@@ -3,7 +3,7 @@ import { BaseReq } from "./../types/cosmos-sdk/rest"
 import { StdTx } from "./../x/auth/types/std-tx"
 import { Coin } from "./../types/cosmos-sdk/coin"
 import { DecCoin } from "./../types/cosmos-sdk/deccoin"
-
+import { Auth } from "./../x/auth/index"
 
 const url: string = "http://133.130.77.80:1317";
 const chainId: string = "t";
@@ -41,6 +41,7 @@ async function setIdentity() {
         base_req: defaultValues()
     }
     try {
+        Auth.init();
         const tx = await sdk.put<StdTx>(path, params);
 
         console.log("結果:")

@@ -16,7 +16,7 @@ export class CosmosSDK {
    * @param url
    * @param chainID
    */
-  constructor(public url: string, public chainID: string) {}
+  constructor(public url: string, public chainID: string) { }
 
   /**
    * Handle request
@@ -52,13 +52,12 @@ export class CosmosSDK {
           uri: this.url + path,
           method: method,
           json: false,
-          body: params
+          body: JSON.stringify(params)
         };
 
         if (method === "PUT") {
           request.put(options, (error, _, body) => {
             if (error) {
-              console.log("エラー:", error);
               reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
               return;
             }

@@ -1,4 +1,3 @@
-export * from "./codec";
 export * from "./community-pool-spend-proposal";
 export * from "./distribution-parameter";
 export * from "./msg-set-withdraw-address";

@@ -9,6 +9,7 @@ import { Msg } from "../../types/cosmos-sdk/msg";
 import { PrivKey } from "../../types/tendermint/priv-key";
 import { StdFee } from "../../x/auth/types/std-fee";
 import { StdSignMsg } from "../../x/auth/types/std-sign-msg";
+import { Amino } from "../../common/amino";
 
 export * from "./types";
 
@@ -43,6 +44,14 @@ export namespace Auth {
   }
 
   /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/Account', BaseAccount);
+    Amino.RegisterConcrete('cosmos-sdk/StdTx', StdTx);
+  }
+
+  /**
    *
    * @param privKey
    * @param stdTx
@@ -67,11 +76,11 @@ export namespace Auth {
     const sortedJSON = JSON.stringify(stdSignMsg, (_, v) =>
       !(v instanceof Array || v === null) && typeof v == "object"
         ? Object.keys(v)
-            .sort()
-            .reduce((r: any, k) => {
-              r[k] = v[k];
-              return r;
-            }, {})
+          .sort()
+          .reduce((r: any, k) => {
+            r[k] = v[k];
+            return r;
+          }, {})
         : v
     );
     const signature = {
@@ -138,3 +147,4 @@ export namespace Auth {
     return sdk.post<EncodeResp>(`/txs/encode`, tx);
   }
 }
+
