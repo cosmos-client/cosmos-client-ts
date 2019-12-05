@@ -7,13 +7,29 @@ import { TextProposal } from "./types/text-proposal";
 import { Proposer } from "./types/proposer";
 import { TallyResult } from "./types/tally-result";
 
+import { Amino } from "../../common/amino";
+import { MsgDeposit } from "./types/msg-deposit";
+import { MsgSubmitProposal } from "./types/msg-submit-proposal";
+import { MsgVote } from "./types/msg-vote";
+import { SoftwareUpgradeProposal } from "./types/software-upgrade-proposal";
+
 export * from "./types";
 
 export namespace Gov {
   /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/MsgDeposit', MsgDeposit);
+    Amino.RegisterConcrete('cosmos-sdk/MsgSubmitProposal', MsgSubmitProposal);
+    Amino.RegisterConcrete('cosmos-sdk/MsgVote', MsgVote);
+    Amino.RegisterConcrete('cosmos-sdk/SoftwareUpgradeProposal', SoftwareUpgradeProposal)
+    Amino.RegisterConcrete('cosmos-sdk/TextProposal', TextProposal);
+  }
+
+  /**
    *
    */
-
   export function postProposal(sdk: CosmosSDK, baseReq: BaseReq) {
     return sdk.post<StdTx>("/gov/proposals", baseReq);
   }
