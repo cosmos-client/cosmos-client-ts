@@ -5,10 +5,19 @@ import { TransferNFTReq } from "./types/transfer-nft-req";
 import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
 import { MintNFTReq } from "./types/mint-nft-req";
 import { BurnNFTReq } from "./types/burn-nft-req";
+import { Amino } from "../../common/amino";
+import { MsgTransferNFT } from "./types/msg-transfer-nft";
 
 export * from "./types";
 
 export namespace NFT {
+  /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/MsgTransferNFT', MsgTransferNFT);
+  }
+
   /**
    *
    */
