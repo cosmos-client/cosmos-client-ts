@@ -6,9 +6,19 @@ import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { StdTx } from "../auth/types/std-tx";
 
+import { Amino } from "../../common/amino";
+import { MsgUnjail } from "./types/msg-unjail";
+
 export * from "./types";
 
 export namespace Slashing {
+  /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/MsgUnjail', MsgUnjail);
+  }
+
   /**
    *
    */
