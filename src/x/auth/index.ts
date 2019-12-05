@@ -44,6 +44,14 @@ export namespace Auth {
   }
 
   /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/Account', BaseAccount);
+    Amino.RegisterConcrete('cosmos-sdk/StdTx', StdTx);
+  }
+
+  /**
    *
    * @param privKey
    * @param stdTx
@@ -138,12 +146,5 @@ export namespace Auth {
   export function postEncodeTransaction(sdk: CosmosSDK, tx: StdTx) {
     return sdk.post<EncodeResp>(`/txs/encode`, tx);
   }
-
-  /**
-   * Register codec
-   */
-  export function init() {
-    Amino.RegisterConcrete('cosmos-sdk/Account', BaseAccount);
-    Amino.RegisterConcrete('cosmos-sdk/StdTx', StdTx);
-  }
 }
+
