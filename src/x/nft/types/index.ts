@@ -1,5 +1,4 @@
 export * from "./burn-nft-req";
-export * from "./codec";
 export * from "./edit-nft-metadata-req";
 export * from "./mint-nft-req";
 export * from "./msg-burn-nft";
