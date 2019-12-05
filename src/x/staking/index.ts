@@ -17,6 +17,12 @@ import { Redelegation } from "./types/redelegation";
 import { Pool } from "./types/pool";
 import { Parameters } from "./types/parameters";
 import { SearchTxsResult } from "../../types/cosmos-sdk/result";
+import { Amino } from "../../common/amino";
+import { MsgBeginRedelegate } from "./types/msg-begin-redelegate";
+import { MsgCreateValidator } from "./types/msg-create-validator";
+import { MsgDelegate } from "./types/msg-delegate";
+import { MsgEditValidator } from "./types/msg-edit-validator";
+import { MsgUndelegate } from "./types/msg-undelegate";
 
 export * from "./types";
 
@@ -24,6 +30,17 @@ export * from "./types";
  *
  */
 export namespace Staking {
+  /**
+   * Register codec
+   */
+  export function init() {
+    Amino.RegisterConcrete('cosmos-sdk/MsgBeginRedelegate', MsgBeginRedelegate);
+    Amino.RegisterConcrete('cosmos-sdk/MsgCreateValidator', MsgCreateValidator);
+    Amino.RegisterConcrete('cosmos-sdk/MsgDelegate', MsgDelegate);
+    Amino.RegisterConcrete('cosmos-sdk/MsgEditValidator', MsgEditValidator);
+    Amino.RegisterConcrete('cosmos-sdk/MsgUndelegate', MsgUndelegate);
+  }
+
   /**
    *
    * /staking/delegators/${delegatorAddress}/delegations
