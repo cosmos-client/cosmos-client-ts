@@ -1,7 +1,6 @@
 import * as request from "request";
 import { Amino } from "./common/amino";
 import { ErrorResponse } from "./types/cosmos-sdk/rest";
-import { Auth } from "./x/auth"
 
 export * from "./common";
 export * from "./tendermint";
