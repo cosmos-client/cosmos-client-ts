@@ -1,5 +1,6 @@
 import { Tx } from "./tx";
 import { StringEvent } from "./events";
+import { Amino } from "../../common";
 
 export interface ABCIMessageLog {
   msg_index: number;
@@ -19,7 +20,7 @@ export interface TxResponse {
   gas_used?: number;
   events?: StringEvent;
   codespace?: string;
-  tx?: Tx;
+  tx?: Amino.Concrete<Tx>;
   timestamp?: string;
 }
 

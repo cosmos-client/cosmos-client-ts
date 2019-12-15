@@ -49,4 +49,6 @@ export namespace Amino {
 
     return value;
   };
+
+  export type Concrete<T> = T | { type: string; value: any };
 }

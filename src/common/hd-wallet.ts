@@ -7,26 +7,17 @@ import * as bip39 from "bip39";
 export namespace HDWallet {
   /**
    *
-   * @param index
-   */
-  export function getBip32PathByBip44(index: number): string {
-    const bip32CoinType = 118;
-
-    return `m/44'/${bip32CoinType}'/0'/0/${index}`;
-  }
-
-  /**
-   *
    * @param mnemonic
    * @param bip32Path
    */
-  export async function generatePrivKeyByBip39(
+  export async function generatePrivKey(
     mnemonic: string,
-    bip32Path: string
+    coinType = 118,
+    account = 0
   ): Promise<Buffer> {
     const seed = await bip39.mnemonicToSeed(mnemonic);
     const node = bip32.fromSeed(seed);
-    const child = node.derivePath(bip32Path);
+    const child = node.derivePath(`m/44'/${coinType}'/${account}'/0/0`);
 
     return child.privateKey!;
   }
