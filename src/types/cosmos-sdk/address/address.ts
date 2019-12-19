@@ -22,14 +22,14 @@ export const bech32Prefix = {
  * 各種アドレスの基底クラス。
  */
 export class Address {
-  protected _value: Uint8Array;
+  protected _value: Buffer;
 
   /**
    * 
    * @param value 
    * @throws Error アドレスの長さが20でない場合、エラーがスローされます。
    */
-  constructor(value: Uint8Array) {
+  constructor(value: Buffer) {
     const addressLength = 20;
     if (value.length !== addressLength) {
       throw Error();
@@ -37,7 +37,7 @@ export class Address {
     this._value = value;
   }
 
-  private static hash160(buffer: Buffer): Buffer {
+  static hash160(buffer: Buffer): Buffer {
     const sha256Hash: Buffer = crypto.createHash('sha256')
       .update(buffer)
       .digest();
@@ -56,7 +56,7 @@ export class Address {
    * 公開鍵からアドレスのインスタンスを作成する。
    * @param publicKey 
    */
-  public static fromPublicKey(publicKey: Buffer) {
+  static fromPublicKey(publicKey: Buffer) {
     return new Address(this.hash160(publicKey));
   }
 }

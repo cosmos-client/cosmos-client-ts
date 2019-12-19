@@ -8,7 +8,7 @@ export class AccAddress extends Address {
   /**
    * Bech32フォーマットのアドレスに変換する。
    */
-  public toBech32() {
+  toBech32() {
     const words = bech32.toWords(Buffer.from(this._value));
     return bech32.encode(bech32Prefix.accAddr, words);
   }
@@ -17,7 +17,7 @@ export class AccAddress extends Address {
    * Bech32フォーマットのアドレスからインスタンスを作成する。
    * @param accAddress
    */
-  public static fromBech32(accAddress: string) {
+  static fromBech32(accAddress: string) {
     const { prefix, words } = bech32.decode(accAddress);
     if (prefix !== bech32Prefix.accAddr) {
       throw Error();
@@ -26,10 +26,14 @@ export class AccAddress extends Address {
     return new AccAddress(bech32.fromWords(words));
   }
 
+  static fromPublicKey(publicKey: Buffer) {
+    return new this(this.hash160(publicKey));
+  }
+
   /**
    * JSON.stringify時に参照される。
    */
-  public toJSON() {
+  toJSON() {
     return this.toBech32();
   }
 }

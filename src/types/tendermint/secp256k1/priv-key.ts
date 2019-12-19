@@ -22,7 +22,7 @@ export class PrivKeySecp256k1 implements PrivKey {
   /**
    *
    */
-  public getPubKey() {
+  getPubKey() {
     return this.pubKey;
   }
 
@@ -30,7 +30,7 @@ export class PrivKeySecp256k1 implements PrivKey {
    *
    * @param message
    */
-  public sign(message: string): Buffer {
+  sign(message: string): Buffer {
     const hash = crypto
       .createHash("sha256")
       .update(message)
@@ -44,21 +44,21 @@ export class PrivKeySecp256k1 implements PrivKey {
   /**
    *
    */
-  public toBuffer() {
+  toBuffer() {
     return new Buffer(this.privKey);
   }
 
   /**
    *
    */
-  public toBase64() {
+  toBase64() {
     return this.privKey.toString("base64");
   }
 
   /**
    * JSON.stringify
    */
-  public toJSON() {
+  toJSON() {
     return this.toBase64();
   }
 
@@ -66,7 +66,7 @@ export class PrivKeySecp256k1 implements PrivKey {
    *
    * @param value
    */
-  public static fromBase64(value: string) {
+  static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
     return new this(buffer);
   }

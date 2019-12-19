@@ -23,7 +23,7 @@ export class PrivKeyEd25519 implements PrivKey {
   /**
    * 
    */
-  public getPubKey() {
+  getPubKey() {
     return this.pubKey;
   }
 
@@ -31,28 +31,28 @@ export class PrivKeyEd25519 implements PrivKey {
    * 
    * @param message 
    */
-  public sign(message: string): Buffer {
+  sign(message: string): Buffer {
     return new Buffer(message);
   }
 
   /**
    * 
    */
-  public toBuffer() {
+  toBuffer() {
     return new Buffer(this.privKey);
   }
 
   /**
    * 
    */
-  public toBase64() {
+  toBase64() {
     return this.privKey.toString('base64');
   }
 
   /**
    * JSON.stringify時に参照される。
    */
-  public toJSON() {
+  toJSON() {
     return this.toBase64();
   }
 
@@ -60,7 +60,7 @@ export class PrivKeyEd25519 implements PrivKey {
    * 
    * @param value 
    */
-  public static fromBase64(value: string) {
+  static fromBase64(value: string) {
     const buffer = new Buffer(value, 'base64');
     return new this(buffer);
   }

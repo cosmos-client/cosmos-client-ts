@@ -21,7 +21,7 @@ export class PubKeyEd25519 implements PubKey {
    * @param message
    * @param signature
    */
-  public verify(message: string, signature: Buffer): boolean {
+  verify(message: string, signature: Buffer): boolean {
     const hash = crypto
       .createHash("sha256")
       .update(message)
@@ -34,28 +34,28 @@ export class PubKeyEd25519 implements PubKey {
   /**
    *
    */
-  public toBuffer() {
+  toBuffer() {
     return new Buffer(this.pubKey);
   }
 
   /**
    *
    */
-  public toBase64() {
+  toBase64() {
     return this.pubKey.toString("base64");
   }
 
   /**
    * JSON.stringify時に参照される。
    */
-  public toJSON() {
+  toJSON() {
     return this.toBase64();
   }
 
   /**
    *
    */
-  public static fromBase64(value: string) {
+  static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
     return new this(buffer);
   }
