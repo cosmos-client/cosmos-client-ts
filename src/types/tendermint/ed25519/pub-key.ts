@@ -1,6 +1,5 @@
 import { PubKey } from "../pub-key";
-import * as crypto from "crypto";
-import * as secp256k1 from "tiny-secp256k1";
+import * as nacl from "tweetnacl";
 
 /**
  * ed25519
@@ -21,14 +20,8 @@ export class PubKeyEd25519 implements PubKey {
    * @param message
    * @param signature
    */
-  verify(message: string, signature: Buffer): boolean {
-    const hash = crypto
-      .createHash("sha256")
-      .update(message)
-      .digest("hex");
-    const buffer = Buffer.from(hash, "hex");
-
-    return secp256k1.verify(buffer, signature, this.pubKey);
+  verify(_: Buffer, signature: Buffer): boolean {
+    return nacl.sign.open(signature, this.pubKey) !== null;
   }
 
   /**

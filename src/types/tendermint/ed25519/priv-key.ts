@@ -1,6 +1,7 @@
 import { PrivKey } from "../priv-key";
 import { PubKey } from "../pub-key";
 import { PubKeyEd25519 } from "./pub-key";
+import * as nacl from "tweetnacl";
 
 /**
  * ed25519
@@ -16,7 +17,8 @@ export class PrivKeyEd25519 implements PrivKey {
   constructor(
     privKey: Buffer
   ) {
-    this.pubKey = new PubKeyEd25519(new Buffer(''));
+    const keypair = nacl.sign.keyPair.fromSeed(privKey)
+    this.pubKey = new PubKeyEd25519(Buffer.from(keypair.publicKey));
     this.privKey = privKey;
   }
 
@@ -31,8 +33,9 @@ export class PrivKeyEd25519 implements PrivKey {
    * 
    * @param message 
    */
-  sign(message: string): Buffer {
-    return new Buffer(message);
+  sign(message: Buffer): Buffer {
+    const keypair = nacl.sign.keyPair.fromSeed(this.privKey)
+    return Buffer.from(nacl.sign(message, keypair.secretKey))
   }
 
   /**

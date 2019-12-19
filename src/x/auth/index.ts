@@ -5,10 +5,7 @@ import { TxResponse, SearchTxsResult } from "../../types/cosmos-sdk/result";
 import { StdTx } from "./types/std-tx";
 import { EncodeResp } from "./types/encode-resp";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { Msg } from "../../types/cosmos-sdk/msg";
 import { PrivKey } from "../../types/tendermint/priv-key";
-import { StdFee } from "../../x/auth/types/std-fee";
-import { StdSignMsg } from "../../x/auth/types/std-sign-msg";
 import { Amino } from "../../common/amino";
 
 export * from "./types";
@@ -17,32 +14,6 @@ export * from "./types";
  *
  */
 export namespace Auth {
-  /**
-   *
-   * @param accountNumber
-   * @param fee
-   * @param memo
-   * @param msgs
-   * @param sequence
-   */
-  export function createStdSignMsg(
-    accountNumber: number,
-    chainID: string,
-    fee: StdFee,
-    memo: string,
-    msgs: Msg[],
-    sequence: number
-  ): StdSignMsg {
-    return {
-      account_number: accountNumber,
-      chain_id: chainID,
-      fee: fee,
-      memo: memo,
-      msgs: msgs,
-      sequence: sequence
-    };
-  }
-
   /**
    * Register codec
    */
@@ -65,26 +36,9 @@ export namespace Auth {
     accountNumber: number,
     sequence: number
   ) {
-    const stdSignMsg = createStdSignMsg(
-      accountNumber,
-      sdk.chainID,
-      stdTx.fee,
-      stdTx.memo,
-      stdTx.msg,
-      sequence
-    );
-    const sortedJSON = JSON.stringify(stdSignMsg, (_, v) =>
-      !(v instanceof Array || v === null) && typeof v == "object"
-        ? Object.keys(v)
-          .sort()
-          .reduce((r: any, k) => {
-            r[k] = v[k];
-            return r;
-          }, {})
-        : v
-    );
+    const signBytes = stdTx.getSignBytes(sdk.chainID, accountNumber, sequence)
     const signature = {
-      signature: privKey.sign(sortedJSON).toString("base64"),
+      signature: privKey.sign(signBytes).toString("base64"),
       pub_key: privKey.getPubKey()
     };
 

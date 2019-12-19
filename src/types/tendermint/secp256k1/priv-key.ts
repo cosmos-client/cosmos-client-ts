@@ -30,13 +30,12 @@ export class PrivKeySecp256k1 implements PrivKey {
    *
    * @param message
    */
-  sign(message: string): Buffer {
+  sign(message: Buffer): Buffer {
     const hash = crypto
       .createHash("sha256")
       .update(message)
-      .digest("hex");
-    const buffer = Buffer.from(hash, "hex");
-    const signature = secp256k1.sign(buffer, this.privKey);
+      .digest();
+    const signature = secp256k1.sign(hash, this.privKey);
 
     return signature;
   }

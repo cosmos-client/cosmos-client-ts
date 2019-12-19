@@ -23,11 +23,10 @@ export class PubKeySecp256k1 implements PubKey {
    * @param message 
    * @param signature 
    */
-  verify(message: string, signature: Buffer): boolean {
-    const hash = crypto.createHash('sha256').update(message).digest('hex');
-    const buffer = Buffer.from(hash, 'hex');
+  verify(message: Buffer, signature: Buffer): boolean {
+    const hash = crypto.createHash('sha256').update(message).digest();
 
-    return secp256k1.verify(buffer, signature, this.pubKey);
+    return secp256k1.verify(hash, signature, this.pubKey);
   }
 
   /**
