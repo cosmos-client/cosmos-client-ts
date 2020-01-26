@@ -1,4 +1,4 @@
-export interface SupplyQuery{
-    page: number;
-    limit: number;
+export interface SupplyQuery {
+  page: number;
+  limit: number;
 }

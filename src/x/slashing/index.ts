@@ -1,28 +1,19 @@
-import { CosmosSDK } from "../..";
+import { CosmosSDK } from "../../cosmos-sdk";
+import { Amino } from "../../common/amino";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { SigningInfo } from "./types/signing-info";
 import { SignParameter } from "./types/sign-parameter";
 import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
 import { BaseReq } from "../../types/cosmos-sdk/rest";
-import { StdTx } from "../auth/types/std-tx";
-
-import { Amino } from "../../common/amino";
 import { MsgUnjail } from "./types/msg-unjail";
 
 export * from "./types";
 
+// Register Codec
+import { StdTx } from "../auth";
+Amino.RegisterConcrete('cosmos-sdk/MsgUnjail', MsgUnjail);
+
 export namespace Slashing {
-  /**
-   * Register codec
-   */
-  export function init() {
-    Amino.RegisterConcrete('cosmos-sdk/MsgUnjail', MsgUnjail);
-  }
-
-  /**
-   *
-   */
-
   export function postUnjail(
     sdk: CosmosSDK,
     validatorAddr: ValAddress,

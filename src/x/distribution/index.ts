@@ -1,4 +1,5 @@
-import { CosmosSDK } from "../..";
+import { CosmosSDK } from "../../cosmos-sdk";
+import { Amino } from "../../common/amino";
 import { ValidatorDistInfo } from "./types/validator-dist-info";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
 import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
@@ -6,25 +7,19 @@ import { BaseReq } from "../../types/cosmos-sdk/rest";
 import { Coin } from "../../types/cosmos-sdk/coin";
 import { Address } from "../../types/cosmos-sdk/address/address";
 import { DistributionParameter } from "./types/distribution-parameter";
-import { StdTx } from "../auth/types/std-tx";
-
-import { Amino } from "../../common/amino";
 import { CommunityPoolSpendProposal } from "./types/community-pool-spend-proposal";
 import { MsgSetWithdrawAddress } from "./types/msg-set-withdraw-address";
 import { MsgWithdrawValidatorCommission } from "./types/msg-withdraw-validator-commision";
 
 export * from "./types";
 
-export namespace Distribution {
-  /**
-   * Register codec
-   */
-  export function init() {
-    Amino.RegisterConcrete('cosmos-sdk/CommunityPoolSpendProposal', CommunityPoolSpendProposal);
-    Amino.RegisterConcrete('cosmos-sdk/MsgModifyWithdrawAddress', MsgSetWithdrawAddress);
-    Amino.RegisterConcrete('cosmos-sdk/MsgWithdrawValidatorCommission', MsgWithdrawValidatorCommission);
-  }
+// Register Codec
+import { StdTx } from "../auth";
+Amino.RegisterConcrete('cosmos-sdk/CommunityPoolSpendProposal', CommunityPoolSpendProposal);
+Amino.RegisterConcrete('cosmos-sdk/MsgModifyWithdrawAddress', MsgSetWithdrawAddress);
+Amino.RegisterConcrete('cosmos-sdk/MsgWithdrawValidatorCommission', MsgWithdrawValidatorCommission);
 
+export namespace Distribution {
   /**
    * @param sdk /slashing/validators/{validatorPubKey}/signing_info
    * @param delegatorAddr

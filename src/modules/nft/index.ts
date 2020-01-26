@@ -1,27 +1,19 @@
-import { CosmosSDK } from "../..";
+import { CosmosSDK } from "../../cosmos-sdk";
+import { Amino } from "../../common/amino";
 import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { StdTx } from "../auth/types/std-tx";
 import { TransferNFTReq } from "./types/transfer-nft-req";
 import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
 import { MintNFTReq } from "./types/mint-nft-req";
 import { BurnNFTReq } from "./types/burn-nft-req";
-import { Amino } from "../../common/amino";
 import { MsgTransferNFT } from "./types/msg-transfer-nft";
 
 export * from "./types";
 
+// Register Concrete
+import { StdTx } from "../../x/auth";
+Amino.RegisterConcrete('cosmos-sdk/MsgTransferNFT', MsgTransferNFT);
+
 export namespace NFT {
-  /**
-   * Register codec
-   */
-  export function init() {
-    Amino.RegisterConcrete('cosmos-sdk/MsgTransferNFT', MsgTransferNFT);
-  }
-
-  /**
-   *
-   */
-
   export function getSupply(sdk: CosmosSDK, denom: string) {
     return sdk.get<{}>(`/nft/supply/${denom}`, denom);
   }

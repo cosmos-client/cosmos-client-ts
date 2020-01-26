@@ -1,4 +1,4 @@
-import { CosmosSDK } from "..";
+import { CosmosSDK } from "../cosmos-sdk";
 
 /**
  * Tendermint Rest API

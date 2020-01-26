@@ -1,6 +1,6 @@
-import { commissionRates } from "./commission-rates";
+import { CommissionRates } from "./commission-rates";
 
-export interface commission {
-    commission: commissionRates;
-    update_date: string;
+export interface Commission {
+  commission: CommissionRates;
+  update_date: string;
 }

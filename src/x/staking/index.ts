@@ -1,5 +1,5 @@
-import { CosmosSDK } from "../..";
-import { StdTx } from "../auth/types/std-tx";
+import { CosmosSDK } from "../../cosmos-sdk";
+import { Amino } from "../../common/amino";
 import { DelegateRequest } from "./types/delegate-request";
 import { UndelegateRequest } from "./types/undelegate-request";
 import { RedelegateRequest } from "./types/redelegate-request";
@@ -17,7 +17,6 @@ import { Redelegation } from "./types/redelegation";
 import { Pool } from "./types/pool";
 import { Parameters } from "./types/parameters";
 import { SearchTxsResult } from "../../types/cosmos-sdk/result";
-import { Amino } from "../../common/amino";
 import { MsgBeginRedelegate } from "./types/msg-begin-redelegate";
 import { MsgCreateValidator } from "./types/msg-create-validator";
 import { MsgDelegate } from "./types/msg-delegate";
@@ -26,21 +25,18 @@ import { MsgUndelegate } from "./types/msg-undelegate";
 
 export * from "./types";
 
+// Register Codec
+import { StdTx } from "../auth";
+Amino.RegisterConcrete("cosmos-sdk/MsgBeginRedelegate", MsgBeginRedelegate);
+Amino.RegisterConcrete("cosmos-sdk/MsgCreateValidator", MsgCreateValidator);
+Amino.RegisterConcrete("cosmos-sdk/MsgDelegate", MsgDelegate);
+Amino.RegisterConcrete("cosmos-sdk/MsgEditValidator", MsgEditValidator);
+Amino.RegisterConcrete("cosmos-sdk/MsgUndelegate", MsgUndelegate);
+
 /**
  *
  */
 export namespace Staking {
-  /**
-   * Register codec
-   */
-  export function init() {
-    Amino.RegisterConcrete('cosmos-sdk/MsgBeginRedelegate', MsgBeginRedelegate);
-    Amino.RegisterConcrete('cosmos-sdk/MsgCreateValidator', MsgCreateValidator);
-    Amino.RegisterConcrete('cosmos-sdk/MsgDelegate', MsgDelegate);
-    Amino.RegisterConcrete('cosmos-sdk/MsgEditValidator', MsgEditValidator);
-    Amino.RegisterConcrete('cosmos-sdk/MsgUndelegate', MsgUndelegate);
-  }
-
   /**
    *
    * /staking/delegators/${delegatorAddress}/delegations
@@ -121,13 +117,13 @@ export namespace Staking {
   ) {
     let types = "";
     if (txsQueryType.bond) {
-      types += "bond ;";
+      types += "bond;";
     }
     if (txsQueryType.unbond) {
-      types += "unbond ;";
+      types += "unbond;";
     }
     if (txsQueryType.redelegate) {
-      types += "redelegate ;";
+      types += "redelegate;";
     }
     return sdk.get<SearchTxsResult>(
       `/staking/delegators/${delegatorAddr.toBech32()}/txs`,

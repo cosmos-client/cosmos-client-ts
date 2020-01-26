@@ -1,14 +1,14 @@
-import { CosmosSDK } from "../..";
+import { CosmosSDK } from "../../cosmos-sdk";
 import { SupplyQuery } from "./types/supply-query";
 
 export * from "./types";
 
 export namespace Supply {
+
   /**
    * /supply/total
    * @param supplyQuery
    */
-
   export function getTotalSupply(sdk: CosmosSDK, supplyQuery: SupplyQuery) {
     return sdk.get<{}>("/supply/total", supplyQuery);
   }

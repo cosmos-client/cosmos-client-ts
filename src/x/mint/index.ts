@@ -1,13 +1,9 @@
-import { CosmosSDK } from "../..";
+import { CosmosSDK } from "../../cosmos-sdk";
 import { MintParameter } from "./types/mint-parameter";
 
 export * from "./types";
 
 export namespace Mint {
-  /**
-   *
-   */
-
   export function getParams(sdk: CosmosSDK) {
     return sdk.get<MintParameter>("/minting/parameters");
   }

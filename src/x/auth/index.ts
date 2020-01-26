@@ -1,6 +1,6 @@
 import { BroadcastReq } from "./types/broadcast-req";
 import { BaseAccount } from "./types/account";
-import { CosmosSDK } from "../..";
+import { CosmosSDK } from "../../cosmos-sdk";
 import { TxResponse, SearchTxsResult } from "../../types/cosmos-sdk/result";
 import { StdTx } from "./types/std-tx";
 import { EncodeResp } from "./types/encode-resp";
@@ -10,18 +10,13 @@ import { Amino } from "../../common/amino";
 
 export * from "./types";
 
+Amino.RegisterConcrete('cosmos-sdk/Account', BaseAccount);
+Amino.RegisterConcrete('cosmos-sdk/StdTx', StdTx);
+
 /**
  *
  */
 export namespace Auth {
-  /**
-   * Register codec
-   */
-  export function init() {
-    Amino.RegisterConcrete('cosmos-sdk/Account', BaseAccount);
-    Amino.RegisterConcrete('cosmos-sdk/StdTx', StdTx);
-  }
-
   /**
    *
    * @param privKey

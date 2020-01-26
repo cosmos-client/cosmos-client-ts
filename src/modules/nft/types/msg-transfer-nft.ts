@@ -7,13 +7,11 @@ export class MsgTransferNFT implements Msg {
     public Recipient: AccAddress,
     public Denom: string,
     public ID: string
-  ) {
-
-  }
+  ) {}
 
   /**
    * @see Amino.reviver
-   * @param obj 
+   * @param obj
    */
   public static fromJSON(obj: any) {
     return new this(
