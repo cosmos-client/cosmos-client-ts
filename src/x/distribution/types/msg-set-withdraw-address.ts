@@ -1,7 +1,7 @@
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 
-export class MsgSetWithdrawAddress implements Msg {
+export class MsgSetWithdrawAddress extends Msg {
   /**
    * @param delegator_address
    * @param withdraw_address
@@ -9,7 +9,9 @@ export class MsgSetWithdrawAddress implements Msg {
   constructor(
     public delegator_address: AccAddress,
     public withdraw_address: AccAddress
-  ) {}
+  ) {
+    super();
+  }
 
   /**
    * @see Amino.reviver

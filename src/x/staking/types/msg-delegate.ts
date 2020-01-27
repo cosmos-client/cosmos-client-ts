@@ -3,7 +3,7 @@ import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 
-export class MsgDelegate implements Msg {
+export class MsgDelegate extends Msg {
   /**
    * @param delegator_address
    * @param validator_address
@@ -13,7 +13,10 @@ export class MsgDelegate implements Msg {
     public delegator_address: AccAddress,
     public validator_address: ValAddress,
     public amount: Coin
-  ) {}
+  ) {
+    super();
+  }
+
   /**
    * @see Amino.reviver
    * @param value

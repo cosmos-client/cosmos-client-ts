@@ -1,8 +1,9 @@
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { Coin } from "../../../types/cosmos-sdk/coin";
+import { Msg } from "../../../types/cosmos-sdk/msg";
 
-export class MsgUndelegate {
+export class MsgUndelegate extends Msg {
   /**
    * @param delegator_address
    * @param validator_address
@@ -12,8 +13,10 @@ export class MsgUndelegate {
     public delegator_address: AccAddress,
     public validator_address: ValAddress,
     public amount: Coin
-  ) {}
-  
+  ) {
+    super();
+  }
+
   /**
    * @see Amino.reviver
    * @param value

@@ -3,7 +3,7 @@ import { description } from "./description";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { CommissionRates } from "./commission-rates";
 
-export class MsgEditValidator implements Msg {
+export class MsgEditValidator extends Msg {
   /**
    * @param description
    * @param address
@@ -15,8 +15,10 @@ export class MsgEditValidator implements Msg {
     public address: ValAddress,
     public committion_rate: CommissionRates,
     public min_self_delegation: number
-  ) {}
-  
+  ) {
+    super();
+  }
+
   /**
    * @see Amino.reviver
    * @param value

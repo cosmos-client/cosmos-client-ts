@@ -1,3 +1,1 @@
-export interface Tx {
-
-}
+export class Tx {}

@@ -1,12 +1,14 @@
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 
-export class MsgUnjail implements Msg {
+export class MsgUnjail extends Msg {
   /**
    * @param address
    */
-  constructor(public address: ValAddress) {}
-  
+  constructor(public address: ValAddress) {
+    super();
+  }
+
   /**
    * @see Amino.reviver
    */

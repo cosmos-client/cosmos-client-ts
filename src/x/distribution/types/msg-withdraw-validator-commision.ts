@@ -1,12 +1,14 @@
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 
-export class MsgWithdrawValidatorCommission implements Msg {
+export class MsgWithdrawValidatorCommission extends Msg {
   /**
    * @param validator_address
    */
-  constructor(public validator_address: ValAddress) {}
-  
+  constructor(public validator_address: ValAddress) {
+    super();
+  }
+
   /**
    * @see Amino.reviver
    */

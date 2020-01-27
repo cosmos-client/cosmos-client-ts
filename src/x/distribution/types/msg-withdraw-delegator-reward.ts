@@ -2,7 +2,7 @@ import { Msg } from "../../../types/cosmos-sdk/msg";
 import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
 import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 
-export class MsgWithdrawDelegatorReward implements Msg {
+export class MsgWithdrawDelegatorReward extends Msg {
   /**
    *
    * @param delegator_address
@@ -11,8 +11,10 @@ export class MsgWithdrawDelegatorReward implements Msg {
   constructor(
     public delegator_address: AccAddress,
     public validator_address: ValAddress
-  ) {}
-  
+  ) {
+    super();
+  }
+
   /**
    * @see Amino.reviver
    */

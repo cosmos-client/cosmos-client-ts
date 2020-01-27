@@ -6,7 +6,7 @@ import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
 import { PubKey } from "../../../types/tendermint/pub-key";
 import { Coin } from "../../../types/cosmos-sdk/coin";
 
-export class MsgCreateValidator implements Msg {
+export class MsgCreateValidator extends Msg {
   /**
    * @param description
    * @param commission
@@ -24,7 +24,9 @@ export class MsgCreateValidator implements Msg {
     public validator_address: ValAddress,
     public publey: PubKey,
     public value: Coin
-  ) {}
+  ) {
+    super();
+  }
   /**
    * @see Amino.reviver
    * @param value

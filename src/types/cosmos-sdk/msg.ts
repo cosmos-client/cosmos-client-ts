@@ -1,2 +1,1 @@
-export interface Msg {
-}
+export class Msg {}

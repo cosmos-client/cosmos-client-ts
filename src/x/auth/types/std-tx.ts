@@ -1,13 +1,14 @@
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { StdFee } from "./std-fee";
 import { StdSignature } from "./std-signature";
-import { Amino, AminoWrapping } from "../../../common";
+import { AminoWrapping } from "../../../common";
 import { StdSignMsg } from "./std-sign-msg";
+import { Tx } from "../../../types/cosmos-sdk/tx";
 
 /**
  *
  */
-export class StdTx {
+export class StdTx extends Tx {
   /**
    *
    * @param msg
@@ -20,7 +21,9 @@ export class StdTx {
     public fee: StdFee,
     public signatures: StdSignature[],
     public memo: string
-  ) {}
+  ) {
+    super();
+  }
 
   getSignBytes(chainID: string, accountNumber: number, sequence: number) {
     const stdSignMsg: StdSignMsg = {
