@@ -2,53 +2,58 @@
  *
  */
 export namespace Amino {
-  const constructors: { [key: string]: any } = {};
-
-  /**
-   *
-   * @param type
-   */
-  export function RegisterConcrete(type: string, target: Function) {
-    constructors[type] = target;
-
-    target.prototype.__toJSON = target.prototype.toJSON;
-    target.prototype.toJSON = function(key: string) {
-      const value = this.__toJSON ? this.__toJSON() : this;
-      if (key === "value") {
-        return value;
-      }
-      return {
-        type: type,
-        value: value
-      };
-    };
-  }
-
-  /**
-   *
-   * @param key
-   * @param value
-   */
-  export const reviver = (key: string, value: any) => {
-    // 最後に空keyで呼ばれ、最終仕上げをできるようになっている
-    if (key === "") {
-      if (!value.type || !constructors[value.type]) {
-        return value;
-      }
-
-      if (constructors[value.type].fromJSON) {
-        return constructors[value.type].fromJSON(value.value);
-      }
-
-      const obj = new constructors[value.type]();
-      for (let k in value.value) {
-        obj[k] = value.value[k];
-      }
-      return obj;
-    }
-
-    return value;
+  export const codec = {
+    to: new Map<Function, string>(),
+    fromJSON: {} as { [type: string]: (value: any) => any }
   };
 
-  export type Concrete<T> = T | { type: string; value: any };
+  export function toJSONString(value: any) {
+    return JSON.stringify(value, (key, value) => {
+      const type = codec.to.get(value.constructor);
+      if (type) {
+        return {
+          type,
+          value: {
+            ...value
+          }
+        };
+      }
+      return value;
+    });
+  }
+
+  export function fromJSONString(json: string) {
+    return JSON.parse(json, (key, value) => {
+      const _type: string | undefined = value.type;
+      const _value = value.value;
+      if (_type && codec.fromJSON[_type]) {
+        return codec.fromJSON[_type](_value);
+      }
+
+      if (_type && _value && Object.keys(value).length == 2) {
+        return new AminoWrapping(_type, _value);
+      }
+
+      return value;
+    });
+  }
+
+  export function RegisterCodec<T>(
+    type: string,
+    constructor: Function,
+    fromJSON: (value: any) => T
+  ) {
+    codec.to.set(constructor, type);
+    codec.fromJSON[type] = fromJSON;
+  }
+}
+
+export class AminoWrapping {
+  type: string;
+  value: any;
+
+  constructor(type: string, value: any) {
+    this.type = type;
+    this.value = value;
+  }
 }

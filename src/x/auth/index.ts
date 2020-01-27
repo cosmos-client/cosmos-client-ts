@@ -10,8 +10,8 @@ import { Amino } from "../../common/amino";
 
 export * from "./types";
 
-Amino.RegisterConcrete('cosmos-sdk/Account', BaseAccount);
-Amino.RegisterConcrete('cosmos-sdk/StdTx', StdTx);
+Amino.RegisterCodec('cosmos-sdk/Account', BaseAccount, BaseAccount.fromJSON);
+Amino.RegisterCodec('cosmos-sdk/StdTx', StdTx, StdTx.fromJSON);
 
 /**
  *

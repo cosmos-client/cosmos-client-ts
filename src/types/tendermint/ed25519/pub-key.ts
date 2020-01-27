@@ -16,7 +16,7 @@ export class PubKeyEd25519 implements PubKey {
   }
 
   /**
-   * 
+   *
    * @param message
    * @param signature
    */
@@ -51,5 +51,9 @@ export class PubKeyEd25519 implements PubKey {
   static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
     return new this(buffer);
+  }
+
+  static fromJSON(value: any) {
+    return this.fromBase64(value);
   }
 }

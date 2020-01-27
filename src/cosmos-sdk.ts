@@ -10,7 +10,7 @@ export class CosmosSDK {
    * @param url
    * @param chainID
    */
-  constructor(public url: string, public chainID: string) { }
+  constructor(public url: string, public chainID: string) {}
 
   /**
    * Handle request
@@ -24,6 +24,15 @@ export class CosmosSDK {
     method: "GET" | "POST" | "PUT" | "DELETE"
   ): Promise<T> {
     return new Promise((resolve, reject) => {
+      const callback: request.RequestCallback = (error, response, body) => {
+        if (error) {
+          reject(JSON.parse(body) as ErrorResponse);
+          return;
+        }
+
+        resolve(Amino.fromJSONString(body));
+      };
+
       if (method === "GET") {
         request.get(
           {
@@ -32,14 +41,7 @@ export class CosmosSDK {
             json: false,
             qs: params
           },
-          (error, _, body) => {
-            if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-              return;
-            }
-
-            resolve(JSON.parse(body, Amino.reviver) as T);
-          }
+          callback
         );
       } else {
         const options = {
@@ -50,34 +52,12 @@ export class CosmosSDK {
         };
 
         if (method === "PUT") {
-          request.put(options, (error, _, body) => {
-            if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-              return;
-            }
-
-            resolve(JSON.parse(body, Amino.reviver) as T);
-          });
+          request.put(options, callback);
         } else if (method === "POST") {
-          request.post(options, (error, _, body) => {
-            if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-              return;
-            }
-
-            resolve(JSON.parse(body, Amino.reviver) as T);
-          });
+          request.post(options, callback);
         } else if (method === "DELETE") {
-          request.delete(options, (error, _, body) => {
-            if (error) {
-              reject(JSON.parse(body, Amino.reviver) as ErrorResponse);
-              return;
-            }
-
-            resolve(JSON.parse(body, Amino.reviver) as T);
-          });
+          request.delete(options, callback);
         }
-        return;
       }
     });
   }
@@ -86,7 +66,7 @@ export class CosmosSDK {
    *
    * @param path
    * @param params
-   * @returns Promise resolve: T, reject: ErrorResponse
+   * @returns
    * @see ErrorResponse
    */
   public get<T>(path: string, params?: any): Promise<T> {
@@ -97,7 +77,7 @@ export class CosmosSDK {
    *
    * @param path
    * @param params
-   * @returns Promise resolve: T, reject: ErrorResponse
+   * @returns
    * @see ErrorResponse
    */
   public post<T>(path: string, params: any): Promise<T> {

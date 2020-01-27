@@ -27,17 +27,17 @@ export class MsgCreateValidator implements Msg {
   ) {}
   /**
    * @see Amino.reviver
-   * @param obj
+   * @param value
    */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      obj.description,
-      obj.commission,
-      obj.min_self_delegation,
-      AccAddress.fromBech32(obj.delegator_address),
-      ValAddress.fromBech32(obj.validator_address),
-      obj.pubkey,
-      obj.value
+      value.description,
+      value.commission,
+      value.min_self_delegation,
+      AccAddress.fromBech32(value.delegator_address),
+      ValAddress.fromBech32(value.validator_address),
+      value.pubkey,
+      value.value
     );
   }
 }

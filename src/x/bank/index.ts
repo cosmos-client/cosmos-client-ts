@@ -10,8 +10,8 @@ export * from "./types";
 
 // Register Codec
 import { StdTx } from "../auth";
-Amino.RegisterConcrete("cosmos-sdk/MsgSend", MsgSend);
-Amino.RegisterConcrete("cosmos-sdk/MsgMultiSend", MsgMultiSend);
+Amino.RegisterCodec("cosmos-sdk/MsgSend", MsgSend, MsgSend.fromJSON);
+Amino.RegisterCodec("cosmos-sdk/MsgMultiSend", MsgMultiSend, MsgMultiSend.fromJSON);
 
 /**
  * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。

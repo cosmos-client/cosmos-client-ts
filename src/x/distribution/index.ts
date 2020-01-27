@@ -15,9 +15,21 @@ export * from "./types";
 
 // Register Codec
 import { StdTx } from "../auth";
-Amino.RegisterConcrete('cosmos-sdk/CommunityPoolSpendProposal', CommunityPoolSpendProposal);
-Amino.RegisterConcrete('cosmos-sdk/MsgModifyWithdrawAddress', MsgSetWithdrawAddress);
-Amino.RegisterConcrete('cosmos-sdk/MsgWithdrawValidatorCommission', MsgWithdrawValidatorCommission);
+Amino.RegisterCodec(
+  "cosmos-sdk/CommunityPoolSpendProposal",
+  CommunityPoolSpendProposal,
+  CommunityPoolSpendProposal.fromJSON
+);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgModifyWithdrawAddress",
+  MsgSetWithdrawAddress,
+  MsgSetWithdrawAddress.fromJSON
+);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgWithdrawValidatorCommission",
+  MsgWithdrawValidatorCommission,
+  MsgWithdrawValidatorCommission.fromJSON
+);
 
 export namespace Distribution {
   /**

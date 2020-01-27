@@ -1,7 +1,7 @@
 import { Msg } from "../../../types/cosmos-sdk/msg";
 import { StdFee } from "./std-fee";
 import { StdSignature } from "./std-signature";
-import { Amino } from "../../../common";
+import { Amino, AminoWrapping } from "../../../common";
 import { StdSignMsg } from "./std-sign-msg";
 
 /**
@@ -16,7 +16,7 @@ export class StdTx {
    * @param memo
    */
   constructor(
-    public msg: Amino.Concrete<Msg>[],
+    public msg: (Msg | AminoWrapping)[],
     public fee: StdFee,
     public signatures: StdSignature[],
     public memo: string
@@ -43,5 +43,9 @@ export class StdTx {
     );
 
     return new Buffer(sortedJSON);
+  }
+
+  static fromJSON(value: any) {
+    return new this(value.msg, value.fee, value.signatures, value.memo);
   }
 }

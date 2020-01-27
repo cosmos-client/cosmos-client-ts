@@ -20,14 +20,14 @@ export class MsgBeginRedelegate implements Msg {
 
   /**
    * @see Amino.reviver
-   * @param obj 
+   * @param value 
    */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      AccAddress.fromBech32(obj.delegator_address),
-      ValAddress.fromBech32(obj.validator_src_address),
-      ValAddress.fromBech32(obj.validator_dst_address),
-      obj.amount
+      AccAddress.fromBech32(value.delegator_address),
+      ValAddress.fromBech32(value.validator_src_address),
+      ValAddress.fromBech32(value.validator_dst_address),
+      value.amount
     );
   }
 }

@@ -27,11 +27,31 @@ export * from "./types";
 
 // Register Codec
 import { StdTx } from "../auth";
-Amino.RegisterConcrete("cosmos-sdk/MsgBeginRedelegate", MsgBeginRedelegate);
-Amino.RegisterConcrete("cosmos-sdk/MsgCreateValidator", MsgCreateValidator);
-Amino.RegisterConcrete("cosmos-sdk/MsgDelegate", MsgDelegate);
-Amino.RegisterConcrete("cosmos-sdk/MsgEditValidator", MsgEditValidator);
-Amino.RegisterConcrete("cosmos-sdk/MsgUndelegate", MsgUndelegate);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgBeginRedelegate",
+  MsgBeginRedelegate,
+  MsgBeginRedelegate.fromJSON
+);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgCreateValidator",
+  MsgCreateValidator,
+  MsgCreateValidator.fromJSON
+);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgDelegate",
+  MsgDelegate,
+  MsgDelegate.fromJSON
+);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgEditValidator",
+  MsgEditValidator,
+  MsgEditValidator.fromJSON
+);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgUndelegate",
+  MsgUndelegate,
+  MsgUndelegate.fromJSON
+);
 
 /**
  *

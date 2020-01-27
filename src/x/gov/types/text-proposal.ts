@@ -13,4 +13,18 @@ export class TextProposal {
     public total_deposit: Coin,
     public voting_start_time: string
   ) {}
+
+  static fromJSON(value: any) {
+    return new this(
+      value.proposal_id,
+      value.title,
+      value.description,
+      value.proposal_type,
+      value.proposal_status,
+      value.final_tally_result,
+      value.submit_time,
+      value.total_deposit,
+      value.voting_start_time
+    );
+  }
 }

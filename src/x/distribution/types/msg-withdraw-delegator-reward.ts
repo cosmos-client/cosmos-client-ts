@@ -16,10 +16,10 @@ export class MsgWithdrawDelegatorReward implements Msg {
   /**
    * @see Amino.reviver
    */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      AccAddress.fromBech32(obj.delegator_address),
-      ValAddress.fromBech32(obj.validator_address)
+      AccAddress.fromBech32(value.delegator_address),
+      ValAddress.fromBech32(value.validator_address)
     );
   }
 }

@@ -26,15 +26,15 @@ export class BaseAccount {
 
   /**
    * @see Amino.reviver
-   * @param obj 
+   * @param value 
    */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      AccAddress.fromBech32(obj.address),
-      obj.coins,
-      obj.public_key,
-      obj.account_number,
-      obj.sequence
+      AccAddress.fromBech32(value.address),
+      value.coins,
+      value.public_key,
+      value.account_number,
+      value.sequence
     );
   }
 }

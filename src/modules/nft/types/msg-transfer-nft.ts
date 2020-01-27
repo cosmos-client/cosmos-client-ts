@@ -3,22 +3,18 @@ import { Msg } from "../../../types/cosmos-sdk/msg";
 
 export class MsgTransferNFT implements Msg {
   constructor(
-    public Sender: AccAddress,
-    public Recipient: AccAddress,
-    public Denom: string,
-    public ID: string
+    public sender: AccAddress,
+    public recipient: AccAddress,
+    public denom: string,
+    public id: string
   ) {}
 
-  /**
-   * @see Amino.reviver
-   * @param obj
-   */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      AccAddress.fromBech32(obj.Sender),
-      AccAddress.fromBech32(obj.Recipient),
-      obj.Denom,
-      obj.ID
+      AccAddress.fromBech32(value.sender),
+      AccAddress.fromBech32(value.recipient),
+      value.denom,
+      value.id
     );
   }
 }

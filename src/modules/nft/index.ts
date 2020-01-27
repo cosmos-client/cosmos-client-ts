@@ -11,7 +11,7 @@ export * from "./types";
 
 // Register Concrete
 import { StdTx } from "../../x/auth";
-Amino.RegisterConcrete('cosmos-sdk/MsgTransferNFT', MsgTransferNFT);
+Amino.RegisterCodec('cosmos-sdk/MsgTransferNFT', MsgTransferNFT, MsgTransferNFT.fromJSON);
 
 export namespace NFT {
   export function getSupply(sdk: CosmosSDK, denom: string) {

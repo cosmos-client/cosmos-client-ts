@@ -16,13 +16,13 @@ export class MsgDeposit implements Msg {
 
     /**
     * @see amino.reviver
-    * @param obj
+    * @param value
     */
-    public static fromJSON(obj: any) {
+    public static fromJSON(value: any) {
         return new this(
-            obj.proposal_id,
-            AccAddress.fromBech32(obj.depositer),
-            obj.amount
+            value.proposal_id,
+            AccAddress.fromBech32(value.depositer),
+            value.amount
         );
     }
 }

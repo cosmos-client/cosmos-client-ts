@@ -17,13 +17,13 @@ export class MsgSubmitProposal implements Msg {
 
     /**
     * @see Amino.reviver
-    * @param obj
+    * @param value
     */
-    public static fromJSON(obj: any) {
+    public static fromJSON(value: any) {
         return new this(
-            obj.content,
-            obj.initial_deposit,
-            AccAddress.fromBech32(obj.proposer)
+            value.content,
+            value.initial_deposit,
+            AccAddress.fromBech32(value.proposer)
         );
     }
 }

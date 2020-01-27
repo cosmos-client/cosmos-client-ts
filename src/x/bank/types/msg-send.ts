@@ -21,13 +21,13 @@ export class MsgSend implements Msg {
 
   /**
    * @see Amino.reviver
-   * @param obj 
+   * @param value 
    */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      AccAddress.fromBech32(obj.from_address),
-      AccAddress.fromBech32(obj.to_address),
-      obj.amount
+      AccAddress.fromBech32(value.from_address),
+      AccAddress.fromBech32(value.to_address),
+      value.amount
     )
   }
 }

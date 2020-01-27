@@ -13,11 +13,7 @@ export class MsgBurnNFT implements Msg {
     public denom: string
   ) {}
 
-  /**
-   * @see Amino.reviver
-   * @param obj
-   */
-  public static fromJSON(obj: any) {
-    return new this(AccAddress.fromBech32(obj.sender), obj.id, obj.denom);
+  public static fromJSON(value: any) {
+    return new this(AccAddress.fromBech32(value.sender), value.id, value.denom);
   }
 }

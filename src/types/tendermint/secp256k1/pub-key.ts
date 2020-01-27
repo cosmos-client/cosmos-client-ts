@@ -57,5 +57,9 @@ export class PubKeySecp256k1 implements PubKey {
     const buffer = new Buffer(value, 'base64');
     return new this(buffer);
   }
+
+  static fromJSON(value: any) {
+    return this.fromBase64(value);
+  }
 }
 

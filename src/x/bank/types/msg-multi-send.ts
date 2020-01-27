@@ -25,4 +25,11 @@ export class MsgMultiSend {
   ) {
     
   }
+
+  static fromJSON(value: any) {
+    return new this(
+      value.inputs,
+      value.outputs
+    )
+  }
 }

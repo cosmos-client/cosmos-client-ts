@@ -19,14 +19,14 @@ export class MsgEditValidator implements Msg {
   
   /**
    * @see Amino.reviver
-   * @param obj
+   * @param value
    */
-  public static fromJSON(obj: any) {
+  public static fromJSON(value: any) {
     return new this(
-      obj.description,
-      ValAddress.fromBech32(obj.validator_address),
-      obj.commission_rate,
-      obj.min_self_delegation
+      value.description,
+      ValAddress.fromBech32(value.validator_address),
+      value.commission_rate,
+      value.min_self_delegation
     );
   }
 }

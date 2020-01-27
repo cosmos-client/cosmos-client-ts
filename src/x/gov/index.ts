@@ -15,14 +15,15 @@ import { StdTx } from "../auth";
 
 export * from "./types";
 
-Amino.RegisterConcrete("cosmos-sdk/MsgDeposit", MsgDeposit);
-Amino.RegisterConcrete("cosmos-sdk/MsgSubmitProposal", MsgSubmitProposal);
-Amino.RegisterConcrete("cosmos-sdk/MsgVote", MsgVote);
-Amino.RegisterConcrete(
+Amino.RegisterCodec("cosmos-sdk/MsgDeposit", MsgDeposit, MsgDeposit.fromJSON);
+Amino.RegisterCodec("cosmos-sdk/MsgSubmitProposal", MsgSubmitProposal, MsgSubmitProposal.fromJSON);
+Amino.RegisterCodec("cosmos-sdk/MsgVote", MsgVote, MsgVote.fromJSON);
+Amino.RegisterCodec(
   "cosmos-sdk/SoftwareUpgradeProposal",
-  SoftwareUpgradeProposal
+  SoftwareUpgradeProposal,
+  SoftwareUpgradeProposal.fromJSON
 );
-Amino.RegisterConcrete("cosmos-sdk/TextProposal", TextProposal);
+Amino.RegisterCodec("cosmos-sdk/TextProposal", TextProposal, TextProposal.fromJSON);
 
 export namespace Gov {
   /**

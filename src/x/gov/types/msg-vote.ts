@@ -16,13 +16,13 @@ export class MsgVote implements Msg {
 
     /**
     * @see Amino.reviver
-    * @param obj
+    * @param value
     */
-    public static fromJSON(obj: any) {
+    public static fromJSON(value: any) {
         return new this(
-            obj.proposal_id,
-            AccAddress.fromBech32(obj.voter),
-            obj.option
+            value.proposal_id,
+            AccAddress.fromBech32(value.voter),
+            value.option
         );
     }
 }

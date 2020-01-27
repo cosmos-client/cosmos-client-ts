@@ -10,7 +10,7 @@ export class MsgUnjail implements Msg {
   /**
    * @see Amino.reviver
    */
-  public static fromJSON(obj: any) {
-    return new this(ValAddress.fromBech32(obj.address));
+  public static fromJSON(value: any) {
+    return new this(ValAddress.fromBech32(value.address));
   }
 }

@@ -69,4 +69,8 @@ export class PrivKeySecp256k1 implements PrivKey {
     const buffer = new Buffer(value, "base64");
     return new this(buffer);
   }
+
+  static fromJSON(value: any) {
+    return this.fromBase64(value);
+  }
 }

@@ -11,7 +11,7 @@ export * from "./types";
 
 // Register Codec
 import { StdTx } from "../auth";
-Amino.RegisterConcrete('cosmos-sdk/MsgUnjail', MsgUnjail);
+Amino.RegisterCodec('cosmos-sdk/MsgUnjail', MsgUnjail, MsgUnjail.fromJSON);
 
 export namespace Slashing {
   export function postUnjail(

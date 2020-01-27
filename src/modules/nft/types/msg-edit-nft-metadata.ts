@@ -6,24 +6,21 @@ export class MsgEditNFTMetadata implements Msg {
    * @param sender
    * @param id
    * @param denom
-   * @param tokenURI
+   * @param token_rui
    */
   constructor(
     public sender: AccAddress,
     public id: string,
     public denom: string,
-    public tokenURI: string
+    public token_uri: string
   ) {}
-  /**
-   * @see Amino.reviver
-   * @param obj
-   */
-  public static fromJSON(obj: any) {
+
+  public static fromJSON(value: any) {
     return new this(
-      AccAddress.fromBech32(obj.sender),
-      obj.id,
-      obj.denom,
-      obj.tokenURI
+      AccAddress.fromBech32(value.sender),
+      value.id,
+      value.denom,
+      value.token_uri
     );
   }
 }
