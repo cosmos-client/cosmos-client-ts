@@ -1,7 +1,7 @@
-import { BaseReq } from "../../../types/cosmos-sdk/rest";
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
-import { Coin } from "../../../types/cosmos-sdk/coin";
+import { BaseReq } from "../../../types/rest";
+import { AccAddress } from "../../../types/address/acc-address";
+import { ValAddress } from "../../../types/address/val-address";
+import { Coin } from "../../../types/coin";
 
 export interface UndelegateRequest {
   base_req: BaseReq;

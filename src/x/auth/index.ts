@@ -1,15 +1,16 @@
+import { CosmosSDK } from "../../cosmos-sdk";
+import { TxResponse, SearchTxsResult, AccAddress } from "../../types";
+import { Amino } from "../../codec";
+import { PrivKey } from "../../tendermint";
 import { BroadcastReq } from "./types/broadcast-req";
 import { BaseAccount } from "./types/account";
-import { CosmosSDK } from "../../cosmos-sdk";
-import { TxResponse, SearchTxsResult } from "../../types/cosmos-sdk/result";
 import { StdTx } from "./types/std-tx";
 import { EncodeResp } from "./types/encode-resp";
-import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { PrivKey } from "../../types/tendermint/priv-key";
-import { Amino } from "../../common/amino";
 
 export * from "./types";
 
+// Register Codec
+import "../../tendermint";
 Amino.RegisterCodec('cosmos-sdk/Account', BaseAccount, BaseAccount.fromJSON);
 Amino.RegisterCodec('cosmos-sdk/StdTx', StdTx, StdTx.fromJSON);
 

@@ -1,4 +1,4 @@
-import { DecCoin } from "../../../types/cosmos-sdk/deccoin";
+import { DecCoin } from "../../../types/deccoin";
 
 export interface ValidatorAccumulatedCommission {
   ValidatorAccumulatedCommission: DecCoin;

@@ -1,5 +1,5 @@
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
+import { AccAddress } from "../../../types/address/acc-address";
+import { ValAddress } from "../../../types/address/val-address";
 
 export interface QueryBondsParams {
   delegator_address: AccAddress;

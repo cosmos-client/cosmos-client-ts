@@ -1,4 +1,4 @@
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
+import { AccAddress } from "../../../types/address/acc-address";
 
 export interface Deposit {
   proposal_id: Int32Array;

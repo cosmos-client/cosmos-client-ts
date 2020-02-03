@@ -1,10 +1,10 @@
-import { Msg } from "../../../types/cosmos-sdk/msg";
+import { Msg } from "../../../types/msg";
 import { description } from "./description";
 import { CommissionRates } from "./commission-rates";
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
-import { PubKey } from "../../../types/tendermint/pub-key";
-import { Coin } from "../../../types/cosmos-sdk/coin";
+import { AccAddress } from "../../../types/address/acc-address";
+import { ValAddress } from "../../../types/address/val-address";
+import { Coin } from "../../../types/coin";
+import { PubKey } from "../../../tendermint";
 
 export class MsgCreateValidator extends Msg {
   /**
@@ -22,7 +22,7 @@ export class MsgCreateValidator extends Msg {
     public min_self_delegation: number,
     public delegator_address: AccAddress,
     public validator_address: ValAddress,
-    public publey: PubKey,
+    public pubkey: PubKey,
     public value: Coin
   ) {
     super();

@@ -1,4 +1,4 @@
-import { PubKey } from "../../../types/tendermint/pub-key";
+import { PubKey } from "../../../tendermint";
 
 export interface StdSignature {
   pub_key: PubKey;

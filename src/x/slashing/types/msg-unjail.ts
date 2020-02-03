@@ -1,5 +1,5 @@
-import { Msg } from "../../../types/cosmos-sdk/msg";
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
+import { Msg } from "../../../types/msg";
+import { ValAddress } from "../../../types/address/val-address";
 
 export class MsgUnjail extends Msg {
   /**

@@ -1,7 +1,7 @@
-import { Msg } from "../../../types/cosmos-sdk/msg";
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
+import { Msg } from "../../../types/msg";
+import { AccAddress } from "../../../types/address/acc-address";
 import { Content } from "./content";
-import { Coin } from "../../../types/cosmos-sdk/coin";
+import { Coin } from "../../../types/coin";
 
 export class MsgSubmitProposal extends Msg {
   /**

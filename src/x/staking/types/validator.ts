@@ -1,4 +1,4 @@
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
+import { ValAddress } from "../../../types/address/val-address";
 import { description } from "./description";
 import { Commission } from "./commition";
 

@@ -1,5 +1,5 @@
 import { StdFee } from "./std-fee";
-import { Msg } from "../../../types/cosmos-sdk/msg";
+import { Msg } from "../../../types/msg";
 
 export interface StdSignMsg {
   chain_id: string;

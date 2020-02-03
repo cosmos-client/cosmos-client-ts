@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { SupplyQuery } from "./types/supply-query";
+import { SupplyQuery } from "./types";
 
 export * from "./types";
 

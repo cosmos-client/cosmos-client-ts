@@ -1,6 +1,6 @@
-import { Msg } from "../../../types/cosmos-sdk/msg";
+import { Msg } from "../../../types/msg";
 import { description } from "./description";
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
+import { ValAddress } from "../../../types/address/val-address";
 import { CommissionRates } from "./commission-rates";
 
 export class MsgEditValidator extends Msg {

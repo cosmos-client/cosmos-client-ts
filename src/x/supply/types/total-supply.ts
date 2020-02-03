@@ -1,4 +1,4 @@
-import { Coin } from "../../../types/cosmos-sdk/coin";
+import { Coin } from "../../../types/coin";
 
 export interface GetSupply {
   total_supply: Coin[];

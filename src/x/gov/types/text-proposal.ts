@@ -1,4 +1,4 @@
-import { Coin } from "../../../types/cosmos-sdk/coin";
+import { Coin } from "../../../types/coin";
 import { TallyResult } from "./tally-result";
 
 export class TextProposal {

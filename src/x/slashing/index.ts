@@ -1,17 +1,14 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Amino } from "../../common/amino";
-import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { SigningInfo } from "./types/signing-info";
-import { SignParameter } from "./types/sign-parameter";
-import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
-import { BaseReq } from "../../types/cosmos-sdk/rest";
-import { MsgUnjail } from "./types/msg-unjail";
+import { Amino } from "../../codec";
+import { AccAddress, ValAddress, BaseReq } from "../../types";
+import { SigningInfo, SignParameter, MsgUnjail } from "./types";
+import { StdTx } from "../auth";
 
 export * from "./types";
 
 // Register Codec
-import { StdTx } from "../auth";
-Amino.RegisterCodec('cosmos-sdk/MsgUnjail', MsgUnjail, MsgUnjail.fromJSON);
+import "../auth";
+Amino.RegisterCodec("cosmos-sdk/MsgUnjail", MsgUnjail, MsgUnjail.fromJSON);
 
 export namespace Slashing {
   export function postUnjail(
@@ -39,4 +36,3 @@ export namespace Slashing {
     return sdk.get<SigningInfo>("/slashing/parameters");
   }
 }
-

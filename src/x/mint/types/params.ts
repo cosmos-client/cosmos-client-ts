@@ -1,4 +1,4 @@
-import { Dec } from "../../../types/cosmos-sdk/decimal";
+import { Dec } from "../../../types/decimal";
 
 export interface Params {
   mint_denom: string;

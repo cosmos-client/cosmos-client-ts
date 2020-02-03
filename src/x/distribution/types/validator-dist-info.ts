@@ -1,5 +1,5 @@
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { DecCoin } from "../../../types/cosmos-sdk/deccoin";
+import { AccAddress } from "../../../types/address/acc-address";
+import { DecCoin } from "../../../types/deccoin";
 import { ValidatorAccumulatedCommission } from "./validator-accumulated-commission";
 
 export interface ValidatorDistInfo {

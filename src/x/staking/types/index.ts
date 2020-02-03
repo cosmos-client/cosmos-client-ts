@@ -18,6 +18,6 @@ export * from "./redelegate-request";
 export * from "./redelegation";
 export * from "./txs-query-params";
 export * from "./txs";
-export * from "./unbounding-delegation";
+export * from "./unbonding-delegation";
 export * from "./undelegate-request";
 export * from "./validator";

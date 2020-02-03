@@ -1,17 +1,19 @@
+import { StdTx } from "../auth";
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Amino } from "../../common/amino";
-import { SendReq } from "./types/send-req";
-import { Coin } from "../../types/cosmos-sdk/coin";
-import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { MsgSend } from "./types/msg-send";
-import { MsgMultiSend } from "./types/msg-multi-send";
+import { Amino } from "../../codec";
+import { Coin, AccAddress } from "../../types";
+import { MsgSend, MsgMultiSend, SendReq } from "./types";
 
 export * from "./types";
 
 // Register Codec
-import { StdTx } from "../auth";
+import "../auth";
 Amino.RegisterCodec("cosmos-sdk/MsgSend", MsgSend, MsgSend.fromJSON);
-Amino.RegisterCodec("cosmos-sdk/MsgMultiSend", MsgMultiSend, MsgMultiSend.fromJSON);
+Amino.RegisterCodec(
+  "cosmos-sdk/MsgMultiSend",
+  MsgMultiSend,
+  MsgMultiSend.fromJSON
+);
 
 /**
  * Cosmos SDKにおけるx/bankのRest APIをまとめたモジュール。

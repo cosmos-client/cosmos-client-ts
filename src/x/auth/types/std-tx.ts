@@ -1,9 +1,9 @@
-import { Msg } from "../../../types/cosmos-sdk/msg";
+import { Msg } from "../../../types/msg";
 import { StdFee } from "./std-fee";
 import { StdSignature } from "./std-signature";
-import { AminoWrapping } from "../../../common";
 import { StdSignMsg } from "./std-sign-msg";
-import { Tx } from "../../../types/cosmos-sdk/tx";
+import { Tx } from "../../../types/tx";
+import { AminoWrapping } from "../../../codec";
 
 /**
  *

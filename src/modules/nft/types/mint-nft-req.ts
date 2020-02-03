@@ -1,5 +1,5 @@
-import { BaseReq } from "../../../types/cosmos-sdk/rest";
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
+import { BaseReq } from "../../../types/rest";
+import { AccAddress } from "../../../types/address/acc-address";
 
 export interface MintNFTReq {
   base_req: BaseReq;

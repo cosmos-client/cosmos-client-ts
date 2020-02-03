@@ -1,6 +1,6 @@
 import * as request from "request";
-import { Amino } from "./common/amino";
-import { ErrorResponse } from "./types/cosmos-sdk/rest";
+import { Amino } from "./codec/amino";
+import { ErrorResponse } from "./types/rest";
 
 /**
  *

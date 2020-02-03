@@ -1,6 +1,6 @@
 import { Tx } from "./tx";
 import { StringEvent } from "./events";
-import { Amino, AminoWrapping } from "../../common";
+import { Amino, AminoWrapping } from "../codec";
 
 export interface ABCIMessageLog {
   msg_index: number;

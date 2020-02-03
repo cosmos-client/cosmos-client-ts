@@ -1,7 +1,7 @@
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
-import { ValAddress } from "../../../types/cosmos-sdk/address/val-address";
-import { Coin } from "../../../types/cosmos-sdk/coin";
-import { Msg } from "../../../types/cosmos-sdk/msg";
+import { AccAddress } from "../../../types/address/acc-address";
+import { ValAddress } from "../../../types/address/val-address";
+import { Coin } from "../../../types/coin";
+import { Msg } from "../../../types/msg";
 
 export class MsgUndelegate extends Msg {
   /**

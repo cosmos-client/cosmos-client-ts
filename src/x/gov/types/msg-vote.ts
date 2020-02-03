@@ -1,5 +1,5 @@
-import { Msg } from "../../../types/cosmos-sdk/msg";
-import { AccAddress } from "../../../types/cosmos-sdk/address/acc-address";
+import { Msg } from "../../../types/msg";
+import { AccAddress } from "../../../types/address/acc-address";
 import { VoteOption } from "./vote-option";
 
 export class MsgVote extends Msg {

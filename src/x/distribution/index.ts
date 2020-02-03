@@ -1,20 +1,19 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Amino } from "../../common/amino";
-import { ValidatorDistInfo } from "./types/validator-dist-info";
-import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
-import { BaseReq } from "../../types/cosmos-sdk/rest";
-import { Coin } from "../../types/cosmos-sdk/coin";
-import { Address } from "../../types/cosmos-sdk/address/address";
-import { DistributionParameter } from "./types/distribution-parameter";
-import { CommunityPoolSpendProposal } from "./types/community-pool-spend-proposal";
-import { MsgSetWithdrawAddress } from "./types/msg-set-withdraw-address";
-import { MsgWithdrawValidatorCommission } from "./types/msg-withdraw-validator-commision";
+import { Amino } from "../../codec";
+import {
+  ValidatorDistInfo,
+  DistributionParameter,
+  CommunityPoolSpendProposal,
+  MsgSetWithdrawAddress,
+  MsgWithdrawValidatorCommission
+} from "./types";
+import { Address, AccAddress, ValAddress, BaseReq, Coin } from "../../types";
+import { StdTx } from "../auth";
 
 export * from "./types";
 
 // Register Codec
-import { StdTx } from "../auth";
+import "../auth";
 Amino.RegisterCodec(
   "cosmos-sdk/CommunityPoolSpendProposal",
   CommunityPoolSpendProposal,

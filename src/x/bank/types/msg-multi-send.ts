@@ -1,5 +1,5 @@
-import { Coin } from "../../../types/cosmos-sdk/coin";
-import { Msg } from "../../../types/cosmos-sdk/msg";
+import { Coin } from "../../../types/coin";
+import { Msg } from "../../../types/msg";
 
 export interface Input {
   address: string;

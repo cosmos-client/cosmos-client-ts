@@ -1,6 +1,6 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Amino } from "../../common/amino";
-import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
+import { Amino } from "../../codec/amino";
+import { AccAddress } from "../../types/address/acc-address";
 import { TransferNFTReq } from "./types/transfer-nft-req";
 import { EditNFTMetadataReq } from "./types/edit-nft-metadata-req";
 import { MintNFTReq } from "./types/mint-nft-req";

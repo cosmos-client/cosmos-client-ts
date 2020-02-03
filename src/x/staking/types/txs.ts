@@ -1,4 +1,4 @@
-import { SearchTxsResult } from "../../../types/cosmos-sdk/result";
+import { SearchTxsResult } from "../../../types/result";
 
 export interface txs {
   txs: SearchTxsResult[];

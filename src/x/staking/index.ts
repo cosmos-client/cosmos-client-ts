@@ -1,27 +1,27 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Amino } from "../../common/amino";
-import { DelegateRequest } from "./types/delegate-request";
-import { UndelegateRequest } from "./types/undelegate-request";
-import { RedelegateRequest } from "./types/redelegate-request";
-import { AccAddress } from "../../types/cosmos-sdk/address/acc-address";
-import { ValAddress } from "../../types/cosmos-sdk/address/val-address";
-import { QueryDelegatorParams } from "./types/query-delegator-params";
-import { QueryValidatorParams } from "./types/query-validator-params";
-import { QueryBondsParams } from "./types/query-bonds-params";
-import { QueryRedelegationParams } from "./types/query-redelegation-params";
-import { TxsQueryType } from "./types/txs-query-params";
-import { Delegation } from "./types/delegation";
-import { UnboundingDelegation } from "./types/unbounding-delegation";
-import { Validator } from "./types/validator";
-import { Redelegation } from "./types/redelegation";
-import { Pool } from "./types/pool";
-import { Parameters } from "./types/parameters";
-import { SearchTxsResult } from "../../types/cosmos-sdk/result";
-import { MsgBeginRedelegate } from "./types/msg-begin-redelegate";
-import { MsgCreateValidator } from "./types/msg-create-validator";
-import { MsgDelegate } from "./types/msg-delegate";
-import { MsgEditValidator } from "./types/msg-edit-validator";
-import { MsgUndelegate } from "./types/msg-undelegate";
+import { Amino } from "../../codec";
+import {
+  DelegateRequest,
+  UndelegateRequest,
+  RedelegateRequest,
+  QueryDelegatorParams,
+  QueryValidatorParams,
+  QueryBondsParams,
+  QueryRedelegationParams,
+  TxsQueryType,
+  Delegation,
+  UnbondingDelegation,
+  Validator,
+  Redelegation,
+  Pool,
+  Parameters,
+  MsgBeginRedelegate,
+  MsgCreateValidator,
+  MsgDelegate,
+  MsgEditValidator,
+  MsgUndelegate
+} from "./types";
+import { AccAddress, ValAddress, SearchTxsResult } from "../../types";
 
 export * from "./types";
 
@@ -124,7 +124,7 @@ export namespace Staking {
     delegatorAddr: AccAddress,
     queryValidatorParams: QueryValidatorParams
   ) {
-    return sdk.get<UnboundingDelegation>(
+    return sdk.get<UnbondingDelegation>(
       `/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`,
       queryValidatorParams
     );
@@ -192,7 +192,7 @@ export namespace Staking {
     validatorAddr: ValAddress,
     queryBondsParams: QueryBondsParams
   ) {
-    return sdk.get<UnboundingDelegation>(
+    return sdk.get<UnbondingDelegation>(
       `/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations/${validatorAddr.toBech32()}`,
       queryBondsParams
     );
@@ -242,7 +242,7 @@ export namespace Staking {
     validatorAddr: ValAddress,
     queryValidatorParams: QueryValidatorParams
   ) {
-    return sdk.get<UnboundingDelegation>(
+    return sdk.get<UnbondingDelegation>(
       `/staking/validators/${validatorAddr.toBech32()}/unbonding_delegations`,
       queryValidatorParams
     );

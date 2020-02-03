@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { MintParameter } from "./types/mint-parameter";
+import { MintParameter } from "./types";
 
 export * from "./types";
 

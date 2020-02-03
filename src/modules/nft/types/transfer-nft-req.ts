@@ -1,4 +1,4 @@
-import { BaseReq } from "../../../types/cosmos-sdk/rest";
+import { BaseReq } from "../../../types/rest";
 
 export interface TransferNFTReq {
   base_req: BaseReq;
