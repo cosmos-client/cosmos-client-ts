@@ -1,19 +1,13 @@
-export interface Attribute {
+export type Attribute = {
   key: string;
   value?: string;
-}
-
-export const AttributeKey = {
-  action: 'action',
-  module: 'module',
-  sender: 'sender'
 };
 
-export interface StringEvent {
+export type StringEvent = {
   type?: string;
   attributes?: Attribute[];
-}
-
-export const EventType = {
-  message: 'message'
 };
+
+export type EventType = "message";
+
+export type AttributeKey = "action" | "module" | "sender" | "amount";

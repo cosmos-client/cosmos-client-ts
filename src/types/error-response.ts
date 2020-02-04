@@ -1,6 +1,4 @@
-import { CodeType } from "./errors";
-
-export interface ErrorResponse {
-  code: CodeType;
+export type ErrorResponse = {
+  code?: number;
   error: string;
-}
+};

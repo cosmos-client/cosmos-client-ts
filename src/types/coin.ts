@@ -1,4 +1,4 @@
-export interface Coin {
+export type Coin = {
   denom: string;
-  amount: string;
-}
+  amount: string; // big i
+};

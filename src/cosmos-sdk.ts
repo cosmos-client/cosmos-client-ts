@@ -1,6 +1,6 @@
 import * as request from "request";
-import { Amino } from "./codec/amino";
-import { ErrorResponse } from "./types/rest";
+import { codec } from "./codec";
+import { ErrorResponse } from "./types";
 
 /**
  *
@@ -30,7 +30,7 @@ export class CosmosSDK {
           return;
         }
 
-        resolve(Amino.fromJSONString(body));
+        resolve(codec.fromJSONString(body));
       };
 
       if (method === "GET") {

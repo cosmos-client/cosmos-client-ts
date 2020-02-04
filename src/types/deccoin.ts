@@ -1,6 +1,6 @@
 import { Dec } from "./decimal";
 
-export interface DecCoin {
+export type DecCoin = {
   denom: string;
   amount: Dec;
-}
+};

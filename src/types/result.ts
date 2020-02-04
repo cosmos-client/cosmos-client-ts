@@ -1,6 +1,6 @@
 import { Tx } from "./tx";
 import { StringEvent } from "./events";
-import { Amino, AminoWrapping } from "../codec";
+import { codec } from "../codec";
 
 export interface ABCIMessageLog {
   msg_index: number;
@@ -20,7 +20,7 @@ export interface TxResponse {
   gas_used?: number;
   events?: StringEvent;
   codespace?: string;
-  tx?: Tx | AminoWrapping;
+  tx?: Tx | codec.AminoWrapping;
   timestamp?: string;
 }
 

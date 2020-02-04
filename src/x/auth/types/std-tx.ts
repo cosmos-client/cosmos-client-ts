@@ -3,7 +3,7 @@ import { StdFee } from "./std-fee";
 import { StdSignature } from "./std-signature";
 import { StdSignMsg } from "./std-sign-msg";
 import { Tx } from "../../../types/tx";
-import { AminoWrapping } from "../../../codec";
+import { codec } from "../../../codec";
 
 /**
  *
@@ -17,7 +17,7 @@ export class StdTx extends Tx {
    * @param memo
    */
   constructor(
-    public msg: (Msg | AminoWrapping)[],
+    public msg: (Msg | codec.AminoWrapping)[],
     public fee: StdFee,
     public signatures: StdSignature[],
     public memo: string
