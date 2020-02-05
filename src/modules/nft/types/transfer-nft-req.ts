@@ -1,6 +1,6 @@
 import { BaseReq } from "../../../types/rest";
 
-export interface TransferNFTReq {
+export type TransferNFTReq = {
   base_req: BaseReq;
   denom: string;
   id: string;

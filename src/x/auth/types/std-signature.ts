@@ -1,6 +1,6 @@
 import { PubKey } from "../../../tendermint";
 
-export interface StdSignature {
+export type StdSignature = {
   pub_key: PubKey;
   signature: string;
 }

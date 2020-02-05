@@ -1,6 +1,6 @@
 import { Dec } from "../../../types/decimal";
 
-export interface Params {
+export type Params = {
   mint_denom: string;
   inflation_rate_change: Dec;
   inflation_max: Dec;

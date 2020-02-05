@@ -1,4 +1,4 @@
-export interface Proposer {
+export type Proposer = {
   proposal_id: number;
   proposer: string;
 }

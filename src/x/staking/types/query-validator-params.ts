@@ -1,5 +1,5 @@
 import { ValAddress } from "../../../types/address/val-address";
 
-export interface QueryValidatorParams {
+export type QueryValidatorParams = {
   validator_address: ValAddress;
 }

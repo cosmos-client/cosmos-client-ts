@@ -1,4 +1,4 @@
-export interface SigningInfo {
+export type SigningInfo = {
   start_height: string;
   index_offset: string;
   jailed_until: string;

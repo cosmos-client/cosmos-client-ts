@@ -1,5 +1,5 @@
 import { DecCoin } from "../../../types/deccoin";
 
-export interface ValidatorAccumulatedCommission {
+export type ValidatorAccumulatedCommission = {
   ValidatorAccumulatedCommission: DecCoin;
 }

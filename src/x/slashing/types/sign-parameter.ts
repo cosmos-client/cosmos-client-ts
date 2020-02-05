@@ -1,4 +1,4 @@
-export interface SignParameter {
+export type SignParameter = {
   max_evidence_age: number;
   signed_blocks_window: number;
   min_signed_per_window: number;

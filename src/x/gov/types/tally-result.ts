@@ -1,4 +1,4 @@
-export interface TallyResult {
+export type TallyResult = {
   yes: string;
   abstain: string;
   no: string;

@@ -1,6 +1,6 @@
 import { Dec } from "../../../types/decimal";
 
-export interface Minter {
+export type Minter = {
   inflation: Dec;
   annual_provisions: Dec;
 }

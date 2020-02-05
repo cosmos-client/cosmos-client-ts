@@ -1,5 +1,5 @@
 import { Coin } from "../../../types/coin";
 
-export interface GetSupply {
+export type GetSupply = {
   total_supply: Coin[];
 }

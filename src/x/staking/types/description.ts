@@ -1,4 +1,4 @@
-export interface description {
+export type description = {
   moniker: string;
   identity: string;
   website: string;

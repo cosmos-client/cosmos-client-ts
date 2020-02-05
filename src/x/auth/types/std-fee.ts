@@ -1,6 +1,6 @@
 import { Coin } from "../../../types/coin";
 
-export interface StdFee {
+export type StdFee = {
   amount: Coin[];
   gas: string;
 }

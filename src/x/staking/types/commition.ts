@@ -1,6 +1,6 @@
 import { CommissionRates } from "./commission-rates";
 
-export interface Commission {
+export type Commission = {
   commission: CommissionRates;
   update_date: string;
 }

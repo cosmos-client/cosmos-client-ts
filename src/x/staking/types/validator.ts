@@ -2,7 +2,7 @@ import { ValAddress } from "../../../types/address/val-address";
 import { description } from "./description";
 import { Commission } from "./commition";
 
-export interface Validator {
+export type Validator = {
     operator_addr: ValAddress;
     consensus_pubkey: string;
     jailed: boolean;

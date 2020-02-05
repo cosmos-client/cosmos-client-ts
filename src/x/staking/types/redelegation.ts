@@ -1,7 +1,7 @@
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
 
-export interface Redelegation {
+export type Redelegation = {
   delegator_addr: AccAddress;
   validator_src_addr: ValAddress;
   validator_dst_addr: ValAddress;

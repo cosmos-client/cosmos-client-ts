@@ -1,16 +1,16 @@
 import { Coin } from "./coin";
 import { DecCoin } from "./deccoin";
 
-export interface ResponseWithHeight {
+export type ResponseWithHeight = {
   height: number;
   result: any;
 }
 
-export interface GasEstimateResponse {
+export type GasEstimateResponse = {
   gas_estimate: number; // u64
 }
 
-export interface BaseReq {
+export type BaseReq = {
   from: string;
   memo: string;
   chain_id: string;
@@ -23,7 +23,7 @@ export interface BaseReq {
   simulate: boolean;
 }
 
-export interface ErrorResponse {
+export type ErrorResponse = {
   code?: number;
   error: string;
 }

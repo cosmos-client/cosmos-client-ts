@@ -1,4 +1,4 @@
-export interface Pool {
+export type Pool = {
   loose_tokens: string;
   bonded_tokens: string;
   inflation_last_time: string;

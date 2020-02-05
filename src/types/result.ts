@@ -2,13 +2,13 @@ import { Tx } from "./tx";
 import { StringEvent } from "./events";
 import { codec } from "../codec";
 
-export interface ABCIMessageLog {
+export type ABCIMessageLog = {
   msg_index: number;
   success: boolean;
   log: string;
 }
 
-export interface TxResponse {
+export type TxResponse = {
   height: number;
   txhash: string;
   code?: number;
@@ -24,7 +24,7 @@ export interface TxResponse {
   timestamp?: string;
 }
 
-export interface SearchTxsResult {
+export type SearchTxsResult = {
   total_count: number;
   count: number;
   page_number: number;

@@ -1,3 +1,3 @@
-export interface EncodeResp {
+export type EncodeResp = {
   tx: string;
 }

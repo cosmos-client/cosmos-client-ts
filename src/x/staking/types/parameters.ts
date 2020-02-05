@@ -1,4 +1,4 @@
-export interface Parameters {
+export type Parameters = {
   inflation_rate_change: string;
   inflation_max: string;
   inflation_min: string;

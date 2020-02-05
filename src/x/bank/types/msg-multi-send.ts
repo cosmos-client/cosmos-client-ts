@@ -1,12 +1,12 @@
 import { Coin } from "../../../types/coin";
 import { Msg } from "../../../types/msg";
 
-export interface Input {
+export type Input = {
   address: string;
   coins: Coin[];
 }
 
-export interface Output {
+export type Output = {
   address: string;
   coins: Coin[];
 }

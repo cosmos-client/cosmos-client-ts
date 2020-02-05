@@ -1,5 +1,5 @@
 import { SearchTxsResult } from "../../../types/result";
 
-export interface txs {
+export type txs = {
   txs: SearchTxsResult[];
 }

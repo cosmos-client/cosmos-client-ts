@@ -1,4 +1,4 @@
-export interface MintParameter {
+export type MintParameter = {
   mint_denom: string;
   inflation_rate_change: string;
   inflation_max: string;
