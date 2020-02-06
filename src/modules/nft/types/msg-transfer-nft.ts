@@ -6,7 +6,7 @@ export class MsgTransferNFT implements Msg {
     public sender: AccAddress,
     public recipient: AccAddress,
     public denom: string,
-    public id: string
+    public id: string,
   ) {}
 
   public static fromJSON(value: any) {
@@ -14,7 +14,7 @@ export class MsgTransferNFT implements Msg {
       AccAddress.fromBech32(value.sender),
       AccAddress.fromBech32(value.recipient),
       value.denom,
-      value.id
+      value.id,
     );
   }
 }

@@ -9,5 +9,5 @@ export * from "./types";
 codec.registerCodec(
   "cosmos-sdk/MsgTransferNFT",
   MsgTransferNFT,
-  MsgTransferNFT.fromJSON
+  MsgTransferNFT.fromJSON,
 );

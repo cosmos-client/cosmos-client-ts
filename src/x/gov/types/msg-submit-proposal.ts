@@ -12,7 +12,7 @@ export class MsgSubmitProposal extends Msg {
   constructor(
     public content: Content,
     public initial_deposit: Coin[],
-    public proposer: AccAddress
+    public proposer: AccAddress,
   ) {
     super();
   }
@@ -25,7 +25,7 @@ export class MsgSubmitProposal extends Msg {
     return new this(
       value.content,
       value.initial_deposit,
-      AccAddress.fromBech32(value.proposer)
+      AccAddress.fromBech32(value.proposer),
     );
   }
 }

@@ -11,7 +11,7 @@ export class TextProposal {
     public final_tally_result: TallyResult,
     public submit_time: string,
     public total_deposit: Coin,
-    public voting_start_time: string
+    public voting_start_time: string,
   ) {}
 
   static fromJSON(value: any) {
@@ -24,7 +24,7 @@ export class TextProposal {
       value.final_tally_result,
       value.submit_time,
       value.total_deposit,
-      value.voting_start_time
+      value.voting_start_time,
     );
   }
 }

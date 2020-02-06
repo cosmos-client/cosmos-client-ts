@@ -12,7 +12,7 @@ export class MsgDelegate extends Msg {
   constructor(
     public delegator_address: AccAddress,
     public validator_address: ValAddress,
-    public amount: Coin
+    public amount: Coin,
   ) {
     super();
   }
@@ -25,7 +25,7 @@ export class MsgDelegate extends Msg {
     return new this(
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_address),
-      value.amount
+      value.amount,
     );
   }
 }

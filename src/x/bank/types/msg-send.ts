@@ -15,7 +15,7 @@ export class MsgSend extends Msg {
   constructor(
     public from_address: AccAddress,
     public to_address: AccAddress,
-    public amount: Coin[]
+    public amount: Coin[],
   ) {
     super();
   }
@@ -28,7 +28,7 @@ export class MsgSend extends Msg {
     return new this(
       AccAddress.fromBech32(value.from_address),
       AccAddress.fromBech32(value.to_address),
-      value.amount
+      value.amount,
     );
   }
 }

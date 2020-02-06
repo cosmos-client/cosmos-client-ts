@@ -10,7 +10,7 @@ export class MsgWithdrawDelegatorReward extends Msg {
    */
   constructor(
     public delegator_address: AccAddress,
-    public validator_address: ValAddress
+    public validator_address: ValAddress,
   ) {
     super();
   }
@@ -21,7 +21,7 @@ export class MsgWithdrawDelegatorReward extends Msg {
   public static fromJSON(value: any) {
     return new this(
       AccAddress.fromBech32(value.delegator_address),
-      ValAddress.fromBech32(value.validator_address)
+      ValAddress.fromBech32(value.validator_address),
     );
   }
 }

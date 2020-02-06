@@ -14,7 +14,7 @@ export class MsgEditValidator extends Msg {
     public descriiption: description,
     public address: ValAddress,
     public committion_rate: CommissionRates,
-    public min_self_delegation: number
+    public min_self_delegation: number,
   ) {
     super();
   }
@@ -28,7 +28,7 @@ export class MsgEditValidator extends Msg {
       value.description,
       ValAddress.fromBech32(value.validator_address),
       value.commission_rate,
-      value.min_self_delegation
+      value.min_self_delegation,
     );
   }
 }

@@ -23,7 +23,7 @@ export class MsgCreateValidator extends Msg {
     public delegator_address: AccAddress,
     public validator_address: ValAddress,
     public pubkey: PubKey,
-    public value: Coin
+    public value: Coin,
   ) {
     super();
   }
@@ -39,7 +39,7 @@ export class MsgCreateValidator extends Msg {
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_address),
       value.pubkey,
-      value.value
+      value.value,
     );
   }
 }

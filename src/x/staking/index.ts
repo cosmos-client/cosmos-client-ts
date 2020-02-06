@@ -3,7 +3,7 @@ import {
   MsgCreateValidator,
   MsgDelegate,
   MsgEditValidator,
-  MsgUndelegate
+  MsgUndelegate,
 } from "./types";
 import { codec } from "../../codec";
 import * as staking from "./module";
@@ -15,25 +15,25 @@ export * from "./types";
 codec.registerCodec(
   "cosmos-sdk/MsgBeginRedelegate",
   MsgBeginRedelegate,
-  MsgBeginRedelegate.fromJSON
+  MsgBeginRedelegate.fromJSON,
 );
 codec.registerCodec(
   "cosmos-sdk/MsgCreateValidator",
   MsgCreateValidator,
-  MsgCreateValidator.fromJSON
+  MsgCreateValidator.fromJSON,
 );
 codec.registerCodec(
   "cosmos-sdk/MsgDelegate",
   MsgDelegate,
-  MsgDelegate.fromJSON
+  MsgDelegate.fromJSON,
 );
 codec.registerCodec(
   "cosmos-sdk/MsgEditValidator",
   MsgEditValidator,
-  MsgEditValidator.fromJSON
+  MsgEditValidator.fromJSON,
 );
 codec.registerCodec(
   "cosmos-sdk/MsgUndelegate",
   MsgUndelegate,
-  MsgUndelegate.fromJSON
+  MsgUndelegate.fromJSON,
 );

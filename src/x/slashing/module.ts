@@ -6,17 +6,17 @@ import { StdTx } from "../auth";
 export function postUnjail(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
-  baseReq: BaseReq
+  baseReq: BaseReq,
 ) {
   return sdk.post<StdTx>(
     `/slashing/validators/${validatorAddr}/unjail`,
-    baseReq
+    baseReq,
   );
 }
 
 export function getParams(sdk: CosmosSDK, validatorPubKey: AccAddress) {
   return sdk.get<SigningInfo>(
-    `/slashing/validators/${validatorPubKey}/signing_info`
+    `/slashing/validators/${validatorPubKey}/signing_info`,
   );
 }
 

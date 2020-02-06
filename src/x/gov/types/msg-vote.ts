@@ -11,7 +11,7 @@ export class MsgVote extends Msg {
   constructor(
     public proposal_id: number,
     public voter: AccAddress,
-    public option: VoteOption
+    public option: VoteOption,
   ) {
     super();
   }
@@ -24,7 +24,7 @@ export class MsgVote extends Msg {
     return new this(
       value.proposal_id,
       AccAddress.fromBech32(value.voter),
-      value.option
+      value.option,
     );
   }
 }

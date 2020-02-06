@@ -2,7 +2,7 @@ import {
   PrivKeyEd25519,
   PubKeyEd25519,
   PrivKeySecp256k1,
-  PubKeySecp256k1
+  PubKeySecp256k1,
 } from "./crypto";
 import { codec } from "../codec";
 import * as tendermint from "./api";
@@ -14,20 +14,20 @@ export * from "./types";
 codec.registerCodec(
   "tendermint/PrivKeyEd25519",
   PrivKeyEd25519,
-  PrivKeyEd25519.fromJSON
+  PrivKeyEd25519.fromJSON,
 );
 codec.registerCodec(
   "tendermint/PubKeyEd25519",
   PubKeyEd25519,
-  PubKeyEd25519.fromJSON
+  PubKeyEd25519.fromJSON,
 );
 codec.registerCodec(
   "tendermint/PrivKeySecp256k1",
   PrivKeySecp256k1,
-  PrivKeySecp256k1.fromJSON
+  PrivKeySecp256k1.fromJSON,
 );
 codec.registerCodec(
   "tendermint/PubKeySecp256k1",
   PubKeySecp256k1,
-  PubKeySecp256k1.fromJSON
+  PubKeySecp256k1.fromJSON,
 );

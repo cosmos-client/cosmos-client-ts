@@ -15,7 +15,7 @@ export class MsgBeginRedelegate extends Msg {
     public delegator_address: AccAddress,
     public validator_src_address: ValAddress,
     public validator_dst_address: ValAddress,
-    public amount: Coin
+    public amount: Coin,
   ) {
     super();
   }
@@ -29,7 +29,7 @@ export class MsgBeginRedelegate extends Msg {
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_src_address),
       ValAddress.fromBech32(value.validator_dst_address),
-      value.amount
+      value.amount,
     );
   }
 }

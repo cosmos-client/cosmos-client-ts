@@ -19,7 +19,7 @@ export class BaseAccount {
     public coins: Coin[],
     public public_key: PubKey,
     public account_number: number,
-    public sequence: number
+    public sequence: number,
   ) {}
 
   /**
@@ -32,7 +32,7 @@ export class BaseAccount {
       value.coins,
       value.public_key,
       value.account_number,
-      value.sequence
+      value.sequence,
     );
   }
 }

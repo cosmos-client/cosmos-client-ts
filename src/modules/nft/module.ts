@@ -5,7 +5,7 @@ import {
   TransferNFTReq,
   EditNFTMetadataReq,
   MintNFTReq,
-  BurnNFTReq
+  BurnNFTReq,
 } from "./types";
 
 export function getSupply(sdk: CosmosSDK, denom: string) {
@@ -19,11 +19,11 @@ export function getOwner(sdk: CosmosSDK, delegatorAddr: AccAddress) {
 export function getOwnerByDenom(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  denom: string
+  denom: string,
 ) {
   return sdk.get<{}>(
     `/nft/owner/${delegatorAddr}/collection/${denom}`,
-    delegatorAddr
+    delegatorAddr,
   );
 }
 
@@ -41,18 +41,18 @@ export function getNFT(sdk: CosmosSDK, denom: string, id: string) {
 
 export function postTransferNFT(
   sdk: CosmosSDK,
-  transferNFTReq: TransferNFTReq
+  transferNFTReq: TransferNFTReq,
 ) {
   return sdk.post<StdTx>("/nfts/transfer", transferNFTReq);
 }
 
 export function postEditNFTMetadata(
   sdk: CosmosSDK,
-  editNFTMetadataReq: EditNFTMetadataReq
+  editNFTMetadataReq: EditNFTMetadataReq,
 ) {
   return sdk.post<StdTx>(
     `/nfts/collection/${editNFTMetadataReq.denom}/nft/${editNFTMetadataReq.id}/metadata`,
-    editNFTMetadataReq
+    editNFTMetadataReq,
   );
 }
 
@@ -63,6 +63,6 @@ export function postMintNFT(sdk: CosmosSDK, mintNFTReq: MintNFTReq) {
 export function putBurnNFT(sdk: CosmosSDK, burnNFTReq: BurnNFTReq) {
   return sdk.put<StdTx>(
     `/nfts/collection/${burnNFTReq.denom}/nft/${burnNFTReq.id}/burn`,
-    burnNFTReq
+    burnNFTReq,
   );
 }

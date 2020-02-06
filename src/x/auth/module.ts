@@ -18,19 +18,19 @@ export function signStdTx(
   privKey: PrivKey,
   stdTx: StdTx,
   accountNumber: number,
-  sequence: number
+  sequence: number,
 ) {
   const signBytes = stdTx.getSignBytes(sdk.chainID, accountNumber, sequence);
   const signature = {
     signature: privKey.sign(signBytes).toString("base64"),
-    pub_key: privKey.getPubKey()
+    pub_key: privKey.getPubKey(),
   };
 
   const newStdTx = new StdTx(
     stdTx.msg,
     stdTx.fee,
     stdTx.signatures,
-    stdTx.memo
+    stdTx.memo,
   );
   newStdTx.signatures.push(signature);
 
@@ -66,7 +66,7 @@ export function getTransactions(
     tags?: string[];
     page?: number;
     limit?: number;
-  }
+  },
 ) {
   return sdk.get<SearchTxsResult>(`/txs`, params);
 }

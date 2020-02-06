@@ -11,7 +11,7 @@ export class MsgDeposit extends Msg {
   constructor(
     public proposal_id: number,
     public depositor: AccAddress,
-    public amount: Coin[]
+    public amount: Coin[],
   ) {
     super();
   }
@@ -24,7 +24,7 @@ export class MsgDeposit extends Msg {
     return new this(
       value.proposal_id,
       AccAddress.fromBech32(value.depositer),
-      value.amount
+      value.amount,
     );
   }
 }

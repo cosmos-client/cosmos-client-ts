@@ -13,7 +13,7 @@ export function postProposal(sdk: CosmosSDK, baseReq: BaseReq) {
 export function postDeposit(
   sdk: CosmosSDK,
   proposalId: string,
-  baseReq: BaseReq
+  baseReq: BaseReq,
 ) {
   return sdk.post<StdTx>(`/gov/proposals/${proposalId}/deposits`, baseReq);
 }
@@ -45,7 +45,7 @@ export function getDeposits(sdk: CosmosSDK, proposalId: string) {
 export function getDeposit(
   sdk: CosmosSDK,
   proposalId: string,
-  depositer: string
+  depositer: string,
 ) {
   return sdk.get<Deposit>(`/gov/proposals/${proposalId}/deposits/${depositer}`);
 }

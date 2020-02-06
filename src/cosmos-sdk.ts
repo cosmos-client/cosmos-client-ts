@@ -21,7 +21,7 @@ export class CosmosSDK {
   private http<T>(
     path: string,
     params: any,
-    method: "GET" | "POST" | "PUT" | "DELETE"
+    method: "GET" | "POST" | "PUT" | "DELETE",
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       const callback: request.RequestCallback = (error, response, body) => {
@@ -39,16 +39,16 @@ export class CosmosSDK {
             uri: this.url + path,
             method: method,
             json: false,
-            qs: params
+            qs: params,
           },
-          callback
+          callback,
         );
       } else {
         const options = {
           uri: this.url + path,
           method: method,
           json: false,
-          body: JSON.stringify(params)
+          body: JSON.stringify(params),
         };
 
         if (method === "PUT") {

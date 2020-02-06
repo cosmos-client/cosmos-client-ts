@@ -1,7 +1,7 @@
 import {
   CommunityPoolSpendProposal,
   MsgSetWithdrawAddress,
-  MsgWithdrawValidatorCommission
+  MsgWithdrawValidatorCommission,
 } from "./types";
 import * as distribution from "./module";
 import { codec } from "../../codec";
@@ -13,15 +13,15 @@ export * from "./types";
 codec.registerCodec(
   "cosmos-sdk/CommunityPoolSpendProposal",
   CommunityPoolSpendProposal,
-  CommunityPoolSpendProposal.fromJSON
+  CommunityPoolSpendProposal.fromJSON,
 );
 codec.registerCodec(
   "cosmos-sdk/MsgModifyWithdrawAddress",
   MsgSetWithdrawAddress,
-  MsgSetWithdrawAddress.fromJSON
+  MsgSetWithdrawAddress.fromJSON,
 );
 codec.registerCodec(
   "cosmos-sdk/MsgWithdrawValidatorCommission",
   MsgWithdrawValidatorCommission,
-  MsgWithdrawValidatorCommission.fromJSON
+  MsgWithdrawValidatorCommission.fromJSON,
 );

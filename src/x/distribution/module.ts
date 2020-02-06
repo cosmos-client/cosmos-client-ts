@@ -12,11 +12,11 @@ import { StdTx } from "../auth";
 export function postWithdrawDelegatorRewards(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  baseReq: BaseReq
+  baseReq: BaseReq,
 ) {
   return sdk.post<StdTx>(
     `/distribution/delegators/${delegatorAddr}/rewards`,
-    baseReq
+    baseReq,
   );
 }
 
@@ -24,33 +24,33 @@ export function postWithdrawDelegationRewards(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
-  baseReq: BaseReq
+  baseReq: BaseReq,
 ) {
   return sdk.post<StdTx>(
     `/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`,
-    baseReq
+    baseReq,
   );
 }
 
 export function postSetDelegatorWithdrawalAddr(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  baseReq: BaseReq
+  baseReq: BaseReq,
 ) {
   return sdk.post<StdTx>(
     `/distribution/delegators/${delegatorAddr}/withdraw_address`,
-    baseReq
+    baseReq,
   );
 }
 
 export function postWithdrawValidatorRewards(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
-  baseReq: BaseReq
+  baseReq: BaseReq,
 ) {
   return sdk.post<StdTx>(
     `/distribution/validators/${validatorAddr}/rewards`,
-    baseReq
+    baseReq,
   );
 }
 
@@ -61,25 +61,25 @@ export function getDelegatorRewards(sdk: CosmosSDK, delegatorAddr: AccAddress) {
 export function getDelegationRewards(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  validatorAddr: ValAddress
+  validatorAddr: ValAddress,
 ) {
   return sdk.get<Coin>(
-    `/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`
+    `/distribution/delegators/${delegatorAddr}/rewards/${validatorAddr}`,
   );
 }
 
 export function getDelegatorWithdrawalAddr(
   sdk: CosmosSDK,
-  delegatorAddr: AccAddress
+  delegatorAddr: AccAddress,
 ) {
   return sdk.get<Address>(
-    `/distribution/delegators/${delegatorAddr}/withdraw_address`
+    `/distribution/delegators/${delegatorAddr}/withdraw_address`,
   );
 }
 
 export function getValidatorInfo(sdk: CosmosSDK, validatorAddr: ValAddress) {
   return sdk.get<ValidatorDistInfo>(
-    `/distribution/validators/${validatorAddr}`
+    `/distribution/validators/${validatorAddr}`,
   );
 }
 
@@ -93,10 +93,10 @@ export function getCommunityPool(sdk: CosmosSDK) {
 
 export function getOutstandingRewards(
   sdk: CosmosSDK,
-  validatorAddr: ValAddress
+  validatorAddr: ValAddress,
 ) {
   return sdk.get<Coin>(
-    `/distribution/validators/${validatorAddr}/outstanding_rewards`
+    `/distribution/validators/${validatorAddr}/outstanding_rewards`,
   );
 }
 

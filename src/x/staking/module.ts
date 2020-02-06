@@ -13,7 +13,7 @@ import {
   Validator,
   Redelegation,
   Pool,
-  Parameters
+  Parameters,
 } from "./types";
 import { AccAddress, ValAddress, SearchTxsResult } from "../../types";
 import { StdTx } from "../auth";
@@ -27,11 +27,11 @@ import { StdTx } from "../auth";
 export function postDelegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  delegateRequest: DelegateRequest
+  delegateRequest: DelegateRequest,
 ) {
   return sdk.post<StdTx>(
     `/staking/delegators/${delegatorAddr.toBech32()}/delegations`,
-    delegateRequest
+    delegateRequest,
   );
 }
 
@@ -44,11 +44,11 @@ export function postDelegation(
 export function postUnbondingDelegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  undelegateRequest: UndelegateRequest
+  undelegateRequest: UndelegateRequest,
 ) {
   return sdk.post<StdTx>(
     `/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`,
-    undelegateRequest
+    undelegateRequest,
   );
 }
 
@@ -61,40 +61,40 @@ export function postUnbondingDelegation(
 export function postRedelegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  redelegateRequest: RedelegateRequest
+  redelegateRequest: RedelegateRequest,
 ) {
   return sdk.post<StdTx>(
     `/staking/delegators/${delegatorAddr.toBech32()}/redelegations`,
-    redelegateRequest
+    redelegateRequest,
   );
 }
 
 export function getDelegatorDelegations(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  queryDelegatorParams: QueryDelegatorParams
+  queryDelegatorParams: QueryDelegatorParams,
 ) {
   return sdk.get<Delegation>(
     `/staking/delegators/${delegatorAddr.toBech32()}/delegations`,
-    queryDelegatorParams
+    queryDelegatorParams,
   );
 }
 
 export function getDelegatorUnbondingDelegations(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  queryValidatorParams: QueryValidatorParams
+  queryValidatorParams: QueryValidatorParams,
 ) {
   return sdk.get<UnbondingDelegation>(
     `/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations`,
-    queryValidatorParams
+    queryValidatorParams,
   );
 }
 
 export function getDelegatorTxs(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  txsQueryType: TxsQueryType
+  txsQueryType: TxsQueryType,
 ) {
   let types = "";
   if (txsQueryType.bond) {
@@ -108,18 +108,18 @@ export function getDelegatorTxs(
   }
   return sdk.get<SearchTxsResult>(
     `/staking/delegators/${delegatorAddr.toBech32()}/txs`,
-    { types }
+    { types },
   );
 }
 
 export function getDelegatorValidators(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
-  queryDelegatorParams: QueryDelegatorParams
+  queryDelegatorParams: QueryDelegatorParams,
 ) {
   return sdk.get<Validator>(
     `/staking/delegators/${delegatorAddr.toBech32()}/validators`,
-    queryDelegatorParams
+    queryDelegatorParams,
   );
 }
 
@@ -127,11 +127,11 @@ export function getDelegatorValidator(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
-  queryBondsParams: QueryBondsParams
+  queryBondsParams: QueryBondsParams,
 ) {
   return sdk.get<Validator>(
     `/staking/delegators/${delegatorAddr}/validators/${validatorAddr}`,
-    queryBondsParams
+    queryBondsParams,
   );
 }
 
@@ -139,11 +139,11 @@ export function getDelegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
-  queryBondsParams: QueryBondsParams
+  queryBondsParams: QueryBondsParams,
 ) {
   return sdk.get<Delegation>(
     `/staking/delegators/${delegatorAddr}/delegations/${validatorAddr}`,
-    queryBondsParams
+    queryBondsParams,
   );
 }
 
@@ -151,27 +151,27 @@ export function getUnbondingDelegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
-  queryBondsParams: QueryBondsParams
+  queryBondsParams: QueryBondsParams,
 ) {
   return sdk.get<UnbondingDelegation>(
     `/staking/delegators/${delegatorAddr.toBech32()}/unbonding_delegations/${validatorAddr.toBech32()}`,
-    queryBondsParams
+    queryBondsParams,
   );
 }
 
 export function getRedelegations(
   sdk: CosmosSDK,
-  queryRedelegationParams: QueryRedelegationParams
+  queryRedelegationParams: QueryRedelegationParams,
 ) {
   return sdk.get<Redelegation>(
     `/staking/redelegations`,
-    queryRedelegationParams
+    queryRedelegationParams,
   );
 }
 
 export function getValidators(
   sdk: CosmosSDK,
-  queryValidatorParams: QueryValidatorParams
+  queryValidatorParams: QueryValidatorParams,
 ) {
   return sdk.get<Validator>(`/staking/validators`, queryValidatorParams);
 }
@@ -179,33 +179,33 @@ export function getValidators(
 export function getValidator(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
-  queryValidatorParams: QueryValidatorParams
+  queryValidatorParams: QueryValidatorParams,
 ) {
   return sdk.get<Validator>(
     `/staking/validators/${validatorAddr.toBech32()}`,
-    queryValidatorParams
+    queryValidatorParams,
   );
 }
 
 export function getValidatorDelegations(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
-  queryValidatorParams: QueryValidatorParams
+  queryValidatorParams: QueryValidatorParams,
 ) {
   return sdk.get<Delegation>(
     `/staking/validators/${validatorAddr.toBech32()}/delegations`,
-    queryValidatorParams
+    queryValidatorParams,
   );
 }
 
 export function getValidatorUnbondingDelegations(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
-  queryValidatorParams: QueryValidatorParams
+  queryValidatorParams: QueryValidatorParams,
 ) {
   return sdk.get<UnbondingDelegation>(
     `/staking/validators/${validatorAddr.toBech32()}/unbonding_delegations`,
-    queryValidatorParams
+    queryValidatorParams,
   );
 }
 

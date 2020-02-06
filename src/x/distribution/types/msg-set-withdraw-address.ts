@@ -8,7 +8,7 @@ export class MsgSetWithdrawAddress extends Msg {
    */
   constructor(
     public delegator_address: AccAddress,
-    public withdraw_address: AccAddress
+    public withdraw_address: AccAddress,
   ) {
     super();
   }
@@ -19,7 +19,7 @@ export class MsgSetWithdrawAddress extends Msg {
   public static fromJSON(value: any) {
     return new this(
       AccAddress.fromBech32(value.delegator_address),
-      AccAddress.fromBech32(value.withdraw_address)
+      AccAddress.fromBech32(value.withdraw_address),
     );
   }
 }

@@ -18,7 +18,7 @@ export function getTotalSupply(sdk: CosmosSDK, supplyQuery: SupplyQuery) {
 export function getSupplyOf(
   sdk: CosmosSDK,
   denom: string,
-  supplyQuery: SupplyQuery
+  supplyQuery: SupplyQuery,
 ) {
   return sdk.get<{}>(`/supply/total/${denom}`, supplyQuery);
 }

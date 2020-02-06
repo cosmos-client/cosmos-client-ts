@@ -7,7 +7,7 @@ const prefix = {
   consensus: "cons",
   public: "pub",
   operator: "oper",
-  address: "addr"
+  address: "addr",
 };
 export const bech32Prefix = {
   accAddr: prefix.main,
@@ -15,7 +15,7 @@ export const bech32Prefix = {
   valAddr: prefix.main + prefix.validator + prefix.operator,
   valPub: prefix.main + prefix.validator + prefix.operator + prefix.public,
   consAddr: prefix.main + prefix.validator + prefix.consensus,
-  consPub: prefix.main + prefix.validator + prefix.consensus + prefix.public
+  consPub: prefix.main + prefix.validator + prefix.consensus + prefix.public,
 };
 
 /**

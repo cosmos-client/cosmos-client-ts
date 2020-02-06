@@ -12,7 +12,7 @@ export class MsgEditNFTMetadata implements Msg {
     public sender: AccAddress,
     public id: string,
     public denom: string,
-    public token_uri: string
+    public token_uri: string,
   ) {}
 
   public static fromJSON(value: any) {
@@ -20,7 +20,7 @@ export class MsgEditNFTMetadata implements Msg {
       AccAddress.fromBech32(value.sender),
       value.id,
       value.denom,
-      value.token_uri
+      value.token_uri,
     );
   }
 }

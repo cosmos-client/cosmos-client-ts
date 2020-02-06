@@ -12,11 +12,11 @@ import { SendReq } from "./types";
 export function postTransfer(
   sdk: CosmosSDK,
   address: AccAddress,
-  params: SendReq
+  params: SendReq,
 ) {
   return sdk.post<StdTx>(
     `/bank/accounts/${address.toBech32()}/transfers`,
-    params
+    params,
   );
 }
 

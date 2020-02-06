@@ -1,6 +1,6 @@
 export const codec = {
   type: new Map<Function, string>(),
-  fromJSON: {} as { [type: string]: (value: any) => any }
+  fromJSON: {} as { [type: string]: (value: any) => any },
 };
 
 export function toJSONString(value: any) {
@@ -10,8 +10,8 @@ export function toJSONString(value: any) {
       return {
         type,
         value: {
-          ...value
-        }
+          ...value,
+        },
       };
     }
     return value;
@@ -37,7 +37,7 @@ export function fromJSONString(json: string) {
 export function registerCodec<T>(
   type: string,
   constructor: Function,
-  fromJSON: (value: any) => T
+  fromJSON: (value: any) => T,
 ) {
   codec.type.set(constructor, type);
   codec.fromJSON[type] = fromJSON;

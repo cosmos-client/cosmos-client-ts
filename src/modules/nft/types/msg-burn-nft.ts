@@ -10,7 +10,7 @@ export class MsgBurnNFT implements Msg {
   constructor(
     public sender: AccAddress,
     public id: string,
-    public denom: string
+    public denom: string,
   ) {}
 
   public static fromJSON(value: any) {

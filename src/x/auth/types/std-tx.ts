@@ -20,7 +20,7 @@ export class StdTx extends Tx {
     public msg: (Msg | codec.AminoWrapping)[],
     public fee: StdFee,
     public signatures: StdSignature[],
-    public memo: string
+    public memo: string,
   ) {
     super();
   }
@@ -32,7 +32,7 @@ export class StdTx extends Tx {
       fee: this.fee,
       memo: this.memo,
       msgs: this.msg,
-      sequence
+      sequence,
     };
     const sortedJSON = JSON.stringify(stdSignMsg, (_, v) =>
       !(v instanceof Array || v === null) && typeof v == "object"
@@ -42,7 +42,7 @@ export class StdTx extends Tx {
               r[k] = v[k];
               return r;
             }, {})
-        : v
+        : v,
     );
 
     return new Buffer(sortedJSON);

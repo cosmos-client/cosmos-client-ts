@@ -10,5 +10,5 @@ codec.registerCodec("cosmos-sdk/MsgSend", MsgSend, MsgSend.fromJSON);
 codec.registerCodec(
   "cosmos-sdk/MsgMultiSend",
   MsgMultiSend,
-  MsgMultiSend.fromJSON
+  MsgMultiSend.fromJSON,
 );
