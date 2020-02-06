@@ -4,7 +4,6 @@ on: [pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -12,19 +11,16 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - name: Cache
-      uses: actions/cache@v1.1.2
-      with:
-        # A directory to store and save the cache
-        path: ./node_modules
-        # An explicit key for restoring and saving the cache
-        key: node_modules
-        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
-        restore-keys: node_modules
-    - run: npm run build --if-present
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm install
+      - run: npm run build --if-present
