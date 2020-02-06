@@ -5,9 +5,9 @@ import { StdTx } from "./std-tx";
  */
 export class BroadcastReq {
   /**
-   * 
-   * @param tx 
-   * @param mode 
+   *
+   * @param tx
+   * @param mode
    */
   constructor(public tx: StdTx, public mode: "sync" | "async" | "block") {}
 }

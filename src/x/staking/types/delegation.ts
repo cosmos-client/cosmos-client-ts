@@ -6,4 +6,4 @@ export type Delegation = {
   validator_addr: ValAddress;
   shares: string;
   height: number;
-}
+};

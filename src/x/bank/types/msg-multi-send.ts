@@ -4,12 +4,12 @@ import { Msg } from "../../../types/msg";
 export type Input = {
   address: string;
   coins: Coin[];
-}
+};
 
 export type Output = {
   address: string;
   coins: Coin[];
-}
+};
 
 /**
  *

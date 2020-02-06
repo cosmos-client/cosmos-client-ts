@@ -9,4 +9,4 @@ export type RedelegateRequest = {
   validator_src_address: ValAddress;
   validator_dst_address: ValAddress;
   amount: Coin;
-}
+};

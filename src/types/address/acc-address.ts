@@ -2,11 +2,11 @@ import * as bech32 from "bech32";
 import { Address, bech32Prefix } from "./address";
 
 /**
- * AccAddressのクラス。
+ * AccAddress
  */
 export class AccAddress extends Address {
   /**
-   * Bech32フォーマットのアドレスに変換する。
+   *
    */
   toBech32() {
     const words = bech32.toWords(Buffer.from(this._value));
@@ -14,7 +14,7 @@ export class AccAddress extends Address {
   }
 
   /**
-   * Bech32フォーマットのアドレスからインスタンスを作成する。
+   *
    * @param accAddress
    */
   static fromBech32(accAddress: string) {
@@ -31,7 +31,7 @@ export class AccAddress extends Address {
   }
 
   /**
-   * JSON.stringify時に参照される。
+   * For `JSON.stringify`
    */
   toJSON() {
     return this.toBech32();

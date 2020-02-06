@@ -1,3 +1,1 @@
-export type Content = {
-    
-}
+export type Content = {};

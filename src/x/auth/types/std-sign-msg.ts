@@ -8,4 +8,4 @@ export type StdSignMsg = {
   fee: StdFee;
   msgs: Msg[];
   memo: string;
-}
+};

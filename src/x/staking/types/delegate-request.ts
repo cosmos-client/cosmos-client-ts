@@ -8,4 +8,4 @@ export type DelegateRequest = {
   delegator_address: AccAddress;
   validator_address: ValAddress;
   amount: Coin;
-}
+};

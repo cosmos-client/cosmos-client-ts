@@ -6,4 +6,4 @@ export type SignParameter = {
   downtime_unbond_duration: number;
   slash_fraction_double_sign: number;
   slash_fraction_downtime: number;
-}
+};

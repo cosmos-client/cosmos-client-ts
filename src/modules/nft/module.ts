@@ -1,7 +1,12 @@
 import { StdTx } from "../../x/auth";
 import { CosmosSDK } from "../../cosmos-sdk";
 import { AccAddress } from "../../types";
-import { TransferNFTReq, EditNFTMetadataReq, MintNFTReq, BurnNFTReq } from "./types";
+import {
+  TransferNFTReq,
+  EditNFTMetadataReq,
+  MintNFTReq,
+  BurnNFTReq
+} from "./types";
 
 export function getSupply(sdk: CosmosSDK, denom: string) {
   return sdk.get<{}>(`/nft/supply/${denom}`, denom);

@@ -7,4 +7,4 @@ export type MintNFTReq = {
   denom: string;
   id: string;
   tokenURI: string;
-}
+};

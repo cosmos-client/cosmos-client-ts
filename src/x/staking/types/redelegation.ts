@@ -11,4 +11,4 @@ export type Redelegation = {
   balance: string;
   shares_src: string;
   shares_dst: string;
-}
+};

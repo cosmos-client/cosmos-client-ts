@@ -1,13 +1,13 @@
-import * as crypto from 'crypto';
+import * as crypto from "crypto";
 
 const prefix = {
-  main: 'cosmos',
-  account: 'acc',
-  validator: 'val',
-  consensus: 'cons',
-  public: 'pub',
-  operator: 'oper',
-  address: 'addr'
+  main: "cosmos",
+  account: "acc",
+  validator: "val",
+  consensus: "cons",
+  public: "pub",
+  operator: "oper",
+  address: "addr"
 };
 export const bech32Prefix = {
   accAddr: prefix.main,
@@ -25,8 +25,8 @@ export class Address {
   protected _value: Buffer;
 
   /**
-   * 
-   * @param value 
+   *
+   * @param value
    * @throws Error アドレスの長さが20でない場合、エラーがスローされます。
    */
   constructor(value: Buffer) {
@@ -38,15 +38,18 @@ export class Address {
   }
 
   static hash160(buffer: Buffer): Buffer {
-    const sha256Hash: Buffer = crypto.createHash('sha256')
+    const sha256Hash: Buffer = crypto
+      .createHash("sha256")
       .update(buffer)
       .digest();
     try {
-      return crypto.createHash('rmd160')
+      return crypto
+        .createHash("rmd160")
         .update(sha256Hash)
         .digest();
     } catch (err) {
-      return crypto.createHash('ripemd160')
+      return crypto
+        .createHash("ripemd160")
         .update(sha256Hash)
         .digest();
     }
@@ -54,7 +57,7 @@ export class Address {
 
   /**
    * 公開鍵からアドレスのインスタンスを作成する。
-   * @param publicKey 
+   * @param publicKey
    */
   static fromPublicKey(publicKey: Buffer) {
     return new Address(this.hash160(publicKey));

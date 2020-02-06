@@ -1,12 +1,6 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { BaseReq } from "../../types";
-import {
-  TallyResult,
-  Proposer,
-  TextProposal,
-  Vote,
-  Deposit
-} from "./types";
+import { TallyResult, Proposer, TextProposal, Vote, Deposit } from "./types";
 import { StdTx } from "../auth";
 
 /**

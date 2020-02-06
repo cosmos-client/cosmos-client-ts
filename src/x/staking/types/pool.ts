@@ -5,4 +5,4 @@ export type Pool = {
   inflation: string;
   date_last_comission_reset: string;
   prev_bonded_shares: string;
-}
+};

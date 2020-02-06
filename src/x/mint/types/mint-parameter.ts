@@ -5,4 +5,4 @@ export type MintParameter = {
   inflation_min: string;
   goal_bonded: string;
   blocks_per_year: number;
-}
+};

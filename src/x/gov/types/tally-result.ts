@@ -3,4 +3,4 @@ export type TallyResult = {
   abstain: string;
   no: string;
   no_with_veto: string;
-}
+};

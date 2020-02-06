@@ -3,16 +3,16 @@ import { AccAddress } from "../../../types/address/acc-address";
 import { PubKey } from "../../../tendermint/types/key";
 
 /**
- * 
+ *
  */
 export class BaseAccount {
   /**
-   * 
-   * @param address 
-   * @param coins 
-   * @param public_key 
-   * @param account_number 
-   * @param sequence 
+   *
+   * @param address
+   * @param coins
+   * @param public_key
+   * @param account_number
+   * @param sequence
    */
   constructor(
     public address: AccAddress,
@@ -20,13 +20,11 @@ export class BaseAccount {
     public public_key: PubKey,
     public account_number: number,
     public sequence: number
-  ) {
-
-  }
+  ) {}
 
   /**
-   * @see Amino.reviver
-   * @param value 
+   *
+   * @param value
    */
   public static fromJSON(value: any) {
     return new this(

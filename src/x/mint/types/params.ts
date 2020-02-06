@@ -7,4 +7,4 @@ export type Params = {
   inflation_min: Dec;
   goal_bonded: Dec;
   blocks_per_year: number;
-}
+};

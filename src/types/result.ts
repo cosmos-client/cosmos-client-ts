@@ -6,7 +6,7 @@ export type ABCIMessageLog = {
   msg_index: number;
   success: boolean;
   log: string;
-}
+};
 
 export type TxResponse = {
   height: number;
@@ -22,7 +22,7 @@ export type TxResponse = {
   codespace?: string;
   tx?: Tx | codec.AminoWrapping;
   timestamp?: string;
-}
+};
 
 export type SearchTxsResult = {
   total_count: number;
@@ -31,4 +31,4 @@ export type SearchTxsResult = {
   page_total: number;
   limit: number;
   txs: TxResponse[];
-}
+};

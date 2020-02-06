@@ -6,4 +6,4 @@ export type ValidatorDistInfo = {
   operator_address: AccAddress;
   self_bond_rewards: DecCoin[];
   val_commission: ValidatorAccumulatedCommission;
-}
+};

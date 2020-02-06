@@ -8,4 +8,4 @@ export type UnbondingDelegation = {
   balance: string;
   creation_height: number;
   min_time: number;
-}
+};

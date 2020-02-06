@@ -1,8 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import {
-  ValidatorDistInfo,
-  DistributionParameter
-} from "./types";
+import { ValidatorDistInfo, DistributionParameter } from "./types";
 import { Address, AccAddress, ValAddress, BaseReq, Coin } from "../../types";
 import { StdTx } from "../auth";
 

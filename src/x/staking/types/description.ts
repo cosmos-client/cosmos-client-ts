@@ -3,4 +3,4 @@ export type description = {
   identity: string;
   website: string;
   details: string;
-}
+};

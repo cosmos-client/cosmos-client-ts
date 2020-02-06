@@ -26,10 +26,13 @@ export function signStdTx(
     pub_key: privKey.getPubKey()
   };
 
-  const newStdTx = { ...stdTx };
-  newStdTx.signatures = newStdTx.signatures
-    ? [...newStdTx.signatures, signature]
-    : [signature];
+  const newStdTx = new StdTx(
+    stdTx.msg,
+    stdTx.fee,
+    stdTx.signatures,
+    stdTx.memo
+  );
+  newStdTx.signatures.push(signature);
 
   return newStdTx;
 }

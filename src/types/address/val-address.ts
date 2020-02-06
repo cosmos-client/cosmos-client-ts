@@ -6,7 +6,7 @@ import { Address, bech32Prefix } from "./address";
  */
 export class ValAddress extends Address {
   /**
-   * Bech32フォーマットのアドレスに変換する。
+   *
    */
   toBech32() {
     const words = bech32.toWords(Buffer.from(this._value));
@@ -31,7 +31,7 @@ export class ValAddress extends Address {
   }
 
   /**
-   * JSON.stringify
+   * For `JSON.stringify`
    */
   toJSON() {
     return this.toBech32();

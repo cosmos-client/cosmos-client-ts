@@ -16,7 +16,7 @@ export class MsgMintNFT implements Msg {
     public denom: string,
     public token_uri: string
   ) {}
- 
+
   public static fromJSON(value: any) {
     return new this(
       AccAddress.fromBech32(value.sender),

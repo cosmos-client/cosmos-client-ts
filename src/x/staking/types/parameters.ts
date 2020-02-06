@@ -6,4 +6,4 @@ export type Parameters = {
   unbounding_time: string;
   max_validators: number;
   bond_denom: string;
-}
+};

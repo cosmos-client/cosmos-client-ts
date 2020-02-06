@@ -5,4 +5,4 @@ export type TransferNFTReq = {
   denom: string;
   id: string;
   recipient: string;
-}
+};

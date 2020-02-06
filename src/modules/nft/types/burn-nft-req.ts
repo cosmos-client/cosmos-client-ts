@@ -4,4 +4,4 @@ export type BurnNFTReq = {
   base_req: BaseReq;
   denom: string;
   id: string;
-}
+};

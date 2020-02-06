@@ -5,4 +5,4 @@ export type EditNFTMetadataReq = {
   denom: string;
   id: string;
   tokenURI: string;
-}
+};
