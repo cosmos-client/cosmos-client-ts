@@ -1,14 +1,26 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { MintParameter } from "./types";
 
-export function getParams(sdk: CosmosSDK) {
+/**
+ * `/minting/parameters`
+ * @param sdk
+ */
+export function queryParams(sdk: CosmosSDK) {
   return sdk.get<MintParameter>("/minting/parameters");
 }
 
-export function getInflation(sdk: CosmosSDK) {
+/**
+ * `/minting/inflation`
+ * @param sdk
+ */
+export function queryInflation(sdk: CosmosSDK) {
   return sdk.get<string>("/minting/inflation");
 }
 
-export function getAnnualProvisions(sdk: CosmosSDK) {
+/**
+ * `/minting/annual-provisions`
+ * @param sdk
+ */
+export function queryAnnualProvisions(sdk: CosmosSDK) {
   return sdk.get<string>("/minting/annual-provisions");
 }

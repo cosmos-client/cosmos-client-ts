@@ -1,6 +1,9 @@
-import { AccAddress } from "../../../types/address/acc-address";
+import { Coin } from "../../../types";
 
-export type Deposit = {
-  proposal_id: Int32Array;
-  depositer: AccAddress;
+export type DepositParams = {
+  min_deposit?: Coin[];
+  /**
+   * `time.Duration`
+   */
+  max_deposit_period?: any;
 };

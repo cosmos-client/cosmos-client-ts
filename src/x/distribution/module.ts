@@ -4,12 +4,13 @@ import { Address, AccAddress, ValAddress, BaseReq, Coin } from "../../types";
 import { StdTx } from "../auth";
 
 /**
- * @param sdk /slashing/validators/{validatorPubKey}/signing_info
+ * `/slashing/validators/{validatorPubKey}/signing_info`
+ * @param sdk
  * @param delegatorAddr
  * @param validatorAddr
  */
 
-export function postWithdrawDelegatorRewards(
+export function withdrawDelegatorRewards(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   baseReq: BaseReq,
@@ -20,7 +21,14 @@ export function postWithdrawDelegatorRewards(
   );
 }
 
-export function postWithdrawDelegationRewards(
+/**
+ * `/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}`
+ * @param sdk
+ * @param delegatorAddr
+ * @param validatorAddr
+ * @param baseReq
+ */
+export function withdrawDelegationRewards(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
@@ -32,7 +40,13 @@ export function postWithdrawDelegationRewards(
   );
 }
 
-export function postSetDelegatorWithdrawalAddr(
+/**
+ * `/distribution/delegators/{delegatorAddr}/withdraw_address`
+ * @param sdk
+ * @param delegatorAddr
+ * @param baseReq
+ */
+export function setDelegatorWithdrawalAddr(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   baseReq: BaseReq,
@@ -43,7 +57,13 @@ export function postSetDelegatorWithdrawalAddr(
   );
 }
 
-export function postWithdrawValidatorRewards(
+/**
+ * `/distribution/validators/{validatorAddr}/rewards`
+ * @param sdk
+ * @param validatorAddr
+ * @param baseReq
+ */
+export function withdrawValidatorRewards(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
   baseReq: BaseReq,
@@ -54,11 +74,22 @@ export function postWithdrawValidatorRewards(
   );
 }
 
-export function getDelegatorRewards(sdk: CosmosSDK, delegatorAddr: AccAddress) {
+/**
+ * `/distribution/delegators/{delegatorAddr}/rewards`
+ * @param sdk
+ * @param delegatorAddr
+ */
+export function delegatorRewards(sdk: CosmosSDK, delegatorAddr: AccAddress) {
   return sdk.get<Coin>(`/distribution/delegators/${delegatorAddr}/rewards`);
 }
 
-export function getDelegationRewards(
+/**
+ * `/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}`
+ * @param sdk
+ * @param delegatorAddr
+ * @param validatorAddr
+ */
+export function delegationRewards(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
@@ -68,7 +99,12 @@ export function getDelegationRewards(
   );
 }
 
-export function getDelegatorWithdrawalAddr(
+/**
+ * `/distribution/delegators/{delegatorAddr}/withdraw_address`
+ * @param sdk
+ * @param delegatorAddr
+ */
+export function delegatorWithdrawalAddr(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
 ) {
@@ -77,29 +113,49 @@ export function getDelegatorWithdrawalAddr(
   );
 }
 
-export function getValidatorInfo(sdk: CosmosSDK, validatorAddr: ValAddress) {
+/**
+ * `/distribution/validators/{validatorAddr}`
+ * @param sdk
+ * @param validatorAddr
+ */
+export function dalidatorInfo(sdk: CosmosSDK, validatorAddr: ValAddress) {
   return sdk.get<ValidatorDistInfo>(
     `/distribution/validators/${validatorAddr}`,
   );
 }
 
-export function getValidatorRewards(sdk: CosmosSDK, validatorAddr: ValAddress) {
+/**
+ * `/distribution/validators/{validatorAddr}/rewards`
+ * @param sdk
+ * @param validatorAddr
+ */
+export function validatorRewards(sdk: CosmosSDK, validatorAddr: ValAddress) {
   return sdk.get<Coin>(`/distribution/validators/${validatorAddr}/rewards`);
 }
 
-export function getCommunityPool(sdk: CosmosSDK) {
-  return sdk.get<Coin>("/distribution/community_pool");
-}
-
-export function getOutstandingRewards(
-  sdk: CosmosSDK,
-  validatorAddr: ValAddress,
-) {
+/**
+ * `/distribution/validators/{validatorAddr}/outstanding_rewards`
+ * @param sdk
+ * @param validatorAddr
+ */
+export function outstandingRewards(sdk: CosmosSDK, validatorAddr: ValAddress) {
   return sdk.get<Coin>(
     `/distribution/validators/${validatorAddr}/outstanding_rewards`,
   );
 }
 
-export function getParams(sdk: CosmosSDK) {
+/**
+ * `/distribution/parameters`
+ * @param sdk
+ */
+export function params(sdk: CosmosSDK) {
   return sdk.get<DistributionParameter>("/distribution/parameters");
+}
+
+/**
+ * `/distribution/community_pool`
+ * @param sdk
+ */
+export function communityPool(sdk: CosmosSDK) {
+  return sdk.get<Coin>("/distribution/community_pool");
 }

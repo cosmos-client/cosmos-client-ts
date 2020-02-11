@@ -1,63 +1,136 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { BaseReq } from "../../types";
-import { TallyResult, Proposer, TextProposal, Vote, Deposit } from "./types";
+import {
+  TallyResult,
+  Proposer,
+  TextProposal,
+  Vote,
+  Deposit,
+  DepositParams,
+  VotingParams,
+  TallyParams,
+  PostProposalReq,
+  DepositReq,
+  VoteReq,
+} from "./types";
 import { StdTx } from "../auth";
 
 /**
- *
+ * `/gov/proposals`
+ * @param sdk
+ * @param req
  */
-export function postProposal(sdk: CosmosSDK, baseReq: BaseReq) {
-  return sdk.post<StdTx>("/gov/proposals", baseReq);
+export function postProposal(sdk: CosmosSDK, req: PostProposalReq) {
+  return sdk.post<StdTx>("/gov/proposals", req);
 }
 
-export function postDeposit(
+/**
+ * `/gov/proposals/{proposalID}/deposits`
+ * @param sdk
+ * @param proposalID
+ * @param req
+ */
+export function deposit(sdk: CosmosSDK, proposalID: string, req: DepositReq) {
+  return sdk.post<StdTx>(`/gov/proposals/${proposalID}/deposits`, req);
+}
+
+/**
+ * `/gov/proposals/{proposalID}/votes`
+ * @param sdk
+ * @param proposalID
+ * @param req
+ */
+export function vote(sdk: CosmosSDK, proposalID: string, req: VoteReq) {
+  return sdk.post<StdTx>(`/gov/proposals/${proposalID}/votes`, req);
+}
+
+/**
+ * `/gov/parameters/{type}`
+ * @param sdk
+ * @param type
+ */
+export function queryParams(
   sdk: CosmosSDK,
-  proposalId: string,
-  baseReq: BaseReq,
+  type: "depositparams" | "votingparams" | "tallyparams",
 ) {
-  return sdk.post<StdTx>(`/gov/proposals/${proposalId}/deposits`, baseReq);
+  return sdk.get<DepositParams | VotingParams | TallyParams>(
+    `/gov/parameters/${type}`,
+  );
 }
 
-export function postVote(sdk: CosmosSDK, proposalId: string, baseReq: BaseReq) {
-  return sdk.post<StdTx>(`/gov/proposals/${proposalId}/votes`, baseReq);
-}
-
-export function getParameters(sdk: CosmosSDK, type: string) {
-  return sdk.get<{}>(`/gob/parameters/${type}`);
-}
-
-export function getProposals(sdk: CosmosSDK) {
+/**
+ * `/gov/proposals`
+ * @param sdk
+ */
+export function queryProposals(sdk: CosmosSDK) {
   return sdk.get<TextProposal[]>("/gov/proposals");
 }
 
-export function getProposal(sdk: CosmosSDK, proposalId: string) {
-  return sdk.get<TextProposal>(`/gov/proposals/${proposalId}`);
+/**
+ * `/gov/proposals/{proposalID}`
+ * @param sdk
+ * @param proposalID
+ */
+export function queryProposal(sdk: CosmosSDK, proposalID: string) {
+  return sdk.get<TextProposal>(`/gov/proposals/${proposalID}`);
 }
 
-export function getProposer(sdk: CosmosSDK, proposalId: string) {
-  return sdk.get<Proposer>(`/gov/proposals/${proposalId}/proposer`);
+/**
+ * `/gov/proposals/{proposalID}/proposer`
+ * @param sdk
+ * @param proposalID
+ */
+export function queryProposer(sdk: CosmosSDK, proposalID: string) {
+  return sdk.get<Proposer>(`/gov/proposals/${proposalID}/proposer`);
 }
 
-export function getDeposits(sdk: CosmosSDK, proposalId: string) {
-  return sdk.get<Deposit[]>(`/gov/proposals/${proposalId}/deposits`);
+/**
+ * `/gov/proposals/{proposalID}/deposits`
+ * @param sdk
+ * @param proposalID
+ */
+export function queryDeposits(sdk: CosmosSDK, proposalID: string) {
+  return sdk.get<Deposit[]>(`/gov/proposals/${proposalID}/deposits`);
 }
 
-export function getDeposit(
+/**
+ * `/gov/proposals/{proposalID}/deposits/{depositer}`
+ * @param sdk
+ * @param proposalID
+ * @param depositer
+ */
+export function queryDeposit(
   sdk: CosmosSDK,
-  proposalId: string,
+  proposalID: string,
   depositer: string,
 ) {
-  return sdk.get<Deposit>(`/gov/proposals/${proposalId}/deposits/${depositer}`);
+  return sdk.get<Deposit>(`/gov/proposals/${proposalID}/deposits/${depositer}`);
 }
 
-export function getTally(sdk: CosmosSDK, proposalId: string) {
-  return sdk.get<TallyResult>(`/gov/proposals/${proposalId}/tally`);
+/**
+ * `/gov/proposals/{proposalID}/tally`
+ * @param sdk
+ * @param proposalID
+ */
+export function queryTally(sdk: CosmosSDK, proposalID: string) {
+  return sdk.get<TallyResult>(`/gov/proposals/${proposalID}/tally`);
 }
 
-export function getVotes(sdk: CosmosSDK, proposalId: string) {
-  return sdk.get<Vote[]>(`/gov/proposals/${proposalId}/votes`);
+/**
+ * `/gov/proposals/{proposalID}/votes`
+ * @param sdk
+ * @param proposalID
+ */
+export function queryVotes(sdk: CosmosSDK, proposalID: string) {
+  return sdk.get<Vote[]>(`/gov/proposals/${proposalID}/votes`);
 }
 
-export function getVote(sdk: CosmosSDK, proposalId: string, voter: string) {
-  return sdk.get<Vote>(`/gov/proposals/${proposalId}/votes/${voter}`);
+/**
+ * `/gov/proposals/{proposalID}/votes/{voter}`
+ * @param sdk
+ * @param proposalID
+ * @param voter
+ */
+export function queryVote(sdk: CosmosSDK, proposalID: string, voter: string) {
+  return sdk.get<Vote>(`/gov/proposals/${proposalID}/votes/${voter}`);
 }

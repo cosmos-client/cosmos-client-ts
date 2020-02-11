@@ -19,8 +19,7 @@ import { AccAddress, ValAddress, SearchTxsResult } from "../../types";
 import { StdTx } from "../auth";
 
 /**
- *
- * /staking/delegators/${delegatorAddress}/delegations
+ * `/staking/delegators/{delegatorAddress}/delegations`
  * @param delegatorAddr
  * @param delegateRequest
  */
@@ -36,7 +35,7 @@ export function postDelegation(
 }
 
 /**
- * /staking/delegators/${delegatorAddress}/unbonding_delegations
+ * `/staking/delegators/{delegatorAddress}/unbonding_delegations`
  * @param sdk
  * @param delegatorAddr
  * @param undelegateRequest
@@ -53,7 +52,7 @@ export function postUnbondingDelegation(
 }
 
 /**
- * staking/delegators/${delegatorAddress}/redelegations
+ * `staking/delegators/{delegatorAddress}/redelegations`
  * @param sdk
  * @param delegatorAddr
  * @param redelegateRequest
@@ -69,7 +68,13 @@ export function postRedelegation(
   );
 }
 
-export function getDelegatorDelegations(
+/**
+ * `/staking/delegators/{delegatorAddress}/delegations`
+ * @param sdk
+ * @param delegatorAddr
+ * @param queryDelegatorParams
+ */
+export function delegatorDelegations(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   queryDelegatorParams: QueryDelegatorParams,
@@ -80,7 +85,13 @@ export function getDelegatorDelegations(
   );
 }
 
-export function getDelegatorUnbondingDelegations(
+/**
+ * `/staking/delegators/{delegatorAddress}/unbonding_delegations`
+ * @param sdk
+ * @param delegatorAddr
+ * @param queryValidatorParams
+ */
+export function delegatorUnbondingDelegations(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   queryValidatorParams: QueryValidatorParams,
@@ -91,7 +102,13 @@ export function getDelegatorUnbondingDelegations(
   );
 }
 
-export function getDelegatorTxs(
+/**
+ * `/staking/delegators/{delegatorAddress}/txs`
+ * @param sdk
+ * @param delegatorAddr
+ * @param txsQueryType
+ */
+export function delegatorTxs(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   txsQueryType: TxsQueryType,
@@ -112,7 +129,13 @@ export function getDelegatorTxs(
   );
 }
 
-export function getDelegatorValidators(
+/**
+ * `/staking/delegators/{delegatorAddress}/validators`
+ * @param sdk
+ * @param delegatorAddr
+ * @param queryDelegatorParams
+ */
+export function delegatorValidators(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   queryDelegatorParams: QueryDelegatorParams,
@@ -123,31 +146,52 @@ export function getDelegatorValidators(
   );
 }
 
-export function getDelegatorValidator(
+/**
+ * `/staking/delegators/{delegatorAddress}/validators/{validatorAddress}`
+ * @param sdk
+ * @param delegatorAddr
+ * @param validatorAddr
+ * @param queryBondsParams
+ */
+export function delegatorValidator(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
   queryBondsParams: QueryBondsParams,
 ) {
   return sdk.get<Validator>(
-    `/staking/delegators/${delegatorAddr}/validators/${validatorAddr}`,
+    `/staking/delegators/${delegatorAddr.toBech32()}/validators/${validatorAddr.toBech32()}`,
     queryBondsParams,
   );
 }
 
-export function getDelegation(
+/**
+ * `/staking/delegators/{delegatorAddress}/delegations/{validatorAddress}`
+ * @param sdk
+ * @param delegatorAddr
+ * @param validatorAddr
+ * @param queryBondsParams
+ */
+export function delegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
   queryBondsParams: QueryBondsParams,
 ) {
   return sdk.get<Delegation>(
-    `/staking/delegators/${delegatorAddr}/delegations/${validatorAddr}`,
+    `/staking/delegators/${delegatorAddr.toBech32()}/delegations/${validatorAddr.toBech32()}`,
     queryBondsParams,
   );
 }
 
-export function getUnbondingDelegation(
+/**
+ * `/staking/delegators/{delegatorAddress}/unbonding_delegations/{validatorAddress}`
+ * @param sdk
+ * @param delegatorAddr
+ * @param validatorAddr
+ * @param queryBondsParams
+ */
+export function unbondingDelegation(
   sdk: CosmosSDK,
   delegatorAddr: AccAddress,
   validatorAddr: ValAddress,
@@ -159,7 +203,12 @@ export function getUnbondingDelegation(
   );
 }
 
-export function getRedelegations(
+/**
+ * `/staking/redelegations`
+ * @param sdk
+ * @param queryRedelegationParams
+ */
+export function redelegations(
   sdk: CosmosSDK,
   queryRedelegationParams: QueryRedelegationParams,
 ) {
@@ -169,14 +218,25 @@ export function getRedelegations(
   );
 }
 
-export function getValidators(
+/**
+ * `/staking/validators`
+ * @param sdk
+ * @param queryValidatorParams
+ */
+export function validators(
   sdk: CosmosSDK,
   queryValidatorParams: QueryValidatorParams,
 ) {
   return sdk.get<Validator>(`/staking/validators`, queryValidatorParams);
 }
 
-export function getValidator(
+/**
+ * `/staking/validators/{validatorAddress}`
+ * @param sdk
+ * @param validatorAddr
+ * @param queryValidatorParams
+ */
+export function validator(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
   queryValidatorParams: QueryValidatorParams,
@@ -187,7 +247,13 @@ export function getValidator(
   );
 }
 
-export function getValidatorDelegations(
+/**
+ * `/staking/validators/{validatorAddress}/delegations`
+ * @param sdk
+ * @param validatorAddr
+ * @param queryValidatorParams
+ */
+export function validatorDelegations(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
   queryValidatorParams: QueryValidatorParams,
@@ -198,7 +264,13 @@ export function getValidatorDelegations(
   );
 }
 
-export function getValidatorUnbondingDelegations(
+/**
+ * `/staking/validators/${validatorAddress}/unbonding_delegations`
+ * @param sdk
+ * @param validatorAddr
+ * @param queryValidatorParams
+ */
+export function validatorUnbondingDelegations(
   sdk: CosmosSDK,
   validatorAddr: ValAddress,
   queryValidatorParams: QueryValidatorParams,
@@ -209,10 +281,18 @@ export function getValidatorUnbondingDelegations(
   );
 }
 
-export function getPool(sdk: CosmosSDK) {
+/**
+ * `/staking/pool`
+ * @param sdk
+ */
+export function pool(sdk: CosmosSDK) {
   return sdk.get<Pool>(`/staking/pool`);
 }
 
-export function getParameters(sdk: CosmosSDK) {
+/**
+ * `/staking/parameters`
+ * @param sdk
+ */
+export function params(sdk: CosmosSDK) {
   return sdk.get<Parameters>(`/staking/parameters`);
 }

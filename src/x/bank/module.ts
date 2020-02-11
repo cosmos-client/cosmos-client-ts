@@ -4,27 +4,20 @@ import { Coin, AccAddress } from "../../types";
 import { SendReq } from "./types";
 
 /**
- * /bank/accounts/${address}/transfers
+ * `/bank/accounts/{address}/transfers`
  * @param sdk
  * @param address
- * @param params
+ * @param req
  */
-export function postTransfer(
-  sdk: CosmosSDK,
-  address: AccAddress,
-  params: SendReq,
-) {
-  return sdk.post<StdTx>(
-    `/bank/accounts/${address.toBech32()}/transfers`,
-    params,
-  );
+export function send(sdk: CosmosSDK, address: AccAddress, req: SendReq) {
+  return sdk.post<StdTx>(`/bank/accounts/${address.toBech32()}/transfers`, req);
 }
 
 /**
- * /bank/balances/${address}
+ * `/bank/balances/{address}`
  * @param sdk
  * @param address
  */
-export function getBalance(sdk: CosmosSDK, address: AccAddress) {
+export function queryBalances(sdk: CosmosSDK, address: AccAddress) {
   return sdk.get<Coin[]>(`/bank/balances/${address.toBech32()}`);
 }
