@@ -1,4 +1,5 @@
-import * as request from "request";
+import fetch, { Response } from "node-fetch";
+import * as querystring from "querystring";
 import { codec } from "./codec";
 import { ErrorResponse } from "./types";
 
@@ -22,42 +23,40 @@ export class CosmosSDK {
     path: string,
     params: any,
     method: "GET" | "POST" | "PUT" | "DELETE",
-  ): Promise<T> {
-    return new Promise((resolve, reject) => {
-      const callback: request.RequestCallback = (error, response, body) => {
-        if (error) {
-          reject(JSON.parse(body) as ErrorResponse);
-          return;
-        }
+  ) {
+    return new Promise<T | ErrorResponse | Error>(async (resolve, reject) => {
+      try {
+        let response: Response;
 
-        resolve(codec.fromJSONString(body));
-      };
-
-      if (method === "GET") {
-        request.get(
-          {
-            uri: this.url + path,
+        if (method === "GET") {
+          response = await fetch(
+            `${this.url}${path}?${querystring.stringify(params)}`,
+            { method: "GET" },
+          );
+          querystring;
+        } else {
+          response = await fetch(`${this.url}${path}`, {
             method: method,
-            json: false,
-            qs: params,
-          },
-          callback,
-        );
-      } else {
-        const options = {
-          uri: this.url + path,
-          method: method,
-          json: false,
-          body: JSON.stringify(params),
-        };
-
-        if (method === "PUT") {
-          request.put(options, callback);
-        } else if (method === "POST") {
-          request.post(options, callback);
-        } else if (method === "DELETE") {
-          request.delete(options, callback);
+            body: JSON.stringify(params),
+            headers: { "Content-Type": "application/json" },
+          });
         }
+
+        if (response.ok) {
+          resolve(codec.fromJSONString(await response.text()));
+        } else {
+          const text = await response.text();
+          try {
+            const errorResponse = JSON.parse(
+              await response.text(),
+            ) as ErrorResponse;
+            resolve(new ErrorResponse(errorResponse.code, errorResponse.error));
+          } catch {
+            resolve(new Error(response.statusText));
+          }
+        }
+      } catch (e) {
+        resolve(e);
       }
     });
   }
@@ -66,10 +65,8 @@ export class CosmosSDK {
    *
    * @param path
    * @param params
-   * @returns
-   * @see ErrorResponse
    */
-  public get<T>(path: string, params?: any): Promise<T> {
+  public get<T>(path: string, params?: any) {
     return this.http<T>(path, params, "GET");
   }
 
@@ -77,10 +74,8 @@ export class CosmosSDK {
    *
    * @param path
    * @param params
-   * @returns
-   * @see ErrorResponse
    */
-  public post<T>(path: string, params: any): Promise<T> {
+  public post<T>(path: string, params: any) {
     return this.http<T>(path, params, "POST");
   }
 
@@ -89,7 +84,7 @@ export class CosmosSDK {
    * @param path
    * @param params
    */
-  public put<T>(path: string, params: any): Promise<T> {
+  public put<T>(path: string, params: any) {
     return this.http<T>(path, params, "PUT");
   }
 
@@ -98,7 +93,7 @@ export class CosmosSDK {
    * @param path
    * @param params
    */
-  public delete<T>(path: string, params: any): Promise<T> {
+  public delete<T>(path: string, params: any) {
     return this.http<T>(path, params, "DELETE");
   }
 }

@@ -20,13 +20,21 @@ const sdk = new CosmosSDK(hostURL, chainID);
 // get account info
 let fromAddress: AccAddress;
 let privKey: PrivKeySecp256k1;
-const account: BaseAccount = await auth.queryAccount(sdk, fromAddress);
+const account = await auth.queryAccount(sdk, fromAddress);
+if (account instanceof Error) {
+  console.error(account);
+  return;
+}
 
 // get unsigned tx
 let toAddress: AccAddress;
 let sendReq: SendReq;
 
 const unsignedStdTx: StdTx = await bank.send(sdk, toAddress, sendReq);
+if (unsignedStdTx instanceof Error) {
+  console.error(unsignedStdTx);
+  return;
+}
 
 // sign
 const signedStdTx: StdTx = auth.signStdTx(
@@ -34,12 +42,12 @@ const signedStdTx: StdTx = auth.signStdTx(
   privKey,
   unsignedStdTx,
   account.account_number,
-  account.sequence,
+  account.sequence + 1,
 );
 
 // broadcast
 const broadcastReq: BroadcastReq = {
-  tx: signedTx,
+  tx: signedStdTx,
   mode: "sync",
 };
 await auth.broadcast(sdk, broadcastReq);

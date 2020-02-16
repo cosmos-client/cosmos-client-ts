@@ -44,7 +44,15 @@ export type BaseReq = {
   simulate: boolean;
 };
 
-export type ErrorResponse = {
+export class ErrorResponse extends Error {
   code?: number;
   error: string;
-};
+
+  constructor(code: number | undefined, error: string) {
+    super(error);
+    if (code) {
+      this.code = code;
+    }
+    this.error = error;
+  }
+}
