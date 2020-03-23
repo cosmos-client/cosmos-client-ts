@@ -1,7 +1,9 @@
-import fetch, { Response } from "node-fetch";
+import nodeFetch from "node-fetch";
 import * as querystring from "querystring";
 import { codec } from "./codec";
 import { ErrorResponse } from "./types";
+
+const fetch: typeof window.fetch = window?.fetch || nodeFetch;
 
 /**
  *
@@ -26,14 +28,13 @@ export class CosmosSDK {
   ) {
     return new Promise<T | ErrorResponse | Error>(async (resolve, reject) => {
       try {
-        let response: Response;
+        let response: globalThis.Response;
 
         if (method === "GET") {
           response = await fetch(
             `${this.url}${path}?${querystring.stringify(params)}`,
             { method: "GET" },
           );
-          querystring;
         } else {
           response = await fetch(`${this.url}${path}`, {
             method: method,
@@ -47,9 +48,7 @@ export class CosmosSDK {
         } else {
           const text = await response.text();
           try {
-            const errorResponse = JSON.parse(
-              await response.text(),
-            ) as ErrorResponse;
+            const errorResponse = JSON.parse(text) as ErrorResponse;
             resolve(new ErrorResponse(errorResponse.code, errorResponse.error));
           } catch {
             resolve(new Error(response.statusText));
