@@ -64,7 +64,8 @@ export function queryTx(sdk: CosmosSDK, hash: string) {
 export function queryTxs(
   sdk: CosmosSDK,
   params: {
-    tags?: string[];
+    "message.action"?: string;
+    "message.sender"?: string;
     page?: number;
     limit?: number;
   },
