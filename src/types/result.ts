@@ -4,8 +4,8 @@ import { codec } from "../codec";
 
 export type ABCIMessageLog = {
   msg_index: number;
-  success: boolean;
   log: string;
+  events: StringEvent[];
 };
 
 export type TxResponse = {
