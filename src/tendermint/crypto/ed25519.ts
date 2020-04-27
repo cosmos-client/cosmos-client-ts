@@ -65,7 +65,7 @@ export class PrivKeyEd25519 implements PrivKey {
   }
 
   static fromJSON(value: any) {
-    return this.fromBase64(value);
+    return PrivKeyEd25519.fromBase64(value);
   }
 }
 
@@ -122,6 +122,6 @@ export class PubKeyEd25519 implements PubKey {
   }
 
   static fromJSON(value: any) {
-    return this.fromBase64(value);
+    return PubKeyEd25519.fromBase64(value);
   }
 }
