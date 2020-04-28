@@ -1,5 +1,4 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { BaseReq } from "../../types";
 import {
   TallyResult,
   Proposer,

@@ -11,6 +11,7 @@ export type ABCIMessageLog = {
 export type TxResponse = {
   height: number;
   txhash: string;
+  codespace?: string;
   code?: number;
   data?: string;
   raw_log?: string;
@@ -18,8 +19,6 @@ export type TxResponse = {
   info?: string;
   gas_wanted?: number;
   gas_used?: number;
-  events?: StringEvent;
-  codespace?: string;
   tx?: Tx | codec.AminoWrapping;
   timestamp?: string;
 };

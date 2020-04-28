@@ -8,7 +8,6 @@ export * from "./msg-vote";
 export * from "./params";
 export * from "./post-proposal-req";
 export * from "./proposer";
-export * from "./software-upgrade-proposal";
 export * from "./tally-params";
 export * from "./tally-result";
 export * from "./text-proposal";

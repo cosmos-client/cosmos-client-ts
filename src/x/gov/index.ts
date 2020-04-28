@@ -1,10 +1,4 @@
-import {
-  MsgDeposit,
-  MsgSubmitProposal,
-  MsgVote,
-  SoftwareUpgradeProposal,
-  TextProposal,
-} from "./types";
+import { MsgDeposit, MsgSubmitProposal, MsgVote, TextProposal } from "./types";
 import { codec } from "../../codec";
 import * as gov from "./module";
 
@@ -20,14 +14,7 @@ codec.registerCodec(
 );
 codec.registerCodec("cosmos-sdk/MsgVote", MsgVote, MsgVote.fromJSON);
 codec.registerCodec(
-  "cosmos-sdk/SoftwareUpgradeProposal",
-  SoftwareUpgradeProposal,
-  SoftwareUpgradeProposal.fromJSON,
-);
-codec.registerCodec(
   "cosmos-sdk/TextProposal",
   TextProposal,
   TextProposal.fromJSON,
 );
-
-export namespace Gov {}
