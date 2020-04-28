@@ -13,6 +13,6 @@ export class MsgUnjail extends Msg {
    * @see Amino.reviver
    */
   public static fromJSON(value: any) {
-    return new this(ValAddress.fromBech32(value.address));
+    return new MsgUnjail(ValAddress.fromBech32(value.address));
   }
 }

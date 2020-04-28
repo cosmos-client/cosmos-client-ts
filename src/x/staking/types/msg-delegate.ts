@@ -22,7 +22,7 @@ export class MsgDelegate extends Msg {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgDelegate(
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_address),
       value.amount,

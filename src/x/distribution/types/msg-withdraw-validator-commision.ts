@@ -14,6 +14,8 @@ export class MsgWithdrawValidatorCommission extends Msg {
    */
 
   public static fromJSON(value: any) {
-    return new this(ValAddress.fromBech32(value.validator_address));
+    return new MsgWithdrawValidatorCommission(
+      ValAddress.fromBech32(value.validator_address),
+    );
   }
 }

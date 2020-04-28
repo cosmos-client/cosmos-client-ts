@@ -27,7 +27,7 @@ export class AccAddress extends Address {
   }
 
   static fromPublicKey(publicKey: Buffer) {
-    return new this(this.hash160(publicKey));
+    return new AccAddress(this.hash160(publicKey));
   }
 
   /**

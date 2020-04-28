@@ -24,7 +24,7 @@ export class MsgEditValidator extends Msg {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgEditValidator(
       value.description,
       ValAddress.fromBech32(value.validator_address),
       value.commission_rate,

@@ -18,7 +18,7 @@ export class MsgMintNFT implements Msg {
   ) {}
 
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgMintNFT(
       AccAddress.fromBech32(value.sender),
       AccAddress.fromBech32(value.recipient),
       value.id,

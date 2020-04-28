@@ -32,7 +32,7 @@ export class MsgCreateValidator extends Msg {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgCreateValidator(
       value.description,
       value.commission,
       value.min_self_delegation,

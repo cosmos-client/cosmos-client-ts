@@ -19,7 +19,7 @@ export class MsgWithdrawDelegatorReward extends Msg {
    * @see Amino.reviver
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgWithdrawDelegatorReward(
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_address),
     );

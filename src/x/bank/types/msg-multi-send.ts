@@ -25,6 +25,6 @@ export class MsgMultiSend extends Msg {
   }
 
   static fromJSON(value: any) {
-    return new this(value.inputs, value.outputs);
+    return new MsgMultiSend(value.inputs, value.outputs);
   }
 }

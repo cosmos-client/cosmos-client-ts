@@ -16,7 +16,7 @@ export class MsgEditNFTMetadata implements Msg {
   ) {}
 
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgEditNFTMetadata(
       AccAddress.fromBech32(value.sender),
       value.id,
       value.denom,

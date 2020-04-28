@@ -21,7 +21,7 @@ export class MsgVote extends Msg {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgVote(
       value.proposal_id,
       AccAddress.fromBech32(value.voter),
       value.option,

@@ -27,7 +27,7 @@ export class ValAddress extends Address {
   }
 
   static fromPublicKey(publicKey: Buffer) {
-    return new this(this.hash160(publicKey));
+    return new ValAddress(this.hash160(publicKey));
   }
 
   /**

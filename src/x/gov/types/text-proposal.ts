@@ -15,7 +15,7 @@ export class TextProposal {
   ) {}
 
   static fromJSON(value: any) {
-    return new this(
+    return new TextProposal(
       value.proposal_id,
       value.title,
       value.description,

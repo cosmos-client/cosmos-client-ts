@@ -14,6 +14,10 @@ export class MsgBurnNFT implements Msg {
   ) {}
 
   public static fromJSON(value: any) {
-    return new this(AccAddress.fromBech32(value.sender), value.id, value.denom);
+    return new MsgBurnNFT(
+      AccAddress.fromBech32(value.sender),
+      value.id,
+      value.denom,
+    );
   }
 }

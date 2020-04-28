@@ -10,7 +10,7 @@ export class MsgTransferNFT implements Msg {
   ) {}
 
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgTransferNFT(
       AccAddress.fromBech32(value.sender),
       AccAddress.fromBech32(value.recipient),
       value.denom,

@@ -61,7 +61,7 @@ export class PrivKeyEd25519 implements PrivKey {
    */
   static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
-    return new this(buffer);
+    return new PrivKeyEd25519(buffer);
   }
 
   static fromJSON(value: any) {
@@ -118,7 +118,7 @@ export class PubKeyEd25519 implements PubKey {
    */
   static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
-    return new this(buffer);
+    return new PubKeyEd25519(buffer);
   }
 
   static fromJSON(value: any) {

@@ -21,11 +21,11 @@ export class MsgSend extends Msg {
   }
 
   /**
-   * 
+   *
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgSend(
       AccAddress.fromBech32(value.from_address),
       AccAddress.fromBech32(value.to_address),
       value.amount,

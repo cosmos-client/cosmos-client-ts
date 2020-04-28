@@ -25,7 +25,7 @@ export class MsgBeginRedelegate extends Msg {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgBeginRedelegate(
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_src_address),
       ValAddress.fromBech32(value.validator_dst_address),

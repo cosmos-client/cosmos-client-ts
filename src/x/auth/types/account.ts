@@ -27,7 +27,7 @@ export class BaseAccount {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new BaseAccount(
       AccAddress.fromBech32(value.address),
       value.coins,
       value.public_key,

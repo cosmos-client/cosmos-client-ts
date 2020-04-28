@@ -49,6 +49,6 @@ export class StdTx extends Tx {
   }
 
   static fromJSON(value: any) {
-    return new this(value.msg, value.fee, value.signatures, value.memo);
+    return new StdTx(value.msg, value.fee, value.signatures, value.memo);
   }
 }

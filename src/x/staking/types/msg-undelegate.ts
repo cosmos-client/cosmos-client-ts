@@ -18,11 +18,11 @@ export class MsgUndelegate extends Msg {
   }
 
   /**
-   * @see Amino.reviver
+   *
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgUndelegate(
       AccAddress.fromBech32(value.delegator_address),
       ValAddress.fromBech32(value.validator_address),
       value.amount,

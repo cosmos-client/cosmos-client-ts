@@ -22,7 +22,7 @@ export class MsgSubmitProposal extends Msg {
    * @param value
    */
   public static fromJSON(value: any) {
-    return new this(
+    return new MsgSubmitProposal(
       value.content,
       value.initial_deposit,
       AccAddress.fromBech32(value.proposer),
