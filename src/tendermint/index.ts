@@ -8,6 +8,7 @@ import { codec } from "../codec";
 import * as tendermint from "./api";
 
 export { tendermint };
+export * from "./crypto";
 export * from "./types";
 
 // Register codec
