@@ -11,10 +11,9 @@ npm install --save cosmos-client
 ## Example
 
 ```typescript
-import { CosmosSDK, AccAddress } from "cosmos-client";
+import { CosmosSDK, AccAddress, PrivKeyEd25519 } from "cosmos-client";
 import { auth, StdTx, BroadcastReq } from "cosmos-client/x/auth";
 import { bank, SendReq } from "cosmos-client/x/bank";
-import { PrivKeyEd25519 } from "cosmos-client/tendermint";
 
 const sdk = new CosmosSDK(hostURL, chainID);
 
