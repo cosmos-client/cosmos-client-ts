@@ -1,5 +1,5 @@
 import { Msg } from "../../../types/msg";
-import { description } from "./description";
+import { Description } from "./description";
 import { CommissionRates } from "./commission-rates";
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
@@ -17,7 +17,7 @@ export class MsgCreateValidator extends Msg {
    * @param value
    */
   constructor(
-    public description: description,
+    public description: Description,
     public commission: CommissionRates,
     public min_self_delegation: number,
     public delegator_address: AccAddress,

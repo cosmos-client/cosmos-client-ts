@@ -1,14 +1,18 @@
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
+import { Int } from "../../../types/int";
+import { Dec } from "../../../types";
 
 export type Redelegation = {
-  delegator_addr: AccAddress;
-  validator_src_addr: ValAddress;
-  validator_dst_addr: ValAddress;
+  delegator_address: AccAddress;
+  validator_src_address: ValAddress;
+  validator_dst_address: ValAddress;
+  entries: RedelegationEntry[];
+};
+
+export type RedelegationEntry = {
   creation_height: number;
-  min_time: number;
-  initial_balance: string;
-  balance: string;
-  shares_src: string;
-  shares_dst: string;
+  completion_time: string;
+  initial_balance: Int;
+  shares_dst: Dec;
 };

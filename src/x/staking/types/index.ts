@@ -8,7 +8,7 @@ export * from "./msg-create-validator";
 export * from "./msg-delegate";
 export * from "./msg-edit-validator";
 export * from "./msg-undelegate";
-export * from "./parameters";
+export * from "./params";
 export * from "./pool";
 export * from "./query-bonds-params";
 export * from "./query-delegator-params";

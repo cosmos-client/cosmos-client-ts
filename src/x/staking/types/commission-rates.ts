@@ -1,5 +1,7 @@
+import { Dec } from "../../../types";
+
 export type CommissionRates = {
-  rate: string;
-  max_rate: string;
-  max_change_rate: string;
+  rate: Dec;
+  max_rate: Dec;
+  max_change_rate: Dec;
 };

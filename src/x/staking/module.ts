@@ -13,7 +13,7 @@ import {
   Validator,
   Redelegation,
   Pool,
-  Parameters,
+  Params,
 } from "./types";
 import { AccAddress, ValAddress, SearchTxsResult } from "../../types";
 import { StdTx } from "../auth";
@@ -294,5 +294,5 @@ export function pool(sdk: CosmosSDK) {
  * @param sdk
  */
 export function params(sdk: CosmosSDK) {
-  return sdk.get<Parameters>(`/staking/parameters`);
+  return sdk.get<Params>(`/staking/parameters`);
 }

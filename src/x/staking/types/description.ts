@@ -1,4 +1,4 @@
-export type description = {
+export type Description = {
   moniker: string;
   identity: string;
   website: string;
