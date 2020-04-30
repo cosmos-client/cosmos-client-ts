@@ -17,14 +17,8 @@ export type BaseReq = {
   from: string;
   memo: string;
   chain_id: string;
-  /**
-   * Integer
-   */
-  account_number: string;
-  /**
-   * Integer
-   */
-  sequence: string;
+  account_number: number;
+  sequence: number;
   /**
    * The maximum amount the user is willing to pay in fees. Alternative to specifying gas prices.
    */

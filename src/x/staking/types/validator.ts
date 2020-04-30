@@ -1,6 +1,6 @@
 import { ValAddress } from "../../../types/address/val-address";
 import { description } from "./description";
-import { Commission } from "./commition";
+import { Commission } from "./commission";
 
 export type Validator = {
   operator_addr: ValAddress;

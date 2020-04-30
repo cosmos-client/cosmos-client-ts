@@ -1,4 +1,4 @@
-import { Dec } from "./decimal";
+import { Dec } from "./dec";
 
 export type DecCoin = {
   denom: string;

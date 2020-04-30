@@ -1,4 +1,4 @@
-import { Dec } from "../../../types/decimal";
+import { Dec } from "../../../types/dec";
 
 export type Params = {
   mint_denom: string;

@@ -5,7 +5,7 @@ export const codec = {
 
 export function toJSONString(value: any) {
   return JSON.stringify(value, (key, value) => {
-    const type = codec.type.get(value.constructor);
+    const type = codec.type.get(value?.constructor);
     if (type) {
       return {
         type,
@@ -20,8 +20,8 @@ export function toJSONString(value: any) {
 
 export function fromJSONString(json: string) {
   return JSON.parse(json, (key, value) => {
-    const _type: string | undefined = value.type;
-    const _value = value.value;
+    const _type: string | undefined = value?.type;
+    const _value: any | undefined = value?.value;
     if (_type && codec.fromJSON[_type]) {
       return codec.fromJSON[_type](_value);
     }

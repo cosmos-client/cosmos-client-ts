@@ -1,9 +1,9 @@
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
+import { Dec } from "../../../types/dec";
 
 export type Delegation = {
-  delegator_addr: AccAddress;
-  validator_addr: ValAddress;
-  shares: string;
-  height: number;
+  delegator_address: AccAddress;
+  validator_address: ValAddress;
+  shares: Dec;
 };

@@ -1,5 +1,5 @@
 export * from "./commission-rates";
-export * from "./commition";
+export * from "./commission";
 export * from "./delegate-request";
 export * from "./delegation";
 export * from "./description";

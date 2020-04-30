@@ -1,4 +1,4 @@
-import { Dec } from "../../../types/decimal";
+import { Dec } from "../../../types/dec";
 
 export type Minter = {
   inflation: Dec;

@@ -4,7 +4,7 @@ export * from "./address/val-address";
 
 export * from "./coin";
 export * from "./deccoin";
-export * from "./decimal";
+export * from "./dec";
 export * from "./errors";
 export * from "./events";
 export * from "./msg";

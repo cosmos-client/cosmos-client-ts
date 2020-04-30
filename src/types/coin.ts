@@ -1,7 +1,6 @@
+import { Int } from "./int";
+
 export type Coin = {
   denom: string;
-  /**
-   * Integer
-   */
-  amount: string;
+  amount: Int;
 };
