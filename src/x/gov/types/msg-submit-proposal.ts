@@ -1,6 +1,5 @@
 import { Msg } from "../../../types/msg";
 import { AccAddress } from "../../../types/address/acc-address";
-import { Content } from "./content";
 import { Coin } from "../../../types/coin";
 
 export class MsgSubmitProposal extends Msg {
@@ -10,7 +9,7 @@ export class MsgSubmitProposal extends Msg {
    * @param proposer
    */
   constructor(
-    public content: Content,
+    public content: any,
     public initial_deposit: Coin[],
     public proposer: AccAddress,
   ) {

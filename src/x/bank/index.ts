@@ -1,4 +1,4 @@
-import { MsgSend, MsgMultiSend, SendReq } from "./types";
+import { MsgSend, MsgMultiSend } from "./types";
 import { codec } from "../../codec";
 import * as bank from "./module";
 

@@ -52,3 +52,9 @@ const broadcastReq: BroadcastReq = {
 };
 await auth.broadcast(sdk, broadcastReq);
 ```
+
+## For library developlers
+
+```shell
+openapi-generator generate -g typescript-axios -i ../../cosmos/cosmos-sdk/client/lcd/swagger-ui/swagger.yaml -o ./src
+```
