@@ -4,9 +4,8 @@ import {
   CancelSoftwareUpgradeProposal,
 } from "./types";
 import { codec } from "../../codec";
-import * as upgrade from "./module";
 
-export { upgrade };
+export * as upgrade from "./module";
 export * from "./types";
 
 // Register codec

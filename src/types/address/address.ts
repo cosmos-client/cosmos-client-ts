@@ -2,12 +2,11 @@ import * as crypto from "crypto";
 
 const prefix = {
   cosmos: "cosmos",
+  public: "pub",
   account: "acc",
   validator: "val",
-  consensus: "cons",
-  public: "pub",
   operator: "oper",
-  address: "addr",
+  consensus: "cons",
 };
 export const bech32Prefix = {
   accAddr: prefix.cosmos,

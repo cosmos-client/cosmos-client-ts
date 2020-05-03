@@ -1,3 +1,1 @@
-import * as mint from "./module";
-
-export { mint };
+export * as mint from "./module";

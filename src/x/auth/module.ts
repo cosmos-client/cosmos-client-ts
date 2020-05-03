@@ -1,6 +1,9 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { PrivKey } from "../../tendermint";
 import { StdTx } from "./types/std-tx";
+import { AuthApi } from "../../api";
+import { AccAddress } from "../../types";
+import { BaseAccount } from "./types";
 
 /**
  *
@@ -31,4 +34,10 @@ export function signStdTx(
   newStdTx.signatures.push(signature);
 
   return newStdTx;
+}
+
+export function accountsAddressGet(sdk: CosmosSDK, address: AccAddress) {
+  return sdk.convertAxiosPromise<BaseAccount>(
+    new AuthApi(undefined, sdk.url).authAccountsAddressGet(address.toBech32()),
+  );
 }

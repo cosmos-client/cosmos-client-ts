@@ -3,10 +3,9 @@ import {
   MsgSetWithdrawAddress,
   MsgWithdrawValidatorCommission,
 } from "./types";
-import * as distribution from "./module";
 import { codec } from "../../codec";
 
-export { distribution };
+export * as distribution from "./module";
 export * from "./types";
 
 // Register codec

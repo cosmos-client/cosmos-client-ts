@@ -1171,58 +1171,58 @@ export interface VoteReq {
 /**
  *
  * @export
- * @interface InlineObject12
+ * @interface WithdrawRewardsReq
  */
-export interface InlineObject12 {
+export interface WithdrawRewardsReq {
   /**
    *
    * @type {BaseReq}
-   * @memberof InlineObject12
+   * @memberof WithdrawRewardsReq
    */
   base_req?: BaseReq;
 }
 /**
  *
  * @export
- * @interface InlineObject13
+ * @interface WithdrawRewardsReq
  */
-export interface InlineObject13 {
+export interface WithdrawRewardsReq {
   /**
    *
    * @type {BaseReq}
-   * @memberof InlineObject13
+   * @memberof WithdrawRewardsReq
    */
   base_req?: BaseReq;
 }
 /**
  *
  * @export
- * @interface InlineObject14
+ * @interface SetWithdrawAddressReq
  */
-export interface InlineObject14 {
+export interface SetWithdrawAddressReq {
   /**
    *
    * @type {BaseReq}
-   * @memberof InlineObject14
+   * @memberof SetWithdrawAddressReq
    */
   base_req?: BaseReq;
   /**
    * bech32 encoded address
    * @type {string}
-   * @memberof InlineObject14
+   * @memberof SetWithdrawAddressReq
    */
   withdraw_address?: string;
 }
 /**
  *
  * @export
- * @interface InlineObject15
+ * @interface WithdrawRewardsReq
  */
-export interface InlineObject15 {
+export interface WithdrawRewardsReq {
   /**
    *
    * @type {BaseReq}
-   * @memberof InlineObject15
+   * @memberof WithdrawRewardsReq
    */
   base_req?: BaseReq;
 }
@@ -1947,8 +1947,46 @@ export interface PostProposalReq {
 /**
  *
  * @export
- * @interface PostProposalReq
+ * @interface ParamChangeProposalReq
  */
+export interface ParamChangeProposalReq {
+  /**
+   *
+   * @type {BaseReq}
+   * @memberof ParamChangeProposalReq
+   */
+  base_req?: BaseReq;
+  /**
+   *
+   * @type {string}
+   * @memberof ParamChangeProposalReq
+   */
+  title?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ParamChangeProposalReq
+   */
+  description?: string;
+  /**
+   * bech32 encoded address
+   * @type {string}
+   * @memberof ParamChangeProposalReq
+   */
+  proposer?: string;
+  /**
+   *
+   * @type {Array<Coin>}
+   * @memberof ParamChangeProposalReq
+   */
+  deposit?: Array<Coin>;
+  /**
+   *
+   * @type {Array<ParamChange>}
+   * @memberof ParamChangeProposalReq
+   */
+  changes?: Array<ParamChange>;
+}
 /**
  *
  * @export
@@ -4096,13 +4134,13 @@ export const DistributionApiAxiosParamCreator = function (
      * Withdraw all the delegator\'s delegation rewards
      * @summary Withdraw all the delegator\'s delegation rewards
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject12} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrRewardsPost(
       delegatorAddr: string,
-      withdrawRequestBody?: InlineObject12,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options: any = {},
     ): RequestArgs {
       // verify required parameter 'delegatorAddr' is not null or undefined
@@ -4233,14 +4271,14 @@ export const DistributionApiAxiosParamCreator = function (
      * @summary Withdraw a delegation reward
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
      * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject13} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
       delegatorAddr: string,
       validatorAddr: string,
-      withdrawRequestBody?: InlineObject13,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options: any = {},
     ): RequestArgs {
       // verify required parameter 'delegatorAddr' is not null or undefined
@@ -4368,13 +4406,13 @@ export const DistributionApiAxiosParamCreator = function (
      * Replace the delegations\' rewards withdrawal address for a new one.
      * @summary Replace the rewards withdrawal address
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject14} [withdrawRequestBody]
+     * @param {SetWithdrawAddressReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrWithdrawAddressPost(
       delegatorAddr: string,
-      withdrawRequestBody?: InlineObject14,
+      withdrawRequestBody?: SetWithdrawAddressReq,
       options: any = {},
     ): RequestArgs {
       // verify required parameter 'delegatorAddr' is not null or undefined
@@ -4641,13 +4679,13 @@ export const DistributionApiAxiosParamCreator = function (
      * Withdraw the validator\'s self-delegation and commissions rewards
      * @summary Withdraw the validator\'s rewards
      * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject15} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionValidatorsValidatorAddrRewardsPost(
       validatorAddr: string,
-      withdrawRequestBody?: InlineObject15,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options: any = {},
     ): RequestArgs {
       // verify required parameter 'validatorAddr' is not null or undefined
@@ -4768,13 +4806,13 @@ export const DistributionApiFp = function (configuration?: Configuration) {
      * Withdraw all the delegator\'s delegation rewards
      * @summary Withdraw all the delegator\'s delegation rewards
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject12} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrRewardsPost(
       delegatorAddr: string,
-      withdrawRequestBody?: InlineObject12,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
     ): (
       axios?: AxiosInstance,
@@ -4834,14 +4872,14 @@ export const DistributionApiFp = function (configuration?: Configuration) {
      * @summary Withdraw a delegation reward
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
      * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject13} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
       delegatorAddr: string,
       validatorAddr: string,
-      withdrawRequestBody?: InlineObject13,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
     ): (
       axios?: AxiosInstance,
@@ -4898,13 +4936,13 @@ export const DistributionApiFp = function (configuration?: Configuration) {
      * Replace the delegations\' rewards withdrawal address for a new one.
      * @summary Replace the rewards withdrawal address
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject14} [withdrawRequestBody]
+     * @param {SetWithdrawAddressReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrWithdrawAddressPost(
       delegatorAddr: string,
-      withdrawRequestBody?: InlineObject14,
+      withdrawRequestBody?: SetWithdrawAddressReq,
       options?: any,
     ): (
       axios?: AxiosInstance,
@@ -5036,13 +5074,13 @@ export const DistributionApiFp = function (configuration?: Configuration) {
      * Withdraw the validator\'s self-delegation and commissions rewards
      * @summary Withdraw the validator\'s rewards
      * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject15} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionValidatorsValidatorAddrRewardsPost(
       validatorAddr: string,
-      withdrawRequestBody?: InlineObject15,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
     ): (
       axios?: AxiosInstance,
@@ -5112,13 +5150,13 @@ export const DistributionApiFactory = function (
      * Withdraw all the delegator\'s delegation rewards
      * @summary Withdraw all the delegator\'s delegation rewards
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject12} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrRewardsPost(
       delegatorAddr: string,
-      withdrawRequestBody?: InlineObject12,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
     ): AxiosPromise<BroadcastTxCommitResult> {
       return DistributionApiFp(
@@ -5155,14 +5193,14 @@ export const DistributionApiFactory = function (
      * @summary Withdraw a delegation reward
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
      * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject13} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
       delegatorAddr: string,
       validatorAddr: string,
-      withdrawRequestBody?: InlineObject13,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
     ): AxiosPromise<BroadcastTxCommitResult> {
       return DistributionApiFp(
@@ -5196,13 +5234,13 @@ export const DistributionApiFactory = function (
      * Replace the delegations\' rewards withdrawal address for a new one.
      * @summary Replace the rewards withdrawal address
      * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject14} [withdrawRequestBody]
+     * @param {SetWithdrawAddressReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionDelegatorsDelegatorAddrWithdrawAddressPost(
       delegatorAddr: string,
-      withdrawRequestBody?: InlineObject14,
+      withdrawRequestBody?: SetWithdrawAddressReq,
       options?: any,
     ): AxiosPromise<BroadcastTxCommitResult> {
       return DistributionApiFp(
@@ -5282,13 +5320,13 @@ export const DistributionApiFactory = function (
      * Withdraw the validator\'s self-delegation and commissions rewards
      * @summary Withdraw the validator\'s rewards
      * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject15} [withdrawRequestBody]
+     * @param {WithdrawRewardsReq} [withdrawRequestBody]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     distributionValidatorsValidatorAddrRewardsPost(
       validatorAddr: string,
-      withdrawRequestBody?: InlineObject15,
+      withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
     ): AxiosPromise<BroadcastTxCommitResult> {
       return DistributionApiFp(
@@ -5346,14 +5384,14 @@ export class DistributionApi extends BaseAPI {
    * Withdraw all the delegator\'s delegation rewards
    * @summary Withdraw all the delegator\'s delegation rewards
    * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-   * @param {InlineObject12} [withdrawRequestBody]
+   * @param {WithdrawRewardsReq} [withdrawRequestBody]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof DistributionApi
    */
   public distributionDelegatorsDelegatorAddrRewardsPost(
     delegatorAddr: string,
-    withdrawRequestBody?: InlineObject12,
+    withdrawRequestBody?: WithdrawRewardsReq,
     options?: any,
   ) {
     return DistributionApiFp(
@@ -5393,7 +5431,7 @@ export class DistributionApi extends BaseAPI {
    * @summary Withdraw a delegation reward
    * @param {string} delegatorAddr Bech32 AccAddress of Delegator
    * @param {string} validatorAddr Bech32 OperatorAddress of validator
-   * @param {InlineObject13} [withdrawRequestBody]
+   * @param {WithdrawRewardsReq} [withdrawRequestBody]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof DistributionApi
@@ -5401,7 +5439,7 @@ export class DistributionApi extends BaseAPI {
   public distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
     delegatorAddr: string,
     validatorAddr: string,
-    withdrawRequestBody?: InlineObject13,
+    withdrawRequestBody?: WithdrawRewardsReq,
     options?: any,
   ) {
     return DistributionApiFp(
@@ -5438,14 +5476,14 @@ export class DistributionApi extends BaseAPI {
    * Replace the delegations\' rewards withdrawal address for a new one.
    * @summary Replace the rewards withdrawal address
    * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-   * @param {InlineObject14} [withdrawRequestBody]
+   * @param {SetWithdrawAddressReq} [withdrawRequestBody]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof DistributionApi
    */
   public distributionDelegatorsDelegatorAddrWithdrawAddressPost(
     delegatorAddr: string,
-    withdrawRequestBody?: InlineObject14,
+    withdrawRequestBody?: SetWithdrawAddressReq,
     options?: any,
   ) {
     return DistributionApiFp(
@@ -5534,14 +5572,14 @@ export class DistributionApi extends BaseAPI {
    * Withdraw the validator\'s self-delegation and commissions rewards
    * @summary Withdraw the validator\'s rewards
    * @param {string} validatorAddr Bech32 OperatorAddress of validator
-   * @param {InlineObject15} [withdrawRequestBody]
+   * @param {WithdrawRewardsReq} [withdrawRequestBody]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof DistributionApi
    */
   public distributionValidatorsValidatorAddrRewardsPost(
     validatorAddr: string,
-    withdrawRequestBody?: InlineObject15,
+    withdrawRequestBody?: WithdrawRewardsReq,
     options?: any,
   ) {
     return DistributionApiFp(
@@ -5880,12 +5918,12 @@ export const GovernanceApiAxiosParamCreator = function (
     /**
      * Generate a parameter change proposal transaction
      * @summary Generate a parameter change proposal transaction
-     * @param {PostProposalReq} postProposalBody
+     * @param {ParamChangeProposalReq} postProposalBody
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     govProposalsParamChangePost(
-      postProposalBody: PostProposalReq,
+      postProposalBody: ParamChangeProposalReq,
       options: any = {},
     ): RequestArgs {
       // verify required parameter 'postProposalBody' is not null or undefined

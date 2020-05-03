@@ -1,20 +1,12 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Coin } from "../../types";
+import { SupplyApi } from "../../api";
 
-/**
- * `/supply/total`
- * @param supplyQuery
- */
-export function getTotalSupply(sdk: CosmosSDK) {
-  return sdk.get<Coin[]>("/supply/total");
+export function totalDenominationGet(sdk: CosmosSDK, denomination: string) {
+  return new SupplyApi(undefined, sdk.url).supplyTotalDenominationGet(
+    denomination,
+  );
 }
 
-/**
- * `/supply/total/{denom}`
- * @param supplyQuery
- * @param denom
- */
-
-export function getSupplyOf(sdk: CosmosSDK, denom: string) {
-  return sdk.get<Coin>(`/supply/total/${denom}`);
+export function totalGet(sdk: CosmosSDK) {
+  return new SupplyApi(undefined, sdk.url).supplyTotalGet();
 }

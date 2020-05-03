@@ -1,23 +1,23 @@
-import { StdTx } from "../auth";
 import { CosmosSDK } from "../../cosmos-sdk";
-import { Coin, AccAddress } from "../../types";
-import { SendReq } from "./types";
+import { BankApi, SendReq } from "../../api";
+import { AccAddress } from "../../types";
+import { StdTx } from "../auth";
 
-/**
- * `/bank/accounts/{address}/transfers`
- * @param sdk
- * @param address
- * @param req
- */
-export function send(sdk: CosmosSDK, address: AccAddress, req: SendReq) {
-  return sdk.post<StdTx>(`/bank/accounts/${address.toBech32()}/transfers`, req);
+export function balancesAddressGet(sdk: CosmosSDK, address: AccAddress) {
+  return new BankApi(undefined, sdk.url).bankBalancesAddressGet(
+    address.toBech32(),
+  );
 }
 
-/**
- * `/bank/balances/{address}`
- * @param sdk
- * @param address
- */
-export function queryBalances(sdk: CosmosSDK, address: AccAddress) {
-  return sdk.get<Coin[]>(`/bank/balances/${address.toBech32()}`);
+export function accountsAddressTransfersPost(
+  sdk: CosmosSDK,
+  address: AccAddress,
+  req: SendReq,
+) {
+  return sdk.convertAxiosPromise<StdTx>(
+    new BankApi(undefined, sdk.url).bankAccountsAddressTransfersPost(
+      address.toBech32(),
+      req,
+    ),
+  );
 }
