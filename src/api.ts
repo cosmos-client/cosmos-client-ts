@@ -1896,7 +1896,7 @@ export interface RedelegateReq {
 export interface UnjailReq {
   /**
    *
-   * @type {StdTx}
+   * @type {BaseReq}
    * @memberof UnjailReq
    */
   base_req?: BaseReq;
