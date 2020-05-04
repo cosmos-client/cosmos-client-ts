@@ -7335,13 +7335,13 @@ export class GovernanceApi extends BaseAPI {
   /**
    * Generate a parameter change proposal transaction
    * @summary Generate a parameter change proposal transaction
-   * @param {PostProposalReq} postProposalBody
+   * @param {ParamChangeProposalReq} postProposalBody
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GovernanceApi
    */
   public govProposalsParamChangePost(
-    postProposalBody: PostProposalReq,
+    postProposalBody: ParamChangeProposalReq,
     options?: any,
   ) {
     return GovernanceApiFp(this.configuration).govProposalsParamChangePost(

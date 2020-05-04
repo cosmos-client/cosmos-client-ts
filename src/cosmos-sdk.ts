@@ -11,7 +11,7 @@ export class CosmosSDK {
    */
   constructor(public url: string, public chainID: string) {}
 
-  convertAxiosPromise<T>(promise: AxiosPromise<any>): AxiosPromise<T> {
+  parseAminoJSON<T>(promise: AxiosPromise<any>): AxiosPromise<T> {
     return promise.then((res) => ({
       ...res,
       data: codec.fromJSONString(JSON.stringify(res.data)) as T,

@@ -1,7 +1,13 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { PrivKey } from "../../tendermint";
 import { StdTx } from "./types/std-tx";
-import { AuthApi } from "../../api";
+import {
+  AuthApi,
+  TransactionsApi,
+  DecodeReq,
+  EncodeReq,
+  BroadcastReq,
+} from "../../api";
 import { AccAddress } from "../../types";
 import { BaseAccount } from "./types";
 
@@ -37,7 +43,45 @@ export function signStdTx(
 }
 
 export function accountsAddressGet(sdk: CosmosSDK, address: AccAddress) {
-  return sdk.convertAxiosPromise<BaseAccount>(
+  return sdk.parseAminoJSON<BaseAccount>(
     new AuthApi(undefined, sdk.url).authAccountsAddressGet(address.toBech32()),
   );
 }
+
+export function txsDecodePost(sdk: CosmosSDK, req: DecodeReq) {
+  return sdk.parseAminoJSON<StdTx>(
+    new TransactionsApi(undefined, sdk.url).txsDecodePost(req),
+  );
+}
+
+export function txsEncodePost(sdk: CosmosSDK, req: EncodeReq) {
+  return new TransactionsApi(undefined, sdk.url).txsEncodePost(req);
+}
+
+export function txsGet(
+  sdk: CosmosSDK,
+  messageAction?: string,
+  messageSender?: string,
+  page?: number,
+  limit?: number,
+  txMinHeight?: number,
+  txMaxHeight?: number,
+) {
+  return new TransactionsApi(undefined, sdk.url).txsGet(
+    messageAction,
+    messageSender,
+    page,
+    limit,
+    txMinHeight,
+    txMaxHeight,
+  );
+}
+
+export function txsHashGet(sdk: CosmosSDK, hash: string) {
+  return new TransactionsApi(undefined, sdk.url).txsHashGet(hash);
+}
+
+export function txsPost(sdk: CosmosSDK, req: BroadcastReq) {
+  return new TransactionsApi(undefined, sdk.url).txsPost(req);
+}
+

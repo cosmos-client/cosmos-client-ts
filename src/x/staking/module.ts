@@ -41,7 +41,7 @@ export function delegatorsDelegatorAddrRedelegationsPost(
   sdk: CosmosSDK,
   delegator: AccAddress,
 ) {
-  return sdk.convertAxiosPromise<StdTx>(
+  return sdk.parseAminoJSON<StdTx>(
     new StakingApi(
       undefined,
       sdk.url,

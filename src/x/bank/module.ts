@@ -14,7 +14,7 @@ export function accountsAddressTransfersPost(
   address: AccAddress,
   req: SendReq,
 ) {
-  return sdk.convertAxiosPromise<StdTx>(
+  return sdk.parseAminoJSON<StdTx>(
     new BankApi(undefined, sdk.url).bankAccountsAddressTransfersPost(
       address.toBech32(),
       req,
