@@ -1,6 +1,6 @@
 import { Msg } from "../../../types/msg";
 import { AccAddress } from "../../../types/address/acc-address";
-import { Coin } from "../../../types/coin";
+import { Coin } from "../../../api";
 
 export class MsgDeposit extends Msg {
   /**
@@ -17,7 +17,7 @@ export class MsgDeposit extends Msg {
   }
 
   /**
-   * @see amino.reviver
+   *
    * @param value
    */
   public static fromJSON(value: any) {

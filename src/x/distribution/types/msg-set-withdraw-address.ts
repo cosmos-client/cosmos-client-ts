@@ -14,7 +14,8 @@ export class MsgSetWithdrawAddress extends Msg {
   }
 
   /**
-   * @see Amino.reviver
+   *
+   * @param value
    */
   public static fromJSON(value: any) {
     return new MsgSetWithdrawAddress(

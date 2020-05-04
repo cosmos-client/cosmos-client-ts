@@ -1,14 +1,8 @@
-import {
-  PrivKeyEd25519,
-  PubKeyEd25519,
-  PrivKeySecp256k1,
-  PubKeySecp256k1,
-} from "./crypto";
+import { PrivKeyEd25519, PubKeyEd25519 } from "./types/ed25519";
+import { PrivKeySecp256k1, PubKeySecp256k1 } from "./types/secp256k1";
 import { codec } from "../codec";
-import * as tendermint from "./api";
 
-export { tendermint };
-export * from "./crypto";
+export * as tendermint from "./module";
 export * from "./types";
 
 // Register codec

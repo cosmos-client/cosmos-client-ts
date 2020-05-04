@@ -12,32 +12,27 @@ npm install --save cosmos-client
 
 ```typescript
 import { CosmosSDK, AccAddress, PrivKeyEd25519 } from "cosmos-client";
-import { auth, StdTx, BroadcastReq } from "cosmos-client/x/auth";
-import { bank, SendReq } from "cosmos-client/x/bank";
+import { auth, StdTx } from "cosmos-client/x/auth";
+import { bank } from "cosmos-client/x/bank";
 
 const sdk = new CosmosSDK(hostURL, chainID);
 
 // get account info
 let fromAddress: AccAddress;
 let privKey: PrivKeyEd25519;
-const account = await auth.queryAccount(sdk, fromAddress);
-if (account instanceof Error) {
-  console.error(account);
-  return;
-}
+const account = await auth
+  .accountsAddressGet(sdk, fromAddress)
+  .then((res) => res.data);
 
 // get unsigned tx
 let toAddress: AccAddress;
-let sendReq: SendReq;
 
-const unsignedStdTx: StdTx = await bank.send(sdk, toAddress, sendReq);
-if (unsignedStdTx instanceof Error) {
-  console.error(unsignedStdTx);
-  return;
-}
+const unsignedStdTx = await bank
+  .accountsAddressTransfersPost(sdk, toAddress, { ... })
+  .then((res) => res.data);
 
 // sign
-const signedStdTx: StdTx = auth.signStdTx(
+const signedStdTx = auth.signStdTx(
   sdk,
   privKey,
   unsignedStdTx,
@@ -46,9 +41,13 @@ const signedStdTx: StdTx = auth.signStdTx(
 );
 
 // broadcast
-const broadcastReq: BroadcastReq = {
-  tx: signedStdTx,
-  mode: "sync",
-};
-await auth.broadcast(sdk, broadcastReq);
+await auth.txsPost(sdk, signedStdTx, "sync");
+```
+
+## For library developlers
+
+[swagger.yml](https://github.com/cosmos/cosmos-sdk/blob/master/client/lcd/swagger-ui/swagger.yaml)
+
+```shell
+openapi-generator generate -g typescript-axios -i swagger.yaml -o ./src
 ```

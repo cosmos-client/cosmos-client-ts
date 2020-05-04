@@ -1,10 +1,8 @@
 import { Msg } from "../../../types/msg";
-import { Description } from "./description";
-import { CommissionRates } from "./commission-rates";
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
-import { Coin } from "../../../types/coin";
 import { PubKey } from "../../../tendermint";
+import { ValidatorDescription, Coin } from "../../../api";
 
 export class MsgCreateValidator extends Msg {
   /**
@@ -17,8 +15,12 @@ export class MsgCreateValidator extends Msg {
    * @param value
    */
   constructor(
-    public description: Description,
-    public commission: CommissionRates,
+    public description: ValidatorDescription,
+    public commission: {
+      rate: string;
+      max_rate: string;
+      max_change_rate: string;
+    },
     public min_self_delegation: number,
     public delegator_address: AccAddress,
     public validator_address: ValAddress,
@@ -27,8 +29,9 @@ export class MsgCreateValidator extends Msg {
   ) {
     super();
   }
+
   /**
-   * @see Amino.reviver
+   *
    * @param value
    */
   public static fromJSON(value: any) {

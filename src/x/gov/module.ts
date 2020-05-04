@@ -1,135 +1,144 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import {
-  TallyResult,
-  Proposer,
-  TextProposal,
-  Vote,
-  Deposit,
-  DepositParams,
-  VotingParams,
-  TallyParams,
+  GovernanceApi,
+  ParamChangeProposalReq,
   PostProposalReq,
   DepositReq,
   VoteReq,
-} from "./types";
+} from "../../api";
+import { AccAddress } from "../../types";
 import { StdTx } from "../auth";
+import { TextProposal } from "./types";
 
-/**
- * `/gov/proposals`
- * @param sdk
- * @param req
- */
-export function postProposal(sdk: CosmosSDK, req: PostProposalReq) {
-  return sdk.post<StdTx>("/gov/proposals", req);
+export function parametersDepositGet(sdk: CosmosSDK) {
+  return new GovernanceApi(undefined, sdk.url).govParametersDepositGet();
 }
 
-/**
- * `/gov/proposals/{proposalID}/deposits`
- * @param sdk
- * @param proposalID
- * @param req
- */
-export function deposit(sdk: CosmosSDK, proposalID: string, req: DepositReq) {
-  return sdk.post<StdTx>(`/gov/proposals/${proposalID}/deposits`, req);
+export function parametersTallyingGet(sdk: CosmosSDK) {
+  return new GovernanceApi(undefined, sdk.url).govParametersTallyingGet();
 }
 
-/**
- * `/gov/proposals/{proposalID}/votes`
- * @param sdk
- * @param proposalID
- * @param req
- */
-export function vote(sdk: CosmosSDK, proposalID: string, req: VoteReq) {
-  return sdk.post<StdTx>(`/gov/proposals/${proposalID}/votes`, req);
+export function parametersVotingGet(sdk: CosmosSDK) {
+  return new GovernanceApi(undefined, sdk.url).govParametersVotingGet();
 }
 
-/**
- * `/gov/parameters/{type}`
- * @param sdk
- * @param type
- */
-export function queryParams(
+export function proposalsGet(
   sdk: CosmosSDK,
-  type: "depositparams" | "votingparams" | "tallyparams",
+  voter?: AccAddress,
+  depositor?: AccAddress,
+  status?: "deposit_period" | "voting_period" | "passed" | "rejected",
 ) {
-  return sdk.get<DepositParams | VotingParams | TallyParams>(
-    `/gov/parameters/${type}`,
+  return new GovernanceApi(undefined, sdk.url).govProposalsGet(
+    voter?.toBech32(),
+    depositor?.toBech32(),
+    status,
   );
 }
 
-/**
- * `/gov/proposals`
- * @param sdk
- */
-export function queryProposals(sdk: CosmosSDK) {
-  return sdk.get<TextProposal[]>("/gov/proposals");
+export function proposalsParamChangePost(
+  sdk: CosmosSDK,
+  req: ParamChangeProposalReq,
+) {
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new GovernanceApi(undefined, sdk.url).govProposalsParamChangePost(req),
+  );
 }
 
-/**
- * `/gov/proposals/{proposalID}`
- * @param sdk
- * @param proposalID
- */
-export function queryProposal(sdk: CosmosSDK, proposalID: string) {
-  return sdk.get<TextProposal>(`/gov/proposals/${proposalID}`);
+export function proposalsPost(sdk: CosmosSDK, req: PostProposalReq) {
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new GovernanceApi(undefined, sdk.url).govProposalsPost(req),
+  );
 }
 
-/**
- * `/gov/proposals/{proposalID}/proposer`
- * @param sdk
- * @param proposalID
- */
-export function queryProposer(sdk: CosmosSDK, proposalID: string) {
-  return sdk.get<Proposer>(`/gov/proposals/${proposalID}/proposer`);
-}
-
-/**
- * `/gov/proposals/{proposalID}/deposits`
- * @param sdk
- * @param proposalID
- */
-export function queryDeposits(sdk: CosmosSDK, proposalID: string) {
-  return sdk.get<Deposit[]>(`/gov/proposals/${proposalID}/deposits`);
-}
-
-/**
- * `/gov/proposals/{proposalID}/deposits/{depositer}`
- * @param sdk
- * @param proposalID
- * @param depositer
- */
-export function queryDeposit(
+export function proposalsProposalIdDepositsDepositorGet(
   sdk: CosmosSDK,
   proposalID: string,
-  depositer: string,
+  depositor: AccAddress,
 ) {
-  return sdk.get<Deposit>(`/gov/proposals/${proposalID}/deposits/${depositer}`);
+  return new GovernanceApi(
+    undefined,
+    sdk.url,
+  ).govProposalsProposalIdDepositsDepositorGet(
+    proposalID,
+    depositor.toBech32(),
+  );
 }
 
-/**
- * `/gov/proposals/{proposalID}/tally`
- * @param sdk
- * @param proposalID
- */
-export function queryTally(sdk: CosmosSDK, proposalID: string) {
-  return sdk.get<TallyResult>(`/gov/proposals/${proposalID}/tally`);
+export function proposalsProposalIdDepositsGet(
+  sdk: CosmosSDK,
+  proposalID: string,
+) {
+  return new GovernanceApi(
+    undefined,
+    sdk.url,
+  ).govProposalsProposalIdDepositsGet(proposalID);
 }
 
-/**
- * `/gov/proposals/{proposalID}/votes`
- * @param sdk
- * @param proposalID
- */
-export function queryVotes(sdk: CosmosSDK, proposalID: string) {
-  return sdk.get<Vote[]>(`/gov/proposals/${proposalID}/votes`);
+export function proposalsProposalIdDepositsPost(
+  sdk: CosmosSDK,
+  proposalID: string,
+  req: DepositReq,
+) {
+  return new GovernanceApi(
+    undefined,
+    sdk.url,
+  ).govProposalsProposalIdDepositsPost(proposalID, req);
 }
 
-/**
- * `/gov/proposals/{proposalID}/votes/{voter}`
- * @param sdk
- * @param proposalID
- * @param voter
- */
-export function queryVote(sdk: CosmosSDK, proposalID: string, voter: string) {
-  return sdk.get<Vote>(`/gov/proposals/${proposalID}/votes/${voter}`);
+export function proposalsProposalIdGet(sdk: CosmosSDK, proposalID: string) {
+  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdGet(
+    proposalID,
+  );
+}
+
+export function proposalsProposalIdProposerGet(
+  sdk: CosmosSDK,
+  proposalID: string,
+) {
+  return new GovernanceApi(
+    undefined,
+    sdk.url,
+  ).govProposalsProposalIdProposerGet(proposalID);
+}
+
+export function proposalsProposalIdTallyGet(
+  sdk: CosmosSDK,
+  proposalID: string,
+) {
+  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdTallyGet(
+    proposalID,
+  );
+}
+
+export function proposalsProposalIdVotesGet(
+  sdk: CosmosSDK,
+  proposalID: string,
+) {
+  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesGet(
+    proposalID,
+  );
+}
+
+export function proposalsProposalIdVotesPost(
+  sdk: CosmosSDK,
+  proposalID: string,
+  req: VoteReq,
+) {
+  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesPost(
+    proposalID,
+    req,
+  );
+}
+
+export function proposalsProposalIdVotesVoterGet(
+  sdk: CosmosSDK,
+  proposalID: string,
+  voter: AccAddress,
+) {
+  return new GovernanceApi(
+    undefined,
+    sdk.url,
+  ).govProposalsProposalIdVotesVoterGet(proposalID, voter.toBech32());
 }

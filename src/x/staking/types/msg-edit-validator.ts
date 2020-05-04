@@ -1,8 +1,6 @@
 import { Msg } from "../../../types/msg";
-import { Description } from "./description";
 import { ValAddress } from "../../../types/address/val-address";
-import { Dec } from "../../../types";
-import { Int } from "../../../types/int";
+import { ValidatorDescription } from "../../../api";
 
 export class MsgEditValidator extends Msg {
   /**
@@ -12,16 +10,16 @@ export class MsgEditValidator extends Msg {
    * @param min_self_delegation
    */
   constructor(
-    public description: Description,
+    public description: ValidatorDescription,
     public validator_address: ValAddress,
-    public committion_rate: Dec,
-    public min_self_delegation: Int,
+    public committion_rate: string,
+    public min_self_delegation: string,
   ) {
     super();
   }
 
   /**
-   * @see Amino.reviver
+   *
    * @param value
    */
   public static fromJSON(value: any) {

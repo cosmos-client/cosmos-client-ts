@@ -10,9 +10,9 @@ export class MsgWithdrawValidatorCommission extends Msg {
   }
 
   /**
-   * @see Amino.reviver
+   *
+   * @param value
    */
-
   public static fromJSON(value: any) {
     return new MsgWithdrawValidatorCommission(
       ValAddress.fromBech32(value.validator_address),

@@ -6,9 +6,8 @@ import {
   MsgUndelegate,
 } from "./types";
 import { codec } from "../../codec";
-import * as staking from "./module";
 
-export { staking };
+export * as staking from "./module";
 export * from "./types";
 
 // Register Codec

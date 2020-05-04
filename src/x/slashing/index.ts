@@ -1,8 +1,7 @@
 import { MsgUnjail } from "./types";
 import { codec } from "../../codec";
-import * as slashing from "./module";
 
-export { slashing };
+export * as slashing from "./module";
 export * from "./types";
 
 // Register codec

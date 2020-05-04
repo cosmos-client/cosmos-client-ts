@@ -1,21 +1,20 @@
 import * as crypto from "crypto";
 
 const prefix = {
-  main: "cosmos",
+  cosmos: "cosmos",
+  public: "pub",
   account: "acc",
   validator: "val",
-  consensus: "cons",
-  public: "pub",
   operator: "oper",
-  address: "addr",
+  consensus: "cons",
 };
 export const bech32Prefix = {
-  accAddr: prefix.main,
-  accPub: prefix.main + prefix.public,
-  valAddr: prefix.main + prefix.validator + prefix.operator,
-  valPub: prefix.main + prefix.validator + prefix.operator + prefix.public,
-  consAddr: prefix.main + prefix.validator + prefix.consensus,
-  consPub: prefix.main + prefix.validator + prefix.consensus + prefix.public,
+  accAddr: prefix.cosmos,
+  accPub: prefix.cosmos + prefix.public,
+  valAddr: prefix.cosmos + prefix.validator + prefix.operator,
+  valPub: prefix.cosmos + prefix.validator + prefix.operator + prefix.public,
+  consAddr: prefix.cosmos + prefix.validator + prefix.consensus,
+  consPub: prefix.cosmos + prefix.validator + prefix.consensus + prefix.public,
 };
 
 /**
@@ -43,15 +42,9 @@ export class Address {
       .update(buffer)
       .digest();
     try {
-      return crypto
-        .createHash("rmd160")
-        .update(sha256Hash)
-        .digest();
+      return crypto.createHash("rmd160").update(sha256Hash).digest();
     } catch (err) {
-      return crypto
-        .createHash("ripemd160")
-        .update(sha256Hash)
-        .digest();
+      return crypto.createHash("ripemd160").update(sha256Hash).digest();
     }
   }
 

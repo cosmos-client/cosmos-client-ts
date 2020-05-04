@@ -1,9 +1,9 @@
 import { Msg } from "../../../types/msg";
-import { StdFee } from "./std-fee";
 import { StdSignature } from "./std-signature";
 import { StdSignMsg } from "./std-sign-msg";
 import { Tx } from "../../../types/tx";
 import { codec } from "../../../codec";
+import { StdTx as StdTxObject, StdTxFee } from "../../../api";
 
 /**
  *
@@ -18,7 +18,7 @@ export class StdTx extends Tx {
    */
   constructor(
     public msg: (Msg | codec.AminoWrapping)[],
-    public fee: StdFee,
+    public fee: StdTxFee,
     public signatures: StdSignature[],
     public memo: string,
   ) {
@@ -46,6 +46,10 @@ export class StdTx extends Tx {
     );
 
     return new Buffer(sortedJSON);
+  }
+
+  toObject(): StdTxObject {
+    return JSON.parse(codec.toJSONString(this)).value;
   }
 
   static fromJSON(value: any) {

@@ -1,5 +1,5 @@
-import { Coin } from "../../../types/coin";
 import { Msg } from "../../../types/msg";
+import { Coin } from "../../../api";
 
 export type Input = {
   address: string;

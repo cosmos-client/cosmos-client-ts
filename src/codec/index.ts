@@ -1,2 +1,1 @@
-import * as codec from "./amino";
-export { codec };
+export * as codec from "./module";

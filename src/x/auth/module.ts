@@ -1,11 +1,9 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { TxResponse, SearchTxsResult, AccAddress } from "../../types";
 import { PrivKey } from "../../tendermint";
-import { BroadcastReq } from "./types/broadcast-req";
-import { BaseAccount } from "./types/account";
 import { StdTx } from "./types/std-tx";
-import { EncodeResp } from "./types/encode-resp";
-import { DecodeReq } from "./types";
+import { AuthApi, TransactionsApi, DecodeReq, EncodeReq } from "../../api";
+import { AccAddress } from "../../types";
+import { BaseAccount, StdSignature } from "./types";
 
 /**
  *
@@ -22,78 +20,69 @@ export function signStdTx(
   sequence: number,
 ) {
   const signBytes = stdTx.getSignBytes(sdk.chainID, accountNumber, sequence);
-  const signature = {
-    signature: privKey.sign(signBytes).toString("base64"),
+  const signature: StdSignature = {
     pub_key: privKey.getPubKey(),
+    signature: privKey.sign(signBytes).toString("base64"),
   };
 
   const newStdTx = new StdTx(
     stdTx.msg,
     stdTx.fee,
-    stdTx.signatures,
+    [...stdTx.signatures, signature],
     stdTx.memo,
   );
-  newStdTx.signatures.push(signature);
 
   return newStdTx;
 }
 
-/**
- * `/auth/accounts/{address}`
- * @param sdk
- * @param address
- */
-export function queryAccount(sdk: CosmosSDK, address: AccAddress) {
-  return sdk.get<BaseAccount>(`/auth/accounts/${address.toBech32()}`);
+export function accountsAddressGet(sdk: CosmosSDK, address: AccAddress) {
+  return sdk.instancifyObjectWithoutAminoJSON<BaseAccount>(
+    BaseAccount,
+    new AuthApi(undefined, sdk.url).authAccountsAddressGet(address.toBech32()),
+  );
 }
 
-/**
- * `/txs/{hash}`
- * @param sdk
- * @param hash
- */
-export function queryTx(sdk: CosmosSDK, hash: string) {
-  return sdk.get<TxResponse>(`/txs/${hash}`);
+export function txsDecodePost(sdk: CosmosSDK, req: DecodeReq) {
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new TransactionsApi(undefined, sdk.url).txsDecodePost(req),
+  );
 }
 
-/**
- * `/txs`
- * @param sdk
- * @param params
- */
-export function queryTxs(
+export function txsEncodePost(sdk: CosmosSDK, req: EncodeReq) {
+  return new TransactionsApi(undefined, sdk.url).txsEncodePost(req);
+}
+
+export function txsGet(
   sdk: CosmosSDK,
-  params: {
-    "message.action"?: string;
-    "message.sender"?: string;
-    page?: number;
-    limit?: number;
-  },
+  messageAction?: string,
+  messageSender?: string,
+  page?: number,
+  limit?: number,
+  txMinHeight?: number,
+  txMaxHeight?: number,
 ) {
-  return sdk.get<SearchTxsResult>(`/txs`, params);
+  return new TransactionsApi(undefined, sdk.url).txsGet(
+    messageAction,
+    messageSender,
+    page,
+    limit,
+    txMinHeight,
+    txMaxHeight,
+  );
 }
 
-/**
- * `/txs`
- * @param sdk
- * @param broadcastReq
- */
-export function broadcast(sdk: CosmosSDK, broadcastReq: BroadcastReq) {
-  return sdk.post<TxResponse>(`/txs`, broadcastReq);
+export function txsHashGet(sdk: CosmosSDK, hash: string) {
+  return new TransactionsApi(undefined, sdk.url).txsHashGet(hash);
 }
 
-/**
- * `/txs/encode`
- * @param sdk
- */
-export function encode(sdk: CosmosSDK, tx: StdTx) {
-  return sdk.post<EncodeResp>(`/txs/encode`, tx);
-}
-
-/**
- * `/txs/decode`
- * @param sdk
- */
-export function decode(sdk: CosmosSDK, req: DecodeReq) {
-  return sdk.post<StdTx>(`/txs/decode`, req);
+export function txsPost(
+  sdk: CosmosSDK,
+  tx: StdTx,
+  mode: "sync" | "async" | "block",
+) {
+  return new TransactionsApi(undefined, sdk.url).txsPost({
+    tx: sdk.objectifyInstanceWithoutAminoJSON(tx),
+    mode: mode,
+  });
 }

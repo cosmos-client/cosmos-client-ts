@@ -1,6 +1,5 @@
 import { Msg } from "../../../types/msg";
 import { AccAddress } from "../../../types/address/acc-address";
-import { VoteOption } from "./vote-option";
 
 export class MsgVote extends Msg {
   /**
@@ -11,13 +10,12 @@ export class MsgVote extends Msg {
   constructor(
     public proposal_id: number,
     public voter: AccAddress,
-    public option: VoteOption,
+    public option: any,
   ) {
     super();
   }
 
   /**
-   * @see Amino.reviver
    * @param value
    */
   public static fromJSON(value: any) {
