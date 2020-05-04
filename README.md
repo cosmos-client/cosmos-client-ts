@@ -27,12 +27,12 @@ const account = await auth
 // get unsigned tx
 let toAddress: AccAddress;
 
-const unsignedStdTx: StdTx = await bank
+const unsignedStdTx = await bank
   .accountsAddressTransfersPost(sdk, toAddress, { ... })
   .then((res) => res.data);
 
 // sign
-const signedStdTx: StdTx = auth.signStdTx(
+const signedStdTx = auth.signStdTx(
   sdk,
   privKey,
   unsignedStdTx,
@@ -41,10 +41,7 @@ const signedStdTx: StdTx = auth.signStdTx(
 );
 
 // broadcast
-await auth.txsPost(sdk, {
-  tx: signedStdTx.toObject(),
-  mode: "sync",
-});
+await auth.txsPost(sdk, signedStdTx, "sync");
 ```
 
 ## For library developlers

@@ -14,7 +14,8 @@ export function accountsAddressTransfersPost(
   address: AccAddress,
   req: SendReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new BankApi(undefined, sdk.url).bankAccountsAddressTransfersPost(
       address.toBech32(),
       req,

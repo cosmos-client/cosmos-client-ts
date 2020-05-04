@@ -28,12 +28,10 @@ export function proposalsGet(
   depositor?: AccAddress,
   status?: "deposit_period" | "voting_period" | "passed" | "rejected",
 ) {
-  return sdk.parseAminoJSON<TextProposal[]>(
-    new GovernanceApi(undefined, sdk.url).govProposalsGet(
-      voter?.toBech32(),
-      depositor?.toBech32(),
-      status,
-    ),
+  return new GovernanceApi(undefined, sdk.url).govProposalsGet(
+    voter?.toBech32(),
+    depositor?.toBech32(),
+    status,
   );
 }
 
@@ -41,13 +39,15 @@ export function proposalsParamChangePost(
   sdk: CosmosSDK,
   req: ParamChangeProposalReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new GovernanceApi(undefined, sdk.url).govProposalsParamChangePost(req),
   );
 }
 
 export function proposalsPost(sdk: CosmosSDK, req: PostProposalReq) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new GovernanceApi(undefined, sdk.url).govProposalsPost(req),
   );
 }

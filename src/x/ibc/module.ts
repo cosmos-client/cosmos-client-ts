@@ -70,7 +70,8 @@ export function clientsClientIdMisbehaviourPost(
   clientID: string,
   req: SubmitMisbehaviourReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcClientsClientIdMisbehaviourPost(
       clientID,
       req,
@@ -96,13 +97,15 @@ export function clientsClientIdUpdatePost(
   clientID: string,
   req: UpdateClientReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcClientsClientIdUpdatePost(clientID, req),
   );
 }
 
 export function clientsPost(sdk: CosmosSDK, req: CreateClientReq) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcClientsPost(req),
   );
 }
@@ -123,7 +126,8 @@ export function connectionsConnectionIdOpenAckPost(
   connectionID: string,
   req: ConnectionOpenAckReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcConnectionsConnectionIdOpenAckPost(
       connectionID,
       req,
@@ -136,7 +140,8 @@ export function connectionsConnectionIdOpenConfirmPost(
   connectionID: string,
   req: ConnectionOpenConfirmReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcConnectionsConnectionIdOpenConfirmPost(
       connectionID,
       req,
@@ -148,7 +153,8 @@ export function connectionsOpenInitPost(
   sdk: CosmosSDK,
   req: ConnectionOpenInitReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcConnectionsOpenInitPost(req),
   );
 }
@@ -157,7 +163,8 @@ export function connectionsOpenTryPost(
   sdk: CosmosSDK,
   req: ConnectionOpenTryReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcConnectionsOpenTryPost(req),
   );
 }
@@ -171,7 +178,8 @@ export function nodeStateGet(sdk: CosmosSDK) {
 }
 
 export function packetsReceivePost(sdk: CosmosSDK, req: ReceivedPacketReq) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcPacketsReceivePost(req),
   );
 }
@@ -186,7 +194,8 @@ export function portsPortIdChannelsChannelIdCloseConfirmPost(
   channelID: string,
   req: ChannelCloseConfirmReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(
       undefined,
       sdk.url,
@@ -200,7 +209,8 @@ export function portsPortIdChannelsChannelIdCloseInitPost(
   channelID: string,
   req: ChannelCloseInitReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcPortsPortIdChannelsChannelIdCloseInitPost(
       portID,
       channelID,
@@ -239,7 +249,8 @@ export function portsPortIdChannelsChannelIdOpenAckPost(
   channelID: string,
   req: ChannelOpenAckReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcPortsPortIdChannelsChannelIdOpenAckPost(
       portID,
       channelID,
@@ -254,7 +265,8 @@ export function portsPortIdChannelsChannelIdOpenConfirmPost(
   channelID: string,
   req: ChannelOpenConfirmReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(
       undefined,
       sdk.url,
@@ -268,7 +280,8 @@ export function portsPortIdChannelsChannelIdTransferPost(
   channelID: string,
   req: TransferTokenReq,
 ) {
-  return sdk.parseAminoJSON<StdTx>(
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
     new IBCApi(undefined, sdk.url).ibcPortsPortIdChannelsChannelIdTransferPost(
       portID,
       channelID,

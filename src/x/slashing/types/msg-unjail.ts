@@ -10,7 +10,8 @@ export class MsgUnjail extends Msg {
   }
 
   /**
-   * @see Amino.reviver
+   *
+   * @param value
    */
   public static fromJSON(value: any) {
     return new MsgUnjail(ValAddress.fromBech32(value.address));

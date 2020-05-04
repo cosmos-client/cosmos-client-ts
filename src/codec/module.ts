@@ -1,11 +1,11 @@
-export const codec = {
+export const maps = {
   type: new Map<Function, string>(),
   fromJSON: {} as { [type: string]: (value: any) => any },
 };
 
 export function toJSONString(value: any) {
   return JSON.stringify(value, (key, value) => {
-    const type = codec.type.get(value?.constructor);
+    const type = maps.type.get(value?.constructor);
     if (type) {
       return {
         type,
@@ -22,8 +22,8 @@ export function fromJSONString(json: string) {
   return JSON.parse(json, (key, value) => {
     const _type: string | undefined = value?.type;
     const _value: any | undefined = value?.value;
-    if (_type && codec.fromJSON[_type]) {
-      return codec.fromJSON[_type](_value);
+    if (_type && maps.fromJSON[_type]) {
+      return maps.fromJSON[_type](_value);
     }
 
     if (_type && _value && Object.keys(value).length == 2) {
@@ -39,8 +39,8 @@ export function registerCodec<T>(
   constructor: Function,
   fromJSON: (value: any) => T,
 ) {
-  codec.type.set(constructor, type);
-  codec.fromJSON[type] = fromJSON;
+  maps.type.set(constructor, type);
+  maps.fromJSON[type] = fromJSON;
 }
 
 export class AminoWrapping {

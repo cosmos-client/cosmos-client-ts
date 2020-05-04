@@ -1,5 +1,5 @@
 import { codec } from "../../codec";
-import { BaseAccount, StdTx } from "./types";
+import { BaseAccount, ModuleAccount, StdTx } from "./types";
 
 export * as auth from "./module";
 export * from "./types";
@@ -8,7 +8,7 @@ export * from "./types";
 codec.registerCodec("cosmos-sdk/Account", BaseAccount, BaseAccount.fromJSON);
 codec.registerCodec(
   "cosmos-sdk/ModuleAccount",
-  BaseAccount,
-  BaseAccount.fromJSON,
+  ModuleAccount,
+  ModuleAccount.fromJSON,
 );
 codec.registerCodec("cosmos-sdk/StdTx", StdTx, StdTx.fromJSON);

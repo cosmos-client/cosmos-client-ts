@@ -11,10 +11,26 @@ export class CosmosSDK {
    */
   constructor(public url: string, public chainID: string) {}
 
-  parseAminoJSON<T>(promise: AxiosPromise<any>): AxiosPromise<T> {
+  instancifyObjectWithoutAminoJSON<T>(
+    constructor: Function,
+    promise: AxiosPromise<any>,
+  ): AxiosPromise<T> {
+    const type = codec.maps.type.get(constructor);
     return promise.then((res) => ({
       ...res,
-      data: codec.fromJSONString(JSON.stringify(res.data)) as T,
+      data: codec.fromJSONString(
+        JSON.stringify({ type: type, value: res.data }),
+      ) as T,
     }));
+  }
+
+  objectifyInstanceWithoutAminoJSON(data: any) {
+    const obj = JSON.parse(codec.toJSONString(data));
+
+    if (obj.type && codec.maps.fromJSON[obj.type]) {
+      return obj.value;
+    }
+
+    return obj;
   }
 }

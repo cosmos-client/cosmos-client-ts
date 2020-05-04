@@ -1,7 +1,7 @@
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
-import { Coin } from "../../../types/coin";
 import { Msg } from "../../../types/msg";
+import { Coin } from "../../../api";
 
 export class MsgUndelegate extends Msg {
   /**

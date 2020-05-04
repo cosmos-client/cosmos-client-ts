@@ -1,7 +1,7 @@
 import { Msg } from "../../../types/msg";
 import { AccAddress } from "../../../types/address/acc-address";
 import { ValAddress } from "../../../types/address/val-address";
-import { Coin } from "../../../types/coin";
+import { Coin } from "../../../api";
 
 export class MsgDelegate extends Msg {
   /**
@@ -18,7 +18,7 @@ export class MsgDelegate extends Msg {
   }
 
   /**
-   * @see Amino.reviver
+   *
    * @param value
    */
   public static fromJSON(value: any) {
