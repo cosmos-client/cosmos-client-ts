@@ -17,10 +17,13 @@ export function delegatorsDelegatorAddrDelegationsPost(
   sdk: CosmosSDK,
   delegator: AccAddress,
 ) {
-  return new StakingApi(
-    undefined,
-    sdk.url,
-  ).stakingDelegatorsDelegatorAddrDelegationsPost(delegator.toBech32());
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new StakingApi(
+      undefined,
+      sdk.url,
+    ).stakingDelegatorsDelegatorAddrDelegationsPost(delegator.toBech32()),
+  );
 }
 
 export function delegatorsDelegatorAddrDelegationsValidatorAddrGet(
@@ -64,11 +67,14 @@ export function delegatorsDelegatorAddrUnbondingDelegationsPost(
   sdk: CosmosSDK,
   delegator: AccAddress,
 ) {
-  return new StakingApi(
-    undefined,
-    sdk.url,
-  ).stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(
-    delegator.toBech32(),
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new StakingApi(
+      undefined,
+      sdk.url,
+    ).stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(
+      delegator.toBech32(),
+    ),
   );
 }
 

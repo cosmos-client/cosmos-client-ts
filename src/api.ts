@@ -4814,10 +4814,7 @@ export const DistributionApiFp = function (configuration?: Configuration) {
       delegatorAddr: string,
       withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = DistributionApiAxiosParamCreator(
         configuration,
       ).distributionDelegatorsDelegatorAddrRewardsPost(
@@ -4881,10 +4878,7 @@ export const DistributionApiFp = function (configuration?: Configuration) {
       validatorAddr: string,
       withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = DistributionApiAxiosParamCreator(
         configuration,
       ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
@@ -4944,10 +4938,7 @@ export const DistributionApiFp = function (configuration?: Configuration) {
       delegatorAddr: string,
       withdrawRequestBody?: SetWithdrawAddressReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = DistributionApiAxiosParamCreator(
         configuration,
       ).distributionDelegatorsDelegatorAddrWithdrawAddressPost(
@@ -5082,10 +5073,7 @@ export const DistributionApiFp = function (configuration?: Configuration) {
       validatorAddr: string,
       withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = DistributionApiAxiosParamCreator(
         configuration,
       ).distributionValidatorsValidatorAddrRewardsPost(
@@ -5158,7 +5146,7 @@ export const DistributionApiFactory = function (
       delegatorAddr: string,
       withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return DistributionApiFp(
         configuration,
       ).distributionDelegatorsDelegatorAddrRewardsPost(
@@ -5202,7 +5190,7 @@ export const DistributionApiFactory = function (
       validatorAddr: string,
       withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return DistributionApiFp(
         configuration,
       ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
@@ -5242,7 +5230,7 @@ export const DistributionApiFactory = function (
       delegatorAddr: string,
       withdrawRequestBody?: SetWithdrawAddressReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return DistributionApiFp(
         configuration,
       ).distributionDelegatorsDelegatorAddrWithdrawAddressPost(
@@ -5328,7 +5316,7 @@ export const DistributionApiFactory = function (
       validatorAddr: string,
       withdrawRequestBody?: WithdrawRewardsReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return DistributionApiFp(
         configuration,
       ).distributionValidatorsValidatorAddrRewardsPost(
@@ -6814,10 +6802,7 @@ export const GovernanceApiFp = function (configuration?: Configuration) {
       proposalId: string,
       postDepositBody: DepositReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = GovernanceApiAxiosParamCreator(
         configuration,
       ).govProposalsProposalIdDepositsPost(
@@ -6951,10 +6936,7 @@ export const GovernanceApiFp = function (configuration?: Configuration) {
       proposalId: string,
       postVoteBody: VoteReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = GovernanceApiAxiosParamCreator(
         configuration,
       ).govProposalsProposalIdVotesPost(proposalId, postVoteBody, options);
@@ -7148,7 +7130,7 @@ export const GovernanceApiFactory = function (
       proposalId: string,
       postDepositBody: DepositReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return GovernanceApiFp(configuration).govProposalsProposalIdDepositsPost(
         proposalId,
         postDepositBody,
@@ -7231,7 +7213,7 @@ export const GovernanceApiFactory = function (
       proposalId: string,
       postVoteBody: VoteReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return GovernanceApiFp(configuration).govProposalsProposalIdVotesPost(
         proposalId,
         postVoteBody,
@@ -11585,10 +11567,7 @@ export const SlashingApiFp = function (configuration?: Configuration) {
       validatorAddr: string,
       unjailBody: UnjailReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = SlashingApiAxiosParamCreator(
         configuration,
       ).slashingValidatorsValidatorAddrUnjailPost(
@@ -11663,7 +11642,7 @@ export const SlashingApiFactory = function (
       validatorAddr: string,
       unjailBody: UnjailReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return SlashingApiFp(
         configuration,
       ).slashingValidatorsValidatorAddrUnjailPost(
@@ -12730,10 +12709,7 @@ export const StakingApiFp = function (configuration?: Configuration) {
       delegatorAddr: string,
       delegation?: DelegateReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = StakingApiAxiosParamCreator(
         configuration,
       ).stakingDelegatorsDelegatorAddrDelegationsPost(
@@ -12857,10 +12833,7 @@ export const StakingApiFp = function (configuration?: Configuration) {
       delegatorAddr: string,
       delegation?: UndelegateReq,
       options?: any,
-    ): (
-      axios?: AxiosInstance,
-      basePath?: string,
-    ) => AxiosPromise<BroadcastTxCommitResult> {
+    ): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<StdTx> {
       const localVarAxiosArgs = StakingApiAxiosParamCreator(
         configuration,
       ).stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(
@@ -13215,7 +13188,7 @@ export const StakingApiFactory = function (
       delegatorAddr: string,
       delegation?: DelegateReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return StakingApiFp(
         configuration,
       ).stakingDelegatorsDelegatorAddrDelegationsPost(
@@ -13296,7 +13269,7 @@ export const StakingApiFactory = function (
       delegatorAddr: string,
       delegation?: UndelegateReq,
       options?: any,
-    ): AxiosPromise<BroadcastTxCommitResult> {
+    ): AxiosPromise<StdTx> {
       return StakingApiFp(
         configuration,
       ).stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(

@@ -5,6 +5,7 @@ import {
   SetWithdrawAddressReq,
 } from "../../api";
 import { AccAddress, ValAddress } from "../../types";
+import { StdTx } from "../auth";
 
 export function communityPoolGet(sdk: CosmosSDK) {
   return new DistributionApi(undefined, sdk.url).distributionCommunityPoolGet();
@@ -25,10 +26,13 @@ export function delegatorsDelegatorAddrRewardsPost(
   delegator: AccAddress,
   req: WithdrawRewardsReq,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionDelegatorsDelegatorAddrRewardsPost(delegator.toBech32(), req);
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionDelegatorsDelegatorAddrRewardsPost(delegator.toBech32(), req),
+  );
 }
 
 export function delegatorsDelegatorAddrRewardsValidatorAddrGet(
@@ -51,13 +55,16 @@ export function delegatorsDelegatorAddrRewardsValidatorAddrPost(
   validator: ValAddress,
   req: WithdrawRewardsReq,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
-    delegator.toBech32(),
-    validator.toBech32(),
-    req,
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
+      delegator.toBech32(),
+      validator.toBech32(),
+      req,
+    ),
   );
 }
 
@@ -76,12 +83,15 @@ export function delegatorsDelegatorAddrWithdrawAddressPost(
   delegator: AccAddress,
   req: SetWithdrawAddressReq,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionDelegatorsDelegatorAddrWithdrawAddressPost(
-    delegator.toBech32(),
-    req,
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionDelegatorsDelegatorAddrWithdrawAddressPost(
+      delegator.toBech32(),
+      req,
+    ),
   );
 }
 
@@ -126,8 +136,11 @@ export function validatorsValidatorAddrRewardsPost(
   validator: ValAddress,
   req: WithdrawRewardsReq,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionValidatorsValidatorAddrRewardsPost(validator.toBech32(), req);
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionValidatorsValidatorAddrRewardsPost(validator.toBech32(), req),
+  );
 }

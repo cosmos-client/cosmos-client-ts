@@ -8,7 +8,6 @@ import {
 } from "../../api";
 import { AccAddress } from "../../types";
 import { StdTx } from "../auth";
-import { TextProposal } from "./types";
 
 export function parametersDepositGet(sdk: CosmosSDK) {
   return new GovernanceApi(undefined, sdk.url).govParametersDepositGet();
@@ -41,7 +40,10 @@ export function proposalsParamChangePost(
 ) {
   return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
     StdTx,
-    new GovernanceApi(undefined, sdk.url).govProposalsParamChangePost(req),
+    sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+      StdTx,
+      new GovernanceApi(undefined, sdk.url).govProposalsParamChangePost(req),
+    ),
   );
 }
 
@@ -81,10 +83,13 @@ export function proposalsProposalIdDepositsPost(
   proposalID: string,
   req: DepositReq,
 ) {
-  return new GovernanceApi(
-    undefined,
-    sdk.url,
-  ).govProposalsProposalIdDepositsPost(proposalID, req);
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdDepositsPost(
+      proposalID,
+      req,
+    ),
+  );
 }
 
 export function proposalsProposalIdGet(sdk: CosmosSDK, proposalID: string) {
@@ -126,9 +131,12 @@ export function proposalsProposalIdVotesPost(
   proposalID: string,
   req: VoteReq,
 ) {
-  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesPost(
-    proposalID,
-    req,
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesPost(
+      proposalID,
+      req,
+    ),
   );
 }
 

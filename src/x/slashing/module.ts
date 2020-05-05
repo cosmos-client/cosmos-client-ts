@@ -1,6 +1,7 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { SlashingApi, UnjailReq } from "../../api";
 import { ValAddress } from "../../types";
+import { StdTx } from "../auth";
 
 export function parametersGet(sdk: CosmosSDK) {
   return new SlashingApi(undefined, sdk.url).slashingParametersGet();
@@ -18,8 +19,11 @@ export function validatorsValidatorAddrUnjailPost(
   validator: ValAddress,
   req: UnjailReq,
 ) {
-  return new SlashingApi(
-    undefined,
-    sdk.url,
-  ).slashingValidatorsValidatorAddrUnjailPost(validator.toBech32(), req);
+  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
+    StdTx,
+    new SlashingApi(
+      undefined,
+      sdk.url,
+    ).slashingValidatorsValidatorAddrUnjailPost(validator.toBech32(), req),
+  );
 }
