@@ -18,8 +18,10 @@ import { bank } from "cosmos-client/x/bank";
 const sdk = new CosmosSDK(hostURL, chainID);
 
 // get account info
-let fromAddress: AccAddress;
 let privKey: PrivKeyEd25519;
+let fromAddress: AccAddress = AccAddress.fromPublicKey(
+  privKey.getPubKey().toBuffer()
+);
 const account = await auth
   .accountsAddressGet(sdk, fromAddress)
   .then((res) => res.data);
