@@ -16,6 +16,7 @@ export * from "./api";
 export * from "./configuration";
 */
 
+export * from "./cosmos-sdk";
 export * from "./codec";
 export * from "./tendermint";
 export * from "./types";
