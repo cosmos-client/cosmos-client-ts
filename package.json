@@ -37,6 +37,7 @@
     "url": "git+https://github.com/lcnem/cosmos-client-ts.git"
   },
   "scripts": {
+    "test": "karma start",
     "build": "tsc --build --clean && tsc",
     "publish": "node bundle && cd dist && npm publish"
   }
