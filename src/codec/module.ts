@@ -9,9 +9,7 @@ export function toJSONString(value: any) {
     if (type) {
       return {
         type,
-        value: {
-          ...value,
-        },
+        value: value.toJSONInCodec ? value.toJSONInCodec() : value,
       };
     }
     return value;

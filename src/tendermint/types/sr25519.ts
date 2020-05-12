@@ -1,11 +1,11 @@
-import * as crypto from "crypto";
-import * as secp256k1 from "tiny-secp256k1";
+import * as nacl from "tweetnacl";
 import { PrivKey, PubKey } from "./key";
+
 /**
- * secp256k1
+ * sr25519
  */
-export class PrivKeySecp256k1 implements PrivKey {
-  private pubKey: PubKeySecp256k1;
+export class PrivKeySr25519 implements PrivKey {
+  private pubKey: PubKeySr25519;
   private privKey: Buffer;
 
   /**
@@ -13,7 +13,8 @@ export class PrivKeySecp256k1 implements PrivKey {
    * @param privKey
    */
   constructor(privKey: Buffer) {
-    this.pubKey = new PubKeySecp256k1(secp256k1.pointFromScalar(privKey)!);
+    const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(privKey));
+    this.pubKey = new PubKeySr25519(Buffer.from(keypair.publicKey));
     this.privKey = privKey;
   }
 
@@ -29,10 +30,10 @@ export class PrivKeySecp256k1 implements PrivKey {
    * @param message
    */
   sign(message: Buffer): Buffer {
-    const hash = crypto.createHash("sha256").update(message).digest();
-    const signature = secp256k1.sign(hash, this.privKey);
-
-    return signature;
+    const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(this.privKey));
+    return Buffer.from(
+      nacl.sign(new Uint8Array(message), new Uint8Array(keypair.secretKey)),
+    );
   }
 
   /**
@@ -59,18 +60,18 @@ export class PrivKeySecp256k1 implements PrivKey {
    */
   static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
-    return new PrivKeySecp256k1(buffer);
+    return new PrivKeySr25519(buffer);
   }
 
   static fromJSON(value: any) {
-    return PrivKeySecp256k1.fromBase64(value);
+    return PrivKeySr25519.fromBase64(value);
   }
 }
 
 /**
- * secp256k1公開鍵。
+ * sr25519
  */
-export class PubKeySecp256k1 implements PubKey {
+export class PubKeySr25519 implements PubKey {
   private pubKey: Buffer;
 
   /**
@@ -82,14 +83,14 @@ export class PubKeySecp256k1 implements PubKey {
   }
 
   /**
-   * 署名がこの公開鍵から作られたものであるか検証する。
-   * @param message
+   * message is not needed
    * @param signature
    */
-  verify(signature: Buffer, message: Buffer): boolean {
-    const hash = crypto.createHash("sha256").update(message).digest();
-
-    return secp256k1.verify(hash, signature, this.pubKey);
+  verify(signature: Buffer): boolean {
+    return (
+      nacl.sign.open(new Uint8Array(signature), new Uint8Array(this.pubKey)) !==
+      null
+    );
   }
 
   /**
@@ -115,10 +116,10 @@ export class PubKeySecp256k1 implements PubKey {
    */
   static fromBase64(value: string) {
     const buffer = new Buffer(value, "base64");
-    return new PubKeySecp256k1(buffer);
+    return new PubKeySr25519(buffer);
   }
 
   static fromJSON(value: any) {
-    return PubKeySecp256k1.fromBase64(value);
+    return PubKeySr25519.fromBase64(value);
   }
 }

@@ -50,11 +50,8 @@ export class PrivKeyEd25519 implements PrivKey {
     return this.privKey.toString("base64");
   }
 
-  /**
-   * JSON.stringify時に参照される。
-   */
-  toJSON() {
-    return { type: "tendermint/PrivKeyEd25519", value: this.toBase64() };
+  toJSONInCodec() {
+    return this.toBase64();
   }
 
   /**
@@ -110,11 +107,8 @@ export class PubKeyEd25519 implements PubKey {
     return this.pubKey.toString("base64");
   }
 
-  /**
-   * JSON.stringify時に参照される。
-   */
-  toJSON() {
-    return { type: "tendermint/PubKeyEd25519", value: this.toBase64() };
+  toJSONInCodec() {
+    return this.toBase64();
   }
 
   /**
