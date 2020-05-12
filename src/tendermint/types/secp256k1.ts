@@ -53,7 +53,7 @@ export class PrivKeySecp256k1 implements PrivKey {
    * JSON.stringify
    */
   toJSON() {
-    return this.toBase64();
+    return { type: "tendermint/PrivKeySecp256k1", value: this.toBase64() };
   }
 
   /**
@@ -113,7 +113,7 @@ export class PubKeySecp256k1 implements PubKey {
    * JSON.stringify時に参照される。
    */
   toJSON() {
-    return this.toBase64();
+    return { type: "tendermint/PubKeySecp256k1", value: this.toBase64() };
   }
 
   /**

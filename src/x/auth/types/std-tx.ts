@@ -19,7 +19,7 @@ export class StdTx extends Tx {
   constructor(
     public msg: (Msg | codec.AminoWrapping)[],
     public fee: StdTxFee,
-    public signatures: StdSignature[],
+    public signatures: StdSignature[] | null,
     public memo: string,
   ) {
     super();

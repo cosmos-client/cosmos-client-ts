@@ -1,4 +1,9 @@
-import { MsgTransferNFT } from "./types";
+import {
+  MsgTransferNFT,
+  MsgEditNFTMetadata,
+  MsgMintNFT,
+  MsgBurnNFT,
+} from "./types";
 import { codec } from "../../codec";
 import * as nft from "./module";
 
@@ -11,3 +16,10 @@ codec.registerCodec(
   MsgTransferNFT,
   MsgTransferNFT.fromJSON,
 );
+codec.registerCodec(
+  "cosmos-sdk/MsgEditNFTMetadata",
+  MsgEditNFTMetadata,
+  MsgEditNFTMetadata.fromJSON,
+);
+codec.registerCodec("cosmos-sdk/MsgMintNFT", MsgMintNFT, MsgMintNFT.fromJSON);
+codec.registerCodec("cosmos-sdk/MsgBurnNFT", MsgBurnNFT, MsgBurnNFT.fromJSON);

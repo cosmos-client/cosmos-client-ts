@@ -2127,45 +2127,45 @@ export interface InlineResponse2004 {
   type?: string;
   /**
    *
-   * @type {InlineResponse2004Value}
+   * @type {BaseAccount}
    * @memberof InlineResponse2004
    */
-  value?: InlineResponse2004Value;
+  value?: BaseAccount;
 }
 /**
  *
  * @export
- * @interface InlineResponse2004Value
+ * @interface BaseAccount
  */
-export interface InlineResponse2004Value {
+export interface BaseAccount {
   /**
    *
    * @type {string}
-   * @memberof InlineResponse2004Value
+   * @memberof BaseAccount
    */
   account_number?: string;
   /**
    *
    * @type {string}
-   * @memberof InlineResponse2004Value
+   * @memberof BaseAccount
    */
   address?: string;
   /**
    *
    * @type {Array<Coin>}
-   * @memberof InlineResponse2004Value
+   * @memberof BaseAccount
    */
   coins?: Array<Coin>;
   /**
    *
    * @type {PublicKey}
-   * @memberof InlineResponse2004Value
+   * @memberof BaseAccount
    */
   public_key?: PublicKey;
   /**
    *
    * @type {string}
-   * @memberof InlineResponse2004Value
+   * @memberof BaseAccount
    */
   sequence?: string;
 }

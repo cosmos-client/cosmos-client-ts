@@ -1,20 +1,21 @@
 import * as crypto from "crypto";
 
-const prefix = {
-  cosmos: "cosmos",
-  public: "pub",
-  account: "acc",
-  validator: "val",
-  operator: "oper",
-  consensus: "cons",
-};
-export const bech32Prefix = {
-  accAddr: prefix.cosmos,
-  accPub: prefix.cosmos + prefix.public,
-  valAddr: prefix.cosmos + prefix.validator + prefix.operator,
-  valPub: prefix.cosmos + prefix.validator + prefix.operator + prefix.public,
-  consAddr: prefix.cosmos + prefix.validator + prefix.consensus,
-  consPub: prefix.cosmos + prefix.validator + prefix.consensus + prefix.public,
+export enum Prefix {
+  Cosmos = "cosmos",
+  Public = "pub",
+  Account = "acc",
+  Validator = "val",
+  Operator = "oper",
+  Consensus = "cons",
+}
+
+export const bech32Prefix: { [key: string]: string } = {
+  accAddr: Prefix.Cosmos,
+  accPub: Prefix.Cosmos + Prefix.Public,
+  valAddr: Prefix.Cosmos + Prefix.Validator + Prefix.Operator,
+  valPub: Prefix.Cosmos + Prefix.Validator + Prefix.Operator + Prefix.Public,
+  consAddr: Prefix.Cosmos + Prefix.Validator + Prefix.Consensus,
+  consPub: Prefix.Cosmos + Prefix.Validator + Prefix.Consensus + Prefix.Public,
 };
 
 /**
@@ -26,12 +27,11 @@ export class Address {
   /**
    *
    * @param value
-   * @throws Error アドレスの長さが20でない場合、エラーがスローされます。
    */
   constructor(value: Buffer) {
     const addressLength = 20;
     if (value.length !== addressLength) {
-      throw Error();
+      throw Error("Address must be 20 bytes length.");
     }
     this._value = value;
   }
@@ -54,5 +54,30 @@ export class Address {
    */
   static fromPublicKey(publicKey: Buffer) {
     return new Address(this.hash160(publicKey));
+  }
+
+  /**
+   *
+   * @param accAddr
+   * @param accPub
+   * @param valAddr
+   * @param valPub
+   * @param consAddr
+   * @param consPub
+   */
+  static setBech32Prefix(
+    accAddr: string,
+    accPub: string,
+    valAddr: string,
+    valPub: string,
+    consAddr: string,
+    consPub: string,
+  ) {
+    bech32Prefix.accAddr = accAddr;
+    bech32Prefix.accPub = accPub;
+    bech32Prefix.valAddr = valAddr;
+    bech32Prefix.valPub = valPub;
+    bech32Prefix.consAddr = consAddr;
+    bech32Prefix.consPub = consPub;
   }
 }

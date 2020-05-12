@@ -3,24 +3,24 @@ import { AccAddress } from "../../../types/address/acc-address";
 
 export class MsgEditNFTMetadata implements Msg {
   /**
-   * @param sender
-   * @param id
-   * @param denom
-   * @param token_rui
+   * @param Sender
+   * @param ID
+   * @param Denom
+   * @param TokenURI
    */
   constructor(
-    public sender: AccAddress,
-    public id: string,
-    public denom: string,
-    public token_uri: string,
+    public Sender: AccAddress,
+    public ID: string,
+    public Denom: string,
+    public TokenURI: string,
   ) {}
 
   public static fromJSON(value: any) {
     return new MsgEditNFTMetadata(
-      AccAddress.fromBech32(value.sender),
-      value.id,
-      value.denom,
-      value.token_uri,
+      AccAddress.fromBech32(value.Sender),
+      value.ID,
+      value.Denom,
+      value.TokenURI,
     );
   }
 }

@@ -28,7 +28,7 @@ export function signStdTx(
   const newStdTx = new StdTx(
     stdTx.msg,
     stdTx.fee,
-    [...stdTx.signatures, signature],
+    stdTx.signatures ? [...stdTx.signatures, signature] : [signature],
     stdTx.memo,
   );
 
