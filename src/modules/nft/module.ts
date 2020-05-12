@@ -72,7 +72,7 @@ export function transferPost(
   );
 }
 
-export function collectionDenomNftIdBurnMetadataPut(
+export function collectionDenomNftIdMetadataPut(
   sdk: CosmosSDK,
   req: {
     base_req: BaseReq;
