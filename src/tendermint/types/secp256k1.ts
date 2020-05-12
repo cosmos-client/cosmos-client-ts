@@ -5,7 +5,7 @@ import { PrivKey, PubKey } from "./key";
  * secp256k1
  */
 export class PrivKeySecp256k1 implements PrivKey {
-  private pubKey: PubKey;
+  private pubKey: PubKeySecp256k1;
   private privKey: Buffer;
 
   /**
@@ -89,7 +89,7 @@ export class PubKeySecp256k1 implements PubKey {
    * @param message
    * @param signature
    */
-  verify(message: Buffer, signature: Buffer): boolean {
+  verify(signature: Buffer, message: Buffer): boolean {
     const hash = crypto.createHash("sha256").update(message).digest();
 
     return secp256k1.verify(hash, signature, this.pubKey);

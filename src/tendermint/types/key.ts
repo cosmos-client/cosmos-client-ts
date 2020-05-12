@@ -8,5 +8,5 @@ export type PrivKey = {
 export type PubKey = {
   toBuffer(): Buffer;
   toBase64(): string;
-  verify(message: Buffer, signature: Buffer): boolean;
+  verify(signature: Buffer, message?: Buffer): boolean;
 };

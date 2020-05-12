@@ -5,7 +5,7 @@ import { PrivKey, PubKey } from "./key";
  * ed25519
  */
 export class PrivKeyEd25519 implements PrivKey {
-  private pubKey: PubKey;
+  private pubKey: PubKeyEd25519;
   private privKey: Buffer;
 
   /**
@@ -13,7 +13,7 @@ export class PrivKeyEd25519 implements PrivKey {
    * @param privKey
    */
   constructor(privKey: Buffer) {
-    const keypair = nacl.sign.keyPair.fromSeed(privKey);
+    const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(privKey));
     this.pubKey = new PubKeyEd25519(Buffer.from(keypair.publicKey));
     this.privKey = privKey;
   }
@@ -30,8 +30,10 @@ export class PrivKeyEd25519 implements PrivKey {
    * @param message
    */
   sign(message: Buffer): Buffer {
-    const keypair = nacl.sign.keyPair.fromSeed(this.privKey);
-    return Buffer.from(nacl.sign(message, keypair.secretKey));
+    const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(this.privKey));
+    return Buffer.from(
+      nacl.sign(new Uint8Array(message), new Uint8Array(keypair.secretKey)),
+    );
   }
 
   /**
@@ -84,12 +86,14 @@ export class PubKeyEd25519 implements PubKey {
   }
 
   /**
-   *
-   * @param message
+   * message is not needed
    * @param signature
    */
-  verify(_: Buffer, signature: Buffer): boolean {
-    return nacl.sign.open(signature, this.pubKey) !== null;
+  verify(signature: Buffer): boolean {
+    return (
+      nacl.sign.open(new Uint8Array(signature), new Uint8Array(this.pubKey)) !==
+      null
+    );
   }
 
   /**
