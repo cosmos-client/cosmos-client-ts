@@ -11,15 +11,15 @@ npm install --save cosmos-client
 ## Example
 
 ```typescript
-import { CosmosSDK, AccAddress, PrivKeyEd25519 } from "cosmos-client";
+import { CosmosSDK, AccAddress, PrivKeySecp256k1 } from "cosmos-client";
 import { auth, StdTx } from "cosmos-client/x/auth";
 import { bank } from "cosmos-client/x/bank";
 
 const sdk = new CosmosSDK(hostURL, chainID);
 
 // get account info
-let privKey: PrivKeyEd25519;
-let fromAddress: AccAddress = AccAddress.fromPublicKey(
+const privKey = new PrivKeySecp256k1(new Buffer(""));
+const fromAddress = AccAddress.fromPublicKey(
   privKey.getPubKey().toBuffer()
 );
 const account = await auth
@@ -27,7 +27,7 @@ const account = await auth
   .then((res) => res.data);
 
 // get unsigned tx
-let toAddress: AccAddress;
+const toAddress = fromAddress;
 
 const unsignedStdTx = await bank
   .accountsAddressTransfersPost(sdk, toAddress, { ... })
@@ -39,11 +39,11 @@ const signedStdTx = auth.signStdTx(
   privKey,
   unsignedStdTx,
   account.account_number,
-  account.sequence + 1,
+  account.sequence,
 );
 
 // broadcast
-await auth.txsPost(sdk, signedStdTx, "sync");
+const result = await auth.txsPost(sdk, signedStdTx, "sync").then((res) => res.data);
 ```
 
 ## For library developlers
