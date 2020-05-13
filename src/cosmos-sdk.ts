@@ -1,5 +1,7 @@
 import { codec } from "./codec";
 import { AxiosPromise } from "axios";
+import * as bip32 from "bip32";
+import * as bip39 from "bip39";
 
 /**
  *
@@ -10,6 +12,14 @@ export class CosmosSDK {
    * @param chainID
    */
   constructor(public url: string, public chainID: string) {}
+
+  async generatePrivKeyFromMnemonic(mnemonic: string) {
+    const seed = await bip39.mnemonicToSeed(mnemonic);
+    const node = bip32.fromSeed(seed);
+    const child = node.derivePath("44'/118'/0'/0/0");
+
+    return child.privateKey!;
+  }
 
   instancifyObjectWithoutAminoJSON<T>(
     constructor: Function,

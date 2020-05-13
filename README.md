@@ -18,7 +18,8 @@ import { bank } from "cosmos-client/x/bank";
 const sdk = new CosmosSDK(hostURL, chainID);
 
 // get account info
-const privKey = new PrivKeySecp256k1(new Buffer(""));
+const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic(mnemonic);
+const privKey = new PrivKeySecp256k1(privKeyBuffer);
 const fromAddress = AccAddress.fromPublicKey(
   privKey.getPubKey().toBuffer()
 );
