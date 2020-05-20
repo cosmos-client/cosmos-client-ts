@@ -1,19 +1,10 @@
 import { CosmosSDK } from "../../";
 import { PrivKeySecp256k1 } from "../../tendermint";
-import { AccAddress, Address, Prefix } from "../../types";
+import { AccAddress } from "../../types";
 import { auth } from "../../x/auth";
 import { nft } from ".";
 
 test("nft", async () => {
-  Address.setBech32Prefix(
-    "jac",
-    "jac" + Prefix.Public,
-    "jac" + Prefix.Validator + Prefix.Operator,
-    "jac" + Prefix.Validator + Prefix.Operator + Prefix.Public,
-    "jac" + Prefix.Validator + Prefix.Consensus,
-    "jac" + Prefix.Validator + Prefix.Consensus + Prefix.Public,
-  );
-
   try {
     const sdk = new CosmosSDK("https://gaia.lcnem.net", "cosmoshub-3");
 
@@ -63,8 +54,6 @@ test("nft", async () => {
       account.account_number,
       account.sequence,
     );
-    console.log(signedStdTx);
-    console.log(sdk.objectifyInstanceWithoutAminoJSON(signedStdTx));
 
     // broadcast
     const result = await auth.txsPost(sdk, signedStdTx, "sync");
