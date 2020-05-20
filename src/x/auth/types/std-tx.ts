@@ -45,7 +45,7 @@ export class StdTx extends Tx {
         : v,
     );
 
-    return new Buffer(sortedJSON);
+    return Buffer.from(sortedJSON);
   }
 
   toObject(): StdTxObject {

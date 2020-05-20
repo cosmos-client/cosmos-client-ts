@@ -40,7 +40,7 @@ export class PrivKeyEd25519 implements PrivKey {
    *
    */
   toBuffer() {
-    return new Buffer(this.privKey);
+    return Buffer.from(this.privKey);
   }
 
   /**
@@ -59,7 +59,7 @@ export class PrivKeyEd25519 implements PrivKey {
    * @param value
    */
   static fromBase64(value: string) {
-    const buffer = new Buffer(value, "base64");
+    const buffer = Buffer.from(value, "base64");
     return new PrivKeyEd25519(buffer);
   }
 
@@ -97,7 +97,7 @@ export class PubKeyEd25519 implements PubKey {
    *
    */
   toBuffer() {
-    return new Buffer(this.pubKey);
+    return Buffer.from(this.pubKey);
   }
 
   /**
@@ -115,7 +115,7 @@ export class PubKeyEd25519 implements PubKey {
    *
    */
   static fromBase64(value: string) {
-    const buffer = new Buffer(value, "base64");
+    const buffer = Buffer.from(value, "base64");
     return new PubKeyEd25519(buffer);
   }
 

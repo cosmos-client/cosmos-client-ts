@@ -19,7 +19,7 @@ test("nft", async () => {
 
     // get account info
     let privKey: PrivKeySecp256k1 = new PrivKeySecp256k1(
-      new Buffer(
+      Buffer.from(
         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "hex",
       ),
@@ -63,6 +63,8 @@ test("nft", async () => {
       account.account_number,
       account.sequence,
     );
+    console.log(signedStdTx);
+    console.log(sdk.objectifyInstanceWithoutAminoJSON(signedStdTx));
 
     // broadcast
     const result = await auth.txsPost(sdk, signedStdTx, "sync");
