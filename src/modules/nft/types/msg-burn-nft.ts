@@ -3,21 +3,21 @@ import { AccAddress } from "../../../types/address/acc-address";
 
 export class MsgBurnNFT implements Msg {
   /**
-   * @param Sender
-   * @param ID
-   * @param Denom
+   * @param sender
+   * @param id
+   * @param denom
    */
   constructor(
-    public Sender: AccAddress,
-    public ID: string,
-    public Denom: string,
+    public sender: AccAddress,
+    public id: string,
+    public denom: string,
   ) {}
 
-  public static fromJSON(value: any) {
+  static fromJSON(value: any) {
     return new MsgBurnNFT(
-      AccAddress.fromBech32(value.Sender),
-      value.ID,
-      value.Denom,
+      AccAddress.fromBech32(value.sender),
+      value.id,
+      value.denom,
     );
   }
 }
