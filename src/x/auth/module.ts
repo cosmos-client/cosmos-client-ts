@@ -44,10 +44,10 @@ export function accountsAddressGet(sdk: CosmosSDK, address: AccAddress) {
         address.toBech32(),
       ),
     )
-    .then((res) => ({
-      height: res.data.height,
-      result: codec.fromJSONString(JSON.stringify(res.data.result)),
-    })) as AxiosPromise<{ height: number; result: BaseAccount }>;
+    .then((res) => {
+      res.data.result = codec.fromJSONString(JSON.stringify(res.data.result));
+      return res;
+    }) as AxiosPromise<{ height: number; result: BaseAccount }>;
 }
 
 export function txsDecodePost(sdk: CosmosSDK, req: DecodeReq) {

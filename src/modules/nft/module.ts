@@ -6,14 +6,18 @@ import { AccAddress } from "../../types";
 import { codec } from "../../codec";
 
 export function supplyDenomGet(sdk: CosmosSDK, denom: string) {
-  return Axios.get(`${sdk.url}/nft/supply/${denom}`);
+  return sdk.wrapResponseWithHeight(
+    Axios.get(`${sdk.url}/nft/supply/${denom}`),
+  );
 }
 
 export function ownerDelegatorAddrGet(
   sdk: CosmosSDK,
   delegatorAddress: AccAddress,
 ) {
-  return Axios.get(`${sdk.url}/nft/owner/${delegatorAddress.toBech32()}`);
+  return sdk.wrapResponseWithHeight(
+    Axios.get(`${sdk.url}/nft/owner/${delegatorAddress.toBech32()}`),
+  );
 }
 
 export function ownerDelegatorAddrCollectionDenomGet(
@@ -21,17 +25,21 @@ export function ownerDelegatorAddrCollectionDenomGet(
   delegatorAddress: AccAddress,
   denom: string,
 ) {
-  return Axios.get(
-    `${sdk.url}/nft/owner/${delegatorAddress.toBech32()}/collection/${denom}`,
+  return sdk.wrapResponseWithHeight(
+    Axios.get(
+      `${sdk.url}/nft/owner/${delegatorAddress.toBech32()}/collection/${denom}`,
+    ),
   );
 }
 
 export function collectionDenomGet(sdk: CosmosSDK, denom: string) {
-  return Axios.get(`${sdk.url}/nft/collection/${denom}`);
+  return sdk.wrapResponseWithHeight(
+    Axios.get(`${sdk.url}/nft/collection/${denom}`),
+  );
 }
 
 export function DenomsGet(sdk: CosmosSDK) {
-  return Axios.get(`${sdk.url}/nft/denoms`);
+  return sdk.wrapResponseWithHeight(Axios.get(`${sdk.url}/nft/denoms`));
 }
 
 export function collectionDenomNftIdGet(
@@ -39,7 +47,9 @@ export function collectionDenomNftIdGet(
   denom: string,
   id: string,
 ) {
-  return Axios.get(`${sdk.url}/collection/${denom}/nft/${id}`);
+  return sdk.wrapResponseWithHeight(
+    Axios.get(`${sdk.url}/collection/${denom}/nft/${id}`),
+  );
 }
 
 export function mintPost(
@@ -52,9 +62,10 @@ export function mintPost(
     tokenURI: string;
   },
 ) {
-  return Axios.post(`${sdk.url}/nfts/mint`, req).then((res) =>
-    codec.fromJSONString(JSON.stringify(res.data)),
-  ) as AxiosPromise<StdTx>;
+  return Axios.post(`${sdk.url}/nfts/mint`, req).then((res) => {
+    res.data = codec.fromJSONString(JSON.stringify(res.data));
+    return res;
+  }) as AxiosPromise<StdTx>;
 }
 
 export function transferPost(
@@ -66,9 +77,10 @@ export function transferPost(
     recipient: string;
   },
 ) {
-  return Axios.post(`${sdk.url}/nfts/transfer`, req).then((res) =>
-    codec.fromJSONString(JSON.stringify(res.data)),
-  ) as AxiosPromise<StdTx>;
+  return Axios.post(`${sdk.url}/nfts/transfer`, req).then((res) => {
+    res.data = codec.fromJSONString(JSON.stringify(res.data));
+    return res;
+  }) as AxiosPromise<StdTx>;
 }
 
 export function collectionDenomNftIdMetadataPut(
@@ -83,9 +95,10 @@ export function collectionDenomNftIdMetadataPut(
   return Axios.put(
     `${sdk.url}/nfts/collection/${req.denom}/nft/${req.id}/metadata`,
     req,
-  ).then((res) =>
-    codec.fromJSONString(JSON.stringify(res.data)),
-  ) as AxiosPromise<StdTx>;
+  ).then((res) => {
+    res.data = codec.fromJSONString(JSON.stringify(res.data));
+    return res;
+  }) as AxiosPromise<StdTx>;
 }
 
 export function collectionDenomNftIdBurnPut(
@@ -99,7 +112,8 @@ export function collectionDenomNftIdBurnPut(
   return Axios.put(
     `${sdk.url}/nfts/collection/${req.denom}/nft/${req.id}/burn`,
     req,
-  ).then((res) =>
-    codec.fromJSONString(JSON.stringify(res.data)),
-  ) as AxiosPromise<StdTx>;
+  ).then((res) => {
+    res.data = codec.fromJSONString(JSON.stringify(res.data));
+    return res;
+  }) as AxiosPromise<StdTx>;
 }

@@ -74,9 +74,10 @@ export function clientsClientIdMisbehaviourPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcClientsClientIdMisbehaviourPost(clientID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function clientsClientIdRootsHeightGet(
@@ -99,17 +100,17 @@ export function clientsClientIdUpdatePost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcClientsClientIdUpdatePost(clientID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function clientsPost(sdk: CosmosSDK, req: CreateClientReq) {
-  return new IBCApi(undefined, sdk.url)
-    .ibcClientsPost(req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+  return new IBCApi(undefined, sdk.url).ibcClientsPost(req).then((res) => {
+    res.data = codec.fromJSONString(JSON.stringify(res.data));
+    return res;
+  }) as AxiosPromise<StdTx>;
 }
 
 export function connectionsConnectionIdGet(
@@ -130,9 +131,10 @@ export function connectionsConnectionIdOpenAckPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcConnectionsConnectionIdOpenAckPost(connectionID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function connectionsConnectionIdOpenConfirmPost(
@@ -142,9 +144,10 @@ export function connectionsConnectionIdOpenConfirmPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcConnectionsConnectionIdOpenConfirmPost(connectionID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function connectionsOpenInitPost(
@@ -153,9 +156,10 @@ export function connectionsOpenInitPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcConnectionsOpenInitPost(req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function connectionsOpenTryPost(
@@ -164,9 +168,10 @@ export function connectionsOpenTryPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcConnectionsOpenTryPost(req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function headerGet(sdk: CosmosSDK) {
@@ -180,9 +185,10 @@ export function nodeStateGet(sdk: CosmosSDK) {
 export function packetsReceivePost(sdk: CosmosSDK, req: ReceivedPacketReq) {
   return new IBCApi(undefined, sdk.url)
     .ibcPacketsReceivePost(req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function pathGet(sdk: CosmosSDK) {
@@ -197,9 +203,10 @@ export function portsPortIdChannelsChannelIdCloseConfirmPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcPortsPortIdChannelsChannelIdCloseConfirmPost(portID, channelID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function portsPortIdChannelsChannelIdCloseInitPost(
@@ -210,9 +217,10 @@ export function portsPortIdChannelsChannelIdCloseInitPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcPortsPortIdChannelsChannelIdCloseInitPost(portID, channelID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function portsPortIdChannelsChannelIdGet(
@@ -247,9 +255,10 @@ export function portsPortIdChannelsChannelIdOpenAckPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcPortsPortIdChannelsChannelIdOpenAckPost(portID, channelID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function portsPortIdChannelsChannelIdOpenConfirmPost(
@@ -260,9 +269,10 @@ export function portsPortIdChannelsChannelIdOpenConfirmPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcPortsPortIdChannelsChannelIdOpenConfirmPost(portID, channelID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function portsPortIdChannelsChannelIdTransferPost(
@@ -273,7 +283,8 @@ export function portsPortIdChannelsChannelIdTransferPost(
 ) {
   return new IBCApi(undefined, sdk.url)
     .ibcPortsPortIdChannelsChannelIdTransferPost(portID, channelID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }

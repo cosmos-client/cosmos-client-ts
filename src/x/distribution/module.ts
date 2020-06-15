@@ -153,7 +153,8 @@ export function validatorsValidatorAddrRewardsPost(
 ) {
   return new DistributionApi(undefined, sdk.url)
     .distributionValidatorsValidatorAddrRewardsPost(validator.toBech32(), req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }

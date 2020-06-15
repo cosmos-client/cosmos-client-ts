@@ -50,17 +50,19 @@ export function proposalsParamChangePost(
 ) {
   return new GovernanceApi(undefined, sdk.url)
     .govProposalsParamChangePost(req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function proposalsPost(sdk: CosmosSDK, req: PostProposalReq) {
   return new GovernanceApi(undefined, sdk.url)
     .govProposalsPost(req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function proposalsProposalIdDepositsDepositorGet(
@@ -97,9 +99,10 @@ export function proposalsProposalIdDepositsPost(
 ) {
   return new GovernanceApi(undefined, sdk.url)
     .govProposalsProposalIdDepositsPost(proposalID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function proposalsProposalIdGet(sdk: CosmosSDK, proposalID: string) {
@@ -148,9 +151,10 @@ export function proposalsProposalIdVotesPost(
 ) {
   return new GovernanceApi(undefined, sdk.url)
     .govProposalsProposalIdVotesPost(proposalID, req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function proposalsProposalIdVotesVoterGet(

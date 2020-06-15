@@ -24,7 +24,8 @@ export function validatorsValidatorAddrUnjailPost(
 ) {
   return new SlashingApi(undefined, sdk.url)
     .slashingValidatorsValidatorAddrUnjailPost(validator.toBech32(), req)
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }

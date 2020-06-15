@@ -23,9 +23,10 @@ export function delegatorsDelegatorAddrDelegationsPost(
 ) {
   return new StakingApi(undefined, sdk.url)
     .stakingDelegatorsDelegatorAddrDelegationsPost(delegator.toBech32())
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function delegatorsDelegatorAddrDelegationsValidatorAddrGet(
@@ -50,9 +51,10 @@ export function delegatorsDelegatorAddrRedelegationsPost(
 ) {
   return new StakingApi(undefined, sdk.url)
     .stakingDelegatorsDelegatorAddrRedelegationsPost(delegator.toBech32())
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function delegatorsDelegatorAddrUnbondingDelegationsGet(
@@ -77,9 +79,10 @@ export function delegatorsDelegatorAddrUnbondingDelegationsPost(
     .stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(
       delegator.toBech32(),
     )
-    .then((res) =>
-      codec.fromJSONString(JSON.stringify(res.data)),
-    ) as AxiosPromise<StdTx>;
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function delegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(
