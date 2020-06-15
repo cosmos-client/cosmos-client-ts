@@ -1,3 +1,4 @@
+import * as crypto from "crypto";
 import * as nacl from "tweetnacl";
 import { PrivKey, PubKey } from "./key";
 
@@ -83,7 +84,8 @@ export class PubKeyEd25519 implements PubKey {
   }
 
   getAddress() {
-    return this.pubKey.subarray(0, 20);
+    const hash = crypto.createHash("sha256").update(this.pubKey).digest();
+    return hash.subarray(0, 20);
   }
 
   /**

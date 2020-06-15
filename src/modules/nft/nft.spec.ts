@@ -9,7 +9,7 @@ test("nft", async () => {
     const sdk = new CosmosSDK("https://gaia.lcnem.net", "cosmoshub-3");
 
     // get account info
-    let privKey: PrivKeySecp256k1 = new PrivKeySecp256k1(
+    let privKey = new PrivKeySecp256k1(
       Buffer.from(
         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "hex",

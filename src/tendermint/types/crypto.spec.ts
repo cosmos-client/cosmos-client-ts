@@ -1,11 +1,14 @@
 import * as crypto from "crypto";
 import { PrivKeyEd25519 } from "./ed25519";
+import { AccAddress } from "../../types";
+import { PrivKeySecp256k1 } from "./secp256k1";
 
-test("address", () => {
+test("crypto", () => {
   const bytes = crypto.randomBytes(32);
-  const data = crypto.randomBytes(16);
-  const key = new PrivKeyEd25519(bytes);
-  const signature = key.sign(data);
-  const verify = key.getPubKey().verify(signature);
-  expect(verify).toBeTruthy();
+  const key = new PrivKeySecp256k1(bytes);
+  const address = AccAddress.fromPublicKey(key.getPubKey());
+  const str = address.toBech32();
+
+  console.log(bytes.toString("hex"));
+  console.log(str);
 });

@@ -11,7 +11,7 @@ npm install --save cosmos-client
 ## Example
 
 ```typescript
-import { CosmosSDK, AccAddress, PrivKeyEd25519 } from "cosmos-client";
+import { CosmosSDK, AccAddress, PrivKeySecp256k1 } from "cosmos-client";
 import { auth } from "cosmos-client/x/auth";
 import { bank } from "cosmos-client/x/bank";
 
@@ -19,7 +19,7 @@ const sdk = new CosmosSDK(hostURL, chainID);
 
 // get account info
 const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic(mnemonic);
-const privKey = new PrivKeyEd25519(privKeyBuffer);
+const privKey = new PrivKeySecp256k1(privKeyBuffer);
 const fromAddress = AccAddress.fromPublicKey(privKey.getPubKey());
 const account = await auth
   .accountsAddressGet(sdk, fromAddress)
