@@ -21,7 +21,7 @@ test("nft", async () => {
     console.log(fromAddress.toBech32());
     const account = await auth
       .accountsAddressGet(sdk, fromAddress)
-      .then((res) => res.data);
+      .then((res) => res.data.result);
 
     // get unsigned tx
     let toAddress: AccAddress = fromAddress;

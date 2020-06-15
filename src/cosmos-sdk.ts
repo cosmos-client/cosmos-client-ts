@@ -21,26 +21,7 @@ export class CosmosSDK {
     return child.privateKey!;
   }
 
-  instancifyObjectWithoutAminoJSON<T>(
-    constructor: Function,
-    promise: AxiosPromise<any>,
-  ): AxiosPromise<T> {
-    const type = codec.maps.type.get(constructor);
-    return promise.then((res) => ({
-      ...res,
-      data: codec.fromJSONString(
-        JSON.stringify({ type: type, value: res.data }),
-      ) as T,
-    }));
-  }
-
-  objectifyInstanceWithoutAminoJSON(data: any) {
-    const obj = JSON.parse(codec.toJSONString(data));
-
-    if (obj.type && codec.maps.fromJSON[obj.type]) {
-      return obj.value;
-    }
-
-    return obj;
+  wrapResponseWithHeight<T>(res: AxiosPromise<T>) {
+    return (res as any) as AxiosPromise<{ height: number; result: T }>;
   }
 }

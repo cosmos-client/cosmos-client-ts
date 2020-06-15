@@ -6,19 +6,25 @@ import {
 } from "../../api";
 import { AccAddress, ValAddress } from "../../types";
 import { StdTx } from "../auth";
+import { codec } from "../../codec";
+import { AxiosPromise, AxiosResponse } from "axios";
 
 export function communityPoolGet(sdk: CosmosSDK) {
-  return new DistributionApi(undefined, sdk.url).distributionCommunityPoolGet();
+  return sdk.wrapResponseWithHeight(
+    new DistributionApi(undefined, sdk.url).distributionCommunityPoolGet(),
+  );
 }
 
 export function delegatorsDelegatorAddrRewardsGet(
   sdk: CosmosSDK,
   delegator: AccAddress,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionDelegatorsDelegatorAddrRewardsGet(delegator.toBech32());
+  return sdk.wrapResponseWithHeight(
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionDelegatorsDelegatorAddrRewardsGet(delegator.toBech32()),
+  );
 }
 
 export function delegatorsDelegatorAddrRewardsPost(
@@ -26,13 +32,11 @@ export function delegatorsDelegatorAddrRewardsPost(
   delegator: AccAddress,
   req: WithdrawRewardsReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new DistributionApi(
-      undefined,
-      sdk.url,
-    ).distributionDelegatorsDelegatorAddrRewardsPost(delegator.toBech32(), req),
-  );
+  return new DistributionApi(undefined, sdk.url)
+    .distributionDelegatorsDelegatorAddrRewardsPost(delegator.toBech32(), req)
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function delegatorsDelegatorAddrRewardsValidatorAddrGet(
@@ -40,12 +44,14 @@ export function delegatorsDelegatorAddrRewardsValidatorAddrGet(
   delegator: AccAddress,
   validator: ValAddress,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(
-    delegator.toBech32(),
-    validator.toBech32(),
+  return sdk.wrapResponseWithHeight(
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(
+      delegator.toBech32(),
+      validator.toBech32(),
+    ),
   );
 }
 
@@ -55,27 +61,29 @@ export function delegatorsDelegatorAddrRewardsValidatorAddrPost(
   validator: ValAddress,
   req: WithdrawRewardsReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new DistributionApi(
-      undefined,
-      sdk.url,
-    ).distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
+  return new DistributionApi(undefined, sdk.url)
+    .distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(
       delegator.toBech32(),
       validator.toBech32(),
       req,
-    ),
-  );
+    )
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function delegatorsDelegatorAddrWithdrawAddressGet(
   sdk: CosmosSDK,
   delegator: AccAddress,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegator.toBech32());
+  return sdk.wrapResponseWithHeight(
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionDelegatorsDelegatorAddrWithdrawAddressGet(
+      delegator.toBech32(),
+    ),
+  );
 }
 
 export function delegatorsDelegatorAddrWithdrawAddressPost(
@@ -83,41 +91,46 @@ export function delegatorsDelegatorAddrWithdrawAddressPost(
   delegator: AccAddress,
   req: SetWithdrawAddressReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new DistributionApi(
-      undefined,
-      sdk.url,
-    ).distributionDelegatorsDelegatorAddrWithdrawAddressPost(
+  return new DistributionApi(undefined, sdk.url)
+    .distributionDelegatorsDelegatorAddrWithdrawAddressPost(
       delegator.toBech32(),
       req,
-    ),
-  );
+    )
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function parametersGet(sdk: CosmosSDK) {
-  return new DistributionApi(undefined, sdk.url).distributionParametersGet();
+  return sdk.wrapResponseWithHeight(
+    new DistributionApi(undefined, sdk.url).distributionParametersGet(),
+  );
 }
 
 export function validatorsValidatorAddrGet(
   sdk: CosmosSDK,
   validator: ValAddress,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionValidatorsValidatorAddrGet(validator.toBech32());
+  return new DistributionApi(undefined, sdk.url)
+    .distributionValidatorsValidatorAddrGet(validator.toBech32())
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function validatorsValidatorAddrOutstandingRewardsGet(
   sdk: CosmosSDK,
   validator: ValAddress,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionValidatorsValidatorAddrOutstandingRewardsGet(
-    validator.toBech32(),
+  return sdk.wrapResponseWithHeight(
+    sdk.wrapResponseWithHeight(
+      new DistributionApi(
+        undefined,
+        sdk.url,
+      ).distributionValidatorsValidatorAddrOutstandingRewardsGet(
+        validator.toBech32(),
+      ),
+    ),
   );
 }
 
@@ -125,10 +138,12 @@ export function validatorsValidatorAddrRewardsGet(
   sdk: CosmosSDK,
   validator: ValAddress,
 ) {
-  return new DistributionApi(
-    undefined,
-    sdk.url,
-  ).distributionValidatorsValidatorAddrRewardsGet(validator.toBech32());
+  return sdk.wrapResponseWithHeight(
+    new DistributionApi(
+      undefined,
+      sdk.url,
+    ).distributionValidatorsValidatorAddrRewardsGet(validator.toBech32()),
+  );
 }
 
 export function validatorsValidatorAddrRewardsPost(
@@ -136,11 +151,9 @@ export function validatorsValidatorAddrRewardsPost(
   validator: ValAddress,
   req: WithdrawRewardsReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new DistributionApi(
-      undefined,
-      sdk.url,
-    ).distributionValidatorsValidatorAddrRewardsPost(validator.toBech32(), req),
-  );
+  return new DistributionApi(undefined, sdk.url)
+    .distributionValidatorsValidatorAddrRewardsPost(validator.toBech32(), req)
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }

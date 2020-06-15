@@ -8,17 +8,25 @@ import {
 } from "../../api";
 import { AccAddress } from "../../types";
 import { StdTx } from "../auth";
+import { codec } from "../../codec";
+import { AxiosPromise } from "axios";
 
 export function parametersDepositGet(sdk: CosmosSDK) {
-  return new GovernanceApi(undefined, sdk.url).govParametersDepositGet();
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govParametersDepositGet(),
+  );
 }
 
 export function parametersTallyingGet(sdk: CosmosSDK) {
-  return new GovernanceApi(undefined, sdk.url).govParametersTallyingGet();
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govParametersTallyingGet(),
+  );
 }
 
 export function parametersVotingGet(sdk: CosmosSDK) {
-  return new GovernanceApi(undefined, sdk.url).govParametersVotingGet();
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govParametersVotingGet(),
+  );
 }
 
 export function proposalsGet(
@@ -27,10 +35,12 @@ export function proposalsGet(
   depositor?: AccAddress,
   status?: "deposit_period" | "voting_period" | "passed" | "rejected",
 ) {
-  return new GovernanceApi(undefined, sdk.url).govProposalsGet(
-    voter?.toBech32(),
-    depositor?.toBech32(),
-    status,
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsGet(
+      voter?.toBech32(),
+      depositor?.toBech32(),
+      status,
+    ),
   );
 }
 
@@ -38,20 +48,19 @@ export function proposalsParamChangePost(
   sdk: CosmosSDK,
   req: ParamChangeProposalReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-      StdTx,
-      new GovernanceApi(undefined, sdk.url).govProposalsParamChangePost(req),
-    ),
-  );
+  return new GovernanceApi(undefined, sdk.url)
+    .govProposalsParamChangePost(req)
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function proposalsPost(sdk: CosmosSDK, req: PostProposalReq) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new GovernanceApi(undefined, sdk.url).govProposalsPost(req),
-  );
+  return new GovernanceApi(undefined, sdk.url)
+    .govProposalsPost(req)
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function proposalsProposalIdDepositsDepositorGet(
@@ -59,12 +68,14 @@ export function proposalsProposalIdDepositsDepositorGet(
   proposalID: string,
   depositor: AccAddress,
 ) {
-  return new GovernanceApi(
-    undefined,
-    sdk.url,
-  ).govProposalsProposalIdDepositsDepositorGet(
-    proposalID,
-    depositor.toBech32(),
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(
+      undefined,
+      sdk.url,
+    ).govProposalsProposalIdDepositsDepositorGet(
+      proposalID,
+      depositor.toBech32(),
+    ),
   );
 }
 
@@ -72,10 +83,11 @@ export function proposalsProposalIdDepositsGet(
   sdk: CosmosSDK,
   proposalID: string,
 ) {
-  return new GovernanceApi(
-    undefined,
-    sdk.url,
-  ).govProposalsProposalIdDepositsGet(proposalID);
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdDepositsGet(
+      proposalID,
+    ),
+  );
 }
 
 export function proposalsProposalIdDepositsPost(
@@ -83,18 +95,16 @@ export function proposalsProposalIdDepositsPost(
   proposalID: string,
   req: DepositReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdDepositsPost(
-      proposalID,
-      req,
-    ),
-  );
+  return new GovernanceApi(undefined, sdk.url)
+    .govProposalsProposalIdDepositsPost(proposalID, req)
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function proposalsProposalIdGet(sdk: CosmosSDK, proposalID: string) {
-  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdGet(
-    proposalID,
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdGet(proposalID),
   );
 }
 
@@ -102,18 +112,21 @@ export function proposalsProposalIdProposerGet(
   sdk: CosmosSDK,
   proposalID: string,
 ) {
-  return new GovernanceApi(
-    undefined,
-    sdk.url,
-  ).govProposalsProposalIdProposerGet(proposalID);
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdProposerGet(
+      proposalID,
+    ),
+  );
 }
 
 export function proposalsProposalIdTallyGet(
   sdk: CosmosSDK,
   proposalID: string,
 ) {
-  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdTallyGet(
-    proposalID,
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdTallyGet(
+      proposalID,
+    ),
   );
 }
 
@@ -121,8 +134,10 @@ export function proposalsProposalIdVotesGet(
   sdk: CosmosSDK,
   proposalID: string,
 ) {
-  return new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesGet(
-    proposalID,
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesGet(
+      proposalID,
+    ),
   );
 }
 
@@ -131,13 +146,11 @@ export function proposalsProposalIdVotesPost(
   proposalID: string,
   req: VoteReq,
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesPost(
-      proposalID,
-      req,
-    ),
-  );
+  return new GovernanceApi(undefined, sdk.url)
+    .govProposalsProposalIdVotesPost(proposalID, req)
+    .then((res) =>
+      codec.fromJSONString(JSON.stringify(res.data)),
+    ) as AxiosPromise<StdTx>;
 }
 
 export function proposalsProposalIdVotesVoterGet(
@@ -145,8 +158,10 @@ export function proposalsProposalIdVotesVoterGet(
   proposalID: string,
   voter: AccAddress,
 ) {
-  return new GovernanceApi(
-    undefined,
-    sdk.url,
-  ).govProposalsProposalIdVotesVoterGet(proposalID, voter.toBech32());
+  return sdk.wrapResponseWithHeight(
+    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesVoterGet(
+      proposalID,
+      voter.toBech32(),
+    ),
+  );
 }

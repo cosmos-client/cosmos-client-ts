@@ -4,6 +4,8 @@ import { StdTx } from "./types/std-tx";
 import { AuthApi, TransactionsApi, DecodeReq, EncodeReq } from "../../api";
 import { AccAddress } from "../../types";
 import { BaseAccount, StdSignature } from "./types";
+import { codec } from "../../codec";
+import { AxiosPromise } from "axios";
 
 /**
  *
@@ -36,21 +38,28 @@ export function signStdTx(
 }
 
 export function accountsAddressGet(sdk: CosmosSDK, address: AccAddress) {
-  return sdk.instancifyObjectWithoutAminoJSON<BaseAccount>(
-    BaseAccount,
-    new AuthApi(undefined, sdk.url).authAccountsAddressGet(address.toBech32()),
-  );
+  return sdk
+    .wrapResponseWithHeight(
+      new AuthApi(undefined, sdk.url).authAccountsAddressGet(
+        address.toBech32(),
+      ),
+    )
+    .then((res) => ({
+      height: res.data.height,
+      result: codec.fromJSONString(JSON.stringify(res.data.result)),
+    })) as AxiosPromise<{ height: number; result: BaseAccount }>;
 }
 
 export function txsDecodePost(sdk: CosmosSDK, req: DecodeReq) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
+  return sdk.wrapResponseWithHeight(
     new TransactionsApi(undefined, sdk.url).txsDecodePost(req),
   );
 }
 
 export function txsEncodePost(sdk: CosmosSDK, req: EncodeReq) {
-  return new TransactionsApi(undefined, sdk.url).txsEncodePost(req);
+  return sdk.wrapResponseWithHeight(
+    new TransactionsApi(undefined, sdk.url).txsEncodePost(req),
+  );
 }
 
 export function txsGet(
@@ -62,18 +71,22 @@ export function txsGet(
   txMinHeight?: number,
   txMaxHeight?: number,
 ) {
-  return new TransactionsApi(undefined, sdk.url).txsGet(
-    messageAction,
-    messageSender,
-    page,
-    limit,
-    txMinHeight,
-    txMaxHeight,
+  return sdk.wrapResponseWithHeight(
+    new TransactionsApi(undefined, sdk.url).txsGet(
+      messageAction,
+      messageSender,
+      page,
+      limit,
+      txMinHeight,
+      txMaxHeight,
+    ),
   );
 }
 
 export function txsHashGet(sdk: CosmosSDK, hash: string) {
-  return new TransactionsApi(undefined, sdk.url).txsHashGet(hash);
+  return sdk.wrapResponseWithHeight(
+    new TransactionsApi(undefined, sdk.url).txsHashGet(hash),
+  );
 }
 
 export function txsPost(
@@ -82,7 +95,7 @@ export function txsPost(
   mode: "sync" | "async" | "block",
 ) {
   return new TransactionsApi(undefined, sdk.url).txsPost({
-    tx: sdk.objectifyInstanceWithoutAminoJSON(tx),
+    tx: JSON.parse(codec.toJSONString(tx)).value,
     mode: mode,
   });
 }

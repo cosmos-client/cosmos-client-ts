@@ -34,7 +34,8 @@ export class StdTx extends Tx {
       msgs: this.msg,
       sequence,
     };
-    const sortedJSON = JSON.stringify(stdSignMsg, (_, v) =>
+    const obj = JSON.parse(codec.toJSONString(stdSignMsg));
+    const sortedJSON = JSON.stringify(obj, (_, v) =>
       !(v instanceof Array || v === null) && typeof v == "object"
         ? Object.keys(v)
             .sort()

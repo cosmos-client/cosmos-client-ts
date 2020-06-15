@@ -1,8 +1,9 @@
 import { StdTx } from "../../x/auth";
 import { CosmosSDK } from "../../cosmos-sdk";
-import Axios from "axios";
+import Axios, { AxiosPromise } from "axios";
 import { BaseReq } from "../../api";
 import { AccAddress } from "../../types";
+import { codec } from "../../codec";
 
 export function supplyDenomGet(sdk: CosmosSDK, denom: string) {
   return Axios.get(`${sdk.url}/nft/supply/${denom}`);
@@ -51,10 +52,9 @@ export function mintPost(
     tokenURI: string;
   },
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    Axios.post(`${sdk.url}/nfts/mint`, req),
-  );
+  return Axios.post(`${sdk.url}/nfts/mint`, req).then((res) =>
+    codec.fromJSONString(JSON.stringify(res.data)),
+  ) as AxiosPromise<StdTx>;
 }
 
 export function transferPost(
@@ -66,10 +66,9 @@ export function transferPost(
     recipient: string;
   },
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    Axios.post(`${sdk.url}/nfts/transfer`, req),
-  );
+  return Axios.post(`${sdk.url}/nfts/transfer`, req).then((res) =>
+    codec.fromJSONString(JSON.stringify(res.data)),
+  ) as AxiosPromise<StdTx>;
 }
 
 export function collectionDenomNftIdMetadataPut(
@@ -81,13 +80,12 @@ export function collectionDenomNftIdMetadataPut(
     tokenURI: string;
   },
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    Axios.put(
-      `${sdk.url}/nfts/collection/${req.denom}/nft/${req.id}/metadata`,
-      req,
-    ),
-  );
+  return Axios.put(
+    `${sdk.url}/nfts/collection/${req.denom}/nft/${req.id}/metadata`,
+    req,
+  ).then((res) =>
+    codec.fromJSONString(JSON.stringify(res.data)),
+  ) as AxiosPromise<StdTx>;
 }
 
 export function collectionDenomNftIdBurnPut(
@@ -98,11 +96,10 @@ export function collectionDenomNftIdBurnPut(
     id: string;
   },
 ) {
-  return sdk.instancifyObjectWithoutAminoJSON<StdTx>(
-    StdTx,
-    Axios.put(
-      `${sdk.url}/nfts/collection/${req.denom}/nft/${req.id}/burn`,
-      req,
-    ),
-  );
+  return Axios.put(
+    `${sdk.url}/nfts/collection/${req.denom}/nft/${req.id}/burn`,
+    req,
+  ).then((res) =>
+    codec.fromJSONString(JSON.stringify(res.data)),
+  ) as AxiosPromise<StdTx>;
 }
