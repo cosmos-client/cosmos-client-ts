@@ -1,7 +1,7 @@
 {
   "name": "cosmos-client",
   "description": "REST API Client for Cosmos SDK Blockchain",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "LCNEM, Inc.",
   "bugs": {
     "url": "https://github.com/lcnem/cosmos-client-ts/issues"

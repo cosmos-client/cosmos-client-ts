@@ -4,6 +4,7 @@ import { StdSignMsg } from "./std-sign-msg";
 import { Tx } from "../../../types/tx";
 import { codec } from "../../../codec";
 import { StdTx as StdTxObject, StdTxFee } from "../../../api";
+import { canonicalizeJSON } from "./canonicalize-json";
 
 /**
  *
@@ -25,29 +26,6 @@ export class StdTx extends Tx {
     super();
   }
 
-  canonicalizeJSON(value: any): any {
-    if (Object.prototype.toString.call(value) === "[object Object]") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const sorted = {} as { [key: string]: any };
-      const keys = Object.keys(value).sort();
-
-      for (const key of keys) {
-        const keyValue = value[key];
-        if (keyValue != null) {
-          sorted[key] = this.canonicalizeJSON(keyValue);
-        }
-      }
-
-      return sorted;
-    }
-
-    if (Array.isArray(value)) {
-      return value.map(this.canonicalizeJSON);
-    }
-
-    return value === undefined ? null : value;
-  }
-
   getSignBytes(chainID: string, accountNumber: number, sequence: number) {
     const stdSignMsg: StdSignMsg = {
       account_number: accountNumber,
@@ -58,7 +36,7 @@ export class StdTx extends Tx {
       sequence,
     };
     const obj = JSON.parse(codec.toJSONString(stdSignMsg));
-    const canonicalized = this.canonicalizeJSON(obj);
+    const canonicalized = canonicalizeJSON(obj);
     const encoder = new TextEncoder();
     const encoded = encoder.encode(JSON.stringify(canonicalized));
 
