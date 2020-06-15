@@ -15,9 +15,7 @@ test("nft", async () => {
         "hex",
       ),
     );
-    let fromAddress: AccAddress = AccAddress.fromPublicKey(
-      privKey.getPubKey().toBuffer(),
-    );
+    let fromAddress: AccAddress = AccAddress.fromPublicKey(privKey.getPubKey());
     console.log(fromAddress.toBech32());
     const account = await auth
       .accountsAddressGet(sdk, fromAddress)

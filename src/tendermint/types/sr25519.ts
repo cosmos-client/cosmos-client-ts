@@ -29,7 +29,7 @@ export class PrivKeySr25519 implements PrivKey {
    *
    * @param message
    */
-  sign(message: Buffer): Buffer {
+  sign(message: Buffer) {
     const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(this.privKey));
     return Buffer.from(
       nacl.sign(new Uint8Array(message), new Uint8Array(keypair.secretKey)),
@@ -82,11 +82,15 @@ export class PubKeySr25519 implements PubKey {
     this.pubKey = pubKey;
   }
 
+  getAddress() {
+    return this.pubKey.subarray(0, 20);
+  }
+
   /**
    * message is not needed
    * @param signature
    */
-  verify(signature: Buffer): boolean {
+  verify(signature: Buffer) {
     return (
       nacl.sign.open(new Uint8Array(signature), new Uint8Array(this.pubKey)) !==
       null

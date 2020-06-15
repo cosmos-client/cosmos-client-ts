@@ -1,4 +1,4 @@
-import * as crypto from "crypto";
+import { PubKey } from "../../tendermint";
 
 export enum Prefix {
   Cosmos = "cosmos",
@@ -36,24 +36,12 @@ export class Address {
     this._value = value;
   }
 
-  static hash160(buffer: Buffer): Buffer {
-    const sha256Hash: Buffer = crypto
-      .createHash("sha256")
-      .update(buffer)
-      .digest();
-    try {
-      return crypto.createHash("rmd160").update(sha256Hash).digest();
-    } catch (err) {
-      return crypto.createHash("ripemd160").update(sha256Hash).digest();
-    }
-  }
-
   /**
-   * 公開鍵からアドレスのインスタンスを作成する。
-   * @param publicKey
+   *
+   * @param pubKey
    */
-  static fromPublicKey(publicKey: Buffer) {
-    return new Address(this.hash160(publicKey));
+  static fromPublicKey(pubKey: PubKey) {
+    return new Address(pubKey.getAddress());
   }
 
   /**

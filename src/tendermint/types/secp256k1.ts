@@ -28,7 +28,7 @@ export class PrivKeySecp256k1 implements PrivKey {
    *
    * @param message
    */
-  sign(message: Buffer): Buffer {
+  sign(message: Buffer) {
     const hash = crypto.createHash("sha256").update(message).digest();
     const signature = secp256k1.sign(hash, this.privKey);
 
@@ -81,12 +81,28 @@ export class PubKeySecp256k1 implements PubKey {
     this.pubKey = pubKey;
   }
 
+  hash160(buffer: Buffer): Buffer {
+    const sha256Hash: Buffer = crypto
+      .createHash("sha256")
+      .update(buffer)
+      .digest();
+    try {
+      return crypto.createHash("rmd160").update(sha256Hash).digest();
+    } catch (err) {
+      return crypto.createHash("ripemd160").update(sha256Hash).digest();
+    }
+  }
+
+  getAddress() {
+    return this.hash160(this.pubKey);
+  }
+
   /**
-   * 署名がこの公開鍵から作られたものであるか検証する。
+   *
    * @param message
    * @param signature
    */
-  verify(signature: Buffer, message: Buffer): boolean {
+  verify(signature: Buffer, message: Buffer) {
     const hash = crypto.createHash("sha256").update(message).digest();
 
     return secp256k1.verify(hash, signature, this.pubKey);

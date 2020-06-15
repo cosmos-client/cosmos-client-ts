@@ -11,18 +11,16 @@ npm install --save cosmos-client
 ## Example
 
 ```typescript
-import { CosmosSDK, AccAddress, PrivKeySecp256k1 } from "cosmos-client";
-import { auth, StdTx } from "cosmos-client/x/auth";
+import { CosmosSDK, AccAddress, PrivKeyEd25519 } from "cosmos-client";
+import { auth } from "cosmos-client/x/auth";
 import { bank } from "cosmos-client/x/bank";
 
 const sdk = new CosmosSDK(hostURL, chainID);
 
 // get account info
 const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic(mnemonic);
-const privKey = new PrivKeySecp256k1(privKeyBuffer);
-const fromAddress = AccAddress.fromPublicKey(
-  privKey.getPubKey().toBuffer()
-);
+const privKey = new PrivKeyEd25519(privKeyBuffer);
+const fromAddress = AccAddress.fromPublicKey(privKey.getPubKey());
 const account = await auth
   .accountsAddressGet(sdk, fromAddress)
   .then((res) => res.data);
@@ -31,7 +29,20 @@ const account = await auth
 const toAddress = fromAddress;
 
 const unsignedStdTx = await bank
-  .accountsAddressTransfersPost(sdk, toAddress, { ... })
+  .accountsAddressTransfersPost(sdk, toAddress, {
+    base_req: {
+      from: fromAddress.toBech32(),
+      memo: "Hello, world!",
+      chain_id: sdk.chainID,
+      account_number: account.account_number.toString(),
+      sequence: account.sequence.toString(),
+      gas: "",
+      gas_adjustment: "",
+      fees: [],
+      simulate: false,
+    },
+    amount: [{ denom: "token", amount: "1000" }],
+  })
   .then((res) => res.data);
 
 // sign
@@ -44,7 +55,9 @@ const signedStdTx = auth.signStdTx(
 );
 
 // broadcast
-const result = await auth.txsPost(sdk, signedStdTx, "sync").then((res) => res.data);
+const result = await auth
+  .txsPost(sdk, signedStdTx, "sync")
+  .then((res) => res.data);
 ```
 
 ## For library developlers

@@ -1,5 +1,6 @@
 import * as bech32 from "bech32";
 import { Address, bech32Prefix } from "./address";
+import { PubKey } from "../../tendermint";
 
 /**
  * AccAddress
@@ -19,15 +20,12 @@ export class AccAddress extends Address {
    */
   static fromBech32(accAddress: string) {
     const { prefix, words } = bech32.decode(accAddress);
-    if (prefix !== bech32Prefix.accAddr) {
-      throw Error();
-    }
 
     return new AccAddress(bech32.fromWords(words));
   }
 
-  static fromPublicKey(publicKey: Buffer) {
-    return new AccAddress(this.hash160(publicKey));
+  static fromPublicKey(pubKey: PubKey) {
+    return new AccAddress(pubKey.getAddress());
   }
 
   /**

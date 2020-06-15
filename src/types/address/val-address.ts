@@ -1,5 +1,6 @@
 import * as bech32 from "bech32";
 import { Address, bech32Prefix } from "./address";
+import { PubKey } from "../../tendermint";
 
 /**
  * ValAddress
@@ -26,8 +27,8 @@ export class ValAddress extends Address {
     return new ValAddress(bech32.fromWords(words));
   }
 
-  static fromPublicKey(publicKey: Buffer) {
-    return new ValAddress(this.hash160(publicKey));
+  static fromPublicKey(pubKey: PubKey) {
+    return new ValAddress(pubKey.getAddress());
   }
 
   /**

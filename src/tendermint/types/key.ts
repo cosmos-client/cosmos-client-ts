@@ -6,6 +6,7 @@ export type PrivKey = {
 };
 
 export type PubKey = {
+  getAddress(): Buffer;
   toBuffer(): Buffer;
   toBase64(): string;
   verify(signature: Buffer, message?: Buffer): boolean;
