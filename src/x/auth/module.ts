@@ -18,8 +18,8 @@ export function signStdTx(
   sdk: CosmosSDK,
   privKey: PrivKey,
   stdTx: StdTx,
-  accountNumber: number,
-  sequence: number,
+  accountNumber: string,
+  sequence: string,
 ) {
   const signBytes = stdTx.getSignBytes(sdk.chainID, accountNumber, sequence);
   const signature: StdSignature = {

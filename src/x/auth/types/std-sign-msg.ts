@@ -3,8 +3,8 @@ import { StdTxFee } from "../../../api";
 
 export type StdSignMsg = {
   chain_id: string;
-  account_number: number;
-  sequence: number;
+  account_number: string;
+  sequence: string;
   fee: StdTxFee;
   msgs: Msg[];
   memo: string;

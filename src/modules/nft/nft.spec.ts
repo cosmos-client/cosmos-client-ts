@@ -51,8 +51,8 @@ test("nft", async () => {
       sdk,
       privKey,
       unsignedStdTx,
-      account.account_number,
-      account.sequence,
+      account.account_number.toString(),
+      account.sequence.toString(),
     );
 
     // broadcast

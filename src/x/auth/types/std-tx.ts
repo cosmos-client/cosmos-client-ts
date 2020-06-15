@@ -3,8 +3,16 @@ import { StdSignature } from "./std-signature";
 import { StdSignMsg } from "./std-sign-msg";
 import { Tx } from "../../../types/tx";
 import { codec } from "../../../codec";
-import { StdTx as StdTxObject, StdTxFee } from "../../../api";
+import { StdTxFee } from "../../../api";
 import { canonicalizeJSON } from "./canonicalize-json";
+
+if (
+  typeof process !== "undefined" &&
+  process.versions &&
+  process.versions.node
+) {
+  (global as any).TextEncoder = require("util").TextEncoder;
+}
 
 /**
  *
@@ -26,7 +34,7 @@ export class StdTx extends Tx {
     super();
   }
 
-  getSignBytes(chainID: string, accountNumber: number, sequence: number) {
+  getSignBytes(chainID: string, accountNumber: string, sequence: string) {
     const stdSignMsg: StdSignMsg = {
       account_number: accountNumber,
       chain_id: chainID,
