@@ -4,10 +4,13 @@ import { bank } from "../bank";
 import { PrivKeySecp256k1 } from "../../tendermint";
 
 test("bank", async () => {
-  const sdk = new CosmosSDK("", "test");
+  const sdk = new CosmosSDK("http://172.105.205.26", "test");
 
   // get account info
-  const privKeyBuffer = Buffer.from("", "hex");
+  const privKeyBuffer = Buffer.from(
+    "36d1043c6e23eb15c928da41043bfd183b6ce13f9e592c9a45ac431c4a08b924",
+    "hex",
+  );
   const privKey = new PrivKeySecp256k1(privKeyBuffer);
   const fromAddress = AccAddress.fromPublicKey(privKey.getPubKey());
   const account = await auth

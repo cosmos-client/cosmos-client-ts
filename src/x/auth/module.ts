@@ -51,15 +51,21 @@ export function accountsAddressGet(sdk: CosmosSDK, address: AccAddress) {
 }
 
 export function txsDecodePost(sdk: CosmosSDK, req: DecodeReq) {
-  return sdk.wrapResponseWithHeight(
-    new TransactionsApi(undefined, sdk.url).txsDecodePost(req),
-  );
+  return new TransactionsApi(undefined, sdk.url)
+    .txsDecodePost(req)
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function txsEncodePost(sdk: CosmosSDK, req: EncodeReq) {
-  return sdk.wrapResponseWithHeight(
-    new TransactionsApi(undefined, sdk.url).txsEncodePost(req),
-  );
+  return new TransactionsApi(undefined, sdk.url)
+    .txsEncodePost(req)
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<StdTx>;
 }
 
 export function txsGet(
@@ -71,22 +77,18 @@ export function txsGet(
   txMinHeight?: number,
   txMaxHeight?: number,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new TransactionsApi(undefined, sdk.url).txsGet(
-      messageAction,
-      messageSender,
-      page,
-      limit,
-      txMinHeight,
-      txMaxHeight,
-    ),
+  return new TransactionsApi(undefined, sdk.url).txsGet(
+    messageAction,
+    messageSender,
+    page,
+    limit,
+    txMinHeight,
+    txMaxHeight,
   );
 }
 
 export function txsHashGet(sdk: CosmosSDK, hash: string) {
-  return sdk.wrapResponseWithHeight(
-    new TransactionsApi(undefined, sdk.url).txsHashGet(hash),
-  );
+  return new TransactionsApi(undefined, sdk.url).txsHashGet(hash);
 }
 
 export function txsPost(
