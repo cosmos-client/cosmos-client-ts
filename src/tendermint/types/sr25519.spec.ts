@@ -1,11 +1,10 @@
 import * as crypto from "crypto";
-import { PrivKeyEd25519 } from "./ed25519";
 import { AccAddress } from "../../types";
-import { PrivKeySecp256k1 } from "./secp256k1";
+import { PrivKeySr25519 } from "./sr25519";
 
-test("crypto", () => {
+test("sr25519", () => {
   const bytes = crypto.randomBytes(32);
-  const key = new PrivKeySecp256k1(bytes);
+  const key = new PrivKeySr25519(bytes);
   const address = AccAddress.fromPublicKey(key.getPubKey());
   const str = address.toBech32();
 

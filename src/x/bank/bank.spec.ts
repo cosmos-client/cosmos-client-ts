@@ -4,7 +4,7 @@ import { bank } from "../bank";
 import { PrivKeySecp256k1 } from "../../tendermint";
 
 test("bank", async () => {
-  const sdk = new CosmosSDK("http://172.105.205.26", "test");
+  const sdk = new CosmosSDK("", "test");
 
   // get account info
   const privKeyBuffer = Buffer.from(
@@ -25,7 +25,7 @@ test("bank", async () => {
       base_req: {
         from: fromAddress.toBech32(),
         memo: "Hello, world!",
-        chain_id: "test",
+        chain_id: sdk.chainID,
         account_number: account.account_number.toString(),
         sequence: account.sequence.toString(),
         gas: "",

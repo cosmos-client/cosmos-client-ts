@@ -1,4 +1,4 @@
-// @ts-check
+// wasm
 const stubbed = require("./sr25519");
 
 module.exports.deriveKeypairHard = stubbed.derive_keypair_hard;
