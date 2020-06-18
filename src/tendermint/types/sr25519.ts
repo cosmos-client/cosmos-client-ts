@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import * as nacl from "tweetnacl";
+import * as sr25519 from "../sr25519/src";
 import { PrivKey, PubKey } from "./key";
 
 /**
@@ -14,8 +14,8 @@ export class PrivKeySr25519 implements PrivKey {
    * @param privKey
    */
   constructor(privKey: Buffer) {
-    const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(privKey));
-    this.pubKey = new PubKeySr25519(Buffer.from(keypair.publicKey));
+    const keypair = sr25519.keypairFromSeed(new Uint8Array(privKey));
+    this.pubKey = new PubKeySr25519(Buffer.from(keypair.slice(64, 96)));
     this.privKey = privKey;
   }
 
@@ -31,10 +31,9 @@ export class PrivKeySr25519 implements PrivKey {
    * @param message
    */
   sign(message: Buffer) {
-    const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(this.privKey));
-    return Buffer.from(
-      nacl.sign(new Uint8Array(message), new Uint8Array(keypair.secretKey)),
-    );
+    const keypair = sr25519.keypairFromSeed(new Uint8Array(this.privKey));
+    const privKey = keypair.slice(0, 64);
+    return Buffer.from(sr25519.sign(this.pubKey.toBuffer(), privKey, message));
   }
 
   /**
@@ -89,13 +88,15 @@ export class PubKeySr25519 implements PubKey {
   }
 
   /**
-   * message is not needed
+   *
+   * @param message
    * @param signature
    */
-  verify(signature: Buffer) {
-    return (
-      nacl.sign.open(new Uint8Array(signature), new Uint8Array(this.pubKey)) !==
-      null
+  verify(signature: Buffer, message: Buffer) {
+    return sr25519.verify(
+      new Uint8Array(signature),
+      new Uint8Array(message),
+      new Uint8Array(this.pubKey),
     );
   }
 
