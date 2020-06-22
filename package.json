@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc --build --clean && tsc",
+    "build": "tsc --build --clean && tsc && cargo install wasm-pack && wasm-pack build --scope lcnem ./src/tendermint/sr25519",
     "publish": "node bundle && cd dist && npm publish"
   }
 }
