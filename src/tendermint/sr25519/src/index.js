@@ -1,5 +1,5 @@
 // wasm
-const stubbed = require("./sr25519");
+const stubbed = require("../pkg/crypto");
 
 module.exports.deriveKeypairHard = stubbed.derive_keypair_hard;
 module.exports.deriveKeypairSoft = stubbed.derive_keypair_soft;

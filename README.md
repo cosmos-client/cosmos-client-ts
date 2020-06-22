@@ -67,3 +67,27 @@ const result = await auth
 ```shell
 openapi-generator generate -g typescript-axios -i swagger.yaml -o ./src
 ```
+
+## Create WASM and Javascript interface with Rust
+
+```shell
+cd src/tendermint/sr25519
+cargo install wasm-pack
+cargo build --target=wasm32-unknown-unknown --release
+wasm-pack build --scope lcnem
+```
+
+You can see generated ./pkg included these files.
+
+./pkg
+
+```
+-rw-rw-r-- 1 nao nao    1  6月 19 20:28 .gitignore
+-rw-r--r-- 1 nao nao  102  6月 19 20:28 README.md
+-rw-rw-r-- 1 nao nao 2.3K  6月 19 20:28 crypto.d.ts
+-rw-rw-r-- 1 nao nao   73  6月 19 20:28 crypto.js
+-rw-rw-r-- 1 nao nao  768  6月 19 20:28 crypto_bg.d.ts
+-rw-rw-r-- 1 nao nao 5.4K  6月 19 20:28 crypto_bg.js
+-rw-rw-r-- 1 nao nao 204K  6月 19 20:28 crypto_bg.wasm
+-rw-rw-r-- 1 nao nao  284  6月 19 20:28 package.json
+```
