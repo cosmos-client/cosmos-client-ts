@@ -67,3 +67,6 @@ const result = await auth
 ```shell
 openapi-generator generate -g typescript-axios -i swagger.yaml -o ./src
 ```
+
+The first digit major version and the second digit minor version should match Cosmos SDK.
+The third digit fix version can be independently incremented.
