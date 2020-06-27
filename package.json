@@ -1,7 +1,7 @@
 {
   "name": "cosmos-client",
   "description": "REST API Client for Cosmos SDK Blockchain",
-  "version": "0.8.13",
+  "version": "0.8.14",
   "author": "LCNEM, Inc.",
   "bugs": {
     "url": "https://github.com/lcnem/cosmos-client-ts/issues"
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc --build --clean && tsc && cargo install wasm-pack && wasm-pack build --target nodejs --scope lcnem ./src/tendermint/sr25519",
-    "bundle-publish": "bundle && cd dist && npm publish"
+    "build": "cargo install wasm-pack && wasm-pack build --target nodejs --scope lcnem ./src/tendermint/sr25519 && tsc --build --clean && tsc",
+    "bundle-publish": "node bundle && cd dist && npm publish"
   }
 }
