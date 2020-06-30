@@ -20,9 +20,6 @@ export class ValAddress extends Address {
    */
   static fromBech32(valAddress: string) {
     const { prefix, words } = bech32.decode(valAddress);
-    if (prefix !== bech32Prefix.valAddr) {
-      throw Error();
-    }
 
     return new ValAddress(bech32.fromWords(words));
   }
