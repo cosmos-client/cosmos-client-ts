@@ -411,7 +411,7 @@ export interface BroadcastTxCommitResult {
    * @type {string}
    * @memberof BroadcastTxCommitResult
    */
-  hash?: string;
+  txhash?: string;
   /**
    *
    * @type {number}
