@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import * as sr25519 from "../sr25519/src";
+import * as sr25519 from "sr25519";
 import { PrivKey, PubKey } from "./key";
 
 /**
@@ -33,7 +33,14 @@ export class PrivKeySr25519 implements PrivKey {
   sign(message: Buffer) {
     const keypair = sr25519.keypairFromSeed(new Uint8Array(this.privKey));
     const privKey = keypair.slice(0, 64);
-    return Buffer.from(sr25519.sign(this.pubKey.toBuffer(), privKey, message));
+    return Buffer.from(
+      sr25519.sign(
+        Uint8Array.from([]),
+        this.pubKey.toBuffer(),
+        privKey,
+        message,
+      ),
+    );
   }
 
   /**
@@ -94,6 +101,7 @@ export class PubKeySr25519 implements PubKey {
    */
   verify(signature: Buffer, message: Buffer) {
     return sr25519.verify(
+      Uint8Array.from([]),
       new Uint8Array(signature),
       new Uint8Array(message),
       new Uint8Array(this.pubKey),
