@@ -14,7 +14,7 @@ export class PrivKeySr25519 implements PrivKey {
    * @param privKey
    */
   constructor(privKey: Buffer) {
-    const keypair = sr25519.keypairFromSeed(new Uint8Array(privKey));
+    const keypair = sr25519.keypair_from_seed(new Uint8Array(privKey));
     this.pubKey = new PubKeySr25519(Buffer.from(keypair.slice(64, 96)));
     this.privKey = privKey;
   }
@@ -31,7 +31,7 @@ export class PrivKeySr25519 implements PrivKey {
    * @param message
    */
   sign(message: Buffer) {
-    const keypair = sr25519.keypairFromSeed(new Uint8Array(this.privKey));
+    const keypair = sr25519.keypair_from_seed(new Uint8Array(this.privKey));
     const privKey = keypair.slice(0, 64);
     return Buffer.from(
       sr25519.sign(
