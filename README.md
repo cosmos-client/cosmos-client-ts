@@ -73,24 +73,12 @@ The third digit patch version can be independently incremented.
 
 ## To use in web
 
-```bash
-npm i -D @wasm-tool/wasm-pack-plugin
-```
-
 `webpack.config.js`
 
 ```javascript
-const path = require("path");
-const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
-
 module.exports = {
   resolve: {
-    extensions: [".js", ".ts", ".wasm"],
+    extensions: [".wasm"],
   },
-  plugins: [
-    new WasmPackPlugin({
-      crateDirectory: path.join(__dirname, "node_modules/sr25519"),
-    }),
-  ],
 };
 ```
