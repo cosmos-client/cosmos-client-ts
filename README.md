@@ -70,15 +70,3 @@ openapi-generator generate -g typescript-axios -i swagger.yaml -o ./src
 
 The first digit major version and the second digit minor version should match Cosmos SDK.
 The third digit patch version can be independently incremented.
-
-## To use in web
-
-`webpack.config.js`
-
-```javascript
-module.exports = {
-  resolve: {
-    extensions: [".wasm"],
-  },
-};
-```
