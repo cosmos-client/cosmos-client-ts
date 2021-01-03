@@ -73,74 +73,25 @@ The third digit patch version can be independently incremented.
 
 ## To use in web
 
-To use in web, replace a part of code in `node_modules/sr25519/sr25519.js`
-
-### Before
-
-```js
-const path = require("path").join(__dirname, "sr25519_bg.wasm");
-const bytes = require("fs").readFileSync(path);
-
-const wasmModule = new WebAssembly.Module(bytes);
-const wasmInstance = new WebAssembly.Instance(wasmModule, imports);
-wasm = wasmInstance.exports;
-module.exports.__wasm = wasm;
+```bash
+npm i -D @wasm-tool/wasm-pack-plugin
 ```
 
-### After
+`webpack.config.js`
 
-```js
-async function load(module, imports) {
-  if (typeof Response === "function" && module instanceof Response) {
-    if (typeof WebAssembly.instantiateStreaming === "function") {
-      try {
-        return await WebAssembly.instantiateStreaming(module, imports);
-      } catch (e) {
-        if (module.headers.get("Content-Type") != "application/wasm") {
-          console.warn(
-            "`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n",
-            e,
-          );
-        } else {
-          throw e;
-        }
-      }
-    }
+```javascript
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
-    const bytes = await module.arrayBuffer();
-    return await WebAssembly.instantiate(bytes, imports);
-  } else {
-    const instance = await WebAssembly.instantiate(module, imports);
-
-    if (instance instanceof WebAssembly.Instance) {
-      return { instance, module };
-    } else {
-      return instance;
-    }
-  }
-}
-
-async function init(input) {
-  if (typeof input === "undefined") {
-    input = import.meta.url.replace(/\.js$/, "_bg.wasm");
-  }
-  const imports = {};
-
-  if (
-    typeof input === "string" ||
-    (typeof Request === "function" && input instanceof Request) ||
-    (typeof URL === "function" && input instanceof URL)
-  ) {
-    input = fetch(input);
-  }
-
-  const { instance, module } = await load(await input, imports);
-
-  wasm = instance.exports;
-  init.__wbindgen_wasm_module = module;
-
-  return wasm;
-}
-
-export default init;
+module.exports = {
+  resolve: {
+    extensions: [".js", ".ts", ".wasm"],
+  },
+  plugins: [
+    new WasmPackPlugin({
+      crateDirectory: path.join(__dirname, "node_modules/sr25519"),
+    }),
+  ],
+};
 ```
