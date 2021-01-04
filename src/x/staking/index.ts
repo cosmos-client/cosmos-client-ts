@@ -7,7 +7,9 @@ import {
 } from "./types";
 import { codec } from "../../codec";
 
-export * as staking from "./module";
+// export * as staking from "./module";
+import * as staking from "./module";
+export { staking };
 export * from "./types";
 
 // Register Codec

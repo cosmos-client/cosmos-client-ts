@@ -3,7 +3,9 @@ import { PrivKeySecp256k1, PubKeySecp256k1 } from "./types/secp256k1";
 import { PrivKeySr25519, PubKeySr25519 } from "./types/sr25519";
 import { codec } from "../codec";
 
-export * as tendermint from "./module";
+// export * as tendermint from "./module";
+import * as tendermint from "./module";
+export { tendermint };
 export * from "./types";
 
 // Register codec

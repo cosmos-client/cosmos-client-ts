@@ -1,6 +1,7 @@
 import * as crypto from "crypto";
 import { PrivKey, PubKey } from "./key";
-import * as sr25519 from "sr25519";
+let sr25519: typeof import("sr25519");
+import("sr25519").then((mod) => (sr25519 = mod));
 
 /**
  * sr25519
