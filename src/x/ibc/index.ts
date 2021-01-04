@@ -1,3 +1,1 @@
-// export * as ibc from "./module";
-import * as ibc from "./module";
-export { ibc };
+export * as ibc from "./module";

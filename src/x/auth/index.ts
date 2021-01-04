@@ -1,9 +1,7 @@
 import { codec } from "../../codec";
 import { BaseAccount, ModuleAccount, StdTx } from "./types";
 
-// export * as auth from "./module";
-import * as auth from "./module";
-export { auth };
+export * as auth from "./module";
 export * from "./types";
 
 // Register codec

@@ -5,9 +5,7 @@ import {
 } from "./types";
 import { codec } from "../../codec";
 
-// export * as upgrade from "./module";
-import * as upgrade from "./module";
-export { upgrade };
+export * as upgrade from "./module";
 export * from "./types";
 
 // Register codec
