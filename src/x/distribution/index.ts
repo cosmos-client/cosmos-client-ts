@@ -5,7 +5,9 @@ import {
 } from "./types";
 import { codec } from "../../codec";
 
-export * as distribution from "./module";
+// export * as distribution from "./module";
+import * as distribution from "./module";
+export { distribution };
 export * from "./types";
 
 // Register codec

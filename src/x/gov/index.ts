@@ -1,7 +1,9 @@
 import { MsgDeposit, MsgSubmitProposal, MsgVote, TextProposal } from "./types";
 import { codec } from "../../codec";
 
-export * as gov from "./module";
+// export * as gov from "./module";
+import * as gov from "./module";
+export { gov };
 export * from "./types";
 
 // Register codec

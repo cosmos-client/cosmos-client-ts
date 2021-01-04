@@ -1,7 +1,9 @@
 import { MsgSend, MsgMultiSend } from "./types";
 import { codec } from "../../codec";
 
-export * as bank from "./module";
+// export * as bank from "./module";
+import * as bank from "./module";
+export { bank };
 export * from "./types";
 
 // Register codec
