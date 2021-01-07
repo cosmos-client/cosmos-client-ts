@@ -2998,10 +2998,10 @@ export interface StdTx {
   memo?: string;
   /**
    *
-   * @type {StdTxSignature}
+   * @type {Array<StdTxSignature>}
    * @memberof StdTx
    */
-  signature?: StdTxSignature;
+  signatures?: Array<StdTxSignature>;
 }
 /**
  *

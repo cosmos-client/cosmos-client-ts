@@ -1,7 +1,14 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { PrivKey } from "../../tendermint";
 import { StdTx } from "./types/std-tx";
-import { AuthApi, TransactionsApi, DecodeReq, EncodeReq } from "../../api";
+import {
+  AuthApi,
+  TransactionsApi,
+  DecodeReq,
+  EncodeReq,
+  PaginatedQueryTxs,
+  TxQuery,
+} from "../../api";
 import { AccAddress } from "../../types";
 import { BaseAccount, StdSignature } from "./types";
 import { codec } from "../../codec";
@@ -77,18 +84,21 @@ export function txsGet(
   txMinHeight?: number,
   txMaxHeight?: number,
 ) {
-  return new TransactionsApi(undefined, sdk.url).txsGet(
-    messageAction,
-    messageSender,
-    page,
-    limit,
-    txMinHeight,
-    txMaxHeight,
-  );
+  return new TransactionsApi(undefined, sdk.url)
+    .txsGet(messageAction, messageSender, page, limit, txMinHeight, txMaxHeight)
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<PaginatedQueryTxs>;
 }
 
 export function txsHashGet(sdk: CosmosSDK, hash: string) {
-  return new TransactionsApi(undefined, sdk.url).txsHashGet(hash);
+  return new TransactionsApi(undefined, sdk.url)
+    .txsHashGet(hash)
+    .then((res) => {
+      res.data = codec.fromJSONString(JSON.stringify(res.data));
+      return res;
+    }) as AxiosPromise<TxQuery>;
 }
 
 export function txsPost(
