@@ -3216,16 +3216,40 @@ export interface TextProposal {
 export interface TxQuery {
   /**
    *
-   * @type {string}
-   * @memberof TxQuery
-   */
-  hash?: string;
-  /**
-   *
    * @type {number}
    * @memberof TxQuery
    */
   height?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof TxQuery
+   */
+  txhash?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof TxQuery
+   */
+  raw_log?: string;
+  /**
+   *
+   * @type {Array<Log>}
+   * @memberof TxQuery
+   */
+  logs?: Array<Log>;
+  /**
+   *
+   * @type {string}
+   * @memberof TxQueryResult
+   */
+  gas_wanted?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof TxQueryResult
+   */
+  gas_used?: string;
   /**
    *
    * @type {StdTx}
@@ -3234,10 +3258,54 @@ export interface TxQuery {
   tx?: StdTx;
   /**
    *
-   * @type {TxQueryResult}
+   * @type {string}
    * @memberof TxQuery
    */
-  result?: TxQueryResult;
+  timestamp?: string;
+}
+/**
+ *
+ * @export
+ * @interface Log
+ */
+export interface Log {
+  /**
+   *
+   * @type {number}
+   * @memberof Log
+   */
+  msg_index?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Log
+   */
+  log?: string;
+  /**
+   *
+   * @type {Array<Event>}
+   * @memberof Log
+   */
+  events?: Array<Event>;
+}
+/**
+ *
+ * @export
+ * @interface Event
+ */
+export interface Event {
+  /**
+   *
+   * @type {string}
+   * @memberof Event
+   */
+  type?: string;
+  /**
+   *
+   * @type {Array<KVPair>}
+   * @memberof Event
+   */
+  attributes?: Array<KVPair>;
 }
 /**
  *
