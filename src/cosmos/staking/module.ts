@@ -1,7 +1,6 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { QueryApi } from "../../api";
 import { AccAddress, ValAddress } from "../types";
-import { codec } from "../../codec";
 
 export function delegation(
   sdk: CosmosSDK,
@@ -84,7 +83,7 @@ export function historicalInfo(sdk: CosmosSDK, height: bigint) {
   return new QueryApi(undefined, sdk.url).historicalInfo(height.toString());
 }
 
-export function stakingParams(sdk: CosmosSDK) {
+export function params(sdk: CosmosSDK) {
   return new QueryApi(undefined, sdk.url).stakingParams();
 }
 

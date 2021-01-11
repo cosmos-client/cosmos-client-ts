@@ -10,5 +10,5 @@ export function inflation(sdk: CosmosSDK) {
 }
 
 export function params(sdk: CosmosSDK) {
-  return new QueryApi(undefined, sdk.url).params();
+  return new QueryApi(undefined, sdk.url).mintParams();
 }

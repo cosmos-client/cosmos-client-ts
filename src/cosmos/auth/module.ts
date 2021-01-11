@@ -8,6 +8,6 @@ export function account(sdk: CosmosSDK, address: string) {
     .then((res) => sdk.reparseAxiosResponse<AccountI>(res));
 }
 
-export function authParams(sdk: CosmosSDK) {
+export function params(sdk: CosmosSDK) {
   return new QueryApi(undefined, sdk.url).authParams();
 }

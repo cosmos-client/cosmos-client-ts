@@ -1,3 +1,3 @@
-export { applications } from "./applications";
-export { client } from "./client";
-export { core } from "./core";
+export * from "./applications";
+export * from "./client";
+export * from "./core";

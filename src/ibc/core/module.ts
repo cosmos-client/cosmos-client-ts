@@ -1,2 +1,2 @@
-import { CosmosSDK } from "../../cosmos-sdk";
-import { QueryApi } from "../../api";
+export * from "./channel";
+export * from "./client";

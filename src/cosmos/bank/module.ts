@@ -22,7 +22,7 @@ export function balance(sdk: CosmosSDK, address: string, denom: string) {
   return new QueryApi(undefined, sdk.url).balance(address, denom);
 }
 
-export function bankParams(sdk: CosmosSDK) {
+export function params(sdk: CosmosSDK) {
   return new QueryApi(undefined, sdk.url).bankParams();
 }
 

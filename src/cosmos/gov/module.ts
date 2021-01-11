@@ -1,10 +1,8 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { QueryApi } from "../../api";
 import { AccAddress } from "../types";
-import { codec } from "../../codec";
-import { AxiosPromise } from "axios";
 
-export function govParams(sdk: CosmosSDK, paramsType: string) {
+export function params(sdk: CosmosSDK, paramsType: string) {
   return new QueryApi(undefined, sdk.url).govParams(paramsType);
 }
 
