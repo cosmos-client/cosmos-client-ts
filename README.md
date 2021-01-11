@@ -64,8 +64,10 @@ const result = await auth
 
 [swagger.yml](https://github.com/cosmos/cosmos-sdk/blob/master/client/lcd/swagger-ui/swagger.yaml)
 
-```shell
-openapi-generator generate -g typescript-axios -i swagger.yaml -o ./src
+```bash
+docker run --rm \
+  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+  -g typescript-axios -i /local/swagger.yaml -o /local/src
 ```
 
 The first digit major version and the second digit minor version should match Cosmos SDK.

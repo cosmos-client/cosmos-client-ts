@@ -1,5 +1,5 @@
 import { codec } from "./codec";
-import { AxiosPromise } from "axios";
+import { AxiosPromise, AxiosResponse } from "axios";
 import * as bip32 from "bip32";
 import * as bip39 from "bip39";
 
@@ -23,5 +23,14 @@ export class CosmosSDK {
 
   wrapResponseWithHeight<T>(res: AxiosPromise<T>) {
     return (res as any) as AxiosPromise<{ height: number; result: T }>;
+  }
+
+  reparseAxiosResponse<T>(res: AxiosResponse) {
+    const ret: AxiosResponse<T> = {
+      ...res,
+      data: codec.fromJSONString(JSON.stringify(res.data)),
+    };
+
+    return ret;
   }
 }

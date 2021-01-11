@@ -1,31 +1,14 @@
 export const maps = {
-  type: new Map<Function, string>(),
+  inv: new Map<Function, string>(),
   fromJSON: {} as { [type: string]: (value: any) => any },
 };
 
-export function toJSONString(value: any) {
-  return JSON.stringify(value, (key, value) => {
-    const type = maps.type.get(value?.constructor);
-    if (type) {
-      return {
-        type,
-        value: value.toJSONInCodec ? value.toJSONInCodec() : { ...value },
-      };
-    }
-    return value;
-  });
-}
-
 export function fromJSONString(json: string) {
-  return JSON.parse(json, (key, value) => {
-    const _type: string | undefined = value?.type;
-    const _value: any | undefined = value?.value;
-    if (_type && maps.fromJSON[_type]) {
-      return maps.fromJSON[_type](_value);
-    }
+  return JSON.parse(json, (_, value) => {
+    const atType = value && value["@type"];
 
-    if (_type && _value && Object.keys(value).length == 2) {
-      return new AminoWrapping(_type, _value);
+    if (atType && maps.fromJSON[atType]) {
+      return maps.fromJSON[atType](value);
     }
 
     return value;
@@ -37,16 +20,35 @@ export function registerCodec<T>(
   constructor: Function,
   fromJSON: (value: any) => T,
 ) {
-  maps.type.set(constructor, type);
+  maps.inv.set(constructor, type);
   maps.fromJSON[type] = fromJSON;
 }
 
-export class AminoWrapping {
-  type: string;
-  value: any;
+function sortJSONObject(value: any): any {
+  if (Object.prototype.toString.call(value) === "[object Object]") {
+    const sorted = {} as { [key: string]: any };
+    const keys = Object.keys(value).sort();
 
-  constructor(type: string, value: any) {
-    this.type = type;
-    this.value = value;
+    for (const key of keys) {
+      const keyValue = value[key];
+      if (keyValue != null) {
+        sorted[key] = sortJSONObject(keyValue);
+      }
+    }
+
+    return sorted;
   }
+
+  if (Array.isArray(value)) {
+    return value.map(sortJSONObject);
+  }
+
+  return value === undefined ? null : value;
+}
+
+export function sortJSON(json: string) {
+  const value = JSON.parse(json);
+  const obj = sortJSONObject(value);
+
+  return JSON.stringify(obj);
 }

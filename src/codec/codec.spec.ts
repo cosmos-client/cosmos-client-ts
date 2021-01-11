@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import { PrivKeyEd25519 } from "../tendermint";
+import { PrivKeyEd25519 } from "../cosmos/base/tendermint";
 import { codec } from ".";
 
 test("address", () => {

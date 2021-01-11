@@ -1,0 +1,31 @@
+// Register codec
+codec.registerCodec(
+  "tendermint/PrivKeyEd25519",
+  PrivKeyEd25519,
+  PrivKeyEd25519.fromJSON,
+);
+codec.registerCodec(
+  "tendermint/PubKeyEd25519",
+  PubKeyEd25519,
+  PubKeyEd25519.fromJSON,
+);
+codec.registerCodec(
+  "tendermint/PrivKeySecp256k1",
+  PrivKeySecp256k1,
+  PrivKeySecp256k1.fromJSON,
+);
+codec.registerCodec(
+  "tendermint/PubKeySecp256k1",
+  PubKeySecp256k1,
+  PubKeySecp256k1.fromJSON,
+);
+codec.registerCodec(
+  "tendermint/PrivKeySr25519",
+  PrivKeySr25519,
+  PrivKeySr25519.fromJSON,
+);
+codec.registerCodec(
+  "tendermint/PubKeySr25519",
+  PubKeySr25519,
+  PubKeySr25519.fromJSON,
+);
