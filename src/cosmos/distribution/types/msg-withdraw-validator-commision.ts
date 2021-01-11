@@ -3,8 +3,8 @@ import { ValAddress } from "../../types/address/val-address";
 import { codec } from "../../../codec";
 
 export class MsgWithdrawValidatorCommission implements Msg {
-  static "@type": "/cosmos.distribution.v1beta1.Msg/WithdrawValidatorCommission";
-  "@type": "/cosmos.distribution.v1beta1.Msg/WithdrawValidatorCommission";
+  static "@type": "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission";
+  "@type": "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission";
 
   /**
    * @param validator_address

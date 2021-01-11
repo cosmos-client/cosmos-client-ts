@@ -1,7 +1,11 @@
 import { Msg } from "../../types/msg";
 import { AccAddress } from "../../types/address/acc-address";
+import { codec } from "../../../codec";
 
 export class MsgVote implements Msg {
+  static "@type": "/cosmos.gov.v1beta1.MsgVote";
+  "@type": "/cosmos.gov.v1beta1.MsgVote";
+
   /**
    * @param proposal_id
    * @param voter
@@ -22,5 +26,9 @@ export class MsgVote implements Msg {
       AccAddress.fromBech32(value.voter),
       value.option,
     );
+  }
+
+  getSignBytes() {
+    return Buffer.from(codec.sortJSON(JSON.stringify(this)));
   }
 }

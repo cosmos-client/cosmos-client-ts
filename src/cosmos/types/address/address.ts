@@ -9,8 +9,8 @@ export enum Prefix {
   Consensus = "cons",
 }
 
-export const bech32Prefix: { [key: string]: string } = {
-  accAddr: Prefix.Cosmos,
+export const bech32Prefix = {
+  accAddr: Prefix.Cosmos as string,
   accPub: Prefix.Cosmos + Prefix.Public,
   valAddr: Prefix.Cosmos + Prefix.Validator + Prefix.Operator,
   valPub: Prefix.Cosmos + Prefix.Validator + Prefix.Operator + Prefix.Public,

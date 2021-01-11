@@ -4,8 +4,8 @@ import { ValAddress } from "../../types/address/val-address";
 import { codec } from "../../../codec";
 
 export class MsgWithdrawDelegatorReward implements Msg {
-  static "@type": "/cosmos.distribution.v1beta1.Msg/WithdrawDelegatorReward";
-  "@type": "/cosmos.distribution.v1beta1.Msg/WithdrawDelegatorReward";
+  static "@type": "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward";
+  "@type": "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward";
 
   /**
    *

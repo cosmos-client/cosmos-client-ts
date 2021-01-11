@@ -8,19 +8,10 @@ export * from "./types";
 
 // Register codec
 codec.registerCodec(
-  "cosmos-sdk/MsgSubmitProposalBase",
+  MsgSubmitProposal["@type"],
   MsgSubmitProposal,
   MsgSubmitProposal.fromJSON,
 );
-codec.registerCodec(
-  "cosmos-sdk/MsgSubmitProposal",
-  MsgSubmitProposal,
-  MsgSubmitProposal.fromJSON,
-);
-codec.registerCodec("cosmos-sdk/MsgDeposit", MsgDeposit, MsgDeposit.fromJSON);
-codec.registerCodec("cosmos-sdk/MsgVote", MsgVote, MsgVote.fromJSON);
-codec.registerCodec(
-  "cosmos-sdk/TextProposal",
-  TextProposal,
-  TextProposal.fromJSON,
-);
+codec.registerCodec(MsgDeposit["@type"], MsgDeposit, MsgDeposit.fromJSON);
+codec.registerCodec(MsgVote["@type"], MsgVote, MsgVote.fromJSON);
+codec.registerCodec(TextProposal["@type"], TextProposal, TextProposal.fromJSON);

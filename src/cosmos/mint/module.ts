@@ -1,20 +1,14 @@
+import { QueryApi } from "../../api";
 import { CosmosSDK } from "../../cosmos-sdk";
-import { MintApi } from "../../api";
 
-export function annualProvisionsGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new MintApi(undefined, sdk.url).mintingAnnualProvisionsGet(),
-  );
+export function annualProvisions(sdk: CosmosSDK) {
+  return new QueryApi(undefined, sdk.url).annualProvisions();
 }
 
-export function inflationGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new MintApi(undefined, sdk.url).mintingInflationGet(),
-  );
+export function inflation(sdk: CosmosSDK) {
+  return new QueryApi(undefined, sdk.url).inflation();
 }
 
-export function parametersGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new MintApi(undefined, sdk.url).mintingParametersGet(),
-  );
+export function params(sdk: CosmosSDK) {
+  return new QueryApi(undefined, sdk.url).params();
 }

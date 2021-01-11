@@ -2,8 +2,8 @@ import { codec } from "../../../codec";
 import { Msg } from "../../types/msg";
 
 export class MsgVerifyInvariant implements Msg {
-  static "@type": "/cosmos.crisis.v1beta1.Msg/VerifyInvariant";
-  "@type": "/cosmos.crisis.v1beta1.Msg/VerifyInvariant";
+  static "@type": "/cosmos.crisis.v1beta1.MsgVerifyInvariant";
+  "@type": "/cosmos.crisis.v1beta1.MsgVerifyInvariant";
 
   /**
    *

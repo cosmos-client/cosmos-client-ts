@@ -1,209 +1,173 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { StakingApi } from "../../api";
+import { QueryApi } from "../../api";
 import { AccAddress, ValAddress } from "../types";
-import { StdTx } from "../auth";
 import { codec } from "../../codec";
-import { AxiosPromise } from "axios";
 
-export function delegatorsDelegatorAddrDelegationsGet(
+export function delegation(
   sdk: CosmosSDK,
-  address: AccAddress,
+  validatorAddr: ValAddress,
+  delegatorAddr: AccAddress,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingDelegatorsDelegatorAddrDelegationsGet(address.toBech32()),
+  return new QueryApi(undefined, sdk.url).delegation(
+    validatorAddr.toBech32(),
+    delegatorAddr.toBech32(),
   );
 }
 
-export function delegatorsDelegatorAddrDelegationsPost(
+export function redelegations(
   sdk: CosmosSDK,
-  delegator: AccAddress,
+  delegatorAddr: AccAddress,
+  srcValidatorAddr?: ValAddress,
+  dstValidatorAddr?: ValAddress,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return new StakingApi(undefined, sdk.url)
-    .stakingDelegatorsDelegatorAddrDelegationsPost(delegator.toBech32())
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
-}
-
-export function delegatorsDelegatorAddrDelegationsValidatorAddrGet(
-  sdk: CosmosSDK,
-  delegator: AccAddress,
-  validator: ValAddress,
-) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(
-      delegator.toBech32(),
-      validator.toBech32(),
-    ),
+  return new QueryApi(undefined, sdk.url).redelegations(
+    delegatorAddr.toBech32(),
+    srcValidatorAddr?.toBech32(),
+    dstValidatorAddr?.toBech32(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
-export function delegatorsDelegatorAddrRedelegationsPost(
+export function delegatorUnbondingDelegations(
   sdk: CosmosSDK,
-  delegator: AccAddress,
+  delegatorAddr: AccAddress,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return new StakingApi(undefined, sdk.url)
-    .stakingDelegatorsDelegatorAddrRedelegationsPost(delegator.toBech32())
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
-}
-
-export function delegatorsDelegatorAddrUnbondingDelegationsGet(
-  sdk: CosmosSDK,
-  delegator: AccAddress,
-) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(
-      delegator.toBech32(),
-    ),
+  return new QueryApi(undefined, sdk.url).delegatorUnbondingDelegations(
+    delegatorAddr.toBech32(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
-export function delegatorsDelegatorAddrUnbondingDelegationsPost(
+export function delegatorValidators(
   sdk: CosmosSDK,
-  delegator: AccAddress,
+  delegatorAddr: AccAddress,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return new StakingApi(undefined, sdk.url)
-    .stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(
-      delegator.toBech32(),
-    )
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
+  return new QueryApi(undefined, sdk.url).stakingDelegatorValidators(
+    delegatorAddr.toBech32(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
+  );
 }
 
-export function delegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(
+export function delegatorValidator(
   sdk: CosmosSDK,
-  delegator: AccAddress,
-  validator: ValAddress,
+  validatorAddr: ValAddress,
+  delegatorAddr: AccAddress,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(
-      delegator.toBech32(),
-      validator.toBech32(),
-    ),
+  return new QueryApi(undefined, sdk.url).delegatorValidator(
+    validatorAddr.toBech32(),
+    delegatorAddr.toBech32(),
   );
 }
 
-export function delegatorsDelegatorAddrValidatorsGet(
-  sdk: CosmosSDK,
-  delegator: AccAddress,
-) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingDelegatorsDelegatorAddrValidatorsGet(delegator.toBech32()),
-  );
+export function historicalInfo(sdk: CosmosSDK, height: bigint) {
+  return new QueryApi(undefined, sdk.url).historicalInfo(height.toString());
 }
 
-export function delegatorsDelegatorAddrValidatorsValidatorAddrGet(
-  sdk: CosmosSDK,
-  delegator: AccAddress,
-  validator: ValAddress,
-) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(
-      delegator.toBech32(),
-      validator.toBech32(),
-    ),
-  );
+export function stakingParams(sdk: CosmosSDK) {
+  return new QueryApi(undefined, sdk.url).stakingParams();
 }
 
-export function parametersGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(undefined, sdk.url).stakingParametersGet(),
-  );
+export function pool(sdk: CosmosSDK) {
+  return new QueryApi(undefined, sdk.url).pool();
 }
 
-export function poolGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(undefined, sdk.url).stakingPoolGet(),
-  );
-}
-
-export function redelegationsGet(
-  sdk: CosmosSDK,
-  delegator?: AccAddress,
-  validatorFrom?: ValAddress,
-  validatorTo?: ValAddress,
-) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(undefined, sdk.url).stakingRedelegationsGet(
-      delegator?.toBech32(),
-      validatorFrom?.toBech32(),
-      validatorTo?.toBech32(),
-    ),
-  );
-}
-
-export function validatorsGet(
+export function validators(
   sdk: CosmosSDK,
   status?: string,
-  page?: number,
-  limit?: number,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(undefined, sdk.url).stakingValidatorsGet(
-      status,
-      page,
-      limit,
-    ),
+  return new QueryApi(undefined, sdk.url).validators(
+    status,
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
-export function validatorsValidatorAddrDelegationsGet(
+export function validator(sdk: CosmosSDK, validatorAddr: ValAddress) {
+  return new QueryApi(undefined, sdk.url).validator(validatorAddr.toBech32());
+}
+
+export function validatorDelegations(
   sdk: CosmosSDK,
-  validator: ValAddress,
+  validatorAddr: ValAddress,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingValidatorsValidatorAddrDelegationsGet(validator.toBech32()),
+  return new QueryApi(undefined, sdk.url).validatorDelegations(
+    validatorAddr.toBech32(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
-export function validatorsValidatorAddrGet(
+// TODO:
+// /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}
+//
+// export function delegation(
+//   sdk: CosmosSDK,
+//   validatorAddr: ValAddress,
+//   delegatorAddr: AccAddress,
+// ) {
+//   return new QueryApi(undefined, sdk.url).delegation(
+//     validatorAddr.toBech32(),
+//     delegatorAddr.toBech32(),
+//   );
+// }
+
+export function unbondingDelegation(
   sdk: CosmosSDK,
-  validator: ValAddress,
+  validatorAddr: ValAddress,
+  delegatorAddr: AccAddress,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(undefined, sdk.url).stakingValidatorsValidatorAddrGet(
-      validator.toBech32(),
-    ),
+  return new QueryApi(undefined, sdk.url).unbondingDelegation(
+    validatorAddr.toBech32(),
+    delegatorAddr.toBech32(),
   );
 }
 
-export function validatorsValidatorAddrUnbondingDelegationsGet(
+export function validatorUnbondingDelegations(
   sdk: CosmosSDK,
-  validator: ValAddress,
+  validatorAddr: ValAddress,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new StakingApi(
-      undefined,
-      sdk.url,
-    ).stakingValidatorsValidatorAddrUnbondingDelegationsGet(
-      validator.toBech32(),
-    ),
+  return new QueryApi(undefined, sdk.url).validatorUnbondingDelegations(
+    validatorAddr.toBech32(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }

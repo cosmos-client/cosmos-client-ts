@@ -3,8 +3,8 @@ import { AccAddress } from "../../types/address/acc-address";
 import { codec } from "../../../codec";
 
 export class MsgSetWithdrawAddress implements Msg {
-  static "@type": "/cosmos.distribution.v1beta1.Msg/SetWithdrawAddress";
-  "@type": "/cosmos.distribution.v1beta1.Msg/SetWithdrawAddress";
+  static "@type": "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress";
+  "@type": "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress";
 
   /**
    * @param delegator_address

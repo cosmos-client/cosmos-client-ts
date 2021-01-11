@@ -1,5 +1,4 @@
 import {
-  Plan,
   SoftwareUpgradeProposal,
   CancelSoftwareUpgradeProposal,
 } from "./types";
@@ -11,14 +10,13 @@ export { upgrade };
 export * from "./types";
 
 // Register codec
-codec.registerCodec("cosmos-sdk/Plan", Plan, Plan.fromJSON);
 codec.registerCodec(
-  "cosmos-sdk/SoftwareUpgradeProposal",
+  SoftwareUpgradeProposal["@type"],
   SoftwareUpgradeProposal,
   SoftwareUpgradeProposal.fromJSON,
 );
 codec.registerCodec(
-  "cosmos-sdk/CancelSoftwareUpgradeProposal",
+  CancelSoftwareUpgradeProposal["@type"],
   CancelSoftwareUpgradeProposal,
   CancelSoftwareUpgradeProposal.fromJSON,
 );

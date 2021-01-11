@@ -1,14 +1,15 @@
-// import { Any } from "../../../types/any";
+import { Any } from "../../types/any";
 import { BaseAccount } from "./account";
 
-export type ModuleAccountI = /* Any */ {
+export type ModuleAccountI = Any & {
   getName(): string | null;
   getPermissions(): string[] | null;
   hasPermissions(permission: string): boolean | null;
 };
 
 export class ModuleAccount implements ModuleAccountI {
-  // "@type": "";
+  static "@type": "/cosmos.auth.v1beta1.ModuleAccount";
+  "@type": "/cosmos.auth.v1beta1.ModuleAccount";
 
   /**
    *

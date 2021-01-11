@@ -1,10 +1,14 @@
 import { Msg } from "../../types/msg";
 import { AccAddress } from "../../types/address/acc-address";
 import { ValAddress } from "../../types/address/val-address";
-import { PubKey } from "../../base/tendermint";
 import { ValidatorDescription, Coin } from "../../../api";
+import { codec } from "../../../codec";
+import { PubKey } from "../../crypto";
 
-export class MsgCreateValidator extends Msg {
+export class MsgCreateValidator implements Msg {
+  static "@type": "/cosmos.staking.v1beta1.MsgCreateValidator";
+  "@type": "/cosmos.staking.v1beta1.MsgCreateValidator";
+
   /**
    * @param description
    * @param commission
@@ -26,15 +30,13 @@ export class MsgCreateValidator extends Msg {
     public validator_address: ValAddress,
     public pubkey: PubKey,
     public value: Coin,
-  ) {
-    super();
-  }
+  ) {}
 
   /**
    *
    * @param value
    */
-  public static fromJSON(value: any) {
+  static fromJSON(value: any) {
     return new MsgCreateValidator(
       value.description,
       value.commission,
@@ -44,5 +46,9 @@ export class MsgCreateValidator extends Msg {
       value.pubkey,
       value.value,
     );
+  }
+
+  getSignBytes() {
+    return Buffer.from(codec.sortJSON(JSON.stringify(this)));
   }
 }

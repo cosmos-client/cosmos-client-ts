@@ -1,31 +1,30 @@
+import { codec } from "../../codec";
+import { PrivKeyEd25519, PubKeyEd25519 } from "./ed25519";
+import { PrivKeySecp256k1, PubKeySecp256k1 } from "./secp256k1";
+
+export * from "./ed25519";
+// export * from './multisig'
+export * from "./secp256k1";
+export * from "./types";
+
 // Register codec
 codec.registerCodec(
-  "tendermint/PrivKeyEd25519",
+  PrivKeyEd25519["@type"],
   PrivKeyEd25519,
   PrivKeyEd25519.fromJSON,
 );
 codec.registerCodec(
-  "tendermint/PubKeyEd25519",
+  PubKeyEd25519["@type"],
   PubKeyEd25519,
   PubKeyEd25519.fromJSON,
 );
 codec.registerCodec(
-  "tendermint/PrivKeySecp256k1",
+  PrivKeySecp256k1["@type"],
   PrivKeySecp256k1,
   PrivKeySecp256k1.fromJSON,
 );
 codec.registerCodec(
-  "tendermint/PubKeySecp256k1",
+  PubKeySecp256k1["@type"],
   PubKeySecp256k1,
   PubKeySecp256k1.fromJSON,
-);
-codec.registerCodec(
-  "tendermint/PrivKeySr25519",
-  PrivKeySr25519,
-  PrivKeySr25519.fromJSON,
-);
-codec.registerCodec(
-  "tendermint/PubKeySr25519",
-  PubKeySr25519,
-  PubKeySr25519.fromJSON,
 );

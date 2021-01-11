@@ -1,8 +1,8 @@
 import { Coin } from "../../../api";
 import { codec } from "../../../codec";
-import { Any } from "../../types/any";
+import { Content } from "../../gov/types/content";
 
-export class CommunityPoolSpendProposal implements Any {
+export class CommunityPoolSpendProposal implements Content {
   static "@type": "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal";
   "@type": "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal";
 
@@ -24,5 +24,9 @@ export class CommunityPoolSpendProposal implements Any {
 
   getSignBytes() {
     return Buffer.from(codec.sortJSON(JSON.stringify(this)));
+  }
+
+  getTitle() {
+    return this.title || "";
   }
 }

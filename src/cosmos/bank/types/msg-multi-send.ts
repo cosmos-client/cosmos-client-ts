@@ -16,9 +16,9 @@ export type Output = {
  *
  */
 export class MsgMultiSend implements Msg {
-  static "@type": "/cosmos.bank.v1beta1.Msg/MultiSend";
-  "@type": "/cosmos.bank.v1beta1.Msg/MultiSend";
-  
+  static "@type": "/cosmos.bank.v1beta1.MsgMultiSend";
+  "@type": "/cosmos.bank.v1beta1.MsgMultiSend";
+
   /**
    *
    * @param inputs

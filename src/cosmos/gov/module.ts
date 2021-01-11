@@ -1,171 +1,93 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import {
-  GovernanceApi,
-  ParamChangeProposalReq,
-  PostProposalReq,
-  DepositReq,
-  VoteReq,
-} from "../../api";
+import { QueryApi } from "../../api";
 import { AccAddress } from "../types";
-import { StdTx } from "../auth";
 import { codec } from "../../codec";
 import { AxiosPromise } from "axios";
 
-export function parametersDepositGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govParametersDepositGet(),
-  );
+export function govParams(sdk: CosmosSDK, paramsType: string) {
+  return new QueryApi(undefined, sdk.url).govParams(paramsType);
 }
 
-export function parametersTallyingGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govParametersTallyingGet(),
-  );
-}
-
-export function parametersVotingGet(sdk: CosmosSDK) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govParametersVotingGet(),
-  );
-}
-
-export function proposalsGet(
+export function proposals(
   sdk: CosmosSDK,
-  voter?: AccAddress,
-  depositor?: AccAddress,
-  status?: "deposit_period" | "voting_period" | "passed" | "rejected",
+  proposalStatus?:
+    | "PROPOSAL_STATUS_UNSPECIFIED"
+    | "PROPOSAL_STATUS_DEPOSIT_PERIOD"
+    | "PROPOSAL_STATUS_VOTING_PERIOD"
+    | "PROPOSAL_STATUS_PASSED"
+    | "PROPOSAL_STATUS_REJECTED"
+    | "PROPOSAL_STATUS_FAILED",
+  voter?: string,
+  depositor?: string,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsGet(
-      voter?.toBech32(),
-      depositor?.toBech32(),
-      status,
-    ),
+  return new QueryApi(undefined, sdk.url).proposals(
+    proposalStatus,
+    voter,
+    depositor,
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
-export function proposalsParamChangePost(
+export function proposal(sdk: CosmosSDK, proposalID: string) {
+  return new QueryApi(undefined, sdk.url).proposal(proposalID);
+}
+
+export function deposits(
   sdk: CosmosSDK,
-  req: ParamChangeProposalReq,
+  proposalID: string,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return new GovernanceApi(undefined, sdk.url)
-    .govProposalsParamChangePost(req)
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
+  return new QueryApi(undefined, sdk.url).deposits(
+    proposalID,
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
+  );
 }
 
-export function proposalsPost(sdk: CosmosSDK, req: PostProposalReq) {
-  return new GovernanceApi(undefined, sdk.url)
-    .govProposalsPost(req)
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
-}
-
-export function proposalsProposalIdDepositsDepositorGet(
+export function deposit(
   sdk: CosmosSDK,
   proposalID: string,
   depositor: AccAddress,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(
-      undefined,
-      sdk.url,
-    ).govProposalsProposalIdDepositsDepositorGet(
-      proposalID,
-      depositor.toBech32(),
-    ),
+  return new QueryApi(undefined, sdk.url).deposit(
+    proposalID,
+    depositor.toBech32(),
   );
 }
 
-export function proposalsProposalIdDepositsGet(
+export function tallyresult(sdk: CosmosSDK, proposalID: string) {
+  return new QueryApi(undefined, sdk.url).tallyResult(proposalID);
+}
+
+export function votes(
   sdk: CosmosSDK,
   proposalID: string,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdDepositsGet(
-      proposalID,
-    ),
+  return new QueryApi(undefined, sdk.url).votes(
+    proposalID,
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
-export function proposalsProposalIdDepositsPost(
-  sdk: CosmosSDK,
-  proposalID: string,
-  req: DepositReq,
-) {
-  return new GovernanceApi(undefined, sdk.url)
-    .govProposalsProposalIdDepositsPost(proposalID, req)
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
-}
-
-export function proposalsProposalIdGet(sdk: CosmosSDK, proposalID: string) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdGet(proposalID),
-  );
-}
-
-export function proposalsProposalIdProposerGet(
-  sdk: CosmosSDK,
-  proposalID: string,
-) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdProposerGet(
-      proposalID,
-    ),
-  );
-}
-
-export function proposalsProposalIdTallyGet(
-  sdk: CosmosSDK,
-  proposalID: string,
-) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdTallyGet(
-      proposalID,
-    ),
-  );
-}
-
-export function proposalsProposalIdVotesGet(
-  sdk: CosmosSDK,
-  proposalID: string,
-) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesGet(
-      proposalID,
-    ),
-  );
-}
-
-export function proposalsProposalIdVotesPost(
-  sdk: CosmosSDK,
-  proposalID: string,
-  req: VoteReq,
-) {
-  return new GovernanceApi(undefined, sdk.url)
-    .govProposalsProposalIdVotesPost(proposalID, req)
-    .then((res) => {
-      res.data = codec.fromJSONString(JSON.stringify(res.data));
-      return res;
-    }) as AxiosPromise<StdTx>;
-}
-
-export function proposalsProposalIdVotesVoterGet(
-  sdk: CosmosSDK,
-  proposalID: string,
-  voter: AccAddress,
-) {
-  return sdk.wrapResponseWithHeight(
-    new GovernanceApi(undefined, sdk.url).govProposalsProposalIdVotesVoterGet(
-      proposalID,
-      voter.toBech32(),
-    ),
-  );
+export function vote(sdk: CosmosSDK, proposalID: string, voter: AccAddress) {
+  return new QueryApi(undefined, sdk.url).vote(proposalID, voter.toBech32());
 }

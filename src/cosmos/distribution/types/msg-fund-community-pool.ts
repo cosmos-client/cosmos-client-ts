@@ -4,8 +4,8 @@ import { AccAddress } from "../../types";
 import { Msg } from "../../types/msg";
 
 export class MsgFundCommunityPool implements Msg {
-  static "@type": "/cosmos.distribution.v1beta1.Msg/FundCommunityPool";
-  "@type": "/cosmos.distribution.v1beta1.Msg/FundCommunityPool";
+  static "@type": "/cosmos.distribution.v1beta1.MsgFundCommunityPool";
+  "@type": "/cosmos.distribution.v1beta1.MsgFundCommunityPool";
 
   constructor(public amount?: Coin[], public depositor?: AccAddress) {}
 

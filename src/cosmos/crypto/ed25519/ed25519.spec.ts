@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import { PrivKeyEd25519 } from "./ed25519";
+import { PrivKeyEd25519 } from ".";
 import { AccAddress } from "../../types";
 
 test("ed25519", () => {

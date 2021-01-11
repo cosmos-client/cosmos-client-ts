@@ -1,27 +1,30 @@
 import * as crypto from "crypto";
 import * as secp256k1 from "tiny-secp256k1";
-import { PrivKey, PubKey } from "./key";
+import { PrivKey, PubKey } from "..";
 /**
  * secp256k1
  */
 export class PrivKeySecp256k1 implements PrivKey {
-  private pubKey: PubKeySecp256k1;
-  private privKey: Buffer;
+  static "@type": "/cosmos.crypto.secp256k1.PrivKey";
+  "@type": "/cosmos.crypto.secp256k1.PrivKey";
+
+  private _pubKey: PubKeySecp256k1;
+  private _privKey: Buffer;
 
   /**
    *
    * @param privKey
    */
   constructor(privKey: Buffer) {
-    this.pubKey = new PubKeySecp256k1(secp256k1.pointFromScalar(privKey)!);
-    this.privKey = privKey;
+    this._pubKey = new PubKeySecp256k1(secp256k1.pointFromScalar(privKey)!);
+    this._privKey = privKey;
   }
 
   /**
    *
    */
-  getPubKey() {
-    return this.pubKey;
+  bytes() {
+    return Buffer.from(this._privKey);
   }
 
   /**
@@ -30,7 +33,7 @@ export class PrivKeySecp256k1 implements PrivKey {
    */
   sign(message: Buffer) {
     const hash = crypto.createHash("sha256").update(message).digest();
-    const signature = secp256k1.sign(hash, this.privKey);
+    const signature = secp256k1.sign(hash, this._privKey);
 
     return signature;
   }
@@ -38,19 +41,15 @@ export class PrivKeySecp256k1 implements PrivKey {
   /**
    *
    */
-  toBuffer() {
-    return Buffer.from(this.privKey);
+  pubKey() {
+    return this._pubKey;
   }
 
   /**
    *
    */
   toBase64() {
-    return this.privKey.toString("base64");
-  }
-
-  toJSONInCodec() {
-    return this.toBase64();
+    return this._privKey.toString("base64");
   }
 
   /**
@@ -62,6 +61,12 @@ export class PrivKeySecp256k1 implements PrivKey {
     return new PrivKeySecp256k1(buffer);
   }
 
+  toJSON() {
+    return {
+      key: this.toBase64(),
+    };
+  }
+
   static fromJSON(value: any) {
     return PrivKeySecp256k1.fromBase64(value);
   }
@@ -71,6 +76,9 @@ export class PrivKeySecp256k1 implements PrivKey {
  * secp256k1公開鍵。
  */
 export class PubKeySecp256k1 implements PubKey {
+  static "@type": "/cosmos.crypto.secp256k1.PubKey";
+  "@type": "/cosmos.crypto.secp256k1.PubKey";
+
   private pubKey: Buffer;
 
   /**
@@ -93,26 +101,26 @@ export class PubKeySecp256k1 implements PubKey {
     }
   }
 
-  getAddress() {
+  address() {
     return this.hash160(this.pubKey);
   }
 
   /**
    *
-   * @param message
-   * @param signature
    */
-  verify(signature: Buffer, message: Buffer) {
-    const hash = crypto.createHash("sha256").update(message).digest();
-
-    return secp256k1.verify(hash, signature, this.pubKey);
+  bytes() {
+    return Buffer.from(this.pubKey);
   }
 
   /**
    *
+   * @param msg
+   * @param sig
    */
-  toBuffer() {
-    return Buffer.from(this.pubKey);
+  verifySignature(msg: Buffer, sig: Buffer) {
+    const hash = crypto.createHash("sha256").update(msg).digest();
+
+    return secp256k1.verify(hash, sig, this.pubKey);
   }
 
   /**
@@ -120,10 +128,6 @@ export class PubKeySecp256k1 implements PubKey {
    */
   toBase64() {
     return this.pubKey.toString("base64");
-  }
-
-  toJSONInCodec() {
-    return this.toBase64();
   }
 
   /**
@@ -134,7 +138,13 @@ export class PubKeySecp256k1 implements PubKey {
     return new PubKeySecp256k1(buffer);
   }
 
+  toJSON() {
+    return {
+      key: this.toBase64(),
+    };
+  }
+
   static fromJSON(value: any) {
-    return PubKeySecp256k1.fromBase64(value);
+    return PubKeySecp256k1.fromBase64(value?.key);
   }
 }
