@@ -50,10 +50,10 @@ export class BaseAccount implements AccountI {
    */
   static fromJSON(value: any) {
     return new BaseAccount(
-      value.address ? AccAddress.fromBech32(value.address) : undefined,
-      value.public_key,
-      value.account_number,
-      value.sequence,
+      value?.address ? AccAddress.fromBech32(value.address) : undefined,
+      value?.public_key,
+      BigInt(value?.account_number),
+      BigInt(value?.sequence),
     );
   }
 

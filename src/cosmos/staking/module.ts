@@ -2,14 +2,20 @@ import { CosmosSDK } from "../../cosmos-sdk";
 import { QueryApi } from "../../api";
 import { AccAddress, ValAddress } from "../types";
 
-export function delegation(
+export function delegatorDelegations(
   sdk: CosmosSDK,
-  validatorAddr: ValAddress,
   delegatorAddr: AccAddress,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
 ) {
-  return new QueryApi(undefined, sdk.url).delegation(
-    validatorAddr.toBech32(),
+  return new QueryApi(undefined, sdk.url).delegatorDelegations(
     delegatorAddr.toBech32(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
   );
 }
 
@@ -129,19 +135,16 @@ export function validatorDelegations(
   );
 }
 
-// TODO:
-// /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}
-//
-// export function delegation(
-//   sdk: CosmosSDK,
-//   validatorAddr: ValAddress,
-//   delegatorAddr: AccAddress,
-// ) {
-//   return new QueryApi(undefined, sdk.url).delegation(
-//     validatorAddr.toBech32(),
-//     delegatorAddr.toBech32(),
-//   );
-// }
+export function delegation(
+  sdk: CosmosSDK,
+  validatorAddr: ValAddress,
+  delegatorAddr: AccAddress,
+) {
+  return new QueryApi(undefined, sdk.url).delegation(
+    validatorAddr.toBech32(),
+    delegatorAddr.toBech32(),
+  );
+}
 
 export function unbondingDelegation(
   sdk: CosmosSDK,
