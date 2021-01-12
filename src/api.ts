@@ -3610,20 +3610,21 @@ export interface CosmosTxV1beta1SignerInfo {
  * @export
  * @interface CosmosTxV1beta1SignerInfoPublicKey
  */
-export interface CosmosTxV1beta1SignerInfoPublicKey {
-  /**
-   * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-   * @type {string}
-   * @memberof CosmosTxV1beta1SignerInfoPublicKey
-   */
-  type_url?: string;
-  /**
-   * Must be a valid serialized protocol buffer of the above specified type.
-   * @type {string}
-   * @memberof CosmosTxV1beta1SignerInfoPublicKey
-   */
-  value?: string;
-}
+// export interface CosmosTxV1beta1SignerInfoPublicKey {
+//   /**
+//    * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+//    * @type {string}
+//    * @memberof CosmosTxV1beta1SignerInfoPublicKey
+//    */
+//   type_url?: string;
+//   /**
+//    * Must be a valid serialized protocol buffer of the above specified type.
+//    * @type {string}
+//    * @memberof CosmosTxV1beta1SignerInfoPublicKey
+//    */
+//   value?: string;
+// }
+export interface CosmosTxV1beta1SignerInfoPublicKey extends Any {}
 /**
  * SimulateRequest is the request type for the Service.Simulate RPC method.
  * @export
@@ -5179,28 +5180,28 @@ export interface IbcCoreConnectionV1Version {
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest RPC method.
  * @export
- * @interface InlineObject
+ * @interface BroadcastTxRequest
  */
-export interface InlineObject {
+export interface BroadcastTxRequest {
   /**
    * tx_bytes is the raw transaction.
    * @type {string}
-   * @memberof InlineObject
+   * @memberof BroadcastTxRequest
    */
   tx_bytes?: string;
   /**
    * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
    * @type {string}
-   * @memberof InlineObject
+   * @memberof BroadcastTxRequest
    */
-  mode?: InlineObjectModeEnum;
+  mode?: BroadcastTxRequestModeEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum InlineObjectModeEnum {
+export enum BroadcastTxRequestModeEnum {
   Unspecified = "BROADCAST_MODE_UNSPECIFIED",
   Block = "BROADCAST_MODE_BLOCK",
   Sync = "BROADCAST_MODE_SYNC",
@@ -22185,12 +22186,12 @@ export const ServiceApiAxiosParamCreator = function (
     /**
      *
      * @summary BroadcastTx broadcast transaction.
-     * @param {InlineObject} body
+     * @param {BroadcastTxRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     broadcastTx: async (
-      body: InlineObject,
+      body: BroadcastTxRequest,
       options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'body' is not null or undefined
@@ -22811,12 +22812,12 @@ export const ServiceApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary BroadcastTx broadcast transaction.
-     * @param {InlineObject} body
+     * @param {BroadcastTxRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async broadcastTx(
-      body: InlineObject,
+      body: BroadcastTxRequest,
       options?: any,
     ): Promise<
       (
@@ -23160,12 +23161,12 @@ export const ServiceApiFactory = function (
     /**
      *
      * @summary BroadcastTx broadcast transaction.
-     * @param {InlineObject} body
+     * @param {BroadcastTxRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     broadcastTx(
-      body: InlineObject,
+      body: BroadcastTxRequest,
       options?: any,
     ): AxiosPromise<InlineResponse20046> {
       return ServiceApiFp(configuration)
@@ -23350,12 +23351,12 @@ export class ServiceApi extends BaseAPI {
   /**
    *
    * @summary BroadcastTx broadcast transaction.
-   * @param {InlineObject} body
+   * @param {BroadcastTxRequest} body
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ServiceApi
    */
-  public broadcastTx(body: InlineObject, options?: any) {
+  public broadcastTx(body: BroadcastTxRequest, options?: any) {
     return ServiceApiFp(this.configuration)
       .broadcastTx(body, options)
       .then((request) => request(this.axios, this.basePath));

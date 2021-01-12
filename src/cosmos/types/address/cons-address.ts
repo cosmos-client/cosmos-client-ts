@@ -1,6 +1,6 @@
 import * as bech32 from "bech32";
+import { PubKey } from "../../crypto";
 import { Address, bech32Prefix } from "./address";
-import { PubKey } from "../../base/tendermint";
 
 /**
  * ConsAddress
@@ -25,7 +25,7 @@ export class ConsAddress extends Address {
   }
 
   static fromPublicKey(pubKey: PubKey) {
-    return new ConsAddress(pubKey.getAddress());
+    return new ConsAddress(pubKey.address());
   }
 
   /**

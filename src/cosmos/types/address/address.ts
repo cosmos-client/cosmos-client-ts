@@ -1,4 +1,4 @@
-import { PubKey } from "../../base/tendermint";
+import { PubKey } from "../../crypto";
 
 export enum Prefix {
   Cosmos = "cosmos",
@@ -41,7 +41,7 @@ export class Address {
    * @param pubKey
    */
   static fromPublicKey(pubKey: PubKey) {
-    return new Address(pubKey.getAddress());
+    return new Address(pubKey.address());
   }
 
   /**

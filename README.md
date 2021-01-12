@@ -72,3 +72,14 @@ docker run --rm \
 
 The first digit major version and the second digit minor version should match Cosmos SDK.
 The third digit patch version can be independently incremented.
+
+```bash
+sudo apt install protobuf-compiler
+```
+
+```bash
+sudo rm -r src/generated
+mkdir src/generated
+cd ~/src/github.com/cosmos/cosmos-sdk
+. ~/src/github.com/cosmos-client/cosmos-client-ts/protocgen.sh
+```

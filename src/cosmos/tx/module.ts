@@ -1,11 +1,11 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import {
   CosmosTxV1beta1SimulateRequest,
-  InlineObject,
+  BroadcastTxRequest,
   ServiceApi,
 } from "../../api";
 
-export function broadcastTx(sdk: CosmosSDK, body: InlineObject) {
+export function broadcastTx(sdk: CosmosSDK, body: BroadcastTxRequest) {
   return new ServiceApi(undefined, sdk.url).broadcastTx(body);
 }
 
