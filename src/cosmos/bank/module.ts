@@ -1,5 +1,6 @@
 import { CosmosSDK } from "../../cosmos-sdk";
 import { QueryApi } from "../../api";
+import { AccAddress } from "../types";
 
 export function allBalances(
   sdk: CosmosSDK,
@@ -18,8 +19,8 @@ export function allBalances(
   );
 }
 
-export function balance(sdk: CosmosSDK, address: string, denom: string) {
-  return new QueryApi(undefined, sdk.url).balance(address, denom);
+export function balance(sdk: CosmosSDK, address: AccAddress, denom: string) {
+  return new QueryApi(undefined, sdk.url).balance(address.toBech32(), denom);
 }
 
 export function params(sdk: CosmosSDK) {

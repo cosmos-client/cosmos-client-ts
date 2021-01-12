@@ -1,10 +1,9 @@
 import * as crypto from "crypto";
-import { PrivKeyEd25519 } from "../cosmos/base/tendermint";
-import { codec } from ".";
+import { PrivKeyEd25519, PrivKeySecp256k1 } from "../cosmos/crypto";
 
-test("address", () => {
+test("codec stringify", () => {
   const bytes = crypto.randomBytes(32);
   const key = new PrivKeyEd25519(bytes);
-  const obj = JSON.parse(codec.toJSONString(key));
-  expect(obj.type).toEqual("tendermint/PrivKeyEd25519");
+  const obj = JSON.parse(JSON.stringify(key));
+  expect(obj["@type"]).toEqual(PrivKeySecp256k1["@type"]);
 });

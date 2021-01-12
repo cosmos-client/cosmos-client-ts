@@ -18,22 +18,16 @@ protoc_gen_doc() {
 protoc_gen_gocosmos
 protoc_gen_doc
 
-protos='
-proto/cosmos/tx/v1beta1/tx.proto
-proto/cosmos/crypto/multisig/v1beta1/multisig.proto
-proto/cosmos/base/v1beta1/coin.proto
-proto/cosmos/tx/signing/v1beta1/signing.proto
-third_party/proto/gogoproto/gogo.proto
-third_party/proto/google/protobuf/any.proto
-'
+proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
+third_party_dirs=$(find ./third_party/proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
+proto_array=("${proto_dirs[@]} ${third_party_dirs[@]}")
 
-protos_array=(`echo $protos`)
-for proto in "${protos_array[@]}"; do
+for dir in $proto_array; do
   protoc \
   -I "proto" \
   -I "third_party/proto" \
   --plugin="protoc-gen-ts=../../cosmos-client/cosmos-client-ts/node_modules/.bin/protoc-gen-ts" \
   --js_out="import_style=commonjs,binary:../../cosmos-client/cosmos-client-ts/src/generated" \
   --ts_out="../../cosmos-client/cosmos-client-ts/src/generated" \
-  $proto
+  $(find "${dir}" -maxdepth 1 -name '*.proto')
 done

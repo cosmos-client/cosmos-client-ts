@@ -30,11 +30,9 @@ export class TxBuilder {
     return signDoc;
   }
 
-  withSignature(privKey: PrivKey, signDoc: SignDoc) {
+  addSignature(privKey: PrivKey, signDoc: SignDoc) {
     const sig = privKey.sign(Buffer.from(signDoc.serializeBinary()));
     this.txRaw.addSignatures(sig);
-
-    return this;
   }
 
   /**
