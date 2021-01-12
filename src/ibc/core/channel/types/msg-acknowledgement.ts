@@ -26,6 +26,18 @@ export class MsgAcknowledgement implements Msg {
     public signer?: AccAddress,
   ) {}
 
+  toJSON() {
+    const value: any = { ...this };
+    if (this.acknowledgement) {
+      value.acknowledgement = this.acknowledgement.toString("hex");
+    }
+    if (this.proof_acked) {
+      value.proof_acked = this.proof_acked.toString("hex");
+    }
+
+    return value;
+  }
+
   /**
    *
    * @param value
