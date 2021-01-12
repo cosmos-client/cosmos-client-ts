@@ -1,3 +1,7 @@
+import { codec } from "../../../../codec";
+import { Channel } from "./channel";
+import { CounterParty } from "./counterparty";
+
 export * from "./channel";
 export * from "./counterparty";
 export * from "./msg-acknowledgement";
@@ -11,3 +15,6 @@ export * from "./msg-recv-packet";
 export * from "./msg-timeout";
 export * from "./msg-timeout-on-close";
 export * from "./packet";
+
+codec.registerCodec(Channel["@type"], Channel, Channel.fromJSON);
+codec.registerCodec(CounterParty["@type"], CounterParty, CounterParty.fromJSON);

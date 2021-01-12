@@ -1,7 +1,7 @@
 import { CosmosSDK, AccAddress } from "../..";
 import { auth } from "../auth";
 import { bank } from ".";
-import { PrivKeySecp256k1 } from "../base/tendermint";
+import { PrivKeySecp256k1 } from "../crypto";
 
 test("bank", async () => {
   const sdk = new CosmosSDK("", "test");
