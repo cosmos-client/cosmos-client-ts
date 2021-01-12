@@ -1,6 +1,11 @@
 import { Any } from "../../../../cosmos/types/any";
 
-export class Height implements Any {
+export type HeightI = Any & {
+  getRevisionNumber(): bigint | null;
+  getRevisionHeight(): bigint | null;
+};
+
+export class Height implements HeightI {
   static "@type" = "/ibc.core.client.v1.Height";
   "@type" = "/ibc.core.client.v1.Height";
 
@@ -30,5 +35,13 @@ export class Height implements Any {
       BigInt(value?.revision_number),
       BigInt(value?.revision_height),
     );
+  }
+
+  getRevisionNumber() {
+    return this.revision_number || null;
+  }
+
+  getRevisionHeight() {
+    return this.revision_height || null;
   }
 }

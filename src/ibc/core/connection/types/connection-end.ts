@@ -1,21 +1,28 @@
-import { codec } from "../../../../codec";
-import { AccAddress, Msg } from "../../../../cosmos/types";
+import { Any } from "../../../../cosmos/types/any";
 import { CounterParty } from "./counterparty";
 import { Version } from "./version";
 
-/**
- *
- */
-export class MsgConnectionOpenInit implements Msg {
-  static "@type" = "/ibc.core.connection.v1.MsgConnectionOpenInit";
-  "@type" = "/ibc.core.connection.v1.MsgConnectionOpenInit";
+export enum State {
+  UNINITIALIZED = 0,
+  INIT = 1,
+  TRYOPEN = 2,
+  OPEN = 3,
+}
+
+export type ConnectionI = Any & {
+  getClientID(): string;
+};
+
+export class ConnectionEnd implements ConnectionI {
+  static "@type" = "/ibc.core.connection.v1.ConnectionEnd";
+  "@type" = "/ibc.core.connection.v1.ConnectionEnd";
 
   constructor(
     public client_id?: string,
+    public versions?: Version[],
+    public state?: State,
     public counterparty?: CounterParty,
-    public version?: Version,
     public delay_period?: bigint,
-    public signer?: AccAddress,
   ) {}
 
   toJSON() {
@@ -32,16 +39,16 @@ export class MsgConnectionOpenInit implements Msg {
    * @param value
    */
   static fromJSON(value: any) {
-    return new MsgConnectionOpenInit(
+    return new ConnectionEnd(
       value?.client_id,
+      value?.versions,
+      value?.state,
       value?.counterparty,
-      value?.version,
       BigInt(value?.delay_period),
-      AccAddress.fromBech32(value?.signer),
     );
   }
 
-  getSignBytes() {
-    return Buffer.from(codec.sortJSON(JSON.stringify(this)));
+  getClientID() {
+    return this.client_id || "";
   }
 }

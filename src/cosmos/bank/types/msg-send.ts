@@ -7,8 +7,8 @@ import { codec } from "../../../codec";
  *
  */
 export class MsgSend implements Msg {
-  static "@type": "/cosmos.bank.v1beta1.Msg/Send";
-  "@type": "/cosmos.bank.v1beta1.Msg/Send";
+  static "@type": "/cosmos.bank.v1beta1.MsgSend";
+  "@type": "/cosmos.bank.v1beta1.MsgSend";
 
   /**
    *
@@ -28,9 +28,9 @@ export class MsgSend implements Msg {
    */
   static fromJSON(value: any) {
     return new MsgSend(
-      AccAddress.fromBech32(value.from_address),
-      AccAddress.fromBech32(value.to_address),
-      value.amount,
+      AccAddress.fromBech32(value?.from_address),
+      AccAddress.fromBech32(value?.to_address),
+      value?.amount,
     );
   }
 
