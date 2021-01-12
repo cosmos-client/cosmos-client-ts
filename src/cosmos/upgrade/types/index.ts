@@ -6,12 +6,12 @@ export * from "./software-upgrade-proposal";
 export * from "./cancel-software-upgrade-proposal";
 
 // Register codec
-codec.registerCodec(
+codec.register(
   SoftwareUpgradeProposal["@type"],
   SoftwareUpgradeProposal,
   SoftwareUpgradeProposal.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   CancelSoftwareUpgradeProposal["@type"],
   CancelSoftwareUpgradeProposal,
   CancelSoftwareUpgradeProposal.fromJSON,

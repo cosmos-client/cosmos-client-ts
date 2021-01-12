@@ -6,5 +6,5 @@ export * from "./msg-multi-send";
 export * from "./msg-send";
 
 // Register codec
-codec.registerCodec(MsgSend["@type"], MsgSend, MsgSend.fromJSON);
-codec.registerCodec(MsgMultiSend["@type"], MsgMultiSend, MsgMultiSend.fromJSON);
+codec.register(MsgSend["@type"], MsgSend, MsgSend.fromJSON);
+codec.register(MsgMultiSend["@type"], MsgMultiSend, MsgMultiSend.fromJSON);

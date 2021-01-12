@@ -15,7 +15,7 @@ export function fromJSONString(json: string) {
   });
 }
 
-export function registerCodec<T>(
+export function register<T>(
   type: string,
   constructor: Function,
   fromJSON: (value: any) => T,

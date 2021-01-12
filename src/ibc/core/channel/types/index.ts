@@ -16,5 +16,5 @@ export * from "./msg-timeout";
 export * from "./msg-timeout-on-close";
 export * from "./packet";
 
-codec.registerCodec(Channel["@type"], Channel, Channel.fromJSON);
-codec.registerCodec(CounterParty["@type"], CounterParty, CounterParty.fromJSON);
+codec.register(Channel["@type"], Channel, Channel.fromJSON);
+codec.register(CounterParty["@type"], CounterParty, CounterParty.fromJSON);

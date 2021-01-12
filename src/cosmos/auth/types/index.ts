@@ -5,4 +5,4 @@ export * from "./account";
 export * from "./module-account";
 
 // Register codec
-codec.registerCodec(BaseAccount["@type"], BaseAccount, BaseAccount.fromJSON);
+codec.register(BaseAccount["@type"], BaseAccount, BaseAccount.fromJSON);

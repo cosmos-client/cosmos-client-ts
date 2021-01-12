@@ -3,7 +3,7 @@ import { MsgVerifyInvariant } from "./msg-verify-invariant";
 
 export * from "./msg-verify-invariant";
 
-codec.registerCodec(
+codec.register(
   MsgVerifyInvariant["@type"],
   MsgVerifyInvariant,
   MsgVerifyInvariant.fromJSON,

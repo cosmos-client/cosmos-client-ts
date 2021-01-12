@@ -12,27 +12,23 @@ export * from "./msg-edit-validator";
 export * from "./msg-undelegate";
 
 // Register Codec
-codec.registerCodec(
+codec.register(
   "cosmos-sdk/MsgBeginRedelegate",
   MsgBeginRedelegate,
   MsgBeginRedelegate.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   "cosmos-sdk/MsgCreateValidator",
   MsgCreateValidator,
   MsgCreateValidator.fromJSON,
 );
-codec.registerCodec(
-  "cosmos-sdk/MsgDelegate",
-  MsgDelegate,
-  MsgDelegate.fromJSON,
-);
-codec.registerCodec(
+codec.register("cosmos-sdk/MsgDelegate", MsgDelegate, MsgDelegate.fromJSON);
+codec.register(
   "cosmos-sdk/MsgEditValidator",
   MsgEditValidator,
   MsgEditValidator.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   "cosmos-sdk/MsgUndelegate",
   MsgUndelegate,
   MsgUndelegate.fromJSON,

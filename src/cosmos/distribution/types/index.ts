@@ -12,27 +12,27 @@ export * from "./msg-withdraw-validator-commision";
 export * from "./msg-fund-community-pool";
 
 // Register codec
-codec.registerCodec(
+codec.register(
   CommunityPoolSpendProposal["@type"],
   CommunityPoolSpendProposal,
   CommunityPoolSpendProposal.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   MsgFundCommunityPool["@type"],
   MsgFundCommunityPool,
   MsgFundCommunityPool.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   MsgSetWithdrawAddress["@type"],
   MsgSetWithdrawAddress,
   MsgSetWithdrawAddress.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   MsgWithdrawDelegatorReward["@type"],
   MsgWithdrawDelegatorReward,
   MsgWithdrawDelegatorReward.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   MsgWithdrawValidatorCommission["@type"],
   MsgWithdrawValidatorCommission,
   MsgWithdrawValidatorCommission.fromJSON,

@@ -10,11 +10,11 @@ export * from "./msg-vote";
 export * from "./text-proposal";
 
 // Register codec
-codec.registerCodec(
+codec.register(
   MsgSubmitProposal["@type"],
   MsgSubmitProposal,
   MsgSubmitProposal.fromJSON,
 );
-codec.registerCodec(MsgDeposit["@type"], MsgDeposit, MsgDeposit.fromJSON);
-codec.registerCodec(MsgVote["@type"], MsgVote, MsgVote.fromJSON);
-codec.registerCodec(TextProposal["@type"], TextProposal, TextProposal.fromJSON);
+codec.register(MsgDeposit["@type"], MsgDeposit, MsgDeposit.fromJSON);
+codec.register(MsgVote["@type"], MsgVote, MsgVote.fromJSON);
+codec.register(TextProposal["@type"], TextProposal, TextProposal.fromJSON);

@@ -17,9 +17,9 @@ export class MsgSend implements Msg {
    * @param amount
    */
   constructor(
-    public from_address: AccAddress,
-    public to_address: AccAddress,
-    public amount: Coin[],
+    public from_address?: AccAddress,
+    public to_address?: AccAddress,
+    public amount?: Coin[],
   ) {}
 
   /**
