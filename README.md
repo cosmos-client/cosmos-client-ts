@@ -12,6 +12,7 @@ npm install --save cosmos-client
 
 ```typescript
 import { cosmos, proto, CosmosClient, codec, secp256k1 } from "cosmos-client";
+
 const sdk = new CosmosClient("http://localhost:1317", "test-1");
 
 // get account info
