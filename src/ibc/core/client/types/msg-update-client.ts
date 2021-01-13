@@ -1,4 +1,4 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { AccAddress, Msg } from "../../../../cosmos/types";
 import { codec } from "../../../../codec";
 
@@ -17,7 +17,7 @@ export class MsgUpdateClient implements Msg {
    */
   constructor(
     public client_id?: string,
-    public header?: Any,
+    public header?: AnyI,
     public signer?: AccAddress,
   ) {}
 

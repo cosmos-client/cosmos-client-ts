@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { QueryApi } from "../../api";
+import { QueryApi } from "../../generated/api";
 import { AccountI } from "./types";
 import { AccAddress } from "../types";
 

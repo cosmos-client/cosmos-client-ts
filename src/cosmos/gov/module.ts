@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { QueryApi } from "../../api";
+import { QueryApi } from "../../generated/api";
 import { AccAddress } from "../types";
 
 export function params(sdk: CosmosSDK, paramsType: string) {

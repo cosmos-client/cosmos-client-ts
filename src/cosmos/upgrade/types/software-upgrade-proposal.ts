@@ -1,12 +1,12 @@
 import { Content } from "../../gov/types/content";
-import { Any } from "../../types/any";
+import { AnyI } from "../../../codec/any";
 
 type Plan = {
   name?: string;
   time: string;
   height?: bigint;
   info?: string;
-  upgraded_client_state?: Any;
+  upgraded_client_state?: AnyI;
 };
 
 export class SoftwareUpgradeProposal implements Content {

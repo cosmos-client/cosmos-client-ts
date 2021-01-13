@@ -1,6 +1,6 @@
 import { AccAddress } from "../../types/address/acc-address";
 import { Msg } from "../../types/msg";
-import { Coin } from "../../../api";
+import { Coin } from "../../../generated/api";
 import { codec } from "../../../codec";
 
 /**

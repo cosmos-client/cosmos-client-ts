@@ -1,7 +1,7 @@
 import { Msg } from "../../types/msg";
 import { AccAddress } from "../../types/address/acc-address";
 import { ValAddress } from "../../types/address/val-address";
-import { ValidatorDescription, Coin } from "../../../api";
+import { ValidatorDescription, Coin } from "../../../generated/api";
 import { codec } from "../../../codec";
 import { PubKey } from "../../crypto";
 

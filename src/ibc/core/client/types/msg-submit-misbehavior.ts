@@ -1,4 +1,4 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { AccAddress, Msg } from "../../../../cosmos/types";
 import { codec } from "../../../../codec";
 
@@ -10,14 +10,14 @@ export class MsgSubmitMisbehavior implements Msg {
   "@type": "/ibc.core.client.v1.MsgSubmitMisbehavior";
 
   /**
-   * 
-   * @param client_id 
-   * @param misbehavior 
-   * @param signer 
+   *
+   * @param client_id
+   * @param misbehavior
+   * @param signer
    */
   constructor(
     public client_id?: string,
-    public misbehavior?: Any,
+    public misbehavior?: AnyI,
     public signer?: AccAddress,
   ) {}
 

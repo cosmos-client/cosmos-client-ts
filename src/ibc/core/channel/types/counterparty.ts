@@ -1,6 +1,6 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 
-export type CounterPartyChannelI = Any & {
+export type CounterPartyChannelI = AnyI & {
   getPortID(): string;
   getChannelID(): string;
 };

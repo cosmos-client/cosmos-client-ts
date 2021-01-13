@@ -3,9 +3,9 @@ import { auth } from "../auth";
 import { bank } from ".";
 import { PrivKeySecp256k1 } from "../crypto";
 import { AuthInfo, tx, TxBody, TxBuilder } from "../tx";
-import { MsgSend } from "../../generated/cosmos/bank/v1beta1/tx_pb";
-import { BroadcastTxRequestModeEnum } from "../../api";
-import { Coin } from "../../generated/cosmos/base/v1beta1/coin_pb";
+import { MsgSend } from "../../pe/cosmos/bank/v1beta1/tx_pb";
+import { BroadcastTxRequestModeEnum } from "../../generated/api";
+import { Coin } from "../../pe/cosmos/base/v1beta1/coin_pb";
 
 test("bank", async () => {
   const sdk = new CosmosSDK("", "test");

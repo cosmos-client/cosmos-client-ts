@@ -1,4 +1,4 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { CounterParty } from "./counterparty";
 import { Version } from "./version";
 
@@ -9,7 +9,7 @@ export enum State {
   OPEN = 3,
 }
 
-export type ConnectionI = Any & {
+export type ConnectionI = AnyI & {
   getClientID(): string;
 };
 

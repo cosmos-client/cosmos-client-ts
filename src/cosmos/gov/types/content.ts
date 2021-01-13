@@ -1,5 +1,5 @@
-import { Any } from "../../types/any";
+import { AnyI } from "../../../codec/any";
 
-export type Content = Any & {
+export type Content = AnyI & {
   getTitle(): string;
 };

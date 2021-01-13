@@ -3,7 +3,7 @@ import {
   CosmosTxV1beta1SimulateRequest,
   BroadcastTxRequest,
   ServiceApi,
-} from "../../api";
+} from "../../generated/api";
 
 export function broadcastTx(sdk: CosmosSDK, body: BroadcastTxRequest) {
   return new ServiceApi(undefined, sdk.url).broadcastTx(body);

@@ -1,6 +1,6 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 
-export type HeightI = Any & {
+export type HeightI = AnyI & {
   getRevisionNumber(): bigint | null;
   getRevisionHeight(): bigint | null;
 };

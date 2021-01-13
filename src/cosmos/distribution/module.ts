@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { QueryApi } from "../../api";
+import { QueryApi } from "../../generated/api";
 import { AccAddress, ValAddress } from "../types";
 
 export function communityPool(sdk: CosmosSDK) {

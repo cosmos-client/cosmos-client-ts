@@ -1,4 +1,4 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { AccAddress, Msg } from "../../../../cosmos/types";
 import { codec } from "../../../../codec";
 
@@ -16,8 +16,8 @@ export class MsgCreateClient implements Msg {
    * @param signer
    */
   constructor(
-    public client_state?: Any,
-    public consensus_state?: Any,
+    public client_state?: AnyI,
+    public consensus_state?: AnyI,
     public signer?: AccAddress,
   ) {}
 

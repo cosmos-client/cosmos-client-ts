@@ -1,7 +1,7 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { HeightI } from "./height";
 
-export type ClientState = Any & {
+export type ClientState = AnyI & {
   clientState(): string;
   getLatestHeight(): HeightI;
 };

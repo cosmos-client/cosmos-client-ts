@@ -1,4 +1,4 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { AccAddress, Msg } from "../../../../cosmos/types";
 import { codec } from "../../../../codec";
 
@@ -11,8 +11,8 @@ export class MsgUpgradeClient implements Msg {
 
   constructor(
     public client_id?: string,
-    public client_state?: Any,
-    public consensus_state?: Any,
+    public client_state?: AnyI,
+    public consensus_state?: AnyI,
     public proof_upgrade_client?: Buffer,
     public proof_upgrade_consensus_state?: Buffer,
     public signer?: AccAddress,

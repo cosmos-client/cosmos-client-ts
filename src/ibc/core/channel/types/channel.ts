@@ -1,4 +1,4 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { CounterParty, CounterPartyChannelI } from "./counterparty";
 
 export enum State {
@@ -15,7 +15,7 @@ export enum Order {
   ORDERED = 2,
 }
 
-export type ChannelI = Any & {
+export type ChannelI = AnyI & {
   getState(): State | null;
   getOrdering(): Order | null;
   getCounterParty(): CounterPartyChannelI | null;

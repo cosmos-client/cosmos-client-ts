@@ -1,6 +1,11 @@
 import * as crypto from "crypto";
 import * as nacl from "tweetnacl";
 import { PrivKey, PubKey } from "..";
+import { codec } from "../../../codec";
+import {
+  PrivKey as GeneratedPrivKey,
+  PubKey as GeneratedPubKey,
+} from "../../../pe/cosmos/crypto/ed25519/keys_pb";
 
 /**
  * ed25519
@@ -20,6 +25,13 @@ export class PrivKeyEd25519 implements PrivKey {
     const keypair = nacl.sign.keyPair.fromSeed(new Uint8Array(privKey));
     this._pubKey = new PubKeyEd25519(Buffer.from(keypair.publicKey));
     this._privKey = privKey;
+  }
+
+  pack() {
+    const generated = new GeneratedPrivKey();
+    generated.setKey(this._privKey);
+
+    return codec.packAny(generated);
   }
 
   /**
@@ -89,6 +101,13 @@ export class PubKeyEd25519 implements PubKey {
    */
   constructor(pubKey: Buffer) {
     this._pubKey = pubKey;
+  }
+
+  pack() {
+    const generated = new GeneratedPubKey();
+    generated.setKey(this._pubKey);
+
+    return codec.packAny(generated);
   }
 
   address() {

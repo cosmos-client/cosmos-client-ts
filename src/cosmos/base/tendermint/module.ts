@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../../cosmos-sdk";
-import { ServiceApi } from "../../../api";
+import { ServiceApi } from "../../../generated/api";
 
 export async function getBlockByHeight(sdk: CosmosSDK, height: bigint) {
   return new ServiceApi(undefined, sdk.url).getBlockByHeight(height.toString());

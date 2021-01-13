@@ -1,7 +1,7 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { Height } from "../../client/types";
 
-export type PacketI = Any & {
+export type PacketI = AnyI & {
   getSequence(): bigint | null;
   getTimeoutHeight(): Height | null;
   getTimeoutTimestamp(): bigint | null;

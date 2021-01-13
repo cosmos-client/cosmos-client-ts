@@ -67,7 +67,7 @@ const result = await auth
 ```bash
 docker run --rm \
   -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-  -g typescript-axios -i /local/swagger.yaml -o /local/src
+  -g typescript-axios -i /local/swagger.yaml -o /local/src/generated/
 ```
 
 The first digit major version and the second digit minor version should match Cosmos SDK.
@@ -78,8 +78,5 @@ sudo apt install protobuf-compiler
 ```
 
 ```bash
-sudo rm -r src/generated
-mkdir src/generated
-cd ~/src/github.com/cosmos/cosmos-sdk
-. ~/src/github.com/cosmos-client/cosmos-client-ts/protocgen.sh
+. protocgen.sh
 ```

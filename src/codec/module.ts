@@ -1,19 +1,11 @@
+import { Any as ClassAny } from "google-protobuf/google/protobuf/any_pb";
+import * as jspb from "google-protobuf";
+import { AnyI } from "./any";
+
 export const maps = {
   inv: new Map<Function, string>(),
   fromJSON: {} as { [type: string]: (value: any) => any },
 };
-
-export function fromJSONString(json: string) {
-  return JSON.parse(json, (_, value) => {
-    const atType = value && value["@type"];
-
-    if (atType && maps.fromJSON[atType]) {
-      return maps.fromJSON[atType](value);
-    }
-
-    return value;
-  });
-}
 
 export function register<T>(
   type: string,
@@ -24,31 +16,24 @@ export function register<T>(
   maps.fromJSON[type] = fromJSON;
 }
 
-function sortJSONObject(value: any): any {
-  if (Object.prototype.toString.call(value) === "[object Object]") {
-    const sorted = {} as { [key: string]: any };
-    const keys = Object.keys(value).sort();
+export function unpackAny(value: AnyI) {
+  const typeURL = value && value["@type"];
 
-    for (const key of keys) {
-      const keyValue = value[key];
-      if (keyValue != null) {
-        sorted[key] = sortJSONObject(keyValue);
-      }
-    }
-
-    return sorted;
+  if (typeURL && maps.fromJSON[typeURL]) {
+    return maps.fromJSON[typeURL](value);
   }
 
-  if (Array.isArray(value)) {
-    return value.map(sortJSONObject);
-  }
-
-  return value === undefined ? null : value;
+  return value;
 }
 
-export function sortJSON(json: string) {
-  const value = JSON.parse(json);
-  const obj = sortJSONObject(value);
+export function packAny(value: jspb.Message) {
+  const packed = new ClassAny();
+  const typeURL = maps.inv.get((value as any)?.prototype.constructor);
+  if (!typeURL) {
+    throw Error("This type is not registered");
+  }
+  packed.setTypeUrl(typeURL);
+  packed.setValue(value.serializeBinary());
 
-  return JSON.stringify(obj);
+  return packed;
 }

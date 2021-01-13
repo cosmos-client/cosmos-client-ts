@@ -1,6 +1,6 @@
 import { codec } from "../../../../codec";
 import { AccAddress, Msg } from "../../../../cosmos/types";
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { Height } from "../../client/types";
 import { Version } from "./version";
 
@@ -15,7 +15,7 @@ export class MsgConnectionOpenAck implements Msg {
     public connection_id?: string,
     public counterparty_connection_id?: string,
     public version?: Version,
-    public client_state?: Any,
+    public client_state?: AnyI,
     public proof_height?: Height,
     public proof_try?: Buffer,
     public proof_client?: Buffer,

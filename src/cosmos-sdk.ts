@@ -28,7 +28,7 @@ export class CosmosSDK {
   reparseAxiosResponse<T>(res: AxiosResponse) {
     const ret: AxiosResponse<T> = {
       ...res,
-      data: codec.fromJSONString(JSON.stringify(res.data)),
+      data: codec.unpackAny(res.data),
     };
 
     return ret;

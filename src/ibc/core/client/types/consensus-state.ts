@@ -1,5 +1,5 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 
-export type ConsensusState = Any & {
+export type ConsensusState = AnyI & {
   clientType(): string;
 };

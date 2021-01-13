@@ -1,7 +1,7 @@
 import { AccAddress } from "../../types/address/acc-address";
 import { ValAddress } from "../../types/address/val-address";
 import { Msg } from "../../types/msg";
-import { Coin } from "../../../api";
+import { Coin } from "../../../generated/api";
 import { codec } from "../../../codec";
 
 export class MsgUndelegate implements Msg {

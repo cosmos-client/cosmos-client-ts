@@ -1,4 +1,4 @@
-import { Coin } from "../../../../api";
+import { Coin } from "../../../../generated/api";
 import { codec } from "../../../../codec";
 import { AccAddress, Msg } from "../../../../cosmos/types";
 import { Height } from "../../../core/client/types/height";

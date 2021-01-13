@@ -1,5 +1,5 @@
-import { Any } from "./any";
+import { AnyI } from "../../codec/any";
 
-export type Msg = Any & {
+export type Msg = AnyI & {
   getSignBytes(): Buffer;
 };

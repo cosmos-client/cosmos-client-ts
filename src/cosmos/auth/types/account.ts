@@ -1,9 +1,11 @@
 import { AccAddress } from "../../types/address/acc-address";
 import { PubKey } from "../../crypto/types/key";
-import { Any } from "../../types/any";
+import { AnyI } from "../../../codec/any";
+import { BaseAccount as Generated } from "../../../pe/cosmos/auth/v1beta1/auth_pb";
+import { codec } from "../../../codec";
 
-export type AccountI = Any & {
-  getAddress(): AccAddress | null;
+export type AccountI = AnyI & {
+  getAddress(): AccAddress;
   setAddress(address: AccAddress): void;
   getPubKey(): PubKey | null;
   setPubkey(pubKey: PubKey): void;
@@ -26,10 +28,10 @@ export class BaseAccount implements AccountI {
    * @param sequence
    */
   constructor(
-    public address?: AccAddress,
-    public public_key?: PubKey,
-    public account_number?: bigint,
-    public sequence?: bigint,
+    public address: AccAddress,
+    public public_key: PubKey,
+    public account_number: bigint,
+    public sequence: bigint,
   ) {}
 
   toJSON() {
@@ -50,11 +52,27 @@ export class BaseAccount implements AccountI {
    */
   static fromJSON(value: any) {
     return new BaseAccount(
-      value?.address ? AccAddress.fromBech32(value.address) : undefined,
-      value?.public_key,
-      BigInt(value?.account_number),
-      BigInt(value?.sequence),
+      AccAddress.fromBech32(value.address),
+      value.public_key,
+      BigInt(value.account_number),
+      BigInt(value.sequence),
     );
+  }
+
+  generated() {
+    const generated = new Generated();
+    generated.setAddress(this.address.toBech32());
+    generated.setPubKey(this.public_key.pack());
+    generated.setAccountNumber(Number(this.account_number));
+    generated.setSequence(Number(this.sequence));
+
+    return generated;
+  }
+
+  pack() {
+    const generated = this.generated();
+
+    return codec.packAny(generated);
   }
 
   getAddress() {

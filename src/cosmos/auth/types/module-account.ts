@@ -1,10 +1,12 @@
-import { Any } from "../../types/any";
+import { AnyI } from "../../../codec/any";
 import { BaseAccount } from "./account";
+import { ModuleAccount as Generated } from "../../../pe/cosmos/auth/v1beta1/auth_pb";
+import { codec } from "../../../codec";
 
-export type ModuleAccountI = Any & {
-  getName(): string | null;
-  getPermissions(): string[] | null;
-  hasPermissions(permission: string): boolean | null;
+export type ModuleAccountI = AnyI & {
+  getName(): string;
+  getPermissions(): string[];
+  hasPermissions(permission: string): boolean;
 };
 
 export class ModuleAccount implements ModuleAccountI {
@@ -18,9 +20,9 @@ export class ModuleAccount implements ModuleAccountI {
    * @param permissions
    */
   constructor(
-    public base_account?: BaseAccount,
-    public name?: string,
-    public permissions?: string[],
+    public base_account: BaseAccount,
+    public name: string,
+    public permissions: string[],
   ) {}
 
   /**
@@ -29,21 +31,30 @@ export class ModuleAccount implements ModuleAccountI {
    */
   static fromJSON(value: any) {
     return new ModuleAccount(
-      new BaseAccount(value.base_account),
+      BaseAccount.fromJSON(value.base_account),
       value.name,
       value.permissions,
     );
   }
 
+  pack() {
+    const generated = new Generated();
+    generated.setBaseAccount(this.base_account.generated());
+    generated.setName(this.name);
+    generated.setPermissionsList(this.permissions);
+
+    return codec.packAny(generated);
+  }
+
   getName() {
-    return this.name || null;
+    return this.name;
   }
 
   getPermissions() {
-    return this.permissions || null;
+    return this.permissions;
   }
 
   hasPermissions(permission: string) {
-    return this.permissions?.includes(permission) || null;
+    return this.permissions.includes(permission);
   }
 }

@@ -1,6 +1,6 @@
 import { Msg } from "../../types/msg";
 import { AccAddress } from "../../types/address/acc-address";
-import { Coin } from "../../../api";
+import { Coin } from "../../../generated/api";
 import { codec } from "../../../codec";
 
 export class MsgDeposit implements Msg {

@@ -1,6 +1,6 @@
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 
-export type VersionI = Any & {
+export type VersionI = AnyI & {
   getIdentifier(): string;
   getFeatures(): string[];
 };

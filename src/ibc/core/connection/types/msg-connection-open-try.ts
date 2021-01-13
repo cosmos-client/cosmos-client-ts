@@ -1,6 +1,6 @@
 import { codec } from "../../../../codec";
 import { AccAddress, Msg } from "../../../../cosmos/types";
-import { Any } from "../../../../cosmos/types/any";
+import { AnyI } from "../../../../codec/any";
 import { Height } from "../../client/types";
 import { CounterParty } from "./counterparty";
 import { Version } from "./version";
@@ -15,7 +15,7 @@ export class MsgConnectionOpenTry implements Msg {
   constructor(
     public client_id?: string,
     public previous_client_id?: string,
-    public client_state?: Any,
+    public client_state?: AnyI,
     public counterparty?: CounterParty,
     public delay_period?: bigint,
     public counterparty_versions?: Version[],

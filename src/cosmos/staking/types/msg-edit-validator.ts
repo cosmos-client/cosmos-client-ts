@@ -1,6 +1,6 @@
 import { Msg } from "../../types/msg";
 import { ValAddress } from "../../types/address/val-address";
-import { ValidatorDescription } from "../../../api";
+import { ValidatorDescription } from "../../../generated/api";
 import { codec } from "../../../codec";
 
 export class MsgEditValidator implements Msg {

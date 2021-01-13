@@ -4,10 +4,10 @@ import {
   SignDoc,
   TxBody,
   TxRaw,
-} from "../../../generated/cosmos/tx/v1beta1/tx_pb";
+} from "../../../pe/cosmos/tx/v1beta1/tx_pb";
 import { PrivKey } from "../../crypto";
 
-export { AuthInfo, TxBody } from "../../../generated/cosmos/tx/v1beta1/tx_pb";
+export { AuthInfo, TxBody } from "../../../pe/cosmos/tx/v1beta1/tx_pb";
 
 export class TxBuilder {
   txRaw: TxRaw;

@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../../cosmos-sdk";
-import { QueryApi } from "../../../api";
+import { QueryApi } from "../../../generated/api";
 
 export function clientConnections(sdk: CosmosSDK, clientID: string) {
   return new QueryApi(undefined, sdk.url).clientConnections(clientID);

@@ -1,4 +1,4 @@
-import { Coin } from "../../../api";
+import { Coin } from "../../../generated/api";
 import { codec } from "../../../codec";
 import { Content } from "../../gov/types/content";
 

@@ -1,5 +1,5 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { QueryApi } from "../../api";
+import { QueryApi } from "../../generated/api";
 import { AccAddress, ConsAddress, ValAddress } from "../types";
 
 export function slashingParams(sdk: CosmosSDK) {

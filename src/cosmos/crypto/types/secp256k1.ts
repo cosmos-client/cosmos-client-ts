@@ -1,6 +1,12 @@
 import * as crypto from "crypto";
 import * as secp256k1 from "tiny-secp256k1";
 import { PrivKey, PubKey } from "..";
+import { codec } from "../../../codec";
+import {
+  PrivKey as GeneratedPrivKey,
+  PubKey as GeneratedPubKey,
+} from "../../../pe/cosmos/crypto/secp256k1/keys_pb";
+
 /**
  * secp256k1
  */
@@ -18,6 +24,13 @@ export class PrivKeySecp256k1 implements PrivKey {
   constructor(privKey: Buffer) {
     this._pubKey = new PubKeySecp256k1(secp256k1.pointFromScalar(privKey)!);
     this._privKey = privKey;
+  }
+
+  pack() {
+    const generated = new GeneratedPrivKey();
+    generated.setKey(this._privKey);
+
+    return codec.packAny(generated);
   }
 
   /**
@@ -79,14 +92,21 @@ export class PubKeySecp256k1 implements PubKey {
   static "@type": "/cosmos.crypto.secp256k1.PubKey";
   "@type": "/cosmos.crypto.secp256k1.PubKey";
 
-  private pubKey: Buffer;
+  private _pubKey: Buffer;
 
   /**
    *
    * @param pubKey
    */
   constructor(pubKey: Buffer) {
-    this.pubKey = pubKey;
+    this._pubKey = pubKey;
+  }
+
+  pack() {
+    const generated = new GeneratedPubKey();
+    generated.setKey(this._pubKey);
+
+    return codec.packAny(generated);
   }
 
   hash160(buffer: Buffer): Buffer {
@@ -102,14 +122,14 @@ export class PubKeySecp256k1 implements PubKey {
   }
 
   address() {
-    return this.hash160(this.pubKey);
+    return this.hash160(this._pubKey);
   }
 
   /**
    *
    */
   bytes() {
-    return Buffer.from(this.pubKey);
+    return Buffer.from(this._pubKey);
   }
 
   /**
@@ -120,14 +140,14 @@ export class PubKeySecp256k1 implements PubKey {
   verifySignature(msg: Buffer, sig: Buffer) {
     const hash = crypto.createHash("sha256").update(msg).digest();
 
-    return secp256k1.verify(hash, sig, this.pubKey);
+    return secp256k1.verify(hash, sig, this._pubKey);
   }
 
   /**
    *
    */
   toBase64() {
-    return this.pubKey.toString("base64");
+    return this._pubKey.toString("base64");
   }
 
   /**
