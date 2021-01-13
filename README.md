@@ -27,7 +27,6 @@ const account = await cosmos.auth
   .then((res) => res.data);
 
 if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
-  console.log("hoge");
   return;
 }
 
@@ -39,7 +38,7 @@ const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
   to_address: toAddress.toString(),
   amount: [{ denom: "token", amount: "1000" }],
 });
-console.log(msgSend);
+
 const txBody = new proto.cosmos.tx.v1beta1.TxBody({
   messages: [
     codec.packAny(
@@ -48,7 +47,7 @@ const txBody = new proto.cosmos.tx.v1beta1.TxBody({
     ),
   ],
 });
-console.log(txBody);
+
 const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({});
 
 // sign
