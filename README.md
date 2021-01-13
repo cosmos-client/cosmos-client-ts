@@ -11,62 +11,73 @@ npm install --save cosmos-client
 ## Example
 
 ```typescript
-import { CosmosSDK, AccAddress, PrivKeySecp256k1 } from "cosmos-client";
-import { auth } from "cosmos-client/x/auth";
-import { bank } from "cosmos-client/x/bank";
+import { cosmos, proto, CosmosClient, codec, secp256k1 } from "cosmos-client";
 
-const sdk = new CosmosSDK(hostURL, chainID);
+const sdk = new CosmosClient("http://localhost:1317", "test-1");
 
 // get account info
-const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic(mnemonic);
-const privKey = new PrivKeySecp256k1(privKeyBuffer);
-const fromAddress = AccAddress.fromPublicKey(privKey.getPubKey());
-const account = await auth
-  .accountsAddressGet(sdk, fromAddress)
-  .then((res) => res.data.result);
+const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic("mnemonic here");
+const privKey = new secp256k1.PrivKey({
+  key: privKeyBuffer,
+});
+const fromAddress = cosmos.AccAddress.fromPublicKey(privKey.pubKey());
 
-// get unsigned tx
+const account = await cosmos.auth
+  .account(sdk, fromAddress)
+  .then((res) => res.data);
+
+if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+  return;
+}
+
+// create tx body
 const toAddress = fromAddress;
 
-const unsignedStdTx = await bank
-  .accountsAddressTransfersPost(sdk, toAddress, {
-    base_req: {
-      from: fromAddress.toBech32(),
-      memo: "Hello, world!",
-      chain_id: sdk.chainID,
-      account_number: account.account_number.toString(),
-      sequence: account.sequence.toString(),
-      gas: "",
-      gas_adjustment: "",
-      fees: [],
-      simulate: false,
-    },
-    amount: [{ denom: "token", amount: "1000" }],
-  })
-  .then((res) => res.data);
+const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+  from_address: fromAddress.toString(),
+  to_address: toAddress.toString(),
+  amount: [{ denom: "token", amount: "1000" }],
+});
+
+const txBody = new proto.cosmos.tx.v1beta1.TxBody({
+  messages: [
+    codec.packAny(
+      proto.cosmos.bank.v1beta1.MsgSend,
+      proto.cosmos.bank.v1beta1.MsgSend.encode(msgSend),
+    ),
+  ],
+});
+
+const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({});
 
 // sign
-const signedStdTx = auth.signStdTx(
-  sdk,
-  privKey,
-  unsignedStdTx,
-  account.account_number,
-  account.sequence,
-);
+const txBuilder = new CosmosClient.TxBuilder(sdk, txBody, authInfo);
+const signDoc = txBuilder.signDoc((account as any).account_number);
+txBuilder.addSignature(privKey, signDoc);
 
 // broadcast
-const result = await auth
-  .txsPost(sdk, signedStdTx, "sync")
-  .then((res) => res.data);
+const result = await cosmos.tx
+  .broadcastTx(sdk, {
+    tx_bytes: txBuilder.txBytes().toString(),
+    mode: cosmos.tx.BroadcastTxRequestModeEnum.Async,
+  })
+  .then((res) => res.data)
+  .catch((reason) => console.log(reason));
 ```
 
 ## For library developlers
 
 [swagger.yml](https://github.com/cosmos/cosmos-sdk/blob/master/client/lcd/swagger-ui/swagger.yaml)
 
-```shell
-openapi-generator generate -g typescript-axios -i swagger.yaml -o ./src
+```bash
+docker run --rm \
+  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+  -g typescript-axios -i /local/swagger.yaml -o /local/src/generated/
 ```
 
 The first digit major version and the second digit minor version should match Cosmos SDK.
 The third digit patch version can be independently incremented.
+
+```bash
+. protocgen.sh
+```

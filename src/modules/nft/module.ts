@@ -1,8 +1,8 @@
-import { StdTx } from "../../x/auth";
+import { StdTx } from "../../cosmos/auth";
 import { CosmosSDK } from "../../cosmos-sdk";
 import Axios, { AxiosPromise } from "axios";
 import { BaseReq } from "../../api";
-import { AccAddress } from "../../types";
+import { AccAddress } from "../../cosmos/types";
 import { codec } from "../../codec";
 
 export function supplyDenomGet(sdk: CosmosSDK, denom: string) {

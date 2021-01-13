@@ -1,5 +1,5 @@
-import { AccAddress } from "../../../types/address/acc-address";
-import { Msg } from "../../../types/msg";
+import { AccAddress } from "../../../cosmos/types/address/acc-address";
+import { Msg } from "../../../cosmos/types/msg";
 
 export class MsgTransferNFT implements Msg {
   constructor(

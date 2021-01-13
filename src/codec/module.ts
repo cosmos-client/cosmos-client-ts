@@ -1,52 +1,41 @@
+import { Any } from "./any";
+import * as protobuf from "protobufjs";
+import { google } from "../generated/proto";
+
 export const maps = {
-  type: new Map<Function, string>(),
-  fromJSON: {} as { [type: string]: (value: any) => any },
+  inv: new Map<Function, string>(),
+  fromObject: {} as { [type: string]: (value: any) => any },
 };
 
-export function toJSONString(value: any) {
-  return JSON.stringify(value, (key, value) => {
-    const type = maps.type.get(value?.constructor);
-    if (type) {
-      return {
-        type,
-        value: value.toJSONInCodec ? value.toJSONInCodec() : { ...value },
-      };
-    }
-    return value;
-  });
-}
-
-export function fromJSONString(json: string) {
-  return JSON.parse(json, (key, value) => {
-    const _type: string | undefined = value?.type;
-    const _value: any | undefined = value?.value;
-    if (_type && maps.fromJSON[_type]) {
-      return maps.fromJSON[_type](_value);
-    }
-
-    if (_type && _value && Object.keys(value).length == 2) {
-      return new AminoWrapping(_type, _value);
-    }
-
-    return value;
-  });
-}
-
-export function registerCodec<T>(
+export function register<T>(
   type: string,
   constructor: Function,
-  fromJSON: (value: any) => T,
+  fromObject: (value: any) => T,
 ) {
-  maps.type.set(constructor, type);
-  maps.fromJSON[type] = fromJSON;
+  maps.inv.set(constructor, type);
+  maps.fromObject[type] = fromObject;
 }
 
-export class AminoWrapping {
-  type: string;
-  value: any;
+export function unpackAny(value: Any) {
+  const typeURL = value && value["@type"];
 
-  constructor(type: string, value: any) {
-    this.type = type;
-    this.value = value;
+  if (typeURL && maps.fromObject[typeURL]) {
+    return maps.fromObject[typeURL](value);
   }
+
+  return value;
+}
+
+export function packAny(constructor: Function, writer: protobuf.Writer) {
+  const typeURL = maps.inv.get(constructor);
+  if (!typeURL) {
+    throw Error("This type is not registered");
+  }
+
+  const packed = new google.protobuf.Any({
+    type_url: typeURL,
+    value: writer.finish(),
+  });
+
+  return packed;
 }

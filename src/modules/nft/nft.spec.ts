@@ -1,7 +1,7 @@
 import { CosmosSDK } from "../../";
-import { PrivKeySecp256k1 } from "../../tendermint";
-import { AccAddress } from "../../types";
-import { auth } from "../../x/auth";
+import { PrivKeySecp256k1 } from "../../cosmos/base/tendermint";
+import { AccAddress } from "../../cosmos/types";
+import { auth } from "../../cosmos/auth";
 import { nft } from ".";
 
 test("nft", async () => {

@@ -11,15 +11,15 @@ export { nft };
 export * from "./types";
 
 // Register codec
-codec.registerCodec(
+codec.register(
   "cosmos-sdk/MsgTransferNFT",
   MsgTransferNFT,
   MsgTransferNFT.fromJSON,
 );
-codec.registerCodec(
+codec.register(
   "cosmos-sdk/MsgEditNFTMetadata",
   MsgEditNFTMetadata,
   MsgEditNFTMetadata.fromJSON,
 );
-codec.registerCodec("cosmos-sdk/MsgMintNFT", MsgMintNFT, MsgMintNFT.fromJSON);
-codec.registerCodec("cosmos-sdk/MsgBurnNFT", MsgBurnNFT, MsgBurnNFT.fromJSON);
+codec.register("cosmos-sdk/MsgMintNFT", MsgMintNFT, MsgMintNFT.fromJSON);
+codec.register("cosmos-sdk/MsgBurnNFT", MsgBurnNFT, MsgBurnNFT.fromJSON);
