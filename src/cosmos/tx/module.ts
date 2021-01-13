@@ -1,20 +1,22 @@
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";
 import {
   CosmosTxV1beta1SimulateRequest,
   BroadcastTxRequest,
   ServiceApi,
 } from "../../generated/api";
 
-export function broadcastTx(sdk: CosmosSDK, body: BroadcastTxRequest) {
+export { BroadcastTxRequestModeEnum } from "../../generated/api";
+
+export function broadcastTx(sdk: CosmosClient, body: BroadcastTxRequest) {
   return new ServiceApi(undefined, sdk.url).broadcastTx(body);
 }
 
-export function getTx(sdk: CosmosSDK, hash: string) {
+export function getTx(sdk: CosmosClient, hash: string) {
   return new ServiceApi(undefined, sdk.url).getTx(hash);
 }
 
 export function getTxsEvent(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   events?: string[],
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -30,6 +32,9 @@ export function getTxsEvent(
   );
 }
 
-export function simulate(sdk: CosmosSDK, body: CosmosTxV1beta1SimulateRequest) {
+export function simulate(
+  sdk: CosmosClient,
+  body: CosmosTxV1beta1SimulateRequest,
+) {
   return new ServiceApi(undefined, sdk.url).simulate(body);
 }

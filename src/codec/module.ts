@@ -1,39 +1,41 @@
-import { Any as ClassAny } from "google-protobuf/google/protobuf/any_pb";
-import * as jspb from "google-protobuf";
-import { AnyI } from "./any";
+import { Any } from "./any";
+import * as protobuf from "protobufjs";
+import { google } from "../generated/proto";
 
 export const maps = {
   inv: new Map<Function, string>(),
-  fromJSON: {} as { [type: string]: (value: any) => any },
+  fromObject: {} as { [type: string]: (value: any) => any },
 };
 
 export function register<T>(
   type: string,
   constructor: Function,
-  fromJSON: (value: any) => T,
+  fromObject: (value: any) => T,
 ) {
   maps.inv.set(constructor, type);
-  maps.fromJSON[type] = fromJSON;
+  maps.fromObject[type] = fromObject;
 }
 
-export function unpackAny(value: AnyI) {
+export function unpackAny(value: Any) {
   const typeURL = value && value["@type"];
 
-  if (typeURL && maps.fromJSON[typeURL]) {
-    return maps.fromJSON[typeURL](value);
+  if (typeURL && maps.fromObject[typeURL]) {
+    return maps.fromObject[typeURL](value);
   }
 
   return value;
 }
 
-export function packAny(value: jspb.Message) {
-  const packed = new ClassAny();
-  const typeURL = maps.inv.get((value as any)?.prototype.constructor);
+export function packAny(constructor: Function, writer: protobuf.Writer) {
+  const typeURL = maps.inv.get(constructor);
   if (!typeURL) {
     throw Error("This type is not registered");
   }
-  packed.setTypeUrl(typeURL);
-  packed.setValue(value.serializeBinary());
+
+  const packed = new google.protobuf.Any({
+    type_url: typeURL,
+    value: writer.finish(),
+  });
 
   return packed;
 }

@@ -1,14 +1,14 @@
 import { QueryApi } from "../../generated/api";
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-sdk";
 
-export function appliedPlan(sdk: CosmosSDK, name: string) {
+export function appliedPlan(sdk: CosmosClient, name: string) {
   return new QueryApi(undefined, sdk.url).appliedPlan(name);
 }
 
-export function currentPlan(sdk: CosmosSDK) {
+export function currentPlan(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).currentPlan();
 }
 
-export function upgradedConsensusState(sdk: CosmosSDK, lastHeight: string) {
+export function upgradedConsensusState(sdk: CosmosClient, lastHeight: string) {
   return new QueryApi(undefined, sdk.url).upgradedConsensusState(lastHeight);
 }

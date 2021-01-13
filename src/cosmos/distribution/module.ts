@@ -1,13 +1,13 @@
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-sdk";
 import { QueryApi } from "../../generated/api";
 import { AccAddress, ValAddress } from "../types";
 
-export function communityPool(sdk: CosmosSDK) {
+export function communityPool(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).communityPool();
 }
 
 export function delegationTotalRewards(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddress: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegationTotalRewards(
@@ -16,7 +16,7 @@ export function delegationTotalRewards(
 }
 
 export function delegationRewards(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddress: AccAddress,
   validatorAddress: ValAddress,
 ) {
@@ -27,7 +27,7 @@ export function delegationRewards(
 }
 
 export function delegatorValidators(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddress: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorValidators(
@@ -36,7 +36,7 @@ export function delegatorValidators(
 }
 
 export function delegatorWithdrawAddress(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddress: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorWithdrawAddress(

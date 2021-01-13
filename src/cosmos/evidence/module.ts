@@ -1,8 +1,8 @@
 import { QueryApi } from "../../generated/api";
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-sdk";
 
 export function allEvidence(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   paginationKey?: string,
   paginationOffset?: bigint,
   paginationLimit?: bigint,
@@ -16,6 +16,6 @@ export function allEvidence(
   );
 }
 
-export function evidence(sdk: CosmosSDK, evidenceHash: string) {
+export function evidence(sdk: CosmosClient, evidenceHash: string) {
   return new QueryApi(undefined, sdk.url).evidence(evidenceHash);
 }

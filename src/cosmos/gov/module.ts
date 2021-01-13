@@ -1,13 +1,13 @@
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-sdk";
 import { QueryApi } from "../../generated/api";
 import { AccAddress } from "../types";
 
-export function params(sdk: CosmosSDK, paramsType: string) {
+export function params(sdk: CosmosClient, paramsType: string) {
   return new QueryApi(undefined, sdk.url).govParams(paramsType);
 }
 
 export function proposals(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   proposalStatus?:
     | "PROPOSAL_STATUS_UNSPECIFIED"
     | "PROPOSAL_STATUS_DEPOSIT_PERIOD"
@@ -33,12 +33,12 @@ export function proposals(
   );
 }
 
-export function proposal(sdk: CosmosSDK, proposalID: string) {
+export function proposal(sdk: CosmosClient, proposalID: string) {
   return new QueryApi(undefined, sdk.url).proposal(proposalID);
 }
 
 export function deposits(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   proposalID: string,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -55,7 +55,7 @@ export function deposits(
 }
 
 export function deposit(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   proposalID: string,
   depositor: AccAddress,
 ) {
@@ -65,12 +65,12 @@ export function deposit(
   );
 }
 
-export function tallyresult(sdk: CosmosSDK, proposalID: string) {
+export function tallyresult(sdk: CosmosClient, proposalID: string) {
   return new QueryApi(undefined, sdk.url).tallyResult(proposalID);
 }
 
 export function votes(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   proposalID: string,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -86,6 +86,6 @@ export function votes(
   );
 }
 
-export function vote(sdk: CosmosSDK, proposalID: string, voter: AccAddress) {
+export function vote(sdk: CosmosClient, proposalID: string, voter: AccAddress) {
   return new QueryApi(undefined, sdk.url).vote(proposalID, voter.toBech32());
 }

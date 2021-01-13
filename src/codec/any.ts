@@ -1,6 +1,5 @@
-import { Any } from "google-protobuf/google/protobuf/any_pb";
-
-export type AnyI = {
+export type Any = {
   "@type": string;
-  pack(): Any;
 } & unknown;
+
+export type AnyOrMessage = Any | unknown;

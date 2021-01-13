@@ -74,9 +74,5 @@ The first digit major version and the second digit minor version should match Co
 The third digit patch version can be independently incremented.
 
 ```bash
-sudo apt install protobuf-compiler
-```
-
-```bash
 . protocgen.sh
 ```

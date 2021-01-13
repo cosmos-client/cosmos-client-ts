@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { Configuration } from "../configuration";
+import { Configuration } from "./configuration";
 import globalAxios, { AxiosPromise, AxiosInstance } from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -22,7 +22,7 @@ import {
   RequestArgs,
   BaseAPI,
   RequiredError,
-} from "../base";
+} from "./base";
 import { AnyI } from "../codec/any";
 
 /**

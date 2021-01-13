@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
-
 rm -r ./src/proto
 cp -r ~/src/github.com/cosmos/cosmos-sdk/proto ./src/
 cp -r ~/src/github.com/cosmos/cosmos-sdk/third_party/proto ./src/
@@ -15,7 +13,7 @@ done
 
 ./node_modules/.bin/pbjs \
   -o ./src/generated/proto.js \
-  -t static-module \
+  -t static \
   -w es6 \
   --es6 \
   --force-long \

@@ -1,12 +1,12 @@
-import { CosmosSDK } from "../../../cosmos-sdk";
+import { CosmosClient } from "../../../cosmos-sdk";
 import { QueryApi } from "../../../generated/api";
 
-export function clientConnections(sdk: CosmosSDK, clientID: string) {
+export function clientConnections(sdk: CosmosClient, clientID: string) {
   return new QueryApi(undefined, sdk.url).clientConnections(clientID);
 }
 
 export function connections(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   paginationKey?: string,
   paginationOffset?: bigint,
   paginationLimit?: bigint,
@@ -20,12 +20,12 @@ export function connections(
   );
 }
 
-export function clientState(sdk: CosmosSDK, connectionID: string) {
+export function clientState(sdk: CosmosClient, connectionID: string) {
   return new QueryApi(undefined, sdk.url).connectionClientState(connectionID);
 }
 
 export function connectionConsensusState(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   connectionID: string,
   revisionNumber: bigint,
   revisionHeight: bigint,

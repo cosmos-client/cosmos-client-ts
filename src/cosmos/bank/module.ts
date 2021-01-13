@@ -1,9 +1,9 @@
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";
 import { QueryApi } from "../../generated/api";
 import { AccAddress } from "../types";
 
 export function allBalances(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   address: string,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -19,18 +19,18 @@ export function allBalances(
   );
 }
 
-export function balance(sdk: CosmosSDK, address: AccAddress, denom: string) {
+export function balance(sdk: CosmosClient, address: AccAddress, denom: string) {
   return new QueryApi(undefined, sdk.url).balance(address.toBech32(), denom);
 }
 
-export function params(sdk: CosmosSDK) {
+export function params(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).bankParams();
 }
 
-export function supplyOf(sdk: CosmosSDK, denom: string) {
+export function supplyOf(sdk: CosmosClient, denom: string) {
   return new QueryApi(undefined, sdk.url).supplyOf(denom);
 }
 
-export function totalSupply(sdk: CosmosSDK) {
+export function totalSupply(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).totalSupply();
 }

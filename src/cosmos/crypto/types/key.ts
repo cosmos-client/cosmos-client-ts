@@ -1,13 +1,11 @@
-import { AnyI } from "../../../codec/any";
-
-export type PubKey = AnyI & {
-  address(): Buffer;
-  bytes(): Buffer;
-  verifySignature(msg: Buffer, sig: Buffer): boolean;
+export type PrivKey = {
+  bytes(): Uint8Array;
+  sign(msg: Uint8Array): Uint8Array;
+  pubKey(): PubKey;
 };
 
-export type PrivKey = AnyI & {
-  bytes(): Buffer;
-  sign(message: Buffer): Buffer;
-  pubKey(): PubKey;
+export type PubKey = {
+  bytes(): Uint8Array;
+  verify(msg: Uint8Array, sig: Uint8Array): boolean;
+  address(): Uint8Array;
 };

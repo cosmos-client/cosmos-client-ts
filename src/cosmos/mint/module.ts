@@ -1,14 +1,14 @@
 import { QueryApi } from "../../generated/api";
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-sdk";
 
-export function annualProvisions(sdk: CosmosSDK) {
+export function annualProvisions(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).annualProvisions();
 }
 
-export function inflation(sdk: CosmosSDK) {
+export function inflation(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).inflation();
 }
 
-export function params(sdk: CosmosSDK) {
+export function params(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).mintParams();
 }

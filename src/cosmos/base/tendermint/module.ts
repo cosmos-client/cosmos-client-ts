@@ -1,16 +1,16 @@
-import { CosmosSDK } from "../../../cosmos-sdk";
+import { CosmosClient } from "../../../cosmos-sdk";
 import { ServiceApi } from "../../../generated/api";
 
-export async function getBlockByHeight(sdk: CosmosSDK, height: bigint) {
+export async function getBlockByHeight(sdk: CosmosClient, height: bigint) {
   return new ServiceApi(undefined, sdk.url).getBlockByHeight(height.toString());
 }
 
-export async function getLatestBlock(sdk: CosmosSDK) {
+export async function getLatestBlock(sdk: CosmosClient) {
   return new ServiceApi(undefined, sdk.url).getLatestBlock();
 }
 
 export async function getLatestValidatorSet(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   paginationKey?: string,
   paginationOffset?: bigint,
   paginationLimit?: bigint,
@@ -24,16 +24,16 @@ export async function getLatestValidatorSet(
   );
 }
 
-export function getNodeInfo(sdk: CosmosSDK) {
+export function getNodeInfo(sdk: CosmosClient) {
   return new ServiceApi(undefined, sdk.url).getNodeInfo();
 }
 
-export function getSyncing(sdk: CosmosSDK) {
+export function getSyncing(sdk: CosmosClient) {
   return new ServiceApi(undefined, sdk.url).getSyncing();
 }
 
 export function simulate(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   height: string,
   paginationKey?: string,
   paginationOffset?: bigint,

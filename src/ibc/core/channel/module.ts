@@ -1,8 +1,8 @@
-import { CosmosSDK } from "../../../cosmos-sdk";
+import { CosmosClient } from "../../../cosmos-sdk";
 import { QueryApi } from "../../../generated/api";
 
 export function channels(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   paginationKey?: string,
   paginationOffset?: bigint,
   paginationLimit?: bigint,
@@ -16,12 +16,12 @@ export function channels(
   );
 }
 
-export function channel(sdk: CosmosSDK, channelID: string, portID: string) {
+export function channel(sdk: CosmosClient, channelID: string, portID: string) {
   return new QueryApi(undefined, sdk.url).channel(channelID, portID);
 }
 
 export function channelClientState(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
 ) {
@@ -29,7 +29,7 @@ export function channelClientState(
 }
 
 export function channelConsensusState(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   revisionNumber: bigint,
@@ -44,7 +44,7 @@ export function channelConsensusState(
 }
 
 export function nextSequenceReceive(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
 ) {
@@ -55,7 +55,7 @@ export function nextSequenceReceive(
 }
 
 export function packetAcknowledgements(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   paginationKey?: string,
@@ -74,7 +74,7 @@ export function packetAcknowledgements(
 }
 
 export function packetAcknowledgement(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   sequence: bigint,
@@ -87,7 +87,7 @@ export function packetAcknowledgement(
 }
 
 export function packetCommitments(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   paginationKey?: string,
@@ -106,7 +106,7 @@ export function packetCommitments(
 }
 
 export function unreceivedAcks(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   packetAckSequences: bigint[],
@@ -119,7 +119,7 @@ export function unreceivedAcks(
 }
 
 export function unreceivedPackets(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   packetAckSequences: bigint[],
@@ -132,7 +132,7 @@ export function unreceivedPackets(
 }
 
 export function packetCommitment(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   sequence: bigint,
@@ -145,7 +145,7 @@ export function packetCommitment(
 }
 
 export function packetReceipt(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   channelID: string,
   portID: string,
   sequence: bigint,
@@ -158,7 +158,7 @@ export function packetReceipt(
 }
 
 export function connectionChannels(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   connection: string,
   paginationKey?: string,
   paginationOffset?: bigint,

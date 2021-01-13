@@ -1,9 +1,9 @@
-import { CosmosSDK } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-sdk";
 import { QueryApi } from "../../generated/api";
 import { AccAddress, ValAddress } from "../types";
 
 export function delegatorDelegations(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddr: AccAddress,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -20,7 +20,7 @@ export function delegatorDelegations(
 }
 
 export function redelegations(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddr: AccAddress,
   srcValidatorAddr?: ValAddress,
   dstValidatorAddr?: ValAddress,
@@ -41,7 +41,7 @@ export function redelegations(
 }
 
 export function delegatorUnbondingDelegations(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddr: AccAddress,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -58,7 +58,7 @@ export function delegatorUnbondingDelegations(
 }
 
 export function delegatorValidators(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   delegatorAddr: AccAddress,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -75,7 +75,7 @@ export function delegatorValidators(
 }
 
 export function delegatorValidator(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   validatorAddr: ValAddress,
   delegatorAddr: AccAddress,
 ) {
@@ -85,20 +85,20 @@ export function delegatorValidator(
   );
 }
 
-export function historicalInfo(sdk: CosmosSDK, height: bigint) {
+export function historicalInfo(sdk: CosmosClient, height: bigint) {
   return new QueryApi(undefined, sdk.url).historicalInfo(height.toString());
 }
 
-export function params(sdk: CosmosSDK) {
+export function params(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).stakingParams();
 }
 
-export function pool(sdk: CosmosSDK) {
+export function pool(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).pool();
 }
 
 export function validators(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   status?: string,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -114,12 +114,12 @@ export function validators(
   );
 }
 
-export function validator(sdk: CosmosSDK, validatorAddr: ValAddress) {
+export function validator(sdk: CosmosClient, validatorAddr: ValAddress) {
   return new QueryApi(undefined, sdk.url).validator(validatorAddr.toBech32());
 }
 
 export function validatorDelegations(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   validatorAddr: ValAddress,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -136,7 +136,7 @@ export function validatorDelegations(
 }
 
 export function delegation(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   validatorAddr: ValAddress,
   delegatorAddr: AccAddress,
 ) {
@@ -147,7 +147,7 @@ export function delegation(
 }
 
 export function unbondingDelegation(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   validatorAddr: ValAddress,
   delegatorAddr: AccAddress,
 ) {
@@ -158,7 +158,7 @@ export function unbondingDelegation(
 }
 
 export function validatorUnbondingDelegations(
-  sdk: CosmosSDK,
+  sdk: CosmosClient,
   validatorAddr: ValAddress,
   paginationKey?: string,
   paginationOffset?: bigint,

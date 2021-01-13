@@ -1,9 +1,9 @@
 import * as bip39 from "bip39";
-import { CosmosSDK } from "./cosmos-sdk";
+import { CosmosClient } from "./cosmos-client";
 
 test("sdk", async () => {
   const mnemonic = bip39.generateMnemonic();
-  const sdk = new CosmosSDK("", "");
+  const sdk = new CosmosClient("", "");
   const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic(mnemonic);
 
   console.log(privKeyBuffer.toString("hex"));
