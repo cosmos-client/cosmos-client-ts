@@ -9,16 +9,23 @@ export class AccAddress extends Address {
   /**
    *
    */
-  toBech32() {
+  toString() {
     const words = bech32.toWords(Buffer.from(this._value));
     return bech32.encode(bech32Prefix.accAddr, words);
+  }
+
+  /**
+   * For `JSON.stringify`
+   */
+  toJSON() {
+    return this.toString();
   }
 
   /**
    *
    * @param accAddress
    */
-  static fromBech32(accAddress: string) {
+  static fromString(accAddress: string) {
     const { prefix, words } = bech32.decode(accAddress);
 
     return new AccAddress(bech32.fromWords(words));
@@ -26,12 +33,5 @@ export class AccAddress extends Address {
 
   static fromPublicKey(pubKey: PubKey) {
     return new AccAddress(pubKey.address());
-  }
-
-  /**
-   * For `JSON.stringify`
-   */
-  toJSON() {
-    return this.toBech32();
   }
 }

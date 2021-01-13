@@ -1,4 +1,4 @@
-import { CosmosClient } from "../../../cosmos-sdk";
+import { CosmosClient } from "../../../cosmos-client";
 import { QueryApi } from "../../../generated/api";
 
 export function channels(

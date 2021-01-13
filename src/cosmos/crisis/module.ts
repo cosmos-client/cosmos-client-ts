@@ -1,1 +1,1 @@
-import { CosmosClient } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";

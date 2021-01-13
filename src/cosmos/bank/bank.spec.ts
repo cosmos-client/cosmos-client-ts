@@ -23,8 +23,8 @@ test("bank", async () => {
   const toAddress = fromAddress;
 
   const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
-    from_address: fromAddress.toBech32(),
-    to_address: toAddress.toBech32(),
+    from_address: fromAddress.toString(),
+    to_address: toAddress.toString(),
     amount: [{ denom: "token", amount: "1000" }],
   });
   const txBody = new proto.cosmos.tx.v1beta1.TxBody({

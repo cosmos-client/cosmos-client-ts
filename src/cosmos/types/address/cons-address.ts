@@ -9,16 +9,23 @@ export class ConsAddress extends Address {
   /**
    *
    */
-  toBech32() {
+  toString() {
     const words = bech32.toWords(Buffer.from(this._value));
     return bech32.encode(bech32Prefix.consAddr, words);
+  }
+
+  /**
+   * For `JSON.stringify`
+   */
+  toJSON() {
+    return this.toString();
   }
 
   /**
    *
    * @param consAddress
    */
-  static fromBech32(consAddress: string) {
+  static fromString(consAddress: string) {
     const { prefix, words } = bech32.decode(consAddress);
 
     return new ConsAddress(bech32.fromWords(words));
@@ -26,12 +33,5 @@ export class ConsAddress extends Address {
 
   static fromPublicKey(pubKey: PubKey) {
     return new ConsAddress(pubKey.address());
-  }
-
-  /**
-   * For `JSON.stringify`
-   */
-  toJSON() {
-    return this.toBech32();
   }
 }

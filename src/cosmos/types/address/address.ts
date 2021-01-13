@@ -19,16 +19,16 @@ export const bech32Prefix = {
 };
 
 /**
- * 各種アドレスの基底クラス。
+ * Base class
  */
 export class Address {
-  protected _value: Buffer;
+  protected _value: Uint8Array;
 
   /**
    *
    * @param value
    */
-  constructor(value: Buffer) {
+  constructor(value: Uint8Array) {
     const addressLength = 20;
     if (value.length !== addressLength) {
       throw Error("Address must be 20 bytes length.");

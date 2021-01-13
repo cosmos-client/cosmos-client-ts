@@ -1,20 +1,20 @@
 import * as crypto from "crypto";
+import { secp256k1 } from "../../";
 import { AccAddress } from "./acc-address";
-import { PrivKeySecp256k1 } from "../../base/tendermint";
 import { ValAddress } from "./val-address";
 
 test("address", () => {
   const bytes = crypto.randomBytes(32);
-  const key = new PrivKeySecp256k1(bytes);
-  const address = AccAddress.fromPublicKey(key.getPubKey());
-  const str = address.toBech32();
-  const revived = AccAddress.fromBech32(str);
+  const key = new secp256k1.PrivKey({ key: bytes });
+  const address = AccAddress.fromPublicKey(key.pubKey());
+  const str = address.toString();
+  const revived = AccAddress.fromString(str);
 
-  expect(revived.toBech32()).toEqual(str);
+  expect(revived.toString()).toEqual(str);
 
-  const valAddress = ValAddress.fromPublicKey(key.getPubKey());
+  const valAddress = ValAddress.fromPublicKey(key.pubKey());
 
-  expect(address.toBech32().split("1")[1].length).toEqual(
-    valAddress.toBech32().split("1")[1].length,
+  expect(address.toString().split("1")[1].length).toEqual(
+    valAddress.toString().split("1")[1].length,
   );
 });

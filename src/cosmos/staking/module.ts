@@ -1,4 +1,4 @@
-import { CosmosClient } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";
 import { QueryApi } from "../../generated/api";
 import { AccAddress, ValAddress } from "../types";
 
@@ -11,7 +11,7 @@ export function delegatorDelegations(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorDelegations(
-    delegatorAddr.toBech32(),
+    delegatorAddr.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
@@ -30,9 +30,9 @@ export function redelegations(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).redelegations(
-    delegatorAddr.toBech32(),
-    srcValidatorAddr?.toBech32(),
-    dstValidatorAddr?.toBech32(),
+    delegatorAddr.toString(),
+    srcValidatorAddr?.toString(),
+    dstValidatorAddr?.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
@@ -49,7 +49,7 @@ export function delegatorUnbondingDelegations(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorUnbondingDelegations(
-    delegatorAddr.toBech32(),
+    delegatorAddr.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
@@ -66,7 +66,7 @@ export function delegatorValidators(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).stakingDelegatorValidators(
-    delegatorAddr.toBech32(),
+    delegatorAddr.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
@@ -80,8 +80,8 @@ export function delegatorValidator(
   delegatorAddr: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorValidator(
-    validatorAddr.toBech32(),
-    delegatorAddr.toBech32(),
+    validatorAddr.toString(),
+    delegatorAddr.toString(),
   );
 }
 
@@ -115,7 +115,7 @@ export function validators(
 }
 
 export function validator(sdk: CosmosClient, validatorAddr: ValAddress) {
-  return new QueryApi(undefined, sdk.url).validator(validatorAddr.toBech32());
+  return new QueryApi(undefined, sdk.url).validator(validatorAddr.toString());
 }
 
 export function validatorDelegations(
@@ -127,7 +127,7 @@ export function validatorDelegations(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).validatorDelegations(
-    validatorAddr.toBech32(),
+    validatorAddr.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
@@ -141,8 +141,8 @@ export function delegation(
   delegatorAddr: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegation(
-    validatorAddr.toBech32(),
-    delegatorAddr.toBech32(),
+    validatorAddr.toString(),
+    delegatorAddr.toString(),
   );
 }
 
@@ -152,8 +152,8 @@ export function unbondingDelegation(
   delegatorAddr: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).unbondingDelegation(
-    validatorAddr.toBech32(),
-    delegatorAddr.toBech32(),
+    validatorAddr.toString(),
+    delegatorAddr.toString(),
   );
 }
 
@@ -166,7 +166,7 @@ export function validatorUnbondingDelegations(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).validatorUnbondingDelegations(
-    validatorAddr.toBech32(),
+    validatorAddr.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),

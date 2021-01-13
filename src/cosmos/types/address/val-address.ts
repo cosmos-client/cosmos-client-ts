@@ -9,16 +9,23 @@ export class ValAddress extends Address {
   /**
    *
    */
-  toBech32() {
+  toString() {
     const words = bech32.toWords(Buffer.from(this._value));
     return bech32.encode(bech32Prefix.valAddr, words);
+  }
+
+  /**
+   * For `JSON.stringify`
+   */
+  toJSON() {
+    return this.toString();
   }
 
   /**
    *
    * @param valAddress
    */
-  static fromBech32(valAddress: string) {
+  static fromString(valAddress: string) {
     const { prefix, words } = bech32.decode(valAddress);
 
     return new ValAddress(bech32.fromWords(words));
@@ -26,12 +33,5 @@ export class ValAddress extends Address {
 
   static fromPublicKey(pubKey: PubKey) {
     return new ValAddress(pubKey.address());
-  }
-
-  /**
-   * For `JSON.stringify`
-   */
-  toJSON() {
-    return this.toBech32();
   }
 }

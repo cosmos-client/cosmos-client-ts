@@ -1,4 +1,4 @@
-import { CosmosClient } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";
 import { QueryApi } from "../../generated/api";
 import { AccAddress } from "../types";
 
@@ -61,7 +61,7 @@ export function deposit(
 ) {
   return new QueryApi(undefined, sdk.url).deposit(
     proposalID,
-    depositor.toBech32(),
+    depositor.toString(),
   );
 }
 
@@ -87,5 +87,5 @@ export function votes(
 }
 
 export function vote(sdk: CosmosClient, proposalID: string, voter: AccAddress) {
-  return new QueryApi(undefined, sdk.url).vote(proposalID, voter.toBech32());
+  return new QueryApi(undefined, sdk.url).vote(proposalID, voter.toString());
 }

@@ -20,7 +20,7 @@ export function allBalances(
 }
 
 export function balance(sdk: CosmosClient, address: AccAddress, denom: string) {
-  return new QueryApi(undefined, sdk.url).balance(address.toBech32(), denom);
+  return new QueryApi(undefined, sdk.url).balance(address.toString(), denom);
 }
 
 export function params(sdk: CosmosClient) {

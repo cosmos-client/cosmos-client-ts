@@ -23,7 +23,7 @@ import {
   BaseAPI,
   RequiredError,
 } from "./base";
-import { AnyI } from "../codec/any";
+import { Any } from "../codec/any";
 
 /**
  *
@@ -3624,7 +3624,7 @@ export interface CosmosTxV1beta1SignerInfo {
 //    */
 //   value?: string;
 // }
-export interface CosmosTxV1beta1SignerInfoPublicKey extends AnyI {}
+export interface CosmosTxV1beta1SignerInfoPublicKey extends Any {}
 /**
  * SimulateRequest is the request type for the Service.Simulate RPC method.
  * @export
@@ -8746,7 +8746,7 @@ export interface InlineResponseDefault1Details {
 //      */
 //     value?: string;
 // }
-export interface InlineResponseDefaultDetails extends AnyI {}
+export interface InlineResponseDefaultDetails extends Any {}
 /**
  *
  * @export

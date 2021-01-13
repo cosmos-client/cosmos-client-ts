@@ -1,4 +1,4 @@
-import { CosmosClient } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";
 import { QueryApi } from "../../generated/api";
 import { AccAddress, ValAddress } from "../types";
 
@@ -11,7 +11,7 @@ export function delegationTotalRewards(
   delegatorAddress: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegationTotalRewards(
-    delegatorAddress.toBech32(),
+    delegatorAddress.toString(),
   );
 }
 
@@ -21,8 +21,8 @@ export function delegationRewards(
   validatorAddress: ValAddress,
 ) {
   return new QueryApi(undefined, sdk.url).validatorDelegations(
-    delegatorAddress.toBech32(),
-    validatorAddress.toBech32(),
+    delegatorAddress.toString(),
+    validatorAddress.toString(),
   );
 }
 
@@ -31,7 +31,7 @@ export function delegatorValidators(
   delegatorAddress: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorValidators(
-    delegatorAddress.toBech32(),
+    delegatorAddress.toString(),
   );
 }
 
@@ -40,6 +40,6 @@ export function delegatorWithdrawAddress(
   delegatorAddress: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegatorWithdrawAddress(
-    delegatorAddress.toBech32(),
+    delegatorAddress.toString(),
   );
 }

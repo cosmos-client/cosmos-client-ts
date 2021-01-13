@@ -1,4 +1,4 @@
-import { CosmosClient } from "../../cosmos-sdk";
+import { CosmosClient } from "../../cosmos-client";
 import { QueryApi } from "../../generated/api";
 import { AccAddress, ConsAddress, ValAddress } from "../types";
 
@@ -22,7 +22,7 @@ export function signingInfos(
 }
 
 export function signingInfo(sdk: CosmosClient, consAddress: ConsAddress) {
-  return new QueryApi(undefined, sdk.url).signingInfo(consAddress.toBech32());
+  return new QueryApi(undefined, sdk.url).signingInfo(consAddress.toString());
 }
 
 export function delegation(
@@ -31,8 +31,8 @@ export function delegation(
   delegatorAddr: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).delegation(
-    validatorAddr.toBech32(),
-    delegatorAddr.toBech32(),
+    validatorAddr.toString(),
+    delegatorAddr.toString(),
   );
 }
 
@@ -47,9 +47,9 @@ export function redelegations(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).redelegations(
-    delegatorAddr.toBech32(),
-    srcValidatorAddr?.toBech32(),
-    dstValidatorAddr?.toBech32(),
+    delegatorAddr.toString(),
+    srcValidatorAddr?.toString(),
+    dstValidatorAddr?.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
@@ -63,8 +63,8 @@ export function unbondingDelegation(
   delegatorAddr: AccAddress,
 ) {
   return new QueryApi(undefined, sdk.url).unbondingDelegation(
-    validatorAddr.toBech32(),
-    delegatorAddr.toBech32(),
+    validatorAddr.toString(),
+    delegatorAddr.toString(),
   );
 }
 
@@ -86,5 +86,5 @@ export function validators(
 }
 
 export function validator(sdk: CosmosClient, validatorAddr: ValAddress) {
-  return new QueryApi(undefined, sdk.url).validator(validatorAddr.toBech32());
+  return new QueryApi(undefined, sdk.url).validator(validatorAddr.toString());
 }

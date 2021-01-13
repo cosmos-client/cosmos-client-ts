@@ -1,4 +1,4 @@
-import { CosmosClient } from "../../../cosmos-sdk";
+import { CosmosClient } from "../../../cosmos-client";
 import { ServiceApi } from "../../../generated/api";
 
 export async function getBlockByHeight(sdk: CosmosClient, height: bigint) {
