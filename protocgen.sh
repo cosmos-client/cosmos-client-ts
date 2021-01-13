@@ -13,11 +13,12 @@ done
 
 ./node_modules/.bin/pbjs \
   -o ./src/generated/proto.js \
-  -t static \
+  -t static-module \
   -w es6 \
   --es6 \
   --force-long \
   --keep-case \
+  --no-create \
   ${proto_files[@]}
 
 ./node_modules/.bin/pbts \
