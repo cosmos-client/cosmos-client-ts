@@ -25,3 +25,5 @@ done
 ./node_modules/.bin/pbts \
   -o ./src/generated/proto.d.ts \
   ./src/generated/proto.js
+
+rm -r ./src/proto
