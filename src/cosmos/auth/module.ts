@@ -6,7 +6,7 @@ import { AnyOrMessage } from "../../codec/any";
 export function account(sdk: CosmosClient, address: AccAddress) {
   return new QueryApi(undefined, sdk.url)
     .account(address.toString())
-    .then((res) => sdk.reparseAxiosResponse<AnyOrMessage>(res));
+    .then((res) => sdk.reparseAxiosResponse<{ account: AnyOrMessage }>(res));
 }
 
 export function params(sdk: CosmosClient) {

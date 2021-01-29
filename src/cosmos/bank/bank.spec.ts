@@ -16,10 +16,9 @@ test("bank", async () => {
 
   const account = await cosmos.auth
     .account(sdk, fromAddress)
-    .then((res) => res.data);
+    .then((res) => res.data.account);
 
   if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
-    console.log("hoge");
     return;
   }
 
@@ -45,7 +44,7 @@ test("bank", async () => {
 
   // sign
   const txBuilder = new CosmosClient.TxBuilder(sdk, txBody, authInfo);
-  const signDoc = txBuilder.signDoc((account as any).account_number);
+  const signDoc = txBuilder.signDoc(account.account_number);
   txBuilder.addSignature(privKey, signDoc);
 
   console.log(txBuilder.txBytes().toString());
