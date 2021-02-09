@@ -1,5 +1,10 @@
 import { CosmosSDK } from "../../cosmos-sdk";
-import { StakingApi } from "../../api";
+import {
+  DelegateReq,
+  RedelegateReq,
+  StakingApi,
+  UndelegateReq,
+} from "../../api";
 import { AccAddress, ValAddress } from "../../types";
 import { StdTx } from "../auth";
 import { codec } from "../../codec";
@@ -20,9 +25,10 @@ export function delegatorsDelegatorAddrDelegationsGet(
 export function delegatorsDelegatorAddrDelegationsPost(
   sdk: CosmosSDK,
   delegator: AccAddress,
+  req: DelegateReq,
 ) {
   return new StakingApi(undefined, sdk.url)
-    .stakingDelegatorsDelegatorAddrDelegationsPost(delegator.toBech32())
+    .stakingDelegatorsDelegatorAddrDelegationsPost(delegator.toBech32(), req)
     .then((res) => {
       res.data = codec.fromJSONString(JSON.stringify(res.data));
       return res;
@@ -48,9 +54,10 @@ export function delegatorsDelegatorAddrDelegationsValidatorAddrGet(
 export function delegatorsDelegatorAddrRedelegationsPost(
   sdk: CosmosSDK,
   delegator: AccAddress,
+  req: RedelegateReq,
 ) {
   return new StakingApi(undefined, sdk.url)
-    .stakingDelegatorsDelegatorAddrRedelegationsPost(delegator.toBech32())
+    .stakingDelegatorsDelegatorAddrRedelegationsPost(delegator.toBech32(), req)
     .then((res) => {
       res.data = codec.fromJSONString(JSON.stringify(res.data));
       return res;
@@ -74,10 +81,12 @@ export function delegatorsDelegatorAddrUnbondingDelegationsGet(
 export function delegatorsDelegatorAddrUnbondingDelegationsPost(
   sdk: CosmosSDK,
   delegator: AccAddress,
+  req: UndelegateReq,
 ) {
   return new StakingApi(undefined, sdk.url)
     .stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(
       delegator.toBech32(),
+      req,
     )
     .then((res) => {
       res.data = codec.fromJSONString(JSON.stringify(res.data));
