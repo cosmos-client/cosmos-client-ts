@@ -1,28 +1,33 @@
 #!/usr/bin/env bash
 
-rm -r ./src/proto
-cp -r ~/src/github.com/cosmos/cosmos-sdk/proto ./src/
-cp -r ~/src/github.com/cosmos/cosmos-sdk/third_party/proto ./src/
+rm -r ./proto
+rm -r ./proto-thirdparty
+cp -r ~/src/github.com/cosmos/cosmos-sdk/proto ./proto
+cp -r ~/src/github.com/cosmos/cosmos-sdk/third_party/proto ./proto-thirdparty
+mv ./proto-thirdparty/tendermint ./proto/
 
-proto_dirs=$(find ./src/proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
+proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
 proto_files=()
 
 for dir in $proto_dirs; do
   proto_files=("${proto_files[@]} $(find "${dir}" -maxdepth 1 -name '*.proto')")
 done
 
-./node_modules/.bin/pbjs \
-  -o ./src/generated/proto.js \
+npx pbjs \
+  -o ./src/proto.js \
   -t static-module \
   -w es6 \
   --es6 \
   --force-long \
   --keep-case \
   --no-create \
+  --path=./proto/ \
+  --path=./proto-thirdparty/ \
   ${proto_files[@]}
 
-./node_modules/.bin/pbts \
-  -o ./src/generated/proto.d.ts \
-  ./src/generated/proto.js
+npx pbts \
+  -o ./src/proto.d.ts \
+  ./src/proto.js
 
-rm -r ./src/proto
+rm -r ./proto
+rm -r ./proto-thirdparty

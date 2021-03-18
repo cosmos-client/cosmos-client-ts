@@ -67,17 +67,11 @@ const result = await cosmos.tx
 
 ## For library developlers
 
-[swagger.yml](https://github.com/cosmos/cosmos-sdk/blob/master/client/lcd/swagger-ui/swagger.yaml)
-
-```bash
-docker run --rm \
-  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-  -g typescript-axios -i /local/swagger.yaml -o /local/src/generated/
-```
-
 The first digit major version and the second digit minor version should match Cosmos SDK.
 The third digit patch version can be independently incremented.
 
-```bash
-. protocgen.sh
+For `proto.d.ts`
+
+```typescript
+import global_tendermint = tendermint;
 ```

@@ -1,16 +1,16 @@
 import * as crypto from "crypto";
 import * as secp256k1 from "tiny-secp256k1";
 import { PrivKey as BasePrivKey, PubKey as BasePubKey } from "./key";
-import { cosmos } from "../../../generated/proto";
+import { cosmos } from "../../../proto";
 
 export const PrivKey = cosmos.crypto.secp256k1.PrivKey;
 export const PubKey = cosmos.crypto.secp256k1.PubKey;
 
-declare module "../../../generated/proto" {
+declare module "../../../proto" {
   namespace cosmos {
     namespace crypto {
       namespace secp256k1 {
-        export interface PrivKey extends BasePrivKey {}
+        export interface PrivKey extends BasePrivKey { }
       }
     }
   }
@@ -35,11 +35,11 @@ cosmos.crypto.secp256k1.PrivKey.prototype.pubKey = function () {
   });
 };
 
-declare module "../../../generated/proto" {
+declare module "../../../proto" {
   namespace cosmos {
     namespace crypto {
       namespace secp256k1 {
-        export interface PubKey extends BasePubKey {}
+        export interface PubKey extends BasePubKey { }
       }
     }
   }

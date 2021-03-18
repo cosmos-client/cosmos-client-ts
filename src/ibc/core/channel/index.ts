@@ -1,6 +1,6 @@
 // export * as channel from './module';
 import { codec } from "../../../codec";
-import { ibc } from "../../../generated/proto";
+import { ibc } from "../../../proto";
 import * as channel from "./module";
 export { channel };
 

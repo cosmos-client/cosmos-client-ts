@@ -1,16 +1,16 @@
 import * as crypto from "crypto";
 import * as nacl from "tweetnacl";
 import { PrivKey as BasePrivKey, PubKey as BasePubKey } from "./key";
-import { cosmos } from "../../../generated/proto";
+import { cosmos } from "../../../proto";
 
 export const PrivKey = cosmos.crypto.ed25519.PrivKey;
 export const PubKey = cosmos.crypto.ed25519.PubKey;
 
-declare module "../../../generated/proto" {
+declare module "../../../proto" {
   namespace cosmos {
     namespace crypto {
       namespace ed25519 {
-        export interface PrivKey extends BasePrivKey {}
+        export interface PrivKey extends BasePrivKey { }
       }
     }
   }
@@ -33,11 +33,11 @@ cosmos.crypto.ed25519.PrivKey.prototype.pubKey = function () {
   return new cosmos.crypto.ed25519.PubKey({ key: keypair.publicKey });
 };
 
-declare module "../../../generated/proto" {
+declare module "../../../proto" {
   namespace cosmos {
     namespace crypto {
       namespace ed25519 {
-        export interface PubKey extends BasePubKey {}
+        export interface PubKey extends BasePubKey { }
       }
     }
   }

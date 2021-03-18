@@ -53,7 +53,7 @@ test("bank", async () => {
   const result = await cosmos.tx
     .broadcastTx(sdk, {
       tx_bytes: txBuilder.txBytes().toString(),
-      mode: cosmos.tx.BroadcastTxRequestModeEnum.Async,
+      mode: cosmos.tx.BroadcastTxMode.Async,
     })
     .then((res) => res.data)
     .catch((reason) => console.log(reason));

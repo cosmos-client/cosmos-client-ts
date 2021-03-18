@@ -1,5 +1,5 @@
 import { CosmosClient } from "../../../cosmos-client";
-import { QueryApi } from "../../../generated/api";
+import { QueryApi } from "../../../openapi/api";
 
 export function clientStates(
   sdk: CosmosClient,

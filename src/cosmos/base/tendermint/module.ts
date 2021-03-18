@@ -1,5 +1,5 @@
 import { CosmosClient } from "../../../cosmos-client";
-import { ServiceApi } from "../../../generated/api";
+import { ServiceApi } from "../../../openapi/api";
 
 export async function getBlockByHeight(sdk: CosmosClient, height: bigint) {
   return new ServiceApi(undefined, sdk.url).getBlockByHeight(height.toString());

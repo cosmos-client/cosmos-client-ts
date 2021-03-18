@@ -1,5 +1,5 @@
 import { codec } from "../../codec";
-import { cosmos } from "../../generated/proto";
+import { cosmos } from "../../proto";
 
 // export * as crisis from "./module";
 import * as crisis from "./module";

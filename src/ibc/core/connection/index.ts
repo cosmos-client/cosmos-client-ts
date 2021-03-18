@@ -1,5 +1,5 @@
 import { codec } from "../../../codec";
-import { ibc } from "../../../generated/proto";
+import { ibc } from "../../../proto";
 
 // export * as connection from './module';
 import * as connection from "./module";

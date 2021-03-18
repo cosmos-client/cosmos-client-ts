@@ -1,6 +1,6 @@
 import { Any } from "./any";
 import * as protobuf from "protobufjs";
-import { google } from "../generated/proto";
+import { google } from "../proto";
 
 export const maps = {
   inv: new Map<Function, string>(),
