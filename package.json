@@ -11,9 +11,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc --build --clean && tsc && node bundle",
-    "openapigen": "bash ./openapigen.sh",
-    "protocgen": "bash ./protocgen.sh",
-    "prepare": "husky install"
+    "gen:openapi": "bash ./gen-openapi.sh",
+    "gen:proto": "bash ./gen-proto.sh",
+    "prepare": "husky install || exit 0"
   },
   "dependencies": {
     "axios": "^0.21.1",
