@@ -1,1 +1,1 @@
-export * as codec from "./module";
+export * as codec from './module';

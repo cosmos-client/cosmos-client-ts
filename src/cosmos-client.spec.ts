@@ -1,10 +1,12 @@
-import * as bip39 from 'bip39';
-import { CosmosClient } from './cosmos-client';
+import { CosmosClient } from '.';
 
-test('sdk', async () => {
-  const mnemonic = bip39.generateMnemonic();
-  const sdk = new CosmosClient('', '');
-  const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic(mnemonic);
+describe('sdk', () => {
+  it('sdk', async () => {
+    expect.hasAssertions();
+    const mnemonic = 'joke door law post fragile cruel torch silver siren mechanic flush surround';
+    const sdk = new CosmosClient('', '');
+    const privKey = await sdk.generatePrivKeyFromMnemonic(mnemonic);
 
-  console.log(Buffer.from(privKeyBuffer).toString('hex'));
+    expect(Buffer.from(privKey).toString('hex')).toStrictEqual('ef40ea14839c3ee5690336bb1f032870941dbb329fc0553132a4a109a022a391');
+  });
 });

@@ -1,5 +1,4 @@
-import { codec } from './codec';
-import Axios, { AxiosResponse } from 'axios';
+import Axios from 'axios';
 import * as bip32 from 'bip32';
 import * as bip39 from 'bip39';
 import * as types from './proto';
@@ -24,15 +23,6 @@ export class CosmosClient {
 
     return Uint8Array.from(child.privateKey!);
   }
-
-  reparseAxiosResponse<T>(res: AxiosResponse) {
-    const ret: AxiosResponse<T> = {
-      ...res,
-      data: JSON.parse(JSON.stringify(res.data), (_, value) => codec.unpackAny(value)),
-    };
-
-    return ret;
-  }
 }
 
 export namespace CosmosClient {
@@ -54,8 +44,8 @@ export namespace CosmosClient {
       const signDoc = new types.cosmos.tx.v1beta1.SignDoc({
         body_bytes: this.txRaw.body_bytes,
         auth_info_bytes: this.txRaw.auth_info_bytes,
-        account_number: accountNumber,
         chain_id: this.sdk.chainID,
+        account_number: accountNumber,
       });
 
       return signDoc;

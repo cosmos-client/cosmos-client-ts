@@ -1,35 +1,29 @@
-import { Any } from './any';
 import * as protobuf from 'protobufjs';
 import { google } from '../proto';
 
 export const maps = {
   inv: new Map<Function, string>(),
-  fromObject: {} as { [type: string]: (_: any) => any },
+  fromObject: {} as { [type: string]: (value: any) => unknown },
 };
 
-export function register<T>(type: string, constructor: Function, fromObject: (_: any) => T) {
+export function register<T>(type: string, constructor: Function, fromObject: (value: any) => T) {
   maps.inv.set(constructor, type);
   maps.fromObject[type] = fromObject;
 }
 
-export function isAny(value: any): value is Any {
-  const typeURL = value && value['@type'];
-  return typeURL && maps.fromObject[typeURL];
-}
-
-export function unpackAny<T>(value: Any): Any | T {
+export function unpackAny(value: any) {
   const typeURL = value && value['@type'];
 
-  if (typeURL && maps.fromObject[typeURL]) {
-    return maps.fromObject[typeURL](value) as T;
+  if (!typeURL || !maps.fromObject[typeURL]) {
+    throw Error('This type is not registered');
   }
 
-  return value;
+  return maps.fromObject[typeURL](value);
 }
 
 export function packAny(value: any, writer: protobuf.Writer) {
-  const constructor = value.constructor;
-  const typeURL = maps.inv.get(constructor);
+  const constructor = value?.constructor;
+  const typeURL = constructor && maps.inv.get(constructor);
   if (!typeURL) {
     throw Error('This type is not registered');
   }
