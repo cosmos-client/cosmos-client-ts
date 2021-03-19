@@ -1,17 +1,4 @@
-# cosmos-client-ts
-
-JavaScript / TypeScript client for Cosmos SDK blockchain.
-
-## Install
-
-```shell
-npm install --save cosmos-client
-```
-
-## Examples
-
-```typescript
-import { cosmosclient, rest, cosmos } from 'cosmos-client';
+import { cosmosclient, rest, cosmos } from '../../..';
 
 describe('bank', () => {
   it('send', async () => {
@@ -77,7 +64,7 @@ describe('bank', () => {
     try {
       const res = await rest.cosmos.tx.broadcastTx(sdk, {
         tx_bytes: txBuilder.txBytes(),
-        mode: rest.cosmos.tx.BroadcastTxMode.Sync,
+        mode: rest.cosmos.tx.BroadcastTxMode.Block,
       });
       console.log(res);
     } catch (e) {
@@ -85,19 +72,3 @@ describe('bank', () => {
     }
   });
 });
-```
-
-## For library developlers
-
-Use [starport](https://github.com/tendermint/starport) to test.
-
-The first digit major version and the second digit minor version should match Cosmos SDK.
-The third digit patch version can be independently incremented.
-
-### for `proto.d.ts` error
-
-Insert:
-
-```typescript
-import global_tendermint = tendermint;
-```
