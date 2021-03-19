@@ -1,12 +1,12 @@
-import { PubKey } from "../../crypto";
+import { PubKey } from '../../crypto';
 
 export enum Prefix {
-  Cosmos = "cosmos",
-  Public = "pub",
-  Account = "acc",
-  Validator = "val",
-  Operator = "oper",
-  Consensus = "cons",
+  Cosmos = 'cosmos',
+  Public = 'pub',
+  Account = 'acc',
+  Validator = 'val',
+  Operator = 'oper',
+  Consensus = 'cons',
 }
 
 export const bech32Prefix = {
@@ -31,7 +31,7 @@ export class Address {
   constructor(value: Uint8Array) {
     const addressLength = 20;
     if (value.length !== addressLength) {
-      throw Error("Address must be 20 bytes length.");
+      throw Error('Address must be 20 bytes length.');
     }
     this._value = value;
   }
@@ -53,14 +53,7 @@ export class Address {
    * @param consAddr
    * @param consPub
    */
-  static setBech32Prefix(
-    accAddr: string,
-    accPub: string,
-    valAddr: string,
-    valPub: string,
-    consAddr: string,
-    consPub: string,
-  ) {
+  static setBech32Prefix(accAddr: string, accPub: string, valAddr: string, valPub: string, consAddr: string, consPub: string) {
     bech32Prefix.accAddr = accAddr;
     bech32Prefix.accPub = accPub;
     bech32Prefix.valAddr = valAddr;
