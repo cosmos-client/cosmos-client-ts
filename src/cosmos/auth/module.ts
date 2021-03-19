@@ -1,7 +1,7 @@
-import { CosmosClient } from "../../cosmos-client";
-import { QueryApi } from "../../openapi/api";
-import { AccAddress } from "../types";
-import { AnyOrMessage } from "../../codec/any";
+import { CosmosClient } from '../../cosmos-client';
+import { QueryApi } from '../../openapi/api';
+import { AccAddress } from '../types';
+import { AnyOrMessage } from '../../codec/any';
 
 export function account(sdk: CosmosClient, address: AccAddress) {
   return new QueryApi(undefined, sdk.url)

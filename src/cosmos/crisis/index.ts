@@ -1,12 +1,10 @@
-import { codec } from "../../codec";
-import { cosmos } from "../../proto";
+import { codec } from '../../codec';
+import { cosmos } from '../../proto';
 
-// export * as crisis from "./module";
-import * as crisis from "./module";
-export { crisis };
+// export * as crisis from './module';
 
 codec.register(
-  "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
+  '/cosmos.crisis.v1beta1.MsgVerifyInvariant',
   cosmos.crisis.v1beta1.MsgVerifyInvariant,
   cosmos.crisis.v1beta1.MsgVerifyInvariant.fromObject,
 );

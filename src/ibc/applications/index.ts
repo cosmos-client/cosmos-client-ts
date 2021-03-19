@@ -1,3 +1,1 @@
-// export * as applications from './module';
-import * as applications from "./module";
-export { applications };
+export * as applications from './module';

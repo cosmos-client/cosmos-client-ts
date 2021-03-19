@@ -1,8 +1,6 @@
-// export * as channel from './module';
 import { codec } from "../../../codec";
 import { ibc } from "../../../proto";
-import * as channel from "./module";
-export { channel };
+export * as channel from './module';
 
 codec.register(
   "/ibc.core.channel.v1.Channel",

@@ -11,66 +11,61 @@ npm install --save cosmos-client
 ## Example
 
 ```typescript
-import { cosmos, proto, CosmosClient, codec, secp256k1 } from "cosmos-client";
-
-const sdk = new CosmosClient("http://localhost:1317", "test-1");
+const sdk = new CosmosClient('http://localhost:1317', 'testchain');
 
 // get account info
-const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic("mnemonic here");
 const privKey = new secp256k1.PrivKey({
-  key: privKeyBuffer,
+  key: await sdk.generatePrivKeyFromMnemonic(''),
 });
+
+// cosmos1te53j33tweqh6cqwwuys2etxazrfrefej3n06z
 const fromAddress = cosmos.AccAddress.fromPublicKey(privKey.pubKey());
 
-const account = await cosmos.auth
-  .account(sdk, fromAddress)
-  .then((res) => res.data);
+const account = await cosmos.auth.account(sdk, fromAddress).then((res) => res.data.account);
 
-if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+if (!(account instanceof types.cosmos.auth.v1beta1.BaseAccount)) {
   return;
 }
 
 // create tx body
 const toAddress = fromAddress;
 
-const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+const msgSend = new types.cosmos.bank.v1beta1.MsgSend({
   from_address: fromAddress.toString(),
   to_address: toAddress.toString(),
-  amount: [{ denom: "token", amount: "1000" }],
+  amount: [{ denom: 'token', amount: '1000' }],
 });
 
-const txBody = new proto.cosmos.tx.v1beta1.TxBody({
-  messages: [
-    codec.packAny(
-      proto.cosmos.bank.v1beta1.MsgSend,
-      proto.cosmos.bank.v1beta1.MsgSend.encode(msgSend),
-    ),
-  ],
+const txBody = new types.cosmos.tx.v1beta1.TxBody({
+  messages: [codec.packAny(msgSend, types.cosmos.bank.v1beta1.MsgSend.encode(msgSend))],
 });
-
-const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({});
+const authInfo = new types.cosmos.tx.v1beta1.AuthInfo({});
 
 // sign
 const txBuilder = new CosmosClient.TxBuilder(sdk, txBody, authInfo);
-const signDoc = txBuilder.signDoc((account as any).account_number);
+const signDoc = txBuilder.signDoc(account.account_number);
 txBuilder.addSignature(privKey, signDoc);
 
 // broadcast
-const result = await cosmos.tx
+await cosmos.tx
   .broadcastTx(sdk, {
-    tx_bytes: txBuilder.txBytes().toString(),
-    mode: cosmos.tx.BroadcastTxRequestModeEnum.Async,
+    tx_bytes: txBuilder.txBytes(),
+    mode: cosmos.tx.BroadcastTxMode.Async,
   })
-  .then((res) => res.data)
-  .catch((reason) => console.log(reason));
+  .then((res) => console.log(res.data))
+  .catch((reason) => console.error(reason));
 ```
 
 ## For library developlers
 
+Use [starport](https://github.com/tendermint/starport) to test.
+
 The first digit major version and the second digit minor version should match Cosmos SDK.
 The third digit patch version can be independently incremented.
 
-For `proto.d.ts`
+### for `proto.d.ts` error
+
+Insert:
 
 ```typescript
 import global_tendermint = tendermint;

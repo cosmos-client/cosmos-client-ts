@@ -1,9 +1,7 @@
 import { codec } from "../../../codec";
 import { ibc } from "../../../proto";
 
-// export * as client from './module';
-import * as client from "./module";
-export { client };
+export * as client from './module';
 
 codec.register(
   "/ibc.core.client.v1.Height",

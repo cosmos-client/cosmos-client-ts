@@ -1,6 +1,6 @@
-import { CosmosClient } from "../../cosmos-client";
-import { QueryApi } from "../../openapi/api";
-import { AccAddress, ValAddress } from "../types";
+import { CosmosClient } from '../../cosmos-client';
+import { QueryApi } from '../../openapi/api';
+import { AccAddress, ValAddress } from '../types';
 
 export function delegatorDelegations(
   sdk: CosmosClient,
@@ -74,15 +74,8 @@ export function delegatorValidators(
   );
 }
 
-export function delegatorValidator(
-  sdk: CosmosClient,
-  validatorAddr: ValAddress,
-  delegatorAddr: AccAddress,
-) {
-  return new QueryApi(undefined, sdk.url).delegatorValidator(
-    validatorAddr.toString(),
-    delegatorAddr.toString(),
-  );
+export function delegatorValidator(sdk: CosmosClient, validatorAddr: ValAddress, delegatorAddr: AccAddress) {
+  return new QueryApi(undefined, sdk.url).delegatorValidator(validatorAddr.toString(), delegatorAddr.toString());
 }
 
 export function historicalInfo(sdk: CosmosClient, height: bigint) {
@@ -135,26 +128,12 @@ export function validatorDelegations(
   );
 }
 
-export function delegation(
-  sdk: CosmosClient,
-  validatorAddr: ValAddress,
-  delegatorAddr: AccAddress,
-) {
-  return new QueryApi(undefined, sdk.url).delegation(
-    validatorAddr.toString(),
-    delegatorAddr.toString(),
-  );
+export function delegation(sdk: CosmosClient, validatorAddr: ValAddress, delegatorAddr: AccAddress) {
+  return new QueryApi(undefined, sdk.url).delegation(validatorAddr.toString(), delegatorAddr.toString());
 }
 
-export function unbondingDelegation(
-  sdk: CosmosClient,
-  validatorAddr: ValAddress,
-  delegatorAddr: AccAddress,
-) {
-  return new QueryApi(undefined, sdk.url).unbondingDelegation(
-    validatorAddr.toString(),
-    delegatorAddr.toString(),
-  );
+export function unbondingDelegation(sdk: CosmosClient, validatorAddr: ValAddress, delegatorAddr: AccAddress) {
+  return new QueryApi(undefined, sdk.url).unbondingDelegation(validatorAddr.toString(), delegatorAddr.toString());
 }
 
 export function validatorUnbondingDelegations(

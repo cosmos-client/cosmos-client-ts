@@ -1,6 +1,6 @@
-import { CosmosClient } from "../../cosmos-client";
-import { QueryApi } from "../../openapi/api";
-import { AccAddress } from "../types";
+import { CosmosClient } from '../../cosmos-client';
+import { QueryApi } from '../../openapi/api';
+import { AccAddress } from '../types';
 
 export function allBalances(
   sdk: CosmosClient,

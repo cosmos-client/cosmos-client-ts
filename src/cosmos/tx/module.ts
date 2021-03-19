@@ -1,12 +1,12 @@
-import { CosmosClient } from "../../cosmos-client";
+import { CosmosClient } from '../../cosmos-client';
 import {
   CosmosTxV1beta1SimulateRequest,
   ServiceApi,
   InlineObject16 as BroadcastTxRequest,
-  InlineObject16ModeEnum as BroadcastTxMode
-} from "../../openapi/api";
+  InlineObject16ModeEnum as BroadcastTxMode,
+} from '../../openapi/api';
 
-export { BroadcastTxMode }
+export { BroadcastTxMode };
 
 export function broadcastTx(sdk: CosmosClient, body: BroadcastTxRequest) {
   return new ServiceApi(undefined, sdk.url).broadcastTx(body);
@@ -33,9 +33,6 @@ export function getTxsEvent(
   );
 }
 
-export function simulate(
-  sdk: CosmosClient,
-  body: CosmosTxV1beta1SimulateRequest,
-) {
+export function simulate(sdk: CosmosClient, body: CosmosTxV1beta1SimulateRequest) {
   return new ServiceApi(undefined, sdk.url).simulate(body);
 }

@@ -1,5 +1,5 @@
-import { QueryApi } from "../../openapi/api";
-import { CosmosClient } from "../../cosmos-client";
+import { QueryApi } from '../../openapi/api';
+import { CosmosClient } from '../../cosmos-client';
 
 export function allEvidence(
   sdk: CosmosClient,

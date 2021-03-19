@@ -1,5 +1,3 @@
 export type Any = {
-  "@type": string;
+  '@type': string;
 } & unknown;
-
-export type AnyOrMessage = Any | unknown;

@@ -1,46 +1,35 @@
-import { cosmos, proto, CosmosClient, codec, secp256k1 } from "../..";
+import { cosmos, types, CosmosClient, codec, secp256k1 } from '../..';
 
-test("bank", async () => {
-  const sdk = new CosmosClient("http://localhost:1317", "test-1");
+test('bank', async () => {
+  const sdk = new CosmosClient('http://localhost:1317', 'testchain');
 
   // get account info
-  const privKeyBuffer = Buffer.from(
-    "36d1043c6e23eb15c928da41043bfd183b6ce13f9e592c9a45ac431c4a08b924",
-    "hex",
-  );
   const privKey = new secp256k1.PrivKey({
-    key: privKeyBuffer,
+    key: await sdk.generatePrivKeyFromMnemonic(''),
   });
-  // cosmos1te53j33tweqh6cqwwuys2etxazrfrefej3n06z
+  // cosmos1qvfttg456p2jz8ev82xrr35eppw7tkzyeeu8cz
   const fromAddress = cosmos.AccAddress.fromPublicKey(privKey.pubKey());
 
-  const account = await cosmos.auth
-    .account(sdk, fromAddress)
-    .then((res) => res.data.account);
+  const account = await cosmos.auth.account(sdk, fromAddress).then((res) => res.data.account);
 
-  if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+  if (!(account instanceof types.cosmos.auth.v1beta1.BaseAccount)) {
     return;
   }
 
   // create tx body
   const toAddress = fromAddress;
 
-  const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+  const msgSend = new types.cosmos.bank.v1beta1.MsgSend({
     from_address: fromAddress.toString(),
     to_address: toAddress.toString(),
-    amount: [{ denom: "token", amount: "1000" }],
+    amount: [{ denom: 'token', amount: '1000' }],
   });
   console.log(msgSend);
-  const txBody = new proto.cosmos.tx.v1beta1.TxBody({
-    messages: [
-      codec.packAny(
-        proto.cosmos.bank.v1beta1.MsgSend,
-        proto.cosmos.bank.v1beta1.MsgSend.encode(msgSend),
-      ),
-    ],
+  const txBody = new types.cosmos.tx.v1beta1.TxBody({
+    messages: [codec.packAny(msgSend, types.cosmos.bank.v1beta1.MsgSend.encode(msgSend))],
   });
   console.log(txBody);
-  const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({});
+  const authInfo = new types.cosmos.tx.v1beta1.AuthInfo({});
 
   // sign
   const txBuilder = new CosmosClient.TxBuilder(sdk, txBody, authInfo);
@@ -50,13 +39,11 @@ test("bank", async () => {
   console.log(txBuilder.txBytes().toString());
 
   // broadcast
-  const result = await cosmos.tx
+  await cosmos.tx
     .broadcastTx(sdk, {
-      tx_bytes: txBuilder.txBytes().toString(),
+      tx_bytes: txBuilder.txBytes(),
       mode: cosmos.tx.BroadcastTxMode.Async,
     })
-    .then((res) => res.data)
-    .catch((reason) => console.log(reason));
-
-  console.log(result);
+    .then((res) => console.log(res.data))
+    .catch((reason) => console.error(reason));
 });

@@ -1,9 +1,7 @@
 import { codec } from "../../../codec";
 import { ibc } from "../../../proto";
 
-// export * as connection from './module';
-import * as connection from "./module";
-export { connection };
+export * as connection from './module';
 
 codec.register(
   "/ibc.core.connection.v1.ConnectionEnd",

@@ -1,6 +1,6 @@
-import { CosmosClient } from "../../cosmos-client";
-import { QueryApi } from "../../openapi/api";
-import { AccAddress } from "../types";
+import { CosmosClient } from '../../cosmos-client';
+import { QueryApi } from '../../openapi/api';
+import { AccAddress } from '../types';
 
 export function params(sdk: CosmosClient, paramsType: string) {
   return new QueryApi(undefined, sdk.url).govParams(paramsType);
@@ -9,12 +9,12 @@ export function params(sdk: CosmosClient, paramsType: string) {
 export function proposals(
   sdk: CosmosClient,
   proposalStatus?:
-    | "PROPOSAL_STATUS_UNSPECIFIED"
-    | "PROPOSAL_STATUS_DEPOSIT_PERIOD"
-    | "PROPOSAL_STATUS_VOTING_PERIOD"
-    | "PROPOSAL_STATUS_PASSED"
-    | "PROPOSAL_STATUS_REJECTED"
-    | "PROPOSAL_STATUS_FAILED",
+    | 'PROPOSAL_STATUS_UNSPECIFIED'
+    | 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
+    | 'PROPOSAL_STATUS_VOTING_PERIOD'
+    | 'PROPOSAL_STATUS_PASSED'
+    | 'PROPOSAL_STATUS_REJECTED'
+    | 'PROPOSAL_STATUS_FAILED',
   voter?: string,
   depositor?: string,
   paginationKey?: string,
@@ -54,15 +54,8 @@ export function deposits(
   );
 }
 
-export function deposit(
-  sdk: CosmosClient,
-  proposalID: string,
-  depositor: AccAddress,
-) {
-  return new QueryApi(undefined, sdk.url).deposit(
-    proposalID,
-    depositor.toString(),
-  );
+export function deposit(sdk: CosmosClient, proposalID: string, depositor: AccAddress) {
+  return new QueryApi(undefined, sdk.url).deposit(proposalID, depositor.toString());
 }
 
 export function tallyresult(sdk: CosmosClient, proposalID: string) {

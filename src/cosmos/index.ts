@@ -1,5 +1,3 @@
-// export * as cosmos from './module';
-import * as cosmos from "./module";
-export { cosmos };
+export * as cosmos from './module';
 
-export * from "./crypto";
+export * from './crypto';

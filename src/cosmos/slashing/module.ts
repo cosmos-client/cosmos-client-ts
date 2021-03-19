@@ -1,6 +1,6 @@
-import { CosmosClient } from "../../cosmos-client";
-import { QueryApi } from "../../openapi/api";
-import { AccAddress, ConsAddress, ValAddress } from "../types";
+import { CosmosClient } from '../../cosmos-client';
+import { QueryApi } from '../../openapi/api';
+import { AccAddress, ConsAddress, ValAddress } from '../types';
 
 export function slashingParams(sdk: CosmosClient) {
   return new QueryApi(undefined, sdk.url).slashingParams();
@@ -25,15 +25,8 @@ export function signingInfo(sdk: CosmosClient, consAddress: ConsAddress) {
   return new QueryApi(undefined, sdk.url).signingInfo(consAddress.toString());
 }
 
-export function delegation(
-  sdk: CosmosClient,
-  validatorAddr: ValAddress,
-  delegatorAddr: AccAddress,
-) {
-  return new QueryApi(undefined, sdk.url).delegation(
-    validatorAddr.toString(),
-    delegatorAddr.toString(),
-  );
+export function delegation(sdk: CosmosClient, validatorAddr: ValAddress, delegatorAddr: AccAddress) {
+  return new QueryApi(undefined, sdk.url).delegation(validatorAddr.toString(), delegatorAddr.toString());
 }
 
 export function redelegations(
@@ -57,15 +50,8 @@ export function redelegations(
   );
 }
 
-export function unbondingDelegation(
-  sdk: CosmosClient,
-  validatorAddr: ValAddress,
-  delegatorAddr: AccAddress,
-) {
-  return new QueryApi(undefined, sdk.url).unbondingDelegation(
-    validatorAddr.toString(),
-    delegatorAddr.toString(),
-  );
+export function unbondingDelegation(sdk: CosmosClient, validatorAddr: ValAddress, delegatorAddr: AccAddress) {
+  return new QueryApi(undefined, sdk.url).unbondingDelegation(validatorAddr.toString(), delegatorAddr.toString());
 }
 
 export function validators(

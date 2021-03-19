@@ -1,7 +1,7 @@
 {
   "name": "cosmos-client",
   "description": "REST API Client for Cosmos SDK Blockchain",
-  "version": "0.42.1-rc1",
+  "version": "0.42.1",
   "author": "LCNEM, Inc.",
   "bugs": {
     "url": "https://github.com/cosmos-client/cosmos-client-ts/issues"
@@ -39,6 +39,7 @@
     "babel-jest": "^26.6.3",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.3.2",
     "eslint-plugin-prettier": "^3.3.1",
     "husky": "^5.1.3",

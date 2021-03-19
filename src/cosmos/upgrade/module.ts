@@ -1,5 +1,5 @@
-import { QueryApi } from "../../openapi/api";
-import { CosmosClient } from "../../cosmos-client";
+import { QueryApi } from '../../openapi/api';
+import { CosmosClient } from '../../cosmos-client';
 
 export function appliedPlan(sdk: CosmosClient, name: string) {
   return new QueryApi(undefined, sdk.url).appliedPlan(name);
