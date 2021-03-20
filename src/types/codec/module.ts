@@ -1,9 +1,9 @@
 import { config } from '../../config';
 import { google } from '../../proto';
 
-export function register<T>(type: string, constructor: Function, fromObject: (value: any) => T) {
+export function register(type: string, constructor: Function & { fromObject(object: any): any }) {
   config.codecMaps.inv.set(constructor, type);
-  config.codecMaps.fromObject[type] = fromObject;
+  config.codecMaps.fromObject[type] = constructor.fromObject;
 }
 
 export function unpackAny(value: any) {
