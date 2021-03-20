@@ -36,12 +36,12 @@ describe('bank', () => {
     });
 
     const txBody = new cosmos.tx.v1beta1.TxBody({
-      messages: [cosmosclient.codec.packAny(msgSend, cosmos.bank.v1beta1.MsgSend.encode(msgSend))],
+      messages: [cosmosclient.codec.packAny(msgSend)],
     });
     const authInfo = new cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
-          public_key: cosmosclient.codec.packAny(pubKey, cosmosclient.secp256k1.PubKey.encode(pubKey)),
+          public_key: cosmosclient.codec.packAny(pubKey),
           mode_info: {
             single: {
               mode: cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,

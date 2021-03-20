@@ -1,4 +1,3 @@
-import * as protobuf from 'protobufjs';
 import { config } from '../../config';
 import { google } from '../../proto';
 
@@ -17,8 +16,9 @@ export function unpackAny(value: any) {
   return config.codecMaps.fromObject[typeURL](value);
 }
 
-export function packAny(value: any, writer: protobuf.Writer) {
+export function packAny(value: any) {
   const constructor = value?.constructor;
+
   const typeURL = constructor && config.codecMaps.inv.get(constructor);
   if (!typeURL) {
     throw Error('This type is not registered');
@@ -26,7 +26,7 @@ export function packAny(value: any, writer: protobuf.Writer) {
 
   const packed = new google.protobuf.Any({
     type_url: typeURL,
-    value: writer.finish(),
+    value: constructor.encode(value).finish(),
   });
 
   return packed;
