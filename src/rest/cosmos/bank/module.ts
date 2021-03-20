@@ -4,14 +4,14 @@ import { AccAddress } from '../../../types';
 
 export function allBalances(
   sdk: CosmosSDK,
-  address: string,
+  address: AccAddress,
   paginationKey?: string,
   paginationOffset?: bigint,
   paginationLimit?: bigint,
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).allBalances(
-    address,
+    address.toString(),
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
