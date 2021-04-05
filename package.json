@@ -1,7 +1,7 @@
 {
   "name": "cosmos-client",
   "description": "REST API Client for Cosmos SDK Blockchain",
-  "version": "0.42.2-3",
+  "version": "0.42.3",
   "author": "LCNEM, Inc.",
   "bugs": {
     "url": "https://github.com/cosmos-client/cosmos-client-ts/issues"
@@ -10,7 +10,9 @@
     "lint": "eslint \"src/**/*\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "tsc --build --clean && tsc && node bundle",
+    "build": "rm -r dist ; mkdir dist && npm run build:cjs && npm run build:esm && node bundle",
+    "build:cjs": "tsc --build --clean && tsc --target es5 --module commonjs && mv lib dist/cjs",
+    "build:esm": "tsc --build --clean && tsc --target esnext --module esnext && mv lib dist/esm",
     "gen:openapi": "bash ./gen-openapi.sh",
     "gen:proto": "bash ./gen-proto.sh",
     "prepare": "husky install || exit 0"
@@ -55,9 +57,21 @@
     "Cosmos SDK"
   ],
   "license": "ISC",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cosmos-client/cosmos-client-ts.git"
+  },
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "node": "./cjs/index.js",
+      "default": "./esm/index.js"
+    },
+    "./openapi": {
+      "node": "./cjs/openapi/index.js",
+      "default": "./esm/openapi/index.js"
+    },
+    "./package.json": "./package.json"
   }
 }

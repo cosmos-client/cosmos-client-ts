@@ -14,6 +14,16 @@ for dir in $proto_dirs; do
 done
 
 npx pbjs \
+  -o ./src/proto.cjs \
+  -t static-module \
+  --force-long \
+  --keep-case \
+  --no-create \
+  --path=./proto/ \
+  --path=./proto-thirdparty/ \
+  ${proto_files[@]}
+
+npx pbjs \
   -o ./src/proto.js \
   -t static-module \
   -w es6 \
