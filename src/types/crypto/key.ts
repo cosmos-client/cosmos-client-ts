@@ -17,7 +17,7 @@ export type PubKey = {
 export async function generatePrivKeyFromMnemonic(mnemonic: string) {
   const seed = await bip39.mnemonicToSeed(mnemonic);
   const node = bip32.fromSeed(seed);
-  const child = node.derivePath(`44'/${config.slip44CoinType}'/0'/0/0`);
+  const child = node.derivePath(`44'/${config.slip44.coinType}'/0'/0/0`);
 
   return Uint8Array.from(child.privateKey!);
 }
