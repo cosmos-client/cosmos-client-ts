@@ -1,1 +1,3 @@
-export let slip44CoinType = 118;
+export const slip44 = {
+  coinType: 118,
+};
