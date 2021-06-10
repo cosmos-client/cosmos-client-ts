@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "always",
+        "printWidth": 140,
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    ]
+  }
+}

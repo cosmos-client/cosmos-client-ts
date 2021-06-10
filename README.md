@@ -8,76 +8,96 @@ JavaScript / TypeScript client for Cosmos SDK blockchain.
 npm install --save cosmos-client
 ```
 
-## Example
+## Examples
 
 ```typescript
-import { cosmos, proto, CosmosClient, codec, secp256k1 } from "cosmos-client";
+import { cosmosclient, rest, cosmos } from 'cosmos-client';
 
-const sdk = new CosmosClient("http://localhost:1317", "test-1");
+describe('bank', () => {
+  it('send', async () => {
+    expect.hasAssertions();
 
-// get account info
-const privKeyBuffer = await sdk.generatePrivKeyFromMnemonic("mnemonic here");
-const privKey = new secp256k1.PrivKey({
-  key: privKeyBuffer,
+    const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
+
+    const privKey = new cosmosclient.secp256k1.PrivKey({
+      key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
+    });
+    const pubKey = privKey.pubKey();
+    const address = cosmosclient.AccAddress.fromPublicKey(pubKey);
+
+    expect(address.toString()).toStrictEqual('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
+
+    const fromAddress = address;
+    const toAddress = address;
+
+    // get account info
+    const account = await rest.cosmos.auth
+      .account(sdk, fromAddress)
+      .then((res) => res.data.account && cosmosclient.codec.unpackAny(res.data.account))
+      .catch((_) => undefined);
+
+    if (!(account instanceof cosmos.auth.v1beta1.BaseAccount)) {
+      console.log(account);
+      return;
+    }
+
+    // build tx
+    const msgSend = new cosmos.bank.v1beta1.MsgSend({
+      from_address: fromAddress.toString(),
+      to_address: toAddress.toString(),
+      amount: [{ denom: 'token', amount: '10' }],
+    });
+
+    const txBody = new cosmos.tx.v1beta1.TxBody({
+      messages: [cosmosclient.codec.packAny(msgSend)],
+    });
+    const authInfo = new cosmos.tx.v1beta1.AuthInfo({
+      signer_infos: [
+        {
+          public_key: cosmosclient.codec.packAny(pubKey),
+          mode_info: {
+            single: {
+              mode: cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+            },
+          },
+          sequence: account.sequence,
+        },
+      ],
+      fee: {
+        gas_limit: cosmosclient.Long.fromString('200000'),
+      },
+    });
+
+    // sign
+    const txBuilder = new cosmosclient.TxBuilder(sdk, txBody, authInfo);
+    const signDoc = txBuilder.signDoc(account.account_number);
+    txBuilder.addSignature(privKey, signDoc);
+
+    // broadcast
+    try {
+      const res = await rest.cosmos.tx.broadcastTx(sdk, {
+        tx_bytes: txBuilder.txBytes(),
+        mode: rest.cosmos.tx.BroadcastTxMode.Sync,
+      });
+      console.log(res);
+    } catch (e) {
+      console.error(e);
+    }
+  });
 });
-const fromAddress = cosmos.AccAddress.fromPublicKey(privKey.pubKey());
-
-const account = await cosmos.auth
-  .account(sdk, fromAddress)
-  .then((res) => res.data);
-
-if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
-  return;
-}
-
-// create tx body
-const toAddress = fromAddress;
-
-const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
-  from_address: fromAddress.toString(),
-  to_address: toAddress.toString(),
-  amount: [{ denom: "token", amount: "1000" }],
-});
-
-const txBody = new proto.cosmos.tx.v1beta1.TxBody({
-  messages: [
-    codec.packAny(
-      proto.cosmos.bank.v1beta1.MsgSend,
-      proto.cosmos.bank.v1beta1.MsgSend.encode(msgSend),
-    ),
-  ],
-});
-
-const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({});
-
-// sign
-const txBuilder = new CosmosClient.TxBuilder(sdk, txBody, authInfo);
-const signDoc = txBuilder.signDoc((account as any).account_number);
-txBuilder.addSignature(privKey, signDoc);
-
-// broadcast
-const result = await cosmos.tx
-  .broadcastTx(sdk, {
-    tx_bytes: txBuilder.txBytes().toString(),
-    mode: cosmos.tx.BroadcastTxRequestModeEnum.Async,
-  })
-  .then((res) => res.data)
-  .catch((reason) => console.log(reason));
 ```
 
 ## For library developlers
 
-[swagger.yml](https://github.com/cosmos/cosmos-sdk/blob/master/client/lcd/swagger-ui/swagger.yaml)
-
-```bash
-docker run --rm \
-  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-  -g typescript-axios -i /local/swagger.yaml -o /local/src/generated/
-```
+Use [starport](https://github.com/tendermint/starport) to test.
 
 The first digit major version and the second digit minor version should match Cosmos SDK.
 The third digit patch version can be independently incremented.
 
-```bash
-. protocgen.sh
+### for `proto.d.ts` error
+
+Insert:
+
+```typescript
+import global_tendermint = tendermint;
 ```
