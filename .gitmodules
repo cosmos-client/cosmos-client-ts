@@ -1,0 +1,6 @@
+[submodule "cosmos-sdk"]
+	path = cosmos-sdk
+	url = https://github.com/cosmos/cosmos-sdk.git
+[submodule "ibc-go"]
+	path = ibc-go
+	url = https://github.com/cosmos/ibc-go.git
