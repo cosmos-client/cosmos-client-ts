@@ -30,7 +30,7 @@ export class PubKey extends cosmos.crypto.secp256k1.PubKey implements BasePubKey
   verify(msg: Uint8Array, sig: Uint8Array) {
     const hash = crypto.createHash('sha256').update(msg).digest();
 
-    return secp256k1.verify(hash, Buffer.from(sig), Buffer.from(this.key));
+    return secp256k1.verify(hash, Buffer.from(this.key), Buffer.from(sig));
   }
 
   address() {

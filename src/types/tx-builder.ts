@@ -28,8 +28,16 @@ export class TxBuilder {
     return signDoc;
   }
 
+  signDocBytes(accountNumber: Long) {
+    return cosmos.tx.v1beta1.SignDoc.encode(this.signDoc(accountNumber)).finish();
+  }
+
   addSignature(privKey: PrivKey, signDoc: cosmos.tx.v1beta1.SignDoc) {
     const sig = privKey.sign(cosmos.tx.v1beta1.SignDoc.encode(signDoc).finish());
+    this.txRaw.signatures.push(sig);
+  }
+
+  addSignatureDirectly(sig: Uint8Array) {
     this.txRaw.signatures.push(sig);
   }
 

@@ -32,7 +32,7 @@ describe('bank', () => {
     const msgSend = new cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
-      amount: [{ denom: 'token', amount: '10' }],
+      amount: [{ denom: 'ubtc', amount: '1' }],
     });
 
     const txBody = new cosmos.tx.v1beta1.TxBody({
@@ -67,6 +67,8 @@ describe('bank', () => {
         mode: rest.cosmos.tx.BroadcastTxMode.Block,
       });
       console.log(res);
+
+      expect(res.data.tx_response?.raw_log?.includes('failed')).toBeFalsy();
     } catch (e) {
       console.error(e);
     }
