@@ -4425,7 +4425,7 @@ export namespace cosmos {
                     log?: (string|null);
 
                     /** Result events */
-                    events?: (global_tendermint.abci.IEvent[]|null);
+                    events?: (tendermint.abci.IEvent[]|null);
                 }
 
                 /** Represents a Result. */
@@ -4444,7 +4444,7 @@ export namespace cosmos {
                     public log: string;
 
                     /** Result events. */
-                    public events: global_tendermint.abci.IEvent[];
+                    public events: tendermint.abci.IEvent[];
 
                     /**
                      * Encodes the specified Result message. Does not implicitly {@link cosmos.base.abci.v1beta1.Result.verify|verify} messages.
@@ -6903,10 +6903,10 @@ export namespace cosmos {
                 interface IGetBlockByHeightResponse {
 
                     /** GetBlockByHeightResponse block_id */
-                    block_id?: (global_tendermint.types.IBlockID|null);
+                    block_id?: (tendermint.types.IBlockID|null);
 
                     /** GetBlockByHeightResponse block */
-                    block?: (global_tendermint.types.IBlock|null);
+                    block?: (tendermint.types.IBlock|null);
                 }
 
                 /** Represents a GetBlockByHeightResponse. */
@@ -6919,10 +6919,10 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IGetBlockByHeightResponse);
 
                     /** GetBlockByHeightResponse block_id. */
-                    public block_id?: (global_tendermint.types.IBlockID|null);
+                    public block_id?: (tendermint.types.IBlockID|null);
 
                     /** GetBlockByHeightResponse block. */
-                    public block?: (global_tendermint.types.IBlock|null);
+                    public block?: (tendermint.types.IBlock|null);
 
                     /**
                      * Encodes the specified GetBlockByHeightResponse message. Does not implicitly {@link cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse.verify|verify} messages.
@@ -7069,10 +7069,10 @@ export namespace cosmos {
                 interface IGetLatestBlockResponse {
 
                     /** GetLatestBlockResponse block_id */
-                    block_id?: (global_tendermint.types.IBlockID|null);
+                    block_id?: (tendermint.types.IBlockID|null);
 
                     /** GetLatestBlockResponse block */
-                    block?: (global_tendermint.types.IBlock|null);
+                    block?: (tendermint.types.IBlock|null);
                 }
 
                 /** Represents a GetLatestBlockResponse. */
@@ -7085,10 +7085,10 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IGetLatestBlockResponse);
 
                     /** GetLatestBlockResponse block_id. */
-                    public block_id?: (global_tendermint.types.IBlockID|null);
+                    public block_id?: (tendermint.types.IBlockID|null);
 
                     /** GetLatestBlockResponse block. */
-                    public block?: (global_tendermint.types.IBlock|null);
+                    public block?: (tendermint.types.IBlock|null);
 
                     /**
                      * Encodes the specified GetLatestBlockResponse message. Does not implicitly {@link cosmos.base.tendermint.v1beta1.GetLatestBlockResponse.verify|verify} messages.
@@ -7395,7 +7395,7 @@ export namespace cosmos {
                 interface IGetNodeInfoResponse {
 
                     /** GetNodeInfoResponse default_node_info */
-                    default_node_info?: (global_tendermint.p2p.IDefaultNodeInfo|null);
+                    default_node_info?: (tendermint.p2p.IDefaultNodeInfo|null);
 
                     /** GetNodeInfoResponse application_version */
                     application_version?: (cosmos.base.tendermint.v1beta1.IVersionInfo|null);
@@ -7411,7 +7411,7 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IGetNodeInfoResponse);
 
                     /** GetNodeInfoResponse default_node_info. */
-                    public default_node_info?: (global_tendermint.p2p.IDefaultNodeInfo|null);
+                    public default_node_info?: (tendermint.p2p.IDefaultNodeInfo|null);
 
                     /** GetNodeInfoResponse application_version. */
                     public application_version?: (cosmos.base.tendermint.v1beta1.IVersionInfo|null);
@@ -29750,8 +29750,6 @@ export namespace cosmos {
         }
     }
 }
-
-import global_tendermint = tendermint;
 
 /** Namespace tendermint. */
 export namespace tendermint {
@@ -56359,16 +56357,16 @@ export namespace ibc {
                 interface IHeader {
 
                     /** Header signed_header */
-                    signed_header?: (global_tendermint.types.ISignedHeader|null);
+                    signed_header?: (tendermint.types.ISignedHeader|null);
 
                     /** Header validator_set */
-                    validator_set?: (global_tendermint.types.IValidatorSet|null);
+                    validator_set?: (tendermint.types.IValidatorSet|null);
 
                     /** Header trusted_height */
                     trusted_height?: (ibc.core.client.v1.IHeight|null);
 
                     /** Header trusted_validators */
-                    trusted_validators?: (global_tendermint.types.IValidatorSet|null);
+                    trusted_validators?: (tendermint.types.IValidatorSet|null);
                 }
 
                 /** Represents a Header. */
@@ -56381,16 +56379,16 @@ export namespace ibc {
                     constructor(properties?: ibc.lightclients.tendermint.v1.IHeader);
 
                     /** Header signed_header. */
-                    public signed_header?: (global_tendermint.types.ISignedHeader|null);
+                    public signed_header?: (tendermint.types.ISignedHeader|null);
 
                     /** Header validator_set. */
-                    public validator_set?: (global_tendermint.types.IValidatorSet|null);
+                    public validator_set?: (tendermint.types.IValidatorSet|null);
 
                     /** Header trusted_height. */
                     public trusted_height?: (ibc.core.client.v1.IHeight|null);
 
                     /** Header trusted_validators. */
-                    public trusted_validators?: (global_tendermint.types.IValidatorSet|null);
+                    public trusted_validators?: (tendermint.types.IValidatorSet|null);
 
                     /**
                      * Encodes the specified Header message. Does not implicitly {@link ibc.lightclients.tendermint.v1.Header.verify|verify} messages.
