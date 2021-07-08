@@ -8,7 +8,7 @@ export function denomTraces(
   paginationLimit?: bigint,
   paginationCountTotal?: boolean,
 ) {
-  return new QueryApi(undefined, sdk.url).denomTraces(
+  return new QueryApi(undefined, sdk.url).d.denomTraces(
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
