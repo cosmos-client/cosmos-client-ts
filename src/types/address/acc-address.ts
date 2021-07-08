@@ -29,7 +29,7 @@ export class AccAddress extends Address {
   static fromString(accAddress: string) {
     const { words } = bech32.decode(accAddress);
 
-    return new AccAddress(bech32.fromWords(words));
+    return new AccAddress(new Uint8Array(bech32.fromWords(words)));
   }
 
   static fromPublicKey(pubKey: PubKey) {

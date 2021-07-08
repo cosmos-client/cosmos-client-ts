@@ -1,5 +1,4 @@
 import { cosmos } from '../proto';
-import { PrivKey } from '../types/crypto';
 import Long from 'long';
 import { CosmosSDK } from '../sdk';
 
@@ -22,14 +21,17 @@ export class TxBuilder {
       body_bytes: this.txRaw.body_bytes,
       auth_info_bytes: this.txRaw.auth_info_bytes,
       chain_id: this.sdk.chainID,
-      account_number: accountNumber,
+      account_number: accountNumber.isZero() ? null : accountNumber,
     });
 
     return signDoc;
   }
 
-  addSignature(privKey: PrivKey, signDoc: cosmos.tx.v1beta1.SignDoc) {
-    const sig = privKey.sign(cosmos.tx.v1beta1.SignDoc.encode(signDoc).finish());
+  signDocBytes(accountNumber: Long) {
+    return cosmos.tx.v1beta1.SignDoc.encode(this.signDoc(accountNumber)).finish();
+  }
+
+  addSignature(sig: Uint8Array) {
     this.txRaw.signatures.push(sig);
   }
 

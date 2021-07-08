@@ -70,19 +70,15 @@ describe('bank', () => {
 
     // sign
     const txBuilder = new cosmosclient.TxBuilder(sdk, txBody, authInfo);
-    const signDoc = txBuilder.signDoc(account.account_number);
-    txBuilder.addSignature(privKey, signDoc);
+    const signDocBytes = txBuilder.signDocBytes(account.account_number);
+    txBuilder.addSignature(privKey.sign(signDocBytes));
 
     // broadcast
-    try {
-      const res = await rest.cosmos.tx.broadcastTx(sdk, {
-        tx_bytes: txBuilder.txBytes(),
-        mode: rest.cosmos.tx.BroadcastTxMode.Sync,
-      });
-      console.log(res);
-    } catch (e) {
-      console.error(e);
-    }
+    const res = await rest.cosmos.tx.broadcastTx(sdk, {
+      tx_bytes: txBuilder.txBytes(),
+      mode: rest.cosmos.tx.BroadcastTxMode.Block,
+    });
+    console.log(res);
   });
 });
 ```
