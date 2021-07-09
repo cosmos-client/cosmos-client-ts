@@ -16,18 +16,21 @@ export class TxBuilder {
     });
   }
 
-  signDoc(accountNumber: Long) {
+  signDoc(accountNumber?: number | Long) {
+    if (typeof accountNumber === 'number') {
+      accountNumber = Long.fromNumber(accountNumber)
+    }
     const signDoc = new cosmos.tx.v1beta1.SignDoc({
       body_bytes: this.txRaw.body_bytes,
       auth_info_bytes: this.txRaw.auth_info_bytes,
       chain_id: this.sdk.chainID,
-      account_number: accountNumber.isZero() ? null : accountNumber,
+      account_number: accountNumber?.isZero() ? null : accountNumber,
     });
 
     return signDoc;
   }
 
-  signDocBytes(accountNumber: Long) {
+  signDocBytes(accountNumber?: number | Long) {
     return cosmos.tx.v1beta1.SignDoc.encode(this.signDoc(accountNumber)).finish();
   }
 
