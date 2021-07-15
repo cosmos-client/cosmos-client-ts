@@ -29,7 +29,7 @@ export class ValAddress extends Address {
   static fromString(valAddress: string) {
     const { words } = bech32.decode(valAddress);
 
-    return new ValAddress(bech32.fromWords(words));
+    return new ValAddress(new Uint8Array(bech32.fromWords(words)));
   }
 
   static fromPublicKey(pubKey: PubKey) {

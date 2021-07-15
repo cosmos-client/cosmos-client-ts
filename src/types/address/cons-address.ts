@@ -29,7 +29,7 @@ export class ConsAddress extends Address {
   static fromString(consAddress: string) {
     const { words } = bech32.decode(consAddress);
 
-    return new ConsAddress(bech32.fromWords(words));
+    return new ConsAddress(new Uint8Array(bech32.fromWords(words)));
   }
 
   static fromPublicKey(pubKey: PubKey) {

@@ -32,7 +32,7 @@ describe('bank', () => {
     const msgSend = new cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
-      amount: [{ denom: 'token', amount: '10' }],
+      amount: [{ denom: 'token', amount: '1' }],
     });
 
     const txBody = new cosmos.tx.v1beta1.TxBody({
@@ -57,18 +57,16 @@ describe('bank', () => {
 
     // sign
     const txBuilder = new cosmosclient.TxBuilder(sdk, txBody, authInfo);
-    const signDoc = txBuilder.signDoc(account.account_number);
-    txBuilder.addSignature(privKey, signDoc);
+    const signDocBytes = txBuilder.signDocBytes(account.account_number);
+    txBuilder.addSignature(privKey.sign(signDocBytes));
 
     // broadcast
-    try {
-      const res = await rest.cosmos.tx.broadcastTx(sdk, {
-        tx_bytes: txBuilder.txBytes(),
-        mode: rest.cosmos.tx.BroadcastTxMode.Block,
-      });
-      console.log(res);
-    } catch (e) {
-      console.error(e);
-    }
+    const res = await rest.cosmos.tx.broadcastTx(sdk, {
+      tx_bytes: txBuilder.txBytes(),
+      mode: rest.cosmos.tx.BroadcastTxMode.Block,
+    });
+    console.log(res);
+
+    expect(res.data.tx_response?.raw_log?.match('failed')).toBeFalsy();
   });
 });
