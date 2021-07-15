@@ -21,3 +21,40 @@ export function delegatorValidators(sdk: CosmosSDK, delegatorAddress: AccAddress
 export function delegatorWithdrawAddress(sdk: CosmosSDK, delegatorAddress: AccAddress) {
   return new QueryApi(undefined, sdk.url).delegatorWithdrawAddress(delegatorAddress.toString());
 }
+
+export function validatorCommission(
+  sdk: CosmosSDK,
+  validatorAddress: ValAddress,
+) {
+  return new QueryApi(undefined, sdk.url).validatorCommission(
+    validatorAddress.toString(),
+  );
+}
+
+export function validatorOutstandingRewards(
+  sdk: CosmosSDK,
+  validatorAddress: ValAddress
+) {
+  return new QueryApi(undefined, sdk.url).validatorOutstandingRewards(validatorAddress.toString());
+}
+
+export function validatorSlashes(
+  sdk: CosmosSDK,
+  validatorAddress: ValAddress,
+  startingHeight?: string,
+  endingHeight?: string,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
+) {
+  return new QueryApi(undefined, sdk.url).validatorSlashes(
+    validatorAddress.toString(),
+    startingHeight,
+    endingHeight,
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal
+  );
+}
