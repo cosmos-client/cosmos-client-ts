@@ -11,3 +11,4 @@ export * from './slashing';
 export * from './staking';
 export * from './tx';
 export * from './upgrade';
+export * from './vesting';
