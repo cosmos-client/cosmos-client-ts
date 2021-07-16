@@ -57,13 +57,15 @@ describe('codec', () => {
       },
     };
 
-    const unpacked = codec.unpackAny(res.data.account);
-
+    const unpacked = codec.unpackCosmosAny(res.data.account);
     if (!(unpacked instanceof cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
 
-    console.log(unpacked.pub_key);
+    console.log(unpacked);
+
+    const key = codec.unpackAny(unpacked.pub_key);
+    console.log(key)
 
     expect(true).toBeTruthy();
   });
