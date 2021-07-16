@@ -53,4 +53,18 @@ describe('address', () => {
     expect(address1.toString()).toStrictEqual('cosmos1aqt94lggum9v9xhuyppaawtjwra76mj8mjdgm5');
     expect(address2.toString()).toStrictEqual('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
   });
+
+  it('convert', async () => {
+    expect.hasAssertions();
+    const privKeyStr = 'ef40ea14839c3ee5690336bb1f032870941dbb329fc0553132a4a109a022a391';
+
+    const privKey = new cosmosclient.secp256k1.PrivKey({
+      key: Buffer.from(privKeyStr, 'hex'),
+    });
+
+    const accAddress = cosmosclient.AccAddress.fromPublicKey(privKey.pubKey());
+    const valAddress = cosmosclient.ValAddress.fromPublicKey(privKey.pubKey());
+
+    expect(accAddress.toValAddress().toString()).toStrictEqual(valAddress.toString());
+  });
 });

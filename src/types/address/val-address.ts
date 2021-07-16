@@ -36,3 +36,13 @@ export class ValAddress extends Address {
     return new ValAddress(pubKey.address());
   }
 }
+
+declare module './address' {
+  interface Address {
+    toValAddress(): ValAddress;
+  }
+}
+
+Address.prototype.toValAddress = function () {
+  return new ValAddress(this.value());
+};

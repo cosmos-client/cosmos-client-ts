@@ -36,3 +36,13 @@ export class ConsAddress extends Address {
     return new ConsAddress(pubKey.address());
   }
 }
+
+declare module './address' {
+  interface Address {
+    toConsAddress(): ConsAddress;
+  }
+}
+
+Address.prototype.toConsAddress = function () {
+  return new ConsAddress(this.value());
+};

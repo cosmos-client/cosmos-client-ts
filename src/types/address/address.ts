@@ -18,6 +18,10 @@ export class Address {
     this._value = value;
   }
 
+  value() {
+    return this._value;
+  }
+
   /**
    *
    * @param pubKey

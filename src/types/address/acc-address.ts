@@ -36,3 +36,13 @@ export class AccAddress extends Address {
     return new AccAddress(pubKey.address());
   }
 }
+
+declare module './address' {
+  interface Address {
+    toAccAddress(): AccAddress;
+  }
+}
+
+Address.prototype.toAccAddress = function () {
+  return new AccAddress(this.value());
+};

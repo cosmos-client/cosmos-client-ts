@@ -9,7 +9,11 @@ export function register(type: string, constructor: Function & { fromObject(obje
 export function unpackAny(value: any) {
   const typeURL = value && value['@type'];
 
-  if (!typeURL || !config.codecMaps.fromObject[typeURL]) {
+  if (!typeURL) {
+    throw Error("The field '@type' is undefined");
+  }
+
+  if (!config.codecMaps.fromObject[typeURL]) {
     throw Error('This type is not registered');
   }
 
@@ -18,6 +22,10 @@ export function unpackAny(value: any) {
 
 export function packAny(value: any) {
   const constructor = value?.constructor;
+
+  if (!constructor) {
+    throw Error("The field 'constructor' is undefined");
+  }
 
   const typeURL = constructor && config.codecMaps.inv.get(constructor);
   if (!typeURL) {
