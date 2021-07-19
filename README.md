@@ -11,7 +11,7 @@ npm install --save cosmos-client
 ## Examples
 
 ```typescript
-import { cosmosclient, rest, proto } from '../../..';
+import { cosmosclient, rest, proto } from 'cosmos-client';
 
 describe('bank', () => {
   it('send', async () => {
