@@ -1,4 +1,4 @@
-import { cosmosclient, rest, cosmos } from '../../..';
+import { cosmosclient, rest, proto } from '../../..';
 
 describe('bank', () => {
   it('send', async () => {
@@ -6,7 +6,7 @@ describe('bank', () => {
 
     const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
 
-    const privKey = new cosmosclient.secp256k1.PrivKey({
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
     });
     const pubKey = privKey.pubKey();
@@ -23,28 +23,28 @@ describe('bank', () => {
       .then((res) => res.data.account && cosmosclient.codec.unpackCosmosAny(res.data.account))
       .catch((_) => undefined);
 
-    if (!(account instanceof cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
       console.log(account);
       return;
     }
 
     // build tx
-    const msgSend = new cosmos.bank.v1beta1.MsgSend({
+    const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
       amount: [{ denom: 'token', amount: '1' }],
     });
 
-    const txBody = new cosmos.tx.v1beta1.TxBody({
+    const txBody = new proto.cosmos.tx.v1beta1.TxBody({
       messages: [cosmosclient.codec.packAny(msgSend)],
     });
-    const authInfo = new cosmos.tx.v1beta1.AuthInfo({
+    const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
           public_key: cosmosclient.codec.packAny(pubKey),
           mode_info: {
             single: {
-              mode: cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+              mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
             },
           },
           sequence: account.sequence,

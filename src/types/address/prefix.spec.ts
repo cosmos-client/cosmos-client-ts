@@ -1,5 +1,4 @@
-import * as crypto from 'crypto';
-import { cosmosclient } from '../..';
+import { cosmosclient, proto } from '../..';
 import { setBech32Prefix } from './config';
 
 describe('address', () => {
@@ -7,19 +6,19 @@ describe('address', () => {
     expect.hasAssertions();
 
     setBech32Prefix({
-      accAddr: "jpyx",
-      accPub: "jpyxpub",
-      valAddr: "jpyxvaloper",
-      valPub: "jpyxvaloperpub",
-      consAddr: "jpyxvalcons",
-      consPub: "jpyxvalconspub",
+      accAddr: 'jpyx',
+      accPub: 'jpyxpub',
+      valAddr: 'jpyxvaloper',
+      valPub: 'jpyxvaloperpub',
+      consAddr: 'jpyxvalcons',
+      consPub: 'jpyxvalconspub',
     });
-    const privKey = new cosmosclient.secp256k1.PrivKey({
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
     });
     const pubKey = privKey.pubKey();
     const address = cosmosclient.AccAddress.fromPublicKey(pubKey);
 
-    expect(address.toString().startsWith("jpyx")).toBeTruthy();
+    expect(address.toString().startsWith('jpyx')).toBeTruthy();
   });
 });

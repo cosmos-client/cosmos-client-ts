@@ -1,12 +1,12 @@
 import * as crypto from 'crypto';
-import { cosmosclient } from '../..';
+import { proto, cosmosclient } from '../..';
 
 describe('address', () => {
   it('ed25519', () => {
     expect.hasAssertions();
 
     const bytes = new Uint8Array(crypto.randomBytes(32));
-    const key = new cosmosclient.ed25519.PrivKey({ key: bytes });
+    const key = new proto.cosmos.crypto.ed25519.PrivKey({ key: bytes });
     const address = cosmosclient.AccAddress.fromPublicKey(key.pubKey());
     const str = address.toString();
     const revived = cosmosclient.AccAddress.fromString(str);
@@ -22,7 +22,7 @@ describe('address', () => {
     expect.hasAssertions();
 
     const bytes = new Uint8Array(crypto.randomBytes(32));
-    const key = new cosmosclient.secp256k1.PrivKey({ key: bytes });
+    const key = new proto.cosmos.crypto.secp256k1.PrivKey({ key: bytes });
     const address = cosmosclient.AccAddress.fromPublicKey(key.pubKey());
     const str = address.toString();
     const revived = cosmosclient.AccAddress.fromString(str);
@@ -38,10 +38,10 @@ describe('address', () => {
     expect.hasAssertions();
     const privKeyStr = 'ef40ea14839c3ee5690336bb1f032870941dbb329fc0553132a4a109a022a391';
 
-    const privKey1 = new cosmosclient.ed25519.PrivKey({
+    const privKey1 = new proto.cosmos.crypto.ed25519.PrivKey({
       key: Buffer.from(privKeyStr, 'hex'),
     });
-    const privKey2 = new cosmosclient.secp256k1.PrivKey({
+    const privKey2 = new proto.cosmos.crypto.secp256k1.PrivKey({
       key: Buffer.from(privKeyStr, 'hex'),
     });
 
@@ -58,7 +58,7 @@ describe('address', () => {
     expect.hasAssertions();
     const privKeyStr = 'ef40ea14839c3ee5690336bb1f032870941dbb329fc0553132a4a109a022a391';
 
-    const privKey = new cosmosclient.secp256k1.PrivKey({
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
       key: Buffer.from(privKeyStr, 'hex'),
     });
 

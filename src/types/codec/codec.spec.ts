@@ -1,6 +1,4 @@
-import { codec } from '.';
-import { cosmos } from '../../proto';
-import '../..';
+import { proto, cosmosclient } from '../..';
 
 describe('codec', () => {
   it('unpack', () => {
@@ -57,15 +55,15 @@ describe('codec', () => {
       },
     };
 
-    const unpacked = codec.unpackCosmosAny(res.data.account);
-    if (!(unpacked instanceof cosmos.auth.v1beta1.BaseAccount)) {
+    const unpacked = cosmosclient.codec.unpackCosmosAny(res.data.account);
+    if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
 
     console.log(unpacked);
 
-    const key = codec.unpackAny(unpacked.pub_key);
-    console.log(key)
+    const key = cosmosclient.codec.unpackAny(unpacked.pub_key);
+    console.log(key);
 
     expect(true).toBeTruthy();
   });
