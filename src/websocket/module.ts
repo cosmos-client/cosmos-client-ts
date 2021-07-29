@@ -10,7 +10,7 @@ export type RequestSchema = BaseSchema & {
   params: string[];
 };
 
-export type ResponseSchema = BaseSchema & ({ result: any } | { error: string });
+export type ResponseSchema = BaseSchema & { result?: any; error?: string };
 
 export function connect(url: string) {
   const ws = new WebSocketSubject<RequestSchema | ResponseSchema>({
