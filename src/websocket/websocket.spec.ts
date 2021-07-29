@@ -1,4 +1,4 @@
-import { cosmosclient, websocket } from '..';
+import { websocket } from '..';
 
 function sleep(sec: number) {
   return new Promise((resolve, _) => {
@@ -11,8 +11,7 @@ function sleep(sec: number) {
 describe('websocket', () => {
   it('websocker', async () => {
     expect.hasAssertions();
-    const sdk = new cosmosclient.CosmosSDK('ws://localhost:26657', 'testchain');
-    const ws = websocket.connect(sdk);
+    const ws = websocket.connect('ws://localhost:26657');
 
     ws.next({
       id: '1',

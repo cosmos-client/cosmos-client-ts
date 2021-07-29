@@ -1,5 +1,4 @@
 import { WebSocketSubject } from 'rxjs/webSocket';
-import { CosmosSDK } from '../sdk';
 
 type BaseSchema = {
   id: '1';
@@ -11,11 +10,11 @@ export type RequestSchema = BaseSchema & {
   params: string[];
 };
 
-export type ResponseSchema = BaseSchema & ({ result: any } | { error: string });
+export type ResponseSchema = BaseSchema & { result?: any; error?: string };
 
-export function connect(sdk: CosmosSDK) {
+export function connect(url: string) {
   const ws = new WebSocketSubject<RequestSchema | ResponseSchema>({
-    url: `${sdk.url}/websocket`,
+    url: `${url}/websocket`,
   });
 
   return ws;
