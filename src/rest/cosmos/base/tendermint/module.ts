@@ -24,7 +24,7 @@ export async function getLatestValidatorSet(
   );
 }
 
-export async function getValidatorSet(
+export async function getValidatorSetByHeight(
   sdk: CosmosSDK,
   height: bigint,
   paginationKey?: string,
