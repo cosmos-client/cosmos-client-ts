@@ -32,7 +32,7 @@ export function getSyncing(sdk: CosmosSDK) {
   return new ServiceApi(undefined, sdk.url).getSyncing();
 }
 
-export function simulate(
+export function getValidatorSetByHeight(
   sdk: CosmosSDK,
   height: string,
   paginationKey?: string,
