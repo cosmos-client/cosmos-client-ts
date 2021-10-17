@@ -1,20 +1,3 @@
-# @cosmos-client/core
-
-REST API client for Cosmos SDK blockchain
-
-## Install
-
-```shell
-npm install @cosmos-client/core
-```
-
-### Caution
-
-A package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` alternatively.
-
-## Examples
-
-```typescript
 import { cosmosclient, rest, proto } from '../..';
 
 describe('bank', () => {
@@ -87,20 +70,3 @@ describe('bank', () => {
     expect(res.data.tx_response?.raw_log?.match('failed')).toBeFalsy();
   });
 });
-
-```
-
-## For library developlers
-
-Use [starport](https://github.com/tendermint/starport) to test.
-
-The first digit major version and the second digit minor version should match Cosmos SDK.
-The third digit patch version can be independently incremented.
-
-### for `proto.d.ts` error
-
-Insert:
-
-```typescript
-import global_tendermint = tendermint;
-```
