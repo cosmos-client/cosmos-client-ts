@@ -1,7 +1,7 @@
 {
   "name": "@cosmos-client/core",
   "description": "REST API client for Cosmos SDK blockchain",
-  "version": "0.44.1",
+  "version": "0.44.2",
   "author": "CauchyE, Inc.",
   "bugs": {
     "url": "https://github.com/cosmos-client/cosmos-client-ts/issues"
