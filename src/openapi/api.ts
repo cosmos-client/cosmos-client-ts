@@ -377,13 +377,13 @@ export interface BlockQuery {
  */
 export interface BodyIsTheProcessableContentOfTheTransaction {
     /**
-     * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs.  By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<InlineResponseDefaultDetails>}
+     * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    messages?: Array<InlineResponseDefaultDetails>;
+    messages?: Array<InlineResponse20025Accounts>;
     /**
-     * 
+     * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
@@ -396,16 +396,16 @@ export interface BodyIsTheProcessableContentOfTheTransaction {
     timeout_height?: string;
     /**
      * 
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    extension_options?: Array<InlineResponseDefaultDetails>;
+    extension_options?: Array<InlineResponse20025Accounts>;
     /**
      * 
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    non_critical_extension_options?: Array<InlineResponseDefaultDetails>;
+    non_critical_extension_options?: Array<InlineResponse20025Accounts>;
 }
 /**
  * 
@@ -438,65 +438,6 @@ export interface BroadcastTxCommitResult {
      */
     height?: number;
 }
-/**
- * Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets.
- * @export
- * @interface ChannelAssociatedWithTheRequestIdentifiers
- */
-export interface ChannelAssociatedWithTheRequestIdentifiers {
-    /**
-     * State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.   - STATE_UNINITIALIZED_UNSPECIFIED: Default State  - STATE_INIT: A channel has just started the opening handshake.  - STATE_TRYOPEN: A channel has acknowledged the handshake step on the counterparty chain.  - STATE_OPEN: A channel has completed the handshake. Open channels are ready to send and receive packets.  - STATE_CLOSED: A channel has been closed and can no longer be used to send or receive packets.
-     * @type {string}
-     * @memberof ChannelAssociatedWithTheRequestIdentifiers
-     */
-    state?: ChannelAssociatedWithTheRequestIdentifiersStateEnum;
-    /**
-     * - ORDER_NONE_UNSPECIFIED: zero-value for channel ordering  - ORDER_UNORDERED: packets can be delivered in any order, which may differ from the order in which they were sent.  - ORDER_ORDERED: packets are delivered exactly in the order which they were sent
-     * @type {string}
-     * @memberof ChannelAssociatedWithTheRequestIdentifiers
-     */
-    ordering?: ChannelAssociatedWithTheRequestIdentifiersOrderingEnum;
-    /**
-     * 
-     * @type {CounterpartyChannelEnd}
-     * @memberof ChannelAssociatedWithTheRequestIdentifiers
-     */
-    counterparty?: CounterpartyChannelEnd;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ChannelAssociatedWithTheRequestIdentifiers
-     */
-    connection_hops?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChannelAssociatedWithTheRequestIdentifiers
-     */
-    version?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ChannelAssociatedWithTheRequestIdentifiersStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN',
-    Closed = 'STATE_CLOSED'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ChannelAssociatedWithTheRequestIdentifiersOrderingEnum {
-    NoneUnspecified = 'ORDER_NONE_UNSPECIFIED',
-    Unordered = 'ORDER_UNORDERED',
-    Ordered = 'ORDER_ORDERED'
-}
-
 /**
  * 
  * @export
@@ -547,63 +488,6 @@ export interface CheckTxResult {
     tags?: Array<InlineResponse2004ResultTags>;
 }
 /**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface ClientState
- */
-export interface ClientState {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof ClientState
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof ClientState
-     */
-    value?: string;
-}
-/**
- * IdentifiedClientState defines a client state with an additional client identifier field.
- * @export
- * @interface ClientStateAssociatedWithTheChannel
- */
-export interface ClientStateAssociatedWithTheChannel {
-    /**
-     * 
-     * @type {string}
-     * @memberof ClientStateAssociatedWithTheChannel
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {ClientState}
-     * @memberof ClientStateAssociatedWithTheChannel
-     */
-    client_state?: ClientState;
-}
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface ClientStateAssociatedWithTheRequestIdentifier
- */
-export interface ClientStateAssociatedWithTheRequestIdentifier {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof ClientStateAssociatedWithTheRequestIdentifier
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof ClientStateAssociatedWithTheRequestIdentifier
-     */
-    value?: string;
-}
-/**
  * 
  * @export
  * @interface Coin
@@ -621,131 +505,6 @@ export interface Coin {
      * @memberof Coin
      */
     amount?: string;
-}
-/**
- * ConnectionEnd defines a stateful object on a chain connected to another separate one. NOTE: there must only be 2 defined ConnectionEnds to establish a connection between two chains.
- * @export
- * @interface ConnectionAssociatedWithTheRequestIdentifier
- */
-export interface ConnectionAssociatedWithTheRequestIdentifier {
-    /**
-     * client associated with this connection.
-     * @type {string}
-     * @memberof ConnectionAssociatedWithTheRequestIdentifier
-     */
-    client_id?: string;
-    /**
-     * IBC version which can be utilised to determine encodings or protocols for channels or packets utilising this connection.
-     * @type {Array<InlineResponse20080Versions>}
-     * @memberof ConnectionAssociatedWithTheRequestIdentifier
-     */
-    versions?: Array<InlineResponse20080Versions>;
-    /**
-     * current state of the connection end.
-     * @type {string}
-     * @memberof ConnectionAssociatedWithTheRequestIdentifier
-     */
-    state?: ConnectionAssociatedWithTheRequestIdentifierStateEnum;
-    /**
-     * 
-     * @type {InlineResponse20080Counterparty}
-     * @memberof ConnectionAssociatedWithTheRequestIdentifier
-     */
-    counterparty?: InlineResponse20080Counterparty;
-    /**
-     * delay period that must pass before a consensus state can be used for packet-verification NOTE: delay period logic is only implemented by some clients.
-     * @type {string}
-     * @memberof ConnectionAssociatedWithTheRequestIdentifier
-     */
-    delay_period?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ConnectionAssociatedWithTheRequestIdentifierStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN'
-}
-
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface ConsensusState
- */
-export interface ConsensusState {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof ConsensusState
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof ConsensusState
-     */
-    value?: string;
-}
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface ConsensusStateAssociatedWithTheChannel
- */
-export interface ConsensusStateAssociatedWithTheChannel {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof ConsensusStateAssociatedWithTheChannel
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof ConsensusStateAssociatedWithTheChannel
-     */
-    value?: string;
-}
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight
- */
-export interface ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight
-     */
-    value?: string;
-}
-/**
- * Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset
- * @export
- * @interface ConsensusStateHeight
- */
-export interface ConsensusStateHeight {
-    /**
-     * 
-     * @type {string}
-     * @memberof ConsensusStateHeight
-     */
-    revision_number?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ConsensusStateHeight
-     */
-    revision_height?: string;
 }
 /**
  * Params defines the parameters for the auth module.
@@ -792,10 +551,29 @@ export interface CosmosAuthV1beta1Params {
 export interface CosmosAuthV1beta1QueryAccountResponse {
     /**
      * 
-     * @type {InlineResponse20025Account}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosAuthV1beta1QueryAccountResponse
      */
-    account?: InlineResponse20025Account;
+    account?: InlineResponse20025Accounts;
+}
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * @export
+ * @interface CosmosAuthV1beta1QueryAccountsResponse
+ */
+export interface CosmosAuthV1beta1QueryAccountsResponse {
+    /**
+     * 
+     * @type {Array<InlineResponse20025Accounts>}
+     * @memberof CosmosAuthV1beta1QueryAccountsResponse
+     */
+    accounts?: Array<InlineResponse20025Accounts>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof CosmosAuthV1beta1QueryAccountsResponse
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -805,10 +583,147 @@ export interface CosmosAuthV1beta1QueryAccountResponse {
 export interface CosmosAuthV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20026Params}
+     * @type {InlineResponse20027Params}
      * @memberof CosmosAuthV1beta1QueryParamsResponse
      */
-    params?: InlineResponse20026Params;
+    params?: InlineResponse20027Params;
+}
+/**
+ * Grant gives permissions to execute the provide method with expiration time.
+ * @export
+ * @interface CosmosAuthzV1beta1Grant
+ */
+export interface CosmosAuthzV1beta1Grant {
+    /**
+     * 
+     * @type {InlineResponse20025Accounts}
+     * @memberof CosmosAuthzV1beta1Grant
+     */
+    authorization?: InlineResponse20025Accounts;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthzV1beta1Grant
+     */
+    expiration?: string;
+}
+/**
+ * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
+ * @export
+ * @interface CosmosAuthzV1beta1QueryGrantsResponse
+ */
+export interface CosmosAuthzV1beta1QueryGrantsResponse {
+    /**
+     * authorizations is a list of grants granted for grantee by granter.
+     * @type {Array<InlineResponse20080Grants>}
+     * @memberof CosmosAuthzV1beta1QueryGrantsResponse
+     */
+    grants?: Array<InlineResponse20080Grants>;
+    /**
+     * 
+     * @type {InlineResponse20039Pagination}
+     * @memberof CosmosAuthzV1beta1QueryGrantsResponse
+     */
+    pagination?: InlineResponse20039Pagination;
+}
+/**
+ * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
+ * @export
+ * @interface CosmosBankV1beta1DenomOwner
+ */
+export interface CosmosBankV1beta1DenomOwner {
+    /**
+     * address defines the address that owns a particular denomination.
+     * @type {string}
+     * @memberof CosmosBankV1beta1DenomOwner
+     */
+    address?: string;
+    /**
+     * 
+     * @type {InlineResponse20028Balances}
+     * @memberof CosmosBankV1beta1DenomOwner
+     */
+    balance?: InlineResponse20028Balances;
+}
+/**
+ * DenomUnit represents a struct that describes a given denomination unit of the basic token.
+ * @export
+ * @interface CosmosBankV1beta1DenomUnit
+ */
+export interface CosmosBankV1beta1DenomUnit {
+    /**
+     * denom represents the string name of the given denom unit (e.g uatom).
+     * @type {string}
+     * @memberof CosmosBankV1beta1DenomUnit
+     */
+    denom?: string;
+    /**
+     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
+     * @type {number}
+     * @memberof CosmosBankV1beta1DenomUnit
+     */
+    exponent?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CosmosBankV1beta1DenomUnit
+     */
+    aliases?: Array<string>;
+}
+/**
+ * Metadata represents a struct that describes a basic token.
+ * @export
+ * @interface CosmosBankV1beta1Metadata
+ */
+export interface CosmosBankV1beta1Metadata {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20031DenomUnits>}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    denom_units?: Array<InlineResponse20031DenomUnits>;
+    /**
+     * base represents the base denom (should be the DenomUnit with exponent = 0).
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    base?: string;
+    /**
+     * display indicates the suggested denom that should be displayed in clients.
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    display?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    name?: string;
+    /**
+     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    symbol?: string;
+    /**
+     * URI to a document (on or off-chain) that contains additional information. Optional.
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    uri?: string;
+    /**
+     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
+     * @type {string}
+     * @memberof CosmosBankV1beta1Metadata
+     */
+    uri_hash?: string;
 }
 /**
  * Params defines the parameters for the bank module.
@@ -818,10 +733,10 @@ export interface CosmosAuthV1beta1QueryParamsResponse {
 export interface CosmosBankV1beta1Params {
     /**
      * 
-     * @type {Array<InlineResponse20029ParamsSendEnabled>}
+     * @type {Array<InlineResponse20033ParamsSendEnabled>}
      * @memberof CosmosBankV1beta1Params
      */
-    send_enabled?: Array<InlineResponse20029ParamsSendEnabled>;
+    send_enabled?: Array<InlineResponse20033ParamsSendEnabled>;
     /**
      * 
      * @type {boolean}
@@ -837,16 +752,16 @@ export interface CosmosBankV1beta1Params {
 export interface CosmosBankV1beta1QueryAllBalancesResponse {
     /**
      * balances is the balances of all the coins.
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosBankV1beta1QueryAllBalancesResponse
      */
-    balances?: Array<InlineResponse20027Balances>;
+    balances?: Array<InlineResponse20028Balances>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosBankV1beta1QueryAllBalancesResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryBalanceResponse is the response type for the Query/Balance RPC method.
@@ -856,10 +771,61 @@ export interface CosmosBankV1beta1QueryAllBalancesResponse {
 export interface CosmosBankV1beta1QueryBalanceResponse {
     /**
      * 
-     * @type {InlineResponse20028Balance}
+     * @type {InlineResponse20028Balances}
      * @memberof CosmosBankV1beta1QueryBalanceResponse
      */
-    balance?: InlineResponse20028Balance;
+    balance?: InlineResponse20028Balances;
+}
+/**
+ * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
+ * @export
+ * @interface CosmosBankV1beta1QueryDenomMetadataResponse
+ */
+export interface CosmosBankV1beta1QueryDenomMetadataResponse {
+    /**
+     * 
+     * @type {InlineResponse20031Metadatas}
+     * @memberof CosmosBankV1beta1QueryDenomMetadataResponse
+     */
+    metadata?: InlineResponse20031Metadatas;
+}
+/**
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+ * @export
+ * @interface CosmosBankV1beta1QueryDenomOwnersResponse
+ */
+export interface CosmosBankV1beta1QueryDenomOwnersResponse {
+    /**
+     * 
+     * @type {Array<InlineResponse20030DenomOwners>}
+     * @memberof CosmosBankV1beta1QueryDenomOwnersResponse
+     */
+    denom_owners?: Array<InlineResponse20030DenomOwners>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof CosmosBankV1beta1QueryDenomOwnersResponse
+     */
+    pagination?: InlineResponse20025Pagination;
+}
+/**
+ * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
+ * @export
+ * @interface CosmosBankV1beta1QueryDenomsMetadataResponse
+ */
+export interface CosmosBankV1beta1QueryDenomsMetadataResponse {
+    /**
+     * metadata provides the client information for all the registered tokens.
+     * @type {Array<InlineResponse20031Metadatas>}
+     * @memberof CosmosBankV1beta1QueryDenomsMetadataResponse
+     */
+    metadatas?: Array<InlineResponse20031Metadatas>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof CosmosBankV1beta1QueryDenomsMetadataResponse
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryParamsResponse defines the response type for querying x/bank parameters.
@@ -869,10 +835,10 @@ export interface CosmosBankV1beta1QueryBalanceResponse {
 export interface CosmosBankV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20029Params}
+     * @type {InlineResponse20033Params}
      * @memberof CosmosBankV1beta1QueryParamsResponse
      */
-    params?: InlineResponse20029Params;
+    params?: InlineResponse20033Params;
 }
 /**
  * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
@@ -882,10 +848,10 @@ export interface CosmosBankV1beta1QueryParamsResponse {
 export interface CosmosBankV1beta1QuerySupplyOfResponse {
     /**
      * 
-     * @type {InlineResponse20030Amount}
+     * @type {InlineResponse20028Balances}
      * @memberof CosmosBankV1beta1QuerySupplyOfResponse
      */
-    amount?: InlineResponse20030Amount;
+    amount?: InlineResponse20028Balances;
 }
 /**
  * 
@@ -895,10 +861,16 @@ export interface CosmosBankV1beta1QuerySupplyOfResponse {
 export interface CosmosBankV1beta1QueryTotalSupplyResponse {
     /**
      * 
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
      */
-    supply?: Array<InlineResponse20027Balances>;
+    supply?: Array<InlineResponse20028Balances>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
@@ -939,10 +911,10 @@ export interface CosmosBaseAbciV1beta1ABCIMessageLog {
     log?: string;
     /**
      * Events contains a slice of Event objects that were emitted during some execution.
-     * @type {Array<InlineResponse20071TxResponseEvents>}
+     * @type {Array<InlineResponse20075TxResponseEvents>}
      * @memberof CosmosBaseAbciV1beta1ABCIMessageLog
      */
-    events?: Array<InlineResponse20071TxResponseEvents>;
+    events?: Array<InlineResponse20075TxResponseEvents>;
 }
 /**
  * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
@@ -1002,10 +974,10 @@ export interface CosmosBaseAbciV1beta1Result {
     log?: string;
     /**
      * Events contains a slice of Event objects that were emitted during message or handler execution.
-     * @type {Array<InlineResponse20070ResultEvents>}
+     * @type {Array<InlineResponse20074ResultEvents>}
      * @memberof CosmosBaseAbciV1beta1Result
      */
-    events?: Array<InlineResponse20070ResultEvents>;
+    events?: Array<InlineResponse20074ResultEvents>;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
@@ -1021,10 +993,10 @@ export interface CosmosBaseAbciV1beta1StringEvent {
     type?: string;
     /**
      * 
-     * @type {Array<InlineResponse20071TxResponseAttributes>}
+     * @type {Array<InlineResponse20075TxResponseAttributes>}
      * @memberof CosmosBaseAbciV1beta1StringEvent
      */
-    attributes?: Array<InlineResponse20071TxResponseAttributes>;
+    attributes?: Array<InlineResponse20075TxResponseAttributes>;
 }
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
@@ -1070,10 +1042,10 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     raw_log?: string;
     /**
      * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20071TxResponseLogs>}
+     * @type {Array<InlineResponse20075TxResponseLogs>}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    logs?: Array<InlineResponse20071TxResponseLogs>;
+    logs?: Array<InlineResponse20075TxResponseLogs>;
     /**
      * Additional information. May be non-deterministic.
      * @type {string}
@@ -1094,10 +1066,10 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     gas_used?: string;
     /**
      * 
-     * @type {InlineResponse20071TxResponseTx}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    tx?: InlineResponse20071TxResponseTx;
+    tx?: InlineResponse20025Accounts;
     /**
      * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
      * @type {string}
@@ -1135,6 +1107,12 @@ export interface CosmosBaseQueryV1beta1PageRequest {
      * @memberof CosmosBaseQueryV1beta1PageRequest
      */
     count_total?: boolean;
+    /**
+     * reverse is set to true if results are to be returned in the descending order.
+     * @type {boolean}
+     * @memberof CosmosBaseQueryV1beta1PageRequest
+     */
+    reverse?: boolean;
 }
 /**
  * PageResponse is to be embedded in gRPC response messages where the corresponding request message has used PageRequest.   message SomeResponse {          repeated Bar results = 1;          PageResponse page = 2;  }
@@ -1169,10 +1147,10 @@ export interface CosmosBaseTendermintV1beta1GetBlockByHeightResponse {
     block_id?: BlockID1;
     /**
      * 
-     * @type {InlineResponse20031Block}
+     * @type {InlineResponse20035Block}
      * @memberof CosmosBaseTendermintV1beta1GetBlockByHeightResponse
      */
-    block?: InlineResponse20031Block;
+    block?: InlineResponse20035Block;
 }
 /**
  * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
@@ -1188,10 +1166,10 @@ export interface CosmosBaseTendermintV1beta1GetLatestBlockResponse {
     block_id?: BlockID1;
     /**
      * 
-     * @type {InlineResponse20031Block}
+     * @type {InlineResponse20035Block}
      * @memberof CosmosBaseTendermintV1beta1GetLatestBlockResponse
      */
-    block?: InlineResponse20031Block;
+    block?: InlineResponse20035Block;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
@@ -1207,16 +1185,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
     block_height?: string;
     /**
      * 
-     * @type {Array<InlineResponse20035Validators>}
+     * @type {Array<InlineResponse20039Validators>}
      * @memberof CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse
      */
-    validators?: Array<InlineResponse20035Validators>;
+    validators?: Array<InlineResponse20039Validators>;
     /**
      * 
-     * @type {InlineResponse20035Pagination}
+     * @type {InlineResponse20039Pagination}
      * @memberof CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse
      */
-    pagination?: InlineResponse20035Pagination;
+    pagination?: InlineResponse20039Pagination;
 }
 /**
  * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
@@ -1226,16 +1204,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
 export interface CosmosBaseTendermintV1beta1GetNodeInfoResponse {
     /**
      * 
-     * @type {InlineResponse20033DefaultNodeInfo}
+     * @type {InlineResponse20037DefaultNodeInfo}
      * @memberof CosmosBaseTendermintV1beta1GetNodeInfoResponse
      */
-    default_node_info?: InlineResponse20033DefaultNodeInfo;
+    default_node_info?: InlineResponse20037DefaultNodeInfo;
     /**
      * 
-     * @type {InlineResponse20033ApplicationVersion}
+     * @type {InlineResponse20037ApplicationVersion}
      * @memberof CosmosBaseTendermintV1beta1GetNodeInfoResponse
      */
-    application_version?: InlineResponse20033ApplicationVersion;
+    application_version?: InlineResponse20037ApplicationVersion;
 }
 /**
  * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
@@ -1264,16 +1242,16 @@ export interface CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse {
     block_height?: string;
     /**
      * 
-     * @type {Array<InlineResponse20035Validators>}
+     * @type {Array<InlineResponse20039Validators>}
      * @memberof CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse
      */
-    validators?: Array<InlineResponse20035Validators>;
+    validators?: Array<InlineResponse20039Validators>;
     /**
      * 
-     * @type {InlineResponse20035Pagination}
+     * @type {InlineResponse20039Pagination}
      * @memberof CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse
      */
-    pagination?: InlineResponse20035Pagination;
+    pagination?: InlineResponse20039Pagination;
 }
 /**
  * 
@@ -1314,10 +1292,10 @@ export interface CosmosBaseTendermintV1beta1Validator {
     address?: string;
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosBaseTendermintV1beta1Validator
      */
-    pub_key?: InlineResponseDefaultDetails;
+    pub_key?: InlineResponse20025Accounts;
     /**
      * 
      * @type {string}
@@ -1379,6 +1357,12 @@ export interface CosmosBaseTendermintV1beta1VersionInfo {
      * @memberof CosmosBaseTendermintV1beta1VersionInfo
      */
     build_deps?: Array<ModuleIsTheTypeForVersionInfo>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1VersionInfo
+     */
+    cosmos_sdk_version?: string;
 }
 /**
  * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
@@ -1451,10 +1435,10 @@ export interface CosmosDistributionV1beta1DelegationDelegatorReward {
     validator_address?: string;
     /**
      * 
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof CosmosDistributionV1beta1DelegationDelegatorReward
      */
-    reward?: Array<InlineResponse20037Pool>;
+    reward?: Array<InlineResponse20041Pool>;
 }
 /**
  * Params defines the set of params for the distribution module.
@@ -1495,10 +1479,10 @@ export interface CosmosDistributionV1beta1Params {
 export interface CosmosDistributionV1beta1QueryCommunityPoolResponse {
     /**
      * pool defines community pool\'s coins.
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof CosmosDistributionV1beta1QueryCommunityPoolResponse
      */
-    pool?: Array<InlineResponse20037Pool>;
+    pool?: Array<InlineResponse20041Pool>;
 }
 /**
  * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
@@ -1508,10 +1492,10 @@ export interface CosmosDistributionV1beta1QueryCommunityPoolResponse {
 export interface CosmosDistributionV1beta1QueryDelegationRewardsResponse {
     /**
      * rewards defines the rewards accrued by a delegation.
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof CosmosDistributionV1beta1QueryDelegationRewardsResponse
      */
-    rewards?: Array<InlineResponse20037Pool>;
+    rewards?: Array<InlineResponse20041Pool>;
 }
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
@@ -1521,16 +1505,16 @@ export interface CosmosDistributionV1beta1QueryDelegationRewardsResponse {
 export interface CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse {
     /**
      * rewards defines all the rewards accrued by a delegator.
-     * @type {Array<InlineResponse20038Rewards>}
+     * @type {Array<InlineResponse20042Rewards>}
      * @memberof CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse
      */
-    rewards?: Array<InlineResponse20038Rewards>;
+    rewards?: Array<InlineResponse20042Rewards>;
     /**
      * total defines the sum of all the rewards.
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse
      */
-    total?: Array<InlineResponse20037Pool>;
+    total?: Array<InlineResponse20041Pool>;
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
@@ -1566,10 +1550,10 @@ export interface CosmosDistributionV1beta1QueryDelegatorWithdrawAddressResponse 
 export interface CosmosDistributionV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20042Params}
+     * @type {InlineResponse20046Params}
      * @memberof CosmosDistributionV1beta1QueryParamsResponse
      */
-    params?: InlineResponse20042Params;
+    params?: InlineResponse20046Params;
 }
 /**
  * 
@@ -1592,10 +1576,10 @@ export interface CosmosDistributionV1beta1QueryValidatorCommissionResponse {
 export interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse {
     /**
      * 
-     * @type {InlineResponse20043Rewards}
+     * @type {InlineResponse20047Rewards}
      * @memberof CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse
      */
-    rewards?: InlineResponse20043Rewards;
+    rewards?: InlineResponse20047Rewards;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
@@ -1605,16 +1589,16 @@ export interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsRespon
 export interface CosmosDistributionV1beta1QueryValidatorSlashesResponse {
     /**
      * slashes defines the slashes the validator received.
-     * @type {Array<InlineResponse20044Slashes>}
+     * @type {Array<InlineResponse20048Slashes>}
      * @memberof CosmosDistributionV1beta1QueryValidatorSlashesResponse
      */
-    slashes?: Array<InlineResponse20044Slashes>;
+    slashes?: Array<InlineResponse20048Slashes>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosDistributionV1beta1QueryValidatorSlashesResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * ValidatorAccumulatedCommission represents accumulated commission for a validator kept as a running counter, can be withdrawn at any time.
@@ -1624,10 +1608,10 @@ export interface CosmosDistributionV1beta1QueryValidatorSlashesResponse {
 export interface CosmosDistributionV1beta1ValidatorAccumulatedCommission {
     /**
      * 
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof CosmosDistributionV1beta1ValidatorAccumulatedCommission
      */
-    commission?: Array<InlineResponse20037Pool>;
+    commission?: Array<InlineResponse20041Pool>;
 }
 /**
  * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
@@ -1637,10 +1621,10 @@ export interface CosmosDistributionV1beta1ValidatorAccumulatedCommission {
 export interface CosmosDistributionV1beta1ValidatorOutstandingRewards {
     /**
      * 
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof CosmosDistributionV1beta1ValidatorOutstandingRewards
      */
-    rewards?: Array<InlineResponse20037Pool>;
+    rewards?: Array<InlineResponse20041Pool>;
 }
 /**
  * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
@@ -1669,16 +1653,16 @@ export interface CosmosDistributionV1beta1ValidatorSlashEvent {
 export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
     /**
      * evidence returns all evidences.
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    evidence?: Array<InlineResponseDefaultDetails>;
+    evidence?: Array<InlineResponse20025Accounts>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
@@ -1688,10 +1672,67 @@ export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
 export interface CosmosEvidenceV1beta1QueryEvidenceResponse {
     /**
      * 
-     * @type {InlineResponse20046Evidence}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosEvidenceV1beta1QueryEvidenceResponse
      */
-    evidence?: InlineResponse20046Evidence;
+    evidence?: InlineResponse20025Accounts;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosFeegrantV1beta1Grant
+ */
+export interface CosmosFeegrantV1beta1Grant {
+    /**
+     * granter is the address of the user granting an allowance of their funds.
+     * @type {string}
+     * @memberof CosmosFeegrantV1beta1Grant
+     */
+    granter?: string;
+    /**
+     * grantee is the address of the user being granted an allowance of another user\'s funds.
+     * @type {string}
+     * @memberof CosmosFeegrantV1beta1Grant
+     */
+    grantee?: string;
+    /**
+     * 
+     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance}
+     * @memberof CosmosFeegrantV1beta1Grant
+     */
+    allowance?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance;
+}
+/**
+ * QueryAllowanceResponse is the response type for the Query/Allowance RPC method.
+ * @export
+ * @interface CosmosFeegrantV1beta1QueryAllowanceResponse
+ */
+export interface CosmosFeegrantV1beta1QueryAllowanceResponse {
+    /**
+     * 
+     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext}
+     * @memberof CosmosFeegrantV1beta1QueryAllowanceResponse
+     */
+    allowance?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext;
+}
+/**
+ * QueryAllowancesResponse is the response type for the Query/Allowances RPC method.
+ * @export
+ * @interface CosmosFeegrantV1beta1QueryAllowancesResponse
+ */
+export interface CosmosFeegrantV1beta1QueryAllowancesResponse {
+    /**
+     * allowances are allowance\'s granted for grantee by granter.
+     * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
+     * @memberof CosmosFeegrantV1beta1QueryAllowancesResponse
+     */
+    allowances?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
+    /**
+     * 
+     * @type {InlineResponse20039Pagination}
+     * @memberof CosmosFeegrantV1beta1QueryAllowancesResponse
+     */
+    pagination?: InlineResponse20039Pagination;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active proposal.
@@ -1713,10 +1754,10 @@ export interface CosmosGovV1beta1Deposit {
     depositor?: string;
     /**
      * 
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosGovV1beta1Deposit
      */
-    amount?: Array<InlineResponse20027Balances>;
+    amount?: Array<InlineResponse20028Balances>;
 }
 /**
  * DepositParams defines the params for deposits on governance proposals.
@@ -1726,10 +1767,10 @@ export interface CosmosGovV1beta1Deposit {
 export interface CosmosGovV1beta1DepositParams {
     /**
      * Minimum deposit for a proposal to enter voting period.
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosGovV1beta1DepositParams
      */
-    min_deposit?: Array<InlineResponse20027Balances>;
+    min_deposit?: Array<InlineResponse20028Balances>;
     /**
      * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
      * @type {string}
@@ -1751,10 +1792,10 @@ export interface CosmosGovV1beta1Proposal {
     proposal_id?: string;
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosGovV1beta1Proposal
      */
-    content?: InlineResponseDefaultDetails;
+    content?: InlineResponse20025Accounts;
     /**
      * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @type {string}
@@ -1763,10 +1804,10 @@ export interface CosmosGovV1beta1Proposal {
     status?: CosmosGovV1beta1ProposalStatusEnum;
     /**
      * 
-     * @type {InlineResponse20048FinalTallyResult}
+     * @type {InlineResponse20052FinalTallyResult}
      * @memberof CosmosGovV1beta1Proposal
      */
-    final_tally_result?: InlineResponse20048FinalTallyResult;
+    final_tally_result?: InlineResponse20052FinalTallyResult;
     /**
      * 
      * @type {string}
@@ -1781,10 +1822,10 @@ export interface CosmosGovV1beta1Proposal {
     deposit_end_time?: string;
     /**
      * 
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosGovV1beta1Proposal
      */
-    total_deposit?: Array<InlineResponse20027Balances>;
+    total_deposit?: Array<InlineResponse20028Balances>;
     /**
      * 
      * @type {string}
@@ -1834,10 +1875,10 @@ export enum CosmosGovV1beta1ProposalStatus {
 export interface CosmosGovV1beta1QueryDepositResponse {
     /**
      * 
-     * @type {InlineResponse20051Deposit}
+     * @type {InlineResponse20054Deposits}
      * @memberof CosmosGovV1beta1QueryDepositResponse
      */
-    deposit?: InlineResponse20051Deposit;
+    deposit?: InlineResponse20054Deposits;
 }
 /**
  * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
@@ -1847,16 +1888,16 @@ export interface CosmosGovV1beta1QueryDepositResponse {
 export interface CosmosGovV1beta1QueryDepositsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20050Deposits>}
+     * @type {Array<InlineResponse20054Deposits>}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
-    deposits?: Array<InlineResponse20050Deposits>;
+    deposits?: Array<InlineResponse20054Deposits>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -1866,22 +1907,22 @@ export interface CosmosGovV1beta1QueryDepositsResponse {
 export interface CosmosGovV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20047VotingParams}
+     * @type {InlineResponse20051VotingParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    voting_params?: InlineResponse20047VotingParams;
+    voting_params?: InlineResponse20051VotingParams;
     /**
      * 
-     * @type {InlineResponse20047DepositParams}
+     * @type {InlineResponse20051DepositParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    deposit_params?: InlineResponse20047DepositParams;
+    deposit_params?: InlineResponse20051DepositParams;
     /**
      * 
-     * @type {InlineResponse20047TallyParams}
+     * @type {InlineResponse20051TallyParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    tally_params?: InlineResponse20047TallyParams;
+    tally_params?: InlineResponse20051TallyParams;
 }
 /**
  * QueryProposalResponse is the response type for the Query/Proposal RPC method.
@@ -1891,10 +1932,10 @@ export interface CosmosGovV1beta1QueryParamsResponse {
 export interface CosmosGovV1beta1QueryProposalResponse {
     /**
      * 
-     * @type {InlineResponse20048Proposals}
+     * @type {InlineResponse20052Proposals}
      * @memberof CosmosGovV1beta1QueryProposalResponse
      */
-    proposal?: InlineResponse20048Proposals;
+    proposal?: InlineResponse20052Proposals;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
@@ -1904,16 +1945,16 @@ export interface CosmosGovV1beta1QueryProposalResponse {
 export interface CosmosGovV1beta1QueryProposalsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20048Proposals>}
+     * @type {Array<InlineResponse20052Proposals>}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
-    proposals?: Array<InlineResponse20048Proposals>;
+    proposals?: Array<InlineResponse20052Proposals>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
@@ -1923,10 +1964,10 @@ export interface CosmosGovV1beta1QueryProposalsResponse {
 export interface CosmosGovV1beta1QueryTallyResultResponse {
     /**
      * 
-     * @type {InlineResponse20052Tally}
+     * @type {InlineResponse20052FinalTallyResult}
      * @memberof CosmosGovV1beta1QueryTallyResultResponse
      */
-    tally?: InlineResponse20052Tally;
+    tally?: InlineResponse20052FinalTallyResult;
 }
 /**
  * QueryVoteResponse is the response type for the Query/Vote RPC method.
@@ -1936,10 +1977,10 @@ export interface CosmosGovV1beta1QueryTallyResultResponse {
 export interface CosmosGovV1beta1QueryVoteResponse {
     /**
      * 
-     * @type {InlineResponse20054Vote}
+     * @type {InlineResponse20057Votes}
      * @memberof CosmosGovV1beta1QueryVoteResponse
      */
-    vote?: InlineResponse20054Vote;
+    vote?: InlineResponse20057Votes;
 }
 /**
  * QueryVotesResponse is the response type for the Query/Votes RPC method.
@@ -1949,16 +1990,16 @@ export interface CosmosGovV1beta1QueryVoteResponse {
 export interface CosmosGovV1beta1QueryVotesResponse {
     /**
      * votes defined the queried votes.
-     * @type {Array<InlineResponse20053Votes>}
+     * @type {Array<InlineResponse20057Votes>}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
-    votes?: Array<InlineResponse20053Votes>;
+    votes?: Array<InlineResponse20057Votes>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * TallyParams defines the params for tallying votes on governance proposals.
@@ -2035,11 +2076,17 @@ export interface CosmosGovV1beta1Vote {
      */
     voter?: string;
     /**
-     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * Deprecated: Prefer to use `options` instead. This field is set in queries if and only if `len(options) == 1` and that option has weight 1. In all other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
      * @type {string}
      * @memberof CosmosGovV1beta1Vote
      */
     option?: CosmosGovV1beta1VoteOptionEnum;
+    /**
+     * 
+     * @type {Array<InlineResponse20057Options>}
+     * @memberof CosmosGovV1beta1Vote
+     */
+    options?: Array<InlineResponse20057Options>;
 }
 
 /**
@@ -2080,6 +2127,38 @@ export interface CosmosGovV1beta1VotingParams {
      */
     voting_period?: string;
 }
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ * @export
+ * @interface CosmosGovV1beta1WeightedVoteOption
+ */
+export interface CosmosGovV1beta1WeightedVoteOption {
+    /**
+     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * @type {string}
+     * @memberof CosmosGovV1beta1WeightedVoteOption
+     */
+    option?: CosmosGovV1beta1WeightedVoteOptionOptionEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosGovV1beta1WeightedVoteOption
+     */
+    weight?: string;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CosmosGovV1beta1WeightedVoteOptionOptionEnum {
+    Unspecified = 'VOTE_OPTION_UNSPECIFIED',
+    Yes = 'VOTE_OPTION_YES',
+    Abstain = 'VOTE_OPTION_ABSTAIN',
+    No = 'VOTE_OPTION_NO',
+    NoWithVeto = 'VOTE_OPTION_NO_WITH_VETO'
+}
+
 /**
  * Params holds parameters for the mint module.
  * @export
@@ -2157,10 +2236,10 @@ export interface CosmosMintV1beta1QueryInflationResponse {
 export interface CosmosMintV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20057Params}
+     * @type {InlineResponse20061Params}
      * @memberof CosmosMintV1beta1QueryParamsResponse
      */
-    params?: InlineResponse20057Params;
+    params?: InlineResponse20061Params;
 }
 /**
  * ParamChange defines an individual parameter change, for use in ParameterChangeProposal.
@@ -2195,10 +2274,10 @@ export interface CosmosParamsV1beta1ParamChange {
 export interface CosmosParamsV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20058Param}
+     * @type {InlineResponse20062Param}
      * @memberof CosmosParamsV1beta1QueryParamsResponse
      */
-    param?: InlineResponse20058Param;
+    param?: InlineResponse20062Param;
 }
 /**
  * Params represents the parameters used for by the slashing module.
@@ -2301,25 +2380,25 @@ export interface CosmosSlashingV1beta1ValidatorSigningInfo {
      */
     start_height?: string;
     /**
-     * 
+     * Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      * @type {string}
      * @memberof CosmosSlashingV1beta1ValidatorSigningInfo
      */
     index_offset?: string;
     /**
-     * 
+     * Timestamp until which the validator is jailed due to liveness downtime.
      * @type {string}
      * @memberof CosmosSlashingV1beta1ValidatorSigningInfo
      */
     jailed_until?: string;
     /**
-     * 
+     * Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor.
      * @type {boolean}
      * @memberof CosmosSlashingV1beta1ValidatorSigningInfo
      */
     tombstoned?: boolean;
     /**
-     * 
+     * A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      * @type {string}
      * @memberof CosmosSlashingV1beta1ValidatorSigningInfo
      */
@@ -2345,12 +2424,12 @@ export enum CosmosStakingV1beta1BondStatus {
 export interface CosmosStakingV1beta1Commission {
     /**
      * 
-     * @type {InlineResponse20062CommissionCommissionRates}
+     * @type {InlineResponse20066CommissionCommissionRates}
      * @memberof CosmosStakingV1beta1Commission
      */
-    commission_rates?: InlineResponse20062CommissionCommissionRates;
+    commission_rates?: InlineResponse20066CommissionCommissionRates;
     /**
-     * 
+     * update_time is the last time the commission rate was changed.
      * @type {string}
      * @memberof CosmosStakingV1beta1Commission
      */
@@ -2363,19 +2442,19 @@ export interface CosmosStakingV1beta1Commission {
  */
 export interface CosmosStakingV1beta1CommissionRates {
     /**
-     * 
+     * rate is the commission rate charged to delegators, as a fraction.
      * @type {string}
      * @memberof CosmosStakingV1beta1CommissionRates
      */
     rate?: string;
     /**
-     * 
+     * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
      * @type {string}
      * @memberof CosmosStakingV1beta1CommissionRates
      */
     max_rate?: string;
     /**
-     * 
+     * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
      * @type {string}
      * @memberof CosmosStakingV1beta1CommissionRates
      */
@@ -2388,19 +2467,19 @@ export interface CosmosStakingV1beta1CommissionRates {
  */
 export interface CosmosStakingV1beta1Delegation {
     /**
-     * 
+     * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
      * @memberof CosmosStakingV1beta1Delegation
      */
     delegator_address?: string;
     /**
-     * 
+     * validator_address is the bech32-encoded address of the validator.
      * @type {string}
      * @memberof CosmosStakingV1beta1Delegation
      */
     validator_address?: string;
     /**
-     * 
+     * shares define the delegation shares received.
      * @type {string}
      * @memberof CosmosStakingV1beta1Delegation
      */
@@ -2414,16 +2493,16 @@ export interface CosmosStakingV1beta1Delegation {
 export interface CosmosStakingV1beta1DelegationResponse {
     /**
      * 
-     * @type {InlineResponse20059Delegation}
+     * @type {InlineResponse20063Delegation}
      * @memberof CosmosStakingV1beta1DelegationResponse
      */
-    delegation?: InlineResponse20059Delegation;
+    delegation?: InlineResponse20063Delegation;
     /**
      * 
-     * @type {InlineResponse20027Balances}
+     * @type {InlineResponse20028Balances}
      * @memberof CosmosStakingV1beta1DelegationResponse
      */
-    balance?: InlineResponse20027Balances;
+    balance?: InlineResponse20028Balances;
 }
 /**
  * Description defines a validator description.
@@ -2432,31 +2511,31 @@ export interface CosmosStakingV1beta1DelegationResponse {
  */
 export interface CosmosStakingV1beta1Description {
     /**
-     * 
+     * moniker defines a human-readable name for the validator.
      * @type {string}
      * @memberof CosmosStakingV1beta1Description
      */
     moniker?: string;
     /**
-     * 
+     * identity defines an optional identity signature (ex. UPort or Keybase).
      * @type {string}
      * @memberof CosmosStakingV1beta1Description
      */
     identity?: string;
     /**
-     * 
+     * website defines an optional website link.
      * @type {string}
      * @memberof CosmosStakingV1beta1Description
      */
     website?: string;
     /**
-     * 
+     * security_contact defines an optional email for security contact.
      * @type {string}
      * @memberof CosmosStakingV1beta1Description
      */
     security_contact?: string;
     /**
-     * 
+     * details define other optional details.
      * @type {string}
      * @memberof CosmosStakingV1beta1Description
      */
@@ -2470,16 +2549,16 @@ export interface CosmosStakingV1beta1Description {
 export interface CosmosStakingV1beta1HistoricalInfo {
     /**
      * 
-     * @type {InlineResponse20031BlockHeader}
+     * @type {InlineResponse20068HistHeader}
      * @memberof CosmosStakingV1beta1HistoricalInfo
      */
-    header?: InlineResponse20031BlockHeader;
+    header?: InlineResponse20068HistHeader;
     /**
      * 
-     * @type {Array<InlineResponse20062Validators>}
+     * @type {Array<InlineResponse20066Validators>}
      * @memberof CosmosStakingV1beta1HistoricalInfo
      */
-    valset?: Array<InlineResponse20062Validators>;
+    valset?: Array<InlineResponse20066Validators>;
 }
 /**
  * Params defines the parameters for the staking module.
@@ -2488,31 +2567,31 @@ export interface CosmosStakingV1beta1HistoricalInfo {
  */
 export interface CosmosStakingV1beta1Params {
     /**
-     * 
+     * unbonding_time is the time duration of unbonding.
      * @type {string}
      * @memberof CosmosStakingV1beta1Params
      */
     unbonding_time?: string;
     /**
-     * 
+     * max_validators is the maximum number of validators.
      * @type {number}
      * @memberof CosmosStakingV1beta1Params
      */
     max_validators?: number;
     /**
-     * 
+     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
      * @type {number}
      * @memberof CosmosStakingV1beta1Params
      */
     max_entries?: number;
     /**
-     * 
+     * historical_entries is the number of historical entries to persist.
      * @type {number}
      * @memberof CosmosStakingV1beta1Params
      */
     historical_entries?: number;
     /**
-     * 
+     * bond_denom defines the bondable coin denomination.
      * @type {string}
      * @memberof CosmosStakingV1beta1Params
      */
@@ -2545,10 +2624,10 @@ export interface CosmosStakingV1beta1Pool {
 export interface CosmosStakingV1beta1QueryDelegationResponse {
     /**
      * 
-     * @type {InlineResponse20067DelegationResponse}
+     * @type {InlineResponse20063DelegationResponses}
      * @memberof CosmosStakingV1beta1QueryDelegationResponse
      */
-    delegation_response?: InlineResponse20067DelegationResponse;
+    delegation_response?: InlineResponse20063DelegationResponses;
 }
 /**
  * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
@@ -2558,16 +2637,16 @@ export interface CosmosStakingV1beta1QueryDelegationResponse {
 export interface CosmosStakingV1beta1QueryDelegatorDelegationsResponse {
     /**
      * delegation_responses defines all the delegations\' info of a delegator.
-     * @type {Array<InlineResponse20059DelegationResponses>}
+     * @type {Array<InlineResponse20063DelegationResponses>}
      * @memberof CosmosStakingV1beta1QueryDelegatorDelegationsResponse
      */
-    delegation_responses?: Array<InlineResponse20059DelegationResponses>;
+    delegation_responses?: Array<InlineResponse20063DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorDelegationsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
@@ -2577,16 +2656,16 @@ export interface CosmosStakingV1beta1QueryDelegatorDelegationsResponse {
 export interface CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20061UnbondingResponses>}
+     * @type {Array<InlineResponse20065UnbondingResponses>}
      * @memberof CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse
      */
-    unbonding_responses?: Array<InlineResponse20061UnbondingResponses>;
+    unbonding_responses?: Array<InlineResponse20065UnbondingResponses>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
@@ -2596,10 +2675,10 @@ export interface CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse 
 export interface CosmosStakingV1beta1QueryDelegatorValidatorResponse {
     /**
      * 
-     * @type {InlineResponse20063Validator}
+     * @type {InlineResponse20066Validators}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorResponse
      */
-    validator?: InlineResponse20063Validator;
+    validator?: InlineResponse20066Validators;
 }
 /**
  * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
@@ -2609,16 +2688,16 @@ export interface CosmosStakingV1beta1QueryDelegatorValidatorResponse {
 export interface CosmosStakingV1beta1QueryDelegatorValidatorsResponse {
     /**
      * validators defines the the validators\' info of a delegator.
-     * @type {Array<InlineResponse20062Validators>}
+     * @type {Array<InlineResponse20066Validators>}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorsResponse
      */
-    validators?: Array<InlineResponse20062Validators>;
+    validators?: Array<InlineResponse20066Validators>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
@@ -2628,10 +2707,10 @@ export interface CosmosStakingV1beta1QueryDelegatorValidatorsResponse {
 export interface CosmosStakingV1beta1QueryHistoricalInfoResponse {
     /**
      * 
-     * @type {InlineResponse20064Hist}
+     * @type {InlineResponse20068Hist}
      * @memberof CosmosStakingV1beta1QueryHistoricalInfoResponse
      */
-    hist?: InlineResponse20064Hist;
+    hist?: InlineResponse20068Hist;
 }
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -2641,10 +2720,10 @@ export interface CosmosStakingV1beta1QueryHistoricalInfoResponse {
 export interface CosmosStakingV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20065Params}
+     * @type {InlineResponse20069Params}
      * @memberof CosmosStakingV1beta1QueryParamsResponse
      */
-    params?: InlineResponse20065Params;
+    params?: InlineResponse20069Params;
 }
 /**
  * QueryPoolResponse is response type for the Query/Pool RPC method.
@@ -2654,10 +2733,10 @@ export interface CosmosStakingV1beta1QueryParamsResponse {
 export interface CosmosStakingV1beta1QueryPoolResponse {
     /**
      * 
-     * @type {InlineResponse20066Pool}
+     * @type {InlineResponse20070Pool}
      * @memberof CosmosStakingV1beta1QueryPoolResponse
      */
-    pool?: InlineResponse20066Pool;
+    pool?: InlineResponse20070Pool;
 }
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
@@ -2667,16 +2746,16 @@ export interface CosmosStakingV1beta1QueryPoolResponse {
 export interface CosmosStakingV1beta1QueryRedelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20060RedelegationResponses>}
+     * @type {Array<InlineResponse20064RedelegationResponses>}
      * @memberof CosmosStakingV1beta1QueryRedelegationsResponse
      */
-    redelegation_responses?: Array<InlineResponse20060RedelegationResponses>;
+    redelegation_responses?: Array<InlineResponse20064RedelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryRedelegationsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
@@ -2686,10 +2765,10 @@ export interface CosmosStakingV1beta1QueryRedelegationsResponse {
 export interface CosmosStakingV1beta1QueryUnbondingDelegationResponse {
     /**
      * 
-     * @type {InlineResponse20068Unbond}
+     * @type {InlineResponse20065UnbondingResponses}
      * @memberof CosmosStakingV1beta1QueryUnbondingDelegationResponse
      */
-    unbond?: InlineResponse20068Unbond;
+    unbond?: InlineResponse20065UnbondingResponses;
 }
 /**
  * 
@@ -2699,16 +2778,16 @@ export interface CosmosStakingV1beta1QueryUnbondingDelegationResponse {
 export interface CosmosStakingV1beta1QueryValidatorDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20059DelegationResponses>}
+     * @type {Array<InlineResponse20063DelegationResponses>}
      * @memberof CosmosStakingV1beta1QueryValidatorDelegationsResponse
      */
-    delegation_responses?: Array<InlineResponse20059DelegationResponses>;
+    delegation_responses?: Array<InlineResponse20063DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryValidatorDelegationsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * 
@@ -2718,10 +2797,10 @@ export interface CosmosStakingV1beta1QueryValidatorDelegationsResponse {
 export interface CosmosStakingV1beta1QueryValidatorResponse {
     /**
      * 
-     * @type {InlineResponse20063Validator}
+     * @type {InlineResponse20066Validators}
      * @memberof CosmosStakingV1beta1QueryValidatorResponse
      */
-    validator?: InlineResponse20063Validator;
+    validator?: InlineResponse20066Validators;
 }
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
@@ -2731,16 +2810,16 @@ export interface CosmosStakingV1beta1QueryValidatorResponse {
 export interface CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20061UnbondingResponses>}
+     * @type {Array<InlineResponse20065UnbondingResponses>}
      * @memberof CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse
      */
-    unbonding_responses?: Array<InlineResponse20061UnbondingResponses>;
+    unbonding_responses?: Array<InlineResponse20065UnbondingResponses>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * 
@@ -2750,16 +2829,16 @@ export interface CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse 
 export interface CosmosStakingV1beta1QueryValidatorsResponse {
     /**
      * validators contains all the queried validators.
-     * @type {Array<InlineResponse20062Validators>}
+     * @type {Array<InlineResponse20066Validators>}
      * @memberof CosmosStakingV1beta1QueryValidatorsResponse
      */
-    validators?: Array<InlineResponse20062Validators>;
+    validators?: Array<InlineResponse20066Validators>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof CosmosStakingV1beta1QueryValidatorsResponse
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
@@ -2768,29 +2847,29 @@ export interface CosmosStakingV1beta1QueryValidatorsResponse {
  */
 export interface CosmosStakingV1beta1Redelegation {
     /**
-     * 
+     * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
      * @memberof CosmosStakingV1beta1Redelegation
      */
     delegator_address?: string;
     /**
-     * 
+     * validator_src_address is the validator redelegation source operator address.
      * @type {string}
      * @memberof CosmosStakingV1beta1Redelegation
      */
     validator_src_address?: string;
     /**
-     * 
+     * validator_dst_address is the validator redelegation destination operator address.
      * @type {string}
      * @memberof CosmosStakingV1beta1Redelegation
      */
     validator_dst_address?: string;
     /**
-     * 
-     * @type {Array<InlineResponse20060RedelegationEntries>}
+     * entries are the redelegation entries.
+     * @type {Array<InlineResponse20064RedelegationEntries>}
      * @memberof CosmosStakingV1beta1Redelegation
      */
-    entries?: Array<InlineResponse20060RedelegationEntries>;
+    entries?: Array<InlineResponse20064RedelegationEntries>;
 }
 /**
  * RedelegationEntry defines a redelegation object with relevant metadata.
@@ -2799,25 +2878,25 @@ export interface CosmosStakingV1beta1Redelegation {
  */
 export interface CosmosStakingV1beta1RedelegationEntry {
     /**
-     * 
+     * creation_height  defines the height which the redelegation took place.
      * @type {string}
      * @memberof CosmosStakingV1beta1RedelegationEntry
      */
     creation_height?: string;
     /**
-     * 
+     * completion_time defines the unix time for redelegation completion.
      * @type {string}
      * @memberof CosmosStakingV1beta1RedelegationEntry
      */
     completion_time?: string;
     /**
-     * 
+     * initial_balance defines the initial balance when redelegation started.
      * @type {string}
      * @memberof CosmosStakingV1beta1RedelegationEntry
      */
     initial_balance?: string;
     /**
-     * 
+     * shares_dst is the amount of destination-validator shares created by redelegation.
      * @type {string}
      * @memberof CosmosStakingV1beta1RedelegationEntry
      */
@@ -2831,10 +2910,10 @@ export interface CosmosStakingV1beta1RedelegationEntry {
 export interface CosmosStakingV1beta1RedelegationEntryResponse {
     /**
      * 
-     * @type {InlineResponse20060RedelegationEntries}
+     * @type {InlineResponse20064RedelegationEntries}
      * @memberof CosmosStakingV1beta1RedelegationEntryResponse
      */
-    redelegation_entry?: InlineResponse20060RedelegationEntries;
+    redelegation_entry?: InlineResponse20064RedelegationEntries;
     /**
      * 
      * @type {string}
@@ -2850,16 +2929,16 @@ export interface CosmosStakingV1beta1RedelegationEntryResponse {
 export interface CosmosStakingV1beta1RedelegationResponse {
     /**
      * 
-     * @type {InlineResponse20060Redelegation}
+     * @type {InlineResponse20064Redelegation}
      * @memberof CosmosStakingV1beta1RedelegationResponse
      */
-    redelegation?: InlineResponse20060Redelegation;
+    redelegation?: InlineResponse20064Redelegation;
     /**
      * 
-     * @type {Array<InlineResponse20060Entries>}
+     * @type {Array<InlineResponse20064Entries>}
      * @memberof CosmosStakingV1beta1RedelegationResponse
      */
-    entries?: Array<InlineResponse20060Entries>;
+    entries?: Array<InlineResponse20064Entries>;
 }
 /**
  * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
@@ -2868,23 +2947,23 @@ export interface CosmosStakingV1beta1RedelegationResponse {
  */
 export interface CosmosStakingV1beta1UnbondingDelegation {
     /**
-     * 
+     * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
      * @memberof CosmosStakingV1beta1UnbondingDelegation
      */
     delegator_address?: string;
     /**
-     * 
+     * validator_address is the bech32-encoded address of the validator.
      * @type {string}
      * @memberof CosmosStakingV1beta1UnbondingDelegation
      */
     validator_address?: string;
     /**
-     * 
-     * @type {Array<InlineResponse20061Entries>}
+     * entries are the unbonding delegation entries.
+     * @type {Array<InlineResponse20065Entries>}
      * @memberof CosmosStakingV1beta1UnbondingDelegation
      */
-    entries?: Array<InlineResponse20061Entries>;
+    entries?: Array<InlineResponse20065Entries>;
 }
 /**
  * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
@@ -2893,25 +2972,25 @@ export interface CosmosStakingV1beta1UnbondingDelegation {
  */
 export interface CosmosStakingV1beta1UnbondingDelegationEntry {
     /**
-     * 
+     * creation_height is the height which the unbonding took place.
      * @type {string}
      * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
      */
     creation_height?: string;
     /**
-     * 
+     * completion_time is the unix time for unbonding completion.
      * @type {string}
      * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
      */
     completion_time?: string;
     /**
-     * 
+     * initial_balance defines the tokens initially scheduled to receive at completion.
      * @type {string}
      * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
      */
     initial_balance?: string;
     /**
-     * 
+     * balance defines the tokens to receive at completion.
      * @type {string}
      * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
      */
@@ -2924,67 +3003,67 @@ export interface CosmosStakingV1beta1UnbondingDelegationEntry {
  */
 export interface CosmosStakingV1beta1Validator {
     /**
-     * 
+     * operator_address defines the address of the validator\'s operator; bech encoded in JSON.
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     operator_address?: string;
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosStakingV1beta1Validator
      */
-    consensus_pubkey?: InlineResponseDefaultDetails;
+    consensus_pubkey?: InlineResponse20025Accounts;
     /**
-     * 
+     * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
      * @memberof CosmosStakingV1beta1Validator
      */
     jailed?: boolean;
     /**
-     * BondStatus is the status of a validator.   - BOND_STATUS_UNSPECIFIED: UNSPECIFIED defines an invalid validator status.  - BOND_STATUS_UNBONDED: UNBONDED defines a validator that is not bonded.  - BOND_STATUS_UNBONDING: UNBONDING defines a validator that is unbonding.  - BOND_STATUS_BONDED: BONDED defines a validator that is bonded.
+     * status is the validator status (bonded/unbonding/unbonded).
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     status?: CosmosStakingV1beta1ValidatorStatusEnum;
     /**
-     * 
+     * tokens define the delegated tokens (incl. self-delegation).
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     tokens?: string;
     /**
-     * 
+     * delegator_shares defines total shares issued to a validator\'s delegators.
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     delegator_shares?: string;
     /**
      * 
-     * @type {InlineResponse20062Description}
+     * @type {InlineResponse20066Description}
      * @memberof CosmosStakingV1beta1Validator
      */
-    description?: InlineResponse20062Description;
+    description?: InlineResponse20066Description;
     /**
-     * 
+     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     unbonding_height?: string;
     /**
-     * 
+     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     unbonding_time?: string;
     /**
      * 
-     * @type {InlineResponse20062Commission}
+     * @type {InlineResponse20066Commission}
      * @memberof CosmosStakingV1beta1Validator
      */
-    commission?: InlineResponse20062Commission;
+    commission?: InlineResponse20066Commission;
     /**
-     * 
+     * min_self_delegation is the validator\'s self declared minimum self delegation.
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
@@ -3041,10 +3120,10 @@ export interface CosmosTxV1beta1AuthInfo {
 export interface CosmosTxV1beta1AuthInfoFee {
     /**
      * 
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosTxV1beta1AuthInfoFee
      */
-    amount?: Array<InlineResponse20027Balances>;
+    amount?: Array<InlineResponse20028Balances>;
     /**
      * 
      * @type {string}
@@ -3115,10 +3194,10 @@ export enum CosmosTxV1beta1BroadcastTxRequestModeEnum {
 export interface CosmosTxV1beta1BroadcastTxResponse {
     /**
      * 
-     * @type {InlineResponse20071TxResponse}
+     * @type {InlineResponse20075TxResponse}
      * @memberof CosmosTxV1beta1BroadcastTxResponse
      */
-    tx_response?: InlineResponse20071TxResponse;
+    tx_response?: InlineResponse20075TxResponse;
 }
 /**
  * Fee includes the amount of coins paid in fees and the maximum gas to be used by the transaction. The ratio yields an effective \"gasprice\", which must be above some miminum to be accepted into the mempool.
@@ -3128,10 +3207,10 @@ export interface CosmosTxV1beta1BroadcastTxResponse {
 export interface CosmosTxV1beta1Fee {
     /**
      * 
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof CosmosTxV1beta1Fee
      */
-    amount?: Array<InlineResponse20027Balances>;
+    amount?: Array<InlineResponse20028Balances>;
     /**
      * 
      * @type {string}
@@ -3165,10 +3244,10 @@ export interface CosmosTxV1beta1GetTxResponse {
     tx?: CosmosTxV1beta1Tx;
     /**
      * 
-     * @type {InlineResponse20071TxResponse}
+     * @type {InlineResponse20075TxResponse}
      * @memberof CosmosTxV1beta1GetTxResponse
      */
-    tx_response?: InlineResponse20071TxResponse;
+    tx_response?: InlineResponse20075TxResponse;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents RPC method.
@@ -3184,95 +3263,16 @@ export interface CosmosTxV1beta1GetTxsEventResponse {
     txs?: Array<CosmosTxV1beta1Tx>;
     /**
      * tx_responses is the list of queried TxResponses.
-     * @type {Array<CosmosTxV1beta1GetTxsEventResponseTxResponses>}
+     * @type {Array<InlineResponse20075TxResponse>}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    tx_responses?: Array<CosmosTxV1beta1GetTxsEventResponseTxResponses>;
+    tx_responses?: Array<InlineResponse20075TxResponse>;
     /**
      * 
-     * @type {InlineResponse20035Pagination}
+     * @type {InlineResponse20039Pagination}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    pagination?: InlineResponse20035Pagination;
-}
-/**
- * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
- * @export
- * @interface CosmosTxV1beta1GetTxsEventResponseTxResponses
- */
-export interface CosmosTxV1beta1GetTxsEventResponseTxResponses {
-    /**
-     * 
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    height?: string;
-    /**
-     * The transaction hash.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    txhash?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    codespace?: string;
-    /**
-     * Response code.
-     * @type {number}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    code?: number;
-    /**
-     * Result bytes, if any.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    data?: string;
-    /**
-     * The output of the application\'s logger (raw string). May be non-deterministic.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    raw_log?: string;
-    /**
-     * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20071TxResponseLogs>}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    logs?: Array<InlineResponse20071TxResponseLogs>;
-    /**
-     * Additional information. May be non-deterministic.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    info?: string;
-    /**
-     * Amount of gas requested for transaction.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    gas_wanted?: string;
-    /**
-     * Amount of gas consumed by transaction.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    gas_used?: string;
-    /**
-     * 
-     * @type {InlineResponse20071TxResponseTx}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    tx?: InlineResponse20071TxResponseTx;
-    /**
-     * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
-     * @type {string}
-     * @memberof CosmosTxV1beta1GetTxsEventResponseTxResponses
-     */
-    timestamp?: string;
+    pagination?: InlineResponse20039Pagination;
 }
 /**
  * ModeInfo describes the signing mode of a single or nested multisig signer.
@@ -3338,6 +3338,17 @@ export enum CosmosTxV1beta1ModeInfoSingleModeEnum {
 }
 
 /**
+ * - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+ * @export
+ * @enum {string}
+ */
+export enum CosmosTxV1beta1OrderBy {
+    Unspecified = 'ORDER_BY_UNSPECIFIED',
+    Asc = 'ORDER_BY_ASC',
+    Desc = 'ORDER_BY_DESC'
+}
+
+/**
  * SignerInfo describes the public key and signing mode of a single top-level signer.
  * @export
  * @interface CosmosTxV1beta1SignerInfo
@@ -3345,10 +3356,10 @@ export enum CosmosTxV1beta1ModeInfoSingleModeEnum {
 export interface CosmosTxV1beta1SignerInfo {
     /**
      * 
-     * @type {CosmosTxV1beta1SignerInfoPublicKey}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosTxV1beta1SignerInfo
      */
-    public_key?: CosmosTxV1beta1SignerInfoPublicKey;
+    public_key?: InlineResponse20025Accounts;
     /**
      * 
      * @type {CosmosTxV1beta1ModeInfo}
@@ -3363,25 +3374,6 @@ export interface CosmosTxV1beta1SignerInfo {
     sequence?: string;
 }
 /**
- * public_key is the public key of the signer. It is optional for accounts that already exist in state. If unset, the verifier can use the required \\ signer address for this position and lookup the public key.
- * @export
- * @interface CosmosTxV1beta1SignerInfoPublicKey
- */
-export interface CosmosTxV1beta1SignerInfoPublicKey {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof CosmosTxV1beta1SignerInfoPublicKey
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof CosmosTxV1beta1SignerInfoPublicKey
-     */
-    value?: string;
-}
-/**
  * SimulateRequest is the request type for the Service.Simulate RPC method.
  * @export
  * @interface CosmosTxV1beta1SimulateRequest
@@ -3393,6 +3385,12 @@ export interface CosmosTxV1beta1SimulateRequest {
      * @memberof CosmosTxV1beta1SimulateRequest
      */
     tx?: CosmosTxV1beta1Tx;
+    /**
+     * tx_bytes is the raw transaction.
+     * @type {string}
+     * @memberof CosmosTxV1beta1SimulateRequest
+     */
+    tx_bytes?: string;
 }
 /**
  * SimulateResponse is the response type for the Service.SimulateRPC method.
@@ -3402,16 +3400,16 @@ export interface CosmosTxV1beta1SimulateRequest {
 export interface CosmosTxV1beta1SimulateResponse {
     /**
      * 
-     * @type {InlineResponse20070GasInfo}
+     * @type {InlineResponse20074GasInfo}
      * @memberof CosmosTxV1beta1SimulateResponse
      */
-    gas_info?: InlineResponse20070GasInfo;
+    gas_info?: InlineResponse20074GasInfo;
     /**
      * 
-     * @type {InlineResponse20070Result}
+     * @type {InlineResponse20074Result}
      * @memberof CosmosTxV1beta1SimulateResponse
      */
-    result?: InlineResponse20070Result;
+    result?: InlineResponse20074Result;
 }
 /**
  * Tx is the standard type used for broadcasting transactions.
@@ -3445,13 +3443,13 @@ export interface CosmosTxV1beta1Tx {
  */
 export interface CosmosTxV1beta1TxBody {
     /**
-     * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs.  By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<InlineResponseDefaultDetails>}
+     * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    messages?: Array<InlineResponseDefaultDetails>;
+    messages?: Array<InlineResponse20025Accounts>;
     /**
-     * 
+     * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
      * @memberof CosmosTxV1beta1TxBody
      */
@@ -3464,16 +3462,35 @@ export interface CosmosTxV1beta1TxBody {
     timeout_height?: string;
     /**
      * 
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    extension_options?: Array<InlineResponseDefaultDetails>;
+    extension_options?: Array<InlineResponse20025Accounts>;
     /**
      * 
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    non_critical_extension_options?: Array<InlineResponseDefaultDetails>;
+    non_critical_extension_options?: Array<InlineResponse20025Accounts>;
+}
+/**
+ * ModuleVersion specifies a module and its consensus version.
+ * @export
+ * @interface CosmosUpgradeV1beta1ModuleVersion
+ */
+export interface CosmosUpgradeV1beta1ModuleVersion {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosUpgradeV1beta1ModuleVersion
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosUpgradeV1beta1ModuleVersion
+     */
+    version?: string;
 }
 /**
  * Plan specifies information about a planned upgrade and when it should occur.
@@ -3488,7 +3505,7 @@ export interface CosmosUpgradeV1beta1Plan {
      */
     name?: string;
     /**
-     * The time after which the upgrade must be performed. Leave set to its zero value to use a pre-defined Height instead.
+     * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.
      * @type {string}
      * @memberof CosmosUpgradeV1beta1Plan
      */
@@ -3507,10 +3524,10 @@ export interface CosmosUpgradeV1beta1Plan {
     info?: string;
     /**
      * 
-     * @type {IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades}
+     * @type {InlineResponse20025Accounts}
      * @memberof CosmosUpgradeV1beta1Plan
      */
-    upgraded_client_state?: IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades;
+    upgraded_client_state?: InlineResponse20025Accounts;
 }
 /**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
@@ -3533,10 +3550,23 @@ export interface CosmosUpgradeV1beta1QueryAppliedPlanResponse {
 export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
     /**
      * 
-     * @type {InlineResponse20073Plan}
+     * @type {InlineResponse20077Plan}
      * @memberof CosmosUpgradeV1beta1QueryCurrentPlanResponse
      */
-    plan?: InlineResponse20073Plan;
+    plan?: InlineResponse20077Plan;
+}
+/**
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
+ * @export
+ * @interface CosmosUpgradeV1beta1QueryModuleVersionsResponse
+ */
+export interface CosmosUpgradeV1beta1QueryModuleVersionsResponse {
+    /**
+     * module_versions is a list of module names with their consensus versions.
+     * @type {Array<InlineResponse20078ModuleVersions>}
+     * @memberof CosmosUpgradeV1beta1QueryModuleVersionsResponse
+     */
+    module_versions?: Array<InlineResponse20078ModuleVersions>;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
@@ -3546,29 +3576,10 @@ export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
 export interface CosmosUpgradeV1beta1QueryUpgradedConsensusStateResponse {
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
+     * @type {string}
      * @memberof CosmosUpgradeV1beta1QueryUpgradedConsensusStateResponse
      */
-    upgraded_consensus_state?: InlineResponseDefaultDetails;
-}
-/**
- * 
- * @export
- * @interface CounterpartyChannelEnd
- */
-export interface CounterpartyChannelEnd {
-    /**
-     * port on the counterparty chain which owns the other end of the channel.
-     * @type {string}
-     * @memberof CounterpartyChannelEnd
-     */
-    port_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CounterpartyChannelEnd
-     */
-    channel_id?: string;
+    upgraded_consensus_state?: string;
 }
 /**
  * 
@@ -3641,10 +3652,10 @@ export interface DelegationDelegatorReward {
 export interface DelegatorTotalRewards {
     /**
      * 
-     * @type {Array<InlineResponse20022Rewards>}
+     * @type {Array<InlineResponse20023Rewards>}
      * @memberof DelegatorTotalRewards
      */
-    rewards?: Array<InlineResponse20022Rewards>;
+    rewards?: Array<InlineResponse20023Rewards>;
     /**
      * 
      * @type {Array<InlineResponse2004TxFeeAmount>}
@@ -3808,6 +3819,75 @@ export interface GovProposalsParamChangeChanges {
     value?: object;
 }
 /**
+ * allowance is a allowance granted for grantee by granter.
+ * @export
+ * @interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext
+ */
+export interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext {
+    /**
+     * granter is the address of the user granting an allowance of their funds.
+     * @type {string}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext
+     */
+    granter?: string;
+    /**
+     * grantee is the address of the user being granted an allowance of another user\'s funds.
+     * @type {string}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext
+     */
+    grantee?: string;
+    /**
+     * 
+     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext
+     */
+    allowance?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance;
+}
+/**
+ * 
+ * @export
+ * @interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1
+ */
+export interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1 {
+    /**
+     * granter is the address of the user granting an allowance of their funds.
+     * @type {string}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1
+     */
+    granter?: string;
+    /**
+     * grantee is the address of the user being granted an allowance of another user\'s funds.
+     * @type {string}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1
+     */
+    grantee?: string;
+    /**
+     * 
+     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1
+     */
+    allowance?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance;
+}
+/**
+ * allowance can be any of basic and filtered fee allowance.
+ * @export
+ * @interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
+ */
+export interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance {
+    /**
+     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+     * @type {string}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
+     */
+    type_url?: string;
+    /**
+     * Must be a valid serialized protocol buffer of the above specified type.
+     * @type {string}
+     * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
+     */
+    value?: string;
+}
+/**
  * 
  * @export
  * @interface GrpcGatewayRuntimeError
@@ -3833,1148 +3913,10 @@ export interface GrpcGatewayRuntimeError {
     message?: string;
     /**
      * 
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof GrpcGatewayRuntimeError
      */
-    details?: Array<InlineResponseDefaultDetails>;
-}
-/**
- * Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset
- * @export
- * @interface HeightAtWhichTheProofWasGenerated
- */
-export interface HeightAtWhichTheProofWasGenerated {
-    /**
-     * 
-     * @type {string}
-     * @memberof HeightAtWhichTheProofWasGenerated
-     */
-    revision_number?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof HeightAtWhichTheProofWasGenerated
-     */
-    revision_height?: string;
-}
-/**
- * Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset
- * @export
- * @interface HeightAtWhichTheProofWasRetrieved
- */
-export interface HeightAtWhichTheProofWasRetrieved {
-    /**
-     * 
-     * @type {string}
-     * @memberof HeightAtWhichTheProofWasRetrieved
-     */
-    revision_number?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof HeightAtWhichTheProofWasRetrieved
-     */
-    revision_height?: string;
-}
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades
- */
-export interface IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades
-     */
-    value?: string;
-}
-/**
- * DenomTrace contains the base denomination for ICS20 fungible tokens and the source tracing information path.
- * @export
- * @interface IbcApplicationsTransferV1DenomTrace
- */
-export interface IbcApplicationsTransferV1DenomTrace {
-    /**
-     * path defines the chain of port/channel identifiers used for tracing the source of the fungible token.
-     * @type {string}
-     * @memberof IbcApplicationsTransferV1DenomTrace
-     */
-    path?: string;
-    /**
-     * base denomination of the relayed fungible token.
-     * @type {string}
-     * @memberof IbcApplicationsTransferV1DenomTrace
-     */
-    base_denom?: string;
-}
-/**
- * Params defines the set of IBC transfer parameters. NOTE: To prevent a single token from being transferred, set the TransfersEnabled parameter to true and then set the bank module\'s SendEnabled parameter for the denomination to false.
- * @export
- * @interface IbcApplicationsTransferV1Params
- */
-export interface IbcApplicationsTransferV1Params {
-    /**
-     * send_enabled enables or disables all cross-chain token transfers from this chain.
-     * @type {boolean}
-     * @memberof IbcApplicationsTransferV1Params
-     */
-    send_enabled?: boolean;
-    /**
-     * receive_enabled enables or disables all cross-chain token transfers to this chain.
-     * @type {boolean}
-     * @memberof IbcApplicationsTransferV1Params
-     */
-    receive_enabled?: boolean;
-}
-/**
- * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC method.
- * @export
- * @interface IbcApplicationsTransferV1QueryDenomTraceResponse
- */
-export interface IbcApplicationsTransferV1QueryDenomTraceResponse {
-    /**
-     * 
-     * @type {InlineResponse20083DenomTrace}
-     * @memberof IbcApplicationsTransferV1QueryDenomTraceResponse
-     */
-    denom_trace?: InlineResponse20083DenomTrace;
-}
-/**
- * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC method.
- * @export
- * @interface IbcApplicationsTransferV1QueryDenomTracesResponse
- */
-export interface IbcApplicationsTransferV1QueryDenomTracesResponse {
-    /**
-     * denom_traces returns all denominations trace information.
-     * @type {Array<InlineResponse20082DenomTraces>}
-     * @memberof IbcApplicationsTransferV1QueryDenomTracesResponse
-     */
-    denom_traces?: Array<InlineResponse20082DenomTraces>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof IbcApplicationsTransferV1QueryDenomTracesResponse
-     */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface IbcApplicationsTransferV1QueryParamsResponse
- */
-export interface IbcApplicationsTransferV1QueryParamsResponse {
-    /**
-     * 
-     * @type {InlineResponse20084Params}
-     * @memberof IbcApplicationsTransferV1QueryParamsResponse
-     */
-    params?: InlineResponse20084Params;
-}
-/**
- * Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets.
- * @export
- * @interface IbcCoreChannelV1Channel
- */
-export interface IbcCoreChannelV1Channel {
-    /**
-     * State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.   - STATE_UNINITIALIZED_UNSPECIFIED: Default State  - STATE_INIT: A channel has just started the opening handshake.  - STATE_TRYOPEN: A channel has acknowledged the handshake step on the counterparty chain.  - STATE_OPEN: A channel has completed the handshake. Open channels are ready to send and receive packets.  - STATE_CLOSED: A channel has been closed and can no longer be used to send or receive packets.
-     * @type {string}
-     * @memberof IbcCoreChannelV1Channel
-     */
-    state?: IbcCoreChannelV1ChannelStateEnum;
-    /**
-     * - ORDER_NONE_UNSPECIFIED: zero-value for channel ordering  - ORDER_UNORDERED: packets can be delivered in any order, which may differ from the order in which they were sent.  - ORDER_ORDERED: packets are delivered exactly in the order which they were sent
-     * @type {string}
-     * @memberof IbcCoreChannelV1Channel
-     */
-    ordering?: IbcCoreChannelV1ChannelOrderingEnum;
-    /**
-     * 
-     * @type {CounterpartyChannelEnd}
-     * @memberof IbcCoreChannelV1Channel
-     */
-    counterparty?: CounterpartyChannelEnd;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof IbcCoreChannelV1Channel
-     */
-    connection_hops?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1Channel
-     */
-    version?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum IbcCoreChannelV1ChannelStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN',
-    Closed = 'STATE_CLOSED'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum IbcCoreChannelV1ChannelOrderingEnum {
-    NoneUnspecified = 'ORDER_NONE_UNSPECIFIED',
-    Unordered = 'ORDER_UNORDERED',
-    Ordered = 'ORDER_ORDERED'
-}
-
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1Counterparty
- */
-export interface IbcCoreChannelV1Counterparty {
-    /**
-     * port on the counterparty chain which owns the other end of the channel.
-     * @type {string}
-     * @memberof IbcCoreChannelV1Counterparty
-     */
-    port_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1Counterparty
-     */
-    channel_id?: string;
-}
-/**
- * IdentifiedChannel defines a channel with additional port and channel identifier fields.
- * @export
- * @interface IbcCoreChannelV1IdentifiedChannel
- */
-export interface IbcCoreChannelV1IdentifiedChannel {
-    /**
-     * State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.   - STATE_UNINITIALIZED_UNSPECIFIED: Default State  - STATE_INIT: A channel has just started the opening handshake.  - STATE_TRYOPEN: A channel has acknowledged the handshake step on the counterparty chain.  - STATE_OPEN: A channel has completed the handshake. Open channels are ready to send and receive packets.  - STATE_CLOSED: A channel has been closed and can no longer be used to send or receive packets.
-     * @type {string}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    state?: IbcCoreChannelV1IdentifiedChannelStateEnum;
-    /**
-     * - ORDER_NONE_UNSPECIFIED: zero-value for channel ordering  - ORDER_UNORDERED: packets can be delivered in any order, which may differ from the order in which they were sent.  - ORDER_ORDERED: packets are delivered exactly in the order which they were sent
-     * @type {string}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    ordering?: IbcCoreChannelV1IdentifiedChannelOrderingEnum;
-    /**
-     * 
-     * @type {CounterpartyChannelEnd}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    counterparty?: CounterpartyChannelEnd;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    connection_hops?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    version?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    port_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1IdentifiedChannel
-     */
-    channel_id?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum IbcCoreChannelV1IdentifiedChannelStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN',
-    Closed = 'STATE_CLOSED'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum IbcCoreChannelV1IdentifiedChannelOrderingEnum {
-    NoneUnspecified = 'ORDER_NONE_UNSPECIFIED',
-    Unordered = 'ORDER_UNORDERED',
-    Ordered = 'ORDER_ORDERED'
-}
-
-/**
- * - ORDER_NONE_UNSPECIFIED: zero-value for channel ordering  - ORDER_UNORDERED: packets can be delivered in any order, which may differ from the order in which they were sent.  - ORDER_ORDERED: packets are delivered exactly in the order which they were sent
- * @export
- * @enum {string}
- */
-export enum IbcCoreChannelV1Order {
-    NoneUnspecified = 'ORDER_NONE_UNSPECIFIED',
-    Unordered = 'ORDER_UNORDERED',
-    Ordered = 'ORDER_ORDERED'
-}
-
-/**
- * PacketState defines the generic type necessary to retrieve and store packet commitments, acknowledgements, and receipts. Caller is responsible for knowing the context necessary to interpret this state as a commitment, acknowledgement, or a receipt.
- * @export
- * @interface IbcCoreChannelV1PacketState
- */
-export interface IbcCoreChannelV1PacketState {
-    /**
-     * channel port identifier.
-     * @type {string}
-     * @memberof IbcCoreChannelV1PacketState
-     */
-    port_id?: string;
-    /**
-     * channel unique identifier.
-     * @type {string}
-     * @memberof IbcCoreChannelV1PacketState
-     */
-    channel_id?: string;
-    /**
-     * packet sequence.
-     * @type {string}
-     * @memberof IbcCoreChannelV1PacketState
-     */
-    sequence?: string;
-    /**
-     * embedded data that represents packet state.
-     * @type {string}
-     * @memberof IbcCoreChannelV1PacketState
-     */
-    data?: string;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryChannelClientStateResponse
- */
-export interface IbcCoreChannelV1QueryChannelClientStateResponse {
-    /**
-     * 
-     * @type {ClientStateAssociatedWithTheChannel}
-     * @memberof IbcCoreChannelV1QueryChannelClientStateResponse
-     */
-    identified_client_state?: ClientStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryChannelClientStateResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryChannelClientStateResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryChannelConsensusStateResponse
- */
-export interface IbcCoreChannelV1QueryChannelConsensusStateResponse {
-    /**
-     * 
-     * @type {ConsensusStateAssociatedWithTheChannel}
-     * @memberof IbcCoreChannelV1QueryChannelConsensusStateResponse
-     */
-    consensus_state?: ConsensusStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryChannelConsensusStateResponse
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryChannelConsensusStateResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryChannelConsensusStateResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * QueryChannelResponse is the response type for the Query/Channel RPC method. Besides the Channel end, it includes a proof and the height from which the proof was retrieved.
- * @export
- * @interface IbcCoreChannelV1QueryChannelResponse
- */
-export interface IbcCoreChannelV1QueryChannelResponse {
-    /**
-     * 
-     * @type {ChannelAssociatedWithTheRequestIdentifiers}
-     * @memberof IbcCoreChannelV1QueryChannelResponse
-     */
-    channel?: ChannelAssociatedWithTheRequestIdentifiers;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryChannelResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryChannelResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * QueryChannelsResponse is the response type for the Query/Channels RPC method.
- * @export
- * @interface IbcCoreChannelV1QueryChannelsResponse
- */
-export interface IbcCoreChannelV1QueryChannelsResponse {
-    /**
-     * list of stored channels of the chain.
-     * @type {Array<InlineResponse20075Channels>}
-     * @memberof IbcCoreChannelV1QueryChannelsResponse
-     */
-    channels?: Array<InlineResponse20075Channels>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreChannelV1QueryChannelsResponse
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreChannelV1QueryChannelsResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryConnectionChannelsResponse
- */
-export interface IbcCoreChannelV1QueryConnectionChannelsResponse {
-    /**
-     * list of channels associated with a connection.
-     * @type {Array<InlineResponse20075Channels>}
-     * @memberof IbcCoreChannelV1QueryConnectionChannelsResponse
-     */
-    channels?: Array<InlineResponse20075Channels>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreChannelV1QueryConnectionChannelsResponse
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreChannelV1QueryConnectionChannelsResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryNextSequenceReceiveResponse
- */
-export interface IbcCoreChannelV1QueryNextSequenceReceiveResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryNextSequenceReceiveResponse
-     */
-    next_sequence_receive?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryNextSequenceReceiveResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryNextSequenceReceiveResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryPacketAcknowledgementResponse
- */
-export interface IbcCoreChannelV1QueryPacketAcknowledgementResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryPacketAcknowledgementResponse
-     */
-    acknowledgement?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryPacketAcknowledgementResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryPacketAcknowledgementResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryPacketAcknowledgementsResponse
- */
-export interface IbcCoreChannelV1QueryPacketAcknowledgementsResponse {
-    /**
-     * 
-     * @type {Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>}
-     * @memberof IbcCoreChannelV1QueryPacketAcknowledgementsResponse
-     */
-    acknowledgements?: Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreChannelV1QueryPacketAcknowledgementsResponse
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreChannelV1QueryPacketAcknowledgementsResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryPacketCommitmentResponse
- */
-export interface IbcCoreChannelV1QueryPacketCommitmentResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryPacketCommitmentResponse
-     */
-    commitment?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryPacketCommitmentResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryPacketCommitmentResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryPacketCommitmentsResponse
- */
-export interface IbcCoreChannelV1QueryPacketCommitmentsResponse {
-    /**
-     * 
-     * @type {Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>}
-     * @memberof IbcCoreChannelV1QueryPacketCommitmentsResponse
-     */
-    commitments?: Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreChannelV1QueryPacketCommitmentsResponse
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreChannelV1QueryPacketCommitmentsResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryPacketReceiptResponse
- */
-export interface IbcCoreChannelV1QueryPacketReceiptResponse {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof IbcCoreChannelV1QueryPacketReceiptResponse
-     */
-    received?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreChannelV1QueryPacketReceiptResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreChannelV1QueryPacketReceiptResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryUnreceivedAcksResponse
- */
-export interface IbcCoreChannelV1QueryUnreceivedAcksResponse {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof IbcCoreChannelV1QueryUnreceivedAcksResponse
-     */
-    sequences?: Array<string>;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreChannelV1QueryUnreceivedAcksResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface IbcCoreChannelV1QueryUnreceivedPacketsResponse
- */
-export interface IbcCoreChannelV1QueryUnreceivedPacketsResponse {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof IbcCoreChannelV1QueryUnreceivedPacketsResponse
-     */
-    sequences?: Array<string>;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreChannelV1QueryUnreceivedPacketsResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.   - STATE_UNINITIALIZED_UNSPECIFIED: Default State  - STATE_INIT: A channel has just started the opening handshake.  - STATE_TRYOPEN: A channel has acknowledged the handshake step on the counterparty chain.  - STATE_OPEN: A channel has completed the handshake. Open channels are ready to send and receive packets.  - STATE_CLOSED: A channel has been closed and can no longer be used to send or receive packets.
- * @export
- * @enum {string}
- */
-export enum IbcCoreChannelV1State {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN',
-    Closed = 'STATE_CLOSED'
-}
-
-/**
- * ConsensusStateWithHeight defines a consensus state with an additional height field.
- * @export
- * @interface IbcCoreClientV1ConsensusStateWithHeight
- */
-export interface IbcCoreClientV1ConsensusStateWithHeight {
-    /**
-     * 
-     * @type {ConsensusStateHeight}
-     * @memberof IbcCoreClientV1ConsensusStateWithHeight
-     */
-    height?: ConsensusStateHeight;
-    /**
-     * 
-     * @type {ConsensusState}
-     * @memberof IbcCoreClientV1ConsensusStateWithHeight
-     */
-    consensus_state?: ConsensusState;
-}
-/**
- * Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset
- * @export
- * @interface IbcCoreClientV1Height
- */
-export interface IbcCoreClientV1Height {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreClientV1Height
-     */
-    revision_number?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreClientV1Height
-     */
-    revision_height?: string;
-}
-/**
- * IdentifiedClientState defines a client state with an additional client identifier field.
- * @export
- * @interface IbcCoreClientV1IdentifiedClientState
- */
-export interface IbcCoreClientV1IdentifiedClientState {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreClientV1IdentifiedClientState
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {ClientState}
-     * @memberof IbcCoreClientV1IdentifiedClientState
-     */
-    client_state?: ClientState;
-}
-/**
- * Params defines the set of IBC light client parameters.
- * @export
- * @interface IbcCoreClientV1Params
- */
-export interface IbcCoreClientV1Params {
-    /**
-     * allowed_clients defines the list of allowed client state types.
-     * @type {Array<string>}
-     * @memberof IbcCoreClientV1Params
-     */
-    allowed_clients?: Array<string>;
-}
-/**
- * QueryClientParamsResponse is the response type for the Query/ClientParams RPC method.
- * @export
- * @interface IbcCoreClientV1QueryClientParamsResponse
- */
-export interface IbcCoreClientV1QueryClientParamsResponse {
-    /**
-     * 
-     * @type {InlineResponse20077Params}
-     * @memberof IbcCoreClientV1QueryClientParamsResponse
-     */
-    params?: InlineResponse20077Params;
-}
-/**
- * QueryClientStateResponse is the response type for the Query/ClientState RPC method. Besides the client state, it includes a proof and the height from which the proof was retrieved.
- * @export
- * @interface IbcCoreClientV1QueryClientStateResponse
- */
-export interface IbcCoreClientV1QueryClientStateResponse {
-    /**
-     * 
-     * @type {ClientStateAssociatedWithTheRequestIdentifier}
-     * @memberof IbcCoreClientV1QueryClientStateResponse
-     */
-    client_state?: ClientStateAssociatedWithTheRequestIdentifier;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreClientV1QueryClientStateResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreClientV1QueryClientStateResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * QueryClientStatesResponse is the response type for the Query/ClientStates RPC method.
- * @export
- * @interface IbcCoreClientV1QueryClientStatesResponse
- */
-export interface IbcCoreClientV1QueryClientStatesResponse {
-    /**
-     * list of stored ClientStates of the chain.
-     * @type {Array<InlineResponse20078ClientStates>}
-     * @memberof IbcCoreClientV1QueryClientStatesResponse
-     */
-    client_states?: Array<InlineResponse20078ClientStates>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreClientV1QueryClientStatesResponse
-     */
-    pagination?: PaginationResponse;
-}
-/**
- * 
- * @export
- * @interface IbcCoreClientV1QueryConsensusStateResponse
- */
-export interface IbcCoreClientV1QueryConsensusStateResponse {
-    /**
-     * 
-     * @type {ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight}
-     * @memberof IbcCoreClientV1QueryConsensusStateResponse
-     */
-    consensus_state?: ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreClientV1QueryConsensusStateResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreClientV1QueryConsensusStateResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreClientV1QueryConsensusStatesResponse
- */
-export interface IbcCoreClientV1QueryConsensusStatesResponse {
-    /**
-     * 
-     * @type {Array<QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates>}
-     * @memberof IbcCoreClientV1QueryConsensusStatesResponse
-     */
-    consensus_states?: Array<QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreClientV1QueryConsensusStatesResponse
-     */
-    pagination?: PaginationResponse;
-}
-/**
- * 
- * @export
- * @interface IbcCoreCommitmentV1MerklePrefix
- */
-export interface IbcCoreCommitmentV1MerklePrefix {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreCommitmentV1MerklePrefix
-     */
-    key_prefix?: string;
-}
-/**
- * ConnectionEnd defines a stateful object on a chain connected to another separate one. NOTE: there must only be 2 defined ConnectionEnds to establish a connection between two chains.
- * @export
- * @interface IbcCoreConnectionV1ConnectionEnd
- */
-export interface IbcCoreConnectionV1ConnectionEnd {
-    /**
-     * client associated with this connection.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1ConnectionEnd
-     */
-    client_id?: string;
-    /**
-     * IBC version which can be utilised to determine encodings or protocols for channels or packets utilising this connection.
-     * @type {Array<InlineResponse20080Versions>}
-     * @memberof IbcCoreConnectionV1ConnectionEnd
-     */
-    versions?: Array<InlineResponse20080Versions>;
-    /**
-     * current state of the connection end.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1ConnectionEnd
-     */
-    state?: IbcCoreConnectionV1ConnectionEndStateEnum;
-    /**
-     * 
-     * @type {InlineResponse20080Counterparty}
-     * @memberof IbcCoreConnectionV1ConnectionEnd
-     */
-    counterparty?: InlineResponse20080Counterparty;
-    /**
-     * delay period that must pass before a consensus state can be used for packet-verification NOTE: delay period logic is only implemented by some clients.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1ConnectionEnd
-     */
-    delay_period?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum IbcCoreConnectionV1ConnectionEndStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN'
-}
-
-/**
- * Counterparty defines the counterparty chain associated with a connection end.
- * @export
- * @interface IbcCoreConnectionV1Counterparty
- */
-export interface IbcCoreConnectionV1Counterparty {
-    /**
-     * identifies the client on the counterparty chain associated with a given connection.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1Counterparty
-     */
-    client_id?: string;
-    /**
-     * identifies the connection end on the counterparty chain associated with a given connection.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1Counterparty
-     */
-    connection_id?: string;
-    /**
-     * 
-     * @type {MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey}
-     * @memberof IbcCoreConnectionV1Counterparty
-     */
-    prefix?: MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey;
-}
-/**
- * IdentifiedConnection defines a connection with additional connection identifier field.
- * @export
- * @interface IbcCoreConnectionV1IdentifiedConnection
- */
-export interface IbcCoreConnectionV1IdentifiedConnection {
-    /**
-     * connection identifier.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1IdentifiedConnection
-     */
-    id?: string;
-    /**
-     * client associated with this connection.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1IdentifiedConnection
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20080Versions>}
-     * @memberof IbcCoreConnectionV1IdentifiedConnection
-     */
-    versions?: Array<InlineResponse20080Versions>;
-    /**
-     * current state of the connection end.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1IdentifiedConnection
-     */
-    state?: IbcCoreConnectionV1IdentifiedConnectionStateEnum;
-    /**
-     * 
-     * @type {InlineResponse20080Counterparty}
-     * @memberof IbcCoreConnectionV1IdentifiedConnection
-     */
-    counterparty?: InlineResponse20080Counterparty;
-    /**
-     * delay period associated with this connection.
-     * @type {string}
-     * @memberof IbcCoreConnectionV1IdentifiedConnection
-     */
-    delay_period?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum IbcCoreConnectionV1IdentifiedConnectionStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN'
-}
-
-/**
- * 
- * @export
- * @interface IbcCoreConnectionV1QueryClientConnectionsResponse
- */
-export interface IbcCoreConnectionV1QueryClientConnectionsResponse {
-    /**
-     * slice of all the connection paths associated with a client.
-     * @type {Array<string>}
-     * @memberof IbcCoreConnectionV1QueryClientConnectionsResponse
-     */
-    connection_paths?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreConnectionV1QueryClientConnectionsResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasGenerated}
-     * @memberof IbcCoreConnectionV1QueryClientConnectionsResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasGenerated;
-}
-/**
- * 
- * @export
- * @interface IbcCoreConnectionV1QueryConnectionClientStateResponse
- */
-export interface IbcCoreConnectionV1QueryConnectionClientStateResponse {
-    /**
-     * 
-     * @type {ClientStateAssociatedWithTheChannel}
-     * @memberof IbcCoreConnectionV1QueryConnectionClientStateResponse
-     */
-    identified_client_state?: ClientStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreConnectionV1QueryConnectionClientStateResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreConnectionV1QueryConnectionClientStateResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface IbcCoreConnectionV1QueryConnectionConsensusStateResponse
- */
-export interface IbcCoreConnectionV1QueryConnectionConsensusStateResponse {
-    /**
-     * 
-     * @type {ConsensusStateAssociatedWithTheChannel}
-     * @memberof IbcCoreConnectionV1QueryConnectionConsensusStateResponse
-     */
-    consensus_state?: ConsensusStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreConnectionV1QueryConnectionConsensusStateResponse
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreConnectionV1QueryConnectionConsensusStateResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreConnectionV1QueryConnectionConsensusStateResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * QueryConnectionResponse is the response type for the Query/Connection RPC method. Besides the connection end, it includes a proof and the height from which the proof was retrieved.
- * @export
- * @interface IbcCoreConnectionV1QueryConnectionResponse
- */
-export interface IbcCoreConnectionV1QueryConnectionResponse {
-    /**
-     * 
-     * @type {ConnectionAssociatedWithTheRequestIdentifier}
-     * @memberof IbcCoreConnectionV1QueryConnectionResponse
-     */
-    connection?: ConnectionAssociatedWithTheRequestIdentifier;
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreConnectionV1QueryConnectionResponse
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof IbcCoreConnectionV1QueryConnectionResponse
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * QueryConnectionsResponse is the response type for the Query/Connections RPC method.
- * @export
- * @interface IbcCoreConnectionV1QueryConnectionsResponse
- */
-export interface IbcCoreConnectionV1QueryConnectionsResponse {
-    /**
-     * list of stored connections of the chain.
-     * @type {Array<InlineResponse20080Connections>}
-     * @memberof IbcCoreConnectionV1QueryConnectionsResponse
-     */
-    connections?: Array<InlineResponse20080Connections>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof IbcCoreConnectionV1QueryConnectionsResponse
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof IbcCoreConnectionV1QueryConnectionsResponse
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * State defines if a connection is in one of the following states: INIT, TRYOPEN, OPEN or UNINITIALIZED.   - STATE_UNINITIALIZED_UNSPECIFIED: Default State  - STATE_INIT: A connection end has just started the opening handshake.  - STATE_TRYOPEN: A connection end has acknowledged the handshake step on the counterparty chain.  - STATE_OPEN: A connection end has completed the handshake.
- * @export
- * @enum {string}
- */
-export enum IbcCoreConnectionV1State {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN'
-}
-
-/**
- * Version defines the versioning scheme used to negotiate the IBC verison in the connection handshake.
- * @export
- * @interface IbcCoreConnectionV1Version
- */
-export interface IbcCoreConnectionV1Version {
-    /**
-     * 
-     * @type {string}
-     * @memberof IbcCoreConnectionV1Version
-     */
-    identifier?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof IbcCoreConnectionV1Version
-     */
-    features?: Array<string>;
+    details?: Array<InlineResponse20025Accounts>;
 }
 /**
  * 
@@ -5208,7 +4150,7 @@ export interface InlineObject4 {
      * @type {InlineResponse2004TxFeeAmount}
      * @memberof InlineObject4
      */
-    delegation?: InlineResponse2004TxFeeAmount;
+    amount?: InlineResponse2004TxFeeAmount;
 }
 /**
  * 
@@ -5236,10 +4178,10 @@ export interface InlineObject5 {
     validator_address?: string;
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse2004TxFeeAmount}
      * @memberof InlineObject5
      */
-    shares?: string;
+    amount?: InlineResponse2004TxFeeAmount;
 }
 /**
  * 
@@ -5432,25 +4374,13 @@ export interface InlineResponse20010 {
      * @type {string}
      * @memberof InlineResponse20010
      */
-    initial_balance?: string;
+    shares?: string;
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse2004TxFeeAmount}
      * @memberof InlineResponse20010
      */
-    balance?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20010
-     */
-    creation_height?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20010
-     */
-    min_time?: number;
+    balance?: InlineResponse2004TxFeeAmount;
 }
 /**
  * 
@@ -5472,41 +4402,28 @@ export interface InlineResponse20011 {
     validator_address?: string;
     /**
      * 
-     * @type {Array<InlineResponse20011Entries>}
-     * @memberof InlineResponse20011
-     */
-    entries?: Array<InlineResponse20011Entries>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20011Entries
- */
-export interface InlineResponse20011Entries {
-    /**
-     * 
      * @type {string}
-     * @memberof InlineResponse20011Entries
+     * @memberof InlineResponse20011
      */
     initial_balance?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20011Entries
+     * @memberof InlineResponse20011
      */
     balance?: string;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20011Entries
+     * @type {number}
+     * @memberof InlineResponse20011
      */
-    creation_height?: string;
+    creation_height?: number;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20011Entries
+     * @type {number}
+     * @memberof InlineResponse20011
      */
-    min_time?: string;
+    min_time?: number;
 }
 /**
  * 
@@ -5515,77 +4432,54 @@ export interface InlineResponse20011Entries {
  */
 export interface InlineResponse20012 {
     /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse20012
-     */
-    operator_address?: string;
-    /**
      * 
      * @type {string}
      * @memberof InlineResponse20012
      */
-    consensus_pubkey?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20012
-     */
-    jailed?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20012
-     */
-    status?: number;
+    delegator_address?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20012
      */
-    tokens?: string;
+    validator_address?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20012Entries>}
+     * @memberof InlineResponse20012
+     */
+    entries?: Array<InlineResponse20012Entries>;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20012Entries
+ */
+export interface InlineResponse20012Entries {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012
+     * @memberof InlineResponse20012Entries
      */
-    delegator_shares?: string;
-    /**
-     * 
-     * @type {StakingDelegatorsDelegatorAddrValidatorsDescription}
-     * @memberof InlineResponse20012
-     */
-    description?: StakingDelegatorsDelegatorAddrValidatorsDescription;
+    initial_balance?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012
+     * @memberof InlineResponse20012Entries
      */
-    bond_height?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20012
-     */
-    bond_intra_tx_counter?: number;
+    balance?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012
+     * @memberof InlineResponse20012Entries
      */
-    unbonding_height?: string;
+    creation_height?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012
+     * @memberof InlineResponse20012Entries
      */
-    unbonding_time?: string;
-    /**
-     * 
-     * @type {StakingDelegatorsDelegatorAddrValidatorsCommission}
-     * @memberof InlineResponse20012
-     */
-    commission?: StakingDelegatorsDelegatorAddrValidatorsCommission;
+    min_time?: string;
 }
 /**
  * 
@@ -5594,41 +4488,77 @@ export interface InlineResponse20012 {
  */
 export interface InlineResponse20013 {
     /**
-     * 
+     * bech32 encoded address
      * @type {string}
      * @memberof InlineResponse20013
      */
-    loose_tokens?: string;
+    operator_address?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20013
      */
-    bonded_tokens?: string;
+    consensus_pubkey?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20013
+     */
+    jailed?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20013
+     */
+    status?: number;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20013
      */
-    inflation_last_time?: string;
+    tokens?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20013
      */
-    inflation?: string;
+    delegator_shares?: string;
+    /**
+     * 
+     * @type {StakingDelegatorsDelegatorAddrValidatorsDescription}
+     * @memberof InlineResponse20013
+     */
+    description?: StakingDelegatorsDelegatorAddrValidatorsDescription;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20013
      */
-    date_last_commission_reset?: string;
+    bond_height?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20013
+     */
+    bond_intra_tx_counter?: number;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20013
      */
-    prev_bonded_shares?: string;
+    unbonding_height?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20013
+     */
+    unbonding_time?: string;
+    /**
+     * 
+     * @type {StakingDelegatorsDelegatorAddrValidatorsCommission}
+     * @memberof InlineResponse20013
+     */
+    commission?: StakingDelegatorsDelegatorAddrValidatorsCommission;
 }
 /**
  * 
@@ -5641,43 +4571,37 @@ export interface InlineResponse20014 {
      * @type {string}
      * @memberof InlineResponse20014
      */
-    inflation_rate_change?: string;
+    loose_tokens?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20014
      */
-    inflation_max?: string;
+    bonded_tokens?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20014
      */
-    inflation_min?: string;
+    inflation_last_time?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20014
      */
-    goal_bonded?: string;
+    inflation?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20014
      */
-    unbonding_time?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20014
-     */
-    max_validators?: number;
+    date_last_commission_reset?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20014
      */
-    bond_denom?: string;
+    prev_bonded_shares?: string;
 }
 /**
  * 
@@ -5690,25 +4614,43 @@ export interface InlineResponse20015 {
      * @type {string}
      * @memberof InlineResponse20015
      */
-    start_height?: string;
+    inflation_rate_change?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20015
      */
-    index_offset?: string;
+    inflation_max?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20015
      */
-    jailed_until?: string;
+    inflation_min?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20015
      */
-    missed_blocks_counter?: string;
+    goal_bonded?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20015
+     */
+    unbonding_time?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20015
+     */
+    max_validators?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20015
+     */
+    bond_denom?: string;
 }
 /**
  * 
@@ -5721,43 +4663,25 @@ export interface InlineResponse20016 {
      * @type {string}
      * @memberof InlineResponse20016
      */
-    max_evidence_age?: string;
+    start_height?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20016
      */
-    signed_blocks_window?: string;
+    index_offset?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20016
      */
-    min_signed_per_window?: string;
+    jailed_until?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20016
      */
-    double_sign_unbond_duration?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    downtime_unbond_duration?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    slash_fraction_double_sign?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    slash_fraction_downtime?: string;
+    missed_blocks_counter?: string;
 }
 /**
  * 
@@ -5767,58 +4691,46 @@ export interface InlineResponse20016 {
 export interface InlineResponse20017 {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof InlineResponse20017
      */
-    proposal_id?: number;
+    max_evidence_age?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20017
      */
-    title?: string;
+    signed_blocks_window?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20017
      */
-    description?: string;
+    min_signed_per_window?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20017
      */
-    proposal_type?: string;
+    double_sign_unbond_duration?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20017
      */
-    proposal_status?: string;
-    /**
-     * 
-     * @type {GovProposalsFinalTallyResult}
-     * @memberof InlineResponse20017
-     */
-    final_tally_result?: GovProposalsFinalTallyResult;
+    downtime_unbond_duration?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20017
      */
-    submit_time?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20017
-     */
-    total_deposit?: Array<InlineResponse2004TxFeeAmount>;
+    slash_fraction_double_sign?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20017
      */
-    voting_start_time?: string;
+    slash_fraction_downtime?: string;
 }
 /**
  * 
@@ -5828,16 +4740,58 @@ export interface InlineResponse20017 {
 export interface InlineResponse20018 {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse20018
      */
-    proposal_id?: string;
+    proposal_id?: number;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20018
      */
-    proposer?: string;
+    title?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20018
+     */
+    description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20018
+     */
+    proposal_type?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20018
+     */
+    proposal_status?: string;
+    /**
+     * 
+     * @type {GovProposalsFinalTallyResult}
+     * @memberof InlineResponse20018
+     */
+    final_tally_result?: GovProposalsFinalTallyResult;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20018
+     */
+    submit_time?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse2004TxFeeAmount>}
+     * @memberof InlineResponse20018
+     */
+    total_deposit?: Array<InlineResponse2004TxFeeAmount>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20018
+     */
+    voting_start_time?: string;
 }
 /**
  * 
@@ -5847,22 +4801,16 @@ export interface InlineResponse20018 {
 export interface InlineResponse20019 {
     /**
      * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20019
-     */
-    amount?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse20019
      */
     proposal_id?: string;
     /**
-     * bech32 encoded address
+     * 
      * @type {string}
      * @memberof InlineResponse20019
      */
-    depositor?: string;
+    proposer?: string;
 }
 /**
  * 
@@ -5891,10 +4839,10 @@ export interface InlineResponse2002 {
 export interface InlineResponse20020 {
     /**
      * 
-     * @type {string}
+     * @type {Array<InlineResponse2004TxFeeAmount>}
      * @memberof InlineResponse20020
      */
-    voter?: string;
+    amount?: Array<InlineResponse2004TxFeeAmount>;
     /**
      * 
      * @type {string}
@@ -5902,11 +4850,11 @@ export interface InlineResponse20020 {
      */
     proposal_id?: string;
     /**
-     * 
+     * bech32 encoded address
      * @type {string}
      * @memberof InlineResponse20020
      */
-    option?: string;
+    depositor?: string;
 }
 /**
  * 
@@ -5916,16 +4864,22 @@ export interface InlineResponse20020 {
 export interface InlineResponse20021 {
     /**
      * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
+     * @type {string}
      * @memberof InlineResponse20021
      */
-    min_deposit?: Array<InlineResponse2004TxFeeAmount>;
+    voter?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20021
      */
-    max_deposit_period?: string;
+    proposal_id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20021
+     */
+    option?: string;
 }
 /**
  * 
@@ -5935,35 +4889,16 @@ export interface InlineResponse20021 {
 export interface InlineResponse20022 {
     /**
      * 
-     * @type {Array<InlineResponse20022Rewards>}
-     * @memberof InlineResponse20022
-     */
-    rewards?: Array<InlineResponse20022Rewards>;
-    /**
-     * 
      * @type {Array<InlineResponse2004TxFeeAmount>}
      * @memberof InlineResponse20022
      */
-    total?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20022Rewards
- */
-export interface InlineResponse20022Rewards {
+    min_deposit?: Array<InlineResponse2004TxFeeAmount>;
     /**
-     * bech32 encoded address
+     * 
      * @type {string}
-     * @memberof InlineResponse20022Rewards
+     * @memberof InlineResponse20022
      */
-    validator_address?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20022Rewards
-     */
-    reward?: Array<InlineResponse2004TxFeeAmount>;
+    max_deposit_period?: string;
 }
 /**
  * 
@@ -5972,23 +4907,36 @@ export interface InlineResponse20022Rewards {
  */
 export interface InlineResponse20023 {
     /**
+     * 
+     * @type {Array<InlineResponse20023Rewards>}
+     * @memberof InlineResponse20023
+     */
+    rewards?: Array<InlineResponse20023Rewards>;
+    /**
+     * 
+     * @type {Array<InlineResponse2004TxFeeAmount>}
+     * @memberof InlineResponse20023
+     */
+    total?: Array<InlineResponse2004TxFeeAmount>;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20023Rewards
+ */
+export interface InlineResponse20023Rewards {
+    /**
      * bech32 encoded address
      * @type {string}
-     * @memberof InlineResponse20023
+     * @memberof InlineResponse20023Rewards
      */
-    operator_address?: string;
+    validator_address?: string;
     /**
      * 
      * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20023
+     * @memberof InlineResponse20023Rewards
      */
-    self_bond_rewards?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20023
-     */
-    val_commission?: Array<InlineResponse2004TxFeeAmount>;
+    reward?: Array<InlineResponse2004TxFeeAmount>;
 }
 /**
  * 
@@ -5997,233 +4945,194 @@ export interface InlineResponse20023 {
  */
 export interface InlineResponse20024 {
     /**
+     * bech32 encoded address
+     * @type {string}
+     * @memberof InlineResponse20024
+     */
+    operator_address?: string;
+    /**
      * 
      * @type {Array<InlineResponse2004TxFeeAmount>}
      * @memberof InlineResponse20024
      */
-    total?: Array<InlineResponse2004TxFeeAmount>;
+    self_bond_rewards?: Array<InlineResponse2004TxFeeAmount>;
+    /**
+     * 
+     * @type {Array<InlineResponse2004TxFeeAmount>}
+     * @memberof InlineResponse20024
+     */
+    val_commission?: Array<InlineResponse2004TxFeeAmount>;
 }
 /**
- * QueryAccountResponse is the response type for the Query/Account RPC method.
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
  * @export
  * @interface InlineResponse20025
  */
 export interface InlineResponse20025 {
     /**
      * 
-     * @type {InlineResponse20025Account}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof InlineResponse20025
      */
-    account?: InlineResponse20025Account;
+    accounts?: Array<InlineResponse20025Accounts>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20025
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
- * account defines the account of the corresponding address.
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
  * @export
- * @interface InlineResponse20025Account
+ * @interface InlineResponse20025Accounts
  */
-export interface InlineResponse20025Account {
+export interface InlineResponse20025Accounts {
     /**
      * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
      * @type {string}
-     * @memberof InlineResponse20025Account
+     * @memberof InlineResponse20025Accounts
      */
     type_url?: string;
     /**
      * Must be a valid serialized protocol buffer of the above specified type.
      * @type {string}
-     * @memberof InlineResponse20025Account
+     * @memberof InlineResponse20025Accounts
      */
     value?: string;
 }
 /**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * pagination defines the pagination in the response.
+ * @export
+ * @interface InlineResponse20025Pagination
+ */
+export interface InlineResponse20025Pagination {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20025Pagination
+     */
+    next_key?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20025Pagination
+     */
+    total?: string;
+}
+/**
+ * QueryAccountResponse is the response type for the Query/Account RPC method.
  * @export
  * @interface InlineResponse20026
  */
 export interface InlineResponse20026 {
     /**
      * 
-     * @type {InlineResponse20026Params}
+     * @type {InlineResponse20025Accounts}
      * @memberof InlineResponse20026
      */
-    params?: InlineResponse20026Params;
+    account?: InlineResponse20025Accounts;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface InlineResponse20027
+ */
+export interface InlineResponse20027 {
+    /**
+     * 
+     * @type {InlineResponse20027Params}
+     * @memberof InlineResponse20027
+     */
+    params?: InlineResponse20027Params;
 }
 /**
  * params defines the parameters of the module.
  * @export
- * @interface InlineResponse20026Params
+ * @interface InlineResponse20027Params
  */
-export interface InlineResponse20026Params {
+export interface InlineResponse20027Params {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20026Params
+     * @memberof InlineResponse20027Params
      */
     max_memo_characters?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20026Params
+     * @memberof InlineResponse20027Params
      */
     tx_sig_limit?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20026Params
+     * @memberof InlineResponse20027Params
      */
     tx_size_cost_per_byte?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20026Params
+     * @memberof InlineResponse20027Params
      */
     sig_verify_cost_ed25519?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20026Params
+     * @memberof InlineResponse20027Params
      */
     sig_verify_cost_secp256k1?: string;
 }
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC method.
  * @export
- * @interface InlineResponse20027
- */
-export interface InlineResponse20027 {
-    /**
-     * balances is the balances of all the coins.
-     * @type {Array<InlineResponse20027Balances>}
-     * @memberof InlineResponse20027
-     */
-    balances?: Array<InlineResponse20027Balances>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20027
-     */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
- * @export
- * @interface InlineResponse20027Balances
- */
-export interface InlineResponse20027Balances {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Balances
-     */
-    denom?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Balances
-     */
-    amount?: string;
-}
-/**
- * pagination defines the pagination in the response.
- * @export
- * @interface InlineResponse20027Pagination
- */
-export interface InlineResponse20027Pagination {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Pagination
-     */
-    next_key?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Pagination
-     */
-    total?: string;
-}
-/**
- * QueryBalanceResponse is the response type for the Query/Balance RPC method.
- * @export
  * @interface InlineResponse20028
  */
 export interface InlineResponse20028 {
     /**
-     * 
-     * @type {InlineResponse20028Balance}
+     * balances is the balances of all the coins.
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof InlineResponse20028
      */
-    balance?: InlineResponse20028Balance;
+    balances?: Array<InlineResponse20028Balances>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20028
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
- * balance is the balance of the coin.
+ * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
  * @export
- * @interface InlineResponse20028Balance
+ * @interface InlineResponse20028Balances
  */
-export interface InlineResponse20028Balance {
+export interface InlineResponse20028Balances {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20028Balance
+     * @memberof InlineResponse20028Balances
      */
     denom?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20028Balance
+     * @memberof InlineResponse20028Balances
      */
     amount?: string;
 }
 /**
- * QueryParamsResponse defines the response type for querying x/bank parameters.
+ * QueryBalanceResponse is the response type for the Query/Balance RPC method.
  * @export
  * @interface InlineResponse20029
  */
 export interface InlineResponse20029 {
     /**
      * 
-     * @type {InlineResponse20029Params}
+     * @type {InlineResponse20028Balances}
      * @memberof InlineResponse20029
      */
-    params?: InlineResponse20029Params;
-}
-/**
- * Params defines the parameters for the bank module.
- * @export
- * @interface InlineResponse20029Params
- */
-export interface InlineResponse20029Params {
-    /**
-     * 
-     * @type {Array<InlineResponse20029ParamsSendEnabled>}
-     * @memberof InlineResponse20029Params
-     */
-    send_enabled?: Array<InlineResponse20029ParamsSendEnabled>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20029Params
-     */
-    default_send_enabled?: boolean;
-}
-/**
- * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
- * @export
- * @interface InlineResponse20029ParamsSendEnabled
- */
-export interface InlineResponse20029ParamsSendEnabled {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20029ParamsSendEnabled
-     */
-    denom?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20029ParamsSendEnabled
-     */
-    enabled?: boolean;
+    balance?: InlineResponse20028Balances;
 }
 /**
  * 
@@ -6529,189 +5438,371 @@ export interface InlineResponse2003 {
     validators?: Array<InlineResponse2003Validators>;
 }
 /**
- * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
  * @export
  * @interface InlineResponse20030
  */
 export interface InlineResponse20030 {
     /**
      * 
-     * @type {InlineResponse20030Amount}
+     * @type {Array<InlineResponse20030DenomOwners>}
      * @memberof InlineResponse20030
      */
-    amount?: InlineResponse20030Amount;
+    denom_owners?: Array<InlineResponse20030DenomOwners>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20030
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
- * amount is the supply of the coin.
+ * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
  * @export
- * @interface InlineResponse20030Amount
+ * @interface InlineResponse20030DenomOwners
  */
-export interface InlineResponse20030Amount {
+export interface InlineResponse20030DenomOwners {
+    /**
+     * address defines the address that owns a particular denomination.
+     * @type {string}
+     * @memberof InlineResponse20030DenomOwners
+     */
+    address?: string;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20030Amount
+     * @type {InlineResponse20028Balances}
+     * @memberof InlineResponse20030DenomOwners
      */
-    denom?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20030Amount
-     */
-    amount?: string;
+    balance?: InlineResponse20028Balances;
 }
 /**
- * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
+ * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
  * @export
  * @interface InlineResponse20031
  */
 export interface InlineResponse20031 {
     /**
+     * metadata provides the client information for all the registered tokens.
+     * @type {Array<InlineResponse20031Metadatas>}
+     * @memberof InlineResponse20031
+     */
+    metadatas?: Array<InlineResponse20031Metadatas>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20031
+     */
+    pagination?: InlineResponse20025Pagination;
+}
+/**
+ * DenomUnit represents a struct that describes a given denomination unit of the basic token.
+ * @export
+ * @interface InlineResponse20031DenomUnits
+ */
+export interface InlineResponse20031DenomUnits {
+    /**
+     * denom represents the string name of the given denom unit (e.g uatom).
+     * @type {string}
+     * @memberof InlineResponse20031DenomUnits
+     */
+    denom?: string;
+    /**
+     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
+     * @type {number}
+     * @memberof InlineResponse20031DenomUnits
+     */
+    exponent?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineResponse20031DenomUnits
+     */
+    aliases?: Array<string>;
+}
+/**
+ * Metadata represents a struct that describes a basic token.
+ * @export
+ * @interface InlineResponse20031Metadatas
+ */
+export interface InlineResponse20031Metadatas {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20031DenomUnits>}
+     * @memberof InlineResponse20031Metadatas
+     */
+    denom_units?: Array<InlineResponse20031DenomUnits>;
+    /**
+     * base represents the base denom (should be the DenomUnit with exponent = 0).
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    base?: string;
+    /**
+     * display indicates the suggested denom that should be displayed in clients.
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    display?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    name?: string;
+    /**
+     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    symbol?: string;
+    /**
+     * URI to a document (on or off-chain) that contains additional information. Optional.
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    uri?: string;
+    /**
+     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
+     * @type {string}
+     * @memberof InlineResponse20031Metadatas
+     */
+    uri_hash?: string;
+}
+/**
+ * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
+ * @export
+ * @interface InlineResponse20032
+ */
+export interface InlineResponse20032 {
+    /**
+     * 
+     * @type {InlineResponse20031Metadatas}
+     * @memberof InlineResponse20032
+     */
+    metadata?: InlineResponse20031Metadatas;
+}
+/**
+ * QueryParamsResponse defines the response type for querying x/bank parameters.
+ * @export
+ * @interface InlineResponse20033
+ */
+export interface InlineResponse20033 {
+    /**
+     * 
+     * @type {InlineResponse20033Params}
+     * @memberof InlineResponse20033
+     */
+    params?: InlineResponse20033Params;
+}
+/**
+ * Params defines the parameters for the bank module.
+ * @export
+ * @interface InlineResponse20033Params
+ */
+export interface InlineResponse20033Params {
+    /**
+     * 
+     * @type {Array<InlineResponse20033ParamsSendEnabled>}
+     * @memberof InlineResponse20033Params
+     */
+    send_enabled?: Array<InlineResponse20033ParamsSendEnabled>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20033Params
+     */
+    default_send_enabled?: boolean;
+}
+/**
+ * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
+ * @export
+ * @interface InlineResponse20033ParamsSendEnabled
+ */
+export interface InlineResponse20033ParamsSendEnabled {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20033ParamsSendEnabled
+     */
+    denom?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20033ParamsSendEnabled
+     */
+    enabled?: boolean;
+}
+/**
+ * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
+ * @export
+ * @interface InlineResponse20034
+ */
+export interface InlineResponse20034 {
+    /**
+     * 
+     * @type {InlineResponse20028Balances}
+     * @memberof InlineResponse20034
+     */
+    amount?: InlineResponse20028Balances;
+}
+/**
+ * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
+ * @export
+ * @interface InlineResponse20035
+ */
+export interface InlineResponse20035 {
+    /**
      * 
      * @type {BlockID1}
-     * @memberof InlineResponse20031
+     * @memberof InlineResponse20035
      */
     block_id?: BlockID1;
     /**
      * 
-     * @type {InlineResponse20031Block}
-     * @memberof InlineResponse20031
+     * @type {InlineResponse20035Block}
+     * @memberof InlineResponse20035
      */
-    block?: InlineResponse20031Block;
+    block?: InlineResponse20035Block;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20031Block
+ * @interface InlineResponse20035Block
  */
-export interface InlineResponse20031Block {
+export interface InlineResponse20035Block {
     /**
      * 
-     * @type {InlineResponse20031BlockHeader}
-     * @memberof InlineResponse20031Block
+     * @type {InlineResponse20035BlockHeader}
+     * @memberof InlineResponse20035Block
      */
-    header?: InlineResponse20031BlockHeader;
+    header?: InlineResponse20035BlockHeader;
     /**
      * 
      * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
-     * @memberof InlineResponse20031Block
+     * @memberof InlineResponse20035Block
      */
     data?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidence}
-     * @memberof InlineResponse20031Block
+     * @type {InlineResponse20035BlockEvidence}
+     * @memberof InlineResponse20035Block
      */
-    evidence?: InlineResponse20031BlockEvidence;
+    evidence?: InlineResponse20035BlockEvidence;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof InlineResponse20031Block
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof InlineResponse20035Block
      */
-    last_commit?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    last_commit?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20031BlockEvidence
+ * @interface InlineResponse20035BlockEvidence
  */
-export interface InlineResponse20031BlockEvidence {
+export interface InlineResponse20035BlockEvidence {
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceEvidence>}
-     * @memberof InlineResponse20031BlockEvidence
+     * @type {Array<InlineResponse20035BlockEvidenceEvidence>}
+     * @memberof InlineResponse20035BlockEvidence
      */
-    evidence?: Array<InlineResponse20031BlockEvidenceEvidence>;
+    evidence?: Array<InlineResponse20035BlockEvidenceEvidence>;
 }
 /**
  * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
  * @export
- * @interface InlineResponse20031BlockEvidenceDuplicateVoteEvidence
+ * @interface InlineResponse20035BlockEvidenceDuplicateVoteEvidence
  */
-export interface InlineResponse20031BlockEvidenceDuplicateVoteEvidence {
+export interface InlineResponse20035BlockEvidenceDuplicateVoteEvidence {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidence
+     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
      */
-    vote_a?: InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA;
+    vote_a?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidence
+     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
      */
-    vote_b?: InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA;
+    vote_b?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidence
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
      */
     total_voting_power?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidence
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
      */
     validator_power?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidence
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
      */
     timestamp?: string;
 }
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for consensus.
  * @export
- * @interface InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+ * @interface InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
  */
-export interface InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA {
+export interface InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA {
     /**
      * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
-    type?: InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum;
+    type?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     height?: string;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     round?: number;
     /**
      * 
      * @type {BlockID1}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     block_id?: BlockID1;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     timestamp?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     validator_address?: string;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     validator_index?: number;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA
+     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
      */
     signature?: string;
 }
@@ -6720,7 +5811,7 @@ export interface InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA {
     * @export
     * @enum {string}
     */
-export enum InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum {
+export enum InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum {
     Unknown = 'SIGNED_MSG_TYPE_UNKNOWN',
     Prevote = 'SIGNED_MSG_TYPE_PREVOTE',
     Precommit = 'SIGNED_MSG_TYPE_PRECOMMIT',
@@ -6730,156 +5821,156 @@ export enum InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum {
 /**
  * 
  * @export
- * @interface InlineResponse20031BlockEvidenceEvidence
+ * @interface InlineResponse20035BlockEvidenceEvidence
  */
-export interface InlineResponse20031BlockEvidenceEvidence {
+export interface InlineResponse20035BlockEvidenceEvidence {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceDuplicateVoteEvidence}
-     * @memberof InlineResponse20031BlockEvidenceEvidence
+     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidence}
+     * @memberof InlineResponse20035BlockEvidenceEvidence
      */
-    duplicate_vote_evidence?: InlineResponse20031BlockEvidenceDuplicateVoteEvidence;
+    duplicate_vote_evidence?: InlineResponse20035BlockEvidenceDuplicateVoteEvidence;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidence}
-     * @memberof InlineResponse20031BlockEvidenceEvidence
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidence}
+     * @memberof InlineResponse20035BlockEvidenceEvidence
      */
-    light_client_attack_evidence?: InlineResponse20031BlockEvidenceLightClientAttackEvidence;
+    light_client_attack_evidence?: InlineResponse20035BlockEvidenceLightClientAttackEvidence;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidence
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidence
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidence {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidence {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidence
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
      */
-    conflicting_block?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock;
+    conflicting_block?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidence
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
      */
     common_height?: string;
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidence
+     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
      */
-    byzantine_validators?: Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    byzantine_validators?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidence
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
      */
     total_voting_power?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidence
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
      */
     timestamp?: string;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock
      */
-    signed_header?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
+    signed_header?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock
      */
-    validator_set?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
+    validator_set?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader {
     /**
      * 
-     * @type {InlineResponse20031BlockHeader}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
+     * @type {InlineResponse20035BlockHeader}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
      */
-    header?: InlineResponse20031BlockHeader;
+    header?: InlineResponse20035BlockHeader;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
      */
-    commit?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    commit?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * Commit contains the evidence that a block was committed by a set of validators.
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
      */
     height?: string;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
      */
     round?: number;
     /**
      * 
      * @type {BlockID1}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
      */
     block_id?: BlockID1;
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
      */
-    signatures?: Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
+    signatures?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
 }
 /**
  * CommitSig is a part of the Vote included in a Commit.
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
-    block_id_flag?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum;
+    block_id_flag?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
     validator_address?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
     timestamp?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
     signature?: string;
 }
@@ -6888,7 +5979,7 @@ export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConfli
     * @export
     * @enum {string}
     */
-export enum InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum {
+export enum InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum {
     Unknown = 'BLOCK_ID_FLAG_UNKNOWN',
     Absent = 'BLOCK_ID_FLAG_ABSENT',
     Commit = 'BLOCK_ID_FLAG_COMMIT',
@@ -6898,531 +5989,429 @@ export enum InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflicting
 /**
  * 
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet {
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
      */
-    validators?: Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    validators?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
      */
-    proposer?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
+    proposer?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
      */
     total_voting_power?: string;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+ * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
  */
-export interface InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators {
+export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
      */
     address?: string;
     /**
      * 
      * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
      */
     pub_key?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
      */
     voting_power?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
      */
     proposer_priority?: string;
 }
 /**
  * Header defines the structure of a Tendermint block header.
  * @export
- * @interface InlineResponse20031BlockHeader
+ * @interface InlineResponse20035BlockHeader
  */
-export interface InlineResponse20031BlockHeader {
+export interface InlineResponse20035BlockHeader {
     /**
      * 
      * @type {BasicBlockInfo}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     version?: BasicBlockInfo;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     chain_id?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     height?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     time?: string;
     /**
      * 
-     * @type {PrevBlockInfo}
-     * @memberof InlineResponse20031BlockHeader
+     * @type {BlockID1}
+     * @memberof InlineResponse20035BlockHeader
      */
-    last_block_id?: PrevBlockInfo;
+    last_block_id?: BlockID1;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     last_commit_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     data_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     validators_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     next_validators_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     consensus_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     app_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     last_results_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     evidence_hash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20031BlockHeader
+     * @memberof InlineResponse20035BlockHeader
      */
     proposer_address?: string;
 }
 /**
  * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
  * @export
- * @interface InlineResponse20032
+ * @interface InlineResponse20036
  */
-export interface InlineResponse20032 {
+export interface InlineResponse20036 {
     /**
      * 
      * @type {BlockID1}
-     * @memberof InlineResponse20032
+     * @memberof InlineResponse20036
      */
     block_id?: BlockID1;
     /**
      * 
-     * @type {InlineResponse20031Block}
-     * @memberof InlineResponse20032
+     * @type {InlineResponse20035Block}
+     * @memberof InlineResponse20036
      */
-    block?: InlineResponse20031Block;
+    block?: InlineResponse20035Block;
 }
 /**
  * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
  * @export
- * @interface InlineResponse20033
+ * @interface InlineResponse20037
  */
-export interface InlineResponse20033 {
+export interface InlineResponse20037 {
     /**
      * 
-     * @type {InlineResponse20033DefaultNodeInfo}
-     * @memberof InlineResponse20033
+     * @type {InlineResponse20037DefaultNodeInfo}
+     * @memberof InlineResponse20037
      */
-    default_node_info?: InlineResponse20033DefaultNodeInfo;
+    default_node_info?: InlineResponse20037DefaultNodeInfo;
     /**
      * 
-     * @type {InlineResponse20033ApplicationVersion}
-     * @memberof InlineResponse20033
+     * @type {InlineResponse20037ApplicationVersion}
+     * @memberof InlineResponse20037
      */
-    application_version?: InlineResponse20033ApplicationVersion;
+    application_version?: InlineResponse20037ApplicationVersion;
 }
 /**
  * VersionInfo is the type for the GetNodeInfoResponse message.
  * @export
- * @interface InlineResponse20033ApplicationVersion
+ * @interface InlineResponse20037ApplicationVersion
  */
-export interface InlineResponse20033ApplicationVersion {
+export interface InlineResponse20037ApplicationVersion {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     name?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     app_name?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     version?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     git_commit?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     build_tags?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     go_version?: string;
     /**
      * 
      * @type {Array<ModuleIsTheTypeForVersionInfo>}
-     * @memberof InlineResponse20033ApplicationVersion
+     * @memberof InlineResponse20037ApplicationVersion
      */
     build_deps?: Array<ModuleIsTheTypeForVersionInfo>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20037ApplicationVersion
+     */
+    cosmos_sdk_version?: string;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20033DefaultNodeInfo
+ * @interface InlineResponse20037DefaultNodeInfo
  */
-export interface InlineResponse20033DefaultNodeInfo {
+export interface InlineResponse20037DefaultNodeInfo {
     /**
      * 
-     * @type {InlineResponse20033DefaultNodeInfoProtocolVersion}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @type {InlineResponse20037DefaultNodeInfoProtocolVersion}
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
-    protocol_version?: InlineResponse20033DefaultNodeInfoProtocolVersion;
+    protocol_version?: InlineResponse20037DefaultNodeInfoProtocolVersion;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
     default_node_id?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
     listen_addr?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
     network?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
     version?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
     channels?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
     moniker?: string;
     /**
      * 
-     * @type {InlineResponse20033DefaultNodeInfoOther}
-     * @memberof InlineResponse20033DefaultNodeInfo
+     * @type {InlineResponse20037DefaultNodeInfoOther}
+     * @memberof InlineResponse20037DefaultNodeInfo
      */
-    other?: InlineResponse20033DefaultNodeInfoOther;
+    other?: InlineResponse20037DefaultNodeInfoOther;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20033DefaultNodeInfoOther
+ * @interface InlineResponse20037DefaultNodeInfoOther
  */
-export interface InlineResponse20033DefaultNodeInfoOther {
+export interface InlineResponse20037DefaultNodeInfoOther {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfoOther
+     * @memberof InlineResponse20037DefaultNodeInfoOther
      */
     tx_index?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfoOther
+     * @memberof InlineResponse20037DefaultNodeInfoOther
      */
     rpc_address?: string;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20033DefaultNodeInfoProtocolVersion
+ * @interface InlineResponse20037DefaultNodeInfoProtocolVersion
  */
-export interface InlineResponse20033DefaultNodeInfoProtocolVersion {
+export interface InlineResponse20037DefaultNodeInfoProtocolVersion {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfoProtocolVersion
+     * @memberof InlineResponse20037DefaultNodeInfoProtocolVersion
      */
     p2p?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfoProtocolVersion
+     * @memberof InlineResponse20037DefaultNodeInfoProtocolVersion
      */
     block?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20033DefaultNodeInfoProtocolVersion
+     * @memberof InlineResponse20037DefaultNodeInfoProtocolVersion
      */
     app?: string;
 }
 /**
  * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
  * @export
- * @interface InlineResponse20034
+ * @interface InlineResponse20038
  */
-export interface InlineResponse20034 {
+export interface InlineResponse20038 {
     /**
      * 
      * @type {boolean}
-     * @memberof InlineResponse20034
+     * @memberof InlineResponse20038
      */
     syncing?: boolean;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
  * @export
- * @interface InlineResponse20035
+ * @interface InlineResponse20039
  */
-export interface InlineResponse20035 {
+export interface InlineResponse20039 {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20035
+     * @memberof InlineResponse20039
      */
     block_height?: string;
     /**
      * 
-     * @type {Array<InlineResponse20035Validators>}
-     * @memberof InlineResponse20035
+     * @type {Array<InlineResponse20039Validators>}
+     * @memberof InlineResponse20039
      */
-    validators?: Array<InlineResponse20035Validators>;
+    validators?: Array<InlineResponse20039Validators>;
     /**
      * 
-     * @type {InlineResponse20035Pagination}
-     * @memberof InlineResponse20035
+     * @type {InlineResponse20039Pagination}
+     * @memberof InlineResponse20039
      */
-    pagination?: InlineResponse20035Pagination;
+    pagination?: InlineResponse20039Pagination;
 }
 /**
  * pagination defines an pagination for the response.
  * @export
- * @interface InlineResponse20035Pagination
+ * @interface InlineResponse20039Pagination
  */
-export interface InlineResponse20035Pagination {
+export interface InlineResponse20039Pagination {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20035Pagination
+     * @memberof InlineResponse20039Pagination
      */
     next_key?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20035Pagination
+     * @memberof InlineResponse20039Pagination
      */
     total?: string;
 }
 /**
  * Validator is the type for the validator-set.
  * @export
- * @interface InlineResponse20035Validators
+ * @interface InlineResponse20039Validators
  */
-export interface InlineResponse20035Validators {
+export interface InlineResponse20039Validators {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20035Validators
+     * @memberof InlineResponse20039Validators
      */
     address?: string;
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
-     * @memberof InlineResponse20035Validators
+     * @type {InlineResponse20025Accounts}
+     * @memberof InlineResponse20039Validators
      */
-    pub_key?: InlineResponseDefaultDetails;
+    pub_key?: InlineResponse20025Accounts;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20035Validators
+     * @memberof InlineResponse20039Validators
      */
     voting_power?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20035Validators
+     * @memberof InlineResponse20039Validators
      */
     proposer_priority?: string;
-}
-/**
- * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
- * @export
- * @interface InlineResponse20036
- */
-export interface InlineResponse20036 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036
-     */
-    block_height?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20035Validators>}
-     * @memberof InlineResponse20036
-     */
-    validators?: Array<InlineResponse20035Validators>;
-    /**
-     * 
-     * @type {InlineResponse20035Pagination}
-     * @memberof InlineResponse20036
-     */
-    pagination?: InlineResponse20035Pagination;
-}
-/**
- * QueryCommunityPoolResponse is the response type for the Query/CommunityPool RPC method.
- * @export
- * @interface InlineResponse20037
- */
-export interface InlineResponse20037 {
-    /**
-     * pool defines community pool\'s coins.
-     * @type {Array<InlineResponse20037Pool>}
-     * @memberof InlineResponse20037
-     */
-    pool?: Array<InlineResponse20037Pool>;
-}
-/**
- * DecCoin defines a token with a denomination and a decimal amount.  NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto.
- * @export
- * @interface InlineResponse20037Pool
- */
-export interface InlineResponse20037Pool {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037Pool
-     */
-    denom?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037Pool
-     */
-    amount?: string;
-}
-/**
- * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
- * @export
- * @interface InlineResponse20038
- */
-export interface InlineResponse20038 {
-    /**
-     * rewards defines all the rewards accrued by a delegator.
-     * @type {Array<InlineResponse20038Rewards>}
-     * @memberof InlineResponse20038
-     */
-    rewards?: Array<InlineResponse20038Rewards>;
-    /**
-     * total defines the sum of all the rewards.
-     * @type {Array<InlineResponse20037Pool>}
-     * @memberof InlineResponse20038
-     */
-    total?: Array<InlineResponse20037Pool>;
-}
-/**
- * DelegationDelegatorReward represents the properties of a delegator\'s delegation reward.
- * @export
- * @interface InlineResponse20038Rewards
- */
-export interface InlineResponse20038Rewards {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20038Rewards
-     */
-    validator_address?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20037Pool>}
-     * @memberof InlineResponse20038Rewards
-     */
-    reward?: Array<InlineResponse20037Pool>;
-}
-/**
- * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
- * @export
- * @interface InlineResponse20039
- */
-export interface InlineResponse20039 {
-    /**
-     * rewards defines the rewards accrued by a delegation.
-     * @type {Array<InlineResponse20037Pool>}
-     * @memberof InlineResponse20039
-     */
-    rewards?: Array<InlineResponse20037Pool>;
 }
 /**
  * 
@@ -7487,409 +6476,265 @@ export interface InlineResponse2004 {
     result?: InlineResponse2004Result;
 }
 /**
- * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
+ * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
  * @export
  * @interface InlineResponse20040
  */
 export interface InlineResponse20040 {
     /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20040
+     */
+    block_height?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20039Validators>}
+     * @memberof InlineResponse20040
+     */
+    validators?: Array<InlineResponse20039Validators>;
+    /**
+     * 
+     * @type {InlineResponse20039Pagination}
+     * @memberof InlineResponse20040
+     */
+    pagination?: InlineResponse20039Pagination;
+}
+/**
+ * QueryCommunityPoolResponse is the response type for the Query/CommunityPool RPC method.
+ * @export
+ * @interface InlineResponse20041
+ */
+export interface InlineResponse20041 {
+    /**
+     * pool defines community pool\'s coins.
+     * @type {Array<InlineResponse20041Pool>}
+     * @memberof InlineResponse20041
+     */
+    pool?: Array<InlineResponse20041Pool>;
+}
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.  NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto.
+ * @export
+ * @interface InlineResponse20041Pool
+ */
+export interface InlineResponse20041Pool {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20041Pool
+     */
+    denom?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20041Pool
+     */
+    amount?: string;
+}
+/**
+ * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
+ * @export
+ * @interface InlineResponse20042
+ */
+export interface InlineResponse20042 {
+    /**
+     * rewards defines all the rewards accrued by a delegator.
+     * @type {Array<InlineResponse20042Rewards>}
+     * @memberof InlineResponse20042
+     */
+    rewards?: Array<InlineResponse20042Rewards>;
+    /**
+     * total defines the sum of all the rewards.
+     * @type {Array<InlineResponse20041Pool>}
+     * @memberof InlineResponse20042
+     */
+    total?: Array<InlineResponse20041Pool>;
+}
+/**
+ * DelegationDelegatorReward represents the properties of a delegator\'s delegation reward.
+ * @export
+ * @interface InlineResponse20042Rewards
+ */
+export interface InlineResponse20042Rewards {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20042Rewards
+     */
+    validator_address?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20041Pool>}
+     * @memberof InlineResponse20042Rewards
+     */
+    reward?: Array<InlineResponse20041Pool>;
+}
+/**
+ * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
+ * @export
+ * @interface InlineResponse20043
+ */
+export interface InlineResponse20043 {
+    /**
+     * rewards defines the rewards accrued by a delegation.
+     * @type {Array<InlineResponse20041Pool>}
+     * @memberof InlineResponse20043
+     */
+    rewards?: Array<InlineResponse20041Pool>;
+}
+/**
+ * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
+ * @export
+ * @interface InlineResponse20044
+ */
+export interface InlineResponse20044 {
+    /**
      * validators defines the validators a delegator is delegating for.
      * @type {Array<string>}
-     * @memberof InlineResponse20040
+     * @memberof InlineResponse20044
      */
     validators?: Array<string>;
 }
 /**
  * QueryDelegatorWithdrawAddressResponse is the response type for the Query/DelegatorWithdrawAddress RPC method.
  * @export
- * @interface InlineResponse20041
+ * @interface InlineResponse20045
  */
-export interface InlineResponse20041 {
+export interface InlineResponse20045 {
     /**
      * withdraw_address defines the delegator address to query for.
      * @type {string}
-     * @memberof InlineResponse20041
+     * @memberof InlineResponse20045
      */
     withdraw_address?: string;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse20042
+ * @interface InlineResponse20046
  */
-export interface InlineResponse20042 {
+export interface InlineResponse20046 {
     /**
      * 
-     * @type {InlineResponse20042Params}
-     * @memberof InlineResponse20042
+     * @type {InlineResponse20046Params}
+     * @memberof InlineResponse20046
      */
-    params?: InlineResponse20042Params;
+    params?: InlineResponse20046Params;
 }
 /**
  * params defines the parameters of the module.
  * @export
- * @interface InlineResponse20042Params
+ * @interface InlineResponse20046Params
  */
-export interface InlineResponse20042Params {
+export interface InlineResponse20046Params {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20042Params
+     * @memberof InlineResponse20046Params
      */
     community_tax?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20042Params
+     * @memberof InlineResponse20046Params
      */
     base_proposer_reward?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20042Params
+     * @memberof InlineResponse20046Params
      */
     bonus_proposer_reward?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof InlineResponse20042Params
+     * @memberof InlineResponse20046Params
      */
     withdraw_addr_enabled?: boolean;
 }
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the Query/ValidatorOutstandingRewards RPC method.
  * @export
- * @interface InlineResponse20043
+ * @interface InlineResponse20047
  */
-export interface InlineResponse20043 {
+export interface InlineResponse20047 {
     /**
      * 
-     * @type {InlineResponse20043Rewards}
-     * @memberof InlineResponse20043
+     * @type {InlineResponse20047Rewards}
+     * @memberof InlineResponse20047
      */
-    rewards?: InlineResponse20043Rewards;
+    rewards?: InlineResponse20047Rewards;
 }
 /**
  * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
  * @export
- * @interface InlineResponse20043Rewards
+ * @interface InlineResponse20047Rewards
  */
-export interface InlineResponse20043Rewards {
+export interface InlineResponse20047Rewards {
     /**
      * 
-     * @type {Array<InlineResponse20037Pool>}
-     * @memberof InlineResponse20043Rewards
+     * @type {Array<InlineResponse20041Pool>}
+     * @memberof InlineResponse20047Rewards
      */
-    rewards?: Array<InlineResponse20037Pool>;
+    rewards?: Array<InlineResponse20041Pool>;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
  * @export
- * @interface InlineResponse20044
+ * @interface InlineResponse20048
  */
-export interface InlineResponse20044 {
+export interface InlineResponse20048 {
     /**
      * slashes defines the slashes the validator received.
-     * @type {Array<InlineResponse20044Slashes>}
-     * @memberof InlineResponse20044
+     * @type {Array<InlineResponse20048Slashes>}
+     * @memberof InlineResponse20048
      */
-    slashes?: Array<InlineResponse20044Slashes>;
+    slashes?: Array<InlineResponse20048Slashes>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20044
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20048
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
  * @export
- * @interface InlineResponse20044Slashes
+ * @interface InlineResponse20048Slashes
  */
-export interface InlineResponse20044Slashes {
+export interface InlineResponse20048Slashes {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20044Slashes
+     * @memberof InlineResponse20048Slashes
      */
     validator_period?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20044Slashes
+     * @memberof InlineResponse20048Slashes
      */
     fraction?: string;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC method.
  * @export
- * @interface InlineResponse20045
- */
-export interface InlineResponse20045 {
-    /**
-     * evidence returns all evidences.
-     * @type {Array<InlineResponseDefaultDetails>}
-     * @memberof InlineResponse20045
-     */
-    evidence?: Array<InlineResponseDefaultDetails>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20045
-     */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
- * @export
- * @interface InlineResponse20046
- */
-export interface InlineResponse20046 {
-    /**
-     * 
-     * @type {InlineResponse20046Evidence}
-     * @memberof InlineResponse20046
-     */
-    evidence?: InlineResponse20046Evidence;
-}
-/**
- * evidence returns the requested evidence.
- * @export
- * @interface InlineResponse20046Evidence
- */
-export interface InlineResponse20046Evidence {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof InlineResponse20046Evidence
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof InlineResponse20046Evidence
-     */
-    value?: string;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20047
- */
-export interface InlineResponse20047 {
-    /**
-     * 
-     * @type {InlineResponse20047VotingParams}
-     * @memberof InlineResponse20047
-     */
-    voting_params?: InlineResponse20047VotingParams;
-    /**
-     * 
-     * @type {InlineResponse20047DepositParams}
-     * @memberof InlineResponse20047
-     */
-    deposit_params?: InlineResponse20047DepositParams;
-    /**
-     * 
-     * @type {InlineResponse20047TallyParams}
-     * @memberof InlineResponse20047
-     */
-    tally_params?: InlineResponse20047TallyParams;
-}
-/**
- * deposit_params defines the parameters related to deposit.
- * @export
- * @interface InlineResponse20047DepositParams
- */
-export interface InlineResponse20047DepositParams {
-    /**
-     * Minimum deposit for a proposal to enter voting period.
-     * @type {Array<InlineResponse20027Balances>}
-     * @memberof InlineResponse20047DepositParams
-     */
-    min_deposit?: Array<InlineResponse20027Balances>;
-    /**
-     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
-     * @type {string}
-     * @memberof InlineResponse20047DepositParams
-     */
-    max_deposit_period?: string;
-}
-/**
- * tally_params defines the parameters related to tally.
- * @export
- * @interface InlineResponse20047TallyParams
- */
-export interface InlineResponse20047TallyParams {
-    /**
-     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
-     * @type {string}
-     * @memberof InlineResponse20047TallyParams
-     */
-    quorum?: string;
-    /**
-     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
-     * @type {string}
-     * @memberof InlineResponse20047TallyParams
-     */
-    threshold?: string;
-    /**
-     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
-     * @type {string}
-     * @memberof InlineResponse20047TallyParams
-     */
-    veto_threshold?: string;
-}
-/**
- * voting_params defines the parameters related to voting.
- * @export
- * @interface InlineResponse20047VotingParams
- */
-export interface InlineResponse20047VotingParams {
-    /**
-     * Length of the voting period.
-     * @type {string}
-     * @memberof InlineResponse20047VotingParams
-     */
-    voting_period?: string;
-}
-/**
- * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
- * @export
- * @interface InlineResponse20048
- */
-export interface InlineResponse20048 {
-    /**
-     * 
-     * @type {Array<InlineResponse20048Proposals>}
-     * @memberof InlineResponse20048
-     */
-    proposals?: Array<InlineResponse20048Proposals>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20048
-     */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * TallyResult defines a standard tally for a governance proposal.
- * @export
- * @interface InlineResponse20048FinalTallyResult
- */
-export interface InlineResponse20048FinalTallyResult {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048FinalTallyResult
-     */
-    yes?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048FinalTallyResult
-     */
-    abstain?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048FinalTallyResult
-     */
-    no?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048FinalTallyResult
-     */
-    no_with_veto?: string;
-}
-/**
- * Proposal defines the core field members of a governance proposal.
- * @export
- * @interface InlineResponse20048Proposals
- */
-export interface InlineResponse20048Proposals {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048Proposals
-     */
-    proposal_id?: string;
-    /**
-     * 
-     * @type {InlineResponseDefaultDetails}
-     * @memberof InlineResponse20048Proposals
-     */
-    content?: InlineResponseDefaultDetails;
-    /**
-     * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
-     * @type {string}
-     * @memberof InlineResponse20048Proposals
-     */
-    status?: InlineResponse20048ProposalsStatusEnum;
-    /**
-     * 
-     * @type {InlineResponse20048FinalTallyResult}
-     * @memberof InlineResponse20048Proposals
-     */
-    final_tally_result?: InlineResponse20048FinalTallyResult;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048Proposals
-     */
-    submit_time?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048Proposals
-     */
-    deposit_end_time?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20027Balances>}
-     * @memberof InlineResponse20048Proposals
-     */
-    total_deposit?: Array<InlineResponse20027Balances>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048Proposals
-     */
-    voting_start_time?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20048Proposals
-     */
-    voting_end_time?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum InlineResponse20048ProposalsStatusEnum {
-    Unspecified = 'PROPOSAL_STATUS_UNSPECIFIED',
-    DepositPeriod = 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
-    VotingPeriod = 'PROPOSAL_STATUS_VOTING_PERIOD',
-    Passed = 'PROPOSAL_STATUS_PASSED',
-    Rejected = 'PROPOSAL_STATUS_REJECTED',
-    Failed = 'PROPOSAL_STATUS_FAILED'
-}
-
-/**
- * QueryProposalResponse is the response type for the Query/Proposal RPC method.
- * @export
  * @interface InlineResponse20049
  */
 export interface InlineResponse20049 {
     /**
-     * 
-     * @type {InlineResponse20048Proposals}
+     * evidence returns all evidences.
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof InlineResponse20049
      */
-    proposal?: InlineResponse20048Proposals;
+    evidence?: Array<InlineResponse20025Accounts>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20049
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * 
@@ -8104,181 +6949,396 @@ export interface InlineResponse2005 {
     txs?: Array<InlineResponse2004>;
 }
 /**
- * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
+ * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
  * @export
  * @interface InlineResponse20050
  */
 export interface InlineResponse20050 {
     /**
      * 
-     * @type {Array<InlineResponse20050Deposits>}
+     * @type {InlineResponse20025Accounts}
      * @memberof InlineResponse20050
      */
-    deposits?: Array<InlineResponse20050Deposits>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20050
-     */
-    pagination?: InlineResponse20027Pagination;
+    evidence?: InlineResponse20025Accounts;
 }
 /**
- * Deposit defines an amount deposited by an account address to an active proposal.
- * @export
- * @interface InlineResponse20050Deposits
- */
-export interface InlineResponse20050Deposits {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050Deposits
-     */
-    proposal_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050Deposits
-     */
-    depositor?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20027Balances>}
-     * @memberof InlineResponse20050Deposits
-     */
-    amount?: Array<InlineResponse20027Balances>;
-}
-/**
- * QueryDepositResponse is the response type for the Query/Deposit RPC method.
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
  * @interface InlineResponse20051
  */
 export interface InlineResponse20051 {
     /**
      * 
-     * @type {InlineResponse20051Deposit}
+     * @type {InlineResponse20051VotingParams}
      * @memberof InlineResponse20051
      */
-    deposit?: InlineResponse20051Deposit;
+    voting_params?: InlineResponse20051VotingParams;
+    /**
+     * 
+     * @type {InlineResponse20051DepositParams}
+     * @memberof InlineResponse20051
+     */
+    deposit_params?: InlineResponse20051DepositParams;
+    /**
+     * 
+     * @type {InlineResponse20051TallyParams}
+     * @memberof InlineResponse20051
+     */
+    tally_params?: InlineResponse20051TallyParams;
 }
 /**
- * deposit defines the requested deposit.
+ * deposit_params defines the parameters related to deposit.
  * @export
- * @interface InlineResponse20051Deposit
+ * @interface InlineResponse20051DepositParams
  */
-export interface InlineResponse20051Deposit {
+export interface InlineResponse20051DepositParams {
     /**
-     * 
+     * Minimum deposit for a proposal to enter voting period.
+     * @type {Array<InlineResponse20028Balances>}
+     * @memberof InlineResponse20051DepositParams
+     */
+    min_deposit?: Array<InlineResponse20028Balances>;
+    /**
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
      * @type {string}
-     * @memberof InlineResponse20051Deposit
+     * @memberof InlineResponse20051DepositParams
      */
-    proposal_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20051Deposit
-     */
-    depositor?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20027Balances>}
-     * @memberof InlineResponse20051Deposit
-     */
-    amount?: Array<InlineResponse20027Balances>;
+    max_deposit_period?: string;
 }
 /**
- * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
+ * tally_params defines the parameters related to tally.
+ * @export
+ * @interface InlineResponse20051TallyParams
+ */
+export interface InlineResponse20051TallyParams {
+    /**
+     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
+     * @type {string}
+     * @memberof InlineResponse20051TallyParams
+     */
+    quorum?: string;
+    /**
+     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
+     * @type {string}
+     * @memberof InlineResponse20051TallyParams
+     */
+    threshold?: string;
+    /**
+     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
+     * @type {string}
+     * @memberof InlineResponse20051TallyParams
+     */
+    veto_threshold?: string;
+}
+/**
+ * voting_params defines the parameters related to voting.
+ * @export
+ * @interface InlineResponse20051VotingParams
+ */
+export interface InlineResponse20051VotingParams {
+    /**
+     * Length of the voting period.
+     * @type {string}
+     * @memberof InlineResponse20051VotingParams
+     */
+    voting_period?: string;
+}
+/**
+ * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
  * @export
  * @interface InlineResponse20052
  */
 export interface InlineResponse20052 {
     /**
      * 
-     * @type {InlineResponse20052Tally}
+     * @type {Array<InlineResponse20052Proposals>}
      * @memberof InlineResponse20052
      */
-    tally?: InlineResponse20052Tally;
+    proposals?: Array<InlineResponse20052Proposals>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20052
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
- * tally defines the requested tally.
+ * TallyResult defines a standard tally for a governance proposal.
  * @export
- * @interface InlineResponse20052Tally
+ * @interface InlineResponse20052FinalTallyResult
  */
-export interface InlineResponse20052Tally {
+export interface InlineResponse20052FinalTallyResult {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Tally
+     * @memberof InlineResponse20052FinalTallyResult
      */
     yes?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Tally
+     * @memberof InlineResponse20052FinalTallyResult
      */
     abstain?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Tally
+     * @memberof InlineResponse20052FinalTallyResult
      */
     no?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Tally
+     * @memberof InlineResponse20052FinalTallyResult
      */
     no_with_veto?: string;
 }
 /**
- * QueryVotesResponse is the response type for the Query/Votes RPC method.
+ * Proposal defines the core field members of a governance proposal.
  * @export
- * @interface InlineResponse20053
+ * @interface InlineResponse20052Proposals
  */
-export interface InlineResponse20053 {
-    /**
-     * votes defined the queried votes.
-     * @type {Array<InlineResponse20053Votes>}
-     * @memberof InlineResponse20053
-     */
-    votes?: Array<InlineResponse20053Votes>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20053
-     */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
- * @export
- * @interface InlineResponse20053Votes
- */
-export interface InlineResponse20053Votes {
+export interface InlineResponse20052Proposals {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20053Votes
+     * @memberof InlineResponse20052Proposals
      */
     proposal_id?: string;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20053Votes
+     * @type {InlineResponse20025Accounts}
+     * @memberof InlineResponse20052Proposals
      */
-    voter?: string;
+    content?: InlineResponse20025Accounts;
     /**
-     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @type {string}
-     * @memberof InlineResponse20053Votes
+     * @memberof InlineResponse20052Proposals
      */
-    option?: InlineResponse20053VotesOptionEnum;
+    status?: InlineResponse20052ProposalsStatusEnum;
+    /**
+     * 
+     * @type {InlineResponse20052FinalTallyResult}
+     * @memberof InlineResponse20052Proposals
+     */
+    final_tally_result?: InlineResponse20052FinalTallyResult;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20052Proposals
+     */
+    submit_time?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20052Proposals
+     */
+    deposit_end_time?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20028Balances>}
+     * @memberof InlineResponse20052Proposals
+     */
+    total_deposit?: Array<InlineResponse20028Balances>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20052Proposals
+     */
+    voting_start_time?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20052Proposals
+     */
+    voting_end_time?: string;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum InlineResponse20053VotesOptionEnum {
+export enum InlineResponse20052ProposalsStatusEnum {
+    Unspecified = 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod = 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod = 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed = 'PROPOSAL_STATUS_PASSED',
+    Rejected = 'PROPOSAL_STATUS_REJECTED',
+    Failed = 'PROPOSAL_STATUS_FAILED'
+}
+
+/**
+ * QueryProposalResponse is the response type for the Query/Proposal RPC method.
+ * @export
+ * @interface InlineResponse20053
+ */
+export interface InlineResponse20053 {
+    /**
+     * 
+     * @type {InlineResponse20052Proposals}
+     * @memberof InlineResponse20053
+     */
+    proposal?: InlineResponse20052Proposals;
+}
+/**
+ * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
+ * @export
+ * @interface InlineResponse20054
+ */
+export interface InlineResponse20054 {
+    /**
+     * 
+     * @type {Array<InlineResponse20054Deposits>}
+     * @memberof InlineResponse20054
+     */
+    deposits?: Array<InlineResponse20054Deposits>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20054
+     */
+    pagination?: InlineResponse20025Pagination;
+}
+/**
+ * Deposit defines an amount deposited by an account address to an active proposal.
+ * @export
+ * @interface InlineResponse20054Deposits
+ */
+export interface InlineResponse20054Deposits {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20054Deposits
+     */
+    proposal_id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20054Deposits
+     */
+    depositor?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20028Balances>}
+     * @memberof InlineResponse20054Deposits
+     */
+    amount?: Array<InlineResponse20028Balances>;
+}
+/**
+ * QueryDepositResponse is the response type for the Query/Deposit RPC method.
+ * @export
+ * @interface InlineResponse20055
+ */
+export interface InlineResponse20055 {
+    /**
+     * 
+     * @type {InlineResponse20054Deposits}
+     * @memberof InlineResponse20055
+     */
+    deposit?: InlineResponse20054Deposits;
+}
+/**
+ * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
+ * @export
+ * @interface InlineResponse20056
+ */
+export interface InlineResponse20056 {
+    /**
+     * 
+     * @type {InlineResponse20052FinalTallyResult}
+     * @memberof InlineResponse20056
+     */
+    tally?: InlineResponse20052FinalTallyResult;
+}
+/**
+ * QueryVotesResponse is the response type for the Query/Votes RPC method.
+ * @export
+ * @interface InlineResponse20057
+ */
+export interface InlineResponse20057 {
+    /**
+     * votes defined the queried votes.
+     * @type {Array<InlineResponse20057Votes>}
+     * @memberof InlineResponse20057
+     */
+    votes?: Array<InlineResponse20057Votes>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20057
+     */
+    pagination?: InlineResponse20025Pagination;
+}
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ * @export
+ * @interface InlineResponse20057Options
+ */
+export interface InlineResponse20057Options {
+    /**
+     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * @type {string}
+     * @memberof InlineResponse20057Options
+     */
+    option?: InlineResponse20057OptionsOptionEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20057Options
+     */
+    weight?: string;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineResponse20057OptionsOptionEnum {
+    Unspecified = 'VOTE_OPTION_UNSPECIFIED',
+    Yes = 'VOTE_OPTION_YES',
+    Abstain = 'VOTE_OPTION_ABSTAIN',
+    No = 'VOTE_OPTION_NO',
+    NoWithVeto = 'VOTE_OPTION_NO_WITH_VETO'
+}
+
+/**
+ * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
+ * @export
+ * @interface InlineResponse20057Votes
+ */
+export interface InlineResponse20057Votes {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20057Votes
+     */
+    proposal_id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20057Votes
+     */
+    voter?: string;
+    /**
+     * Deprecated: Prefer to use `options` instead. This field is set in queries if and only if `len(options) == 1` and that option has weight 1. In all other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
+     * @type {string}
+     * @memberof InlineResponse20057Votes
+     */
+    option?: InlineResponse20057VotesOptionEnum;
+    /**
+     * 
+     * @type {Array<InlineResponse20057Options>}
+     * @memberof InlineResponse20057Votes
+     */
+    options?: Array<InlineResponse20057Options>;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineResponse20057VotesOptionEnum {
     Unspecified = 'VOTE_OPTION_UNSPECIFIED',
     Yes = 'VOTE_OPTION_YES',
     Abstain = 'VOTE_OPTION_ABSTAIN',
@@ -8289,236 +7349,28 @@ export enum InlineResponse20053VotesOptionEnum {
 /**
  * QueryVoteResponse is the response type for the Query/Vote RPC method.
  * @export
- * @interface InlineResponse20054
- */
-export interface InlineResponse20054 {
-    /**
-     * 
-     * @type {InlineResponse20054Vote}
-     * @memberof InlineResponse20054
-     */
-    vote?: InlineResponse20054Vote;
-}
-/**
- * vote defined the queried vote.
- * @export
- * @interface InlineResponse20054Vote
- */
-export interface InlineResponse20054Vote {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20054Vote
-     */
-    proposal_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20054Vote
-     */
-    voter?: string;
-    /**
-     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
-     * @type {string}
-     * @memberof InlineResponse20054Vote
-     */
-    option?: InlineResponse20054VoteOptionEnum;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum InlineResponse20054VoteOptionEnum {
-    Unspecified = 'VOTE_OPTION_UNSPECIFIED',
-    Yes = 'VOTE_OPTION_YES',
-    Abstain = 'VOTE_OPTION_ABSTAIN',
-    No = 'VOTE_OPTION_NO',
-    NoWithVeto = 'VOTE_OPTION_NO_WITH_VETO'
-}
-
-/**
- * QueryAnnualProvisionsResponse is the response type for the Query/AnnualProvisions RPC method.
- * @export
- * @interface InlineResponse20055
- */
-export interface InlineResponse20055 {
-    /**
-     * annual_provisions is the current minting annual provisions value.
-     * @type {string}
-     * @memberof InlineResponse20055
-     */
-    annual_provisions?: string;
-}
-/**
- * QueryInflationResponse is the response type for the Query/Inflation RPC method.
- * @export
- * @interface InlineResponse20056
- */
-export interface InlineResponse20056 {
-    /**
-     * inflation is the current minting inflation value.
-     * @type {string}
-     * @memberof InlineResponse20056
-     */
-    inflation?: string;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20057
- */
-export interface InlineResponse20057 {
-    /**
-     * 
-     * @type {InlineResponse20057Params}
-     * @memberof InlineResponse20057
-     */
-    params?: InlineResponse20057Params;
-}
-/**
- * params defines the parameters of the module.
- * @export
- * @interface InlineResponse20057Params
- */
-export interface InlineResponse20057Params {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20057Params
-     */
-    mint_denom?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20057Params
-     */
-    inflation_rate_change?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20057Params
-     */
-    inflation_max?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20057Params
-     */
-    inflation_min?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20057Params
-     */
-    goal_bonded?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20057Params
-     */
-    blocks_per_year?: string;
-}
-/**
- * QueryParamsResponse is response type for the Query/Params RPC method.
- * @export
  * @interface InlineResponse20058
  */
 export interface InlineResponse20058 {
     /**
      * 
-     * @type {InlineResponse20058Param}
+     * @type {InlineResponse20057Votes}
      * @memberof InlineResponse20058
      */
-    param?: InlineResponse20058Param;
+    vote?: InlineResponse20057Votes;
 }
 /**
- * param defines the queried parameter.
- * @export
- * @interface InlineResponse20058Param
- */
-export interface InlineResponse20058Param {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20058Param
-     */
-    subspace?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20058Param
-     */
-    key?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20058Param
-     */
-    value?: string;
-}
-/**
- * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
+ * QueryAnnualProvisionsResponse is the response type for the Query/AnnualProvisions RPC method.
  * @export
  * @interface InlineResponse20059
  */
 export interface InlineResponse20059 {
     /**
-     * delegation_responses defines all the delegations\' info of a delegator.
-     * @type {Array<InlineResponse20059DelegationResponses>}
+     * annual_provisions is the current minting annual provisions value.
+     * @type {string}
      * @memberof InlineResponse20059
      */
-    delegation_responses?: Array<InlineResponse20059DelegationResponses>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20059
-     */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator.
- * @export
- * @interface InlineResponse20059Delegation
- */
-export interface InlineResponse20059Delegation {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20059Delegation
-     */
-    delegator_address?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20059Delegation
-     */
-    validator_address?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20059Delegation
-     */
-    shares?: string;
-}
-/**
- * DelegationResponse is equivalent to Delegation except that it contains a balance in addition to shares which is more suitable for client responses.
- * @export
- * @interface InlineResponse20059DelegationResponses
- */
-export interface InlineResponse20059DelegationResponses {
-    /**
-     * 
-     * @type {InlineResponse20059Delegation}
-     * @memberof InlineResponse20059DelegationResponses
-     */
-    delegation?: InlineResponse20059Delegation;
-    /**
-     * 
-     * @type {InlineResponse20027Balances}
-     * @memberof InlineResponse20059DelegationResponses
-     */
-    balance?: InlineResponse20027Balances;
+    annual_provisions?: string;
 }
 /**
  * 
@@ -8552,369 +7404,539 @@ export interface InlineResponse2006 {
     height?: number;
 }
 /**
- * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
+ * QueryInflationResponse is the response type for the Query/Inflation RPC method.
  * @export
  * @interface InlineResponse20060
  */
 export interface InlineResponse20060 {
     /**
-     * 
-     * @type {Array<InlineResponse20060RedelegationResponses>}
+     * inflation is the current minting inflation value.
+     * @type {string}
      * @memberof InlineResponse20060
      */
-    redelegation_responses?: Array<InlineResponse20060RedelegationResponses>;
-    /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20060
-     */
-    pagination?: InlineResponse20027Pagination;
+    inflation?: string;
 }
 /**
- * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it contains a balance in addition to shares which is more suitable for client responses.
- * @export
- * @interface InlineResponse20060Entries
- */
-export interface InlineResponse20060Entries {
-    /**
-     * 
-     * @type {InlineResponse20060RedelegationEntries}
-     * @memberof InlineResponse20060Entries
-     */
-    redelegation_entry?: InlineResponse20060RedelegationEntries;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060Entries
-     */
-    balance?: string;
-}
-/**
- * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
- * @export
- * @interface InlineResponse20060Redelegation
- */
-export interface InlineResponse20060Redelegation {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060Redelegation
-     */
-    delegator_address?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060Redelegation
-     */
-    validator_src_address?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060Redelegation
-     */
-    validator_dst_address?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20060RedelegationEntries>}
-     * @memberof InlineResponse20060Redelegation
-     */
-    entries?: Array<InlineResponse20060RedelegationEntries>;
-}
-/**
- * RedelegationEntry defines a redelegation object with relevant metadata.
- * @export
- * @interface InlineResponse20060RedelegationEntries
- */
-export interface InlineResponse20060RedelegationEntries {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060RedelegationEntries
-     */
-    creation_height?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060RedelegationEntries
-     */
-    completion_time?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060RedelegationEntries
-     */
-    initial_balance?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20060RedelegationEntries
-     */
-    shares_dst?: string;
-}
-/**
- * RedelegationResponse is equivalent to a Redelegation except that its entries contain a balance in addition to shares which is more suitable for client responses.
- * @export
- * @interface InlineResponse20060RedelegationResponses
- */
-export interface InlineResponse20060RedelegationResponses {
-    /**
-     * 
-     * @type {InlineResponse20060Redelegation}
-     * @memberof InlineResponse20060RedelegationResponses
-     */
-    redelegation?: InlineResponse20060Redelegation;
-    /**
-     * 
-     * @type {Array<InlineResponse20060Entries>}
-     * @memberof InlineResponse20060RedelegationResponses
-     */
-    entries?: Array<InlineResponse20060Entries>;
-}
-/**
- * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
  * @interface InlineResponse20061
  */
 export interface InlineResponse20061 {
     /**
      * 
-     * @type {Array<InlineResponse20061UnbondingResponses>}
+     * @type {InlineResponse20061Params}
      * @memberof InlineResponse20061
      */
-    unbonding_responses?: Array<InlineResponse20061UnbondingResponses>;
+    params?: InlineResponse20061Params;
+}
+/**
+ * params defines the parameters of the module.
+ * @export
+ * @interface InlineResponse20061Params
+ */
+export interface InlineResponse20061Params {
     /**
      * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20061
+     * @type {string}
+     * @memberof InlineResponse20061Params
      */
-    pagination?: InlineResponse20027Pagination;
+    mint_denom?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20061Params
+     */
+    inflation_rate_change?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20061Params
+     */
+    inflation_max?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20061Params
+     */
+    inflation_min?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20061Params
+     */
+    goal_bonded?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20061Params
+     */
+    blocks_per_year?: string;
+}
+/**
+ * QueryParamsResponse is response type for the Query/Params RPC method.
+ * @export
+ * @interface InlineResponse20062
+ */
+export interface InlineResponse20062 {
+    /**
+     * 
+     * @type {InlineResponse20062Param}
+     * @memberof InlineResponse20062
+     */
+    param?: InlineResponse20062Param;
+}
+/**
+ * param defines the queried parameter.
+ * @export
+ * @interface InlineResponse20062Param
+ */
+export interface InlineResponse20062Param {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20062Param
+     */
+    subspace?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20062Param
+     */
+    key?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20062Param
+     */
+    value?: string;
+}
+/**
+ * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
+ * @export
+ * @interface InlineResponse20063
+ */
+export interface InlineResponse20063 {
+    /**
+     * delegation_responses defines all the delegations\' info of a delegator.
+     * @type {Array<InlineResponse20063DelegationResponses>}
+     * @memberof InlineResponse20063
+     */
+    delegation_responses?: Array<InlineResponse20063DelegationResponses>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20063
+     */
+    pagination?: InlineResponse20025Pagination;
+}
+/**
+ * Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator.
+ * @export
+ * @interface InlineResponse20063Delegation
+ */
+export interface InlineResponse20063Delegation {
+    /**
+     * delegator_address is the bech32-encoded address of the delegator.
+     * @type {string}
+     * @memberof InlineResponse20063Delegation
+     */
+    delegator_address?: string;
+    /**
+     * validator_address is the bech32-encoded address of the validator.
+     * @type {string}
+     * @memberof InlineResponse20063Delegation
+     */
+    validator_address?: string;
+    /**
+     * shares define the delegation shares received.
+     * @type {string}
+     * @memberof InlineResponse20063Delegation
+     */
+    shares?: string;
+}
+/**
+ * DelegationResponse is equivalent to Delegation except that it contains a balance in addition to shares which is more suitable for client responses.
+ * @export
+ * @interface InlineResponse20063DelegationResponses
+ */
+export interface InlineResponse20063DelegationResponses {
+    /**
+     * 
+     * @type {InlineResponse20063Delegation}
+     * @memberof InlineResponse20063DelegationResponses
+     */
+    delegation?: InlineResponse20063Delegation;
+    /**
+     * 
+     * @type {InlineResponse20028Balances}
+     * @memberof InlineResponse20063DelegationResponses
+     */
+    balance?: InlineResponse20028Balances;
+}
+/**
+ * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
+ * @export
+ * @interface InlineResponse20064
+ */
+export interface InlineResponse20064 {
+    /**
+     * 
+     * @type {Array<InlineResponse20064RedelegationResponses>}
+     * @memberof InlineResponse20064
+     */
+    redelegation_responses?: Array<InlineResponse20064RedelegationResponses>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20064
+     */
+    pagination?: InlineResponse20025Pagination;
+}
+/**
+ * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it contains a balance in addition to shares which is more suitable for client responses.
+ * @export
+ * @interface InlineResponse20064Entries
+ */
+export interface InlineResponse20064Entries {
+    /**
+     * 
+     * @type {InlineResponse20064RedelegationEntries}
+     * @memberof InlineResponse20064Entries
+     */
+    redelegation_entry?: InlineResponse20064RedelegationEntries;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20064Entries
+     */
+    balance?: string;
+}
+/**
+ * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
+ * @export
+ * @interface InlineResponse20064Redelegation
+ */
+export interface InlineResponse20064Redelegation {
+    /**
+     * delegator_address is the bech32-encoded address of the delegator.
+     * @type {string}
+     * @memberof InlineResponse20064Redelegation
+     */
+    delegator_address?: string;
+    /**
+     * validator_src_address is the validator redelegation source operator address.
+     * @type {string}
+     * @memberof InlineResponse20064Redelegation
+     */
+    validator_src_address?: string;
+    /**
+     * validator_dst_address is the validator redelegation destination operator address.
+     * @type {string}
+     * @memberof InlineResponse20064Redelegation
+     */
+    validator_dst_address?: string;
+    /**
+     * entries are the redelegation entries.
+     * @type {Array<InlineResponse20064RedelegationEntries>}
+     * @memberof InlineResponse20064Redelegation
+     */
+    entries?: Array<InlineResponse20064RedelegationEntries>;
+}
+/**
+ * RedelegationEntry defines a redelegation object with relevant metadata.
+ * @export
+ * @interface InlineResponse20064RedelegationEntries
+ */
+export interface InlineResponse20064RedelegationEntries {
+    /**
+     * creation_height  defines the height which the redelegation took place.
+     * @type {string}
+     * @memberof InlineResponse20064RedelegationEntries
+     */
+    creation_height?: string;
+    /**
+     * completion_time defines the unix time for redelegation completion.
+     * @type {string}
+     * @memberof InlineResponse20064RedelegationEntries
+     */
+    completion_time?: string;
+    /**
+     * initial_balance defines the initial balance when redelegation started.
+     * @type {string}
+     * @memberof InlineResponse20064RedelegationEntries
+     */
+    initial_balance?: string;
+    /**
+     * shares_dst is the amount of destination-validator shares created by redelegation.
+     * @type {string}
+     * @memberof InlineResponse20064RedelegationEntries
+     */
+    shares_dst?: string;
+}
+/**
+ * RedelegationResponse is equivalent to a Redelegation except that its entries contain a balance in addition to shares which is more suitable for client responses.
+ * @export
+ * @interface InlineResponse20064RedelegationResponses
+ */
+export interface InlineResponse20064RedelegationResponses {
+    /**
+     * 
+     * @type {InlineResponse20064Redelegation}
+     * @memberof InlineResponse20064RedelegationResponses
+     */
+    redelegation?: InlineResponse20064Redelegation;
+    /**
+     * 
+     * @type {Array<InlineResponse20064Entries>}
+     * @memberof InlineResponse20064RedelegationResponses
+     */
+    entries?: Array<InlineResponse20064Entries>;
+}
+/**
+ * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
+ * @export
+ * @interface InlineResponse20065
+ */
+export interface InlineResponse20065 {
+    /**
+     * 
+     * @type {Array<InlineResponse20065UnbondingResponses>}
+     * @memberof InlineResponse20065
+     */
+    unbonding_responses?: Array<InlineResponse20065UnbondingResponses>;
+    /**
+     * 
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20065
+     */
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
  * @export
- * @interface InlineResponse20061Entries
+ * @interface InlineResponse20065Entries
  */
-export interface InlineResponse20061Entries {
+export interface InlineResponse20065Entries {
     /**
-     * 
+     * creation_height is the height which the unbonding took place.
      * @type {string}
-     * @memberof InlineResponse20061Entries
+     * @memberof InlineResponse20065Entries
      */
     creation_height?: string;
     /**
-     * 
+     * completion_time is the unix time for unbonding completion.
      * @type {string}
-     * @memberof InlineResponse20061Entries
+     * @memberof InlineResponse20065Entries
      */
     completion_time?: string;
     /**
-     * 
+     * initial_balance defines the tokens initially scheduled to receive at completion.
      * @type {string}
-     * @memberof InlineResponse20061Entries
+     * @memberof InlineResponse20065Entries
      */
     initial_balance?: string;
     /**
-     * 
+     * balance defines the tokens to receive at completion.
      * @type {string}
-     * @memberof InlineResponse20061Entries
+     * @memberof InlineResponse20065Entries
      */
     balance?: string;
 }
 /**
  * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
  * @export
- * @interface InlineResponse20061UnbondingResponses
+ * @interface InlineResponse20065UnbondingResponses
  */
-export interface InlineResponse20061UnbondingResponses {
+export interface InlineResponse20065UnbondingResponses {
     /**
-     * 
+     * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
-     * @memberof InlineResponse20061UnbondingResponses
+     * @memberof InlineResponse20065UnbondingResponses
      */
     delegator_address?: string;
     /**
-     * 
+     * validator_address is the bech32-encoded address of the validator.
      * @type {string}
-     * @memberof InlineResponse20061UnbondingResponses
+     * @memberof InlineResponse20065UnbondingResponses
      */
     validator_address?: string;
     /**
-     * 
-     * @type {Array<InlineResponse20061Entries>}
-     * @memberof InlineResponse20061UnbondingResponses
+     * entries are the unbonding delegation entries.
+     * @type {Array<InlineResponse20065Entries>}
+     * @memberof InlineResponse20065UnbondingResponses
      */
-    entries?: Array<InlineResponse20061Entries>;
+    entries?: Array<InlineResponse20065Entries>;
 }
 /**
  * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
  * @export
- * @interface InlineResponse20062
+ * @interface InlineResponse20066
  */
-export interface InlineResponse20062 {
+export interface InlineResponse20066 {
     /**
      * validators defines the the validators\' info of a delegator.
-     * @type {Array<InlineResponse20062Validators>}
-     * @memberof InlineResponse20062
+     * @type {Array<InlineResponse20066Validators>}
+     * @memberof InlineResponse20066
      */
-    validators?: Array<InlineResponse20062Validators>;
+    validators?: Array<InlineResponse20066Validators>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20062
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20066
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
- * Commission defines commission parameters for a given validator.
+ * commission defines the commission parameters.
  * @export
- * @interface InlineResponse20062Commission
+ * @interface InlineResponse20066Commission
  */
-export interface InlineResponse20062Commission {
+export interface InlineResponse20066Commission {
     /**
      * 
-     * @type {InlineResponse20062CommissionCommissionRates}
-     * @memberof InlineResponse20062Commission
+     * @type {InlineResponse20066CommissionCommissionRates}
+     * @memberof InlineResponse20066Commission
      */
-    commission_rates?: InlineResponse20062CommissionCommissionRates;
+    commission_rates?: InlineResponse20066CommissionCommissionRates;
     /**
-     * 
+     * update_time is the last time the commission rate was changed.
      * @type {string}
-     * @memberof InlineResponse20062Commission
+     * @memberof InlineResponse20066Commission
      */
     update_time?: string;
 }
 /**
- * CommissionRates defines the initial commission rates to be used for creating a validator.
+ * commission_rates defines the initial commission rates to be used for creating a validator.
  * @export
- * @interface InlineResponse20062CommissionCommissionRates
+ * @interface InlineResponse20066CommissionCommissionRates
  */
-export interface InlineResponse20062CommissionCommissionRates {
+export interface InlineResponse20066CommissionCommissionRates {
     /**
-     * 
+     * rate is the commission rate charged to delegators, as a fraction.
      * @type {string}
-     * @memberof InlineResponse20062CommissionCommissionRates
+     * @memberof InlineResponse20066CommissionCommissionRates
      */
     rate?: string;
     /**
-     * 
+     * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
      * @type {string}
-     * @memberof InlineResponse20062CommissionCommissionRates
+     * @memberof InlineResponse20066CommissionCommissionRates
      */
     max_rate?: string;
     /**
-     * 
+     * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
      * @type {string}
-     * @memberof InlineResponse20062CommissionCommissionRates
+     * @memberof InlineResponse20066CommissionCommissionRates
      */
     max_change_rate?: string;
 }
 /**
- * Description defines a validator description.
+ * description defines the description terms for the validator.
  * @export
- * @interface InlineResponse20062Description
+ * @interface InlineResponse20066Description
  */
-export interface InlineResponse20062Description {
+export interface InlineResponse20066Description {
     /**
-     * 
+     * moniker defines a human-readable name for the validator.
      * @type {string}
-     * @memberof InlineResponse20062Description
+     * @memberof InlineResponse20066Description
      */
     moniker?: string;
     /**
-     * 
+     * identity defines an optional identity signature (ex. UPort or Keybase).
      * @type {string}
-     * @memberof InlineResponse20062Description
+     * @memberof InlineResponse20066Description
      */
     identity?: string;
     /**
-     * 
+     * website defines an optional website link.
      * @type {string}
-     * @memberof InlineResponse20062Description
+     * @memberof InlineResponse20066Description
      */
     website?: string;
     /**
-     * 
+     * security_contact defines an optional email for security contact.
      * @type {string}
-     * @memberof InlineResponse20062Description
+     * @memberof InlineResponse20066Description
      */
     security_contact?: string;
     /**
-     * 
+     * details define other optional details.
      * @type {string}
-     * @memberof InlineResponse20062Description
+     * @memberof InlineResponse20066Description
      */
     details?: string;
 }
 /**
  * Validator defines a validator, together with the total amount of the Validator\'s bond shares and their exchange rate to coins. Slashing results in a decrease in the exchange rate, allowing correct calculation of future undelegations without iterating over delegators. When coins are delegated to this validator, the validator is credited with a delegation whose number of bond shares is based on the amount of coins delegated divided by the current exchange rate. Voting power can be calculated as total bonded shares multiplied by exchange rate.
  * @export
- * @interface InlineResponse20062Validators
+ * @interface InlineResponse20066Validators
  */
-export interface InlineResponse20062Validators {
+export interface InlineResponse20066Validators {
     /**
-     * 
+     * operator_address defines the address of the validator\'s operator; bech encoded in JSON.
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     operator_address?: string;
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
-     * @memberof InlineResponse20062Validators
+     * @type {InlineResponse20025Accounts}
+     * @memberof InlineResponse20066Validators
      */
-    consensus_pubkey?: InlineResponseDefaultDetails;
+    consensus_pubkey?: InlineResponse20025Accounts;
     /**
-     * 
+     * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     jailed?: boolean;
     /**
-     * BondStatus is the status of a validator.   - BOND_STATUS_UNSPECIFIED: UNSPECIFIED defines an invalid validator status.  - BOND_STATUS_UNBONDED: UNBONDED defines a validator that is not bonded.  - BOND_STATUS_UNBONDING: UNBONDING defines a validator that is unbonding.  - BOND_STATUS_BONDED: BONDED defines a validator that is bonded.
+     * status is the validator status (bonded/unbonding/unbonded).
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
-    status?: InlineResponse20062ValidatorsStatusEnum;
+    status?: InlineResponse20066ValidatorsStatusEnum;
     /**
-     * 
+     * tokens define the delegated tokens (incl. self-delegation).
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     tokens?: string;
     /**
-     * 
+     * delegator_shares defines total shares issued to a validator\'s delegators.
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     delegator_shares?: string;
     /**
      * 
-     * @type {InlineResponse20062Description}
-     * @memberof InlineResponse20062Validators
+     * @type {InlineResponse20066Description}
+     * @memberof InlineResponse20066Validators
      */
-    description?: InlineResponse20062Description;
+    description?: InlineResponse20066Description;
     /**
-     * 
+     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     unbonding_height?: string;
     /**
-     * 
+     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     unbonding_time?: string;
     /**
      * 
-     * @type {InlineResponse20062Commission}
-     * @memberof InlineResponse20062Validators
+     * @type {InlineResponse20066Commission}
+     * @memberof InlineResponse20066Validators
      */
-    commission?: InlineResponse20062Commission;
+    commission?: InlineResponse20066Commission;
     /**
-     * 
+     * min_self_delegation is the validator\'s self declared minimum self delegation.
      * @type {string}
-     * @memberof InlineResponse20062Validators
+     * @memberof InlineResponse20066Validators
      */
     min_self_delegation?: string;
 }
@@ -8923,7 +7945,7 @@ export interface InlineResponse20062Validators {
     * @export
     * @enum {string}
     */
-export enum InlineResponse20062ValidatorsStatusEnum {
+export enum InlineResponse20066ValidatorsStatusEnum {
     Unspecified = 'BOND_STATUS_UNSPECIFIED',
     Unbonded = 'BOND_STATUS_UNBONDED',
     Unbonding = 'BOND_STATUS_UNBONDING',
@@ -8933,303 +7955,188 @@ export enum InlineResponse20062ValidatorsStatusEnum {
 /**
  * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
  * @export
- * @interface InlineResponse20063
- */
-export interface InlineResponse20063 {
-    /**
-     * 
-     * @type {InlineResponse20063Validator}
-     * @memberof InlineResponse20063
-     */
-    validator?: InlineResponse20063Validator;
-}
-/**
- * validator defines the the validator info.
- * @export
- * @interface InlineResponse20063Validator
- */
-export interface InlineResponse20063Validator {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    operator_address?: string;
-    /**
-     * 
-     * @type {InlineResponseDefaultDetails}
-     * @memberof InlineResponse20063Validator
-     */
-    consensus_pubkey?: InlineResponseDefaultDetails;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20063Validator
-     */
-    jailed?: boolean;
-    /**
-     * BondStatus is the status of a validator.   - BOND_STATUS_UNSPECIFIED: UNSPECIFIED defines an invalid validator status.  - BOND_STATUS_UNBONDED: UNBONDED defines a validator that is not bonded.  - BOND_STATUS_UNBONDING: UNBONDING defines a validator that is unbonding.  - BOND_STATUS_BONDED: BONDED defines a validator that is bonded.
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    status?: InlineResponse20063ValidatorStatusEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    tokens?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    delegator_shares?: string;
-    /**
-     * 
-     * @type {InlineResponse20062Description}
-     * @memberof InlineResponse20063Validator
-     */
-    description?: InlineResponse20062Description;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    unbonding_height?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    unbonding_time?: string;
-    /**
-     * 
-     * @type {InlineResponse20062Commission}
-     * @memberof InlineResponse20063Validator
-     */
-    commission?: InlineResponse20062Commission;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20063Validator
-     */
-    min_self_delegation?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum InlineResponse20063ValidatorStatusEnum {
-    Unspecified = 'BOND_STATUS_UNSPECIFIED',
-    Unbonded = 'BOND_STATUS_UNBONDED',
-    Unbonding = 'BOND_STATUS_UNBONDING',
-    Bonded = 'BOND_STATUS_BONDED'
-}
-
-/**
- * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
- * @export
- * @interface InlineResponse20064
- */
-export interface InlineResponse20064 {
-    /**
-     * 
-     * @type {InlineResponse20064Hist}
-     * @memberof InlineResponse20064
-     */
-    hist?: InlineResponse20064Hist;
-}
-/**
- * hist defines the historical info at the given height.
- * @export
- * @interface InlineResponse20064Hist
- */
-export interface InlineResponse20064Hist {
-    /**
-     * 
-     * @type {InlineResponse20031BlockHeader}
-     * @memberof InlineResponse20064Hist
-     */
-    header?: InlineResponse20031BlockHeader;
-    /**
-     * 
-     * @type {Array<InlineResponse20062Validators>}
-     * @memberof InlineResponse20064Hist
-     */
-    valset?: Array<InlineResponse20062Validators>;
-}
-/**
- * QueryParamsResponse is response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20065
- */
-export interface InlineResponse20065 {
-    /**
-     * 
-     * @type {InlineResponse20065Params}
-     * @memberof InlineResponse20065
-     */
-    params?: InlineResponse20065Params;
-}
-/**
- * params holds all the parameters of this module.
- * @export
- * @interface InlineResponse20065Params
- */
-export interface InlineResponse20065Params {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20065Params
-     */
-    unbonding_time?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20065Params
-     */
-    max_validators?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20065Params
-     */
-    max_entries?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20065Params
-     */
-    historical_entries?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20065Params
-     */
-    bond_denom?: string;
-}
-/**
- * QueryPoolResponse is response type for the Query/Pool RPC method.
- * @export
- * @interface InlineResponse20066
- */
-export interface InlineResponse20066 {
-    /**
-     * 
-     * @type {InlineResponse20066Pool}
-     * @memberof InlineResponse20066
-     */
-    pool?: InlineResponse20066Pool;
-}
-/**
- * pool defines the pool info.
- * @export
- * @interface InlineResponse20066Pool
- */
-export interface InlineResponse20066Pool {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20066Pool
-     */
-    not_bonded_tokens?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20066Pool
-     */
-    bonded_tokens?: string;
-}
-/**
- * QueryDelegationResponse is response type for the Query/Delegation RPC method.
- * @export
  * @interface InlineResponse20067
  */
 export interface InlineResponse20067 {
     /**
      * 
-     * @type {InlineResponse20067DelegationResponse}
+     * @type {InlineResponse20066Validators}
      * @memberof InlineResponse20067
      */
-    delegation_response?: InlineResponse20067DelegationResponse;
+    validator?: InlineResponse20066Validators;
 }
 /**
- * delegation_responses defines the delegation info of a delegation.
- * @export
- * @interface InlineResponse20067DelegationResponse
- */
-export interface InlineResponse20067DelegationResponse {
-    /**
-     * 
-     * @type {InlineResponse20059Delegation}
-     * @memberof InlineResponse20067DelegationResponse
-     */
-    delegation?: InlineResponse20059Delegation;
-    /**
-     * 
-     * @type {InlineResponse20027Balances}
-     * @memberof InlineResponse20067DelegationResponse
-     */
-    balance?: InlineResponse20027Balances;
-}
-/**
- * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
+ * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
  * @export
  * @interface InlineResponse20068
  */
 export interface InlineResponse20068 {
     /**
      * 
-     * @type {InlineResponse20068Unbond}
+     * @type {InlineResponse20068Hist}
      * @memberof InlineResponse20068
      */
-    unbond?: InlineResponse20068Unbond;
+    hist?: InlineResponse20068Hist;
 }
 /**
- * unbond defines the unbonding information of a delegation.
+ * hist defines the historical info at the given height.
  * @export
- * @interface InlineResponse20068Unbond
+ * @interface InlineResponse20068Hist
  */
-export interface InlineResponse20068Unbond {
+export interface InlineResponse20068Hist {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20068Unbond
+     * @type {InlineResponse20068HistHeader}
+     * @memberof InlineResponse20068Hist
      */
-    delegator_address?: string;
+    header?: InlineResponse20068HistHeader;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20068Unbond
+     * @type {Array<InlineResponse20066Validators>}
+     * @memberof InlineResponse20068Hist
      */
-    validator_address?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20061Entries>}
-     * @memberof InlineResponse20068Unbond
-     */
-    entries?: Array<InlineResponse20061Entries>;
+    valset?: Array<InlineResponse20066Validators>;
 }
 /**
- * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
+ * Header defines the structure of a Tendermint block header.
+ * @export
+ * @interface InlineResponse20068HistHeader
+ */
+export interface InlineResponse20068HistHeader {
+    /**
+     * 
+     * @type {BasicBlockInfo}
+     * @memberof InlineResponse20068HistHeader
+     */
+    version?: BasicBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    chain_id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    height?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    time?: string;
+    /**
+     * 
+     * @type {PrevBlockInfo}
+     * @memberof InlineResponse20068HistHeader
+     */
+    last_block_id?: PrevBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    last_commit_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    data_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    validators_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    next_validators_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    consensus_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    app_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    last_results_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    evidence_hash?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20068HistHeader
+     */
+    proposer_address?: string;
+}
+/**
+ * QueryParamsResponse is response type for the Query/Params RPC method.
  * @export
  * @interface InlineResponse20069
  */
 export interface InlineResponse20069 {
     /**
      * 
-     * @type {Array<InlineResponse20061UnbondingResponses>}
+     * @type {InlineResponse20069Params}
      * @memberof InlineResponse20069
      */
-    unbonding_responses?: Array<InlineResponse20061UnbondingResponses>;
+    params?: InlineResponse20069Params;
+}
+/**
+ * params holds all the parameters of this module.
+ * @export
+ * @interface InlineResponse20069Params
+ */
+export interface InlineResponse20069Params {
     /**
-     * 
-     * @type {InlineResponse20027Pagination}
-     * @memberof InlineResponse20069
+     * unbonding_time is the time duration of unbonding.
+     * @type {string}
+     * @memberof InlineResponse20069Params
      */
-    pagination?: InlineResponse20027Pagination;
+    unbonding_time?: string;
+    /**
+     * max_validators is the maximum number of validators.
+     * @type {number}
+     * @memberof InlineResponse20069Params
+     */
+    max_validators?: number;
+    /**
+     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
+     * @type {number}
+     * @memberof InlineResponse20069Params
+     */
+    max_entries?: number;
+    /**
+     * historical_entries is the number of historical entries to persist.
+     * @type {number}
+     * @memberof InlineResponse20069Params
+     */
+    historical_entries?: number;
+    /**
+     * bond_denom defines the bondable coin denomination.
+     * @type {string}
+     * @memberof InlineResponse20069Params
+     */
+    bond_denom?: string;
 }
 /**
  * 
@@ -9343,571 +8250,451 @@ export interface InlineResponse2007 {
     tx?: string;
 }
 /**
- * SimulateResponse is the response type for the Service.SimulateRPC method.
+ * QueryPoolResponse is response type for the Query/Pool RPC method.
  * @export
  * @interface InlineResponse20070
  */
 export interface InlineResponse20070 {
     /**
      * 
-     * @type {InlineResponse20070GasInfo}
+     * @type {InlineResponse20070Pool}
      * @memberof InlineResponse20070
      */
-    gas_info?: InlineResponse20070GasInfo;
-    /**
-     * 
-     * @type {InlineResponse20070Result}
-     * @memberof InlineResponse20070
-     */
-    result?: InlineResponse20070Result;
+    pool?: InlineResponse20070Pool;
 }
 /**
- * gas_info is the information about gas used in the simulation.
+ * pool defines the pool info.
  * @export
- * @interface InlineResponse20070GasInfo
+ * @interface InlineResponse20070Pool
  */
-export interface InlineResponse20070GasInfo {
+export interface InlineResponse20070Pool {
     /**
-     * GasWanted is the maximum units of work we allow this tx to perform.
+     * 
      * @type {string}
-     * @memberof InlineResponse20070GasInfo
+     * @memberof InlineResponse20070Pool
      */
-    gas_wanted?: string;
+    not_bonded_tokens?: string;
     /**
-     * GasUsed is the amount of gas actually consumed.
+     * 
      * @type {string}
-     * @memberof InlineResponse20070GasInfo
+     * @memberof InlineResponse20070Pool
      */
-    gas_used?: string;
+    bonded_tokens?: string;
 }
 /**
- * result is the result of the simulation.
- * @export
- * @interface InlineResponse20070Result
- */
-export interface InlineResponse20070Result {
-    /**
-     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
-     * @type {string}
-     * @memberof InlineResponse20070Result
-     */
-    data?: string;
-    /**
-     * Log contains the log information from message or handler execution.
-     * @type {string}
-     * @memberof InlineResponse20070Result
-     */
-    log?: string;
-    /**
-     * Events contains a slice of Event objects that were emitted during message or handler execution.
-     * @type {Array<InlineResponse20070ResultEvents>}
-     * @memberof InlineResponse20070Result
-     */
-    events?: Array<InlineResponse20070ResultEvents>;
-}
-/**
- * EventAttribute is a single key-value pair, associated with an event.
- * @export
- * @interface InlineResponse20070ResultAttributes
- */
-export interface InlineResponse20070ResultAttributes {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20070ResultAttributes
-     */
-    key?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20070ResultAttributes
-     */
-    value?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20070ResultAttributes
-     */
-    index?: boolean;
-}
-/**
- * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
- * @export
- * @interface InlineResponse20070ResultEvents
- */
-export interface InlineResponse20070ResultEvents {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20070ResultEvents
-     */
-    type?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20070ResultAttributes>}
-     * @memberof InlineResponse20070ResultEvents
-     */
-    attributes?: Array<InlineResponse20070ResultAttributes>;
-}
-/**
- * BroadcastTxResponse is the response type for the Service.BroadcastTx method.
+ * QueryDelegationResponse is response type for the Query/Delegation RPC method.
  * @export
  * @interface InlineResponse20071
  */
 export interface InlineResponse20071 {
     /**
      * 
-     * @type {InlineResponse20071TxResponse}
+     * @type {InlineResponse20063DelegationResponses}
      * @memberof InlineResponse20071
      */
-    tx_response?: InlineResponse20071TxResponse;
+    delegation_response?: InlineResponse20063DelegationResponses;
 }
 /**
- * tx_response is the queried TxResponses.
- * @export
- * @interface InlineResponse20071TxResponse
- */
-export interface InlineResponse20071TxResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    height?: string;
-    /**
-     * The transaction hash.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    txhash?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    codespace?: string;
-    /**
-     * Response code.
-     * @type {number}
-     * @memberof InlineResponse20071TxResponse
-     */
-    code?: number;
-    /**
-     * Result bytes, if any.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    data?: string;
-    /**
-     * The output of the application\'s logger (raw string). May be non-deterministic.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    raw_log?: string;
-    /**
-     * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20071TxResponseLogs>}
-     * @memberof InlineResponse20071TxResponse
-     */
-    logs?: Array<InlineResponse20071TxResponseLogs>;
-    /**
-     * Additional information. May be non-deterministic.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    info?: string;
-    /**
-     * Amount of gas requested for transaction.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    gas_wanted?: string;
-    /**
-     * Amount of gas consumed by transaction.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    gas_used?: string;
-    /**
-     * 
-     * @type {InlineResponse20071TxResponseTx}
-     * @memberof InlineResponse20071TxResponse
-     */
-    tx?: InlineResponse20071TxResponseTx;
-    /**
-     * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponse
-     */
-    timestamp?: string;
-}
-/**
- * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
- * @export
- * @interface InlineResponse20071TxResponseAttributes
- */
-export interface InlineResponse20071TxResponseAttributes {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20071TxResponseAttributes
-     */
-    key?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20071TxResponseAttributes
-     */
-    value?: string;
-}
-/**
- * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
- * @export
- * @interface InlineResponse20071TxResponseEvents
- */
-export interface InlineResponse20071TxResponseEvents {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20071TxResponseEvents
-     */
-    type?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20071TxResponseAttributes>}
-     * @memberof InlineResponse20071TxResponseEvents
-     */
-    attributes?: Array<InlineResponse20071TxResponseAttributes>;
-}
-/**
- * ABCIMessageLog defines a structure containing an indexed tx ABCI message log.
- * @export
- * @interface InlineResponse20071TxResponseLogs
- */
-export interface InlineResponse20071TxResponseLogs {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20071TxResponseLogs
-     */
-    msg_index?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20071TxResponseLogs
-     */
-    log?: string;
-    /**
-     * Events contains a slice of Event objects that were emitted during some execution.
-     * @type {Array<InlineResponse20071TxResponseEvents>}
-     * @memberof InlineResponse20071TxResponseLogs
-     */
-    events?: Array<InlineResponse20071TxResponseEvents>;
-}
-/**
- * The request transaction bytes.
- * @export
- * @interface InlineResponse20071TxResponseTx
- */
-export interface InlineResponse20071TxResponseTx {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponseTx
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof InlineResponse20071TxResponseTx
-     */
-    value?: string;
-}
-/**
- * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
+ * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
  * @export
  * @interface InlineResponse20072
  */
 export interface InlineResponse20072 {
     /**
-     * height is the block height at which the plan was applied.
-     * @type {string}
+     * 
+     * @type {InlineResponse20065UnbondingResponses}
      * @memberof InlineResponse20072
      */
-    height?: string;
+    unbond?: InlineResponse20065UnbondingResponses;
 }
 /**
- * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC method.
+ * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
  * @export
  * @interface InlineResponse20073
  */
 export interface InlineResponse20073 {
     /**
      * 
-     * @type {InlineResponse20073Plan}
+     * @type {Array<InlineResponse20065UnbondingResponses>}
      * @memberof InlineResponse20073
      */
-    plan?: InlineResponse20073Plan;
-}
-/**
- * plan is the current upgrade plan.
- * @export
- * @interface InlineResponse20073Plan
- */
-export interface InlineResponse20073Plan {
-    /**
-     * Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit.
-     * @type {string}
-     * @memberof InlineResponse20073Plan
-     */
-    name?: string;
-    /**
-     * The time after which the upgrade must be performed. Leave set to its zero value to use a pre-defined Height instead.
-     * @type {string}
-     * @memberof InlineResponse20073Plan
-     */
-    time?: string;
-    /**
-     * The height at which the upgrade must be performed. Only used if Time is not set.
-     * @type {string}
-     * @memberof InlineResponse20073Plan
-     */
-    height?: string;
+    unbonding_responses?: Array<InlineResponse20065UnbondingResponses>;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20073Plan
+     * @type {InlineResponse20025Pagination}
+     * @memberof InlineResponse20073
      */
-    info?: string;
-    /**
-     * 
-     * @type {IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades}
-     * @memberof InlineResponse20073Plan
-     */
-    upgraded_client_state?: IBCEnabledChainsCanOptInToIncludingTheUpgradedClientStateInItsUpgradePlanThisWillMakeTheChainCommitToTheCorrectUpgradedSelfClientStateBeforeTheUpgradeOccursSoThatConnectingChainsCanVerifyThatTheNewUpgradedClientIsValidByVerifyingAProofOnThePreviousVersionOfTheChainThisWillAllowIBCConnectionsToPersistSmoothlyAcrossPlannedChainUpgrades;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
- * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
+ * SimulateResponse is the response type for the Service.SimulateRPC method.
  * @export
  * @interface InlineResponse20074
  */
 export interface InlineResponse20074 {
     /**
      * 
-     * @type {InlineResponseDefaultDetails}
+     * @type {InlineResponse20074GasInfo}
      * @memberof InlineResponse20074
      */
-    upgraded_consensus_state?: InlineResponseDefaultDetails;
+    gas_info?: InlineResponse20074GasInfo;
+    /**
+     * 
+     * @type {InlineResponse20074Result}
+     * @memberof InlineResponse20074
+     */
+    result?: InlineResponse20074Result;
 }
 /**
- * QueryChannelsResponse is the response type for the Query/Channels RPC method.
+ * gas_info is the information about gas used in the simulation.
+ * @export
+ * @interface InlineResponse20074GasInfo
+ */
+export interface InlineResponse20074GasInfo {
+    /**
+     * GasWanted is the maximum units of work we allow this tx to perform.
+     * @type {string}
+     * @memberof InlineResponse20074GasInfo
+     */
+    gas_wanted?: string;
+    /**
+     * GasUsed is the amount of gas actually consumed.
+     * @type {string}
+     * @memberof InlineResponse20074GasInfo
+     */
+    gas_used?: string;
+}
+/**
+ * result is the result of the simulation.
+ * @export
+ * @interface InlineResponse20074Result
+ */
+export interface InlineResponse20074Result {
+    /**
+     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
+     * @type {string}
+     * @memberof InlineResponse20074Result
+     */
+    data?: string;
+    /**
+     * Log contains the log information from message or handler execution.
+     * @type {string}
+     * @memberof InlineResponse20074Result
+     */
+    log?: string;
+    /**
+     * Events contains a slice of Event objects that were emitted during message or handler execution.
+     * @type {Array<InlineResponse20074ResultEvents>}
+     * @memberof InlineResponse20074Result
+     */
+    events?: Array<InlineResponse20074ResultEvents>;
+}
+/**
+ * EventAttribute is a single key-value pair, associated with an event.
+ * @export
+ * @interface InlineResponse20074ResultAttributes
+ */
+export interface InlineResponse20074ResultAttributes {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20074ResultAttributes
+     */
+    key?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20074ResultAttributes
+     */
+    value?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20074ResultAttributes
+     */
+    index?: boolean;
+}
+/**
+ * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
+ * @export
+ * @interface InlineResponse20074ResultEvents
+ */
+export interface InlineResponse20074ResultEvents {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20074ResultEvents
+     */
+    type?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20074ResultAttributes>}
+     * @memberof InlineResponse20074ResultEvents
+     */
+    attributes?: Array<InlineResponse20074ResultAttributes>;
+}
+/**
+ * BroadcastTxResponse is the response type for the Service.BroadcastTx method.
  * @export
  * @interface InlineResponse20075
  */
 export interface InlineResponse20075 {
     /**
-     * list of stored channels of the chain.
-     * @type {Array<InlineResponse20075Channels>}
-     * @memberof InlineResponse20075
-     */
-    channels?: Array<InlineResponse20075Channels>;
-    /**
      * 
-     * @type {PaginationResponse}
+     * @type {InlineResponse20075TxResponse}
      * @memberof InlineResponse20075
      */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof InlineResponse20075
-     */
-    height?: QueryBlockHeight;
+    tx_response?: InlineResponse20075TxResponse;
 }
 /**
- * IdentifiedChannel defines a channel with additional port and channel identifier fields.
+ * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
  * @export
- * @interface InlineResponse20075Channels
+ * @interface InlineResponse20075TxResponse
  */
-export interface InlineResponse20075Channels {
-    /**
-     * State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.   - STATE_UNINITIALIZED_UNSPECIFIED: Default State  - STATE_INIT: A channel has just started the opening handshake.  - STATE_TRYOPEN: A channel has acknowledged the handshake step on the counterparty chain.  - STATE_OPEN: A channel has completed the handshake. Open channels are ready to send and receive packets.  - STATE_CLOSED: A channel has been closed and can no longer be used to send or receive packets.
-     * @type {string}
-     * @memberof InlineResponse20075Channels
-     */
-    state?: InlineResponse20075ChannelsStateEnum;
-    /**
-     * - ORDER_NONE_UNSPECIFIED: zero-value for channel ordering  - ORDER_UNORDERED: packets can be delivered in any order, which may differ from the order in which they were sent.  - ORDER_ORDERED: packets are delivered exactly in the order which they were sent
-     * @type {string}
-     * @memberof InlineResponse20075Channels
-     */
-    ordering?: InlineResponse20075ChannelsOrderingEnum;
-    /**
-     * 
-     * @type {CounterpartyChannelEnd}
-     * @memberof InlineResponse20075Channels
-     */
-    counterparty?: CounterpartyChannelEnd;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse20075Channels
-     */
-    connection_hops?: Array<string>;
+export interface InlineResponse20075TxResponse {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075Channels
+     * @memberof InlineResponse20075TxResponse
      */
-    version?: string;
+    height?: string;
+    /**
+     * The transaction hash.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    txhash?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075Channels
+     * @memberof InlineResponse20075TxResponse
      */
-    port_id?: string;
+    codespace?: string;
+    /**
+     * Response code.
+     * @type {number}
+     * @memberof InlineResponse20075TxResponse
+     */
+    code?: number;
+    /**
+     * Result bytes, if any.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    data?: string;
+    /**
+     * The output of the application\'s logger (raw string). May be non-deterministic.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    raw_log?: string;
+    /**
+     * The output of the application\'s logger (typed). May be non-deterministic.
+     * @type {Array<InlineResponse20075TxResponseLogs>}
+     * @memberof InlineResponse20075TxResponse
+     */
+    logs?: Array<InlineResponse20075TxResponseLogs>;
+    /**
+     * Additional information. May be non-deterministic.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    info?: string;
+    /**
+     * Amount of gas requested for transaction.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    gas_wanted?: string;
+    /**
+     * Amount of gas consumed by transaction.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    gas_used?: string;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20075Channels
+     * @type {InlineResponse20025Accounts}
+     * @memberof InlineResponse20075TxResponse
      */
-    channel_id?: string;
+    tx?: InlineResponse20025Accounts;
+    /**
+     * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
+     * @type {string}
+     * @memberof InlineResponse20075TxResponse
+     */
+    timestamp?: string;
 }
-
 /**
-    * @export
-    * @enum {string}
-    */
-export enum InlineResponse20075ChannelsStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN',
-    Closed = 'STATE_CLOSED'
+ * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
+ * @export
+ * @interface InlineResponse20075TxResponseAttributes
+ */
+export interface InlineResponse20075TxResponseAttributes {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20075TxResponseAttributes
+     */
+    key?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20075TxResponseAttributes
+     */
+    value?: string;
 }
 /**
-    * @export
-    * @enum {string}
-    */
-export enum InlineResponse20075ChannelsOrderingEnum {
-    NoneUnspecified = 'ORDER_NONE_UNSPECIFIED',
-    Unordered = 'ORDER_UNORDERED',
-    Ordered = 'ORDER_ORDERED'
+ * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
+ * @export
+ * @interface InlineResponse20075TxResponseEvents
+ */
+export interface InlineResponse20075TxResponseEvents {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20075TxResponseEvents
+     */
+    type?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20075TxResponseAttributes>}
+     * @memberof InlineResponse20075TxResponseEvents
+     */
+    attributes?: Array<InlineResponse20075TxResponseAttributes>;
 }
-
 /**
- * QueryChannelResponse is the response type for the Query/Channel RPC method. Besides the Channel end, it includes a proof and the height from which the proof was retrieved.
+ * ABCIMessageLog defines a structure containing an indexed tx ABCI message log.
+ * @export
+ * @interface InlineResponse20075TxResponseLogs
+ */
+export interface InlineResponse20075TxResponseLogs {
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20075TxResponseLogs
+     */
+    msg_index?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20075TxResponseLogs
+     */
+    log?: string;
+    /**
+     * Events contains a slice of Event objects that were emitted during some execution.
+     * @type {Array<InlineResponse20075TxResponseEvents>}
+     * @memberof InlineResponse20075TxResponseLogs
+     */
+    events?: Array<InlineResponse20075TxResponseEvents>;
+}
+/**
+ * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
  * @export
  * @interface InlineResponse20076
  */
 export interface InlineResponse20076 {
     /**
-     * 
-     * @type {ChannelAssociatedWithTheRequestIdentifiers}
-     * @memberof InlineResponse20076
-     */
-    channel?: ChannelAssociatedWithTheRequestIdentifiers;
-    /**
-     * 
+     * height is the block height at which the plan was applied.
      * @type {string}
      * @memberof InlineResponse20076
      */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof InlineResponse20076
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
+    height?: string;
 }
 /**
- * QueryClientParamsResponse is the response type for the Query/ClientParams RPC method.
+ * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC method.
  * @export
  * @interface InlineResponse20077
  */
 export interface InlineResponse20077 {
     /**
      * 
-     * @type {InlineResponse20077Params}
+     * @type {InlineResponse20077Plan}
      * @memberof InlineResponse20077
      */
-    params?: InlineResponse20077Params;
+    plan?: InlineResponse20077Plan;
 }
 /**
- * params defines the parameters of the module.
+ * plan is the current upgrade plan.
  * @export
- * @interface InlineResponse20077Params
+ * @interface InlineResponse20077Plan
  */
-export interface InlineResponse20077Params {
+export interface InlineResponse20077Plan {
     /**
-     * allowed_clients defines the list of allowed client state types.
-     * @type {Array<string>}
-     * @memberof InlineResponse20077Params
+     * Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit.
+     * @type {string}
+     * @memberof InlineResponse20077Plan
      */
-    allowed_clients?: Array<string>;
+    name?: string;
+    /**
+     * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.
+     * @type {string}
+     * @memberof InlineResponse20077Plan
+     */
+    time?: string;
+    /**
+     * The height at which the upgrade must be performed. Only used if Time is not set.
+     * @type {string}
+     * @memberof InlineResponse20077Plan
+     */
+    height?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20077Plan
+     */
+    info?: string;
+    /**
+     * 
+     * @type {InlineResponse20025Accounts}
+     * @memberof InlineResponse20077Plan
+     */
+    upgraded_client_state?: InlineResponse20025Accounts;
 }
 /**
- * QueryClientStatesResponse is the response type for the Query/ClientStates RPC method.
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
  * @export
  * @interface InlineResponse20078
  */
 export interface InlineResponse20078 {
     /**
-     * list of stored ClientStates of the chain.
-     * @type {Array<InlineResponse20078ClientStates>}
+     * module_versions is a list of module names with their consensus versions.
+     * @type {Array<InlineResponse20078ModuleVersions>}
      * @memberof InlineResponse20078
      */
-    client_states?: Array<InlineResponse20078ClientStates>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof InlineResponse20078
-     */
-    pagination?: PaginationResponse;
+    module_versions?: Array<InlineResponse20078ModuleVersions>;
 }
 /**
- * IdentifiedClientState defines a client state with an additional client identifier field.
+ * ModuleVersion specifies a module and its consensus version.
  * @export
- * @interface InlineResponse20078ClientStates
+ * @interface InlineResponse20078ModuleVersions
  */
-export interface InlineResponse20078ClientStates {
+export interface InlineResponse20078ModuleVersions {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20078ClientStates
+     * @memberof InlineResponse20078ModuleVersions
      */
-    client_id?: string;
+    name?: string;
     /**
      * 
-     * @type {ClientState}
-     * @memberof InlineResponse20078ClientStates
+     * @type {string}
+     * @memberof InlineResponse20078ModuleVersions
      */
-    client_state?: ClientState;
+    version?: string;
 }
 /**
- * QueryClientStateResponse is the response type for the Query/ClientState RPC method. Besides the client state, it includes a proof and the height from which the proof was retrieved.
+ * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
  * @export
  * @interface InlineResponse20079
  */
 export interface InlineResponse20079 {
     /**
      * 
-     * @type {ClientStateAssociatedWithTheRequestIdentifier}
-     * @memberof InlineResponse20079
-     */
-    client_state?: ClientStateAssociatedWithTheRequestIdentifier;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse20079
      */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof InlineResponse20079
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
+    upgraded_consensus_state?: string;
 }
 /**
  * 
@@ -9917,323 +8704,80 @@ export interface InlineResponse20079 {
 export interface InlineResponse2008 {
     /**
      * 
-     * @type {string}
+     * @type {Array<InlineResponse2004TxFeeAmount>}
      * @memberof InlineResponse2008
      */
-    type?: string;
-    /**
-     * 
-     * @type {InlineResponse2008Value}
-     * @memberof InlineResponse2008
-     */
-    value?: InlineResponse2008Value;
+    total?: Array<InlineResponse2004TxFeeAmount>;
 }
 /**
- * QueryConnectionsResponse is the response type for the Query/Connections RPC method.
+ * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
  * @export
  * @interface InlineResponse20080
  */
 export interface InlineResponse20080 {
     /**
-     * list of stored connections of the chain.
-     * @type {Array<InlineResponse20080Connections>}
+     * authorizations is a list of grants granted for grantee by granter.
+     * @type {Array<InlineResponse20080Grants>}
      * @memberof InlineResponse20080
      */
-    connections?: Array<InlineResponse20080Connections>;
+    grants?: Array<InlineResponse20080Grants>;
     /**
      * 
-     * @type {PaginationResponse}
+     * @type {InlineResponse20039Pagination}
      * @memberof InlineResponse20080
      */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof InlineResponse20080
-     */
-    height?: QueryBlockHeight;
+    pagination?: InlineResponse20039Pagination;
 }
 /**
- * IdentifiedConnection defines a connection with additional connection identifier field.
+ * Grant gives permissions to execute the provide method with expiration time.
  * @export
- * @interface InlineResponse20080Connections
+ * @interface InlineResponse20080Grants
  */
-export interface InlineResponse20080Connections {
-    /**
-     * connection identifier.
-     * @type {string}
-     * @memberof InlineResponse20080Connections
-     */
-    id?: string;
-    /**
-     * client associated with this connection.
-     * @type {string}
-     * @memberof InlineResponse20080Connections
-     */
-    client_id?: string;
+export interface InlineResponse20080Grants {
     /**
      * 
-     * @type {Array<InlineResponse20080Versions>}
-     * @memberof InlineResponse20080Connections
+     * @type {InlineResponse20025Accounts}
+     * @memberof InlineResponse20080Grants
      */
-    versions?: Array<InlineResponse20080Versions>;
-    /**
-     * current state of the connection end.
-     * @type {string}
-     * @memberof InlineResponse20080Connections
-     */
-    state?: InlineResponse20080ConnectionsStateEnum;
+    authorization?: InlineResponse20025Accounts;
     /**
      * 
-     * @type {InlineResponse20080Counterparty}
-     * @memberof InlineResponse20080Connections
-     */
-    counterparty?: InlineResponse20080Counterparty;
-    /**
-     * delay period associated with this connection.
      * @type {string}
-     * @memberof InlineResponse20080Connections
+     * @memberof InlineResponse20080Grants
      */
-    delay_period?: string;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum InlineResponse20080ConnectionsStateEnum {
-    UninitializedUnspecified = 'STATE_UNINITIALIZED_UNSPECIFIED',
-    Init = 'STATE_INIT',
-    Tryopen = 'STATE_TRYOPEN',
-    Open = 'STATE_OPEN'
-}
-
-/**
- * counterparty chain associated with this connection.
- * @export
- * @interface InlineResponse20080Counterparty
- */
-export interface InlineResponse20080Counterparty {
-    /**
-     * identifies the client on the counterparty chain associated with a given connection.
-     * @type {string}
-     * @memberof InlineResponse20080Counterparty
-     */
-    client_id?: string;
-    /**
-     * identifies the connection end on the counterparty chain associated with a given connection.
-     * @type {string}
-     * @memberof InlineResponse20080Counterparty
-     */
-    connection_id?: string;
-    /**
-     * 
-     * @type {MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey}
-     * @memberof InlineResponse20080Counterparty
-     */
-    prefix?: MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey;
+    expiration?: string;
 }
 /**
- * Version defines the versioning scheme used to negotiate the IBC verison in the connection handshake.
- * @export
- * @interface InlineResponse20080Versions
- */
-export interface InlineResponse20080Versions {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20080Versions
-     */
-    identifier?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse20080Versions
-     */
-    features?: Array<string>;
-}
-/**
- * QueryConnectionResponse is the response type for the Query/Connection RPC method. Besides the connection end, it includes a proof and the height from which the proof was retrieved.
+ * QueryAllowanceResponse is the response type for the Query/Allowance RPC method.
  * @export
  * @interface InlineResponse20081
  */
 export interface InlineResponse20081 {
     /**
      * 
-     * @type {ConnectionAssociatedWithTheRequestIdentifier}
+     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext}
      * @memberof InlineResponse20081
      */
-    connection?: ConnectionAssociatedWithTheRequestIdentifier;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20081
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof InlineResponse20081
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
+    allowance?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext;
 }
 /**
- * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC method.
+ * QueryAllowancesResponse is the response type for the Query/Allowances RPC method.
  * @export
  * @interface InlineResponse20082
  */
 export interface InlineResponse20082 {
     /**
-     * denom_traces returns all denominations trace information.
-     * @type {Array<InlineResponse20082DenomTraces>}
+     * allowances are allowance\'s granted for grantee by granter.
+     * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
      * @memberof InlineResponse20082
      */
-    denom_traces?: Array<InlineResponse20082DenomTraces>;
+    allowances?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20039Pagination}
      * @memberof InlineResponse20082
      */
-    pagination?: InlineResponse20027Pagination;
-}
-/**
- * DenomTrace contains the base denomination for ICS20 fungible tokens and the source tracing information path.
- * @export
- * @interface InlineResponse20082DenomTraces
- */
-export interface InlineResponse20082DenomTraces {
-    /**
-     * path defines the chain of port/channel identifiers used for tracing the source of the fungible token.
-     * @type {string}
-     * @memberof InlineResponse20082DenomTraces
-     */
-    path?: string;
-    /**
-     * base denomination of the relayed fungible token.
-     * @type {string}
-     * @memberof InlineResponse20082DenomTraces
-     */
-    base_denom?: string;
-}
-/**
- * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC method.
- * @export
- * @interface InlineResponse20083
- */
-export interface InlineResponse20083 {
-    /**
-     * 
-     * @type {InlineResponse20083DenomTrace}
-     * @memberof InlineResponse20083
-     */
-    denom_trace?: InlineResponse20083DenomTrace;
-}
-/**
- * denom_trace returns the requested denomination trace information.
- * @export
- * @interface InlineResponse20083DenomTrace
- */
-export interface InlineResponse20083DenomTrace {
-    /**
-     * path defines the chain of port/channel identifiers used for tracing the source of the fungible token.
-     * @type {string}
-     * @memberof InlineResponse20083DenomTrace
-     */
-    path?: string;
-    /**
-     * base denomination of the relayed fungible token.
-     * @type {string}
-     * @memberof InlineResponse20083DenomTrace
-     */
-    base_denom?: string;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20084
- */
-export interface InlineResponse20084 {
-    /**
-     * 
-     * @type {InlineResponse20084Params}
-     * @memberof InlineResponse20084
-     */
-    params?: InlineResponse20084Params;
-}
-/**
- * params defines the parameters of the module.
- * @export
- * @interface InlineResponse20084Params
- */
-export interface InlineResponse20084Params {
-    /**
-     * send_enabled enables or disables all cross-chain token transfers from this chain.
-     * @type {boolean}
-     * @memberof InlineResponse20084Params
-     */
-    send_enabled?: boolean;
-    /**
-     * receive_enabled enables or disables all cross-chain token transfers to this chain.
-     * @type {boolean}
-     * @memberof InlineResponse20084Params
-     */
-    receive_enabled?: boolean;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2008Value
- */
-export interface InlineResponse2008Value {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2008Value
-     */
-    account_number?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2008Value
-     */
-    address?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse2008Value
-     */
-    coins?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {InlineResponse2008ValuePublicKey}
-     * @memberof InlineResponse2008Value
-     */
-    public_key?: InlineResponse2008ValuePublicKey;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2008Value
-     */
-    sequence?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2008ValuePublicKey
- */
-export interface InlineResponse2008ValuePublicKey {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2008ValuePublicKey
-     */
-    type?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2008ValuePublicKey
-     */
-    value?: string;
+    pagination?: InlineResponse20039Pagination;
 }
 /**
  * 
@@ -10246,25 +8790,69 @@ export interface InlineResponse2009 {
      * @type {string}
      * @memberof InlineResponse2009
      */
-    delegator_address?: string;
+    type?: string;
+    /**
+     * 
+     * @type {InlineResponse2009Value}
+     * @memberof InlineResponse2009
+     */
+    value?: InlineResponse2009Value;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2009Value
+ */
+export interface InlineResponse2009Value {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2009
+     * @memberof InlineResponse2009Value
      */
-    validator_address?: string;
+    account_number?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2009
+     * @memberof InlineResponse2009Value
      */
-    shares?: string;
+    address?: string;
     /**
      * 
-     * @type {InlineResponse2004TxFeeAmount}
-     * @memberof InlineResponse2009
+     * @type {Array<InlineResponse2004TxFeeAmount>}
+     * @memberof InlineResponse2009Value
      */
-    balance?: InlineResponse2004TxFeeAmount;
+    coins?: Array<InlineResponse2004TxFeeAmount>;
+    /**
+     * 
+     * @type {InlineResponse2009ValuePublicKey}
+     * @memberof InlineResponse2009Value
+     */
+    public_key?: InlineResponse2009ValuePublicKey;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2009Value
+     */
+    sequence?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2009ValuePublicKey
+ */
+export interface InlineResponse2009ValuePublicKey {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2009ValuePublicKey
+     */
+    type?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2009ValuePublicKey
+     */
+    value?: string;
 }
 /**
  * 
@@ -10440,10 +9028,10 @@ export interface InlineResponseDefault {
     message?: string;
     /**
      * 
-     * @type {Array<InlineResponseDefaultDetails>}
+     * @type {Array<InlineResponse20025Accounts>}
      * @memberof InlineResponseDefault
      */
-    details?: Array<InlineResponseDefaultDetails>;
+    details?: Array<InlineResponse20025Accounts>;
 }
 /**
  * 
@@ -10496,25 +9084,6 @@ export interface InlineResponseDefault1Details {
     value?: string;
 }
 /**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface InlineResponseDefaultDetails
- */
-export interface InlineResponseDefaultDetails {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof InlineResponseDefaultDetails
-     */
-    type_url?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof InlineResponseDefaultDetails
-     */
-    value?: string;
-}
-/**
  * 
  * @export
  * @interface KVPair
@@ -10532,19 +9101,6 @@ export interface KVPair {
      * @memberof KVPair
      */
     value?: string;
-}
-/**
- * commitment merkle prefix of the counterparty chain.
- * @export
- * @interface MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey
- */
-export interface MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey {
-    /**
-     * 
-     * @type {string}
-     * @memberof MerklePrefixIsMerklePathPrefixedToTheKeyTheConstructedKeyFromThePathAndTheKeyWillBeAppendPathKeyPathAppendPathKeyPrefixKey
-     */
-    key_prefix?: string;
 }
 /**
  * 
@@ -10613,25 +9169,6 @@ export interface PaginatedQueryTxs {
      * @memberof PaginatedQueryTxs
      */
     txs?: Array<InlineResponse2004>;
-}
-/**
- * PageResponse is to be embedded in gRPC response messages where the corresponding request message has used PageRequest.   message SomeResponse {          repeated Bar results = 1;          PageResponse page = 2;  }
- * @export
- * @interface PaginationResponse
- */
-export interface PaginationResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof PaginationResponse
-     */
-    next_key?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaginationResponse
-     */
-    total?: string;
 }
 /**
  * 
@@ -10760,406 +9297,6 @@ export interface PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators 
     secp256k1?: string;
 }
 /**
- * Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset
- * @export
- * @interface QueryBlockHeight
- */
-export interface QueryBlockHeight {
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryBlockHeight
-     */
-    revision_number?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryBlockHeight
-     */
-    revision_height?: string;
-}
-/**
- * 
- * @export
- * @interface QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod
- */
-export interface QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod {
-    /**
-     * 
-     * @type {ClientStateAssociatedWithTheChannel}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod
-     */
-    identified_client_state?: ClientStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1
- */
-export interface QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1 {
-    /**
-     * 
-     * @type {ConsensusStateAssociatedWithTheChannel}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1
-     */
-    consensus_state?: ConsensusStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod
- */
-export interface QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod {
-    /**
-     * slice of all the connection paths associated with a client.
-     * @type {Array<string>}
-     * @memberof QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod
-     */
-    connection_paths?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasGenerated}
-     * @memberof QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod
-     */
-    proof_height?: HeightAtWhichTheProofWasGenerated;
-}
-/**
- * 
- * @export
- * @interface QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod
- */
-export interface QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod {
-    /**
-     * list of channels associated with a connection.
-     * @type {Array<InlineResponse20075Channels>}
-     * @memberof QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod
-     */
-    channels?: Array<InlineResponse20075Channels>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod
- */
-export interface QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod {
-    /**
-     * 
-     * @type {ClientStateAssociatedWithTheChannel}
-     * @memberof QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod
-     */
-    identified_client_state?: ClientStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod
- */
-export interface QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod {
-    /**
-     * 
-     * @type {ConsensusStateAssociatedWithTheChannel}
-     * @memberof QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod
-     */
-    consensus_state?: ConsensusStateAssociatedWithTheChannel;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod
-     */
-    client_id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod
- */
-export interface QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod {
-    /**
-     * 
-     * @type {ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight}
-     * @memberof QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod
-     */
-    consensus_state?: ConsensusStateAssociatedWithTheClientIdentifierAtTheGivenHeight;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethod
- */
-export interface QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethod {
-    /**
-     * 
-     * @type {Array<QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates>}
-     * @memberof QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethod
-     */
-    consensus_states?: Array<QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethod
-     */
-    pagination?: PaginationResponse;
-}
-/**
- * ConsensusStateWithHeight defines a consensus state with an additional height field.
- * @export
- * @interface QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates
- */
-export interface QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates {
-    /**
-     * 
-     * @type {ConsensusStateHeight}
-     * @memberof QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates
-     */
-    height?: ConsensusStateHeight;
-    /**
-     * 
-     * @type {ConsensusState}
-     * @memberof QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethodConsensusStates
-     */
-    consensus_state?: ConsensusState;
-}
-/**
- * 
- * @export
- * @interface QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
- */
-export interface QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved {
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    acknowledgement?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod
- */
-export interface QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod {
-    /**
-     * 
-     * @type {Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod
-     */
-    acknowledgements?: Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * PacketState defines the generic type necessary to retrieve and store packet commitments, acknowledgements, and receipts. Caller is responsible for knowing the context necessary to interpret this state as a commitment, acknowledgement, or a receipt.
- * @export
- * @interface QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements
- */
-export interface QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements {
-    /**
-     * channel port identifier.
-     * @type {string}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements
-     */
-    port_id?: string;
-    /**
-     * channel unique identifier.
-     * @type {string}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements
-     */
-    channel_id?: string;
-    /**
-     * packet sequence.
-     * @type {string}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements
-     */
-    sequence?: string;
-    /**
-     * embedded data that represents packet state.
-     * @type {string}
-     * @memberof QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements
-     */
-    data?: string;
-}
-/**
- * 
- * @export
- * @interface QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
- */
-export interface QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved {
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    commitment?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
- * @interface QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod
- */
-export interface QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod {
-    /**
-     * 
-     * @type {Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>}
-     * @memberof QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod
-     */
-    commitments?: Array<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethodAcknowledgements>;
-    /**
-     * 
-     * @type {PaginationResponse}
-     * @memberof QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod
-     */
-    pagination?: PaginationResponse;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
- */
-export interface QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    received?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
  * 
  * @export
  * @interface QueryParamsResponseIsTheResponseTypeForTheQueryParamsRPCMethod
@@ -11212,31 +9349,6 @@ export interface QueryParamsResponseIsTheResponseTypeForTheQueryParamsRPCMethodP
 /**
  * 
  * @export
- * @interface QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod
- */
-export interface QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod {
-    /**
-     * 
-     * @type {string}
-     * @memberof QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod
-     */
-    next_sequence_receive?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod
-     */
-    proof?: string;
-    /**
-     * 
-     * @type {HeightAtWhichTheProofWasRetrieved}
-     * @memberof QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod
-     */
-    proof_height?: HeightAtWhichTheProofWasRetrieved;
-}
-/**
- * 
- * @export
  * @interface QuerySigningInfoResponseIsTheResponseTypeForTheQuerySigningInfoRPCMethod
  */
 export interface QuerySigningInfoResponseIsTheResponseTypeForTheQuerySigningInfoRPCMethod {
@@ -11285,25 +9397,25 @@ export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInf
      */
     start_height?: string;
     /**
-     * 
+     * Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      * @type {string}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
      */
     index_offset?: string;
     /**
-     * 
+     * Timestamp until which the validator is jailed due to liveness downtime.
      * @type {string}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
      */
     jailed_until?: string;
     /**
-     * 
+     * Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor.
      * @type {boolean}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
      */
     tombstoned?: boolean;
     /**
-     * 
+     * A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      * @type {string}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
      */
@@ -11336,48 +9448,16 @@ export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInf
 export interface QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod {
     /**
      * 
-     * @type {Array<InlineResponse20027Balances>}
+     * @type {Array<InlineResponse20028Balances>}
      * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    supply?: Array<InlineResponse20027Balances>;
-}
-/**
- * 
- * @export
- * @interface QueryUnreceivedAcksResponseIsTheResponseTypeForTheQueryUnreceivedAcksRPCMethod
- */
-export interface QueryUnreceivedAcksResponseIsTheResponseTypeForTheQueryUnreceivedAcksRPCMethod {
+    supply?: Array<InlineResponse20028Balances>;
     /**
      * 
-     * @type {Array<string>}
-     * @memberof QueryUnreceivedAcksResponseIsTheResponseTypeForTheQueryUnreceivedAcksRPCMethod
+     * @type {InlineResponse20025Pagination}
+     * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    sequences?: Array<string>;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof QueryUnreceivedAcksResponseIsTheResponseTypeForTheQueryUnreceivedAcksRPCMethod
-     */
-    height?: QueryBlockHeight;
-}
-/**
- * 
- * @export
- * @interface QueryUnreceivedPacketsResponseIsTheResponseTypeForTheQueryUnreceivedPacketCommitmentsRPCMethod
- */
-export interface QueryUnreceivedPacketsResponseIsTheResponseTypeForTheQueryUnreceivedPacketCommitmentsRPCMethod {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof QueryUnreceivedPacketsResponseIsTheResponseTypeForTheQueryUnreceivedPacketCommitmentsRPCMethod
-     */
-    sequences?: Array<string>;
-    /**
-     * 
-     * @type {QueryBlockHeight}
-     * @memberof QueryUnreceivedPacketsResponseIsTheResponseTypeForTheQueryUnreceivedPacketCommitmentsRPCMethod
-     */
-    height?: QueryBlockHeight;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * 
@@ -11400,10 +9480,10 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
 export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission {
     /**
      * 
-     * @type {Array<InlineResponse20037Pool>}
+     * @type {Array<InlineResponse20041Pool>}
      * @memberof QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission
      */
-    commission?: Array<InlineResponse20037Pool>;
+    commission?: Array<InlineResponse20041Pool>;
 }
 /**
  * 
@@ -11413,16 +9493,16 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
 export interface QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod {
     /**
      * 
-     * @type {Array<InlineResponse20059DelegationResponses>}
+     * @type {Array<InlineResponse20063DelegationResponses>}
      * @memberof QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod
      */
-    delegation_responses?: Array<InlineResponse20059DelegationResponses>;
+    delegation_responses?: Array<InlineResponse20063DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * 
@@ -11432,10 +9512,10 @@ export interface QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValid
 export interface QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMethod {
     /**
      * 
-     * @type {InlineResponse20063Validator}
+     * @type {InlineResponse20066Validators}
      * @memberof QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMethod
      */
-    validator?: InlineResponse20063Validator;
+    validator?: InlineResponse20066Validators;
 }
 /**
  * 
@@ -11445,16 +9525,16 @@ export interface QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMeth
 export interface QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod {
     /**
      * validators contains all the queried validators.
-     * @type {Array<InlineResponse20062Validators>}
+     * @type {Array<InlineResponse20066Validators>}
      * @memberof QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod
      */
-    validators?: Array<InlineResponse20062Validators>;
+    validators?: Array<InlineResponse20066Validators>;
     /**
      * 
-     * @type {InlineResponse20027Pagination}
+     * @type {InlineResponse20025Pagination}
      * @memberof QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod
      */
-    pagination?: InlineResponse20027Pagination;
+    pagination?: InlineResponse20025Pagination;
 }
 /**
  * 
@@ -11737,10 +9817,10 @@ export interface TendermintAbciEvent {
     type?: string;
     /**
      * 
-     * @type {Array<InlineResponse20070ResultAttributes>}
+     * @type {Array<InlineResponse20074ResultAttributes>}
      * @memberof TendermintAbciEvent
      */
-    attributes?: Array<InlineResponse20070ResultAttributes>;
+    attributes?: Array<InlineResponse20074ResultAttributes>;
 }
 /**
  * EventAttribute is a single key-value pair, associated with an event.
@@ -11794,10 +9874,10 @@ export interface TendermintCryptoPublicKey {
 export interface TendermintP2pDefaultNodeInfo {
     /**
      * 
-     * @type {InlineResponse20033DefaultNodeInfoProtocolVersion}
+     * @type {InlineResponse20037DefaultNodeInfoProtocolVersion}
      * @memberof TendermintP2pDefaultNodeInfo
      */
-    protocol_version?: InlineResponse20033DefaultNodeInfoProtocolVersion;
+    protocol_version?: InlineResponse20037DefaultNodeInfoProtocolVersion;
     /**
      * 
      * @type {string}
@@ -11836,10 +9916,10 @@ export interface TendermintP2pDefaultNodeInfo {
     moniker?: string;
     /**
      * 
-     * @type {InlineResponse20033DefaultNodeInfoOther}
+     * @type {InlineResponse20037DefaultNodeInfoOther}
      * @memberof TendermintP2pDefaultNodeInfo
      */
-    other?: InlineResponse20033DefaultNodeInfoOther;
+    other?: InlineResponse20037DefaultNodeInfoOther;
 }
 /**
  * 
@@ -11893,10 +9973,10 @@ export interface TendermintP2pProtocolVersion {
 export interface TendermintTypesBlock {
     /**
      * 
-     * @type {InlineResponse20031BlockHeader}
+     * @type {InlineResponse20035BlockHeader}
      * @memberof TendermintTypesBlock
      */
-    header?: InlineResponse20031BlockHeader;
+    header?: InlineResponse20035BlockHeader;
     /**
      * 
      * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
@@ -11905,16 +9985,16 @@ export interface TendermintTypesBlock {
     data?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidence}
+     * @type {InlineResponse20035BlockEvidence}
      * @memberof TendermintTypesBlock
      */
-    evidence?: InlineResponse20031BlockEvidence;
+    evidence?: InlineResponse20035BlockEvidence;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesBlock
      */
-    last_commit?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    last_commit?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * 
@@ -11973,10 +10053,10 @@ export interface TendermintTypesCommit {
     block_id?: BlockID1;
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
+     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
      * @memberof TendermintTypesCommit
      */
-    signatures?: Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
+    signatures?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
 }
 /**
  * CommitSig is a part of the Vote included in a Commit.
@@ -12042,16 +10122,16 @@ export interface TendermintTypesData {
 export interface TendermintTypesDuplicateVoteEvidence {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    vote_a?: InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA;
+    vote_a?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    vote_b?: InlineResponse20031BlockEvidenceDuplicateVoteEvidenceVoteA;
+    vote_b?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
      * @type {string}
@@ -12079,16 +10159,16 @@ export interface TendermintTypesDuplicateVoteEvidence {
 export interface TendermintTypesEvidence {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceDuplicateVoteEvidence}
+     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidence}
      * @memberof TendermintTypesEvidence
      */
-    duplicate_vote_evidence?: InlineResponse20031BlockEvidenceDuplicateVoteEvidence;
+    duplicate_vote_evidence?: InlineResponse20035BlockEvidenceDuplicateVoteEvidence;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidence}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidence}
      * @memberof TendermintTypesEvidence
      */
-    light_client_attack_evidence?: InlineResponse20031BlockEvidenceLightClientAttackEvidence;
+    light_client_attack_evidence?: InlineResponse20035BlockEvidenceLightClientAttackEvidence;
 }
 /**
  * 
@@ -12098,10 +10178,10 @@ export interface TendermintTypesEvidence {
 export interface TendermintTypesEvidenceList {
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceEvidence>}
+     * @type {Array<InlineResponse20035BlockEvidenceEvidence>}
      * @memberof TendermintTypesEvidenceList
      */
-    evidence?: Array<InlineResponse20031BlockEvidenceEvidence>;
+    evidence?: Array<InlineResponse20035BlockEvidenceEvidence>;
 }
 /**
  * Header defines the structure of a Tendermint block header.
@@ -12135,10 +10215,10 @@ export interface TendermintTypesHeader {
     time?: string;
     /**
      * 
-     * @type {PrevBlockInfo}
+     * @type {BlockID1}
      * @memberof TendermintTypesHeader
      */
-    last_block_id?: PrevBlockInfo;
+    last_block_id?: BlockID1;
     /**
      * 
      * @type {string}
@@ -12202,16 +10282,16 @@ export interface TendermintTypesHeader {
 export interface TendermintTypesLightBlock {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
      * @memberof TendermintTypesLightBlock
      */
-    signed_header?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
+    signed_header?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
      * @memberof TendermintTypesLightBlock
      */
-    validator_set?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
+    validator_set?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
@@ -12221,10 +10301,10 @@ export interface TendermintTypesLightBlock {
 export interface TendermintTypesLightClientAttackEvidence {
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    conflicting_block?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlock;
+    conflicting_block?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock;
     /**
      * 
      * @type {string}
@@ -12233,10 +10313,10 @@ export interface TendermintTypesLightClientAttackEvidence {
     common_height?: string;
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    byzantine_validators?: Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    byzantine_validators?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
     /**
      * 
      * @type {string}
@@ -12277,16 +10357,16 @@ export interface TendermintTypesPartSetHeader {
 export interface TendermintTypesSignedHeader {
     /**
      * 
-     * @type {InlineResponse20031BlockHeader}
+     * @type {InlineResponse20035BlockHeader}
      * @memberof TendermintTypesSignedHeader
      */
-    header?: InlineResponse20031BlockHeader;
+    header?: InlineResponse20035BlockHeader;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesSignedHeader
      */
-    commit?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    commit?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
@@ -12339,16 +10419,16 @@ export interface TendermintTypesValidator {
 export interface TendermintTypesValidatorSet {
     /**
      * 
-     * @type {Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
      * @memberof TendermintTypesValidatorSet
      */
-    validators?: Array<InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    validators?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
     /**
      * 
-     * @type {InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
+     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
      * @memberof TendermintTypesValidatorSet
      */
-    proposer?: InlineResponse20031BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
+    proposer?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
     /**
      * 
      * @type {string}
@@ -12628,10 +10708,10 @@ export interface UnbondingDelegationPair {
     validator_address?: string;
     /**
      * 
-     * @type {Array<InlineResponse20011Entries>}
+     * @type {Array<InlineResponse20012Entries>}
      * @memberof UnbondingDelegationPair
      */
-    entries?: Array<InlineResponse20011Entries>;
+    entries?: Array<InlineResponse20012Entries>;
 }
 /**
  * 
@@ -12683,25 +10763,25 @@ export interface ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress {
      */
     start_height?: string;
     /**
-     * 
+     * Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      * @type {string}
      * @memberof ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress
      */
     index_offset?: string;
     /**
-     * 
+     * Timestamp until which the validator is jailed due to liveness downtime.
      * @type {string}
      * @memberof ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress
      */
     jailed_until?: string;
     /**
-     * 
+     * Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor.
      * @type {boolean}
      * @memberof ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress
      */
     tombstoned?: boolean;
     /**
-     * 
+     * A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      * @type {string}
      * @memberof ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress
      */
@@ -12902,7 +10982,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authAccountsAddressGet(address: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
+        async authAccountsAddressGet(address: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
             const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authAccountsAddressGet(address, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -12925,7 +11005,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authAccountsAddressGet(address: string, options?: any): AxiosPromise<InlineResponse2008> {
+        authAccountsAddressGet(address: string, options?: any): AxiosPromise<InlineResponse2009> {
             return AuthApiFp(configuration).authAccountsAddressGet(address, options).then((request) => request(axios, basePath));
         },
     };
@@ -13058,6 +11138,86 @@ export const BankApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Total supply of a single coin denomination
+         * @param {string} denomination Coin denomination
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTotalDenominationGet: async (denomination: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'denomination' is not null or undefined
+            if (denomination === null || denomination === undefined) {
+                throw new RequiredError('denomination','Required parameter denomination was null or undefined when calling bankTotalDenominationGet.');
+            }
+            const localVarPath = `/bank/total/{denomination}`
+                .replace(`{${"denomination"}}`, encodeURIComponent(String(denomination)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Total supply of coins in the chain
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTotalGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/bank/total`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -13096,6 +11256,33 @@ export const BankApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * 
+         * @summary Total supply of a single coin denomination
+         * @param {string} denomination Coin denomination
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTotalDenominationGet(denomination: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await BankApiAxiosParamCreator(configuration).bankTotalDenominationGet(denomination, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Total supply of coins in the chain
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTotalGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
+            const localVarAxiosArgs = await BankApiAxiosParamCreator(configuration).bankTotalGet(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -13125,6 +11312,25 @@ export const BankApiFactory = function (configuration?: Configuration, basePath?
          */
         bankBalancesAddressGet(address: string, options?: any): AxiosPromise<Array<InlineResponse2004TxFeeAmount>> {
             return BankApiFp(configuration).bankBalancesAddressGet(address, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Total supply of a single coin denomination
+         * @param {string} denomination Coin denomination
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTotalDenominationGet(denomination: string, options?: any): AxiosPromise<string> {
+            return BankApiFp(configuration).bankTotalDenominationGet(denomination, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Total supply of coins in the chain
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTotalGet(options?: any): AxiosPromise<InlineResponse2008> {
+            return BankApiFp(configuration).bankTotalGet(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -13159,6 +11365,29 @@ export class BankApi extends BaseAPI {
      */
     public bankBalancesAddressGet(address: string, options?: any) {
         return BankApiFp(this.configuration).bankBalancesAddressGet(address, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Total supply of a single coin denomination
+     * @param {string} denomination Coin denomination
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankApi
+     */
+    public bankTotalDenominationGet(denomination: string, options?: any) {
+        return BankApiFp(this.configuration).bankTotalDenominationGet(denomination, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Total supply of coins in the chain
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankApi
+     */
+    public bankTotalGet(options?: any) {
+        return BankApiFp(this.configuration).bankTotalGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -13754,7 +11983,7 @@ export const DistributionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
+        async distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
             const localVarAxiosArgs = await DistributionApiAxiosParamCreator(configuration).distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -13856,7 +12085,7 @@ export const DistributionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
+        async distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
             const localVarAxiosArgs = await DistributionApiAxiosParamCreator(configuration).distributionValidatorsValidatorAddrGet(validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -13931,7 +12160,7 @@ export const DistributionApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20022> {
+        distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20023> {
             return DistributionApiFp(configuration).distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -14005,7 +12234,7 @@ export const DistributionApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: any): AxiosPromise<InlineResponse20023> {
+        distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: any): AxiosPromise<InlineResponse20024> {
             return DistributionApiFp(configuration).distributionValidatorsValidatorAddrGet(validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15018,7 +13247,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govParametersDepositGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
+        async govParametersDepositGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govParametersDepositGet(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15060,7 +13289,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsGet(voter?: string, depositor?: string, status?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20017>>> {
+        async govProposalsGet(voter?: string, depositor?: string, status?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20018>>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsGet(voter, depositor, status, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15103,7 +13332,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20019>> {
+        async govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsProposalIdDepositsDepositorGet(proposalId, depositor, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15117,7 +13346,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsProposalIdDepositsGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20019>>> {
+        async govProposalsProposalIdDepositsGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20020>>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsProposalIdDepositsGet(proposalId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15146,7 +13375,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsProposalIdGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
+        async govProposalsProposalIdGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsProposalIdGet(proposalId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15160,7 +13389,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsProposalIdProposerGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
+        async govProposalsProposalIdProposerGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20019>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsProposalIdProposerGet(proposalId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15188,7 +13417,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsProposalIdVotesGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20020>>> {
+        async govProposalsProposalIdVotesGet(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20021>>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsProposalIdVotesGet(proposalId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15218,7 +13447,7 @@ export const GovernanceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
+        async govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
             const localVarAxiosArgs = await GovernanceApiAxiosParamCreator(configuration).govProposalsProposalIdVotesVoterGet(proposalId, voter, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -15240,7 +13469,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govParametersDepositGet(options?: any): AxiosPromise<InlineResponse20021> {
+        govParametersDepositGet(options?: any): AxiosPromise<InlineResponse20022> {
             return GovernanceApiFp(configuration).govParametersDepositGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -15270,7 +13499,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsGet(voter?: string, depositor?: string, status?: string, options?: any): AxiosPromise<Array<InlineResponse20017>> {
+        govProposalsGet(voter?: string, depositor?: string, status?: string, options?: any): AxiosPromise<Array<InlineResponse20018>> {
             return GovernanceApiFp(configuration).govProposalsGet(voter, depositor, status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15301,7 +13530,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20019> {
+        govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20020> {
             return GovernanceApiFp(configuration).govProposalsProposalIdDepositsDepositorGet(proposalId, depositor, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15311,7 +13540,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsProposalIdDepositsGet(proposalId: string, options?: any): AxiosPromise<Array<InlineResponse20019>> {
+        govProposalsProposalIdDepositsGet(proposalId: string, options?: any): AxiosPromise<Array<InlineResponse20020>> {
             return GovernanceApiFp(configuration).govProposalsProposalIdDepositsGet(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15332,7 +13561,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsProposalIdGet(proposalId: string, options?: any): AxiosPromise<InlineResponse20017> {
+        govProposalsProposalIdGet(proposalId: string, options?: any): AxiosPromise<InlineResponse20018> {
             return GovernanceApiFp(configuration).govProposalsProposalIdGet(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15342,7 +13571,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsProposalIdProposerGet(proposalId: string, options?: any): AxiosPromise<InlineResponse20018> {
+        govProposalsProposalIdProposerGet(proposalId: string, options?: any): AxiosPromise<InlineResponse20019> {
             return GovernanceApiFp(configuration).govProposalsProposalIdProposerGet(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15362,7 +13591,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsProposalIdVotesGet(proposalId: string, options?: any): AxiosPromise<Array<InlineResponse20020>> {
+        govProposalsProposalIdVotesGet(proposalId: string, options?: any): AxiosPromise<Array<InlineResponse20021>> {
             return GovernanceApiFp(configuration).govProposalsProposalIdVotesGet(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -15384,7 +13613,7 @@ export const GovernanceApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20020> {
+        govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20021> {
             return GovernanceApiFp(configuration).govProposalsProposalIdVotesVoterGet(proposalId, voter, options).then((request) => request(axios, basePath));
         },
     };
@@ -15879,16 +14108,79 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @summary Accounts returns all the existing accounts
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accounts: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/auth/v1beta1/accounts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary AllBalances queries the balance of all coins for a single account.
          * @param {string} address address is the address to query balances for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allBalances: async (address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        allBalances: async (address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'address' is not null or undefined
             if (address === null || address === undefined) {
                 throw new RequiredError('address','Required parameter address was null or undefined when calling allBalances.');
@@ -15922,6 +14214,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
             }
 
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -15947,10 +14243,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allEvidence: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        allEvidence: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/evidence/v1beta1/evidence`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -15977,6 +14274,127 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Allowance returns fee granted to the grantee by the granter.
+         * @param {string} granter granter is the address of the user granting an allowance of their funds.
+         * @param {string} grantee grantee is the address of the user being granted an allowance of another user\&#39;s funds.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        allowance: async (granter: string, grantee: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'granter' is not null or undefined
+            if (granter === null || granter === undefined) {
+                throw new RequiredError('granter','Required parameter granter was null or undefined when calling allowance.');
+            }
+            // verify required parameter 'grantee' is not null or undefined
+            if (grantee === null || grantee === undefined) {
+                throw new RequiredError('grantee','Required parameter grantee was null or undefined when calling allowance.');
+            }
+            const localVarPath = `/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}`
+                .replace(`{${"granter"}}`, encodeURIComponent(String(granter)))
+                .replace(`{${"grantee"}}`, encodeURIComponent(String(grantee)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Allowances returns all the grants for address.
+         * @param {string} grantee 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        allowances: async (grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'grantee' is not null or undefined
+            if (grantee === null || grantee === undefined) {
+                throw new RequiredError('grantee','Required parameter grantee was null or undefined when calling allowances.');
+            }
+            const localVarPath = `/cosmos/feegrant/v1beta1/allowances/{grantee}`
+                .replace(`{${"grantee"}}`, encodeURIComponent(String(grantee)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -16202,402 +14620,6 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary Channel queries an IBC Channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channel: async (channelId: string, portId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling channel.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling channel.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ChannelClientState queries for the client state for the channel associated with the provided channel identifiers.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channelClientState: async (channelId: string, portId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling channelClientState.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling channelClientState.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/client_state`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ChannelConsensusState queries for the consensus state for the channel associated with the provided channel identifiers.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} revisionNumber revision number of the consensus state
-         * @param {string} revisionHeight revision height of the consensus state
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channelConsensusState: async (channelId: string, portId: string, revisionNumber: string, revisionHeight: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling channelConsensusState.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling channelConsensusState.');
-            }
-            // verify required parameter 'revisionNumber' is not null or undefined
-            if (revisionNumber === null || revisionNumber === undefined) {
-                throw new RequiredError('revisionNumber','Required parameter revisionNumber was null or undefined when calling channelConsensusState.');
-            }
-            // verify required parameter 'revisionHeight' is not null or undefined
-            if (revisionHeight === null || revisionHeight === undefined) {
-                throw new RequiredError('revisionHeight','Required parameter revisionHeight was null or undefined when calling channelConsensusState.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)))
-                .replace(`{${"revision_number"}}`, encodeURIComponent(String(revisionNumber)))
-                .replace(`{${"revision_height"}}`, encodeURIComponent(String(revisionHeight)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Channels queries all the IBC channels of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channels: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ibc/core/channel/v1beta1/channels`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ClientConnections queries the connection paths associated with a client state.
-         * @param {string} clientId client identifier associated with a connection
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientConnections: async (clientId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'clientId' is not null or undefined
-            if (clientId === null || clientId === undefined) {
-                throw new RequiredError('clientId','Required parameter clientId was null or undefined when calling clientConnections.');
-            }
-            const localVarPath = `/ibc/core/connection/v1beta1/client_connections/{client_id}`
-                .replace(`{${"client_id"}}`, encodeURIComponent(String(clientId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ClientParams queries all parameters of the ibc client.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientParams: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ibc/client/v1beta1/params`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ClientState queries an IBC light client.
-         * @param {string} clientId client state unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientState: async (clientId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'clientId' is not null or undefined
-            if (clientId === null || clientId === undefined) {
-                throw new RequiredError('clientId','Required parameter clientId was null or undefined when calling clientState.');
-            }
-            const localVarPath = `/ibc/core/client/v1beta1/client_states/{client_id}`
-                .replace(`{${"client_id"}}`, encodeURIComponent(String(clientId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ClientStates queries all the IBC light clients of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientStates: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ibc/core/client/v1beta1/client_states`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary CommunityPool queries the community pool coins.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -16614,390 +14636,6 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Connection queries an IBC connection end.
-         * @param {string} connectionId connection unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connection: async (connectionId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connectionId' is not null or undefined
-            if (connectionId === null || connectionId === undefined) {
-                throw new RequiredError('connectionId','Required parameter connectionId was null or undefined when calling connection.');
-            }
-            const localVarPath = `/ibc/core/connection/v1beta1/connections/{connection_id}`
-                .replace(`{${"connection_id"}}`, encodeURIComponent(String(connectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ConnectionChannels queries all the channels associated with a connection end.
-         * @param {string} connection connection unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connectionChannels: async (connection: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connection' is not null or undefined
-            if (connection === null || connection === undefined) {
-                throw new RequiredError('connection','Required parameter connection was null or undefined when calling connectionChannels.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/connections/{connection}/channels`
-                .replace(`{${"connection"}}`, encodeURIComponent(String(connection)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ConnectionClientState queries the client state associated with the connection.
-         * @param {string} connectionId connection identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connectionClientState: async (connectionId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connectionId' is not null or undefined
-            if (connectionId === null || connectionId === undefined) {
-                throw new RequiredError('connectionId','Required parameter connectionId was null or undefined when calling connectionClientState.');
-            }
-            const localVarPath = `/ibc/core/connection/v1beta1/connections/{connection_id}/client_state`
-                .replace(`{${"connection_id"}}`, encodeURIComponent(String(connectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ConnectionConsensusState queries the consensus state associated with the connection.
-         * @param {string} connectionId connection identifier
-         * @param {string} revisionNumber 
-         * @param {string} revisionHeight 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connectionConsensusState: async (connectionId: string, revisionNumber: string, revisionHeight: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connectionId' is not null or undefined
-            if (connectionId === null || connectionId === undefined) {
-                throw new RequiredError('connectionId','Required parameter connectionId was null or undefined when calling connectionConsensusState.');
-            }
-            // verify required parameter 'revisionNumber' is not null or undefined
-            if (revisionNumber === null || revisionNumber === undefined) {
-                throw new RequiredError('revisionNumber','Required parameter revisionNumber was null or undefined when calling connectionConsensusState.');
-            }
-            // verify required parameter 'revisionHeight' is not null or undefined
-            if (revisionHeight === null || revisionHeight === undefined) {
-                throw new RequiredError('revisionHeight','Required parameter revisionHeight was null or undefined when calling connectionConsensusState.');
-            }
-            const localVarPath = `/ibc/core/connection/v1beta1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}`
-                .replace(`{${"connection_id"}}`, encodeURIComponent(String(connectionId)))
-                .replace(`{${"revision_number"}}`, encodeURIComponent(String(revisionNumber)))
-                .replace(`{${"revision_height"}}`, encodeURIComponent(String(revisionHeight)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Connections queries all the IBC connections of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connections: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ibc/core/connection/v1beta1/connections`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ConsensusState queries a consensus state associated with a client state at a given height.
-         * @param {string} clientId client identifier
-         * @param {string} revisionNumber consensus state revision number
-         * @param {string} revisionHeight consensus state revision height
-         * @param {boolean} [latestHeight] latest_height overrrides the height field and queries the latest stored ConsensusState.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        consensusState: async (clientId: string, revisionNumber: string, revisionHeight: string, latestHeight?: boolean, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'clientId' is not null or undefined
-            if (clientId === null || clientId === undefined) {
-                throw new RequiredError('clientId','Required parameter clientId was null or undefined when calling consensusState.');
-            }
-            // verify required parameter 'revisionNumber' is not null or undefined
-            if (revisionNumber === null || revisionNumber === undefined) {
-                throw new RequiredError('revisionNumber','Required parameter revisionNumber was null or undefined when calling consensusState.');
-            }
-            // verify required parameter 'revisionHeight' is not null or undefined
-            if (revisionHeight === null || revisionHeight === undefined) {
-                throw new RequiredError('revisionHeight','Required parameter revisionHeight was null or undefined when calling consensusState.');
-            }
-            const localVarPath = `/ibc/core/client/v1beta1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}`
-                .replace(`{${"client_id"}}`, encodeURIComponent(String(clientId)))
-                .replace(`{${"revision_number"}}`, encodeURIComponent(String(revisionNumber)))
-                .replace(`{${"revision_height"}}`, encodeURIComponent(String(revisionHeight)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (latestHeight !== undefined) {
-                localVarQueryParameter['latest_height'] = latestHeight;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ConsensusStates queries all the consensus state associated with a given client.
-         * @param {string} clientId client identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        consensusStates: async (clientId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'clientId' is not null or undefined
-            if (clientId === null || clientId === undefined) {
-                throw new RequiredError('clientId','Required parameter clientId was null or undefined when calling consensusStates.');
-            }
-            const localVarPath = `/ibc/core/client/v1beta1/consensus_states/{client_id}`
-                .replace(`{${"client_id"}}`, encodeURIComponent(String(clientId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
 
 
     
@@ -17203,10 +14841,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorDelegations: async (delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        delegatorDelegations: async (delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'delegatorAddr' is not null or undefined
             if (delegatorAddr === null || delegatorAddr === undefined) {
                 throw new RequiredError('delegatorAddr','Required parameter delegatorAddr was null or undefined when calling delegatorDelegations.');
@@ -17240,6 +14879,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
             }
 
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -17266,10 +14909,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorUnbondingDelegations: async (delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        delegatorUnbondingDelegations: async (delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'delegatorAddr' is not null or undefined
             if (delegatorAddr === null || delegatorAddr === undefined) {
                 throw new RequiredError('delegatorAddr','Required parameter delegatorAddr was null or undefined when calling delegatorUnbondingDelegations.');
@@ -17301,6 +14945,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -17458,18 +15106,18 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary DenomTrace queries a denomination trace information.
-         * @param {string} hash hash (in hex format) of the denomination trace information.
+         * @summary DenomsMetadata queries the client metadata of a given coin denomination.
+         * @param {string} denom denom is the coin denom to query the metadata for.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomTrace: async (hash: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'hash' is not null or undefined
-            if (hash === null || hash === undefined) {
-                throw new RequiredError('hash','Required parameter hash was null or undefined when calling denomTrace.');
+        denomMetadata: async (denom: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'denom' is not null or undefined
+            if (denom === null || denom === undefined) {
+                throw new RequiredError('denom','Required parameter denom was null or undefined when calling denomMetadata.');
             }
-            const localVarPath = `/ibc/applications/transfer/v1beta1/denom_traces/{hash}`
-                .replace(`{${"hash"}}`, encodeURIComponent(String(hash)));
+            const localVarPath = `/cosmos/bank/v1beta1/denoms_metadata/{denom}`
+                .replace(`{${"denom"}}`, encodeURIComponent(String(denom)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -17501,16 +15149,23 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary DenomTraces queries all denomination traces.
+         * @summary DenomOwners queries for all account addresses that own a particular token denomination.
+         * @param {string} denom denom defines the coin denomination to query all account holders for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomTraces: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ibc/applications/transfer/v1beta1/denom_traces`;
+        denomOwners: async (denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'denom' is not null or undefined
+            if (denom === null || denom === undefined) {
+                throw new RequiredError('denom','Required parameter denom was null or undefined when calling denomOwners.');
+            }
+            const localVarPath = `/cosmos/bank/v1beta1/denom_owners/{denom}`
+                .replace(`{${"denom"}}`, encodeURIComponent(String(denom)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -17536,6 +15191,72 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary DenomsMetadata queries the client metadata for all registered coin denominations.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        denomsMetadata: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/bank/v1beta1/denoms_metadata`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -17613,10 +15334,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposits: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        deposits: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'proposalId' is not null or undefined
             if (proposalId === null || proposalId === undefined) {
                 throw new RequiredError('proposalId','Required parameter proposalId was null or undefined when calling deposits.');
@@ -17648,6 +15370,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -17793,18 +15519,20 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary HistoricalInfo queries the historical info for given height.
-         * @param {string} height height defines at which height to query the historical info.
+         * @summary Returns list of `Authorization`, granted to the grantee by the granter.
+         * @param {string} [granter] 
+         * @param {string} [grantee] 
+         * @param {string} [msgTypeUrl] Optional, msg_type_url, when set, will query only grants matching given msg type.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        historicalInfo: async (height: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'height' is not null or undefined
-            if (height === null || height === undefined) {
-                throw new RequiredError('height','Required parameter height was null or undefined when calling historicalInfo.');
-            }
-            const localVarPath = `/cosmos/staking/v1beta1/historical_info/{height}`
-                .replace(`{${"height"}}`, encodeURIComponent(String(height)));
+        grants: async (granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/authz/v1beta1/grants`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -17815,6 +15543,38 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (granter !== undefined) {
+                localVarQueryParameter['granter'] = granter;
+            }
+
+            if (grantee !== undefined) {
+                localVarQueryParameter['grantee'] = grantee;
+            }
+
+            if (msgTypeUrl !== undefined) {
+                localVarQueryParameter['msg_type_url'] = msgTypeUrl;
+            }
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
 
 
     
@@ -17836,12 +15596,18 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary Params queries all parameters of the ibc-transfer module.
+         * @summary HistoricalInfo queries the historical info for given height.
+         * @param {string} height height defines at which height to query the historical info.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        iBCTransferParams: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ibc/applications/transfer/v1beta1/params`;
+        historicalInfo: async (height: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'height' is not null or undefined
+            if (height === null || height === undefined) {
+                throw new RequiredError('height','Required parameter height was null or undefined when calling historicalInfo.');
+            }
+            const localVarPath = `/cosmos/staking/v1beta1/historical_info/{height}`
+                .replace(`{${"height"}}`, encodeURIComponent(String(height)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -17947,24 +15713,13 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary NextSequenceReceive returns the next receive sequence for a given channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
+         * @summary ModuleVersions queries the list of module versions from state.
+         * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        nextSequenceReceive: async (channelId: string, portId: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling nextSequenceReceive.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling nextSequenceReceive.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/next_sequence`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)));
+        moduleVersions: async (moduleName?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/upgrade/v1beta1/module_versions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -17976,308 +15731,9 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
+            if (moduleName !== undefined) {
+                localVarQueryParameter['module_name'] = moduleName;
             }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary PacketAcknowledgement queries a stored packet acknowledgement hash.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetAcknowledgement: async (channelId: string, portId: string, sequence: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling packetAcknowledgement.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling packetAcknowledgement.');
-            }
-            // verify required parameter 'sequence' is not null or undefined
-            if (sequence === null || sequence === undefined) {
-                throw new RequiredError('sequence','Required parameter sequence was null or undefined when calling packetAcknowledgement.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)))
-                .replace(`{${"sequence"}}`, encodeURIComponent(String(sequence)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary PacketAcknowledgements returns all the packet acknowledgements associated with a channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetAcknowledgements: async (channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling packetAcknowledgements.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling packetAcknowledgements.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary PacketCommitment queries a stored packet commitment hash.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetCommitment: async (channelId: string, portId: string, sequence: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling packetCommitment.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling packetCommitment.');
-            }
-            // verify required parameter 'sequence' is not null or undefined
-            if (sequence === null || sequence === undefined) {
-                throw new RequiredError('sequence','Required parameter sequence was null or undefined when calling packetCommitment.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments/{sequence}`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)))
-                .replace(`{${"sequence"}}`, encodeURIComponent(String(sequence)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary PacketCommitments returns all the packet commitments hashes associated with a channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetCommitments: async (channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling packetCommitments.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling packetCommitments.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (paginationKey !== undefined) {
-                localVarQueryParameter['pagination.key'] = paginationKey;
-            }
-
-            if (paginationOffset !== undefined) {
-                localVarQueryParameter['pagination.offset'] = paginationOffset;
-            }
-
-            if (paginationLimit !== undefined) {
-                localVarQueryParameter['pagination.limit'] = paginationLimit;
-            }
-
-            if (paginationCountTotal !== undefined) {
-                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary PacketReceipt queries if a given packet sequence has been received on the queried chain
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetReceipt: async (channelId: string, portId: string, sequence: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling packetReceipt.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling packetReceipt.');
-            }
-            // verify required parameter 'sequence' is not null or undefined
-            if (sequence === null || sequence === undefined) {
-                throw new RequiredError('sequence','Required parameter sequence was null or undefined when calling packetReceipt.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)))
-                .replace(`{${"sequence"}}`, encodeURIComponent(String(sequence)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
 
     
@@ -18434,10 +15890,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposals: async (proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        proposals: async (proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/gov/v1beta1/proposals`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -18478,6 +15935,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
             }
 
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -18506,10 +15967,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        redelegations: async (delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        redelegations: async (delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'delegatorAddr' is not null or undefined
             if (delegatorAddr === null || delegatorAddr === undefined) {
                 throw new RequiredError('delegatorAddr','Required parameter delegatorAddr was null or undefined when calling redelegations.');
@@ -18549,6 +16011,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -18619,10 +16085,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signingInfos: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        signingInfos: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/slashing/v1beta1/signing_infos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -18649,6 +16116,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -18714,10 +16185,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorValidators: async (delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        stakingDelegatorValidators: async (delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'delegatorAddr' is not null or undefined
             if (delegatorAddr === null || delegatorAddr === undefined) {
                 throw new RequiredError('delegatorAddr','Required parameter delegatorAddr was null or undefined when calling stakingDelegatorValidators.');
@@ -18749,6 +16221,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -18895,10 +16371,15 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary TotalSupply queries the total supply of all coins.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        totalSupply: async (options: any = {}): Promise<RequestArgs> => {
+        totalSupply: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/bank/v1beta1/supply`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -18910,6 +16391,26 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
 
 
     
@@ -18949,116 +16450,6 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarPath = `/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation`
                 .replace(`{${"validator_addr"}}`, encodeURIComponent(String(validatorAddr)))
                 .replace(`{${"delegator_addr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary UnreceivedAcks returns all the unreceived IBC acknowledgements associated with a channel and sequences.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {Array<string>} packetAckSequences list of acknowledgement sequences
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unreceivedAcks: async (channelId: string, portId: string, packetAckSequences: Array<string>, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling unreceivedAcks.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling unreceivedAcks.');
-            }
-            // verify required parameter 'packetAckSequences' is not null or undefined
-            if (packetAckSequences === null || packetAckSequences === undefined) {
-                throw new RequiredError('packetAckSequences','Required parameter packetAckSequences was null or undefined when calling unreceivedAcks.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)))
-                .replace(`{${"packet_ack_sequences"}}`, encodeURIComponent(String(packetAckSequences)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary UnreceivedPackets returns all the unreceived IBC packets associated with a channel and sequences.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {Array<string>} packetCommitmentSequences list of packet sequences
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unreceivedPackets: async (channelId: string, portId: string, packetCommitmentSequences: Array<string>, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'channelId' is not null or undefined
-            if (channelId === null || channelId === undefined) {
-                throw new RequiredError('channelId','Required parameter channelId was null or undefined when calling unreceivedPackets.');
-            }
-            // verify required parameter 'portId' is not null or undefined
-            if (portId === null || portId === undefined) {
-                throw new RequiredError('portId','Required parameter portId was null or undefined when calling unreceivedPackets.');
-            }
-            // verify required parameter 'packetCommitmentSequences' is not null or undefined
-            if (packetCommitmentSequences === null || packetCommitmentSequences === undefined) {
-                throw new RequiredError('packetCommitmentSequences','Required parameter packetCommitmentSequences was null or undefined when calling unreceivedPackets.');
-            }
-            const localVarPath = `/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets`
-                .replace(`{${"channel_id"}}`, encodeURIComponent(String(channelId)))
-                .replace(`{${"port_id"}}`, encodeURIComponent(String(portId)))
-                .replace(`{${"packet_commitment_sequences"}}`, encodeURIComponent(String(packetCommitmentSequences)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -19225,10 +16616,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorDelegations: async (validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        validatorDelegations: async (validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'validatorAddr' is not null or undefined
             if (validatorAddr === null || validatorAddr === undefined) {
                 throw new RequiredError('validatorAddr','Required parameter validatorAddr was null or undefined when calling validatorDelegations.');
@@ -19260,6 +16652,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -19333,10 +16729,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorSlashes: async (validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        validatorSlashes: async (validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'validatorAddress' is not null or undefined
             if (validatorAddress === null || validatorAddress === undefined) {
                 throw new RequiredError('validatorAddress','Required parameter validatorAddress was null or undefined when calling validatorSlashes.');
@@ -19378,6 +16775,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
             }
 
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -19404,10 +16805,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorUnbondingDelegations: async (validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        validatorUnbondingDelegations: async (validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'validatorAddr' is not null or undefined
             if (validatorAddr === null || validatorAddr === undefined) {
                 throw new RequiredError('validatorAddr','Required parameter validatorAddr was null or undefined when calling validatorUnbondingDelegations.');
@@ -19441,6 +16843,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
             }
 
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -19467,10 +16873,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validators: async (status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        validators: async (status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/staking/v1beta1/validators`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -19501,6 +16908,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -19578,10 +16989,11 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        votes: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        votes: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'proposalId' is not null or undefined
             if (proposalId === null || proposalId === undefined) {
                 throw new RequiredError('proposalId','Required parameter proposalId was null or undefined when calling votes.');
@@ -19613,6 +17025,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -19649,8 +17065,26 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async account(address: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
+        async account(address: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).account(address, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Accounts returns all the existing accounts
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -19664,11 +17098,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -19681,11 +17116,46 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Allowance returns fee granted to the grantee by the granter.
+         * @param {string} granter granter is the address of the user granting an allowance of their funds.
+         * @param {string} grantee grantee is the address of the user being granted an allowance of another user\&#39;s funds.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async allowance(granter: string, grantee: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).allowance(granter, grantee, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Allowances returns all the grants for address.
+         * @param {string} grantee 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -19697,7 +17167,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annualProvisions(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+        async annualProvisions(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).annualProvisions(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -19711,7 +17181,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appliedPlan(name: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20072>> {
+        async appliedPlan(name: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).appliedPlan(name, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -19724,7 +17194,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
+        async authParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).authParams(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -19739,7 +17209,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async balance(address: string, denom: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
+        async balance(address: string, denom: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).balance(address, denom, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -19752,130 +17222,8 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
+        async bankParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).bankParams(options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary Channel queries an IBC Channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async channel(channelId: string, portId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).channel(channelId, portId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ChannelClientState queries for the client state for the channel associated with the provided channel identifiers.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async channelClientState(channelId: string, portId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).channelClientState(channelId, portId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ChannelConsensusState queries for the consensus state for the channel associated with the provided channel identifiers.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} revisionNumber revision number of the consensus state
-         * @param {string} revisionHeight revision height of the consensus state
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async channelConsensusState(channelId: string, portId: string, revisionNumber: string, revisionHeight: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).channelConsensusState(channelId, portId, revisionNumber, revisionHeight, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary Channels queries all the IBC channels of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async channels(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20075>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).channels(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ClientConnections queries the connection paths associated with a client state.
-         * @param {string} clientId client identifier associated with a connection
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async clientConnections(clientId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).clientConnections(clientId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ClientParams queries all parameters of the ibc client.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async clientParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).clientParams(options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ClientState queries an IBC light client.
-         * @param {string} clientId client state unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async clientState(clientId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).clientState(clientId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ClientStates queries all the IBC light clients of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async clientStates(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).clientStates(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -19887,122 +17235,8 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async communityPool(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
+        async communityPool(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).communityPool(options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary Connection queries an IBC connection end.
-         * @param {string} connectionId connection unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async connection(connectionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).connection(connectionId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ConnectionChannels queries all the channels associated with a connection end.
-         * @param {string} connection connection unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async connectionChannels(connection: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).connectionChannels(connection, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ConnectionClientState queries the client state associated with the connection.
-         * @param {string} connectionId connection identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async connectionClientState(connectionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).connectionClientState(connectionId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ConnectionConsensusState queries the consensus state associated with the connection.
-         * @param {string} connectionId connection identifier
-         * @param {string} revisionNumber 
-         * @param {string} revisionHeight 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async connectionConsensusState(connectionId: string, revisionNumber: string, revisionHeight: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).connectionConsensusState(connectionId, revisionNumber, revisionHeight, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary Connections queries all the IBC connections of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async connections(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).connections(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ConsensusState queries a consensus state associated with a client state at a given height.
-         * @param {string} clientId client identifier
-         * @param {string} revisionNumber consensus state revision number
-         * @param {string} revisionHeight consensus state revision height
-         * @param {boolean} [latestHeight] latest_height overrrides the height field and queries the latest stored ConsensusState.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async consensusState(clientId: string, revisionNumber: string, revisionHeight: string, latestHeight?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).consensusState(clientId, revisionNumber, revisionHeight, latestHeight, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary ConsensusStates queries all the consensus state associated with a given client.
-         * @param {string} clientId client identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async consensusStates(clientId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).consensusStates(clientId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20014,7 +17248,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async currentPlan(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
+        async currentPlan(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).currentPlan(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20029,7 +17263,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegation(validatorAddr: string, delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
+        async delegation(validatorAddr: string, delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegation(validatorAddr, delegatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20044,7 +17278,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
+        async delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegationRewards(delegatorAddress, validatorAddress, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20058,7 +17292,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegationTotalRewards(delegatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
+        async delegationTotalRewards(delegatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegationTotalRewards(delegatorAddress, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20073,11 +17307,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20091,11 +17326,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20109,7 +17345,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+        async delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorValidator(delegatorAddr, validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20123,7 +17359,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorValidators(delegatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
+        async delegatorValidators(delegatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorValidators(delegatorAddress, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20137,7 +17373,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorWithdrawAddress(delegatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+        async delegatorWithdrawAddress(delegatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).delegatorWithdrawAddress(delegatorAddress, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20146,13 +17382,13 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary DenomTrace queries a denomination trace information.
-         * @param {string} hash hash (in hex format) of the denomination trace information.
+         * @summary DenomsMetadata queries the client metadata of a given coin denomination.
+         * @param {string} denom denom is the coin denom to query the metadata for.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomTrace(hash: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).denomTrace(hash, options);
+        async denomMetadata(denom: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).denomMetadata(denom, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20160,16 +17396,36 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary DenomTraces queries all denomination traces.
+         * @summary DenomOwners queries for all account addresses that own a particular token denomination.
+         * @param {string} denom denom defines the coin denomination to query all account holders for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomTraces(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).denomTraces(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary DenomsMetadata queries the client metadata for all registered coin denominations.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20183,7 +17439,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deposit(proposalId: string, depositor: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
+        async deposit(proposalId: string, depositor: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).deposit(proposalId, depositor, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20198,11 +17454,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20214,7 +17471,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async distributionParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+        async distributionParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).distributionParams(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20228,7 +17485,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async evidence(evidenceHash: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
+        async evidence(evidenceHash: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).evidence(evidenceHash, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20242,8 +17499,29 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govParams(paramsType: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
+        async govParams(paramsType: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).govParams(paramsType, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Returns list of `Authorization`, granted to the grantee by the granter.
+         * @param {string} [granter] 
+         * @param {string} [grantee] 
+         * @param {string} [msgTypeUrl] Optional, msg_type_url, when set, will query only grants matching given msg type.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20256,21 +17534,8 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async historicalInfo(height: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
+        async historicalInfo(height: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).historicalInfo(height, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary Params queries all parameters of the ibc-transfer module.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async iBCTransferParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).iBCTransferParams(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20282,7 +17547,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async inflation(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+        async inflation(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).inflation(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20295,7 +17560,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async mintParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+        async mintParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).mintParams(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20304,100 +17569,13 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary NextSequenceReceive returns the next receive sequence for a given channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
+         * @summary ModuleVersions queries the list of module versions from state.
+         * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async nextSequenceReceive(channelId: string, portId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).nextSequenceReceive(channelId, portId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary PacketAcknowledgement queries a stored packet acknowledgement hash.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async packetAcknowledgement(channelId: string, portId: string, sequence: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).packetAcknowledgement(channelId, portId, sequence, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary PacketAcknowledgements returns all the packet acknowledgements associated with a channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async packetAcknowledgements(channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).packetAcknowledgements(channelId, portId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary PacketCommitment queries a stored packet commitment hash.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async packetCommitment(channelId: string, portId: string, sequence: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).packetCommitment(channelId, portId, sequence, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary PacketCommitments returns all the packet commitments hashes associated with a channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async packetCommitments(channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).packetCommitments(channelId, portId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary PacketReceipt queries if a given packet sequence has been received on the queried chain
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async packetReceipt(channelId: string, portId: string, sequence: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).packetReceipt(channelId, portId, sequence, options);
+        async moduleVersions(moduleName?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).moduleVersions(moduleName, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20411,7 +17589,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async params(subspace?: string, key?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
+        async params(subspace?: string, key?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).params(subspace, key, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20424,7 +17602,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pool(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
+        async pool(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20070>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).pool(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20438,7 +17616,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposal(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
+        async proposal(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).proposal(proposalId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20455,11 +17633,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20475,11 +17654,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20506,11 +17686,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signingInfos(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).signingInfos(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async signingInfos(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).signingInfos(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20537,11 +17718,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20553,7 +17735,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
+        async stakingParams(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20069>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).stakingParams(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20567,7 +17749,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async supplyOf(denom: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
+        async supplyOf(denom: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).supplyOf(denom, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20581,7 +17763,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tallyResult(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
+        async tallyResult(proposalId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).tallyResult(proposalId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20591,11 +17773,16 @@ export const QueryApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary TotalSupply queries the total supply of all coins.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async totalSupply(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).totalSupply(options);
+        async totalSupply(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).totalSupply(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20609,40 +17796,8 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
+        async unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20072>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).unbondingDelegation(validatorAddr, delegatorAddr, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary UnreceivedAcks returns all the unreceived IBC acknowledgements associated with a channel and sequences.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {Array<string>} packetAckSequences list of acknowledgement sequences
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async unreceivedAcks(channelId: string, portId: string, packetAckSequences: Array<string>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryUnreceivedAcksResponseIsTheResponseTypeForTheQueryUnreceivedAcksRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).unreceivedAcks(channelId, portId, packetAckSequences, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary UnreceivedPackets returns all the unreceived IBC packets associated with a channel and sequences.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {Array<string>} packetCommitmentSequences list of packet sequences
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async unreceivedPackets(channelId: string, portId: string, packetCommitmentSequences: Array<string>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryUnreceivedPacketsResponseIsTheResponseTypeForTheQueryUnreceivedPacketCommitmentsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).unreceivedPackets(channelId, portId, packetCommitmentSequences, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20655,7 +17810,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async upgradedConsensusState(lastHeight: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20074>> {
+        async upgradedConsensusState(lastHeight: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).upgradedConsensusState(lastHeight, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20698,11 +17853,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20715,7 +17871,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorOutstandingRewards(validatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+        async validatorOutstandingRewards(validatorAddress: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorOutstandingRewards(validatorAddress, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20732,11 +17888,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20750,11 +17907,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20069>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20768,11 +17926,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validators(status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validators(status, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async validators(status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).validators(status, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20786,7 +17945,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async vote(proposalId: string, voter: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+        async vote(proposalId: string, voter: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
             const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).vote(proposalId, voter, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -20801,11 +17960,12 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
-            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+            const localVarAxiosArgs = await QueryApiAxiosParamCreator(configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -20827,8 +17987,22 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        account(address: string, options?: any): AxiosPromise<InlineResponse20025> {
+        account(address: string, options?: any): AxiosPromise<InlineResponse20026> {
             return QueryApiFp(configuration).account(address, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Accounts returns all the existing accounts
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20025> {
+            return QueryApiFp(configuration).accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -20838,11 +18012,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20027> {
-            return QueryApiFp(configuration).allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20028> {
+            return QueryApiFp(configuration).allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -20851,11 +18026,38 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20045> {
-            return QueryApiFp(configuration).allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20049> {
+            return QueryApiFp(configuration).allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Allowance returns fee granted to the grantee by the granter.
+         * @param {string} granter granter is the address of the user granting an allowance of their funds.
+         * @param {string} grantee grantee is the address of the user being granted an allowance of another user\&#39;s funds.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        allowance(granter: string, grantee: string, options?: any): AxiosPromise<InlineResponse20081> {
+            return QueryApiFp(configuration).allowance(granter, grantee, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Allowances returns all the grants for address.
+         * @param {string} grantee 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20082> {
+            return QueryApiFp(configuration).allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -20863,7 +18065,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annualProvisions(options?: any): AxiosPromise<InlineResponse20055> {
+        annualProvisions(options?: any): AxiosPromise<InlineResponse20059> {
             return QueryApiFp(configuration).annualProvisions(options).then((request) => request(axios, basePath));
         },
         /**
@@ -20873,7 +18075,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appliedPlan(name: string, options?: any): AxiosPromise<InlineResponse20072> {
+        appliedPlan(name: string, options?: any): AxiosPromise<InlineResponse20076> {
             return QueryApiFp(configuration).appliedPlan(name, options).then((request) => request(axios, basePath));
         },
         /**
@@ -20882,7 +18084,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authParams(options?: any): AxiosPromise<InlineResponse20026> {
+        authParams(options?: any): AxiosPromise<InlineResponse20027> {
             return QueryApiFp(configuration).authParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -20893,7 +18095,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        balance(address: string, denom: string, options?: any): AxiosPromise<InlineResponse20028> {
+        balance(address: string, denom: string, options?: any): AxiosPromise<InlineResponse20029> {
             return QueryApiFp(configuration).balance(address, denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -20902,98 +18104,8 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankParams(options?: any): AxiosPromise<InlineResponse20029> {
+        bankParams(options?: any): AxiosPromise<InlineResponse20033> {
             return QueryApiFp(configuration).bankParams(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Channel queries an IBC Channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channel(channelId: string, portId: string, options?: any): AxiosPromise<InlineResponse20076> {
-            return QueryApiFp(configuration).channel(channelId, portId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ChannelClientState queries for the client state for the channel associated with the provided channel identifiers.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channelClientState(channelId: string, portId: string, options?: any): AxiosPromise<QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod> {
-            return QueryApiFp(configuration).channelClientState(channelId, portId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ChannelConsensusState queries for the consensus state for the channel associated with the provided channel identifiers.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} revisionNumber revision number of the consensus state
-         * @param {string} revisionHeight revision height of the consensus state
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channelConsensusState(channelId: string, portId: string, revisionNumber: string, revisionHeight: string, options?: any): AxiosPromise<QueryChannelClientStateResponseIsTheResponseTypeForTheQueryQueryChannelClientStateRPCMethod1> {
-            return QueryApiFp(configuration).channelConsensusState(channelId, portId, revisionNumber, revisionHeight, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Channels queries all the IBC channels of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        channels(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20075> {
-            return QueryApiFp(configuration).channels(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ClientConnections queries the connection paths associated with a client state.
-         * @param {string} clientId client identifier associated with a connection
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientConnections(clientId: string, options?: any): AxiosPromise<QueryClientConnectionsResponseIsTheResponseTypeForTheQueryClientConnectionsRPCMethod> {
-            return QueryApiFp(configuration).clientConnections(clientId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ClientParams queries all parameters of the ibc client.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientParams(options?: any): AxiosPromise<InlineResponse20077> {
-            return QueryApiFp(configuration).clientParams(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ClientState queries an IBC light client.
-         * @param {string} clientId client state unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientState(clientId: string, options?: any): AxiosPromise<InlineResponse20079> {
-            return QueryApiFp(configuration).clientState(clientId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ClientStates queries all the IBC light clients of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clientStates(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20078> {
-            return QueryApiFp(configuration).clientStates(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21001,94 +18113,8 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        communityPool(options?: any): AxiosPromise<InlineResponse20037> {
+        communityPool(options?: any): AxiosPromise<InlineResponse20041> {
             return QueryApiFp(configuration).communityPool(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Connection queries an IBC connection end.
-         * @param {string} connectionId connection unique identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connection(connectionId: string, options?: any): AxiosPromise<InlineResponse20081> {
-            return QueryApiFp(configuration).connection(connectionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ConnectionChannels queries all the channels associated with a connection end.
-         * @param {string} connection connection unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connectionChannels(connection: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QueryConnectionChannelsResponseIsTheResponseTypeForTheQueryQueryConnectionChannelsRPCMethod> {
-            return QueryApiFp(configuration).connectionChannels(connection, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ConnectionClientState queries the client state associated with the connection.
-         * @param {string} connectionId connection identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connectionClientState(connectionId: string, options?: any): AxiosPromise<QueryConnectionClientStateResponseIsTheResponseTypeForTheQueryConnectionClientStateRPCMethod> {
-            return QueryApiFp(configuration).connectionClientState(connectionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ConnectionConsensusState queries the consensus state associated with the connection.
-         * @param {string} connectionId connection identifier
-         * @param {string} revisionNumber 
-         * @param {string} revisionHeight 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connectionConsensusState(connectionId: string, revisionNumber: string, revisionHeight: string, options?: any): AxiosPromise<QueryConnectionConsensusStateResponseIsTheResponseTypeForTheQueryConnectionConsensusStateRPCMethod> {
-            return QueryApiFp(configuration).connectionConsensusState(connectionId, revisionNumber, revisionHeight, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Connections queries all the IBC connections of a chain.
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        connections(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20080> {
-            return QueryApiFp(configuration).connections(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ConsensusState queries a consensus state associated with a client state at a given height.
-         * @param {string} clientId client identifier
-         * @param {string} revisionNumber consensus state revision number
-         * @param {string} revisionHeight consensus state revision height
-         * @param {boolean} [latestHeight] latest_height overrrides the height field and queries the latest stored ConsensusState.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        consensusState(clientId: string, revisionNumber: string, revisionHeight: string, latestHeight?: boolean, options?: any): AxiosPromise<QueryConsensusStateResponseIsTheResponseTypeForTheQueryConsensusStateRPCMethod> {
-            return QueryApiFp(configuration).consensusState(clientId, revisionNumber, revisionHeight, latestHeight, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ConsensusStates queries all the consensus state associated with a given client.
-         * @param {string} clientId client identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        consensusStates(clientId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QueryConsensusStatesResponseIsTheResponseTypeForTheQueryConsensusStatesRPCMethod> {
-            return QueryApiFp(configuration).consensusStates(clientId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21096,7 +18122,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        currentPlan(options?: any): AxiosPromise<InlineResponse20073> {
+        currentPlan(options?: any): AxiosPromise<InlineResponse20077> {
             return QueryApiFp(configuration).currentPlan(options).then((request) => request(axios, basePath));
         },
         /**
@@ -21107,7 +18133,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20067> {
+        delegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20071> {
             return QueryApiFp(configuration).delegation(validatorAddr, delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21118,7 +18144,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): AxiosPromise<InlineResponse20039> {
+        delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): AxiosPromise<InlineResponse20043> {
             return QueryApiFp(configuration).delegationRewards(delegatorAddress, validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21128,7 +18154,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegationTotalRewards(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20038> {
+        delegationTotalRewards(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20042> {
             return QueryApiFp(configuration).delegationTotalRewards(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21139,11 +18165,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20059> {
-            return QueryApiFp(configuration).delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20063> {
+            return QueryApiFp(configuration).delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21153,11 +18180,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20061> {
-            return QueryApiFp(configuration).delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20065> {
+            return QueryApiFp(configuration).delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21167,7 +18195,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20063> {
+        delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20067> {
             return QueryApiFp(configuration).delegatorValidator(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21177,7 +18205,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorValidators(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20040> {
+        delegatorValidators(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20044> {
             return QueryApiFp(configuration).delegatorValidators(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21187,31 +18215,47 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorWithdrawAddress(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20041> {
+        delegatorWithdrawAddress(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20045> {
             return QueryApiFp(configuration).delegatorWithdrawAddress(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary DenomTrace queries a denomination trace information.
-         * @param {string} hash hash (in hex format) of the denomination trace information.
+         * @summary DenomsMetadata queries the client metadata of a given coin denomination.
+         * @param {string} denom denom is the coin denom to query the metadata for.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomTrace(hash: string, options?: any): AxiosPromise<InlineResponse20083> {
-            return QueryApiFp(configuration).denomTrace(hash, options).then((request) => request(axios, basePath));
+        denomMetadata(denom: string, options?: any): AxiosPromise<InlineResponse20032> {
+            return QueryApiFp(configuration).denomMetadata(denom, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary DenomTraces queries all denomination traces.
+         * @summary DenomOwners queries for all account addresses that own a particular token denomination.
+         * @param {string} denom denom defines the coin denomination to query all account holders for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomTraces(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20082> {
-            return QueryApiFp(configuration).denomTraces(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20030> {
+            return QueryApiFp(configuration).denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary DenomsMetadata queries the client metadata for all registered coin denominations.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20031> {
+            return QueryApiFp(configuration).denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21221,7 +18265,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20051> {
+        deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20055> {
             return QueryApiFp(configuration).deposit(proposalId, depositor, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21232,11 +18276,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20050> {
-            return QueryApiFp(configuration).deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20054> {
+            return QueryApiFp(configuration).deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21244,7 +18289,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        distributionParams(options?: any): AxiosPromise<InlineResponse20042> {
+        distributionParams(options?: any): AxiosPromise<InlineResponse20046> {
             return QueryApiFp(configuration).distributionParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -21254,7 +18299,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        evidence(evidenceHash: string, options?: any): AxiosPromise<InlineResponse20046> {
+        evidence(evidenceHash: string, options?: any): AxiosPromise<InlineResponse20050> {
             return QueryApiFp(configuration).evidence(evidenceHash, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21264,8 +18309,25 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govParams(paramsType: string, options?: any): AxiosPromise<InlineResponse20047> {
+        govParams(paramsType: string, options?: any): AxiosPromise<InlineResponse20051> {
             return QueryApiFp(configuration).govParams(paramsType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Returns list of `Authorization`, granted to the grantee by the granter.
+         * @param {string} [granter] 
+         * @param {string} [grantee] 
+         * @param {string} [msgTypeUrl] Optional, msg_type_url, when set, will query only grants matching given msg type.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20080> {
+            return QueryApiFp(configuration).grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21274,17 +18336,8 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        historicalInfo(height: string, options?: any): AxiosPromise<InlineResponse20064> {
+        historicalInfo(height: string, options?: any): AxiosPromise<InlineResponse20068> {
             return QueryApiFp(configuration).historicalInfo(height, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Params queries all parameters of the ibc-transfer module.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        iBCTransferParams(options?: any): AxiosPromise<InlineResponse20084> {
-            return QueryApiFp(configuration).iBCTransferParams(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21292,7 +18345,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        inflation(options?: any): AxiosPromise<InlineResponse20056> {
+        inflation(options?: any): AxiosPromise<InlineResponse20060> {
             return QueryApiFp(configuration).inflation(options).then((request) => request(axios, basePath));
         },
         /**
@@ -21301,85 +18354,18 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        mintParams(options?: any): AxiosPromise<InlineResponse20057> {
+        mintParams(options?: any): AxiosPromise<InlineResponse20061> {
             return QueryApiFp(configuration).mintParams(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary NextSequenceReceive returns the next receive sequence for a given channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
+         * @summary ModuleVersions queries the list of module versions from state.
+         * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        nextSequenceReceive(channelId: string, portId: string, options?: any): AxiosPromise<QuerySequenceResponseIsTheRequestTypeForTheQueryQueryNextSequenceReceiveResponseRPCMethod> {
-            return QueryApiFp(configuration).nextSequenceReceive(channelId, portId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary PacketAcknowledgement queries a stored packet acknowledgement hash.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetAcknowledgement(channelId: string, portId: string, sequence: string, options?: any): AxiosPromise<QueryPacketAcknowledgementResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved> {
-            return QueryApiFp(configuration).packetAcknowledgement(channelId, portId, sequence, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary PacketAcknowledgements returns all the packet acknowledgements associated with a channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetAcknowledgements(channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QueryPacketAcknowledgemetsResponseIsTheRequestTypeForTheQueryQueryPacketAcknowledgementsRPCMethod> {
-            return QueryApiFp(configuration).packetAcknowledgements(channelId, portId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary PacketCommitment queries a stored packet commitment hash.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetCommitment(channelId: string, portId: string, sequence: string, options?: any): AxiosPromise<QueryPacketCommitmentResponseDefinesTheClientQueryResponseForAPacketWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved> {
-            return QueryApiFp(configuration).packetCommitment(channelId, portId, sequence, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary PacketCommitments returns all the packet commitments hashes associated with a channel.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetCommitments(channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QueryPacketCommitmentsResponseIsTheRequestTypeForTheQueryQueryPacketCommitmentsRPCMethod> {
-            return QueryApiFp(configuration).packetCommitments(channelId, portId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary PacketReceipt queries if a given packet sequence has been received on the queried chain
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {string} sequence packet sequence
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        packetReceipt(channelId: string, portId: string, sequence: string, options?: any): AxiosPromise<QueryPacketReceiptResponseDefinesTheClientQueryResponseForAPacketReceiptWhichAlsoIncludesAProofAndTheHeightFromWhichTheProofWasRetrieved> {
-            return QueryApiFp(configuration).packetReceipt(channelId, portId, sequence, options).then((request) => request(axios, basePath));
+        moduleVersions(moduleName?: string, options?: any): AxiosPromise<InlineResponse20078> {
+            return QueryApiFp(configuration).moduleVersions(moduleName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21389,7 +18375,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        params(subspace?: string, key?: string, options?: any): AxiosPromise<InlineResponse20058> {
+        params(subspace?: string, key?: string, options?: any): AxiosPromise<InlineResponse20062> {
             return QueryApiFp(configuration).params(subspace, key, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21398,7 +18384,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pool(options?: any): AxiosPromise<InlineResponse20066> {
+        pool(options?: any): AxiosPromise<InlineResponse20070> {
             return QueryApiFp(configuration).pool(options).then((request) => request(axios, basePath));
         },
         /**
@@ -21408,7 +18394,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposal(proposalId: string, options?: any): AxiosPromise<InlineResponse20049> {
+        proposal(proposalId: string, options?: any): AxiosPromise<InlineResponse20053> {
             return QueryApiFp(configuration).proposal(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21421,11 +18407,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20048> {
-            return QueryApiFp(configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20052> {
+            return QueryApiFp(configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21437,11 +18424,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20060> {
-            return QueryApiFp(configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20064> {
+            return QueryApiFp(configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21460,11 +18448,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signingInfos(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod> {
-            return QueryApiFp(configuration).signingInfos(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        signingInfos(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod> {
+            return QueryApiFp(configuration).signingInfos(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21483,11 +18472,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20062> {
-            return QueryApiFp(configuration).stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20066> {
+            return QueryApiFp(configuration).stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21495,7 +18485,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingParams(options?: any): AxiosPromise<InlineResponse20065> {
+        stakingParams(options?: any): AxiosPromise<InlineResponse20069> {
             return QueryApiFp(configuration).stakingParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -21505,7 +18495,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        supplyOf(denom: string, options?: any): AxiosPromise<InlineResponse20030> {
+        supplyOf(denom: string, options?: any): AxiosPromise<InlineResponse20034> {
             return QueryApiFp(configuration).supplyOf(denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21515,17 +18505,22 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tallyResult(proposalId: string, options?: any): AxiosPromise<InlineResponse20052> {
+        tallyResult(proposalId: string, options?: any): AxiosPromise<InlineResponse20056> {
             return QueryApiFp(configuration).tallyResult(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary TotalSupply queries the total supply of all coins.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        totalSupply(options?: any): AxiosPromise<QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod> {
-            return QueryApiFp(configuration).totalSupply(options).then((request) => request(axios, basePath));
+        totalSupply(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod> {
+            return QueryApiFp(configuration).totalSupply(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21535,32 +18530,8 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20068> {
+        unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20072> {
             return QueryApiFp(configuration).unbondingDelegation(validatorAddr, delegatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary UnreceivedAcks returns all the unreceived IBC acknowledgements associated with a channel and sequences.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {Array<string>} packetAckSequences list of acknowledgement sequences
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unreceivedAcks(channelId: string, portId: string, packetAckSequences: Array<string>, options?: any): AxiosPromise<QueryUnreceivedAcksResponseIsTheResponseTypeForTheQueryUnreceivedAcksRPCMethod> {
-            return QueryApiFp(configuration).unreceivedAcks(channelId, portId, packetAckSequences, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary UnreceivedPackets returns all the unreceived IBC packets associated with a channel and sequences.
-         * @param {string} channelId channel unique identifier
-         * @param {string} portId port unique identifier
-         * @param {Array<string>} packetCommitmentSequences list of packet sequences
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unreceivedPackets(channelId: string, portId: string, packetCommitmentSequences: Array<string>, options?: any): AxiosPromise<QueryUnreceivedPacketsResponseIsTheResponseTypeForTheQueryUnreceivedPacketCommitmentsRPCMethod> {
-            return QueryApiFp(configuration).unreceivedPackets(channelId, portId, packetCommitmentSequences, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21569,7 +18540,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        upgradedConsensusState(lastHeight: string, options?: any): AxiosPromise<InlineResponse20074> {
+        upgradedConsensusState(lastHeight: string, options?: any): AxiosPromise<InlineResponse20079> {
             return QueryApiFp(configuration).upgradedConsensusState(lastHeight, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21600,11 +18571,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod> {
-            return QueryApiFp(configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod> {
+            return QueryApiFp(configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21613,7 +18585,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorOutstandingRewards(validatorAddress: string, options?: any): AxiosPromise<InlineResponse20043> {
+        validatorOutstandingRewards(validatorAddress: string, options?: any): AxiosPromise<InlineResponse20047> {
             return QueryApiFp(configuration).validatorOutstandingRewards(validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21626,11 +18598,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20044> {
-            return QueryApiFp(configuration).validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20048> {
+            return QueryApiFp(configuration).validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21640,11 +18613,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20069> {
-            return QueryApiFp(configuration).validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20073> {
+            return QueryApiFp(configuration).validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21654,11 +18628,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validators(status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod> {
-            return QueryApiFp(configuration).validators(status, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        validators(status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod> {
+            return QueryApiFp(configuration).validators(status, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -21668,7 +18643,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        vote(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20054> {
+        vote(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20058> {
             return QueryApiFp(configuration).vote(proposalId, voter, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21679,11 +18654,12 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20053> {
-            return QueryApiFp(configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20057> {
+            return QueryApiFp(configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -21709,18 +18685,35 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
+     * @summary Accounts returns all the existing accounts
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary AllBalances queries the balance of all coins for a single account.
      * @param {string} address address is the address to query balances for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -21730,12 +18723,43 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Allowance returns fee granted to the grantee by the granter.
+     * @param {string} granter granter is the address of the user granting an allowance of their funds.
+     * @param {string} grantee grantee is the address of the user being granted an allowance of another user\&#39;s funds.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public allowance(granter: string, grantee: string, options?: any) {
+        return QueryApiFp(this.configuration).allowance(granter, grantee, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Allowances returns all the grants for address.
+     * @param {string} grantee 
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -21798,112 +18822,6 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
-     * @summary Channel queries an IBC Channel.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public channel(channelId: string, portId: string, options?: any) {
-        return QueryApiFp(this.configuration).channel(channelId, portId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ChannelClientState queries for the client state for the channel associated with the provided channel identifiers.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public channelClientState(channelId: string, portId: string, options?: any) {
-        return QueryApiFp(this.configuration).channelClientState(channelId, portId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ChannelConsensusState queries for the consensus state for the channel associated with the provided channel identifiers.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {string} revisionNumber revision number of the consensus state
-     * @param {string} revisionHeight revision height of the consensus state
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public channelConsensusState(channelId: string, portId: string, revisionNumber: string, revisionHeight: string, options?: any) {
-        return QueryApiFp(this.configuration).channelConsensusState(channelId, portId, revisionNumber, revisionHeight, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Channels queries all the IBC channels of a chain.
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public channels(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).channels(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ClientConnections queries the connection paths associated with a client state.
-     * @param {string} clientId client identifier associated with a connection
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public clientConnections(clientId: string, options?: any) {
-        return QueryApiFp(this.configuration).clientConnections(clientId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ClientParams queries all parameters of the ibc client.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public clientParams(options?: any) {
-        return QueryApiFp(this.configuration).clientParams(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ClientState queries an IBC light client.
-     * @param {string} clientId client state unique identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public clientState(clientId: string, options?: any) {
-        return QueryApiFp(this.configuration).clientState(clientId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ClientStates queries all the IBC light clients of a chain.
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public clientStates(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).clientStates(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary CommunityPool queries the community pool coins.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -21911,106 +18829,6 @@ export class QueryApi extends BaseAPI {
      */
     public communityPool(options?: any) {
         return QueryApiFp(this.configuration).communityPool(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Connection queries an IBC connection end.
-     * @param {string} connectionId connection unique identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public connection(connectionId: string, options?: any) {
-        return QueryApiFp(this.configuration).connection(connectionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ConnectionChannels queries all the channels associated with a connection end.
-     * @param {string} connection connection unique identifier
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public connectionChannels(connection: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).connectionChannels(connection, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ConnectionClientState queries the client state associated with the connection.
-     * @param {string} connectionId connection identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public connectionClientState(connectionId: string, options?: any) {
-        return QueryApiFp(this.configuration).connectionClientState(connectionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ConnectionConsensusState queries the consensus state associated with the connection.
-     * @param {string} connectionId connection identifier
-     * @param {string} revisionNumber 
-     * @param {string} revisionHeight 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public connectionConsensusState(connectionId: string, revisionNumber: string, revisionHeight: string, options?: any) {
-        return QueryApiFp(this.configuration).connectionConsensusState(connectionId, revisionNumber, revisionHeight, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Connections queries all the IBC connections of a chain.
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public connections(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).connections(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ConsensusState queries a consensus state associated with a client state at a given height.
-     * @param {string} clientId client identifier
-     * @param {string} revisionNumber consensus state revision number
-     * @param {string} revisionHeight consensus state revision height
-     * @param {boolean} [latestHeight] latest_height overrrides the height field and queries the latest stored ConsensusState.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public consensusState(clientId: string, revisionNumber: string, revisionHeight: string, latestHeight?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).consensusState(clientId, revisionNumber, revisionHeight, latestHeight, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ConsensusStates queries all the consensus state associated with a given client.
-     * @param {string} clientId client identifier
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public consensusStates(clientId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).consensusStates(clientId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22070,12 +18888,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22086,12 +18905,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22133,29 +18953,47 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
-     * @summary DenomTrace queries a denomination trace information.
-     * @param {string} hash hash (in hex format) of the denomination trace information.
+     * @summary DenomsMetadata queries the client metadata of a given coin denomination.
+     * @param {string} denom denom is the coin denom to query the metadata for.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public denomTrace(hash: string, options?: any) {
-        return QueryApiFp(this.configuration).denomTrace(hash, options).then((request) => request(this.axios, this.basePath));
+    public denomMetadata(denom: string, options?: any) {
+        return QueryApiFp(this.configuration).denomMetadata(denom, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary DenomTraces queries all denomination traces.
+     * @summary DenomOwners queries for all account addresses that own a particular token denomination.
+     * @param {string} denom denom defines the coin denomination to query all account holders for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public denomTraces(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).denomTraces(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary DenomsMetadata queries the client metadata for all registered coin denominations.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22179,12 +19017,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22224,6 +19063,25 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
+     * @summary Returns list of `Authorization`, granted to the grantee by the granter.
+     * @param {string} [granter] 
+     * @param {string} [grantee] 
+     * @param {string} [msgTypeUrl] Optional, msg_type_url, when set, will query only grants matching given msg type.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary HistoricalInfo queries the historical info for given height.
      * @param {string} height height defines at which height to query the historical info.
      * @param {*} [options] Override http request option.
@@ -22232,17 +19090,6 @@ export class QueryApi extends BaseAPI {
      */
     public historicalInfo(height: string, options?: any) {
         return QueryApiFp(this.configuration).historicalInfo(height, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Params queries all parameters of the ibc-transfer module.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public iBCTransferParams(options?: any) {
-        return QueryApiFp(this.configuration).iBCTransferParams(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22269,91 +19116,14 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
-     * @summary NextSequenceReceive returns the next receive sequence for a given channel.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
+     * @summary ModuleVersions queries the list of module versions from state.
+     * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public nextSequenceReceive(channelId: string, portId: string, options?: any) {
-        return QueryApiFp(this.configuration).nextSequenceReceive(channelId, portId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary PacketAcknowledgement queries a stored packet acknowledgement hash.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {string} sequence packet sequence
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public packetAcknowledgement(channelId: string, portId: string, sequence: string, options?: any) {
-        return QueryApiFp(this.configuration).packetAcknowledgement(channelId, portId, sequence, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary PacketAcknowledgements returns all the packet acknowledgements associated with a channel.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public packetAcknowledgements(channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).packetAcknowledgements(channelId, portId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary PacketCommitment queries a stored packet commitment hash.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {string} sequence packet sequence
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public packetCommitment(channelId: string, portId: string, sequence: string, options?: any) {
-        return QueryApiFp(this.configuration).packetCommitment(channelId, portId, sequence, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary PacketCommitments returns all the packet commitments hashes associated with a channel.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
-     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
-     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
-     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public packetCommitments(channelId: string, portId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).packetCommitments(channelId, portId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary PacketReceipt queries if a given packet sequence has been received on the queried chain
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {string} sequence packet sequence
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public packetReceipt(channelId: string, portId: string, sequence: string, options?: any) {
-        return QueryApiFp(this.configuration).packetReceipt(channelId, portId, sequence, options).then((request) => request(this.axios, this.basePath));
+    public moduleVersions(moduleName?: string, options?: any) {
+        return QueryApiFp(this.configuration).moduleVersions(moduleName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22402,12 +19172,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22420,12 +19191,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22447,12 +19219,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public signingInfos(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).signingInfos(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public signingInfos(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).signingInfos(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22474,12 +19247,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22520,12 +19294,17 @@ export class QueryApi extends BaseAPI {
     /**
      * 
      * @summary TotalSupply queries the total supply of all coins.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public totalSupply(options?: any) {
-        return QueryApiFp(this.configuration).totalSupply(options).then((request) => request(this.axios, this.basePath));
+    public totalSupply(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).totalSupply(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22539,34 +19318,6 @@ export class QueryApi extends BaseAPI {
      */
     public unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any) {
         return QueryApiFp(this.configuration).unbondingDelegation(validatorAddr, delegatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary UnreceivedAcks returns all the unreceived IBC acknowledgements associated with a channel and sequences.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {Array<string>} packetAckSequences list of acknowledgement sequences
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public unreceivedAcks(channelId: string, portId: string, packetAckSequences: Array<string>, options?: any) {
-        return QueryApiFp(this.configuration).unreceivedAcks(channelId, portId, packetAckSequences, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary UnreceivedPackets returns all the unreceived IBC packets associated with a channel and sequences.
-     * @param {string} channelId channel unique identifier
-     * @param {string} portId port unique identifier
-     * @param {Array<string>} packetCommitmentSequences list of packet sequences
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public unreceivedPackets(channelId: string, portId: string, packetCommitmentSequences: Array<string>, options?: any) {
-        return QueryApiFp(this.configuration).unreceivedPackets(channelId, portId, packetCommitmentSequences, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22613,12 +19364,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22643,12 +19395,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22659,12 +19412,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22675,12 +19429,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public validators(status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).validators(status, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public validators(status?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).validators(status, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22704,12 +19459,13 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return QueryApiFp(this.configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return QueryApiFp(this.configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -22858,10 +19614,11 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestValidatorSet: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        getLatestValidatorSet: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/base/tendermint/v1beta1/validatorsets/latest`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -22888,6 +19645,10 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -23033,10 +19794,12 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTxsEvent: async (events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        getTxsEvent: async (events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/tx/v1beta1/txs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -23069,6 +19832,14 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
             }
 
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['order_by'] = orderBy;
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -23095,10 +19866,11 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getValidatorSetByHeight: async (height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options: any = {}): Promise<RequestArgs> => {
+        getValidatorSetByHeight: async (height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'height' is not null or undefined
             if (height === null || height === undefined) {
                 throw new RequiredError('height','Required parameter height was null or undefined when calling getValidatorSetByHeight.');
@@ -23130,6 +19902,10 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
 
             if (paginationCountTotal !== undefined) {
                 localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
 
 
@@ -23217,7 +19993,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async broadcastTx(body: InlineObject16, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
+        async broadcastTx(body: InlineObject16, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20075>> {
             const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).broadcastTx(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23231,7 +20007,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBlockByHeight(height: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
+        async getBlockByHeight(height: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
             const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getBlockByHeight(height, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23244,7 +20020,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestBlock(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
+        async getLatestBlock(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
             const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getLatestBlock(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23258,11 +20034,12 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
-            const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
+            const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -23274,7 +20051,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getNodeInfo(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
+        async getNodeInfo(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
             const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getNodeInfo(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23287,7 +20064,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSyncing(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
+        async getSyncing(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
             const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getSyncing(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23316,11 +20093,13 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetTxsEventResponse>> {
-            const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetTxsEventResponse>> {
+            const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -23334,11 +20113,12 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
-            const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options);
+        async getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
+            const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -23351,7 +20131,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20070>> {
+        async simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20074>> {
             const localVarAxiosArgs = await ServiceApiAxiosParamCreator(configuration).simulate(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23374,7 +20154,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        broadcastTx(body: InlineObject16, options?: any): AxiosPromise<InlineResponse20071> {
+        broadcastTx(body: InlineObject16, options?: any): AxiosPromise<InlineResponse20075> {
             return ServiceApiFp(configuration).broadcastTx(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -23384,7 +20164,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBlockByHeight(height: string, options?: any): AxiosPromise<InlineResponse20032> {
+        getBlockByHeight(height: string, options?: any): AxiosPromise<InlineResponse20036> {
             return ServiceApiFp(configuration).getBlockByHeight(height, options).then((request) => request(axios, basePath));
         },
         /**
@@ -23393,7 +20173,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestBlock(options?: any): AxiosPromise<InlineResponse20031> {
+        getLatestBlock(options?: any): AxiosPromise<InlineResponse20035> {
             return ServiceApiFp(configuration).getLatestBlock(options).then((request) => request(axios, basePath));
         },
         /**
@@ -23403,11 +20183,12 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20035> {
-            return ServiceApiFp(configuration).getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20039> {
+            return ServiceApiFp(configuration).getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -23415,7 +20196,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNodeInfo(options?: any): AxiosPromise<InlineResponse20033> {
+        getNodeInfo(options?: any): AxiosPromise<InlineResponse20037> {
             return ServiceApiFp(configuration).getNodeInfo(options).then((request) => request(axios, basePath));
         },
         /**
@@ -23424,7 +20205,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSyncing(options?: any): AxiosPromise<InlineResponse20034> {
+        getSyncing(options?: any): AxiosPromise<InlineResponse20038> {
             return ServiceApiFp(configuration).getSyncing(options).then((request) => request(axios, basePath));
         },
         /**
@@ -23445,11 +20226,13 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<CosmosTxV1beta1GetTxsEventResponse> {
-            return ServiceApiFp(configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options?: any): AxiosPromise<CosmosTxV1beta1GetTxsEventResponse> {
+            return ServiceApiFp(configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -23459,11 +20242,12 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any): AxiosPromise<InlineResponse20036> {
-            return ServiceApiFp(configuration).getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(axios, basePath));
+        getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20040> {
+            return ServiceApiFp(configuration).getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -23472,7 +20256,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<InlineResponse20070> {
+        simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<InlineResponse20074> {
             return ServiceApiFp(configuration).simulate(body, options).then((request) => request(axios, basePath));
         },
     };
@@ -23527,12 +20311,13 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return ServiceApiFp(this.configuration).getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return ServiceApiFp(this.configuration).getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -23577,12 +20362,14 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return ServiceApiFp(this.configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options?: any) {
+        return ServiceApiFp(this.configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -23593,12 +20380,13 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, options?: any) {
-        return ServiceApiFp(this.configuration).getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, options).then((request) => request(this.axios, this.basePath));
+    public getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any) {
+        return ServiceApiFp(this.configuration).getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -23785,7 +20573,7 @@ export const SlashingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async slashingParametersGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
+        async slashingParametersGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
             const localVarAxiosArgs = await SlashingApiAxiosParamCreator(configuration).slashingParametersGet(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23800,7 +20588,7 @@ export const SlashingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async slashingSigningInfosGet(page: number, limit: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20015>>> {
+        async slashingSigningInfosGet(page: number, limit: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20016>>> {
             const localVarAxiosArgs = await SlashingApiAxiosParamCreator(configuration).slashingSigningInfosGet(page, limit, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -23837,7 +20625,7 @@ export const SlashingApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        slashingParametersGet(options?: any): AxiosPromise<InlineResponse20016> {
+        slashingParametersGet(options?: any): AxiosPromise<InlineResponse20017> {
             return SlashingApiFp(configuration).slashingParametersGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -23848,7 +20636,7 @@ export const SlashingApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        slashingSigningInfosGet(page: number, limit: number, options?: any): AxiosPromise<Array<InlineResponse20015>> {
+        slashingSigningInfosGet(page: number, limit: number, options?: any): AxiosPromise<Array<InlineResponse20016>> {
             return SlashingApiFp(configuration).slashingSigningInfosGet(page, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -24675,7 +21463,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2009>>> {
+        async stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20010>>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24705,7 +21493,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
+        async stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24734,7 +21522,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20010>>> {
+        async stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20011>>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24764,7 +21552,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
+        async stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24778,7 +21566,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20012>>> {
+        async stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20013>>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24793,7 +21581,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
+        async stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr, validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24806,7 +21594,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingParametersGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
+        async stakingParametersGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingParametersGet(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24819,7 +21607,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingPoolGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
+        async stakingPoolGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingPoolGet(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24851,7 +21639,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20012>>> {
+        async stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20013>>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingValidatorsGet(status, page, limit, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24865,7 +21653,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2009>>> {
+        async stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20010>>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingValidatorsValidatorAddrDelegationsGet(validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24879,7 +21667,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
+        async stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingValidatorsValidatorAddrGet(validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24893,7 +21681,7 @@ export const StakingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20010>>> {
+        async stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20011>>> {
             const localVarAxiosArgs = await StakingApiAxiosParamCreator(configuration).stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -24916,7 +21704,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse2009>> {
+        stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20010>> {
             return StakingApiFp(configuration).stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -24938,7 +21726,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse2009> {
+        stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20010> {
             return StakingApiFp(configuration).stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -24959,7 +21747,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20010>> {
+        stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20011>> {
             return StakingApiFp(configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -24981,7 +21769,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20011> {
+        stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20012> {
             return StakingApiFp(configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -24991,7 +21779,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20012>> {
+        stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20013>> {
             return StakingApiFp(configuration).stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -25002,7 +21790,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20012> {
+        stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20013> {
             return StakingApiFp(configuration).stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -25011,7 +21799,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingParametersGet(options?: any): AxiosPromise<InlineResponse20014> {
+        stakingParametersGet(options?: any): AxiosPromise<InlineResponse20015> {
             return StakingApiFp(configuration).stakingParametersGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -25020,7 +21808,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingPoolGet(options?: any): AxiosPromise<InlineResponse20013> {
+        stakingPoolGet(options?: any): AxiosPromise<InlineResponse20014> {
             return StakingApiFp(configuration).stakingPoolGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -25044,7 +21832,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: any): AxiosPromise<Array<InlineResponse20012>> {
+        stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: any): AxiosPromise<Array<InlineResponse20013>> {
             return StakingApiFp(configuration).stakingValidatorsGet(status, page, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -25054,7 +21842,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse2009>> {
+        stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20010>> {
             return StakingApiFp(configuration).stakingValidatorsValidatorAddrDelegationsGet(validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -25064,7 +21852,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: any): AxiosPromise<InlineResponse20012> {
+        stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: any): AxiosPromise<InlineResponse20013> {
             return StakingApiFp(configuration).stakingValidatorsValidatorAddrGet(validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -25074,7 +21862,7 @@ export const StakingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20010>> {
+        stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20011>> {
             return StakingApiFp(configuration).stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr, options).then((request) => request(axios, basePath));
         },
     };
@@ -25285,191 +22073,6 @@ export class StakingApi extends BaseAPI {
      */
     public stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: any) {
         return StakingApiFp(this.configuration).stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * SupplyApi - axios parameter creator
- * @export
- */
-export const SupplyApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Total supply of a single coin denomination
-         * @param {string} denomination Coin denomination
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        supplyTotalDenominationGet: async (denomination: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'denomination' is not null or undefined
-            if (denomination === null || denomination === undefined) {
-                throw new RequiredError('denomination','Required parameter denomination was null or undefined when calling supplyTotalDenominationGet.');
-            }
-            const localVarPath = `/supply/total/{denomination}`
-                .replace(`{${"denomination"}}`, encodeURIComponent(String(denomination)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Total supply of coins in the chain
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        supplyTotalGet: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/supply/total`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * SupplyApi - functional programming interface
- * @export
- */
-export const SupplyApiFp = function(configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Total supply of a single coin denomination
-         * @param {string} denomination Coin denomination
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async supplyTotalDenominationGet(denomination: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await SupplyApiAxiosParamCreator(configuration).supplyTotalDenominationGet(denomination, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @summary Total supply of coins in the chain
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async supplyTotalGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
-            const localVarAxiosArgs = await SupplyApiAxiosParamCreator(configuration).supplyTotalGet(options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-    }
-};
-
-/**
- * SupplyApi - factory interface
- * @export
- */
-export const SupplyApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    return {
-        /**
-         * 
-         * @summary Total supply of a single coin denomination
-         * @param {string} denomination Coin denomination
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        supplyTotalDenominationGet(denomination: string, options?: any): AxiosPromise<string> {
-            return SupplyApiFp(configuration).supplyTotalDenominationGet(denomination, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Total supply of coins in the chain
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        supplyTotalGet(options?: any): AxiosPromise<InlineResponse20024> {
-            return SupplyApiFp(configuration).supplyTotalGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * SupplyApi - object-oriented interface
- * @export
- * @class SupplyApi
- * @extends {BaseAPI}
- */
-export class SupplyApi extends BaseAPI {
-    /**
-     * 
-     * @summary Total supply of a single coin denomination
-     * @param {string} denomination Coin denomination
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SupplyApi
-     */
-    public supplyTotalDenominationGet(denomination: string, options?: any) {
-        return SupplyApiFp(this.configuration).supplyTotalDenominationGet(denomination, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Total supply of coins in the chain
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SupplyApi
-     */
-    public supplyTotalGet(options?: any) {
-        return SupplyApiFp(this.configuration).supplyTotalGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

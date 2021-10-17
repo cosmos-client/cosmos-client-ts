@@ -1,6 +1,6 @@
 import Long from 'long';
 
-export * from './types';
-export * from './config';
-export * from './sdk';
 export { Long };
+export * from './config';
+export * from './types';
+export * from './sdk';
