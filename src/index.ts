@@ -1,4 +1,4 @@
-export * from './rest';
-export * from './websocket';
-export * as proto from './proto';
 export * as cosmosclient from './module';
+export * from './rest';
+export * as proto from './proto';
+export * from './websocket';

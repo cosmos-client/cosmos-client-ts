@@ -1,14 +1,14 @@
+import { cosmos } from '../../proto';
+import { PrivKey as BasePrivKey, PubKey as BasePubKey } from './key';
 import * as crypto from 'crypto';
 import * as nacl from 'tweetnacl';
-import { PrivKey as BasePrivKey, PubKey as BasePubKey } from './key';
-import { cosmos } from '../../proto';
 
 declare module '../../proto' {
   namespace cosmos {
     namespace crypto {
       namespace ed25519 {
-        interface PrivKey extends BasePrivKey { }
-        interface PubKey extends BasePubKey { }
+        interface PrivKey extends BasePrivKey {}
+        interface PubKey extends BasePubKey {}
       }
     }
   }

@@ -1,12 +1,16 @@
 # cosmos-client-ts
 
-JavaScript / TypeScript client for Cosmos SDK blockchain.
+REST API client for Cosmos SDK blockchain
 
 ## Install
 
 ```shell
-npm install --save cosmos-client
+npm install @cosmos-client/core
 ```
+
+### Caution
+
+A package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` alternatively.
 
 ## Examples
 
