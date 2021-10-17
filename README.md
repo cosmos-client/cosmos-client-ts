@@ -15,7 +15,7 @@ A package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` a
 ## Examples
 
 ```typescript
-import { cosmosclient, rest, proto } from '../..';
+import { cosmosclient, proto, rest } from '@cosmos-client/core';
 
 describe('bank', () => {
   it('send', async () => {

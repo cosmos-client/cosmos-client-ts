@@ -1,4 +1,4 @@
-import { cosmosclient, rest, proto } from '../..';
+import { cosmosclient, proto, rest } from '../..';
 
 describe('bank', () => {
   it('send', async () => {
