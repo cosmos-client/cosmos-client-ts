@@ -10,7 +10,14 @@ npm install @cosmos-client/core
 
 ### Caution
 
-A package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` alternatively.
+The package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` alternatively.
+
+### Plugin modules
+
+- [`@cosmos-client/ibc`](https://github.com/cosmos-client/ibc-ts)
+- [`@cosmos-client/liquidity`](https://github.com/cosmos-client/liquidity-ts)
+- [`@cosmos-client/cosmwasm`](https://github.com/cosmos-client/cosmwasm-ts)
+- [`@cosmos-client/bandprotocol`](https://github.com/cosmos-client/bandprotocol-ts)
 
 ## Examples
 
