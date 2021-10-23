@@ -1,5 +1,6 @@
 import { config } from '../../config';
 import { google } from '../../proto';
+import Long from 'long';
 import * as $protobuf from 'protobufjs';
 
 export function register(
@@ -14,14 +15,14 @@ export function register(
 
 /**
  * CosmosAny -> Instance
- * @param value 
- * @returns 
+ * @param value
+ * @returns
  */
-export function unpackCosmosAny(value: any): unknown {
+export function cosmosJSONParse(value: any) {
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = packCosmosAny(value[key]);
+    newValue[key] = packAnyFromCosmosJSON(value[key]);
   }
 
   const typeURL = value && value['@type'];
@@ -34,10 +35,51 @@ export function unpackCosmosAny(value: any): unknown {
 }
 
 /**
- * CosmosAny -> Any
- * @param value 
+ * Instance -> CosmosAny
+ * @param value
+ * @returns
  */
-export function packCosmosAny(value: any) {
+export function cosmosJSONObjectify(value: any): Object {
+  if (value instanceof Array) {
+    return value.map((v) => cosmosJSONObjectify(v));
+  }
+  if (value instanceof Uint8Array) {
+    return Buffer.from(value).toString('base64');
+  }
+  if (value instanceof google.protobuf.Any) {
+    return cosmosJSONObjectify(unpackAny(value));
+  }
+  if (value instanceof Long) {
+    return value.toString();
+  }
+  if (typeof value !== 'object') {
+    return value;
+  }
+
+  const newValue: { [key: string]: any } = {};
+
+  const constructor = value?.constructor;
+  const typeURL = constructor && config.codecMaps.inv.get(constructor);
+
+  if (typeURL) {
+    newValue['@type'] = typeURL;
+  }
+
+  for (const key in value) {
+    const v = value[key];
+    if (typeof v !== 'function') {
+      newValue[key] = cosmosJSONObjectify(v);
+    }
+  }
+
+  return newValue;
+}
+
+/**
+ * CosmosAny -> Any
+ * @param value
+ */
+export function packAnyFromCosmosJSON(value: any) {
   const typeURL = value && value['@type'];
 
   if (!typeURL || !config.codecMaps.fromObject[typeURL]) {
@@ -47,7 +89,7 @@ export function packCosmosAny(value: any) {
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = packCosmosAny(value[key]);
+    newValue[key] = packAnyFromCosmosJSON(value[key]);
   }
 
   return new google.protobuf.Any({
@@ -58,7 +100,7 @@ export function packCosmosAny(value: any) {
 
 /**
  * Any -> Instance
- * @param value 
+ * @param value
  */
 export function unpackAny(value?: google.protobuf.IAny | null) {
   if (!value) {
@@ -75,8 +117,8 @@ export function unpackAny(value?: google.protobuf.IAny | null) {
 
 /**
  * Instance -> Any
- * @param value 
- * @returns 
+ * @param value
+ * @returns
  */
 export function packAny(value: any) {
   const constructor = value?.constructor;

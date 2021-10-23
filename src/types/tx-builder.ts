@@ -1,6 +1,7 @@
+import { codec } from '.';
 import { cosmos } from '../proto';
-import Long from 'long';
 import { CosmosSDK } from '../sdk';
+import Long from 'long';
 
 export class TxBuilder {
   txRaw: cosmos.tx.v1beta1.TxRaw;
@@ -18,7 +19,7 @@ export class TxBuilder {
 
   signDoc(accountNumber?: number | Long) {
     if (typeof accountNumber === 'number') {
-      accountNumber = Long.fromNumber(accountNumber)
+      accountNumber = Long.fromNumber(accountNumber);
     }
     const signDoc = new cosmos.tx.v1beta1.SignDoc({
       body_bytes: this.txRaw.body_bytes,
@@ -44,5 +45,19 @@ export class TxBuilder {
   txBytes() {
     const bytes = cosmos.tx.v1beta1.TxRaw.encode(this.txRaw).finish();
     return Buffer.from(bytes).toString('base64');
+  }
+
+  cosmosJSONStringify(space?: number) {
+    const body = cosmos.tx.v1beta1.TxBody.decode(this.txRaw.body_bytes);
+    const authInfo = cosmos.tx.v1beta1.AuthInfo.decode(this.txRaw.auth_info_bytes);
+    return JSON.stringify(
+      codec.cosmosJSONObjectify({
+        body,
+        auth_info: authInfo,
+        signatures: this.txRaw.signatures,
+      }),
+      undefined,
+      space,
+    );
   }
 }

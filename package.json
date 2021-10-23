@@ -24,7 +24,7 @@
     "bip39": "^3.0.4",
     "protobufjs": "^6.11.2",
     "rxjs": "^7.4.0",
-    "tiny-secp256k1": "^2.0.1",
+    "tiny-secp256k1": "^1.1.6",
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
@@ -35,7 +35,6 @@
     "@trivago/prettier-plugin-sort-imports": "^2.0.4",
     "@types/bech32": "^1.1.4",
     "@types/jest": "^27.0.2",
-    "@types/tiny-secp256k1": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "babel-jest": "^27.2.3",
