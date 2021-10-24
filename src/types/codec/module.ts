@@ -18,7 +18,7 @@ export function register(
  * @param value
  * @returns
  */
-export function cosmosJSONParse(value: any) {
+export function unpackCosmosAny(value: any) {
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
@@ -39,15 +39,15 @@ export function cosmosJSONParse(value: any) {
  * @param value
  * @returns
  */
-export function cosmosJSONObjectify(value: any): Object {
+export function packCosmosAny(value: any): Object {
   if (value instanceof Array) {
-    return value.map((v) => cosmosJSONObjectify(v));
+    return value.map((v) => packCosmosAny(v));
   }
   if (value instanceof Uint8Array) {
     return Buffer.from(value).toString('base64');
   }
   if (value instanceof google.protobuf.Any) {
-    return cosmosJSONObjectify(unpackAny(value));
+    return packCosmosAny(unpackAny(value));
   }
   if (value instanceof Long) {
     return value.toString();
@@ -68,7 +68,7 @@ export function cosmosJSONObjectify(value: any): Object {
   for (const key in value) {
     const v = value[key];
     if (typeof v !== 'function') {
-      newValue[key] = cosmosJSONObjectify(v);
+      newValue[key] = packCosmosAny(v);
     }
   }
 

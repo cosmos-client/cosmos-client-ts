@@ -108,7 +108,7 @@ describe('codec', () => {
       },
     };
 
-    const unpacked = cosmosclient.codec.cosmosJSONParse(res.data.account);
+    const unpacked = cosmosclient.codec.unpackCosmosAny(res.data.account);
     if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }

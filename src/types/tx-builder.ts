@@ -51,7 +51,7 @@ export class TxBuilder {
     const body = cosmos.tx.v1beta1.TxBody.decode(this.txRaw.body_bytes);
     const authInfo = cosmos.tx.v1beta1.AuthInfo.decode(this.txRaw.auth_info_bytes);
     return JSON.stringify(
-      codec.cosmosJSONObjectify({
+      codec.packCosmosAny({
         body,
         auth_info: authInfo,
         signatures: this.txRaw.signatures,
