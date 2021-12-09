@@ -49,6 +49,9 @@ export function packCosmosAny(value: any): Object {
   if (value instanceof google.protobuf.Any) {
     return packCosmosAny(unpackAny(value));
   }
+  if (value instanceof google.protobuf.Timestamp) {
+    return jsDateToGoTimeString(protobufTimestampToJsDate(value));
+  }
   if (value instanceof Long) {
     return value.toString();
   }
@@ -138,4 +141,42 @@ export function packAny(value: any) {
   });
 
   return packed;
+}
+
+export function goTimeStringToJsDate(goTimeString: string): Date {
+  return new Date(Date.parse(goTimeString));
+}
+
+export function jsDateToGoTimeString(jsDate: Date): string {
+  const timezoneOffset = jsDate.getTimezoneOffset();
+  const timezoneHours = timezoneOffset / 60;
+  const timezoneMinutes = timezoneOffset % 60;
+  const rfc3339 = [
+    jsDate.getFullYear(),
+    '-',
+    `0${jsDate.getMonth() + 1}`.slice(-2),
+    '-',
+    `0${jsDate.getDate()}`.slice(-2),
+    'T',
+    `0${jsDate.getHours()}`.slice(-2),
+    ':',
+    `0${jsDate.getMinutes()}`.slice(-2),
+    ':',
+    `0${jsDate.getSeconds()}`.slice(-2),
+    -timezoneHours < 0 ? '' : '+',
+    `0${-timezoneHours}`.slice(-2),
+    ':',
+    `0${timezoneMinutes}`.slice(-2),
+  ].join('');
+  return rfc3339;
+}
+
+export function jsDateToProtobufTimestamp(jsDate: Date): google.protobuf.Timestamp {
+  return new google.protobuf.Timestamp({
+    seconds: Long.fromNumber(jsDate.getTime() / 1000),
+  });
+}
+
+export function protobufTimestampToJsDate(protobufTimestamp: google.protobuf.Timestamp): Date {
+  return new Date(protobufTimestamp.seconds.toNumber() * 1000);
 }
