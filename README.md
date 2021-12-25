@@ -12,6 +12,10 @@ npm install @cosmos-client/core
 
 The package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` alternatively.
 
+## Discord community
+
+[Invitation link](https://discord.gg/FKp94XDYSa)
+
 ### Plugin modules
 
 - [`@cosmos-client/ibc`](https://github.com/cosmos-client/ibc-ts)
@@ -98,6 +102,18 @@ describe('bank', () => {
 ```
 
 ## For library developlers
+
+Install Protocol Buffer Compiler
+
+```
+sudo apt -y install protobuf-compiler
+```
+
+or
+
+```
+brew install protobuf 
+```
 
 Use [starport](https://github.com/tendermint/starport) to test.
 
