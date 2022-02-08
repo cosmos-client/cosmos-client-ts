@@ -1,5 +1,5 @@
-import * as crypto from 'crypto';
 import { proto, cosmosclient } from '../..';
+import * as crypto from 'crypto';
 
 describe('address', () => {
   it('ed25519', () => {
@@ -50,8 +50,8 @@ describe('address', () => {
 
     console.log(address2.toString());
 
-    expect(address1.toString()).toStrictEqual('cosmos1aqt94lggum9v9xhuyppaawtjwra76mj8mjdgm5');
-    expect(address2.toString()).toStrictEqual('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
+    expect(address1.toString()).toBe('ununifi1aqt94lggum9v9xhuyppaawtjwra76mj8ds76p6');
+    expect(address2.toString()).toBe('ununifi14ynfqqa6j5k3kcqm2ymf3l66d9x07ysx73ll7g');
   });
 
   it('convert', async () => {
@@ -66,5 +66,24 @@ describe('address', () => {
     const valAddress = cosmosclient.ValAddress.fromPublicKey(privKey.pubKey());
 
     expect(accAddress.toValAddress().toString()).toStrictEqual(valAddress.toString());
+  });
+
+  it('accPubkey', async () => {
+    expect.hasAssertions();
+    const mnemonic =
+      'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+      key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
+    });
+    const accPubkey = cosmosclient.AccPubkey.fromPrivateKey(privKey);
+
+    expect(accPubkey.toString()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+  });
+
+  it('accPubkey_reverse', async () => {
+    expect.hasAssertions();
+    const accPubkey = cosmosclient.AccPubkey.fromString('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+
+    expect(accPubkey.toString()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
   });
 });

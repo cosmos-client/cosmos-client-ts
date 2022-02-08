@@ -1,5 +1,5 @@
 export enum AddressPrefix {
-  Cosmos = 'cosmos',
+  Cosmos = 'ununifi',
   Public = 'pub',
   Account = 'acc',
   Validator = 'val',
