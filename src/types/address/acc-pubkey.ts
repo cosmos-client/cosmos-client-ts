@@ -33,8 +33,8 @@ export class AccPubkey extends PublicKey {
     return new AccPubkey(new Uint8Array(bech32.fromWords(words)));
   }
 
-  static fromPrivateKey(pubKey: PrivKey) {
-    return new AccPubkey(pubKey.bytes());
+  static fromPrivateKey(privKey: PrivKey) {
+    return new AccPubkey(privKey.pubKey().bytes());
   }
 }
 

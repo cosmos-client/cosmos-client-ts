@@ -13,9 +13,9 @@ export class PublicKey {
    * @param value
    */
   constructor(value: Uint8Array) {
-    const pubKeyLength = 32;
+    const pubKeyLength = 33;
     if (value.length !== pubKeyLength) {
-      throw Error('Public key must be 32 bytes length.');
+      throw Error('Public key must be 33 bytes length.');
     }
     this._value = value;
   }

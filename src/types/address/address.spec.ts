@@ -1,4 +1,5 @@
 import { proto, cosmosclient } from '../..';
+import * as bech32 from 'bech32';
 import * as crypto from 'crypto';
 
 describe('address', () => {
@@ -80,10 +81,58 @@ describe('address', () => {
     expect(accPubkey.toString()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
   });
 
-  it('accPubkey_reverse', async () => {
+  it('decode_encode', async () => {
+    //pubkey from CLI vs encoded decoded pubkey from CLI
     expect.hasAssertions();
-    const accPubkey = cosmosclient.AccPubkey.fromString('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+    const pubkeyStr = 'ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4';
+    const { words } = bech32.decode(pubkeyStr);
+    const pubkeyDecode = new Uint8Array(bech32.fromWords(words));
+    const pubkeyEncodeTemp = bech32.toWords(Buffer.from(pubkeyDecode));
+    const pubkeyEncode = bech32.encode('ununifipub', pubkeyEncodeTemp);
 
-    expect(accPubkey.toString()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+    expect(pubkeyEncode).toBe(pubkeyStr);
+  });
+
+  it('chk Unit8Array', async () => {
+    //pubkey from CLI vs decoded pubkey from CLI
+    expect.hasAssertions();
+    const pubkeyStr = 'ununifipub1q0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e5hz89ue';
+    const { words } = bech32.decode(pubkeyStr);
+    const pubkeyDecode = new Uint8Array(bech32.fromWords(words));
+    console.log('pubkey_byte_from_decode', pubkeyDecode);
+
+    //
+    const mnemonic =
+      'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+      key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
+    });
+    const pubkeyUint8Array = privKey.pubKey().bytes();
+    console.log('privkey_byte', privKey.bytes());
+    console.log('privkey_byte(hex)', Buffer.from(privKey.bytes()).toString('hex'));
+    console.log('pubkey_byte_from_privkey', pubkeyUint8Array);
+
+    expect(words).toBe(bech32.toWords(Buffer.from(pubkeyUint8Array)));
+  });
+
+  it('starport', async () => {
+    //starport CLI
+    expect.hasAssertions();
+
+    const mnemonic =
+      'enlist salt butter wealth prison people main benefit exhaust knock breeze wagon vote cloud cream tourist major caught carbon main below net float habit';
+    const pubkeySecp256k1 = '0301DC2818F675A3CC39B8F41C73CB3F98D257DBBB8994D933518F57494A6FC74D';
+    const addressCLI = 'cosmos1edh2rptgahn6cf53eldujnjym4g5wy97qs02gg';
+
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+      key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
+    });
+    console.log('pubkey_byte_from_privkey (starport)', privKey.pubKey().bytes());
+
+    const pubKeyHex = Buffer.from(privKey.pubKey().bytes()).toString('HEX');
+    expect(pubKeyHex).toBe(pubkeySecp256k1);
+
+    const address = cosmosclient.AccAddress.fromPublicKey(privKey.pubKey());
+    expect(address).toBe(addressCLI);
   });
 });
