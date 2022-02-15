@@ -1,5 +1,7 @@
+import { config } from '../../config/';
 import { cosmos } from '../../proto';
 import { PrivKey as BasePrivKey, PubKey as BasePubKey } from './key';
+import * as bech32 from 'bech32';
 import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
 
@@ -47,6 +49,15 @@ cosmos.crypto.secp256k1.PubKey.prototype.verify = function (msg: Uint8Array, sig
 
 cosmos.crypto.secp256k1.PubKey.prototype.address = function () {
   return new Uint8Array(hash160(this.key));
+};
+
+cosmos.crypto.secp256k1.PubKey.prototype.accPubkey = function () {
+  const prefix = new Uint8Array([235, 90, 233, 135, 33]);
+  let mergedKey = new Uint8Array(prefix.length + this.key.length);
+  mergedKey.set(prefix);
+  mergedKey.set(this.key, prefix.length);
+  const words = bech32.toWords(Buffer.from(mergedKey));
+  return bech32.encode(config.bech32Prefix.accPub, words);
 };
 
 function hash160(buffer: Uint8Array) {
