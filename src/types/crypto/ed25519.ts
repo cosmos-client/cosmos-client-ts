@@ -50,7 +50,7 @@ cosmos.crypto.ed25519.PubKey.prototype.address = function () {
 
 cosmos.crypto.ed25519.PubKey.prototype.accPubkey = function () {
   const prefix = new Uint8Array([235, 90, 233, 135, 33]);
-  let mergedKey = new Uint8Array(prefix.length + this.key.length);
+  const mergedKey = new Uint8Array(prefix.length + this.key.length);
   mergedKey.set(prefix);
   mergedKey.set(this.key, prefix.length);
   const words = bech32.toWords(Buffer.from(mergedKey));
