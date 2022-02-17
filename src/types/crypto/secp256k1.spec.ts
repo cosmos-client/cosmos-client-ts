@@ -27,7 +27,24 @@ describe('secp256k1', () => {
     expect(pubkey.verify(msg, sig)).toBeTruthy();
   });
 
-  it('secp256k1_accPubkey', async () => {
+  it('secp256k1_accPubkey_cosmos', async () => {
+    expect.hasAssertions();
+
+    //input mnemonic
+    const mnemonic =
+      'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+      key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
+    });
+    const pubkey = privKey.pubKey();
+    console.log('accPubSp', pubkey.accPubkey());
+    console.log('toStringSp', typeof pubkey.toString(), pubkey.toString());
+
+    //check
+    expect(pubkey.accPubkey()).toBe('cosmospub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+  });
+
+  it('secp256k1_accPubkey_ununifi', async () => {
     expect.hasAssertions();
 
     //set prfix for test

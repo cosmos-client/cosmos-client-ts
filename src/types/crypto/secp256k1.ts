@@ -52,8 +52,9 @@ cosmos.crypto.secp256k1.PubKey.prototype.address = function () {
 };
 
 cosmos.crypto.secp256k1.PubKey.prototype.accPubkey = function () {
+  //Todo: calculate prefix from base128Varints
   const prefix = new Uint8Array([235, 90, 233, 135, 33]);
-  let mergedKey = new Uint8Array(prefix.length + this.key.length);
+  const mergedKey = new Uint8Array(prefix.length + this.key.length);
   mergedKey.set(prefix);
   mergedKey.set(this.key, prefix.length);
   const words = bech32.toWords(Buffer.from(mergedKey));

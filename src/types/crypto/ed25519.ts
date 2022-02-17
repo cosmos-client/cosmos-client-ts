@@ -49,6 +49,7 @@ cosmos.crypto.ed25519.PubKey.prototype.address = function () {
 };
 
 cosmos.crypto.ed25519.PubKey.prototype.accPubkey = function () {
+  //Todo: calculate prefix from base128Varints
   const prefix = new Uint8Array([235, 90, 233, 135, 33]);
   const mergedKey = new Uint8Array(prefix.length + this.key.length);
   mergedKey.set(prefix);
