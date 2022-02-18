@@ -9,8 +9,8 @@ declare module '../../proto' {
   namespace cosmos {
     namespace crypto {
       namespace ed25519 {
-        interface PrivKey extends BasePrivKey {}
-        interface PubKey extends BasePubKey {}
+        interface PrivKey extends BasePrivKey { }
+        interface PubKey extends BasePubKey { }
       }
     }
   }
@@ -28,7 +28,9 @@ cosmos.crypto.ed25519.PrivKey.prototype.sign = function (message: Uint8Array) {
 };
 
 cosmos.crypto.ed25519.PrivKey.prototype.pubKey = function () {
-  const keypair = nacl.sign.keyPair.fromSeed(this.key);
+
+  const slicedKey = this.key.slice(0, 32)
+  const keypair = nacl.sign.keyPair.fromSeed(slicedKey);
 
   return new cosmos.crypto.ed25519.PubKey({ key: keypair.publicKey });
 };
@@ -55,5 +57,5 @@ cosmos.crypto.ed25519.PubKey.prototype.accPubkey = function () {
   mergedKey.set(prefix);
   mergedKey.set(this.key, prefix.length);
   const words = bech32.toWords(Buffer.from(mergedKey));
-  return bech32.encode(config.bech32Prefix.accPub, words);
+  return bech32.encode(config.bech32Prefix.consPub, words);
 };

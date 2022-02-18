@@ -15,27 +15,21 @@ describe('ed25519', () => {
     expect.hasAssertions();
 
     // info from local test chain
-    const address = '19647C2DC80B9A8C78A3BEA49A5878580235851F';
     const pub_key = {
-      //type: 'tendermint/PubKeyEd25519',
       '@type': '/cosmos.crypto.ed25519.PubKey',
-      //value: or pub_key:
-      value: '+q8dUtYeppa3ycdKFIc1Dl9OtVLbTVlXoBpmsOO4p40=',
+      'key': '+q8dUtYeppa3ycdKFIc1Dl9OtVLbTVlXoBpmsOO4p40=',
     };
     const priv_key = {
       '@type': '/cosmos.crypto.ed25519.PrivKey',
-      //value: or priv_key:
-      priv_key: 'Q7RecOq++QctQfKXqBOnrvMIT81sC8KaIE+HY+ZfsOn6rx1S1h6mlrfJx0oUhzUOX061UttNWVegGmaw47injQ==',
+      'key': 'Q7RecOq++QctQfKXqBOnrvMIT81sC8KaIE+HY+ZfsOn6rx1S1h6mlrfJx0oUhzUOX061UttNWVegGmaw47injQ==',
     };
-    const publicKeyUnpackCosmos = cosmosclient.codec.unpackCosmosAny(pub_key) as cosmosclient.PubKey;
-    const privateKeyUnpackCosmos = cosmosclient.codec.unpackCosmosAny(priv_key) as cosmosclient.PrivKey;
-    console.log('cosmosAny', publicKeyUnpackCosmos.bytes().length, privateKeyUnpackCosmos.bytes().length);
-
-    console.log('toStringEd', typeof privateKeyUnpackCosmos.toString(), publicKeyUnpackCosmos.toString());
+    const publicKeyUnpackUnunifi = cosmosclient.codec.unpackCosmosAny(pub_key) as cosmosclient.PubKey;
+    const privateKeyUnpackUnunifi = cosmosclient.codec.unpackCosmosAny(priv_key) as cosmosclient.PrivKey;
+    //console.log('cosmosAny_lenght', publicKeyUnpackUnunifi.bytes().length, privateKeyUnpackUnunifi.bytes().length);
+    //console.log('cosmosAny_toStringEd', publicKeyUnpackUnunifi.toString(), privateKeyUnpackUnunifi.toString());
 
     //check
-    //!!! Need to get pubkey address with "cosmos" prefix !!!
-    expect(publicKeyUnpackCosmos.accPubkey()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+    expect(publicKeyUnpackUnunifi.accPubkey()).toBe(privateKeyUnpackUnunifi.pubKey().accPubkey());
   });
 
   it('ed25519_accPubkey_ununifi', async () => {
@@ -51,18 +45,25 @@ describe('ed25519', () => {
       consPub: 'ununifivalconspub',
     });
 
-    //input mnemonic
-    const mnemonic =
-      'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
-    const privKey = new proto.cosmos.crypto.ed25519.PrivKey({
-      key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
-    });
-    const pubkey = privKey.pubKey();
-    console.log('accPubEd', pubkey.accPubkey());
-    console.log('toStringEd', typeof pubkey.toString(), pubkey.toString());
+    // info from local test chain (.gaia)
+    const pub_key = {
+      '@type': '/cosmos.crypto.ed25519.PubKey',
+      'key': '+q8dUtYeppa3ycdKFIc1Dl9OtVLbTVlXoBpmsOO4p40=',
+    };
+    const priv_key = {
+      '@type': '/cosmos.crypto.ed25519.PrivKey',
+      'key': 'Q7RecOq++QctQfKXqBOnrvMIT81sC8KaIE+HY+ZfsOn6rx1S1h6mlrfJx0oUhzUOX061UttNWVegGmaw47injQ==',
+    };
 
-    //check
-    //!!! this public key is came from secp256k1 privatekey !!!
-    expect(pubkey.accPubkey()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+    const publicKeyUnpackCosmos = cosmosclient.codec.unpackCosmosAny(pub_key) as cosmosclient.PubKey;
+    const privateKeyUnpackCosmos = cosmosclient.codec.unpackCosmosAny(priv_key) as cosmosclient.PrivKey;
+    //console.log('cosmosAny_lenght', publicKeyUnpackCosmos.bytes().length, privateKeyUnpackCosmos.bytes().length);
+    console.log('cosmosAny_toStringEd', publicKeyUnpackCosmos.accPubkey(), privateKeyUnpackCosmos.toString());
+
+    //check1
+    expect(publicKeyUnpackCosmos.accPubkey()).toBe(privateKeyUnpackCosmos.pubKey().accPubkey());
+
+    //check2
+    expect(publicKeyUnpackCosmos.accPubkey()).toBe('ununifivalconspub1zcjduepql2h365kkr6nfdd7fca9pfpe4pe05ad2jmdx4j4aqrfntpcac57xssk7egh');
   });
 });
