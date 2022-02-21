@@ -30,34 +30,24 @@ describe('secp256k1', () => {
   it('secp256k1_accPubkey_cosmos', async () => {
     expect.hasAssertions();
 
-    const address = 'cosmos1hjsnk6rjvtpt3hen69kkw3uvm43xlv7wq69kfm'
+    //packed publickey from gaia CLI
+    const pubKeyCLI =
+    {
+      "@type": "/cosmos.crypto.secp256k1.PubKey",
+      "key": "A8Pj5Q8u3hShw3+oFc4nGrZvKl4avTDHW1m9GiI1fm5x"
+    }
+    const publicKeyCLI = cosmosclient.codec.unpackCosmosAny(pubKeyCLI) as cosmosclient.PubKey;
 
-    // info from starport (v0.19.3)
-    const priv_key = {
-      '@type': '/cosmos.crypto.secp256k1.PrivKey',
-      'key': 'mpm+jIjEgSAqRDIFH6526GV7Ooy5fB4cp9FauLbAW3TqljPwXa2EEHY6ygGz9zvnYD74YmXQbO5hekX3Mq1aYehMk0Phidal0bsYeGM==ZI2l',
-    };
-    const pub_key = {
-      '@type': '/cosmos.crypto.secp256k1.PubKey',
-      'key': '03DCB67638ABA8D41D9EEFE930CC4298633911C92179BD22D0A950AE0AF4607281',
-    };
-    const publicKeyUnpackCosmos = cosmosclient.codec.unpackCosmosAny(pub_key) as cosmosclient.PubKey;
-    const privateKeyUnpackCosmos = cosmosclient.codec.unpackCosmosAny(priv_key) as cosmosclient.PrivKey;
-    console.log('cosmosAny_lenght', publicKeyUnpackCosmos.bytes().length, privateKeyUnpackCosmos.bytes().length);
-    console.log('cosmosAny_toStringEd', publicKeyUnpackCosmos.accPubkey(), privateKeyUnpackCosmos.toString());
-
-    //input mnemonic
+    //publickey from mnemonic
     const mnemonic =
-      'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
+      "joy furnace inject spot engine source alpha turn east visa abstract cousin shell express weasel math perfect tiger quality camp mansion desert web jaguar"
     const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
     });
-    const pubkey = privKey.pubKey();
-    console.log('accPubSp', pubkey.accPubkey());
-    console.log('toStringSp', typeof pubkey.toString(), pubkey.toString());
+    const pubkey = privKey.pubKey()
 
-    //check
-    expect(pubkey.accPubkey()).toBe('cosmospub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
+    //check (encoded publickey from pack vs mnemonic )
+    expect(pubkey.accPubkey()).toBe(publicKeyCLI.accPubkey());
   });
 
   it('secp256k1_accPubkey_ununifi', async () => {
@@ -73,7 +63,7 @@ describe('secp256k1', () => {
       consPub: 'ununifivalconspub',
     });
 
-    //input mnemonic
+    //publickey from mnemonic
     const mnemonic =
       'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
     const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
@@ -81,7 +71,7 @@ describe('secp256k1', () => {
     });
     const pubkey = privKey.pubKey();
 
-    //check
+    //check (encoded publickey from mnemonic vs ununifid CLI condole )
     expect(pubkey.accPubkey()).toBe('ununifipub1addwnpepq0u4zl9r2x4ks82mjetexffsdduruqkmmtmqnx68dfkuy2yr275e53rn0e4');
   });
 });
