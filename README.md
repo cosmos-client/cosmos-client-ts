@@ -1,17 +1,32 @@
-# cosmos-client-ts
+# @cosmos-client/core
 
-JavaScript / TypeScript client for Cosmos SDK blockchain.
+REST API client for Cosmos SDK blockchain
 
 ## Install
 
 ```shell
-npm install --save cosmos-client
+npm install @cosmos-client/core
 ```
+
+### Caution
+
+The package name `cosmos-client` is deprecated. Please use `@cosmos-client/core` alternatively.
+
+## Discord community
+
+[Invitation link](https://discord.gg/FKp94XDYSa)
+
+### Plugin modules
+
+- [`@cosmos-client/ibc`](https://github.com/cosmos-client/ibc-ts)
+- [`@cosmos-client/liquidity`](https://github.com/cosmos-client/liquidity-ts)
+- [`@cosmos-client/cosmwasm`](https://github.com/cosmos-client/cosmwasm-ts)
+- [`@cosmos-client/bandprotocol`](https://github.com/cosmos-client/bandprotocol-ts)
 
 ## Examples
 
 ```typescript
-import { cosmosclient, rest, proto } from 'cosmos-client';
+import { cosmosclient, proto, rest } from '@cosmos-client/core';
 
 describe('bank', () => {
   it('send', async () => {
@@ -31,7 +46,7 @@ describe('bank', () => {
     const toAddress = address;
 
     // get account info
-    const account = await rest.cosmos.auth
+    const account = await rest.auth
       .account(sdk, fromAddress)
       .then((res) => res.data.account && cosmosclient.codec.unpackCosmosAny(res.data.account))
       .catch((_) => undefined);
@@ -74,9 +89,9 @@ describe('bank', () => {
     txBuilder.addSignature(privKey.sign(signDocBytes));
 
     // broadcast
-    const res = await rest.cosmos.tx.broadcastTx(sdk, {
+    const res = await rest.tx.broadcastTx(sdk, {
       tx_bytes: txBuilder.txBytes(),
-      mode: rest.cosmos.tx.BroadcastTxMode.Block,
+      mode: rest.tx.BroadcastTxMode.Block,
     });
     console.log(res);
 
@@ -87,6 +102,18 @@ describe('bank', () => {
 ```
 
 ## For library developlers
+
+Install Protocol Buffer Compiler
+
+```
+sudo apt -y install protobuf-compiler
+```
+
+or
+
+```
+brew install protobuf 
+```
 
 Use [starport](https://github.com/tendermint/starport) to test.
 

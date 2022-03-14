@@ -21,6 +21,7 @@ npx pbjs \
   --no-create \
   --path=./proto/ \
   --path=./proto-thirdparty/ \
+  --root="@cosmos-client/core" \
   ${proto_files[@]}
 
 npx pbjs \
@@ -33,6 +34,7 @@ npx pbjs \
   --no-create \
   --path=./proto/ \
   --path=./proto-thirdparty/ \
+  --root="@cosmos-client/core" \
   ${proto_files[@]}
 
 npx pbts \

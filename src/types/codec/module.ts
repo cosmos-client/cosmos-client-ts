@@ -1,5 +1,6 @@
 import { config } from '../../config';
 import { google } from '../../proto';
+import Long from 'long';
 import * as $protobuf from 'protobufjs';
 
 export function register(
@@ -14,14 +15,14 @@ export function register(
 
 /**
  * CosmosAny -> Instance
- * @param value 
- * @returns 
+ * @param value
+ * @returns
  */
-export function unpackCosmosAny(value: any): unknown {
+export function unpackCosmosAny(value: any) {
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = packCosmosAny(value[key]);
+    newValue[key] = packAnyFromCosmosJSON(value[key]);
   }
 
   const typeURL = value && value['@type'];
@@ -34,10 +35,54 @@ export function unpackCosmosAny(value: any): unknown {
 }
 
 /**
- * CosmosAny -> Any
- * @param value 
+ * Instance -> CosmosAny
+ * @param value
+ * @returns
  */
-export function packCosmosAny(value: any) {
+export function packCosmosAny(value: any): Object {
+  if (value instanceof Array) {
+    return value.map((v) => packCosmosAny(v));
+  }
+  if (value instanceof Uint8Array) {
+    return Buffer.from(value).toString('base64');
+  }
+  if (value instanceof google.protobuf.Any) {
+    return packCosmosAny(unpackAny(value));
+  }
+  if (value instanceof google.protobuf.Timestamp) {
+    return jsDateToGoTimeString(protobufTimestampToJsDate(value));
+  }
+  if (value instanceof Long) {
+    return value.toString();
+  }
+  if (typeof value !== 'object') {
+    return value;
+  }
+
+  const newValue: { [key: string]: any } = {};
+
+  const constructor = value?.constructor;
+  const typeURL = constructor && config.codecMaps.inv.get(constructor);
+
+  if (typeURL) {
+    newValue['@type'] = typeURL;
+  }
+
+  for (const key in value) {
+    const v = value[key];
+    if (typeof v !== 'function') {
+      newValue[key] = packCosmosAny(v);
+    }
+  }
+
+  return newValue;
+}
+
+/**
+ * CosmosAny -> Any
+ * @param value
+ */
+export function packAnyFromCosmosJSON(value: any) {
   const typeURL = value && value['@type'];
 
   if (!typeURL || !config.codecMaps.fromObject[typeURL]) {
@@ -47,7 +92,7 @@ export function packCosmosAny(value: any) {
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = packCosmosAny(value[key]);
+    newValue[key] = packAnyFromCosmosJSON(value[key]);
   }
 
   return new google.protobuf.Any({
@@ -58,7 +103,7 @@ export function packCosmosAny(value: any) {
 
 /**
  * Any -> Instance
- * @param value 
+ * @param value
  */
 export function unpackAny(value?: google.protobuf.IAny | null) {
   if (!value) {
@@ -75,8 +120,8 @@ export function unpackAny(value?: google.protobuf.IAny | null) {
 
 /**
  * Instance -> Any
- * @param value 
- * @returns 
+ * @param value
+ * @returns
  */
 export function packAny(value: any) {
   const constructor = value?.constructor;
@@ -96,4 +141,42 @@ export function packAny(value: any) {
   });
 
   return packed;
+}
+
+export function goTimeStringToJsDate(goTimeString: string): Date {
+  return new Date(Date.parse(goTimeString));
+}
+
+export function jsDateToGoTimeString(jsDate: Date): string {
+  const timezoneOffset = jsDate.getTimezoneOffset();
+  const timezoneHours = timezoneOffset / 60;
+  const timezoneMinutes = timezoneOffset % 60;
+  const rfc3339 = [
+    jsDate.getFullYear(),
+    '-',
+    `0${jsDate.getMonth() + 1}`.slice(-2),
+    '-',
+    `0${jsDate.getDate()}`.slice(-2),
+    'T',
+    `0${jsDate.getHours()}`.slice(-2),
+    ':',
+    `0${jsDate.getMinutes()}`.slice(-2),
+    ':',
+    `0${jsDate.getSeconds()}`.slice(-2),
+    -timezoneHours < 0 ? '' : '+',
+    `0${-timezoneHours}`.slice(-2),
+    ':',
+    `0${timezoneMinutes}`.slice(-2),
+  ].join('');
+  return rfc3339;
+}
+
+export function jsDateToProtobufTimestamp(jsDate: Date): google.protobuf.Timestamp {
+  return new google.protobuf.Timestamp({
+    seconds: Long.fromNumber(jsDate.getTime() / 1000),
+  });
+}
+
+export function protobufTimestampToJsDate(protobufTimestamp: google.protobuf.Timestamp): Date {
+  return new Date(protobufTimestamp.seconds.toNumber() * 1000);
 }

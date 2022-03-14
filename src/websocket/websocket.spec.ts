@@ -9,7 +9,7 @@ function sleep(sec: number) {
 }
 
 describe('websocket', () => {
-  it('websocker', async () => {
+  it('websocket', async () => {
     expect.hasAssertions();
     const ws = websocket.connect('ws://localhost:26657');
 

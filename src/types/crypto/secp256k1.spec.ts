@@ -1,6 +1,6 @@
-import * as crypto from 'crypto';
 import { proto, cosmosclient } from '../..';
-import * as secp256k1 from 'tiny-secp256k1';
+import * as crypto from 'crypto';
+import * as secp256k1 from 'secp256k1';
 
 describe('secp256k1', () => {
   it('verify', () => {
@@ -17,9 +17,9 @@ describe('secp256k1', () => {
     const msg = Buffer.from(data, 'utf-8');
 
     const hash = crypto.createHash('sha256').update(msg).digest();
-    const signature = secp256k1.sign(hash, bytes);
-    const pbk = secp256k1.pointFromScalar(bytes)!;
-    expect(secp256k1.verify(hash, pbk, signature)).toBeTruthy();
+    const signature = secp256k1.ecdsaSign(hash, bytes).signature;
+    const pbk = secp256k1.publicKeyCreate(bytes)!;
+    expect(secp256k1.ecdsaVerify(signature, hash, pbk)).toBeTruthy();
 
     const sig = key.sign(msg);
 

@@ -1,7 +1,63 @@
 import { proto, cosmosclient } from '../..';
+import { google } from '../../proto';
+import { goTimeStringToJsDate, jsDateToGoTimeString, jsDateToProtobufTimestamp, protobufTimestampToJsDate } from './module';
+import Long from 'long';
 
 describe('codec', () => {
-  it('unpack', () => {
+  it('cosmosJSONStringify', async () => {
+    expect.hasAssertions();
+
+    const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
+
+    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+      key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
+    });
+    const pubKey = privKey.pubKey();
+    const address = cosmosclient.AccAddress.fromPublicKey(pubKey);
+
+    expect(address.toString()).toBe('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
+
+    const fromAddress = address;
+    const toAddress = address;
+
+    // build tx
+    const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+      from_address: fromAddress.toString(),
+      to_address: toAddress.toString(),
+      amount: [{ denom: 'token', amount: '1' }],
+    });
+
+    const txBody = new proto.cosmos.tx.v1beta1.TxBody({
+      messages: [cosmosclient.codec.packAny(msgSend)],
+    });
+    const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
+      signer_infos: [
+        {
+          public_key: cosmosclient.codec.packAny(pubKey),
+          mode_info: {
+            single: {
+              mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+            },
+          },
+          sequence: cosmosclient.Long.fromNumber(0),
+        },
+      ],
+      fee: {
+        gas_limit: cosmosclient.Long.fromString('200000'),
+      },
+    });
+
+    // sign
+    const txBuilder = new cosmosclient.TxBuilder(sdk, txBody, authInfo);
+    const signDocBytes = txBuilder.signDocBytes(0);
+    txBuilder.addSignature(privKey.sign(signDocBytes));
+
+    // broadcast
+    const json = txBuilder.cosmosJSONStringify(2);
+    console.log(json);
+  });
+
+  it('unpackAny', () => {
     expect.hasAssertions();
     const res = {
       data: {
@@ -66,5 +122,44 @@ describe('codec', () => {
     console.log(key);
 
     expect(true).toBeTruthy();
+  });
+
+  it('goTimeStringToJsDate', () => {
+    expect.hasAssertions();
+    const originalGoTimeString = '2021-12-09T18:00:00+09:00';
+    const resultJsDate = goTimeStringToJsDate(originalGoTimeString);
+    const resultJsDateTimestamp = resultJsDate.toUTCString();
+    const expectedDateTimestamp = new Date(2021, 11, 9, 18, 0, 0).toUTCString();
+    expect(resultJsDateTimestamp).toBe(expectedDateTimestamp);
+  });
+
+  it('jsDateToGoTimeString', () => {
+    expect.hasAssertions();
+    const originalDate = new Date(2021, 11, 9, 18, 0, 0);
+    const resultDateString = jsDateToGoTimeString(originalDate);
+    expect(resultDateString).toBe('2021-12-09T18:00:00+09:00');
+  });
+
+  it('jsDateToProtobufTimestamp', () => {
+    expect.hasAssertions();
+    const originalDate = new Date(2021, 11, 9, 18, 0, 0);
+    const protobufTimestamp = jsDateToProtobufTimestamp(originalDate);
+    expect(protobufTimestamp.seconds.low).toBe(1639040400);
+    expect(protobufTimestamp.seconds.high).toBe(0);
+    expect(protobufTimestamp.seconds.unsigned).toBe(false);
+  });
+
+  it('protobufTimestampToJsDate', () => {
+    expect.hasAssertions();
+    const protobufTimestamp = new google.protobuf.Timestamp({
+      seconds: Long.fromNumber(new Date(2021, 11, 9, 18, 0, 0).getTime() / 1000),
+    });
+    const date = protobufTimestampToJsDate(protobufTimestamp);
+    expect(date.getFullYear()).toBe(2021);
+    expect(date.getMonth()).toBe(11);
+    expect(date.getDate()).toBe(9);
+    expect(date.getHours()).toBe(18);
+    expect(date.getMinutes()).toBe(0);
+    expect(date.getSeconds()).toBe(0);
   });
 });
