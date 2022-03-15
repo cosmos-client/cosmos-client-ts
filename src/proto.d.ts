@@ -1,5 +1,4 @@
 import * as $protobuf from 'protobufjs';
-
 /** Namespace cosmos. */
 export namespace cosmos {
   /** Namespace auth. */
@@ -1219,6 +1218,9 @@ export namespace cosmos {
 
           /** TxResponse timestamp */
           timestamp?: string | null;
+
+          /** TxResponse events */
+          events?: global_tendermint.abci.IEvent[] | null;
         }
 
         /** Represents a TxResponse. */
@@ -1264,6 +1266,9 @@ export namespace cosmos {
 
           /** TxResponse timestamp. */
           public timestamp: string;
+
+          /** TxResponse events. */
+          public events: global_tendermint.abci.IEvent[];
 
           /**
            * Encodes the specified TxResponse message. Does not implicitly {@link cosmos.base.abci.v1beta1.TxResponse.verify|verify} messages.
@@ -39805,7 +39810,7 @@ export namespace tendermint {
     /** Properties of a ResponseBeginBlock. */
     interface IResponseBeginBlock {
       /** ResponseBeginBlock events */
-      events?: tendermint.abci.IEvent[] | null;
+      events?: global_tendermint.abci.IEvent[] | null;
     }
 
     /** Represents a ResponseBeginBlock. */
@@ -39817,7 +39822,7 @@ export namespace tendermint {
       constructor(properties?: tendermint.abci.IResponseBeginBlock);
 
       /** ResponseBeginBlock events. */
-      public events: tendermint.abci.IEvent[];
+      public events: global_tendermint.abci.IEvent[];
 
       /**
        * Encodes the specified ResponseBeginBlock message. Does not implicitly {@link tendermint.abci.ResponseBeginBlock.verify|verify} messages.
@@ -39904,7 +39909,7 @@ export namespace tendermint {
       gas_used?: Long | null;
 
       /** ResponseCheckTx events */
-      events?: tendermint.abci.IEvent[] | null;
+      events?: global_tendermint.abci.IEvent[] | null;
 
       /** ResponseCheckTx codespace */
       codespace?: string | null;
@@ -39937,7 +39942,7 @@ export namespace tendermint {
       public gas_used: Long;
 
       /** ResponseCheckTx events. */
-      public events: tendermint.abci.IEvent[];
+      public events: global_tendermint.abci.IEvent[];
 
       /** ResponseCheckTx codespace. */
       public codespace: string;
@@ -40027,7 +40032,7 @@ export namespace tendermint {
       gas_used?: Long | null;
 
       /** ResponseDeliverTx events */
-      events?: tendermint.abci.IEvent[] | null;
+      events?: global_tendermint.abci.IEvent[] | null;
 
       /** ResponseDeliverTx codespace */
       codespace?: string | null;
@@ -40060,7 +40065,7 @@ export namespace tendermint {
       public gas_used: Long;
 
       /** ResponseDeliverTx events. */
-      public events: tendermint.abci.IEvent[];
+      public events: global_tendermint.abci.IEvent[];
 
       /** ResponseDeliverTx codespace. */
       public codespace: string;
@@ -40138,7 +40143,7 @@ export namespace tendermint {
       consensus_param_updates?: tendermint.abci.IConsensusParams | null;
 
       /** ResponseEndBlock events */
-      events?: tendermint.abci.IEvent[] | null;
+      events?: global_tendermint.abci.IEvent[] | null;
     }
 
     /** Represents a ResponseEndBlock. */
@@ -40156,7 +40161,7 @@ export namespace tendermint {
       public consensus_param_updates?: tendermint.abci.IConsensusParams | null;
 
       /** ResponseEndBlock events. */
-      public events: tendermint.abci.IEvent[];
+      public events: global_tendermint.abci.IEvent[];
 
       /**
        * Encodes the specified ResponseEndBlock message. Does not implicitly {@link tendermint.abci.ResponseEndBlock.verify|verify} messages.
@@ -42805,7 +42810,7 @@ export namespace tendermint {
        * Constructs a new BlockID.
        * @param [properties] Properties to set
        */
-      constructor(properties?: tendermint.types.IBlockID);
+      constructor(properties?: global_tendermint.types.IBlockID);
 
       /** BlockID hash. */
       public hash: Uint8Array;
@@ -42819,7 +42824,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encode(message: tendermint.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encode(message: global_tendermint.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Encodes the specified BlockID message, length delimited. Does not implicitly {@link tendermint.types.BlockID.verify|verify} messages.
@@ -42827,7 +42832,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encodeDelimited(message: tendermint.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encodeDelimited(message: global_tendermint.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Decodes a BlockID message from the specified reader or buffer.
@@ -42892,7 +42897,7 @@ export namespace tendermint {
       time?: google.protobuf.ITimestamp | null;
 
       /** Header last_block_id */
-      last_block_id?: tendermint.types.IBlockID | null;
+      last_block_id?: global_tendermint.types.IBlockID | null;
 
       /** Header last_commit_hash */
       last_commit_hash?: Uint8Array | null;
@@ -42943,7 +42948,7 @@ export namespace tendermint {
       public time?: google.protobuf.ITimestamp | null;
 
       /** Header last_block_id. */
-      public last_block_id?: tendermint.types.IBlockID | null;
+      public last_block_id?: global_tendermint.types.IBlockID | null;
 
       /** Header last_commit_hash. */
       public last_commit_hash: Uint8Array;
@@ -43129,7 +43134,7 @@ export namespace tendermint {
       round?: number | null;
 
       /** Vote block_id */
-      block_id?: tendermint.types.IBlockID | null;
+      block_id?: global_tendermint.types.IBlockID | null;
 
       /** Vote timestamp */
       timestamp?: google.protobuf.ITimestamp | null;
@@ -43162,7 +43167,7 @@ export namespace tendermint {
       public round: number;
 
       /** Vote block_id. */
-      public block_id?: tendermint.types.IBlockID | null;
+      public block_id?: global_tendermint.types.IBlockID | null;
 
       /** Vote timestamp. */
       public timestamp?: google.protobuf.ITimestamp | null;
@@ -43249,7 +43254,7 @@ export namespace tendermint {
       round?: number | null;
 
       /** Commit block_id */
-      block_id?: tendermint.types.IBlockID | null;
+      block_id?: global_tendermint.types.IBlockID | null;
 
       /** Commit signatures */
       signatures?: tendermint.types.ICommitSig[] | null;
@@ -43270,7 +43275,7 @@ export namespace tendermint {
       public round: number;
 
       /** Commit block_id. */
-      public block_id?: tendermint.types.IBlockID | null;
+      public block_id?: global_tendermint.types.IBlockID | null;
 
       /** Commit signatures. */
       public signatures: tendermint.types.ICommitSig[];
@@ -43453,7 +43458,7 @@ export namespace tendermint {
       pol_round?: number | null;
 
       /** Proposal block_id */
-      block_id?: tendermint.types.IBlockID | null;
+      block_id?: global_tendermint.types.IBlockID | null;
 
       /** Proposal timestamp */
       timestamp?: google.protobuf.ITimestamp | null;
@@ -43483,7 +43488,7 @@ export namespace tendermint {
       public pol_round: number;
 
       /** Proposal block_id. */
-      public block_id?: tendermint.types.IBlockID | null;
+      public block_id?: global_tendermint.types.IBlockID | null;
 
       /** Proposal timestamp. */
       public timestamp?: google.protobuf.ITimestamp | null;
@@ -43732,7 +43737,7 @@ export namespace tendermint {
     /** Properties of a BlockMeta. */
     interface IBlockMeta {
       /** BlockMeta block_id */
-      block_id?: tendermint.types.IBlockID | null;
+      block_id?: global_tendermint.types.IBlockID | null;
 
       /** BlockMeta block_size */
       block_size?: Long | null;
@@ -43750,10 +43755,10 @@ export namespace tendermint {
        * Constructs a new BlockMeta.
        * @param [properties] Properties to set
        */
-      constructor(properties?: tendermint.types.IBlockMeta);
+      constructor(properties?: global_tendermint.types.IBlockMeta);
 
       /** BlockMeta block_id. */
-      public block_id?: tendermint.types.IBlockID | null;
+      public block_id?: global_tendermint.types.IBlockID | null;
 
       /** BlockMeta block_size. */
       public block_size: Long;
@@ -43770,7 +43775,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encode(message: tendermint.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encode(message: global_tendermint.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Encodes the specified BlockMeta message, length delimited. Does not implicitly {@link tendermint.types.BlockMeta.verify|verify} messages.
@@ -43778,7 +43783,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encodeDelimited(message: tendermint.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encodeDelimited(message: global_tendermint.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Decodes a BlockMeta message from the specified reader or buffer.
@@ -44203,7 +44208,7 @@ export namespace tendermint {
     /** Properties of a ConsensusParams. */
     interface IConsensusParams {
       /** ConsensusParams block */
-      block?: tendermint.types.IBlockParams | null;
+      block?: global_tendermint.types.IBlockParams | null;
 
       /** ConsensusParams evidence */
       evidence?: tendermint.types.IEvidenceParams | null;
@@ -44224,7 +44229,7 @@ export namespace tendermint {
       constructor(properties?: tendermint.types.IConsensusParams);
 
       /** ConsensusParams block. */
-      public block?: tendermint.types.IBlockParams | null;
+      public block?: global_tendermint.types.IBlockParams | null;
 
       /** ConsensusParams evidence. */
       public evidence?: tendermint.types.IEvidenceParams | null;
@@ -44317,7 +44322,7 @@ export namespace tendermint {
        * Constructs a new BlockParams.
        * @param [properties] Properties to set
        */
-      constructor(properties?: tendermint.types.IBlockParams);
+      constructor(properties?: global_tendermint.types.IBlockParams);
 
       /** BlockParams max_bytes. */
       public max_bytes: Long;
@@ -44334,7 +44339,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encode(message: tendermint.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encode(message: global_tendermint.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Encodes the specified BlockParams message, length delimited. Does not implicitly {@link tendermint.types.BlockParams.verify|verify} messages.
@@ -44342,7 +44347,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encodeDelimited(message: tendermint.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encodeDelimited(message: global_tendermint.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Decodes a BlockParams message from the specified reader or buffer.
@@ -44755,7 +44760,7 @@ export namespace tendermint {
        * Constructs a new Block.
        * @param [properties] Properties to set
        */
-      constructor(properties?: tendermint.types.IBlock);
+      constructor(properties?: global_tendermint.types.IBlock);
 
       /** Block header. */
       public header?: tendermint.types.IHeader | null;
@@ -44775,7 +44780,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encode(message: tendermint.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encode(message: global_tendermint.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Encodes the specified Block message, length delimited. Does not implicitly {@link tendermint.types.Block.verify|verify} messages.
@@ -44783,7 +44788,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encodeDelimited(message: tendermint.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encodeDelimited(message: global_tendermint.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Decodes a Block message from the specified reader or buffer.
@@ -45607,7 +45612,7 @@ export namespace tendermint {
       moniker?: string | null;
 
       /** DefaultNodeInfo other */
-      other?: tendermint.p2p.IDefaultNodeInfoOther | null;
+      other?: global_tendermint.p2p.IDefaultNodeInfoOther | null;
     }
 
     /** Represents a DefaultNodeInfo. */
@@ -45616,7 +45621,7 @@ export namespace tendermint {
        * Constructs a new DefaultNodeInfo.
        * @param [properties] Properties to set
        */
-      constructor(properties?: tendermint.p2p.IDefaultNodeInfo);
+      constructor(properties?: global_tendermint.p2p.IDefaultNodeInfo);
 
       /** DefaultNodeInfo protocol_version. */
       public protocol_version?: tendermint.p2p.IProtocolVersion | null;
@@ -45640,7 +45645,7 @@ export namespace tendermint {
       public moniker: string;
 
       /** DefaultNodeInfo other. */
-      public other?: tendermint.p2p.IDefaultNodeInfoOther | null;
+      public other?: global_tendermint.p2p.IDefaultNodeInfoOther | null;
 
       /**
        * Encodes the specified DefaultNodeInfo message. Does not implicitly {@link tendermint.p2p.DefaultNodeInfo.verify|verify} messages.
@@ -45648,7 +45653,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encode(message: tendermint.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encode(message: global_tendermint.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Encodes the specified DefaultNodeInfo message, length delimited. Does not implicitly {@link tendermint.p2p.DefaultNodeInfo.verify|verify} messages.
@@ -45656,7 +45661,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encodeDelimited(message: tendermint.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encodeDelimited(message: global_tendermint.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Decodes a DefaultNodeInfo message from the specified reader or buffer.
@@ -45721,7 +45726,7 @@ export namespace tendermint {
        * Constructs a new DefaultNodeInfoOther.
        * @param [properties] Properties to set
        */
-      constructor(properties?: tendermint.p2p.IDefaultNodeInfoOther);
+      constructor(properties?: global_tendermint.p2p.IDefaultNodeInfoOther);
 
       /** DefaultNodeInfoOther tx_index. */
       public tx_index: string;
@@ -45735,7 +45740,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encode(message: tendermint.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encode(message: global_tendermint.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Encodes the specified DefaultNodeInfoOther message, length delimited. Does not implicitly {@link tendermint.p2p.DefaultNodeInfoOther.verify|verify} messages.
@@ -45743,7 +45748,7 @@ export namespace tendermint {
        * @param [writer] Writer to encode to
        * @returns Writer
        */
-      public static encodeDelimited(message: tendermint.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
+      public static encodeDelimited(message: global_tendermint.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
 
       /**
        * Decodes a DefaultNodeInfoOther message from the specified reader or buffer.

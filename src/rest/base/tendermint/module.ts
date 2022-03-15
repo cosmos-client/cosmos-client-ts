@@ -24,6 +24,23 @@ export async function getLatestValidatorSet(
   );
 }
 
+export async function getValidatorSet(
+  sdk: CosmosSDK,
+  height: bigint,
+  paginationKey?: string,
+  paginationOffset?: bigint,
+  paginationLimit?: bigint,
+  paginationCountTotal?: boolean,
+) {
+  return new ServiceApi(undefined, sdk.url).getValidatorSetByHeight(
+    height.toString(),
+    paginationKey,
+    paginationOffset?.toString(),
+    paginationLimit?.toString(),
+    paginationCountTotal,
+  );
+}
+
 export function getNodeInfo(sdk: CosmosSDK) {
   return new ServiceApi(undefined, sdk.url).getNodeInfo();
 }
