@@ -5,6 +5,7 @@ import * as bech32 from 'bech32';
 import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
 
+/* eslint-disable no-unused-vars */
 declare module '../../proto' {
   namespace cosmos {
     namespace crypto {
@@ -15,9 +16,9 @@ declare module '../../proto' {
     }
   }
 }
+/* eslint-enable */
 
 // PrivKey
-
 cosmos.crypto.secp256k1.PrivKey.prototype.bytes = function () {
   return this.key;
 };
@@ -36,7 +37,6 @@ cosmos.crypto.secp256k1.PrivKey.prototype.pubKey = function () {
 };
 
 // PubKey
-
 cosmos.crypto.secp256k1.PubKey.prototype.bytes = function () {
   return this.key;
 };

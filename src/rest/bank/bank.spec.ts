@@ -12,7 +12,7 @@ describe('bank', () => {
     const pubKey = privKey.pubKey();
     const address = cosmosclient.AccAddress.fromPublicKey(pubKey);
 
-    expect(address.toString()).toStrictEqual('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
+    expect(address.toString()).toBe('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
 
     const fromAddress = address;
     const toAddress = address;
@@ -21,7 +21,7 @@ describe('bank', () => {
     const account = await rest.auth
       .account(sdk, fromAddress)
       .then((res) => res.data.account && cosmosclient.codec.unpackCosmosAny(res.data.account))
-      .catch((_) => undefined);
+      .catch(() => undefined);
 
     if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
       console.log(account);
