@@ -1,6 +1,6 @@
+import { config } from '../../config/';
 import * as bip32 from 'bip32';
 import * as bip39 from 'bip39';
-import { config } from '../../config/';
 
 export type PrivKey = {
   bytes(): Uint8Array;
@@ -12,6 +12,7 @@ export type PubKey = {
   bytes(): Uint8Array;
   verify(msg: Uint8Array, sig: Uint8Array): boolean;
   address(): Uint8Array;
+  accPubkey(): string;
 };
 
 export async function generatePrivKeyFromMnemonic(mnemonic: string) {

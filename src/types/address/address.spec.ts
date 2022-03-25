@@ -1,5 +1,5 @@
-import * as crypto from 'crypto';
 import { proto, cosmosclient } from '../..';
+import * as crypto from 'crypto';
 
 describe('address', () => {
   it('ed25519', () => {
@@ -50,8 +50,8 @@ describe('address', () => {
 
     console.log(address2.toString());
 
-    expect(address1.toString()).toStrictEqual('cosmos1aqt94lggum9v9xhuyppaawtjwra76mj8mjdgm5');
-    expect(address2.toString()).toStrictEqual('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
+    expect(address1.toString()).toBe('cosmos1aqt94lggum9v9xhuyppaawtjwra76mj8mjdgm5');
+    expect(address2.toString()).toBe('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
   });
 
   it('convert', async () => {
