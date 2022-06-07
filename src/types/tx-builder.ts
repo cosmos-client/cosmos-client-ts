@@ -59,18 +59,18 @@ export class TxBuilder {
   }
 
   cosmosJSONStringify(space?: number) {
-    return JSON.stringify(canonicalizeJSON(this.packCosmosAny()), undefined, space);
+    return JSON.stringify(this.canonicalizeJSON(this.packCosmosAny()), undefined, space);
   }
-  
+
   canonicalizeJSON(value: any): any {
-    if (Object.prototype.toString.call(value) === "[object Object]") {
+    if (Object.prototype.toString.call(value) === '[object Object]') {
       const sorted = {} as { [key: string]: any };
       const keys = Object.keys(value).sort();
 
       for (const key of keys) {
         const keyValue = value[key];
         if (keyValue != null) {
-          sorted[key] = canonicalizeJSON(keyValue);
+          sorted[key] = this.canonicalizeJSON(keyValue);
         }
       }
 
@@ -78,7 +78,7 @@ export class TxBuilder {
     }
 
     if (Array.isArray(value)) {
-      return value.map(canonicalizeJSON);
+      return value.map((element) => this.canonicalizeJSON(element));
     }
 
     return value === undefined ? null : value;
