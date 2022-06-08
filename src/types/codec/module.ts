@@ -3,51 +3,62 @@ import { google } from '../../proto';
 import Long from 'long';
 import * as $protobuf from 'protobufjs';
 
-export function register(
-  type: string,
-  constructor: Function & { encode(value: any): $protobuf.Writer; decode(value: Uint8Array): unknown; fromObject(object: any): any },
-) {
+export type protoMessage = Function & {
+  encode(value: any): $protobuf.Writer;
+  decode(value: Uint8Array): unknown;
+  fromObject(object: any): any;
+  toObject(object: any, option?: any): any;
+};
+
+export function register(type: string, constructor: protoMessage) {
   config.codecMaps.inv.set(constructor, type);
-  config.codecMaps.encode[type] = constructor.encode;
-  config.codecMaps.decode[type] = constructor.decode;
-  config.codecMaps.fromObject[type] = constructor.fromObject;
+  config.codecMaps.constructor[type] = constructor;
 }
 
 /**
- * CosmosAny -> Instance
+ * ProtoJSON -> Instance
  * @param value
  * @returns
  */
-export function unpackCosmosAny(value: any) {
+export function protoJSONToInstance(value: any) {
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = packAnyFromCosmosJSON(value[key]);
+    newValue[key] = protoJSONToProtoAny(value[key]);
   }
 
   const typeURL = value && value['@type'];
 
-  if (!typeURL || !config.codecMaps.fromObject[typeURL]) {
+  if (!typeURL || !config.codecMaps.constructor[typeURL]) {
     return newValue;
   }
 
-  return config.codecMaps.fromObject[typeURL](newValue);
+  return config.codecMaps.constructor[typeURL].fromObject(newValue);
 }
 
 /**
- * Instance -> CosmosAny
+ * Instance -> ProtoJSON
  * @param value
  * @returns
  */
-export function packCosmosAny(value: any): Object {
+export function instanceToProtoJSON(value: any): Object {
   if (value instanceof Array) {
-    return value.map((v) => packCosmosAny(v));
+    return value.map((v) => instanceToProtoJSON(v));
   }
   if (value instanceof Uint8Array) {
     return Buffer.from(value).toString('base64');
   }
   if (value instanceof google.protobuf.Any) {
-    return packCosmosAny(unpackAny(value));
+    const instance = protoAnyToInstance(value) as any;
+    const constructor = instance?.constructor;
+    const typeURL = constructor && config.codecMaps.inv.get(constructor);
+
+    const ret: { [key: string]: any } = { '@type': typeURL, ...instanceToProtoJSON(instance) };
+    if (!typeURL) {
+      delete ret['@type'];
+    }
+
+    return ret;
   }
   if (value instanceof google.protobuf.Timestamp) {
     return jsDateToGoTimeString(protobufTimestampToJsDate(value));
@@ -59,19 +70,15 @@ export function packCosmosAny(value: any): Object {
     return value;
   }
 
+  const prototype = value?.constructor?.prototype;
+  const keys = prototype ? Object.keys(prototype) : Object.keys(value);
+
   const newValue: { [key: string]: any } = {};
 
-  const constructor = value?.constructor;
-  const typeURL = constructor && config.codecMaps.inv.get(constructor);
-
-  if (typeURL) {
-    newValue['@type'] = typeURL;
-  }
-
-  for (const key in value) {
+  for (const key of keys) {
     const v = value[key];
-    if (typeof v !== 'function') {
-      newValue[key] = packCosmosAny(v);
+    if (v != null && typeof v !== 'function') {
+      newValue[key] = instanceToProtoJSON(v);
     }
   }
 
@@ -79,33 +86,33 @@ export function packCosmosAny(value: any): Object {
 }
 
 /**
- * CosmosAny -> Any
+ * ProtoJSON -> ProtoAny
  * @param value
  */
-export function packAnyFromCosmosJSON(value: any) {
+export function protoJSONToProtoAny(value: any) {
   const typeURL = value && value['@type'];
 
-  if (!typeURL || !config.codecMaps.fromObject[typeURL]) {
+  if (!typeURL || !config.codecMaps.constructor[typeURL]) {
     return value;
   }
 
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = packAnyFromCosmosJSON(value[key]);
+    newValue[key] = protoJSONToInstance(value[key]);
   }
 
   return new google.protobuf.Any({
     type_url: typeURL,
-    value: config.codecMaps.encode[typeURL](config.codecMaps.fromObject[typeURL](newValue)).finish(),
+    value: config.codecMaps.constructor[typeURL].encode(config.codecMaps.constructor[typeURL].fromObject(newValue)).finish(),
   });
 }
 
 /**
- * Any -> Instance
+ * ProtoAny -> Instance
  * @param value
  */
-export function unpackAny(value?: google.protobuf.IAny | null) {
+export function protoAnyToInstance(value?: google.protobuf.IAny | null) {
   if (!value) {
     throw Error("Object 'value' is undefined");
   }
@@ -115,15 +122,15 @@ export function unpackAny(value?: google.protobuf.IAny | null) {
   if (!value.value) {
     throw Error("The field 'value' is undefined");
   }
-  return config.codecMaps.decode[value.type_url](value.value);
+  return config.codecMaps.constructor[value.type_url].decode(value.value);
 }
 
 /**
- * Instance -> Any
+ * Instance -> ProtoAny
  * @param value
  * @returns
  */
-export function packAny(value: any) {
+export function instanceToProtoAny(value: any) {
   const constructor = value?.constructor;
 
   if (!constructor) {
@@ -179,4 +186,26 @@ export function jsDateToProtobufTimestamp(jsDate: Date): google.protobuf.Timesta
 
 export function protobufTimestampToJsDate(protobufTimestamp: google.protobuf.Timestamp): Date {
   return new Date(protobufTimestamp.seconds.toNumber() * 1000);
+}
+
+export function canonicalizeJSON(value: any): any {
+  if (Object.prototype.toString.call(value) === '[object Object]') {
+    const sorted = {} as { [key: string]: any };
+    const keys = Object.keys(value).sort();
+
+    for (const key of keys) {
+      const keyValue = value[key];
+      if (keyValue != null) {
+        sorted[key] = canonicalizeJSON(keyValue);
+      }
+    }
+
+    return sorted;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((element) => canonicalizeJSON(element));
+  }
+
+  return value === undefined ? null : value;
 }
