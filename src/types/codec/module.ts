@@ -10,9 +10,13 @@ export type protoMessage = Function & {
   toObject(object: any, option?: any): any;
 };
 
-export function register(type: string, constructor: protoMessage) {
-  config.codecMaps.inv.set(constructor, type);
-  config.codecMaps.constructor[type] = constructor;
+export function register(typeURL: string, constructor: protoMessage) {
+  config.codecMaps.constructor[typeURL] = constructor;
+  config.codecMaps.inv.set(constructor, typeURL);
+}
+
+export function registerConvertJSON(constructor: protoMessage, converter: (value: any) => any) {
+  config.codecMaps.convertJSON.set(constructor, converter);
 }
 
 /**
@@ -70,7 +74,8 @@ export function instanceToProtoJSON(value: any): Object {
     return value;
   }
 
-  const prototype = value?.constructor?.prototype;
+  const constructor = value?.constructor;
+  const prototype = constructor?.prototype;
   const keys = prototype ? Object.keys(prototype) : Object.keys(value);
 
   const newValue: { [key: string]: any } = {};
@@ -80,6 +85,11 @@ export function instanceToProtoJSON(value: any): Object {
     if (v != null && typeof v !== 'function') {
       newValue[key] = instanceToProtoJSON(v);
     }
+  }
+
+  const converter = constructor && config.codecMaps.convertJSON.get(constructor);
+  if (converter) {
+    return converter(newValue);
   }
 
   return newValue;
