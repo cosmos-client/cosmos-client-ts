@@ -58,7 +58,7 @@ export function instanceToProtoJSON(value: unknown): unknown {
   if (value instanceof google.protobuf.Timestamp) {
     return jsDateToGoTimeString(protobufTimestampToJsDate(value));
   }
-  if (value instanceof Long) {
+  if (Long.isLong(value)) {
     return value.toString();
   }
   if (typeof value !== 'object') {
