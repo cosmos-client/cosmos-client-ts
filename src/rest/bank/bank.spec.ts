@@ -20,7 +20,7 @@ describe('bank', () => {
     // get account info
     const account = await rest.auth
       .account(sdk, fromAddress)
-      .then((res) => res.data.account && cosmosclient.codec.protoJSONToInstance(res.data.account as { '@type': string }))
+      .then((res) => cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(res.data.account)))
       .catch(() => undefined);
 
     if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
