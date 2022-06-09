@@ -10,30 +10,13 @@ export type protoMessage = Function & {
   toObject(object: any, option?: any): any;
 };
 
-export function register(type: string, constructor: protoMessage) {
-  config.codecMaps.inv.set(constructor, type);
-  config.codecMaps.constructor[type] = constructor;
+export function register(typeURL: string, constructor: protoMessage) {
+  config.codecMaps.constructor[typeURL] = constructor;
+  config.codecMaps.inv.set(constructor, typeURL);
 }
 
-/**
- * ProtoJSON -> Instance
- * @param value
- * @returns
- */
-export function protoJSONToInstance(value: any) {
-  const newValue: { [key: string]: any } = {};
-
-  for (const key in value) {
-    newValue[key] = protoJSONToProtoAny(value[key]);
-  }
-
-  const typeURL = value && value['@type'];
-
-  if (!typeURL || !config.codecMaps.constructor[typeURL]) {
-    return newValue;
-  }
-
-  return config.codecMaps.constructor[typeURL].fromObject(newValue);
+export function registerConvertJSON(constructor: protoMessage, converter: (value: any) => any) {
+  config.codecMaps.convertJSON.set(constructor, converter);
 }
 
 /**
@@ -41,7 +24,7 @@ export function protoJSONToInstance(value: any) {
  * @param value
  * @returns
  */
-export function instanceToProtoJSON(value: any): Object {
+export function instanceToProtoJSON(value: { [key: string]: any }): Object {
   if (value instanceof Array) {
     return value.map((v) => instanceToProtoJSON(v));
   }
@@ -49,7 +32,7 @@ export function instanceToProtoJSON(value: any): Object {
     return Buffer.from(value).toString('base64');
   }
   if (value instanceof google.protobuf.Any) {
-    const instance = protoAnyToInstance(value) as any;
+    const instance = protoAnyToInstance(value) as { constructor: protoMessage };
     const constructor = instance?.constructor;
     const typeURL = constructor && config.codecMaps.inv.get(constructor);
 
@@ -70,16 +53,24 @@ export function instanceToProtoJSON(value: any): Object {
     return value;
   }
 
-  const prototype = value?.constructor?.prototype;
+  const constructor = value?.constructor as protoMessage;
+  const prototype = constructor?.prototype;
   const keys = prototype ? Object.keys(prototype) : Object.keys(value);
 
   const newValue: { [key: string]: any } = {};
 
   for (const key of keys) {
     const v = value[key];
-    if (v != null && typeof v !== 'function') {
-      newValue[key] = instanceToProtoJSON(v);
+    if (v == null || typeof v === 'function') {
+      continue;
     }
+
+    newValue[key] = instanceToProtoJSON(v);
+  }
+
+  const converter = constructor && config.codecMaps.convertJSON.get(constructor);
+  if (converter) {
+    return converter(newValue);
   }
 
   return newValue;
@@ -89,23 +80,58 @@ export function instanceToProtoJSON(value: any): Object {
  * ProtoJSON -> ProtoAny
  * @param value
  */
-export function protoJSONToProtoAny(value: any) {
-  const typeURL = value && value['@type'];
-
-  if (!typeURL || !config.codecMaps.constructor[typeURL]) {
-    return value;
+export function protoJSONToProtoAny(value: { [key: string]: any } & { '@type': string }) {
+  const typeURL = value?.['@type'];
+  if (!typeURL) {
+    throw Error("This object doesn't have information of type");
+  }
+  if (!config.codecMaps.constructor[typeURL]) {
+    throw Error('This type is not registered');
   }
 
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    newValue[key] = protoJSONToInstance(value[key]);
+    const typeURL = value[key]['@type'];
+    if (typeURL) {
+      newValue[key] = protoJSONToInstance(value[key]);
+    } else {
+      newValue[key] = value[key];
+    }
   }
 
   return new google.protobuf.Any({
     type_url: typeURL,
     value: config.codecMaps.constructor[typeURL].encode(config.codecMaps.constructor[typeURL].fromObject(newValue)).finish(),
   });
+}
+
+/**
+ * ProtoJSON -> Instance
+ * @param value
+ * @returns
+ */
+export function protoJSONToInstance(value: { [key: string]: any } & { '@type': string }) {
+  const typeURL = value?.['@type'];
+  if (!typeURL) {
+    throw Error("This object doesn't have information of type");
+  }
+  if (!config.codecMaps.constructor[typeURL]) {
+    throw Error('This type is not registered');
+  }
+
+  const newValue: { [key: string]: any } = {};
+
+  for (const key in value) {
+    const typeURL = value[key]['@type'];
+    if (typeURL) {
+      newValue[key] = protoJSONToProtoAny(value[key]);
+    } else {
+      newValue[key] = value[key];
+    }
+  }
+
+  return config.codecMaps.constructor[typeURL].fromObject(newValue);
 }
 
 /**
@@ -130,8 +156,8 @@ export function protoAnyToInstance(value?: google.protobuf.IAny | null) {
  * @param value
  * @returns
  */
-export function instanceToProtoAny(value: any) {
-  const constructor = value?.constructor;
+export function instanceToProtoAny(value: { constructor: Function }) {
+  const constructor = value?.constructor as protoMessage;
 
   if (!constructor) {
     throw Error("The field 'constructor' is undefined");
