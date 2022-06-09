@@ -76,7 +76,7 @@ export function instanceToProtoJSON(value: unknown): unknown {
 
   for (const key of keys) {
     const v: unknown = (value as { [key: string]: unknown })[key];
-    if (typeof v === 'function') {
+    if (v == null || typeof v === 'function') {
       continue;
     }
 
