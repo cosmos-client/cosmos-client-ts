@@ -1,7 +1,7 @@
 import { cosmosclient } from '../..';
 
 describe('sdk', () => {
-  it('sdk', async () => {
+  it('multisig', async () => {
     expect.hasAssertions();
     const json = `
     {
