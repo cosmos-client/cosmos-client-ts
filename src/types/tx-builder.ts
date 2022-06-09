@@ -47,18 +47,20 @@ export class TxBuilder {
     return Buffer.from(bytes).toString('base64');
   }
 
-  packCosmosAny() {
+  toProtoJSON() {
     const body = cosmos.tx.v1beta1.TxBody.decode(this.txRaw.body_bytes);
     const authInfo = cosmos.tx.v1beta1.AuthInfo.decode(this.txRaw.auth_info_bytes);
 
-    return codec.packCosmosAny({
-      body,
-      auth_info: authInfo,
-      signatures: this.txRaw.signatures,
-    });
+    return codec.instanceToProtoJSON(
+      new cosmos.tx.v1beta1.Tx({
+        body,
+        auth_info: authInfo,
+        signatures: this.txRaw.signatures,
+      }),
+    );
   }
 
-  cosmosJSONStringify(space?: number) {
-    return JSON.stringify(this.packCosmosAny(), undefined, space);
+  protoJSONStringify(space?: number) {
+    return JSON.stringify(this.toProtoJSON(), undefined, space);
   }
 }
