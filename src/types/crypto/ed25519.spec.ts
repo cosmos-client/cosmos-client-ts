@@ -14,8 +14,8 @@ describe('ed25519', () => {
       '@type': '/cosmos.crypto.ed25519.PrivKey',
       key: 'vGqFxQ10qeP98qJ/mdpcJpPTkc6uqI0dr9x6L9AFSEMKomyxKj5rctJAcqBtuov8pMt4QJk78lzeWuxBxj/Y+g==',
     };
-    const publicKeyUnpack = cosmosclient.codec.unpackCosmosAny(pub_key) as cosmosclient.PubKey;
-    const privateKeyUnpack = cosmosclient.codec.unpackCosmosAny(priv_key) as cosmosclient.PrivKey;
+    const publicKeyUnpack = cosmosclient.codec.protoJSONToInstance(pub_key) as cosmosclient.PubKey;
+    const privateKeyUnpack = cosmosclient.codec.protoJSONToInstance(priv_key) as cosmosclient.PrivKey;
 
     //check1 (encoded public key from packed pubkey vs packed privkey )
     expect(publicKeyUnpack.accPubkey()).toBe(privateKeyUnpack.pubKey().accPubkey());
@@ -43,8 +43,8 @@ describe('ed25519', () => {
       '@type': '/cosmos.crypto.ed25519.PrivKey',
       key: 'Q7RecOq++QctQfKXqBOnrvMIT81sC8KaIE+HY+ZfsOn6rx1S1h6mlrfJx0oUhzUOX061UttNWVegGmaw47injQ==',
     };
-    const publicKeyUnpack = cosmosclient.codec.unpackCosmosAny(pub_key) as cosmosclient.PubKey;
-    const privateKeyUnpack = cosmosclient.codec.unpackCosmosAny(priv_key) as cosmosclient.PrivKey;
+    const publicKeyUnpack = cosmosclient.codec.protoJSONToInstance(pub_key) as cosmosclient.PubKey;
+    const privateKeyUnpack = cosmosclient.codec.protoJSONToInstance(priv_key) as cosmosclient.PrivKey;
 
     //check1 (encoded public key from packed pubkey vs packed privkey )
     expect(publicKeyUnpack.accPubkey()).toBe(privateKeyUnpack.pubKey().accPubkey());

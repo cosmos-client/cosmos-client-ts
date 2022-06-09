@@ -31,20 +31,19 @@ describe('secp256k1', () => {
     expect.hasAssertions();
 
     //packed publickey from gaia CLI
-    const pubKeyCLI =
-    {
-      "@type": "/cosmos.crypto.secp256k1.PubKey",
-      "key": "A8Pj5Q8u3hShw3+oFc4nGrZvKl4avTDHW1m9GiI1fm5x"
-    }
-    const publicKeyCLI = cosmosclient.codec.unpackCosmosAny(pubKeyCLI) as cosmosclient.PubKey;
+    const pubKeyCLI = {
+      '@type': '/cosmos.crypto.secp256k1.PubKey',
+      key: 'A8Pj5Q8u3hShw3+oFc4nGrZvKl4avTDHW1m9GiI1fm5x',
+    };
+    const publicKeyCLI = cosmosclient.codec.protoJSONToInstance(pubKeyCLI) as cosmosclient.PubKey;
 
     //publickey from mnemonic
     const mnemonic =
-      "joy furnace inject spot engine source alpha turn east visa abstract cousin shell express weasel math perfect tiger quality camp mansion desert web jaguar"
+      'joy furnace inject spot engine source alpha turn east visa abstract cousin shell express weasel math perfect tiger quality camp mansion desert web jaguar';
     const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
     });
-    const pubkey = privKey.pubKey()
+    const pubkey = privKey.pubKey();
 
     //check (encoded publickey from pack vs mnemonic )
     expect(pubkey.accPubkey()).toBe(publicKeyCLI.accPubkey());

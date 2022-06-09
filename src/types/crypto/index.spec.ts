@@ -1,7 +1,7 @@
 import { cosmosclient } from '../..';
 
 describe('sdk', () => {
-  it('sdk', async () => {
+  it('multisig', async () => {
     expect.hasAssertions();
     const json = `
     {
@@ -46,7 +46,7 @@ describe('sdk', () => {
     }
 `;
     const obj = JSON.parse(json);
-    const unpacked = cosmosclient.codec.unpackCosmosAny(obj);
+    const unpacked = cosmosclient.codec.protoJSONToInstance(obj);
 
     console.log(unpacked);
 

@@ -1,8 +1,7 @@
-import * as $protobuf from 'protobufjs';
+import { protoMessage } from './module';
 
 export const codecMaps = {
-  inv: new Map<Function, string>(),
-  encode: {} as { [type: string]: (value: any) => $protobuf.Writer },
-  decode: {} as { [type: string]: (value: Uint8Array) => unknown },
-  fromObject: {} as { [type: string]: (value: any) => unknown },
+  constructor: {} as { [type: string]: protoMessage },
+  inv: new Map<protoMessage, string>(),
+  convertJSON: new Map<protoMessage, (value: any) => any>(),
 };

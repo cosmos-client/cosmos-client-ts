@@ -4,7 +4,7 @@ import { goTimeStringToJsDate, jsDateToGoTimeString, jsDateToProtobufTimestamp, 
 import Long from 'long';
 
 describe('codec', () => {
-  it('cosmosJSONStringify', async () => {
+  it('txBuilder', async () => {
     expect.hasAssertions();
 
     const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
@@ -28,12 +28,12 @@ describe('codec', () => {
     });
 
     const txBody = new proto.cosmos.tx.v1beta1.TxBody({
-      messages: [cosmosclient.codec.packAny(msgSend)],
+      messages: [cosmosclient.codec.instanceToProtoAny(msgSend)],
     });
     const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
-          public_key: cosmosclient.codec.packAny(pubKey),
+          public_key: cosmosclient.codec.instanceToProtoAny(pubKey),
           mode_info: {
             single: {
               mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
@@ -53,11 +53,34 @@ describe('codec', () => {
     txBuilder.addSignature(privKey.sign(signDocBytes));
 
     // broadcast
-    const json = txBuilder.cosmosJSONStringify(2);
+    const json = txBuilder.protoJSONStringify(2);
     console.log(json);
+
+    expect(true).toBeTruthy();
   });
 
-  it('unpackAny', () => {
+  it('protoJSONStringify', () => {
+    expect.hasAssertions();
+
+    const account = {
+      '@type': '/cosmos.auth.v1beta1.BaseAccount',
+      address: 'jpyx10lcj22kzftvnduchatmnsnhfljeky5ghd398wt',
+      account_number: '0',
+      pub_key: { '@type': '/cosmos.crypto.secp256k1.PubKey', key: 'AvSf2U/B23UZKvLTD0E4xqJ33Nn0Z552nXCkkwEfleiu' },
+      sequence: '13',
+    };
+
+    const unpacked = cosmosclient.codec.protoJSONToInstance(account);
+    if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+      throw Error('');
+    }
+    const json = cosmosclient.codec.instanceToProtoJSON(unpacked);
+    console.log(json);
+
+    expect(true).toBeTruthy();
+  });
+
+  it('protoJSONToInstance', () => {
     expect.hasAssertions();
     const res = {
       data: {
@@ -111,14 +134,14 @@ describe('codec', () => {
       },
     };
 
-    const unpacked = cosmosclient.codec.unpackCosmosAny(res.data.account);
+    const unpacked = cosmosclient.codec.protoJSONToInstance(res.data.account);
     if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
 
     console.log(unpacked);
 
-    const key = cosmosclient.codec.unpackAny(unpacked.pub_key);
+    const key = cosmosclient.codec.protoAnyToInstance(unpacked.pub_key);
     console.log(key);
 
     expect(true).toBeTruthy();

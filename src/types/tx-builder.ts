@@ -47,40 +47,20 @@ export class TxBuilder {
     return Buffer.from(bytes).toString('base64');
   }
 
-  packCosmosAny() {
+  toProtoJSON() {
     const body = cosmos.tx.v1beta1.TxBody.decode(this.txRaw.body_bytes);
     const authInfo = cosmos.tx.v1beta1.AuthInfo.decode(this.txRaw.auth_info_bytes);
 
-    return codec.packCosmosAny({
-      body,
-      auth_info: authInfo,
-      signatures: this.txRaw.signatures,
-    });
+    return codec.instanceToProtoJSON(
+      new cosmos.tx.v1beta1.Tx({
+        body,
+        auth_info: authInfo,
+        signatures: this.txRaw.signatures,
+      }),
+    );
   }
 
-  cosmosJSONStringify(space?: number) {
-    return JSON.stringify(this.canonicalizeJSON(this.packCosmosAny()), undefined, space);
-  }
-
-  canonicalizeJSON(value: any): any {
-    if (Object.prototype.toString.call(value) === '[object Object]') {
-      const sorted = {} as { [key: string]: any };
-      const keys = Object.keys(value).sort();
-
-      for (const key of keys) {
-        const keyValue = value[key];
-        if (keyValue != null) {
-          sorted[key] = this.canonicalizeJSON(keyValue);
-        }
-      }
-
-      return sorted;
-    }
-
-    if (Array.isArray(value)) {
-      return value.map((element) => this.canonicalizeJSON(element));
-    }
-
-    return value === undefined ? null : value;
+  protoJSONStringify(space?: number) {
+    return JSON.stringify(this.toProtoJSON(), undefined, space);
   }
 }
