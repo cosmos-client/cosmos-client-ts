@@ -92,7 +92,7 @@ export function protoJSONToProtoAny(value: { [key: string]: any } & { '@type': s
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    const typeURL = value[key]['@type'];
+    const typeURL = value[key]?.['@type'];
     if (typeURL) {
       newValue[key] = protoJSONToInstance(value[key]);
     } else {
@@ -123,7 +123,7 @@ export function protoJSONToInstance(value: { [key: string]: any } & { '@type': s
   const newValue: { [key: string]: any } = {};
 
   for (const key in value) {
-    const typeURL = value[key]['@type'];
+    const typeURL = value[key]?.['@type'];
     if (typeURL) {
       newValue[key] = protoJSONToProtoAny(value[key]);
     } else {
