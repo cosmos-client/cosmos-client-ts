@@ -39,11 +39,11 @@ describe('codec', () => {
               mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
             },
           },
-          sequence: cosmosclient.Long.fromNumber(0),
+          sequence: Long.fromNumber(0),
         },
       ],
       fee: {
-        gas_limit: cosmosclient.Long.fromString('200000'),
+        gas_limit: Long.fromString('200000'),
       },
     });
 

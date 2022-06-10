@@ -1,4 +1,5 @@
 import { cosmosclient, proto, rest } from '../..';
+import Long from 'long';
 
 describe('bank', () => {
   it('send', async () => {
@@ -51,7 +52,7 @@ describe('bank', () => {
         },
       ],
       fee: {
-        gas_limit: cosmosclient.Long.fromString('200000'),
+        gas_limit: Long.fromString('200000'),
       },
     });
 
