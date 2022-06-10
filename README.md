@@ -27,6 +27,7 @@ The package name `cosmos-client` is deprecated. Please use `@cosmos-client/core`
 
 ```typescript
 import { cosmosclient, proto, rest } from '@cosmos-client/core';
+import Long from 'long';
 
 describe('bank', () => {
   it('send', async () => {
@@ -79,7 +80,7 @@ describe('bank', () => {
         },
       ],
       fee: {
-        gas_limit: cosmosclient.Long.fromString('200000'),
+        gas_limit: Long.fromString('200000'),
       },
     });
 
