@@ -99,20 +99,32 @@ describe('bank', () => {
     expect(res.data.tx_response?.raw_log?.match('failed')).toBeFalsy();
   });
 });
+```
 
+## For frontend developers
+
+In something like `polyfill.ts` in Angular (of course something like that in other frontend frameworks), don't forget to input this statement.
+If there isn't this statement, the outcome of serializing JSON of instances including `Long` type field will be wrong.
+
+```typescript
+import Long from 'long';
+import * as $protobuf from 'protobufjs/minimal';
+
+$protobuf.util.Long = Long;
+$protobuf.configure();
 ```
 
 ## For library developlers
 
 Install Protocol Buffer Compiler
 
-```
+```shell
 sudo apt -y install protobuf-compiler
 ```
 
 or
 
-```
+```shell
 brew install protobuf 
 ```
 
