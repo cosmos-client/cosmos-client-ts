@@ -91,35 +91,17 @@ export function instanceToProtoJSON(value: unknown): unknown {
   return newValue;
 }
 
-/**
- * ProtoJSON -> ProtoAny
- * @param value
- */
-export function protoJSONToProtoAny(value: ProtoJSONOfProtoAny) {
-  const typeURL = value?.['@type'];
-  if (!typeURL) {
-    throw Error("This object doesn't have information of type");
-  }
-  if (!config.codecMaps.constructor[typeURL]) {
-    throw Error('This type is not registered');
-  }
-
-  const newValue: { [key: string]: unknown } = {};
-
-  for (const [key, _v] of Object.entries(value)) {
-    const v: unknown = _v;
-
-    if (isProtoJSONOfProtoAny(v)) {
-      newValue[key] = protoJSONToInstance(v);
-    } else {
-      newValue[key] = v;
+function protoJSONArrayToInstance<T>(value: ProtoJSONOfProtoAny[]): T[] | Error {
+  const array: T[] = [];
+  for (const v of value) {
+    const instance = protoJSONToInstance<T>(v);
+    if (instance instanceof Error) {
+      return instance;
     }
+    array.push(instance);
   }
 
-  return new google.protobuf.Any({
-    type_url: typeURL,
-    value: config.codecMaps.constructor[typeURL].encode(config.codecMaps.constructor[typeURL].fromObject(newValue)).finish(),
-  });
+  return array;
 }
 
 /**
@@ -127,9 +109,17 @@ export function protoJSONToProtoAny(value: ProtoJSONOfProtoAny) {
  * @param value
  * @returns
  */
-export function protoJSONToInstance<T>(value: ProtoJSONOfProtoAny | null | undefined): T | ProtoJSONOfProtoAny | null | undefined {
+export function protoJSONToInstance<T>(value: ProtoJSONOfProtoAny | null | undefined): T | Error {
   if (value == null) {
-    return value;
+    return Error('Entered value is null or undefined');
+  }
+
+  const typeURL = value['@type'];
+  if (!typeURL) {
+    return Error("This object doesn't have information of type");
+  }
+  if (!config.codecMaps.constructor[typeURL]) {
+    return Error(`This type is not registered: ${typeURL}}`);
   }
 
   const newValue: { [key: string]: unknown } = {};
@@ -137,18 +127,21 @@ export function protoJSONToInstance<T>(value: ProtoJSONOfProtoAny | null | undef
   for (const [key, _v] of Object.entries(value)) {
     const v: unknown = _v;
 
-    if (isProtoJSONOfProtoAny(v)) {
-      newValue[key] = protoJSONToProtoAny(v);
+    if (v instanceof Array) {
+      const array = protoJSONArrayToInstance(v);
+      if (array instanceof Error) {
+        return array;
+      }
+      newValue[key] = array.map((instance) => instanceToProtoAny(instance as any));
+    } else if (isProtoJSONOfProtoAny(v)) {
+      const instance = protoJSONToInstance<T>(v);
+      if (instance instanceof Error) {
+        return instance;
+      }
+      newValue[key] = instanceToProtoAny(instance);
     } else {
       newValue[key] = v;
     }
-  }
-  const typeURL = value?.['@type'];
-  if (!typeURL || !config.codecMaps.constructor[typeURL]) {
-    return {
-      '@type': typeURL,
-      ...newValue,
-    };
   }
 
   return config.codecMaps.constructor[typeURL].fromObject(newValue);
@@ -185,7 +178,7 @@ export function instanceToProtoAny(value: { constructor: Function }) {
 
   const typeURL = constructor && config.codecMaps.inv.get(constructor);
   if (!typeURL) {
-    throw Error('This type is not registered');
+    throw Error(`This type is not registered: ${typeURL}`);
   }
 
   const packed = new google.protobuf.Any({

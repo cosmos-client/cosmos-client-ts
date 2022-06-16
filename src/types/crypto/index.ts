@@ -1,6 +1,7 @@
 import { cosmos } from '../../proto';
 import { codec } from '../codec';
 import './ed25519';
+import './multisig';
 import './secp256k1';
 
 export * from './key';
