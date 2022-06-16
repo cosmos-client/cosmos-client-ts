@@ -19,6 +19,9 @@ function encodeUvarint(value: number) {
   if (!Number.isInteger(value)) {
     throw Error('Not integer');
   }
+  if (value < 0) {
+    throw Error('The value must be unsigned');
+  }
   if (value > 127) {
     throw Error('The value greater than 127 is not supported');
   }
