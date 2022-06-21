@@ -135,7 +135,7 @@ The third digit patch version can be independently incremented.
 
 ### for `proto.d.ts` error
 
-Insert:
+Add the following line to the end of the proto.d.ts file and replace tendermint with global_tendermint at the error points.
 
 ```typescript
 import global_tendermint = tendermint;
