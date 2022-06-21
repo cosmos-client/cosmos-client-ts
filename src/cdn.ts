@@ -1,8 +1,5 @@
-import { cosmosclient, proto, rest, websocket } from '.';
+import cosmosclient from '.';
+import Long from 'long';
 
-(window as any).Long = (window as any).cosmosclient = {
-  ...cosmosclient,
-  proto,
-  rest,
-  websocket,
-};
+(window as any).Long = Long;
+(window as any).cosmosclient = cosmosclient;

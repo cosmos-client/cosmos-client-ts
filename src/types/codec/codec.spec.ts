@@ -1,4 +1,4 @@
-import { proto, cosmosclient } from '../..';
+import cosmosclient from '../..';
 import { google } from '../../proto';
 import { goTimeStringToJsDate, jsDateToGoTimeString, jsDateToProtobufTimestamp, protobufTimestampToJsDate } from './module';
 import Long from 'long';
@@ -9,7 +9,7 @@ describe('codec', () => {
 
     const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
 
-    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
     });
     const pubKey = privKey.pubKey();
@@ -21,22 +21,22 @@ describe('codec', () => {
     const toAddress = address;
 
     // build tx
-    const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+    const msgSend = new cosmosclient.proto.cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
       amount: [{ denom: 'token', amount: '1' }],
     });
 
-    const txBody = new proto.cosmos.tx.v1beta1.TxBody({
+    const txBody = new cosmosclient.proto.cosmos.tx.v1beta1.TxBody({
       messages: [cosmosclient.codec.instanceToProtoAny(msgSend)],
     });
-    const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
+    const authInfo = new cosmosclient.proto.cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
           public_key: cosmosclient.codec.instanceToProtoAny(pubKey),
           mode_info: {
             single: {
-              mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+              mode: cosmosclient.proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
             },
           },
           sequence: Long.fromNumber(0),
@@ -71,7 +71,7 @@ describe('codec', () => {
     };
 
     const unpacked = cosmosclient.codec.protoJSONToInstance(account);
-    if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(unpacked instanceof cosmosclient.proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
     const json = cosmosclient.codec.instanceToProtoJSON(unpacked);
@@ -135,7 +135,7 @@ describe('codec', () => {
     };
 
     const unpacked = cosmosclient.codec.protoJSONToInstance(res.data.account);
-    if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(unpacked instanceof cosmosclient.proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
 

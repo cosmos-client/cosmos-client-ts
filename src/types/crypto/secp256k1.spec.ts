@@ -1,4 +1,4 @@
-import { proto, cosmosclient } from '../..';
+import cosmosclient from '../..';
 import { setBech32Prefix } from './../address/config';
 import * as crypto from 'crypto';
 import * as secp256k1 from 'secp256k1';
@@ -7,7 +7,7 @@ describe('secp256k1', () => {
   it('verify', () => {
     expect.hasAssertions();
     const bytes = crypto.randomBytes(32);
-    const key = new proto.cosmos.crypto.secp256k1.PrivKey({ key: bytes });
+    const key = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({ key: bytes });
     const pubkey = key.pubKey();
     const address = cosmosclient.AccAddress.fromPublicKey(pubkey);
     const str = address.toString();
@@ -40,7 +40,7 @@ describe('secp256k1', () => {
     //publickey from mnemonic
     const mnemonic =
       'joy furnace inject spot engine source alpha turn east visa abstract cousin shell express weasel math perfect tiger quality camp mansion desert web jaguar';
-    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
     });
     const pubkey = privKey.pubKey();
@@ -65,7 +65,7 @@ describe('secp256k1', () => {
     //publickey from mnemonic
     const mnemonic =
       'chest flight brain grocery flock elephant gloom gaze diet girl subway again extra spider monitor kiss explain paper beauty ordinary ship dry oxygen shield';
-    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic(mnemonic),
     });
     const pubkey = privKey.pubKey();

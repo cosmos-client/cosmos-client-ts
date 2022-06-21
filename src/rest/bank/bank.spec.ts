@@ -1,4 +1,4 @@
-import { cosmosclient, proto, rest } from '../..';
+import cosmosclient from '../..';
 import Long from 'long';
 
 describe('bank', () => {
@@ -7,7 +7,7 @@ describe('bank', () => {
 
     const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
 
-    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
     });
     const pubKey = privKey.pubKey();
@@ -19,33 +19,33 @@ describe('bank', () => {
     const toAddress = address;
 
     // get account info
-    const account = await rest.auth
+    const account = await cosmosclient.rest.auth
       .account(sdk, fromAddress)
       .then((res) => cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(res.data.account)))
       .catch(() => undefined);
 
-    if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(account instanceof cosmosclient.proto.cosmos.auth.v1beta1.BaseAccount)) {
       console.log(account);
       return;
     }
 
     // build tx
-    const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+    const msgSend = new cosmosclient.proto.cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
       amount: [{ denom: 'token', amount: '1' }],
     });
 
-    const txBody = new proto.cosmos.tx.v1beta1.TxBody({
+    const txBody = new cosmosclient.proto.cosmos.tx.v1beta1.TxBody({
       messages: [cosmosclient.codec.instanceToProtoAny(msgSend)],
     });
-    const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
+    const authInfo = new cosmosclient.proto.cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
           public_key: cosmosclient.codec.instanceToProtoAny(pubKey),
           mode_info: {
             single: {
-              mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+              mode: cosmosclient.proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
             },
           },
           sequence: account.sequence,
@@ -62,9 +62,9 @@ describe('bank', () => {
     txBuilder.addSignature(privKey.sign(signDocBytes));
 
     // broadcast
-    const res = await rest.tx.broadcastTx(sdk, {
+    const res = await cosmosclient.rest.tx.broadcastTx(sdk, {
       tx_bytes: txBuilder.txBytes(),
-      mode: rest.tx.BroadcastTxMode.Block,
+      mode: cosmosclient.rest.tx.BroadcastTxMode.Block,
     });
     console.log(res);
 
