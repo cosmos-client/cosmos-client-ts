@@ -3100,7 +3100,7 @@ export namespace cosmos {
           public timestamp: string;
 
           /** TxResponse events. */
-          public events: tendermint.abci.IEvent[];
+          public events: global_tendermint.abci.IEvent[];
 
           /**
            * Encodes the specified TxResponse message. Does not implicitly {@link cosmos.base.abci.v1beta1.TxResponse.verify|verify} messages.
@@ -3538,7 +3538,7 @@ export namespace cosmos {
           log?: string | null;
 
           /** Result events */
-          events?: tendermint.abci.IEvent[] | null;
+          events?: global_tendermint.abci.IEvent[] | null;
 
           /** Result msg_responses */
           msg_responses?: google.protobuf.IAny[] | null;
@@ -3559,7 +3559,7 @@ export namespace cosmos {
           public log: string;
 
           /** Result events. */
-          public events: tendermint.abci.IEvent[];
+          public events: global_tendermint.abci.IEvent[];
 
           /** Result msg_responses. */
           public msg_responses: google.protobuf.IAny[];
@@ -9313,10 +9313,10 @@ export namespace cosmos {
         /** Properties of a GetBlockByHeightResponse. */
         interface IGetBlockByHeightResponse {
           /** GetBlockByHeightResponse block_id */
-          block_id?: tendermint.types.IBlockID | null;
+          block_id?: global_tendermint.types.IBlockID | null;
 
           /** GetBlockByHeightResponse block */
-          block?: tendermint.types.IBlock | null;
+          block?: global_tendermint.types.IBlock | null;
         }
 
         /** Represents a GetBlockByHeightResponse. */
@@ -9328,10 +9328,10 @@ export namespace cosmos {
           constructor(properties?: cosmos.base.tendermint.v1beta1.IGetBlockByHeightResponse);
 
           /** GetBlockByHeightResponse block_id. */
-          public block_id?: tendermint.types.IBlockID | null;
+          public block_id?: global_tendermint.types.IBlockID | null;
 
           /** GetBlockByHeightResponse block. */
-          public block?: tendermint.types.IBlock | null;
+          public block?: global_tendermint.types.IBlock | null;
 
           /**
            * Encodes the specified GetBlockByHeightResponse message. Does not implicitly {@link cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse.verify|verify} messages.
@@ -9496,10 +9496,10 @@ export namespace cosmos {
         /** Properties of a GetLatestBlockResponse. */
         interface IGetLatestBlockResponse {
           /** GetLatestBlockResponse block_id */
-          block_id?: tendermint.types.IBlockID | null;
+          block_id?: global_tendermint.types.IBlockID | null;
 
           /** GetLatestBlockResponse block */
-          block?: tendermint.types.IBlock | null;
+          block?: global_tendermint.types.IBlock | null;
         }
 
         /** Represents a GetLatestBlockResponse. */
@@ -9511,10 +9511,10 @@ export namespace cosmos {
           constructor(properties?: cosmos.base.tendermint.v1beta1.IGetLatestBlockResponse);
 
           /** GetLatestBlockResponse block_id. */
-          public block_id?: tendermint.types.IBlockID | null;
+          public block_id?: global_tendermint.types.IBlockID | null;
 
           /** GetLatestBlockResponse block. */
-          public block?: tendermint.types.IBlock | null;
+          public block?: global_tendermint.types.IBlock | null;
 
           /**
            * Encodes the specified GetLatestBlockResponse message. Does not implicitly {@link cosmos.base.tendermint.v1beta1.GetLatestBlockResponse.verify|verify} messages.
@@ -9844,7 +9844,7 @@ export namespace cosmos {
         /** Properties of a GetNodeInfoResponse. */
         interface IGetNodeInfoResponse {
           /** GetNodeInfoResponse node_info */
-          node_info?: tendermint.p2p.INodeInfo | null;
+          node_info?: global_tendermint.p2p.INodeInfo | null;
 
           /** GetNodeInfoResponse application_version */
           application_version?: cosmos.base.tendermint.v1beta1.IVersionInfo | null;
@@ -9859,7 +9859,7 @@ export namespace cosmos {
           constructor(properties?: cosmos.base.tendermint.v1beta1.IGetNodeInfoResponse);
 
           /** GetNodeInfoResponse node_info. */
-          public node_info?: tendermint.p2p.INodeInfo | null;
+          public node_info?: global_tendermint.p2p.INodeInfo | null;
 
           /** GetNodeInfoResponse application_version. */
           public application_version?: cosmos.base.tendermint.v1beta1.IVersionInfo | null;
@@ -69302,3 +69302,5 @@ export namespace google {
     }
   }
 }
+
+import global_tendermint = tendermint;
