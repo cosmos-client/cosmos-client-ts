@@ -1,6 +1,9 @@
 module.exports = {
   mode: 'production',
   entry: './src/cdn.ts',
+  output: {
+    filename: '../cdn/main.js',
+  },
   module: {
     rules: [
       {
@@ -11,5 +14,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    fallback: {
+      buffer: require.resolve('buffer/'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
   },
 };
