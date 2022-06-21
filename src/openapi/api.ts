@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Cosmos SDK - Legacy REST and gRPC Gateway docs
- * A REST interface for state queries, legacy transactions
+ * Cosmos SDK - gRPC Gateway docs
+ * A REST interface for state queries
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -21,128 +21,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
-/**
- * 
- * @export
- * @interface BankAccountsAddressTransfersBaseReq
- */
-export interface BankAccountsAddressTransfersBaseReq {
-    /**
-     * Sender address or Keybase name to generate a transaction
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'from'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'memo'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'account_number'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'sequence'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'gas'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'gas_adjustment'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'fees'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * Estimate gas for a transaction (cannot be used in conjunction with generate_only)
-     * @type {boolean}
-     * @memberof BankAccountsAddressTransfersBaseReq
-     */
-    'simulate'?: boolean;
-}
-/**
- * 
- * @export
- * @interface BaseReq
- */
-export interface BaseReq {
-    /**
-     * Sender address or Keybase name to generate a transaction
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'from'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'memo'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'account_number'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'sequence'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'gas'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseReq
-     */
-    'gas_adjustment'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof BaseReq
-     */
-    'fees'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * Estimate gas for a transaction (cannot be used in conjunction with generate_only)
-     * @type {boolean}
-     * @memberof BaseReq
-     */
-    'simulate'?: boolean;
-}
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain, including all blockchain data structures and the rules of the application\'s state transition machine.
  * @export
@@ -184,140 +62,6 @@ export interface BitarraySpecifiesWhichKeysWithinTheMultisigAreSigning {
 /**
  * 
  * @export
- * @interface Block
- */
-export interface Block {
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeader}
-     * @memberof Block
-     */
-    'header'?: InlineResponse2002BlockMetaHeader;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Block
-     */
-    'txs'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Block
-     */
-    'evidence'?: Array<string>;
-    /**
-     * 
-     * @type {InlineResponse2002BlockLastCommit}
-     * @memberof Block
-     */
-    'last_commit'?: InlineResponse2002BlockLastCommit;
-}
-/**
- * 
- * @export
- * @interface BlockHeader
- */
-export interface BlockHeader {
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof BlockHeader
-     */
-    'height'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof BlockHeader
-     */
-    'num_txs'?: number;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockId}
-     * @memberof BlockHeader
-     */
-    'last_block_id'?: InlineResponse2002BlockMetaHeaderLastBlockId;
-    /**
-     * 
-     * @type {number}
-     * @memberof BlockHeader
-     */
-    'total_txs'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'last_commit_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'data_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'next_validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'consensus_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'app_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'last_results_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'evidence_hash'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof BlockHeader
-     */
-    'proposer_address'?: string;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderVersion}
-     * @memberof BlockHeader
-     */
-    'version'?: InlineResponse2002BlockMetaHeaderVersion;
-}
-/**
- * 
- * @export
  * @interface BlockID
  */
 export interface BlockID {
@@ -329,48 +73,10 @@ export interface BlockID {
     'hash'?: string;
     /**
      * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockIdParts}
+     * @type {PartsetHeader}
      * @memberof BlockID
      */
-    'parts'?: InlineResponse2002BlockMetaHeaderLastBlockIdParts;
-}
-/**
- * 
- * @export
- * @interface BlockID1
- */
-export interface BlockID1 {
-    /**
-     * 
-     * @type {string}
-     * @memberof BlockID1
-     */
-    'hash'?: string;
-    /**
-     * 
-     * @type {PartsetHeader}
-     * @memberof BlockID1
-     */
     'part_set_header'?: PartsetHeader;
-}
-/**
- * 
- * @export
- * @interface BlockQuery
- */
-export interface BlockQuery {
-    /**
-     * 
-     * @type {InlineResponse2002BlockMeta}
-     * @memberof BlockQuery
-     */
-    'block_meta'?: InlineResponse2002BlockMeta;
-    /**
-     * 
-     * @type {InlineResponse2002Block}
-     * @memberof BlockQuery
-     */
-    'block'?: InlineResponse2002Block;
 }
 /**
  * TxBody is the body of a transaction that all signers sign over.
@@ -380,10 +86,10 @@ export interface BlockQuery {
 export interface BodyIsTheProcessableContentOfTheTransaction {
     /**
      * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'messages'?: Array<InlineResponse20025Accounts>;
+    'messages'?: Array<InlineResponse200Accounts>;
     /**
      * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
@@ -398,115 +104,16 @@ export interface BodyIsTheProcessableContentOfTheTransaction {
     'timeout_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'extension_options'?: Array<InlineResponse20025Accounts>;
+    'extension_options'?: Array<InlineResponse200Accounts>;
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'non_critical_extension_options'?: Array<InlineResponse20025Accounts>;
-}
-/**
- * 
- * @export
- * @interface BroadcastTxCommitResult
- */
-export interface BroadcastTxCommitResult {
-    /**
-     * 
-     * @type {InlineResponse2006CheckTx}
-     * @memberof BroadcastTxCommitResult
-     */
-    'check_tx'?: InlineResponse2006CheckTx;
-    /**
-     * 
-     * @type {InlineResponse2006DeliverTx}
-     * @memberof BroadcastTxCommitResult
-     */
-    'deliver_tx'?: InlineResponse2006DeliverTx;
-    /**
-     * 
-     * @type {string}
-     * @memberof BroadcastTxCommitResult
-     */
-    'hash'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof BroadcastTxCommitResult
-     */
-    'height'?: number;
-}
-/**
- * 
- * @export
- * @interface CheckTxResult
- */
-export interface CheckTxResult {
-    /**
-     * 
-     * @type {number}
-     * @memberof CheckTxResult
-     */
-    'code'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckTxResult
-     */
-    'data'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CheckTxResult
-     */
-    'gas_used'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CheckTxResult
-     */
-    'gas_wanted'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckTxResult
-     */
-    'info'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckTxResult
-     */
-    'log'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004ResultTags>}
-     * @memberof CheckTxResult
-     */
-    'tags'?: Array<InlineResponse2004ResultTags>;
-}
-/**
- * 
- * @export
- * @interface Coin
- */
-export interface Coin {
-    /**
-     * 
-     * @type {string}
-     * @memberof Coin
-     */
-    'denom'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Coin
-     */
-    'amount'?: string;
+    'non_critical_extension_options'?: Array<InlineResponse200Accounts>;
 }
 /**
  * Params defines the parameters for the auth module.
@@ -553,10 +160,10 @@ export interface CosmosAuthV1beta1Params {
 export interface CosmosAuthV1beta1QueryAccountResponse {
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosAuthV1beta1QueryAccountResponse
      */
-    'account'?: InlineResponse20025Accounts;
+    'account'?: InlineResponse200Accounts;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -566,16 +173,16 @@ export interface CosmosAuthV1beta1QueryAccountResponse {
 export interface CosmosAuthV1beta1QueryAccountsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof CosmosAuthV1beta1QueryAccountsResponse
      */
-    'accounts'?: Array<InlineResponse20025Accounts>;
+    'accounts'?: Array<InlineResponse200Accounts>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosAuthV1beta1QueryAccountsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -585,10 +192,10 @@ export interface CosmosAuthV1beta1QueryAccountsResponse {
 export interface CosmosAuthV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20027Params}
+     * @type {InlineResponse2002Params}
      * @memberof CosmosAuthV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20027Params;
+    'params'?: InlineResponse2002Params;
 }
 /**
  * Grant gives permissions to execute the provide method with expiration time.
@@ -598,10 +205,10 @@ export interface CosmosAuthV1beta1QueryParamsResponse {
 export interface CosmosAuthzV1beta1Grant {
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosAuthzV1beta1Grant
      */
-    'authorization'?: InlineResponse20025Accounts;
+    'authorization'?: InlineResponse200Accounts;
     /**
      * 
      * @type {string}
@@ -617,16 +224,16 @@ export interface CosmosAuthzV1beta1Grant {
 export interface CosmosAuthzV1beta1QueryGrantsResponse {
     /**
      * authorizations is a list of grants granted for grantee by granter.
-     * @type {Array<InlineResponse20080Grants>}
+     * @type {Array<InlineResponse20055Grants>}
      * @memberof CosmosAuthzV1beta1QueryGrantsResponse
      */
-    'grants'?: Array<InlineResponse20080Grants>;
+    'grants'?: Array<InlineResponse20055Grants>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
+     * @type {InlineResponse20014Pagination}
      * @memberof CosmosAuthzV1beta1QueryGrantsResponse
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
  * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
@@ -642,10 +249,10 @@ export interface CosmosBankV1beta1DenomOwner {
     'address'?: string;
     /**
      * 
-     * @type {InlineResponse20028Balances}
+     * @type {InlineResponse2003Balances}
      * @memberof CosmosBankV1beta1DenomOwner
      */
-    'balance'?: InlineResponse20028Balances;
+    'balance'?: InlineResponse2003Balances;
 }
 /**
  * DenomUnit represents a struct that describes a given denomination unit of the basic token.
@@ -686,10 +293,10 @@ export interface CosmosBankV1beta1Metadata {
     'description'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20031DenomUnits>}
+     * @type {Array<InlineResponse2006DenomUnits>}
      * @memberof CosmosBankV1beta1Metadata
      */
-    'denom_units'?: Array<InlineResponse20031DenomUnits>;
+    'denom_units'?: Array<InlineResponse2006DenomUnits>;
     /**
      * base represents the base denom (should be the DenomUnit with exponent = 0).
      * @type {string}
@@ -735,10 +342,10 @@ export interface CosmosBankV1beta1Metadata {
 export interface CosmosBankV1beta1Params {
     /**
      * 
-     * @type {Array<InlineResponse20033ParamsSendEnabled>}
+     * @type {Array<InlineResponse2008ParamsSendEnabled>}
      * @memberof CosmosBankV1beta1Params
      */
-    'send_enabled'?: Array<InlineResponse20033ParamsSendEnabled>;
+    'send_enabled'?: Array<InlineResponse2008ParamsSendEnabled>;
     /**
      * 
      * @type {boolean}
@@ -754,16 +361,16 @@ export interface CosmosBankV1beta1Params {
 export interface CosmosBankV1beta1QueryAllBalancesResponse {
     /**
      * balances is the balances of all the coins.
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosBankV1beta1QueryAllBalancesResponse
      */
-    'balances'?: Array<InlineResponse20028Balances>;
+    'balances'?: Array<InlineResponse2003Balances>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosBankV1beta1QueryAllBalancesResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryBalanceResponse is the response type for the Query/Balance RPC method.
@@ -773,10 +380,10 @@ export interface CosmosBankV1beta1QueryAllBalancesResponse {
 export interface CosmosBankV1beta1QueryBalanceResponse {
     /**
      * 
-     * @type {InlineResponse20028Balances}
+     * @type {InlineResponse2003Balances}
      * @memberof CosmosBankV1beta1QueryBalanceResponse
      */
-    'balance'?: InlineResponse20028Balances;
+    'balance'?: InlineResponse2003Balances;
 }
 /**
  * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
@@ -786,10 +393,10 @@ export interface CosmosBankV1beta1QueryBalanceResponse {
 export interface CosmosBankV1beta1QueryDenomMetadataResponse {
     /**
      * 
-     * @type {InlineResponse20031Metadatas}
+     * @type {InlineResponse2006Metadatas}
      * @memberof CosmosBankV1beta1QueryDenomMetadataResponse
      */
-    'metadata'?: InlineResponse20031Metadatas;
+    'metadata'?: InlineResponse2006Metadatas;
 }
 /**
  * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
@@ -799,16 +406,16 @@ export interface CosmosBankV1beta1QueryDenomMetadataResponse {
 export interface CosmosBankV1beta1QueryDenomOwnersResponse {
     /**
      * 
-     * @type {Array<InlineResponse20030DenomOwners>}
+     * @type {Array<InlineResponse2005DenomOwners>}
      * @memberof CosmosBankV1beta1QueryDenomOwnersResponse
      */
-    'denom_owners'?: Array<InlineResponse20030DenomOwners>;
+    'denom_owners'?: Array<InlineResponse2005DenomOwners>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosBankV1beta1QueryDenomOwnersResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
@@ -818,16 +425,16 @@ export interface CosmosBankV1beta1QueryDenomOwnersResponse {
 export interface CosmosBankV1beta1QueryDenomsMetadataResponse {
     /**
      * metadata provides the client information for all the registered tokens.
-     * @type {Array<InlineResponse20031Metadatas>}
+     * @type {Array<InlineResponse2006Metadatas>}
      * @memberof CosmosBankV1beta1QueryDenomsMetadataResponse
      */
-    'metadatas'?: Array<InlineResponse20031Metadatas>;
+    'metadatas'?: Array<InlineResponse2006Metadatas>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosBankV1beta1QueryDenomsMetadataResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryParamsResponse defines the response type for querying x/bank parameters.
@@ -837,10 +444,10 @@ export interface CosmosBankV1beta1QueryDenomsMetadataResponse {
 export interface CosmosBankV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20033Params}
+     * @type {InlineResponse2008Params}
      * @memberof CosmosBankV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20033Params;
+    'params'?: InlineResponse2008Params;
 }
 /**
  * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
@@ -850,10 +457,10 @@ export interface CosmosBankV1beta1QueryParamsResponse {
 export interface CosmosBankV1beta1QuerySupplyOfResponse {
     /**
      * 
-     * @type {InlineResponse20028Balances}
+     * @type {InlineResponse2003Balances}
      * @memberof CosmosBankV1beta1QuerySupplyOfResponse
      */
-    'amount'?: InlineResponse20028Balances;
+    'amount'?: InlineResponse2003Balances;
 }
 /**
  * 
@@ -863,16 +470,16 @@ export interface CosmosBankV1beta1QuerySupplyOfResponse {
 export interface CosmosBankV1beta1QueryTotalSupplyResponse {
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
      */
-    'supply'?: Array<InlineResponse20028Balances>;
+    'supply'?: Array<InlineResponse2003Balances>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
@@ -913,10 +520,10 @@ export interface CosmosBaseAbciV1beta1ABCIMessageLog {
     'log'?: string;
     /**
      * Events contains a slice of Event objects that were emitted during some execution.
-     * @type {Array<InlineResponse20075TxResponseEvents>}
+     * @type {Array<InlineResponse20050TxResponseEvents>}
      * @memberof CosmosBaseAbciV1beta1ABCIMessageLog
      */
-    'events'?: Array<InlineResponse20075TxResponseEvents>;
+    'events'?: Array<InlineResponse20050TxResponseEvents>;
 }
 /**
  * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
@@ -976,10 +583,10 @@ export interface CosmosBaseAbciV1beta1Result {
     'log'?: string;
     /**
      * Events contains a slice of Event objects that were emitted during message or handler execution.
-     * @type {Array<InlineResponse20074ResultEvents>}
+     * @type {Array<InlineResponse20049ResultEvents>}
      * @memberof CosmosBaseAbciV1beta1Result
      */
-    'events'?: Array<InlineResponse20074ResultEvents>;
+    'events'?: Array<InlineResponse20049ResultEvents>;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
@@ -995,10 +602,10 @@ export interface CosmosBaseAbciV1beta1StringEvent {
     'type'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20075TxResponseAttributes>}
+     * @type {Array<InlineResponse20050TxResponseAttributes>}
      * @memberof CosmosBaseAbciV1beta1StringEvent
      */
-    'attributes'?: Array<InlineResponse20075TxResponseAttributes>;
+    'attributes'?: Array<InlineResponse20050TxResponseAttributes>;
 }
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
@@ -1044,10 +651,10 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     'raw_log'?: string;
     /**
      * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20075TxResponseLogs>}
+     * @type {Array<InlineResponse20050TxResponseLogs>}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    'logs'?: Array<InlineResponse20075TxResponseLogs>;
+    'logs'?: Array<InlineResponse20050TxResponseLogs>;
     /**
      * Additional information. May be non-deterministic.
      * @type {string}
@@ -1068,10 +675,10 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     'gas_used'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    'tx'?: InlineResponse20025Accounts;
+    'tx'?: InlineResponse200Accounts;
     /**
      * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
      * @type {string}
@@ -1143,16 +750,16 @@ export interface CosmosBaseQueryV1beta1PageResponse {
 export interface CosmosBaseTendermintV1beta1GetBlockByHeightResponse {
     /**
      * 
-     * @type {BlockID1}
+     * @type {BlockID}
      * @memberof CosmosBaseTendermintV1beta1GetBlockByHeightResponse
      */
-    'block_id'?: BlockID1;
+    'block_id'?: BlockID;
     /**
      * 
-     * @type {InlineResponse20035Block}
+     * @type {InlineResponse20010Block}
      * @memberof CosmosBaseTendermintV1beta1GetBlockByHeightResponse
      */
-    'block'?: InlineResponse20035Block;
+    'block'?: InlineResponse20010Block;
 }
 /**
  * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
@@ -1162,16 +769,16 @@ export interface CosmosBaseTendermintV1beta1GetBlockByHeightResponse {
 export interface CosmosBaseTendermintV1beta1GetLatestBlockResponse {
     /**
      * 
-     * @type {BlockID1}
+     * @type {BlockID}
      * @memberof CosmosBaseTendermintV1beta1GetLatestBlockResponse
      */
-    'block_id'?: BlockID1;
+    'block_id'?: BlockID;
     /**
      * 
-     * @type {InlineResponse20035Block}
+     * @type {InlineResponse20010Block}
      * @memberof CosmosBaseTendermintV1beta1GetLatestBlockResponse
      */
-    'block'?: InlineResponse20035Block;
+    'block'?: InlineResponse20010Block;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
@@ -1187,16 +794,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
     'block_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20039Validators>}
+     * @type {Array<InlineResponse20014Validators>}
      * @memberof CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse
      */
-    'validators'?: Array<InlineResponse20039Validators>;
+    'validators'?: Array<InlineResponse20014Validators>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
+     * @type {InlineResponse20014Pagination}
      * @memberof CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
  * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
@@ -1206,16 +813,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
 export interface CosmosBaseTendermintV1beta1GetNodeInfoResponse {
     /**
      * 
-     * @type {InlineResponse20037DefaultNodeInfo}
+     * @type {InlineResponse20012DefaultNodeInfo}
      * @memberof CosmosBaseTendermintV1beta1GetNodeInfoResponse
      */
-    'default_node_info'?: InlineResponse20037DefaultNodeInfo;
+    'default_node_info'?: InlineResponse20012DefaultNodeInfo;
     /**
      * 
-     * @type {InlineResponse20037ApplicationVersion}
+     * @type {InlineResponse20012ApplicationVersion}
      * @memberof CosmosBaseTendermintV1beta1GetNodeInfoResponse
      */
-    'application_version'?: InlineResponse20037ApplicationVersion;
+    'application_version'?: InlineResponse20012ApplicationVersion;
 }
 /**
  * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
@@ -1244,16 +851,16 @@ export interface CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse {
     'block_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20039Validators>}
+     * @type {Array<InlineResponse20014Validators>}
      * @memberof CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse
      */
-    'validators'?: Array<InlineResponse20039Validators>;
+    'validators'?: Array<InlineResponse20014Validators>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
+     * @type {InlineResponse20014Pagination}
      * @memberof CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
  * 
@@ -1294,10 +901,10 @@ export interface CosmosBaseTendermintV1beta1Validator {
     'address'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosBaseTendermintV1beta1Validator
      */
-    'pub_key'?: InlineResponse20025Accounts;
+    'pub_key'?: InlineResponse200Accounts;
     /**
      * 
      * @type {string}
@@ -1437,10 +1044,10 @@ export interface CosmosDistributionV1beta1DelegationDelegatorReward {
     'validator_address'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof CosmosDistributionV1beta1DelegationDelegatorReward
      */
-    'reward'?: Array<InlineResponse20041Pool>;
+    'reward'?: Array<InlineResponse20016Pool>;
 }
 /**
  * Params defines the set of params for the distribution module.
@@ -1481,10 +1088,10 @@ export interface CosmosDistributionV1beta1Params {
 export interface CosmosDistributionV1beta1QueryCommunityPoolResponse {
     /**
      * pool defines community pool\'s coins.
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof CosmosDistributionV1beta1QueryCommunityPoolResponse
      */
-    'pool'?: Array<InlineResponse20041Pool>;
+    'pool'?: Array<InlineResponse20016Pool>;
 }
 /**
  * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
@@ -1494,10 +1101,10 @@ export interface CosmosDistributionV1beta1QueryCommunityPoolResponse {
 export interface CosmosDistributionV1beta1QueryDelegationRewardsResponse {
     /**
      * rewards defines the rewards accrued by a delegation.
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof CosmosDistributionV1beta1QueryDelegationRewardsResponse
      */
-    'rewards'?: Array<InlineResponse20041Pool>;
+    'rewards'?: Array<InlineResponse20016Pool>;
 }
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
@@ -1507,16 +1114,16 @@ export interface CosmosDistributionV1beta1QueryDelegationRewardsResponse {
 export interface CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse {
     /**
      * rewards defines all the rewards accrued by a delegator.
-     * @type {Array<InlineResponse20042Rewards>}
+     * @type {Array<InlineResponse20017Rewards>}
      * @memberof CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse
      */
-    'rewards'?: Array<InlineResponse20042Rewards>;
+    'rewards'?: Array<InlineResponse20017Rewards>;
     /**
      * total defines the sum of all the rewards.
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse
      */
-    'total'?: Array<InlineResponse20041Pool>;
+    'total'?: Array<InlineResponse20016Pool>;
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
@@ -1552,10 +1159,10 @@ export interface CosmosDistributionV1beta1QueryDelegatorWithdrawAddressResponse 
 export interface CosmosDistributionV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20046Params}
+     * @type {InlineResponse20021Params}
      * @memberof CosmosDistributionV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20046Params;
+    'params'?: InlineResponse20021Params;
 }
 /**
  * 
@@ -1578,10 +1185,10 @@ export interface CosmosDistributionV1beta1QueryValidatorCommissionResponse {
 export interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse {
     /**
      * 
-     * @type {InlineResponse20047Rewards}
+     * @type {InlineResponse20022Rewards}
      * @memberof CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse
      */
-    'rewards'?: InlineResponse20047Rewards;
+    'rewards'?: InlineResponse20022Rewards;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
@@ -1591,16 +1198,16 @@ export interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsRespon
 export interface CosmosDistributionV1beta1QueryValidatorSlashesResponse {
     /**
      * slashes defines the slashes the validator received.
-     * @type {Array<InlineResponse20048Slashes>}
+     * @type {Array<InlineResponse20023Slashes>}
      * @memberof CosmosDistributionV1beta1QueryValidatorSlashesResponse
      */
-    'slashes'?: Array<InlineResponse20048Slashes>;
+    'slashes'?: Array<InlineResponse20023Slashes>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosDistributionV1beta1QueryValidatorSlashesResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * ValidatorAccumulatedCommission represents accumulated commission for a validator kept as a running counter, can be withdrawn at any time.
@@ -1610,10 +1217,10 @@ export interface CosmosDistributionV1beta1QueryValidatorSlashesResponse {
 export interface CosmosDistributionV1beta1ValidatorAccumulatedCommission {
     /**
      * 
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof CosmosDistributionV1beta1ValidatorAccumulatedCommission
      */
-    'commission'?: Array<InlineResponse20041Pool>;
+    'commission'?: Array<InlineResponse20016Pool>;
 }
 /**
  * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
@@ -1623,10 +1230,10 @@ export interface CosmosDistributionV1beta1ValidatorAccumulatedCommission {
 export interface CosmosDistributionV1beta1ValidatorOutstandingRewards {
     /**
      * 
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof CosmosDistributionV1beta1ValidatorOutstandingRewards
      */
-    'rewards'?: Array<InlineResponse20041Pool>;
+    'rewards'?: Array<InlineResponse20016Pool>;
 }
 /**
  * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
@@ -1655,16 +1262,16 @@ export interface CosmosDistributionV1beta1ValidatorSlashEvent {
 export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
     /**
      * evidence returns all evidences.
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    'evidence'?: Array<InlineResponse20025Accounts>;
+    'evidence'?: Array<InlineResponse200Accounts>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
@@ -1674,10 +1281,10 @@ export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
 export interface CosmosEvidenceV1beta1QueryEvidenceResponse {
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosEvidenceV1beta1QueryEvidenceResponse
      */
-    'evidence'?: InlineResponse20025Accounts;
+    'evidence'?: InlineResponse200Accounts;
 }
 /**
  * 
@@ -1731,10 +1338,10 @@ export interface CosmosFeegrantV1beta1QueryAllowancesResponse {
     'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
+     * @type {InlineResponse20014Pagination}
      * @memberof CosmosFeegrantV1beta1QueryAllowancesResponse
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active proposal.
@@ -1756,10 +1363,10 @@ export interface CosmosGovV1beta1Deposit {
     'depositor'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosGovV1beta1Deposit
      */
-    'amount'?: Array<InlineResponse20028Balances>;
+    'amount'?: Array<InlineResponse2003Balances>;
 }
 /**
  * DepositParams defines the params for deposits on governance proposals.
@@ -1769,10 +1376,10 @@ export interface CosmosGovV1beta1Deposit {
 export interface CosmosGovV1beta1DepositParams {
     /**
      * Minimum deposit for a proposal to enter voting period.
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosGovV1beta1DepositParams
      */
-    'min_deposit'?: Array<InlineResponse20028Balances>;
+    'min_deposit'?: Array<InlineResponse2003Balances>;
     /**
      * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
      * @type {string}
@@ -1794,10 +1401,10 @@ export interface CosmosGovV1beta1Proposal {
     'proposal_id'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'content'?: InlineResponse20025Accounts;
+    'content'?: InlineResponse200Accounts;
     /**
      * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @type {string}
@@ -1806,10 +1413,10 @@ export interface CosmosGovV1beta1Proposal {
     'status'?: CosmosGovV1beta1ProposalStatusEnum;
     /**
      * 
-     * @type {InlineResponse20052FinalTallyResult}
+     * @type {InlineResponse20027FinalTallyResult}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'final_tally_result'?: InlineResponse20052FinalTallyResult;
+    'final_tally_result'?: InlineResponse20027FinalTallyResult;
     /**
      * 
      * @type {string}
@@ -1824,10 +1431,10 @@ export interface CosmosGovV1beta1Proposal {
     'deposit_end_time'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'total_deposit'?: Array<InlineResponse20028Balances>;
+    'total_deposit'?: Array<InlineResponse2003Balances>;
     /**
      * 
      * @type {string}
@@ -1879,10 +1486,10 @@ export type CosmosGovV1beta1ProposalStatus = typeof CosmosGovV1beta1ProposalStat
 export interface CosmosGovV1beta1QueryDepositResponse {
     /**
      * 
-     * @type {InlineResponse20054Deposits}
+     * @type {InlineResponse20029Deposits}
      * @memberof CosmosGovV1beta1QueryDepositResponse
      */
-    'deposit'?: InlineResponse20054Deposits;
+    'deposit'?: InlineResponse20029Deposits;
 }
 /**
  * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
@@ -1892,16 +1499,16 @@ export interface CosmosGovV1beta1QueryDepositResponse {
 export interface CosmosGovV1beta1QueryDepositsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20054Deposits>}
+     * @type {Array<InlineResponse20029Deposits>}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
-    'deposits'?: Array<InlineResponse20054Deposits>;
+    'deposits'?: Array<InlineResponse20029Deposits>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -1911,22 +1518,22 @@ export interface CosmosGovV1beta1QueryDepositsResponse {
 export interface CosmosGovV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20051VotingParams}
+     * @type {InlineResponse20026VotingParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    'voting_params'?: InlineResponse20051VotingParams;
+    'voting_params'?: InlineResponse20026VotingParams;
     /**
      * 
-     * @type {InlineResponse20051DepositParams}
+     * @type {InlineResponse20026DepositParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    'deposit_params'?: InlineResponse20051DepositParams;
+    'deposit_params'?: InlineResponse20026DepositParams;
     /**
      * 
-     * @type {InlineResponse20051TallyParams}
+     * @type {InlineResponse20026TallyParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    'tally_params'?: InlineResponse20051TallyParams;
+    'tally_params'?: InlineResponse20026TallyParams;
 }
 /**
  * QueryProposalResponse is the response type for the Query/Proposal RPC method.
@@ -1936,10 +1543,10 @@ export interface CosmosGovV1beta1QueryParamsResponse {
 export interface CosmosGovV1beta1QueryProposalResponse {
     /**
      * 
-     * @type {InlineResponse20052Proposals}
+     * @type {InlineResponse20027Proposals}
      * @memberof CosmosGovV1beta1QueryProposalResponse
      */
-    'proposal'?: InlineResponse20052Proposals;
+    'proposal'?: InlineResponse20027Proposals;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
@@ -1949,16 +1556,16 @@ export interface CosmosGovV1beta1QueryProposalResponse {
 export interface CosmosGovV1beta1QueryProposalsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20052Proposals>}
+     * @type {Array<InlineResponse20027Proposals>}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
-    'proposals'?: Array<InlineResponse20052Proposals>;
+    'proposals'?: Array<InlineResponse20027Proposals>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
@@ -1968,10 +1575,10 @@ export interface CosmosGovV1beta1QueryProposalsResponse {
 export interface CosmosGovV1beta1QueryTallyResultResponse {
     /**
      * 
-     * @type {InlineResponse20052FinalTallyResult}
+     * @type {InlineResponse20027FinalTallyResult}
      * @memberof CosmosGovV1beta1QueryTallyResultResponse
      */
-    'tally'?: InlineResponse20052FinalTallyResult;
+    'tally'?: InlineResponse20027FinalTallyResult;
 }
 /**
  * QueryVoteResponse is the response type for the Query/Vote RPC method.
@@ -1981,10 +1588,10 @@ export interface CosmosGovV1beta1QueryTallyResultResponse {
 export interface CosmosGovV1beta1QueryVoteResponse {
     /**
      * 
-     * @type {InlineResponse20057Votes}
+     * @type {InlineResponse20032Votes}
      * @memberof CosmosGovV1beta1QueryVoteResponse
      */
-    'vote'?: InlineResponse20057Votes;
+    'vote'?: InlineResponse20032Votes;
 }
 /**
  * QueryVotesResponse is the response type for the Query/Votes RPC method.
@@ -1994,16 +1601,16 @@ export interface CosmosGovV1beta1QueryVoteResponse {
 export interface CosmosGovV1beta1QueryVotesResponse {
     /**
      * votes defined the queried votes.
-     * @type {Array<InlineResponse20057Votes>}
+     * @type {Array<InlineResponse20032Votes>}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
-    'votes'?: Array<InlineResponse20057Votes>;
+    'votes'?: Array<InlineResponse20032Votes>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * TallyParams defines the params for tallying votes on governance proposals.
@@ -2087,10 +1694,10 @@ export interface CosmosGovV1beta1Vote {
     'option'?: CosmosGovV1beta1VoteOptionEnum;
     /**
      * 
-     * @type {Array<InlineResponse20057Options>}
+     * @type {Array<InlineResponse20032Options>}
      * @memberof CosmosGovV1beta1Vote
      */
-    'options'?: Array<InlineResponse20057Options>;
+    'options'?: Array<InlineResponse20032Options>;
 }
 
 export const CosmosGovV1beta1VoteOptionEnum = {
@@ -2240,10 +1847,10 @@ export interface CosmosMintV1beta1QueryInflationResponse {
 export interface CosmosMintV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20061Params}
+     * @type {InlineResponse20036Params}
      * @memberof CosmosMintV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20061Params;
+    'params'?: InlineResponse20036Params;
 }
 /**
  * ParamChange defines an individual parameter change, for use in ParameterChangeProposal.
@@ -2278,10 +1885,10 @@ export interface CosmosParamsV1beta1ParamChange {
 export interface CosmosParamsV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20062Param}
+     * @type {InlineResponse20037Param}
      * @memberof CosmosParamsV1beta1QueryParamsResponse
      */
-    'param'?: InlineResponse20062Param;
+    'param'?: InlineResponse20037Param;
 }
 /**
  * Params represents the parameters used for by the slashing module.
@@ -2432,10 +2039,10 @@ export type CosmosStakingV1beta1BondStatus = typeof CosmosStakingV1beta1BondStat
 export interface CosmosStakingV1beta1Commission {
     /**
      * 
-     * @type {InlineResponse20066CommissionCommissionRates}
+     * @type {InlineResponse20041CommissionCommissionRates}
      * @memberof CosmosStakingV1beta1Commission
      */
-    'commission_rates'?: InlineResponse20066CommissionCommissionRates;
+    'commission_rates'?: InlineResponse20041CommissionCommissionRates;
     /**
      * update_time is the last time the commission rate was changed.
      * @type {string}
@@ -2501,16 +2108,16 @@ export interface CosmosStakingV1beta1Delegation {
 export interface CosmosStakingV1beta1DelegationResponse {
     /**
      * 
-     * @type {InlineResponse20063Delegation}
+     * @type {InlineResponse20038Delegation}
      * @memberof CosmosStakingV1beta1DelegationResponse
      */
-    'delegation'?: InlineResponse20063Delegation;
+    'delegation'?: InlineResponse20038Delegation;
     /**
      * 
-     * @type {InlineResponse20028Balances}
+     * @type {InlineResponse2003Balances}
      * @memberof CosmosStakingV1beta1DelegationResponse
      */
-    'balance'?: InlineResponse20028Balances;
+    'balance'?: InlineResponse2003Balances;
 }
 /**
  * Description defines a validator description.
@@ -2557,16 +2164,16 @@ export interface CosmosStakingV1beta1Description {
 export interface CosmosStakingV1beta1HistoricalInfo {
     /**
      * 
-     * @type {InlineResponse20068HistHeader}
+     * @type {InlineResponse20043HistHeader}
      * @memberof CosmosStakingV1beta1HistoricalInfo
      */
-    'header'?: InlineResponse20068HistHeader;
+    'header'?: InlineResponse20043HistHeader;
     /**
      * 
-     * @type {Array<InlineResponse20066Validators>}
+     * @type {Array<InlineResponse20041Validators>}
      * @memberof CosmosStakingV1beta1HistoricalInfo
      */
-    'valset'?: Array<InlineResponse20066Validators>;
+    'valset'?: Array<InlineResponse20041Validators>;
 }
 /**
  * Params defines the parameters for the staking module.
@@ -2632,10 +2239,10 @@ export interface CosmosStakingV1beta1Pool {
 export interface CosmosStakingV1beta1QueryDelegationResponse {
     /**
      * 
-     * @type {InlineResponse20063DelegationResponses}
+     * @type {InlineResponse20038DelegationResponses}
      * @memberof CosmosStakingV1beta1QueryDelegationResponse
      */
-    'delegation_response'?: InlineResponse20063DelegationResponses;
+    'delegation_response'?: InlineResponse20038DelegationResponses;
 }
 /**
  * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
@@ -2645,16 +2252,16 @@ export interface CosmosStakingV1beta1QueryDelegationResponse {
 export interface CosmosStakingV1beta1QueryDelegatorDelegationsResponse {
     /**
      * delegation_responses defines all the delegations\' info of a delegator.
-     * @type {Array<InlineResponse20063DelegationResponses>}
+     * @type {Array<InlineResponse20038DelegationResponses>}
      * @memberof CosmosStakingV1beta1QueryDelegatorDelegationsResponse
      */
-    'delegation_responses'?: Array<InlineResponse20063DelegationResponses>;
+    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorDelegationsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
@@ -2664,16 +2271,16 @@ export interface CosmosStakingV1beta1QueryDelegatorDelegationsResponse {
 export interface CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20065UnbondingResponses>}
+     * @type {Array<InlineResponse20040UnbondingResponses>}
      * @memberof CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse
      */
-    'unbonding_responses'?: Array<InlineResponse20065UnbondingResponses>;
+    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
@@ -2683,10 +2290,10 @@ export interface CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse 
 export interface CosmosStakingV1beta1QueryDelegatorValidatorResponse {
     /**
      * 
-     * @type {InlineResponse20066Validators}
+     * @type {InlineResponse20041Validators}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorResponse
      */
-    'validator'?: InlineResponse20066Validators;
+    'validator'?: InlineResponse20041Validators;
 }
 /**
  * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
@@ -2695,17 +2302,17 @@ export interface CosmosStakingV1beta1QueryDelegatorValidatorResponse {
  */
 export interface CosmosStakingV1beta1QueryDelegatorValidatorsResponse {
     /**
-     * validators defines the the validators\' info of a delegator.
-     * @type {Array<InlineResponse20066Validators>}
+     * validators defines the validators\' info of a delegator.
+     * @type {Array<InlineResponse20041Validators>}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorsResponse
      */
-    'validators'?: Array<InlineResponse20066Validators>;
+    'validators'?: Array<InlineResponse20041Validators>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
@@ -2715,10 +2322,10 @@ export interface CosmosStakingV1beta1QueryDelegatorValidatorsResponse {
 export interface CosmosStakingV1beta1QueryHistoricalInfoResponse {
     /**
      * 
-     * @type {InlineResponse20068Hist}
+     * @type {InlineResponse20043Hist}
      * @memberof CosmosStakingV1beta1QueryHistoricalInfoResponse
      */
-    'hist'?: InlineResponse20068Hist;
+    'hist'?: InlineResponse20043Hist;
 }
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -2728,10 +2335,10 @@ export interface CosmosStakingV1beta1QueryHistoricalInfoResponse {
 export interface CosmosStakingV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20069Params}
+     * @type {InlineResponse20044Params}
      * @memberof CosmosStakingV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20069Params;
+    'params'?: InlineResponse20044Params;
 }
 /**
  * QueryPoolResponse is response type for the Query/Pool RPC method.
@@ -2741,10 +2348,10 @@ export interface CosmosStakingV1beta1QueryParamsResponse {
 export interface CosmosStakingV1beta1QueryPoolResponse {
     /**
      * 
-     * @type {InlineResponse20070Pool}
+     * @type {InlineResponse20045Pool}
      * @memberof CosmosStakingV1beta1QueryPoolResponse
      */
-    'pool'?: InlineResponse20070Pool;
+    'pool'?: InlineResponse20045Pool;
 }
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
@@ -2754,16 +2361,16 @@ export interface CosmosStakingV1beta1QueryPoolResponse {
 export interface CosmosStakingV1beta1QueryRedelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20064RedelegationResponses>}
+     * @type {Array<InlineResponse20039RedelegationResponses>}
      * @memberof CosmosStakingV1beta1QueryRedelegationsResponse
      */
-    'redelegation_responses'?: Array<InlineResponse20064RedelegationResponses>;
+    'redelegation_responses'?: Array<InlineResponse20039RedelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryRedelegationsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
@@ -2773,10 +2380,10 @@ export interface CosmosStakingV1beta1QueryRedelegationsResponse {
 export interface CosmosStakingV1beta1QueryUnbondingDelegationResponse {
     /**
      * 
-     * @type {InlineResponse20065UnbondingResponses}
+     * @type {InlineResponse20040UnbondingResponses}
      * @memberof CosmosStakingV1beta1QueryUnbondingDelegationResponse
      */
-    'unbond'?: InlineResponse20065UnbondingResponses;
+    'unbond'?: InlineResponse20040UnbondingResponses;
 }
 /**
  * 
@@ -2786,16 +2393,16 @@ export interface CosmosStakingV1beta1QueryUnbondingDelegationResponse {
 export interface CosmosStakingV1beta1QueryValidatorDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20063DelegationResponses>}
+     * @type {Array<InlineResponse20038DelegationResponses>}
      * @memberof CosmosStakingV1beta1QueryValidatorDelegationsResponse
      */
-    'delegation_responses'?: Array<InlineResponse20063DelegationResponses>;
+    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryValidatorDelegationsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * 
@@ -2805,10 +2412,10 @@ export interface CosmosStakingV1beta1QueryValidatorDelegationsResponse {
 export interface CosmosStakingV1beta1QueryValidatorResponse {
     /**
      * 
-     * @type {InlineResponse20066Validators}
+     * @type {InlineResponse20041Validators}
      * @memberof CosmosStakingV1beta1QueryValidatorResponse
      */
-    'validator'?: InlineResponse20066Validators;
+    'validator'?: InlineResponse20041Validators;
 }
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
@@ -2818,16 +2425,16 @@ export interface CosmosStakingV1beta1QueryValidatorResponse {
 export interface CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20065UnbondingResponses>}
+     * @type {Array<InlineResponse20040UnbondingResponses>}
      * @memberof CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse
      */
-    'unbonding_responses'?: Array<InlineResponse20065UnbondingResponses>;
+    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * 
@@ -2837,16 +2444,16 @@ export interface CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse 
 export interface CosmosStakingV1beta1QueryValidatorsResponse {
     /**
      * validators contains all the queried validators.
-     * @type {Array<InlineResponse20066Validators>}
+     * @type {Array<InlineResponse20041Validators>}
      * @memberof CosmosStakingV1beta1QueryValidatorsResponse
      */
-    'validators'?: Array<InlineResponse20066Validators>;
+    'validators'?: Array<InlineResponse20041Validators>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof CosmosStakingV1beta1QueryValidatorsResponse
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
@@ -2874,10 +2481,10 @@ export interface CosmosStakingV1beta1Redelegation {
     'validator_dst_address'?: string;
     /**
      * entries are the redelegation entries.
-     * @type {Array<InlineResponse20064RedelegationEntries>}
+     * @type {Array<InlineResponse20039RedelegationEntries>}
      * @memberof CosmosStakingV1beta1Redelegation
      */
-    'entries'?: Array<InlineResponse20064RedelegationEntries>;
+    'entries'?: Array<InlineResponse20039RedelegationEntries>;
 }
 /**
  * RedelegationEntry defines a redelegation object with relevant metadata.
@@ -2918,10 +2525,10 @@ export interface CosmosStakingV1beta1RedelegationEntry {
 export interface CosmosStakingV1beta1RedelegationEntryResponse {
     /**
      * 
-     * @type {InlineResponse20064RedelegationEntries}
+     * @type {InlineResponse20039RedelegationEntries}
      * @memberof CosmosStakingV1beta1RedelegationEntryResponse
      */
-    'redelegation_entry'?: InlineResponse20064RedelegationEntries;
+    'redelegation_entry'?: InlineResponse20039RedelegationEntries;
     /**
      * 
      * @type {string}
@@ -2937,16 +2544,16 @@ export interface CosmosStakingV1beta1RedelegationEntryResponse {
 export interface CosmosStakingV1beta1RedelegationResponse {
     /**
      * 
-     * @type {InlineResponse20064Redelegation}
+     * @type {InlineResponse20039Redelegation}
      * @memberof CosmosStakingV1beta1RedelegationResponse
      */
-    'redelegation'?: InlineResponse20064Redelegation;
+    'redelegation'?: InlineResponse20039Redelegation;
     /**
      * 
-     * @type {Array<InlineResponse20064Entries>}
+     * @type {Array<InlineResponse20039Entries>}
      * @memberof CosmosStakingV1beta1RedelegationResponse
      */
-    'entries'?: Array<InlineResponse20064Entries>;
+    'entries'?: Array<InlineResponse20039Entries>;
 }
 /**
  * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
@@ -2968,10 +2575,10 @@ export interface CosmosStakingV1beta1UnbondingDelegation {
     'validator_address'?: string;
     /**
      * entries are the unbonding delegation entries.
-     * @type {Array<InlineResponse20065Entries>}
+     * @type {Array<InlineResponse20040Entries>}
      * @memberof CosmosStakingV1beta1UnbondingDelegation
      */
-    'entries'?: Array<InlineResponse20065Entries>;
+    'entries'?: Array<InlineResponse20040Entries>;
 }
 /**
  * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
@@ -3018,10 +2625,10 @@ export interface CosmosStakingV1beta1Validator {
     'operator_address'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'consensus_pubkey'?: InlineResponse20025Accounts;
+    'consensus_pubkey'?: InlineResponse200Accounts;
     /**
      * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
@@ -3048,10 +2655,10 @@ export interface CosmosStakingV1beta1Validator {
     'delegator_shares'?: string;
     /**
      * 
-     * @type {InlineResponse20066Description}
+     * @type {InlineResponse20041Description}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'description'?: InlineResponse20066Description;
+    'description'?: InlineResponse20041Description;
     /**
      * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      * @type {string}
@@ -3066,10 +2673,10 @@ export interface CosmosStakingV1beta1Validator {
     'unbonding_time'?: string;
     /**
      * 
-     * @type {InlineResponse20066Commission}
+     * @type {InlineResponse20041Commission}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'commission'?: InlineResponse20066Commission;
+    'commission'?: InlineResponse20041Commission;
     /**
      * min_self_delegation is the validator\'s self declared minimum self delegation.
      * @type {string}
@@ -3130,10 +2737,10 @@ export interface CosmosTxV1beta1AuthInfo {
 export interface CosmosTxV1beta1AuthInfoFee {
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosTxV1beta1AuthInfoFee
      */
-    'amount'?: Array<InlineResponse20028Balances>;
+    'amount'?: Array<InlineResponse2003Balances>;
     /**
      * 
      * @type {string}
@@ -3206,10 +2813,10 @@ export type CosmosTxV1beta1BroadcastTxRequestModeEnum = typeof CosmosTxV1beta1Br
 export interface CosmosTxV1beta1BroadcastTxResponse {
     /**
      * 
-     * @type {InlineResponse20075TxResponse}
+     * @type {InlineResponse20050TxResponse}
      * @memberof CosmosTxV1beta1BroadcastTxResponse
      */
-    'tx_response'?: InlineResponse20075TxResponse;
+    'tx_response'?: InlineResponse20050TxResponse;
 }
 /**
  * Fee includes the amount of coins paid in fees and the maximum gas to be used by the transaction. The ratio yields an effective \"gasprice\", which must be above some miminum to be accepted into the mempool.
@@ -3219,10 +2826,10 @@ export interface CosmosTxV1beta1BroadcastTxResponse {
 export interface CosmosTxV1beta1Fee {
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof CosmosTxV1beta1Fee
      */
-    'amount'?: Array<InlineResponse20028Balances>;
+    'amount'?: Array<InlineResponse2003Balances>;
     /**
      * 
      * @type {string}
@@ -3256,10 +2863,10 @@ export interface CosmosTxV1beta1GetTxResponse {
     'tx'?: CosmosTxV1beta1Tx;
     /**
      * 
-     * @type {InlineResponse20075TxResponse}
+     * @type {InlineResponse20050TxResponse}
      * @memberof CosmosTxV1beta1GetTxResponse
      */
-    'tx_response'?: InlineResponse20075TxResponse;
+    'tx_response'?: InlineResponse20050TxResponse;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents RPC method.
@@ -3275,16 +2882,16 @@ export interface CosmosTxV1beta1GetTxsEventResponse {
     'txs'?: Array<CosmosTxV1beta1Tx>;
     /**
      * tx_responses is the list of queried TxResponses.
-     * @type {Array<InlineResponse20075TxResponse>}
+     * @type {Array<InlineResponse20050TxResponse>}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    'tx_responses'?: Array<InlineResponse20075TxResponse>;
+    'tx_responses'?: Array<InlineResponse20050TxResponse>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
+     * @type {InlineResponse20014Pagination}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
  * ModeInfo describes the signing mode of a single or nested multisig signer.
@@ -3370,10 +2977,10 @@ export type CosmosTxV1beta1OrderBy = typeof CosmosTxV1beta1OrderBy[keyof typeof 
 export interface CosmosTxV1beta1SignerInfo {
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosTxV1beta1SignerInfo
      */
-    'public_key'?: InlineResponse20025Accounts;
+    'public_key'?: InlineResponse200Accounts;
     /**
      * 
      * @type {CosmosTxV1beta1ModeInfo}
@@ -3414,16 +3021,16 @@ export interface CosmosTxV1beta1SimulateRequest {
 export interface CosmosTxV1beta1SimulateResponse {
     /**
      * 
-     * @type {InlineResponse20074GasInfo}
+     * @type {InlineResponse20049GasInfo}
      * @memberof CosmosTxV1beta1SimulateResponse
      */
-    'gas_info'?: InlineResponse20074GasInfo;
+    'gas_info'?: InlineResponse20049GasInfo;
     /**
      * 
-     * @type {InlineResponse20074Result}
+     * @type {InlineResponse20049Result}
      * @memberof CosmosTxV1beta1SimulateResponse
      */
-    'result'?: InlineResponse20074Result;
+    'result'?: InlineResponse20049Result;
 }
 /**
  * Tx is the standard type used for broadcasting transactions.
@@ -3458,10 +3065,10 @@ export interface CosmosTxV1beta1Tx {
 export interface CosmosTxV1beta1TxBody {
     /**
      * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'messages'?: Array<InlineResponse20025Accounts>;
+    'messages'?: Array<InlineResponse200Accounts>;
     /**
      * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
@@ -3476,16 +3083,16 @@ export interface CosmosTxV1beta1TxBody {
     'timeout_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'extension_options'?: Array<InlineResponse20025Accounts>;
+    'extension_options'?: Array<InlineResponse200Accounts>;
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'non_critical_extension_options'?: Array<InlineResponse20025Accounts>;
+    'non_critical_extension_options'?: Array<InlineResponse200Accounts>;
 }
 /**
  * ModuleVersion specifies a module and its consensus version.
@@ -3538,10 +3145,10 @@ export interface CosmosUpgradeV1beta1Plan {
     'info'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
+     * @type {InlineResponse200Accounts}
      * @memberof CosmosUpgradeV1beta1Plan
      */
-    'upgraded_client_state'?: InlineResponse20025Accounts;
+    'upgraded_client_state'?: InlineResponse200Accounts;
 }
 /**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
@@ -3564,10 +3171,10 @@ export interface CosmosUpgradeV1beta1QueryAppliedPlanResponse {
 export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
     /**
      * 
-     * @type {InlineResponse20077Plan}
+     * @type {InlineResponse20052Plan}
      * @memberof CosmosUpgradeV1beta1QueryCurrentPlanResponse
      */
-    'plan'?: InlineResponse20077Plan;
+    'plan'?: InlineResponse20052Plan;
 }
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
@@ -3577,10 +3184,10 @@ export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
 export interface CosmosUpgradeV1beta1QueryModuleVersionsResponse {
     /**
      * module_versions is a list of module names with their consensus versions.
-     * @type {Array<InlineResponse20078ModuleVersions>}
+     * @type {Array<InlineResponse20053ModuleVersions>}
      * @memberof CosmosUpgradeV1beta1QueryModuleVersionsResponse
      */
-    'module_versions'?: Array<InlineResponse20078ModuleVersions>;
+    'module_versions'?: Array<InlineResponse20053ModuleVersions>;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
@@ -3609,149 +3216,6 @@ export interface DataContainsTheSetOfTransactionsIncludedInTheBlock {
     'txs'?: Array<string>;
 }
 /**
- * 
- * @export
- * @interface Delegation
- */
-export interface Delegation {
-    /**
-     * 
-     * @type {string}
-     * @memberof Delegation
-     */
-    'delegator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Delegation
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Delegation
-     */
-    'shares'?: string;
-    /**
-     * 
-     * @type {InlineResponse2004TxFeeAmount}
-     * @memberof Delegation
-     */
-    'balance'?: InlineResponse2004TxFeeAmount;
-}
-/**
- * 
- * @export
- * @interface DelegationDelegatorReward
- */
-export interface DelegationDelegatorReward {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof DelegationDelegatorReward
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof DelegationDelegatorReward
-     */
-    'reward'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface DelegatorTotalRewards
- */
-export interface DelegatorTotalRewards {
-    /**
-     * 
-     * @type {Array<InlineResponse20023Rewards>}
-     * @memberof DelegatorTotalRewards
-     */
-    'rewards'?: Array<InlineResponse20023Rewards>;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof DelegatorTotalRewards
-     */
-    'total'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface DeliverTxResult
- */
-export interface DeliverTxResult {
-    /**
-     * 
-     * @type {number}
-     * @memberof DeliverTxResult
-     */
-    'code'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeliverTxResult
-     */
-    'data'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof DeliverTxResult
-     */
-    'gas_used'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof DeliverTxResult
-     */
-    'gas_wanted'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeliverTxResult
-     */
-    'info'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeliverTxResult
-     */
-    'log'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004ResultTags>}
-     * @memberof DeliverTxResult
-     */
-    'tags'?: Array<InlineResponse2004ResultTags>;
-}
-/**
- * 
- * @export
- * @interface Deposit
- */
-export interface Deposit {
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof Deposit
-     */
-    'amount'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {string}
-     * @memberof Deposit
-     */
-    'proposal_id'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof Deposit
-     */
-    'depositor'?: string;
-}
-/**
  * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
  * @export
  * @interface GoogleProtobufAny
@@ -3769,68 +3233,6 @@ export interface GoogleProtobufAny {
      * @memberof GoogleProtobufAny
      */
     'value'?: string;
-}
-/**
- * 
- * @export
- * @interface GovProposalsFinalTallyResult
- */
-export interface GovProposalsFinalTallyResult {
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsFinalTallyResult
-     */
-    'yes'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsFinalTallyResult
-     */
-    'abstain'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsFinalTallyResult
-     */
-    'no'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsFinalTallyResult
-     */
-    'no_with_veto'?: string;
-}
-/**
- * 
- * @export
- * @interface GovProposalsParamChangeChanges
- */
-export interface GovProposalsParamChangeChanges {
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsParamChangeChanges
-     */
-    'subspace'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsParamChangeChanges
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GovProposalsParamChangeChanges
-     */
-    'subkey'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof GovProposalsParamChangeChanges
-     */
-    'value'?: object;
 }
 /**
  * allowance is a allowance granted for grantee by granter.
@@ -3927,653 +3329,757 @@ export interface GrpcGatewayRuntimeError {
     'message'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof GrpcGatewayRuntimeError
      */
-    'details'?: Array<InlineResponse20025Accounts>;
+    'details'?: Array<InlineResponse200Accounts>;
 }
 /**
- * 
+ * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest RPC method.
  * @export
  * @interface InlineObject
  */
 export interface InlineObject {
     /**
-     * 
-     * @type {InlineResponse2004Tx}
-     * @memberof InlineObject
-     */
-    'tx'?: InlineResponse2004Tx;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'mode'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineObject1
- */
-export interface InlineObject1 {
-    /**
-     * 
-     * @type {InlineResponse2004Tx}
-     * @memberof InlineObject1
-     */
-    'tx'?: InlineResponse2004Tx;
-}
-/**
- * 
- * @export
- * @interface InlineObject10
- */
-export interface InlineObject10 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject10
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject10
-     */
-    'depositor'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineObject10
-     */
-    'amount'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineObject11
- */
-export interface InlineObject11 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject11
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject11
-     */
-    'voter'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject11
-     */
-    'option'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineObject12
- */
-export interface InlineObject12 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject12
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-}
-/**
- * 
- * @export
- * @interface InlineObject13
- */
-export interface InlineObject13 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject13
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-}
-/**
- * 
- * @export
- * @interface InlineObject14
- */
-export interface InlineObject14 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject14
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject14
-     */
-    'withdraw_address'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineObject15
- */
-export interface InlineObject15 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject15
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-}
-/**
- * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest RPC method.
- * @export
- * @interface InlineObject16
- */
-export interface InlineObject16 {
-    /**
      * tx_bytes is the raw transaction.
      * @type {string}
-     * @memberof InlineObject16
+     * @memberof InlineObject
      */
     'tx_bytes'?: string;
     /**
      * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
      * @type {string}
-     * @memberof InlineObject16
+     * @memberof InlineObject
      */
-    'mode'?: InlineObject16ModeEnum;
+    'mode'?: InlineObjectModeEnum;
 }
 
-export const InlineObject16ModeEnum = {
+export const InlineObjectModeEnum = {
     Unspecified: 'BROADCAST_MODE_UNSPECIFIED',
     Block: 'BROADCAST_MODE_BLOCK',
     Sync: 'BROADCAST_MODE_SYNC',
     Async: 'BROADCAST_MODE_ASYNC'
 } as const;
 
-export type InlineObject16ModeEnum = typeof InlineObject16ModeEnum[keyof typeof InlineObject16ModeEnum];
+export type InlineObjectModeEnum = typeof InlineObjectModeEnum[keyof typeof InlineObjectModeEnum];
 
 /**
- * 
- * @export
- * @interface InlineObject2
- */
-export interface InlineObject2 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject2
-     */
-    'tx'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineObject3
- */
-export interface InlineObject3 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject3
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineObject3
-     */
-    'amount'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineObject4
- */
-export interface InlineObject4 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject4
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject4
-     */
-    'delegator_address'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject4
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {InlineResponse2004TxFeeAmount}
-     * @memberof InlineObject4
-     */
-    'amount'?: InlineResponse2004TxFeeAmount;
-}
-/**
- * 
- * @export
- * @interface InlineObject5
- */
-export interface InlineObject5 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject5
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject5
-     */
-    'delegator_address'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject5
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {InlineResponse2004TxFeeAmount}
-     * @memberof InlineObject5
-     */
-    'amount'?: InlineResponse2004TxFeeAmount;
-}
-/**
- * 
- * @export
- * @interface InlineObject6
- */
-export interface InlineObject6 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject6
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject6
-     */
-    'delegator_address'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject6
-     */
-    'validator_src_addressess'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject6
-     */
-    'validator_dst_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject6
-     */
-    'shares'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineObject7
- */
-export interface InlineObject7 {
-    /**
-     * 
-     * @type {InlineResponse2004Tx}
-     * @memberof InlineObject7
-     */
-    'base_req'?: InlineResponse2004Tx;
-}
-/**
- * 
- * @export
- * @interface InlineObject8
- */
-export interface InlineObject8 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject8
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject8
-     */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject8
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject8
-     */
-    'proposal_type'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject8
-     */
-    'proposer'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineObject8
-     */
-    'initial_deposit'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineObject9
- */
-export interface InlineObject9 {
-    /**
-     * 
-     * @type {BankAccountsAddressTransfersBaseReq}
-     * @memberof InlineObject9
-     */
-    'base_req'?: BankAccountsAddressTransfersBaseReq;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject9
-     */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject9
-     */
-    'description'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineObject9
-     */
-    'proposer'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineObject9
-     */
-    'deposit'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {Array<GovProposalsParamChangeChanges>}
-     * @memberof InlineObject9
-     */
-    'changes'?: Array<GovProposalsParamChangeChanges>;
-}
-/**
- * 
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
  * @export
  * @interface InlineResponse200
  */
 export interface InlineResponse200 {
     /**
      * 
-     * @type {InlineResponse200ApplicationVersion}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof InlineResponse200
      */
-    'application_version'?: InlineResponse200ApplicationVersion;
+    'accounts'?: Array<InlineResponse200Accounts>;
     /**
      * 
-     * @type {InlineResponse200NodeInfo}
+     * @type {InlineResponse200Pagination}
      * @memberof InlineResponse200
      */
-    'node_info'?: InlineResponse200NodeInfo;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
- * 
+ * QueryAccountResponse is the response type for the Query/Account RPC method.
  * @export
  * @interface InlineResponse2001
  */
 export interface InlineResponse2001 {
     /**
      * 
-     * @type {boolean}
+     * @type {InlineResponse200Accounts}
      * @memberof InlineResponse2001
      */
-    'syncing'?: boolean;
+    'account'?: InlineResponse200Accounts;
 }
 /**
- * 
+ * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
  * @export
  * @interface InlineResponse20010
  */
 export interface InlineResponse20010 {
     /**
      * 
-     * @type {string}
+     * @type {BlockID}
      * @memberof InlineResponse20010
      */
-    'delegator_address'?: string;
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {InlineResponse20010Block}
+     * @memberof InlineResponse20010
+     */
+    'block'?: InlineResponse20010Block;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20010Block
+ */
+export interface InlineResponse20010Block {
+    /**
+     * 
+     * @type {InlineResponse20010BlockHeader}
+     * @memberof InlineResponse20010Block
+     */
+    'header'?: InlineResponse20010BlockHeader;
+    /**
+     * 
+     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
+     * @memberof InlineResponse20010Block
+     */
+    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidence}
+     * @memberof InlineResponse20010Block
+     */
+    'evidence'?: InlineResponse20010BlockEvidence;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof InlineResponse20010Block
+     */
+    'last_commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20010BlockEvidence
+ */
+export interface InlineResponse20010BlockEvidence {
+    /**
+     * 
+     * @type {Array<InlineResponse20010BlockEvidenceEvidence>}
+     * @memberof InlineResponse20010BlockEvidence
+     */
+    'evidence'?: Array<InlineResponse20010BlockEvidenceEvidence>;
+}
+/**
+ * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
+ * @export
+ * @interface InlineResponse20010BlockEvidenceDuplicateVoteEvidence
+ */
+export interface InlineResponse20010BlockEvidenceDuplicateVoteEvidence {
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
+     */
+    'vote_a'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
+     */
+    'vote_b'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20010
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
+     */
+    'total_voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
+     */
+    'validator_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
+     */
+    'timestamp'?: string;
+}
+/**
+ * Vote represents a prevote, precommit, or commit vote from validators for consensus.
+ * @export
+ * @interface InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+ */
+export interface InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA {
+    /**
+     * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'type'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'round'?: number;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'validator_address'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'validator_index'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
+     */
+    'signature'?: string;
+}
+
+export const InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum = {
+    Unknown: 'SIGNED_MSG_TYPE_UNKNOWN',
+    Prevote: 'SIGNED_MSG_TYPE_PREVOTE',
+    Precommit: 'SIGNED_MSG_TYPE_PRECOMMIT',
+    Proposal: 'SIGNED_MSG_TYPE_PROPOSAL'
+} as const;
+
+export type InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum = typeof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum[keyof typeof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface InlineResponse20010BlockEvidenceEvidence
+ */
+export interface InlineResponse20010BlockEvidenceEvidence {
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidence}
+     * @memberof InlineResponse20010BlockEvidenceEvidence
+     */
+    'duplicate_vote_evidence'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidence;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidence}
+     * @memberof InlineResponse20010BlockEvidenceEvidence
+     */
+    'light_client_attack_evidence'?: InlineResponse20010BlockEvidenceLightClientAttackEvidence;
+}
+/**
+ * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidence
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidence {
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
+     */
+    'conflicting_block'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
+     */
+    'common_height'?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
+     */
+    'byzantine_validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
+     */
+    'total_voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
+     */
+    'timestamp'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock {
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock
+     */
+    'signed_header'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock
+     */
+    'validator_set'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader {
+    /**
+     * 
+     * @type {InlineResponse20010BlockHeader}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
+     */
+    'header'?: InlineResponse20010BlockHeader;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
+     */
+    'commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * Commit contains the evidence that a block was committed by a set of validators.
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'round'?: number;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'signatures'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
+}
+/**
+ * CommitSig is a part of the Vote included in a Commit.
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
+     */
+    'block_id_flag'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
     'validator_address'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20010
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
-    'shares'?: string;
+    'timestamp'?: string;
     /**
      * 
-     * @type {InlineResponse2004TxFeeAmount}
-     * @memberof InlineResponse20010
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
      */
-    'balance'?: InlineResponse2004TxFeeAmount;
+    'signature'?: string;
+}
+
+export const InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum = {
+    Unknown: 'BLOCK_ID_FLAG_UNKNOWN',
+    Absent: 'BLOCK_ID_FLAG_ABSENT',
+    Commit: 'BLOCK_ID_FLAG_COMMIT',
+    Nil: 'BLOCK_ID_FLAG_NIL'
+} as const;
+
+export type InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum = typeof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum[keyof typeof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum];
+
+/**
+ * 
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet {
+    /**
+     * 
+     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    /**
+     * 
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'proposer'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'total_voting_power'?: string;
 }
 /**
  * 
+ * @export
+ * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+ */
+export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     */
+    'pub_key'?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     */
+    'voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
+     */
+    'proposer_priority'?: string;
+}
+/**
+ * Header defines the structure of a Tendermint block header.
+ * @export
+ * @interface InlineResponse20010BlockHeader
+ */
+export interface InlineResponse20010BlockHeader {
+    /**
+     * 
+     * @type {BasicBlockInfo}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'version'?: BasicBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'chain_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'time'?: string;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'last_block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'last_commit_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'data_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'next_validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'consensus_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'app_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'last_results_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'evidence_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20010BlockHeader
+     */
+    'proposer_address'?: string;
+}
+/**
+ * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
  * @export
  * @interface InlineResponse20011
  */
 export interface InlineResponse20011 {
     /**
      * 
-     * @type {string}
+     * @type {BlockID}
      * @memberof InlineResponse20011
      */
-    'delegator_address'?: string;
+    'block_id'?: BlockID;
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse20010Block}
      * @memberof InlineResponse20011
      */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20011
-     */
-    'initial_balance'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20011
-     */
-    'balance'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20011
-     */
-    'creation_height'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20011
-     */
-    'min_time'?: number;
+    'block'?: InlineResponse20010Block;
 }
 /**
- * 
+ * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
  * @export
  * @interface InlineResponse20012
  */
 export interface InlineResponse20012 {
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse20012DefaultNodeInfo}
      * @memberof InlineResponse20012
      */
-    'delegator_address'?: string;
+    'default_node_info'?: InlineResponse20012DefaultNodeInfo;
+    /**
+     * 
+     * @type {InlineResponse20012ApplicationVersion}
+     * @memberof InlineResponse20012
+     */
+    'application_version'?: InlineResponse20012ApplicationVersion;
+}
+/**
+ * VersionInfo is the type for the GetNodeInfoResponse message.
+ * @export
+ * @interface InlineResponse20012ApplicationVersion
+ */
+export interface InlineResponse20012ApplicationVersion {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012
+     * @memberof InlineResponse20012ApplicationVersion
      */
-    'validator_address'?: string;
+    'name'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20012Entries>}
-     * @memberof InlineResponse20012
+     * @type {string}
+     * @memberof InlineResponse20012ApplicationVersion
      */
-    'entries'?: Array<InlineResponse20012Entries>;
+    'app_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012ApplicationVersion
+     */
+    'version'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012ApplicationVersion
+     */
+    'git_commit'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012ApplicationVersion
+     */
+    'build_tags'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012ApplicationVersion
+     */
+    'go_version'?: string;
+    /**
+     * 
+     * @type {Array<ModuleIsTheTypeForVersionInfo>}
+     * @memberof InlineResponse20012ApplicationVersion
+     */
+    'build_deps'?: Array<ModuleIsTheTypeForVersionInfo>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012ApplicationVersion
+     */
+    'cosmos_sdk_version'?: string;
 }
 /**
  * 
  * @export
- * @interface InlineResponse20012Entries
+ * @interface InlineResponse20012DefaultNodeInfo
  */
-export interface InlineResponse20012Entries {
+export interface InlineResponse20012DefaultNodeInfo {
+    /**
+     * 
+     * @type {InlineResponse20012DefaultNodeInfoProtocolVersion}
+     * @memberof InlineResponse20012DefaultNodeInfo
+     */
+    'protocol_version'?: InlineResponse20012DefaultNodeInfoProtocolVersion;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012Entries
+     * @memberof InlineResponse20012DefaultNodeInfo
      */
-    'initial_balance'?: string;
+    'default_node_id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012Entries
+     * @memberof InlineResponse20012DefaultNodeInfo
      */
-    'balance'?: string;
+    'listen_addr'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012Entries
+     * @memberof InlineResponse20012DefaultNodeInfo
      */
-    'creation_height'?: string;
+    'network'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20012Entries
+     * @memberof InlineResponse20012DefaultNodeInfo
      */
-    'min_time'?: string;
+    'version'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfo
+     */
+    'channels'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfo
+     */
+    'moniker'?: string;
+    /**
+     * 
+     * @type {InlineResponse20012DefaultNodeInfoOther}
+     * @memberof InlineResponse20012DefaultNodeInfo
+     */
+    'other'?: InlineResponse20012DefaultNodeInfoOther;
 }
 /**
  * 
+ * @export
+ * @interface InlineResponse20012DefaultNodeInfoOther
+ */
+export interface InlineResponse20012DefaultNodeInfoOther {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfoOther
+     */
+    'tx_index'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfoOther
+     */
+    'rpc_address'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20012DefaultNodeInfoProtocolVersion
+ */
+export interface InlineResponse20012DefaultNodeInfoProtocolVersion {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfoProtocolVersion
+     */
+    'p2p'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfoProtocolVersion
+     */
+    'block'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012DefaultNodeInfoProtocolVersion
+     */
+    'app'?: string;
+}
+/**
+ * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
  * @export
  * @interface InlineResponse20013
  */
 export interface InlineResponse20013 {
     /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'operator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'consensus_pubkey'?: string;
-    /**
      * 
      * @type {boolean}
      * @memberof InlineResponse20013
      */
-    'jailed'?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20013
-     */
-    'status'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'tokens'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'delegator_shares'?: string;
-    /**
-     * 
-     * @type {StakingDelegatorsDelegatorAddrValidatorsDescription}
-     * @memberof InlineResponse20013
-     */
-    'description'?: StakingDelegatorsDelegatorAddrValidatorsDescription;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'bond_height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20013
-     */
-    'bond_intra_tx_counter'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'unbonding_height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20013
-     */
-    'unbonding_time'?: string;
-    /**
-     * 
-     * @type {StakingDelegatorsDelegatorAddrValidatorsCommission}
-     * @memberof InlineResponse20013
-     */
-    'commission'?: StakingDelegatorsDelegatorAddrValidatorsCommission;
+    'syncing'?: boolean;
 }
 /**
- * 
+ * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
  * @export
  * @interface InlineResponse20014
  */
@@ -4583,40 +4089,72 @@ export interface InlineResponse20014 {
      * @type {string}
      * @memberof InlineResponse20014
      */
-    'loose_tokens'?: string;
+    'block_height'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<InlineResponse20014Validators>}
      * @memberof InlineResponse20014
      */
-    'bonded_tokens'?: string;
+    'validators'?: Array<InlineResponse20014Validators>;
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse20014Pagination}
      * @memberof InlineResponse20014
      */
-    'inflation_last_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014
-     */
-    'inflation'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014
-     */
-    'date_last_commission_reset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014
-     */
-    'prev_bonded_shares'?: string;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
- * 
+ * pagination defines an pagination for the response.
+ * @export
+ * @interface InlineResponse20014Pagination
+ */
+export interface InlineResponse20014Pagination {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20014Pagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20014Pagination
+     */
+    'total'?: string;
+}
+/**
+ * Validator is the type for the validator-set.
+ * @export
+ * @interface InlineResponse20014Validators
+ */
+export interface InlineResponse20014Validators {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20014Validators
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20014Validators
+     */
+    'pub_key'?: InlineResponse200Accounts;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20014Validators
+     */
+    'voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20014Validators
+     */
+    'proposer_priority'?: string;
+}
+/**
+ * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
  * @export
  * @interface InlineResponse20015
  */
@@ -4626,2544 +4164,477 @@ export interface InlineResponse20015 {
      * @type {string}
      * @memberof InlineResponse20015
      */
-    'inflation_rate_change'?: string;
+    'block_height'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<InlineResponse20014Validators>}
      * @memberof InlineResponse20015
      */
-    'inflation_max'?: string;
+    'validators'?: Array<InlineResponse20014Validators>;
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse20014Pagination}
      * @memberof InlineResponse20015
      */
-    'inflation_min'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20015
-     */
-    'goal_bonded'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20015
-     */
-    'unbonding_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20015
-     */
-    'max_validators'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20015
-     */
-    'bond_denom'?: string;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
- * 
+ * QueryCommunityPoolResponse is the response type for the Query/CommunityPool RPC method.
  * @export
  * @interface InlineResponse20016
  */
 export interface InlineResponse20016 {
     /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    'start_height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    'index_offset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    'jailed_until'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016
-     */
-    'missed_blocks_counter'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20017
- */
-export interface InlineResponse20017 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'max_evidence_age'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'signed_blocks_window'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'min_signed_per_window'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'double_sign_unbond_duration'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'downtime_unbond_duration'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'slash_fraction_double_sign'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    'slash_fraction_downtime'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20018
- */
-export interface InlineResponse20018 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20018
-     */
-    'proposal_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    'proposal_type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    'proposal_status'?: string;
-    /**
-     * 
-     * @type {GovProposalsFinalTallyResult}
-     * @memberof InlineResponse20018
-     */
-    'final_tally_result'?: GovProposalsFinalTallyResult;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    'submit_time'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20018
-     */
-    'total_deposit'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    'voting_start_time'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20019
- */
-export interface InlineResponse20019 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20019
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20019
-     */
-    'proposer'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002
- */
-export interface InlineResponse2002 {
-    /**
-     * 
-     * @type {InlineResponse2002BlockMeta}
-     * @memberof InlineResponse2002
-     */
-    'block_meta'?: InlineResponse2002BlockMeta;
-    /**
-     * 
-     * @type {InlineResponse2002Block}
-     * @memberof InlineResponse2002
-     */
-    'block'?: InlineResponse2002Block;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20020
- */
-export interface InlineResponse20020 {
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20020
-     */
-    'amount'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20020
-     */
-    'proposal_id'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse20020
-     */
-    'depositor'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20021
- */
-export interface InlineResponse20021 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20021
-     */
-    'voter'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20021
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20021
-     */
-    'option'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20022
- */
-export interface InlineResponse20022 {
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20022
-     */
-    'min_deposit'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20022
-     */
-    'max_deposit_period'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20023
- */
-export interface InlineResponse20023 {
-    /**
-     * 
-     * @type {Array<InlineResponse20023Rewards>}
-     * @memberof InlineResponse20023
-     */
-    'rewards'?: Array<InlineResponse20023Rewards>;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20023
-     */
-    'total'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20023Rewards
- */
-export interface InlineResponse20023Rewards {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse20023Rewards
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20023Rewards
-     */
-    'reward'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20024
- */
-export interface InlineResponse20024 {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse20024
-     */
-    'operator_address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20024
-     */
-    'self_bond_rewards'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse20024
-     */
-    'val_commission'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- * @export
- * @interface InlineResponse20025
- */
-export interface InlineResponse20025 {
-    /**
-     * 
-     * @type {Array<InlineResponse20025Accounts>}
-     * @memberof InlineResponse20025
-     */
-    'accounts'?: Array<InlineResponse20025Accounts>;
-    /**
-     * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20025
-     */
-    'pagination'?: InlineResponse20025Pagination;
-}
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface InlineResponse20025Accounts
- */
-export interface InlineResponse20025Accounts {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof InlineResponse20025Accounts
-     */
-    'type_url'?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof InlineResponse20025Accounts
-     */
-    'value'?: string;
-}
-/**
- * pagination defines the pagination in the response.
- * @export
- * @interface InlineResponse20025Pagination
- */
-export interface InlineResponse20025Pagination {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20025Pagination
-     */
-    'next_key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20025Pagination
-     */
-    'total'?: string;
-}
-/**
- * QueryAccountResponse is the response type for the Query/Account RPC method.
- * @export
- * @interface InlineResponse20026
- */
-export interface InlineResponse20026 {
-    /**
-     * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20026
-     */
-    'account'?: InlineResponse20025Accounts;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20027
- */
-export interface InlineResponse20027 {
-    /**
-     * 
-     * @type {InlineResponse20027Params}
-     * @memberof InlineResponse20027
-     */
-    'params'?: InlineResponse20027Params;
-}
-/**
- * params defines the parameters of the module.
- * @export
- * @interface InlineResponse20027Params
- */
-export interface InlineResponse20027Params {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Params
-     */
-    'max_memo_characters'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Params
-     */
-    'tx_sig_limit'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Params
-     */
-    'tx_size_cost_per_byte'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Params
-     */
-    'sig_verify_cost_ed25519'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Params
-     */
-    'sig_verify_cost_secp256k1'?: string;
-}
-/**
- * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC method.
- * @export
- * @interface InlineResponse20028
- */
-export interface InlineResponse20028 {
-    /**
-     * balances is the balances of all the coins.
-     * @type {Array<InlineResponse20028Balances>}
-     * @memberof InlineResponse20028
-     */
-    'balances'?: Array<InlineResponse20028Balances>;
-    /**
-     * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20028
-     */
-    'pagination'?: InlineResponse20025Pagination;
-}
-/**
- * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
- * @export
- * @interface InlineResponse20028Balances
- */
-export interface InlineResponse20028Balances {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20028Balances
-     */
-    'denom'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20028Balances
-     */
-    'amount'?: string;
-}
-/**
- * QueryBalanceResponse is the response type for the Query/Balance RPC method.
- * @export
- * @interface InlineResponse20029
- */
-export interface InlineResponse20029 {
-    /**
-     * 
-     * @type {InlineResponse20028Balances}
-     * @memberof InlineResponse20029
-     */
-    'balance'?: InlineResponse20028Balances;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002Block
- */
-export interface InlineResponse2002Block {
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeader}
-     * @memberof InlineResponse2002Block
-     */
-    'header'?: InlineResponse2002BlockMetaHeader;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse2002Block
-     */
-    'txs'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse2002Block
-     */
-    'evidence'?: Array<string>;
-    /**
-     * 
-     * @type {InlineResponse2002BlockLastCommit}
-     * @memberof InlineResponse2002Block
-     */
-    'last_commit'?: InlineResponse2002BlockLastCommit;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockLastCommit
- */
-export interface InlineResponse2002BlockLastCommit {
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockId}
-     * @memberof InlineResponse2002BlockLastCommit
-     */
-    'block_id'?: InlineResponse2002BlockMetaHeaderLastBlockId;
-    /**
-     * 
-     * @type {Array<InlineResponse2002BlockLastCommitPrecommits>}
-     * @memberof InlineResponse2002BlockLastCommit
-     */
-    'precommits'?: Array<InlineResponse2002BlockLastCommitPrecommits>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockLastCommitPrecommits
- */
-export interface InlineResponse2002BlockLastCommitPrecommits {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'validator_index'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'round'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'type'?: number;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockId}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'block_id'?: InlineResponse2002BlockMetaHeaderLastBlockId;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockLastCommitPrecommits
-     */
-    'signature'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockMeta
- */
-export interface InlineResponse2002BlockMeta {
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeader}
-     * @memberof InlineResponse2002BlockMeta
-     */
-    'header'?: InlineResponse2002BlockMetaHeader;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockId}
-     * @memberof InlineResponse2002BlockMeta
-     */
-    'block_id'?: InlineResponse2002BlockMetaHeaderLastBlockId;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockMetaHeader
- */
-export interface InlineResponse2002BlockMetaHeader {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'height'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'num_txs'?: number;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockId}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'last_block_id'?: InlineResponse2002BlockMetaHeaderLastBlockId;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'total_txs'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'last_commit_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'data_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'next_validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'consensus_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'app_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'last_results_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'evidence_hash'?: string;
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'proposer_address'?: string;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderVersion}
-     * @memberof InlineResponse2002BlockMetaHeader
-     */
-    'version'?: InlineResponse2002BlockMetaHeaderVersion;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockMetaHeaderLastBlockId
- */
-export interface InlineResponse2002BlockMetaHeaderLastBlockId {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeaderLastBlockId
-     */
-    'hash'?: string;
-    /**
-     * 
-     * @type {InlineResponse2002BlockMetaHeaderLastBlockIdParts}
-     * @memberof InlineResponse2002BlockMetaHeaderLastBlockId
-     */
-    'parts'?: InlineResponse2002BlockMetaHeaderLastBlockIdParts;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockMetaHeaderLastBlockIdParts
- */
-export interface InlineResponse2002BlockMetaHeaderLastBlockIdParts {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002BlockMetaHeaderLastBlockIdParts
-     */
-    'total'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeaderLastBlockIdParts
-     */
-    'hash'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002BlockMetaHeaderVersion
- */
-export interface InlineResponse2002BlockMetaHeaderVersion {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeaderVersion
-     */
-    'block'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002BlockMetaHeaderVersion
-     */
-    'app'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2003
- */
-export interface InlineResponse2003 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003
-     */
-    'block_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2003Validators>}
-     * @memberof InlineResponse2003
-     */
-    'validators'?: Array<InlineResponse2003Validators>;
-}
-/**
- * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
- * @export
- * @interface InlineResponse20030
- */
-export interface InlineResponse20030 {
-    /**
-     * 
-     * @type {Array<InlineResponse20030DenomOwners>}
-     * @memberof InlineResponse20030
-     */
-    'denom_owners'?: Array<InlineResponse20030DenomOwners>;
-    /**
-     * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20030
-     */
-    'pagination'?: InlineResponse20025Pagination;
-}
-/**
- * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
- * @export
- * @interface InlineResponse20030DenomOwners
- */
-export interface InlineResponse20030DenomOwners {
-    /**
-     * address defines the address that owns a particular denomination.
-     * @type {string}
-     * @memberof InlineResponse20030DenomOwners
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {InlineResponse20028Balances}
-     * @memberof InlineResponse20030DenomOwners
-     */
-    'balance'?: InlineResponse20028Balances;
-}
-/**
- * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
- * @export
- * @interface InlineResponse20031
- */
-export interface InlineResponse20031 {
-    /**
-     * metadata provides the client information for all the registered tokens.
-     * @type {Array<InlineResponse20031Metadatas>}
-     * @memberof InlineResponse20031
-     */
-    'metadatas'?: Array<InlineResponse20031Metadatas>;
-    /**
-     * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20031
-     */
-    'pagination'?: InlineResponse20025Pagination;
-}
-/**
- * DenomUnit represents a struct that describes a given denomination unit of the basic token.
- * @export
- * @interface InlineResponse20031DenomUnits
- */
-export interface InlineResponse20031DenomUnits {
-    /**
-     * denom represents the string name of the given denom unit (e.g uatom).
-     * @type {string}
-     * @memberof InlineResponse20031DenomUnits
-     */
-    'denom'?: string;
-    /**
-     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
-     * @type {number}
-     * @memberof InlineResponse20031DenomUnits
-     */
-    'exponent'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse20031DenomUnits
-     */
-    'aliases'?: Array<string>;
-}
-/**
- * Metadata represents a struct that describes a basic token.
- * @export
- * @interface InlineResponse20031Metadatas
- */
-export interface InlineResponse20031Metadatas {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20031DenomUnits>}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'denom_units'?: Array<InlineResponse20031DenomUnits>;
-    /**
-     * base represents the base denom (should be the DenomUnit with exponent = 0).
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'base'?: string;
-    /**
-     * display indicates the suggested denom that should be displayed in clients.
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'display'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'name'?: string;
-    /**
-     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'symbol'?: string;
-    /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'uri'?: string;
-    /**
-     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
-     * @type {string}
-     * @memberof InlineResponse20031Metadatas
-     */
-    'uri_hash'?: string;
-}
-/**
- * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
- * @export
- * @interface InlineResponse20032
- */
-export interface InlineResponse20032 {
-    /**
-     * 
-     * @type {InlineResponse20031Metadatas}
-     * @memberof InlineResponse20032
-     */
-    'metadata'?: InlineResponse20031Metadatas;
-}
-/**
- * QueryParamsResponse defines the response type for querying x/bank parameters.
- * @export
- * @interface InlineResponse20033
- */
-export interface InlineResponse20033 {
-    /**
-     * 
-     * @type {InlineResponse20033Params}
-     * @memberof InlineResponse20033
-     */
-    'params'?: InlineResponse20033Params;
-}
-/**
- * Params defines the parameters for the bank module.
- * @export
- * @interface InlineResponse20033Params
- */
-export interface InlineResponse20033Params {
-    /**
-     * 
-     * @type {Array<InlineResponse20033ParamsSendEnabled>}
-     * @memberof InlineResponse20033Params
-     */
-    'send_enabled'?: Array<InlineResponse20033ParamsSendEnabled>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20033Params
-     */
-    'default_send_enabled'?: boolean;
-}
-/**
- * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
- * @export
- * @interface InlineResponse20033ParamsSendEnabled
- */
-export interface InlineResponse20033ParamsSendEnabled {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20033ParamsSendEnabled
-     */
-    'denom'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20033ParamsSendEnabled
-     */
-    'enabled'?: boolean;
-}
-/**
- * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
- * @export
- * @interface InlineResponse20034
- */
-export interface InlineResponse20034 {
-    /**
-     * 
-     * @type {InlineResponse20028Balances}
-     * @memberof InlineResponse20034
-     */
-    'amount'?: InlineResponse20028Balances;
-}
-/**
- * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
- * @export
- * @interface InlineResponse20035
- */
-export interface InlineResponse20035 {
-    /**
-     * 
-     * @type {BlockID1}
-     * @memberof InlineResponse20035
-     */
-    'block_id'?: BlockID1;
-    /**
-     * 
-     * @type {InlineResponse20035Block}
-     * @memberof InlineResponse20035
-     */
-    'block'?: InlineResponse20035Block;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20035Block
- */
-export interface InlineResponse20035Block {
-    /**
-     * 
-     * @type {InlineResponse20035BlockHeader}
-     * @memberof InlineResponse20035Block
-     */
-    'header'?: InlineResponse20035BlockHeader;
-    /**
-     * 
-     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
-     * @memberof InlineResponse20035Block
-     */
-    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidence}
-     * @memberof InlineResponse20035Block
-     */
-    'evidence'?: InlineResponse20035BlockEvidence;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof InlineResponse20035Block
-     */
-    'last_commit'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20035BlockEvidence
- */
-export interface InlineResponse20035BlockEvidence {
-    /**
-     * 
-     * @type {Array<InlineResponse20035BlockEvidenceEvidence>}
-     * @memberof InlineResponse20035BlockEvidence
-     */
-    'evidence'?: Array<InlineResponse20035BlockEvidenceEvidence>;
-}
-/**
- * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
- * @export
- * @interface InlineResponse20035BlockEvidenceDuplicateVoteEvidence
- */
-export interface InlineResponse20035BlockEvidenceDuplicateVoteEvidence {
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
-     */
-    'vote_a'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
-     */
-    'vote_b'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
-     */
-    'total_voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
-     */
-    'validator_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidence
-     */
-    'timestamp'?: string;
-}
-/**
- * Vote represents a prevote, precommit, or commit vote from validators for consensus.
- * @export
- * @interface InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
- */
-export interface InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA {
-    /**
-     * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'type'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'round'?: number;
-    /**
-     * 
-     * @type {BlockID1}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'block_id'?: BlockID1;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'validator_index'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'signature'?: string;
-}
-
-export const InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum = {
-    Unknown: 'SIGNED_MSG_TYPE_UNKNOWN',
-    Prevote: 'SIGNED_MSG_TYPE_PREVOTE',
-    Precommit: 'SIGNED_MSG_TYPE_PRECOMMIT',
-    Proposal: 'SIGNED_MSG_TYPE_PROPOSAL'
-} as const;
-
-export type InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum = typeof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum[keyof typeof InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum];
-
-/**
- * 
- * @export
- * @interface InlineResponse20035BlockEvidenceEvidence
- */
-export interface InlineResponse20035BlockEvidenceEvidence {
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidence}
-     * @memberof InlineResponse20035BlockEvidenceEvidence
-     */
-    'duplicate_vote_evidence'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidence;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidence}
-     * @memberof InlineResponse20035BlockEvidenceEvidence
-     */
-    'light_client_attack_evidence'?: InlineResponse20035BlockEvidenceLightClientAttackEvidence;
-}
-/**
- * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidence
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidence {
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
-     */
-    'conflicting_block'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
-     */
-    'common_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
-     */
-    'byzantine_validators'?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
-     */
-    'total_voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidence
-     */
-    'timestamp'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock {
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock
-     */
-    'signed_header'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock
-     */
-    'validator_set'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader {
-    /**
-     * 
-     * @type {InlineResponse20035BlockHeader}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
-     */
-    'header'?: InlineResponse20035BlockHeader;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
-     */
-    'commit'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
-}
-/**
- * Commit contains the evidence that a block was committed by a set of validators.
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'round'?: number;
-    /**
-     * 
-     * @type {BlockID1}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'block_id'?: BlockID1;
-    /**
-     * 
-     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'signatures'?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
-}
-/**
- * CommitSig is a part of the Vote included in a Commit.
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'block_id_flag'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'signature'?: string;
-}
-
-export const InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum = {
-    Unknown: 'BLOCK_ID_FLAG_UNKNOWN',
-    Absent: 'BLOCK_ID_FLAG_ABSENT',
-    Commit: 'BLOCK_ID_FLAG_COMMIT',
-    Nil: 'BLOCK_ID_FLAG_NIL'
-} as const;
-
-export type InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum = typeof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum[keyof typeof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum];
-
-/**
- * 
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet {
-    /**
-     * 
-     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'validators'?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
-    /**
-     * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'proposer'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'total_voting_power'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
- */
-export interface InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'pub_key'?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'proposer_priority'?: string;
-}
-/**
- * Header defines the structure of a Tendermint block header.
- * @export
- * @interface InlineResponse20035BlockHeader
- */
-export interface InlineResponse20035BlockHeader {
-    /**
-     * 
-     * @type {BasicBlockInfo}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'version'?: BasicBlockInfo;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'time'?: string;
-    /**
-     * 
-     * @type {BlockID1}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'last_block_id'?: BlockID1;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'last_commit_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'data_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'next_validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'consensus_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'app_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'last_results_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'evidence_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20035BlockHeader
-     */
-    'proposer_address'?: string;
-}
-/**
- * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
- * @export
- * @interface InlineResponse20036
- */
-export interface InlineResponse20036 {
-    /**
-     * 
-     * @type {BlockID1}
-     * @memberof InlineResponse20036
-     */
-    'block_id'?: BlockID1;
-    /**
-     * 
-     * @type {InlineResponse20035Block}
-     * @memberof InlineResponse20036
-     */
-    'block'?: InlineResponse20035Block;
-}
-/**
- * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
- * @export
- * @interface InlineResponse20037
- */
-export interface InlineResponse20037 {
-    /**
-     * 
-     * @type {InlineResponse20037DefaultNodeInfo}
-     * @memberof InlineResponse20037
-     */
-    'default_node_info'?: InlineResponse20037DefaultNodeInfo;
-    /**
-     * 
-     * @type {InlineResponse20037ApplicationVersion}
-     * @memberof InlineResponse20037
-     */
-    'application_version'?: InlineResponse20037ApplicationVersion;
-}
-/**
- * VersionInfo is the type for the GetNodeInfoResponse message.
- * @export
- * @interface InlineResponse20037ApplicationVersion
- */
-export interface InlineResponse20037ApplicationVersion {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'app_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'version'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'git_commit'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'build_tags'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'go_version'?: string;
-    /**
-     * 
-     * @type {Array<ModuleIsTheTypeForVersionInfo>}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'build_deps'?: Array<ModuleIsTheTypeForVersionInfo>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037ApplicationVersion
-     */
-    'cosmos_sdk_version'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20037DefaultNodeInfo
- */
-export interface InlineResponse20037DefaultNodeInfo {
-    /**
-     * 
-     * @type {InlineResponse20037DefaultNodeInfoProtocolVersion}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'protocol_version'?: InlineResponse20037DefaultNodeInfoProtocolVersion;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'default_node_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'listen_addr'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'network'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'version'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'channels'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'moniker'?: string;
-    /**
-     * 
-     * @type {InlineResponse20037DefaultNodeInfoOther}
-     * @memberof InlineResponse20037DefaultNodeInfo
-     */
-    'other'?: InlineResponse20037DefaultNodeInfoOther;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20037DefaultNodeInfoOther
- */
-export interface InlineResponse20037DefaultNodeInfoOther {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfoOther
-     */
-    'tx_index'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfoOther
-     */
-    'rpc_address'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20037DefaultNodeInfoProtocolVersion
- */
-export interface InlineResponse20037DefaultNodeInfoProtocolVersion {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfoProtocolVersion
-     */
-    'p2p'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfoProtocolVersion
-     */
-    'block'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037DefaultNodeInfoProtocolVersion
-     */
-    'app'?: string;
-}
-/**
- * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
- * @export
- * @interface InlineResponse20038
- */
-export interface InlineResponse20038 {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20038
-     */
-    'syncing'?: boolean;
-}
-/**
- * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
- * @export
- * @interface InlineResponse20039
- */
-export interface InlineResponse20039 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039
-     */
-    'block_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20039Validators>}
-     * @memberof InlineResponse20039
-     */
-    'validators'?: Array<InlineResponse20039Validators>;
-    /**
-     * 
-     * @type {InlineResponse20039Pagination}
-     * @memberof InlineResponse20039
-     */
-    'pagination'?: InlineResponse20039Pagination;
-}
-/**
- * pagination defines an pagination for the response.
- * @export
- * @interface InlineResponse20039Pagination
- */
-export interface InlineResponse20039Pagination {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039Pagination
-     */
-    'next_key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039Pagination
-     */
-    'total'?: string;
-}
-/**
- * Validator is the type for the validator-set.
- * @export
- * @interface InlineResponse20039Validators
- */
-export interface InlineResponse20039Validators {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039Validators
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20039Validators
-     */
-    'pub_key'?: InlineResponse20025Accounts;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039Validators
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039Validators
-     */
-    'proposer_priority'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2003Validators
- */
-export interface InlineResponse2003Validators {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof InlineResponse2003Validators
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Validators
-     */
-    'pub_key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Validators
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Validators
-     */
-    'proposer_priority'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004
- */
-export interface InlineResponse2004 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004
-     */
-    'hash'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2004
-     */
-    'height'?: number;
-    /**
-     * 
-     * @type {InlineResponse2004Tx}
-     * @memberof InlineResponse2004
-     */
-    'tx'?: InlineResponse2004Tx;
-    /**
-     * 
-     * @type {InlineResponse2004Result}
-     * @memberof InlineResponse2004
-     */
-    'result'?: InlineResponse2004Result;
-}
-/**
- * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
- * @export
- * @interface InlineResponse20040
- */
-export interface InlineResponse20040 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20040
-     */
-    'block_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20039Validators>}
-     * @memberof InlineResponse20040
-     */
-    'validators'?: Array<InlineResponse20039Validators>;
-    /**
-     * 
-     * @type {InlineResponse20039Pagination}
-     * @memberof InlineResponse20040
-     */
-    'pagination'?: InlineResponse20039Pagination;
-}
-/**
- * QueryCommunityPoolResponse is the response type for the Query/CommunityPool RPC method.
- * @export
- * @interface InlineResponse20041
- */
-export interface InlineResponse20041 {
-    /**
      * pool defines community pool\'s coins.
-     * @type {Array<InlineResponse20041Pool>}
-     * @memberof InlineResponse20041
+     * @type {Array<InlineResponse20016Pool>}
+     * @memberof InlineResponse20016
      */
-    'pool'?: Array<InlineResponse20041Pool>;
+    'pool'?: Array<InlineResponse20016Pool>;
 }
 /**
  * DecCoin defines a token with a denomination and a decimal amount.  NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto.
  * @export
- * @interface InlineResponse20041Pool
+ * @interface InlineResponse20016Pool
  */
-export interface InlineResponse20041Pool {
+export interface InlineResponse20016Pool {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20041Pool
+     * @memberof InlineResponse20016Pool
      */
     'denom'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20041Pool
+     * @memberof InlineResponse20016Pool
      */
     'amount'?: string;
 }
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
  * @export
- * @interface InlineResponse20042
+ * @interface InlineResponse20017
  */
-export interface InlineResponse20042 {
+export interface InlineResponse20017 {
     /**
      * rewards defines all the rewards accrued by a delegator.
-     * @type {Array<InlineResponse20042Rewards>}
-     * @memberof InlineResponse20042
+     * @type {Array<InlineResponse20017Rewards>}
+     * @memberof InlineResponse20017
      */
-    'rewards'?: Array<InlineResponse20042Rewards>;
+    'rewards'?: Array<InlineResponse20017Rewards>;
     /**
      * total defines the sum of all the rewards.
-     * @type {Array<InlineResponse20041Pool>}
-     * @memberof InlineResponse20042
+     * @type {Array<InlineResponse20016Pool>}
+     * @memberof InlineResponse20017
      */
-    'total'?: Array<InlineResponse20041Pool>;
+    'total'?: Array<InlineResponse20016Pool>;
 }
 /**
  * DelegationDelegatorReward represents the properties of a delegator\'s delegation reward.
  * @export
- * @interface InlineResponse20042Rewards
+ * @interface InlineResponse20017Rewards
  */
-export interface InlineResponse20042Rewards {
+export interface InlineResponse20017Rewards {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20042Rewards
+     * @memberof InlineResponse20017Rewards
      */
     'validator_address'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20041Pool>}
-     * @memberof InlineResponse20042Rewards
+     * @type {Array<InlineResponse20016Pool>}
+     * @memberof InlineResponse20017Rewards
      */
-    'reward'?: Array<InlineResponse20041Pool>;
+    'reward'?: Array<InlineResponse20016Pool>;
 }
 /**
  * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
  * @export
- * @interface InlineResponse20043
+ * @interface InlineResponse20018
  */
-export interface InlineResponse20043 {
+export interface InlineResponse20018 {
     /**
      * rewards defines the rewards accrued by a delegation.
-     * @type {Array<InlineResponse20041Pool>}
-     * @memberof InlineResponse20043
+     * @type {Array<InlineResponse20016Pool>}
+     * @memberof InlineResponse20018
      */
-    'rewards'?: Array<InlineResponse20041Pool>;
+    'rewards'?: Array<InlineResponse20016Pool>;
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
  * @export
- * @interface InlineResponse20044
+ * @interface InlineResponse20019
  */
-export interface InlineResponse20044 {
+export interface InlineResponse20019 {
     /**
      * validators defines the validators a delegator is delegating for.
      * @type {Array<string>}
-     * @memberof InlineResponse20044
+     * @memberof InlineResponse20019
      */
     'validators'?: Array<string>;
 }
 /**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface InlineResponse2002
+ */
+export interface InlineResponse2002 {
+    /**
+     * 
+     * @type {InlineResponse2002Params}
+     * @memberof InlineResponse2002
+     */
+    'params'?: InlineResponse2002Params;
+}
+/**
  * QueryDelegatorWithdrawAddressResponse is the response type for the Query/DelegatorWithdrawAddress RPC method.
  * @export
- * @interface InlineResponse20045
+ * @interface InlineResponse20020
  */
-export interface InlineResponse20045 {
+export interface InlineResponse20020 {
     /**
      * withdraw_address defines the delegator address to query for.
      * @type {string}
-     * @memberof InlineResponse20045
+     * @memberof InlineResponse20020
      */
     'withdraw_address'?: string;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse20046
+ * @interface InlineResponse20021
  */
-export interface InlineResponse20046 {
+export interface InlineResponse20021 {
     /**
      * 
-     * @type {InlineResponse20046Params}
-     * @memberof InlineResponse20046
+     * @type {InlineResponse20021Params}
+     * @memberof InlineResponse20021
      */
-    'params'?: InlineResponse20046Params;
+    'params'?: InlineResponse20021Params;
 }
 /**
  * params defines the parameters of the module.
  * @export
- * @interface InlineResponse20046Params
+ * @interface InlineResponse20021Params
  */
-export interface InlineResponse20046Params {
+export interface InlineResponse20021Params {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20046Params
+     * @memberof InlineResponse20021Params
      */
     'community_tax'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20046Params
+     * @memberof InlineResponse20021Params
      */
     'base_proposer_reward'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20046Params
+     * @memberof InlineResponse20021Params
      */
     'bonus_proposer_reward'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof InlineResponse20046Params
+     * @memberof InlineResponse20021Params
      */
     'withdraw_addr_enabled'?: boolean;
 }
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the Query/ValidatorOutstandingRewards RPC method.
  * @export
- * @interface InlineResponse20047
+ * @interface InlineResponse20022
  */
-export interface InlineResponse20047 {
+export interface InlineResponse20022 {
     /**
      * 
-     * @type {InlineResponse20047Rewards}
-     * @memberof InlineResponse20047
+     * @type {InlineResponse20022Rewards}
+     * @memberof InlineResponse20022
      */
-    'rewards'?: InlineResponse20047Rewards;
+    'rewards'?: InlineResponse20022Rewards;
 }
 /**
  * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
  * @export
- * @interface InlineResponse20047Rewards
+ * @interface InlineResponse20022Rewards
  */
-export interface InlineResponse20047Rewards {
+export interface InlineResponse20022Rewards {
     /**
      * 
-     * @type {Array<InlineResponse20041Pool>}
-     * @memberof InlineResponse20047Rewards
+     * @type {Array<InlineResponse20016Pool>}
+     * @memberof InlineResponse20022Rewards
      */
-    'rewards'?: Array<InlineResponse20041Pool>;
+    'rewards'?: Array<InlineResponse20016Pool>;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
  * @export
- * @interface InlineResponse20048
+ * @interface InlineResponse20023
  */
-export interface InlineResponse20048 {
+export interface InlineResponse20023 {
     /**
      * slashes defines the slashes the validator received.
-     * @type {Array<InlineResponse20048Slashes>}
-     * @memberof InlineResponse20048
+     * @type {Array<InlineResponse20023Slashes>}
+     * @memberof InlineResponse20023
      */
-    'slashes'?: Array<InlineResponse20048Slashes>;
+    'slashes'?: Array<InlineResponse20023Slashes>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20048
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20023
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
  * @export
- * @interface InlineResponse20048Slashes
+ * @interface InlineResponse20023Slashes
  */
-export interface InlineResponse20048Slashes {
+export interface InlineResponse20023Slashes {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20048Slashes
+     * @memberof InlineResponse20023Slashes
      */
     'validator_period'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20048Slashes
+     * @memberof InlineResponse20023Slashes
      */
     'fraction'?: string;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC method.
  * @export
- * @interface InlineResponse20049
+ * @interface InlineResponse20024
  */
-export interface InlineResponse20049 {
+export interface InlineResponse20024 {
     /**
      * evidence returns all evidences.
-     * @type {Array<InlineResponse20025Accounts>}
-     * @memberof InlineResponse20049
+     * @type {Array<InlineResponse200Accounts>}
+     * @memberof InlineResponse20024
      */
-    'evidence'?: Array<InlineResponse20025Accounts>;
+    'evidence'?: Array<InlineResponse200Accounts>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20049
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20024
      */
-    'pagination'?: InlineResponse20025Pagination;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004Result
- */
-export interface InlineResponse2004Result {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004Result
-     */
-    'log'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004Result
-     */
-    'gas_wanted'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004Result
-     */
-    'gas_used'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004ResultTags>}
-     * @memberof InlineResponse2004Result
-     */
-    'tags'?: Array<InlineResponse2004ResultTags>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004ResultTags
- */
-export interface InlineResponse2004ResultTags {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004ResultTags
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004ResultTags
-     */
-    'value'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004Tx
- */
-export interface InlineResponse2004Tx {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse2004Tx
-     */
-    'msg'?: Array<string>;
-    /**
-     * 
-     * @type {InlineResponse2004TxFee}
-     * @memberof InlineResponse2004Tx
-     */
-    'fee'?: InlineResponse2004TxFee;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004Tx
-     */
-    'memo'?: string;
-    /**
-     * 
-     * @type {InlineResponse2004TxSignature}
-     * @memberof InlineResponse2004Tx
-     */
-    'signature'?: InlineResponse2004TxSignature;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004TxFee
- */
-export interface InlineResponse2004TxFee {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxFee
-     */
-    'gas'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse2004TxFee
-     */
-    'amount'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004TxFeeAmount
- */
-export interface InlineResponse2004TxFeeAmount {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxFeeAmount
-     */
-    'denom'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxFeeAmount
-     */
-    'amount'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004TxSignature
- */
-export interface InlineResponse2004TxSignature {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxSignature
-     */
-    'signature'?: string;
-    /**
-     * 
-     * @type {InlineResponse2004TxSignaturePubKey}
-     * @memberof InlineResponse2004TxSignature
-     */
-    'pub_key'?: InlineResponse2004TxSignaturePubKey;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxSignature
-     */
-    'account_number'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxSignature
-     */
-    'sequence'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004TxSignaturePubKey
- */
-export interface InlineResponse2004TxSignaturePubKey {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxSignaturePubKey
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004TxSignaturePubKey
-     */
-    'value'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2005
- */
-export interface InlineResponse2005 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2005
-     */
-    'total_count'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2005
-     */
-    'count'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2005
-     */
-    'page_number'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2005
-     */
-    'page_total'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2005
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {Array<InlineResponse2004>}
-     * @memberof InlineResponse2005
-     */
-    'txs'?: Array<InlineResponse2004>;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
  * @export
- * @interface InlineResponse20050
+ * @interface InlineResponse20025
  */
-export interface InlineResponse20050 {
+export interface InlineResponse20025 {
     /**
      * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20050
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20025
      */
-    'evidence'?: InlineResponse20025Accounts;
+    'evidence'?: InlineResponse200Accounts;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse20051
+ * @interface InlineResponse20026
  */
-export interface InlineResponse20051 {
+export interface InlineResponse20026 {
     /**
      * 
-     * @type {InlineResponse20051VotingParams}
-     * @memberof InlineResponse20051
+     * @type {InlineResponse20026VotingParams}
+     * @memberof InlineResponse20026
      */
-    'voting_params'?: InlineResponse20051VotingParams;
+    'voting_params'?: InlineResponse20026VotingParams;
     /**
      * 
-     * @type {InlineResponse20051DepositParams}
-     * @memberof InlineResponse20051
+     * @type {InlineResponse20026DepositParams}
+     * @memberof InlineResponse20026
      */
-    'deposit_params'?: InlineResponse20051DepositParams;
+    'deposit_params'?: InlineResponse20026DepositParams;
     /**
      * 
-     * @type {InlineResponse20051TallyParams}
-     * @memberof InlineResponse20051
+     * @type {InlineResponse20026TallyParams}
+     * @memberof InlineResponse20026
      */
-    'tally_params'?: InlineResponse20051TallyParams;
+    'tally_params'?: InlineResponse20026TallyParams;
 }
 /**
  * deposit_params defines the parameters related to deposit.
  * @export
- * @interface InlineResponse20051DepositParams
+ * @interface InlineResponse20026DepositParams
  */
-export interface InlineResponse20051DepositParams {
+export interface InlineResponse20026DepositParams {
     /**
      * Minimum deposit for a proposal to enter voting period.
-     * @type {Array<InlineResponse20028Balances>}
-     * @memberof InlineResponse20051DepositParams
+     * @type {Array<InlineResponse2003Balances>}
+     * @memberof InlineResponse20026DepositParams
      */
-    'min_deposit'?: Array<InlineResponse20028Balances>;
+    'min_deposit'?: Array<InlineResponse2003Balances>;
     /**
      * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
      * @type {string}
-     * @memberof InlineResponse20051DepositParams
+     * @memberof InlineResponse20026DepositParams
      */
     'max_deposit_period'?: string;
 }
 /**
  * tally_params defines the parameters related to tally.
  * @export
- * @interface InlineResponse20051TallyParams
+ * @interface InlineResponse20026TallyParams
  */
-export interface InlineResponse20051TallyParams {
+export interface InlineResponse20026TallyParams {
     /**
      * Minimum percentage of total stake needed to vote for a result to be  considered valid.
      * @type {string}
-     * @memberof InlineResponse20051TallyParams
+     * @memberof InlineResponse20026TallyParams
      */
     'quorum'?: string;
     /**
      * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
      * @type {string}
-     * @memberof InlineResponse20051TallyParams
+     * @memberof InlineResponse20026TallyParams
      */
     'threshold'?: string;
     /**
      * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
      * @type {string}
-     * @memberof InlineResponse20051TallyParams
+     * @memberof InlineResponse20026TallyParams
      */
     'veto_threshold'?: string;
 }
 /**
  * voting_params defines the parameters related to voting.
  * @export
- * @interface InlineResponse20051VotingParams
+ * @interface InlineResponse20026VotingParams
  */
-export interface InlineResponse20051VotingParams {
+export interface InlineResponse20026VotingParams {
     /**
      * Length of the voting period.
      * @type {string}
-     * @memberof InlineResponse20051VotingParams
+     * @memberof InlineResponse20026VotingParams
      */
     'voting_period'?: string;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
  * @export
- * @interface InlineResponse20052
+ * @interface InlineResponse20027
  */
-export interface InlineResponse20052 {
+export interface InlineResponse20027 {
     /**
      * 
-     * @type {Array<InlineResponse20052Proposals>}
-     * @memberof InlineResponse20052
+     * @type {Array<InlineResponse20027Proposals>}
+     * @memberof InlineResponse20027
      */
-    'proposals'?: Array<InlineResponse20052Proposals>;
+    'proposals'?: Array<InlineResponse20027Proposals>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20052
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20027
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * TallyResult defines a standard tally for a governance proposal.
  * @export
- * @interface InlineResponse20052FinalTallyResult
+ * @interface InlineResponse20027FinalTallyResult
  */
-export interface InlineResponse20052FinalTallyResult {
+export interface InlineResponse20027FinalTallyResult {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052FinalTallyResult
+     * @memberof InlineResponse20027FinalTallyResult
      */
     'yes'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052FinalTallyResult
+     * @memberof InlineResponse20027FinalTallyResult
      */
     'abstain'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052FinalTallyResult
+     * @memberof InlineResponse20027FinalTallyResult
      */
     'no'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052FinalTallyResult
+     * @memberof InlineResponse20027FinalTallyResult
      */
     'no_with_veto'?: string;
 }
 /**
  * Proposal defines the core field members of a governance proposal.
  * @export
- * @interface InlineResponse20052Proposals
+ * @interface InlineResponse20027Proposals
  */
-export interface InlineResponse20052Proposals {
+export interface InlineResponse20027Proposals {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Proposals
+     * @memberof InlineResponse20027Proposals
      */
     'proposal_id'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20052Proposals
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20027Proposals
      */
-    'content'?: InlineResponse20025Accounts;
+    'content'?: InlineResponse200Accounts;
     /**
      * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @type {string}
-     * @memberof InlineResponse20052Proposals
+     * @memberof InlineResponse20027Proposals
      */
-    'status'?: InlineResponse20052ProposalsStatusEnum;
+    'status'?: InlineResponse20027ProposalsStatusEnum;
     /**
      * 
-     * @type {InlineResponse20052FinalTallyResult}
-     * @memberof InlineResponse20052Proposals
+     * @type {InlineResponse20027FinalTallyResult}
+     * @memberof InlineResponse20027Proposals
      */
-    'final_tally_result'?: InlineResponse20052FinalTallyResult;
+    'final_tally_result'?: InlineResponse20027FinalTallyResult;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Proposals
+     * @memberof InlineResponse20027Proposals
      */
     'submit_time'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Proposals
+     * @memberof InlineResponse20027Proposals
      */
     'deposit_end_time'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
-     * @memberof InlineResponse20052Proposals
+     * @type {Array<InlineResponse2003Balances>}
+     * @memberof InlineResponse20027Proposals
      */
-    'total_deposit'?: Array<InlineResponse20028Balances>;
+    'total_deposit'?: Array<InlineResponse2003Balances>;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Proposals
+     * @memberof InlineResponse20027Proposals
      */
     'voting_start_time'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20052Proposals
+     * @memberof InlineResponse20027Proposals
      */
     'voting_end_time'?: string;
 }
 
-export const InlineResponse20052ProposalsStatusEnum = {
+export const InlineResponse20027ProposalsStatusEnum = {
     Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
     DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
     VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
@@ -7172,131 +4643,187 @@ export const InlineResponse20052ProposalsStatusEnum = {
     Failed: 'PROPOSAL_STATUS_FAILED'
 } as const;
 
-export type InlineResponse20052ProposalsStatusEnum = typeof InlineResponse20052ProposalsStatusEnum[keyof typeof InlineResponse20052ProposalsStatusEnum];
+export type InlineResponse20027ProposalsStatusEnum = typeof InlineResponse20027ProposalsStatusEnum[keyof typeof InlineResponse20027ProposalsStatusEnum];
 
 /**
  * QueryProposalResponse is the response type for the Query/Proposal RPC method.
  * @export
- * @interface InlineResponse20053
+ * @interface InlineResponse20028
  */
-export interface InlineResponse20053 {
+export interface InlineResponse20028 {
     /**
      * 
-     * @type {InlineResponse20052Proposals}
-     * @memberof InlineResponse20053
+     * @type {InlineResponse20027Proposals}
+     * @memberof InlineResponse20028
      */
-    'proposal'?: InlineResponse20052Proposals;
+    'proposal'?: InlineResponse20027Proposals;
 }
 /**
  * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
  * @export
- * @interface InlineResponse20054
+ * @interface InlineResponse20029
  */
-export interface InlineResponse20054 {
+export interface InlineResponse20029 {
     /**
      * 
-     * @type {Array<InlineResponse20054Deposits>}
-     * @memberof InlineResponse20054
+     * @type {Array<InlineResponse20029Deposits>}
+     * @memberof InlineResponse20029
      */
-    'deposits'?: Array<InlineResponse20054Deposits>;
+    'deposits'?: Array<InlineResponse20029Deposits>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20054
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20029
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active proposal.
  * @export
- * @interface InlineResponse20054Deposits
+ * @interface InlineResponse20029Deposits
  */
-export interface InlineResponse20054Deposits {
+export interface InlineResponse20029Deposits {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20054Deposits
+     * @memberof InlineResponse20029Deposits
      */
     'proposal_id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20054Deposits
+     * @memberof InlineResponse20029Deposits
      */
     'depositor'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
-     * @memberof InlineResponse20054Deposits
+     * @type {Array<InlineResponse2003Balances>}
+     * @memberof InlineResponse20029Deposits
      */
-    'amount'?: Array<InlineResponse20028Balances>;
+    'amount'?: Array<InlineResponse2003Balances>;
+}
+/**
+ * params defines the parameters of the module.
+ * @export
+ * @interface InlineResponse2002Params
+ */
+export interface InlineResponse2002Params {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2002Params
+     */
+    'max_memo_characters'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2002Params
+     */
+    'tx_sig_limit'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2002Params
+     */
+    'tx_size_cost_per_byte'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2002Params
+     */
+    'sig_verify_cost_ed25519'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2002Params
+     */
+    'sig_verify_cost_secp256k1'?: string;
+}
+/**
+ * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC method.
+ * @export
+ * @interface InlineResponse2003
+ */
+export interface InlineResponse2003 {
+    /**
+     * balances is the balances of all the coins.
+     * @type {Array<InlineResponse2003Balances>}
+     * @memberof InlineResponse2003
+     */
+    'balances'?: Array<InlineResponse2003Balances>;
+    /**
+     * 
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse2003
+     */
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * QueryDepositResponse is the response type for the Query/Deposit RPC method.
  * @export
- * @interface InlineResponse20055
+ * @interface InlineResponse20030
  */
-export interface InlineResponse20055 {
+export interface InlineResponse20030 {
     /**
      * 
-     * @type {InlineResponse20054Deposits}
-     * @memberof InlineResponse20055
+     * @type {InlineResponse20029Deposits}
+     * @memberof InlineResponse20030
      */
-    'deposit'?: InlineResponse20054Deposits;
+    'deposit'?: InlineResponse20029Deposits;
 }
 /**
  * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
  * @export
- * @interface InlineResponse20056
+ * @interface InlineResponse20031
  */
-export interface InlineResponse20056 {
+export interface InlineResponse20031 {
     /**
      * 
-     * @type {InlineResponse20052FinalTallyResult}
-     * @memberof InlineResponse20056
+     * @type {InlineResponse20027FinalTallyResult}
+     * @memberof InlineResponse20031
      */
-    'tally'?: InlineResponse20052FinalTallyResult;
+    'tally'?: InlineResponse20027FinalTallyResult;
 }
 /**
  * QueryVotesResponse is the response type for the Query/Votes RPC method.
  * @export
- * @interface InlineResponse20057
+ * @interface InlineResponse20032
  */
-export interface InlineResponse20057 {
+export interface InlineResponse20032 {
     /**
      * votes defined the queried votes.
-     * @type {Array<InlineResponse20057Votes>}
-     * @memberof InlineResponse20057
+     * @type {Array<InlineResponse20032Votes>}
+     * @memberof InlineResponse20032
      */
-    'votes'?: Array<InlineResponse20057Votes>;
+    'votes'?: Array<InlineResponse20032Votes>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20057
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20032
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
  * @export
- * @interface InlineResponse20057Options
+ * @interface InlineResponse20032Options
  */
-export interface InlineResponse20057Options {
+export interface InlineResponse20032Options {
     /**
      * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
      * @type {string}
-     * @memberof InlineResponse20057Options
+     * @memberof InlineResponse20032Options
      */
-    'option'?: InlineResponse20057OptionsOptionEnum;
+    'option'?: InlineResponse20032OptionsOptionEnum;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20057Options
+     * @memberof InlineResponse20032Options
      */
     'weight'?: string;
 }
 
-export const InlineResponse20057OptionsOptionEnum = {
+export const InlineResponse20032OptionsOptionEnum = {
     Unspecified: 'VOTE_OPTION_UNSPECIFIED',
     Yes: 'VOTE_OPTION_YES',
     Abstain: 'VOTE_OPTION_ABSTAIN',
@@ -7304,41 +4831,41 @@ export const InlineResponse20057OptionsOptionEnum = {
     NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
 } as const;
 
-export type InlineResponse20057OptionsOptionEnum = typeof InlineResponse20057OptionsOptionEnum[keyof typeof InlineResponse20057OptionsOptionEnum];
+export type InlineResponse20032OptionsOptionEnum = typeof InlineResponse20032OptionsOptionEnum[keyof typeof InlineResponse20032OptionsOptionEnum];
 
 /**
  * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
  * @export
- * @interface InlineResponse20057Votes
+ * @interface InlineResponse20032Votes
  */
-export interface InlineResponse20057Votes {
+export interface InlineResponse20032Votes {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20057Votes
+     * @memberof InlineResponse20032Votes
      */
     'proposal_id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20057Votes
+     * @memberof InlineResponse20032Votes
      */
     'voter'?: string;
     /**
      * Deprecated: Prefer to use `options` instead. This field is set in queries if and only if `len(options) == 1` and that option has weight 1. In all other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
      * @type {string}
-     * @memberof InlineResponse20057Votes
+     * @memberof InlineResponse20032Votes
      */
-    'option'?: InlineResponse20057VotesOptionEnum;
+    'option'?: InlineResponse20032VotesOptionEnum;
     /**
      * 
-     * @type {Array<InlineResponse20057Options>}
-     * @memberof InlineResponse20057Votes
+     * @type {Array<InlineResponse20032Options>}
+     * @memberof InlineResponse20032Votes
      */
-    'options'?: Array<InlineResponse20057Options>;
+    'options'?: Array<InlineResponse20032Options>;
 }
 
-export const InlineResponse20057VotesOptionEnum = {
+export const InlineResponse20032VotesOptionEnum = {
     Unspecified: 'VOTE_OPTION_UNSPECIFIED',
     Yes: 'VOTE_OPTION_YES',
     Abstain: 'VOTE_OPTION_ABSTAIN',
@@ -7346,1661 +4873,1567 @@ export const InlineResponse20057VotesOptionEnum = {
     NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
 } as const;
 
-export type InlineResponse20057VotesOptionEnum = typeof InlineResponse20057VotesOptionEnum[keyof typeof InlineResponse20057VotesOptionEnum];
+export type InlineResponse20032VotesOptionEnum = typeof InlineResponse20032VotesOptionEnum[keyof typeof InlineResponse20032VotesOptionEnum];
 
 /**
  * QueryVoteResponse is the response type for the Query/Vote RPC method.
  * @export
- * @interface InlineResponse20058
+ * @interface InlineResponse20033
  */
-export interface InlineResponse20058 {
+export interface InlineResponse20033 {
     /**
      * 
-     * @type {InlineResponse20057Votes}
-     * @memberof InlineResponse20058
+     * @type {InlineResponse20032Votes}
+     * @memberof InlineResponse20033
      */
-    'vote'?: InlineResponse20057Votes;
+    'vote'?: InlineResponse20032Votes;
 }
 /**
  * QueryAnnualProvisionsResponse is the response type for the Query/AnnualProvisions RPC method.
  * @export
- * @interface InlineResponse20059
+ * @interface InlineResponse20034
  */
-export interface InlineResponse20059 {
+export interface InlineResponse20034 {
     /**
      * annual_provisions is the current minting annual provisions value.
      * @type {string}
-     * @memberof InlineResponse20059
+     * @memberof InlineResponse20034
      */
     'annual_provisions'?: string;
 }
 /**
- * 
- * @export
- * @interface InlineResponse2006
- */
-export interface InlineResponse2006 {
-    /**
-     * 
-     * @type {InlineResponse2006CheckTx}
-     * @memberof InlineResponse2006
-     */
-    'check_tx'?: InlineResponse2006CheckTx;
-    /**
-     * 
-     * @type {InlineResponse2006DeliverTx}
-     * @memberof InlineResponse2006
-     */
-    'deliver_tx'?: InlineResponse2006DeliverTx;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006
-     */
-    'hash'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006
-     */
-    'height'?: number;
-}
-/**
  * QueryInflationResponse is the response type for the Query/Inflation RPC method.
  * @export
- * @interface InlineResponse20060
+ * @interface InlineResponse20035
  */
-export interface InlineResponse20060 {
+export interface InlineResponse20035 {
     /**
      * inflation is the current minting inflation value.
      * @type {string}
-     * @memberof InlineResponse20060
+     * @memberof InlineResponse20035
      */
     'inflation'?: string;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse20061
+ * @interface InlineResponse20036
  */
-export interface InlineResponse20061 {
+export interface InlineResponse20036 {
     /**
      * 
-     * @type {InlineResponse20061Params}
-     * @memberof InlineResponse20061
+     * @type {InlineResponse20036Params}
+     * @memberof InlineResponse20036
      */
-    'params'?: InlineResponse20061Params;
+    'params'?: InlineResponse20036Params;
 }
 /**
  * params defines the parameters of the module.
  * @export
- * @interface InlineResponse20061Params
+ * @interface InlineResponse20036Params
  */
-export interface InlineResponse20061Params {
+export interface InlineResponse20036Params {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20061Params
+     * @memberof InlineResponse20036Params
      */
     'mint_denom'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20061Params
+     * @memberof InlineResponse20036Params
      */
     'inflation_rate_change'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20061Params
+     * @memberof InlineResponse20036Params
      */
     'inflation_max'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20061Params
+     * @memberof InlineResponse20036Params
      */
     'inflation_min'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20061Params
+     * @memberof InlineResponse20036Params
      */
     'goal_bonded'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20061Params
+     * @memberof InlineResponse20036Params
      */
     'blocks_per_year'?: string;
 }
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse20062
+ * @interface InlineResponse20037
  */
-export interface InlineResponse20062 {
+export interface InlineResponse20037 {
     /**
      * 
-     * @type {InlineResponse20062Param}
-     * @memberof InlineResponse20062
+     * @type {InlineResponse20037Param}
+     * @memberof InlineResponse20037
      */
-    'param'?: InlineResponse20062Param;
+    'param'?: InlineResponse20037Param;
 }
 /**
  * param defines the queried parameter.
  * @export
- * @interface InlineResponse20062Param
+ * @interface InlineResponse20037Param
  */
-export interface InlineResponse20062Param {
+export interface InlineResponse20037Param {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20062Param
+     * @memberof InlineResponse20037Param
      */
     'subspace'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20062Param
+     * @memberof InlineResponse20037Param
      */
     'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20062Param
+     * @memberof InlineResponse20037Param
      */
     'value'?: string;
 }
 /**
  * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
  * @export
- * @interface InlineResponse20063
+ * @interface InlineResponse20038
  */
-export interface InlineResponse20063 {
+export interface InlineResponse20038 {
     /**
      * delegation_responses defines all the delegations\' info of a delegator.
-     * @type {Array<InlineResponse20063DelegationResponses>}
-     * @memberof InlineResponse20063
+     * @type {Array<InlineResponse20038DelegationResponses>}
+     * @memberof InlineResponse20038
      */
-    'delegation_responses'?: Array<InlineResponse20063DelegationResponses>;
+    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20063
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20038
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator.
  * @export
- * @interface InlineResponse20063Delegation
+ * @interface InlineResponse20038Delegation
  */
-export interface InlineResponse20063Delegation {
+export interface InlineResponse20038Delegation {
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
-     * @memberof InlineResponse20063Delegation
+     * @memberof InlineResponse20038Delegation
      */
     'delegator_address'?: string;
     /**
      * validator_address is the bech32-encoded address of the validator.
      * @type {string}
-     * @memberof InlineResponse20063Delegation
+     * @memberof InlineResponse20038Delegation
      */
     'validator_address'?: string;
     /**
      * shares define the delegation shares received.
      * @type {string}
-     * @memberof InlineResponse20063Delegation
+     * @memberof InlineResponse20038Delegation
      */
     'shares'?: string;
 }
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a balance in addition to shares which is more suitable for client responses.
  * @export
- * @interface InlineResponse20063DelegationResponses
+ * @interface InlineResponse20038DelegationResponses
  */
-export interface InlineResponse20063DelegationResponses {
+export interface InlineResponse20038DelegationResponses {
     /**
      * 
-     * @type {InlineResponse20063Delegation}
-     * @memberof InlineResponse20063DelegationResponses
+     * @type {InlineResponse20038Delegation}
+     * @memberof InlineResponse20038DelegationResponses
      */
-    'delegation'?: InlineResponse20063Delegation;
+    'delegation'?: InlineResponse20038Delegation;
     /**
      * 
-     * @type {InlineResponse20028Balances}
-     * @memberof InlineResponse20063DelegationResponses
+     * @type {InlineResponse2003Balances}
+     * @memberof InlineResponse20038DelegationResponses
      */
-    'balance'?: InlineResponse20028Balances;
+    'balance'?: InlineResponse2003Balances;
 }
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
  * @export
- * @interface InlineResponse20064
+ * @interface InlineResponse20039
  */
-export interface InlineResponse20064 {
+export interface InlineResponse20039 {
     /**
      * 
-     * @type {Array<InlineResponse20064RedelegationResponses>}
-     * @memberof InlineResponse20064
+     * @type {Array<InlineResponse20039RedelegationResponses>}
+     * @memberof InlineResponse20039
      */
-    'redelegation_responses'?: Array<InlineResponse20064RedelegationResponses>;
+    'redelegation_responses'?: Array<InlineResponse20039RedelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20064
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20039
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it contains a balance in addition to shares which is more suitable for client responses.
  * @export
- * @interface InlineResponse20064Entries
+ * @interface InlineResponse20039Entries
  */
-export interface InlineResponse20064Entries {
+export interface InlineResponse20039Entries {
     /**
      * 
-     * @type {InlineResponse20064RedelegationEntries}
-     * @memberof InlineResponse20064Entries
+     * @type {InlineResponse20039RedelegationEntries}
+     * @memberof InlineResponse20039Entries
      */
-    'redelegation_entry'?: InlineResponse20064RedelegationEntries;
+    'redelegation_entry'?: InlineResponse20039RedelegationEntries;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20064Entries
+     * @memberof InlineResponse20039Entries
      */
     'balance'?: string;
 }
 /**
  * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
  * @export
- * @interface InlineResponse20064Redelegation
+ * @interface InlineResponse20039Redelegation
  */
-export interface InlineResponse20064Redelegation {
+export interface InlineResponse20039Redelegation {
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
-     * @memberof InlineResponse20064Redelegation
+     * @memberof InlineResponse20039Redelegation
      */
     'delegator_address'?: string;
     /**
      * validator_src_address is the validator redelegation source operator address.
      * @type {string}
-     * @memberof InlineResponse20064Redelegation
+     * @memberof InlineResponse20039Redelegation
      */
     'validator_src_address'?: string;
     /**
      * validator_dst_address is the validator redelegation destination operator address.
      * @type {string}
-     * @memberof InlineResponse20064Redelegation
+     * @memberof InlineResponse20039Redelegation
      */
     'validator_dst_address'?: string;
     /**
      * entries are the redelegation entries.
-     * @type {Array<InlineResponse20064RedelegationEntries>}
-     * @memberof InlineResponse20064Redelegation
+     * @type {Array<InlineResponse20039RedelegationEntries>}
+     * @memberof InlineResponse20039Redelegation
      */
-    'entries'?: Array<InlineResponse20064RedelegationEntries>;
+    'entries'?: Array<InlineResponse20039RedelegationEntries>;
 }
 /**
  * RedelegationEntry defines a redelegation object with relevant metadata.
  * @export
- * @interface InlineResponse20064RedelegationEntries
+ * @interface InlineResponse20039RedelegationEntries
  */
-export interface InlineResponse20064RedelegationEntries {
+export interface InlineResponse20039RedelegationEntries {
     /**
      * creation_height  defines the height which the redelegation took place.
      * @type {string}
-     * @memberof InlineResponse20064RedelegationEntries
+     * @memberof InlineResponse20039RedelegationEntries
      */
     'creation_height'?: string;
     /**
      * completion_time defines the unix time for redelegation completion.
      * @type {string}
-     * @memberof InlineResponse20064RedelegationEntries
+     * @memberof InlineResponse20039RedelegationEntries
      */
     'completion_time'?: string;
     /**
      * initial_balance defines the initial balance when redelegation started.
      * @type {string}
-     * @memberof InlineResponse20064RedelegationEntries
+     * @memberof InlineResponse20039RedelegationEntries
      */
     'initial_balance'?: string;
     /**
      * shares_dst is the amount of destination-validator shares created by redelegation.
      * @type {string}
-     * @memberof InlineResponse20064RedelegationEntries
+     * @memberof InlineResponse20039RedelegationEntries
      */
     'shares_dst'?: string;
 }
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries contain a balance in addition to shares which is more suitable for client responses.
  * @export
- * @interface InlineResponse20064RedelegationResponses
+ * @interface InlineResponse20039RedelegationResponses
  */
-export interface InlineResponse20064RedelegationResponses {
+export interface InlineResponse20039RedelegationResponses {
     /**
      * 
-     * @type {InlineResponse20064Redelegation}
-     * @memberof InlineResponse20064RedelegationResponses
+     * @type {InlineResponse20039Redelegation}
+     * @memberof InlineResponse20039RedelegationResponses
      */
-    'redelegation'?: InlineResponse20064Redelegation;
+    'redelegation'?: InlineResponse20039Redelegation;
     /**
      * 
-     * @type {Array<InlineResponse20064Entries>}
-     * @memberof InlineResponse20064RedelegationResponses
+     * @type {Array<InlineResponse20039Entries>}
+     * @memberof InlineResponse20039RedelegationResponses
      */
-    'entries'?: Array<InlineResponse20064Entries>;
+    'entries'?: Array<InlineResponse20039Entries>;
+}
+/**
+ * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
+ * @export
+ * @interface InlineResponse2003Balances
+ */
+export interface InlineResponse2003Balances {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2003Balances
+     */
+    'denom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2003Balances
+     */
+    'amount'?: string;
+}
+/**
+ * QueryBalanceResponse is the response type for the Query/Balance RPC method.
+ * @export
+ * @interface InlineResponse2004
+ */
+export interface InlineResponse2004 {
+    /**
+     * 
+     * @type {InlineResponse2003Balances}
+     * @memberof InlineResponse2004
+     */
+    'balance'?: InlineResponse2003Balances;
 }
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
  * @export
- * @interface InlineResponse20065
+ * @interface InlineResponse20040
  */
-export interface InlineResponse20065 {
+export interface InlineResponse20040 {
     /**
      * 
-     * @type {Array<InlineResponse20065UnbondingResponses>}
-     * @memberof InlineResponse20065
+     * @type {Array<InlineResponse20040UnbondingResponses>}
+     * @memberof InlineResponse20040
      */
-    'unbonding_responses'?: Array<InlineResponse20065UnbondingResponses>;
+    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20065
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20040
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
  * @export
- * @interface InlineResponse20065Entries
+ * @interface InlineResponse20040Entries
  */
-export interface InlineResponse20065Entries {
+export interface InlineResponse20040Entries {
     /**
      * creation_height is the height which the unbonding took place.
      * @type {string}
-     * @memberof InlineResponse20065Entries
+     * @memberof InlineResponse20040Entries
      */
     'creation_height'?: string;
     /**
      * completion_time is the unix time for unbonding completion.
      * @type {string}
-     * @memberof InlineResponse20065Entries
+     * @memberof InlineResponse20040Entries
      */
     'completion_time'?: string;
     /**
      * initial_balance defines the tokens initially scheduled to receive at completion.
      * @type {string}
-     * @memberof InlineResponse20065Entries
+     * @memberof InlineResponse20040Entries
      */
     'initial_balance'?: string;
     /**
      * balance defines the tokens to receive at completion.
      * @type {string}
-     * @memberof InlineResponse20065Entries
+     * @memberof InlineResponse20040Entries
      */
     'balance'?: string;
 }
 /**
  * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
  * @export
- * @interface InlineResponse20065UnbondingResponses
+ * @interface InlineResponse20040UnbondingResponses
  */
-export interface InlineResponse20065UnbondingResponses {
+export interface InlineResponse20040UnbondingResponses {
     /**
      * delegator_address is the bech32-encoded address of the delegator.
      * @type {string}
-     * @memberof InlineResponse20065UnbondingResponses
+     * @memberof InlineResponse20040UnbondingResponses
      */
     'delegator_address'?: string;
     /**
      * validator_address is the bech32-encoded address of the validator.
      * @type {string}
-     * @memberof InlineResponse20065UnbondingResponses
+     * @memberof InlineResponse20040UnbondingResponses
      */
     'validator_address'?: string;
     /**
      * entries are the unbonding delegation entries.
-     * @type {Array<InlineResponse20065Entries>}
-     * @memberof InlineResponse20065UnbondingResponses
+     * @type {Array<InlineResponse20040Entries>}
+     * @memberof InlineResponse20040UnbondingResponses
      */
-    'entries'?: Array<InlineResponse20065Entries>;
+    'entries'?: Array<InlineResponse20040Entries>;
 }
 /**
  * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
  * @export
- * @interface InlineResponse20066
+ * @interface InlineResponse20041
  */
-export interface InlineResponse20066 {
+export interface InlineResponse20041 {
     /**
-     * validators defines the the validators\' info of a delegator.
-     * @type {Array<InlineResponse20066Validators>}
-     * @memberof InlineResponse20066
+     * validators defines the validators\' info of a delegator.
+     * @type {Array<InlineResponse20041Validators>}
+     * @memberof InlineResponse20041
      */
-    'validators'?: Array<InlineResponse20066Validators>;
+    'validators'?: Array<InlineResponse20041Validators>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20066
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20041
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * commission defines the commission parameters.
  * @export
- * @interface InlineResponse20066Commission
+ * @interface InlineResponse20041Commission
  */
-export interface InlineResponse20066Commission {
+export interface InlineResponse20041Commission {
     /**
      * 
-     * @type {InlineResponse20066CommissionCommissionRates}
-     * @memberof InlineResponse20066Commission
+     * @type {InlineResponse20041CommissionCommissionRates}
+     * @memberof InlineResponse20041Commission
      */
-    'commission_rates'?: InlineResponse20066CommissionCommissionRates;
+    'commission_rates'?: InlineResponse20041CommissionCommissionRates;
     /**
      * update_time is the last time the commission rate was changed.
      * @type {string}
-     * @memberof InlineResponse20066Commission
+     * @memberof InlineResponse20041Commission
      */
     'update_time'?: string;
 }
 /**
  * commission_rates defines the initial commission rates to be used for creating a validator.
  * @export
- * @interface InlineResponse20066CommissionCommissionRates
+ * @interface InlineResponse20041CommissionCommissionRates
  */
-export interface InlineResponse20066CommissionCommissionRates {
+export interface InlineResponse20041CommissionCommissionRates {
     /**
      * rate is the commission rate charged to delegators, as a fraction.
      * @type {string}
-     * @memberof InlineResponse20066CommissionCommissionRates
+     * @memberof InlineResponse20041CommissionCommissionRates
      */
     'rate'?: string;
     /**
      * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
      * @type {string}
-     * @memberof InlineResponse20066CommissionCommissionRates
+     * @memberof InlineResponse20041CommissionCommissionRates
      */
     'max_rate'?: string;
     /**
      * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
      * @type {string}
-     * @memberof InlineResponse20066CommissionCommissionRates
+     * @memberof InlineResponse20041CommissionCommissionRates
      */
     'max_change_rate'?: string;
 }
 /**
  * description defines the description terms for the validator.
  * @export
- * @interface InlineResponse20066Description
+ * @interface InlineResponse20041Description
  */
-export interface InlineResponse20066Description {
+export interface InlineResponse20041Description {
     /**
      * moniker defines a human-readable name for the validator.
      * @type {string}
-     * @memberof InlineResponse20066Description
+     * @memberof InlineResponse20041Description
      */
     'moniker'?: string;
     /**
      * identity defines an optional identity signature (ex. UPort or Keybase).
      * @type {string}
-     * @memberof InlineResponse20066Description
+     * @memberof InlineResponse20041Description
      */
     'identity'?: string;
     /**
      * website defines an optional website link.
      * @type {string}
-     * @memberof InlineResponse20066Description
+     * @memberof InlineResponse20041Description
      */
     'website'?: string;
     /**
      * security_contact defines an optional email for security contact.
      * @type {string}
-     * @memberof InlineResponse20066Description
+     * @memberof InlineResponse20041Description
      */
     'security_contact'?: string;
     /**
      * details define other optional details.
      * @type {string}
-     * @memberof InlineResponse20066Description
+     * @memberof InlineResponse20041Description
      */
     'details'?: string;
 }
 /**
  * Validator defines a validator, together with the total amount of the Validator\'s bond shares and their exchange rate to coins. Slashing results in a decrease in the exchange rate, allowing correct calculation of future undelegations without iterating over delegators. When coins are delegated to this validator, the validator is credited with a delegation whose number of bond shares is based on the amount of coins delegated divided by the current exchange rate. Voting power can be calculated as total bonded shares multiplied by exchange rate.
  * @export
- * @interface InlineResponse20066Validators
+ * @interface InlineResponse20041Validators
  */
-export interface InlineResponse20066Validators {
+export interface InlineResponse20041Validators {
     /**
      * operator_address defines the address of the validator\'s operator; bech encoded in JSON.
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'operator_address'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20066Validators
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20041Validators
      */
-    'consensus_pubkey'?: InlineResponse20025Accounts;
+    'consensus_pubkey'?: InlineResponse200Accounts;
     /**
      * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'jailed'?: boolean;
     /**
      * status is the validator status (bonded/unbonding/unbonded).
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
-    'status'?: InlineResponse20066ValidatorsStatusEnum;
+    'status'?: InlineResponse20041ValidatorsStatusEnum;
     /**
      * tokens define the delegated tokens (incl. self-delegation).
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'tokens'?: string;
     /**
      * delegator_shares defines total shares issued to a validator\'s delegators.
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'delegator_shares'?: string;
     /**
      * 
-     * @type {InlineResponse20066Description}
-     * @memberof InlineResponse20066Validators
+     * @type {InlineResponse20041Description}
+     * @memberof InlineResponse20041Validators
      */
-    'description'?: InlineResponse20066Description;
+    'description'?: InlineResponse20041Description;
     /**
      * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'unbonding_height'?: string;
     /**
      * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'unbonding_time'?: string;
     /**
      * 
-     * @type {InlineResponse20066Commission}
-     * @memberof InlineResponse20066Validators
+     * @type {InlineResponse20041Commission}
+     * @memberof InlineResponse20041Validators
      */
-    'commission'?: InlineResponse20066Commission;
+    'commission'?: InlineResponse20041Commission;
     /**
      * min_self_delegation is the validator\'s self declared minimum self delegation.
      * @type {string}
-     * @memberof InlineResponse20066Validators
+     * @memberof InlineResponse20041Validators
      */
     'min_self_delegation'?: string;
 }
 
-export const InlineResponse20066ValidatorsStatusEnum = {
+export const InlineResponse20041ValidatorsStatusEnum = {
     Unspecified: 'BOND_STATUS_UNSPECIFIED',
     Unbonded: 'BOND_STATUS_UNBONDED',
     Unbonding: 'BOND_STATUS_UNBONDING',
     Bonded: 'BOND_STATUS_BONDED'
 } as const;
 
-export type InlineResponse20066ValidatorsStatusEnum = typeof InlineResponse20066ValidatorsStatusEnum[keyof typeof InlineResponse20066ValidatorsStatusEnum];
+export type InlineResponse20041ValidatorsStatusEnum = typeof InlineResponse20041ValidatorsStatusEnum[keyof typeof InlineResponse20041ValidatorsStatusEnum];
 
 /**
  * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
  * @export
- * @interface InlineResponse20067
+ * @interface InlineResponse20042
  */
-export interface InlineResponse20067 {
+export interface InlineResponse20042 {
     /**
      * 
-     * @type {InlineResponse20066Validators}
-     * @memberof InlineResponse20067
+     * @type {InlineResponse20041Validators}
+     * @memberof InlineResponse20042
      */
-    'validator'?: InlineResponse20066Validators;
+    'validator'?: InlineResponse20041Validators;
 }
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
  * @export
- * @interface InlineResponse20068
+ * @interface InlineResponse20043
  */
-export interface InlineResponse20068 {
+export interface InlineResponse20043 {
     /**
      * 
-     * @type {InlineResponse20068Hist}
-     * @memberof InlineResponse20068
+     * @type {InlineResponse20043Hist}
+     * @memberof InlineResponse20043
      */
-    'hist'?: InlineResponse20068Hist;
+    'hist'?: InlineResponse20043Hist;
 }
 /**
  * hist defines the historical info at the given height.
  * @export
- * @interface InlineResponse20068Hist
+ * @interface InlineResponse20043Hist
  */
-export interface InlineResponse20068Hist {
+export interface InlineResponse20043Hist {
     /**
      * 
-     * @type {InlineResponse20068HistHeader}
-     * @memberof InlineResponse20068Hist
+     * @type {InlineResponse20043HistHeader}
+     * @memberof InlineResponse20043Hist
      */
-    'header'?: InlineResponse20068HistHeader;
+    'header'?: InlineResponse20043HistHeader;
     /**
      * 
-     * @type {Array<InlineResponse20066Validators>}
-     * @memberof InlineResponse20068Hist
+     * @type {Array<InlineResponse20041Validators>}
+     * @memberof InlineResponse20043Hist
      */
-    'valset'?: Array<InlineResponse20066Validators>;
+    'valset'?: Array<InlineResponse20041Validators>;
 }
 /**
  * Header defines the structure of a Tendermint block header.
  * @export
- * @interface InlineResponse20068HistHeader
+ * @interface InlineResponse20043HistHeader
  */
-export interface InlineResponse20068HistHeader {
+export interface InlineResponse20043HistHeader {
     /**
      * 
      * @type {BasicBlockInfo}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'version'?: BasicBlockInfo;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'chain_id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'height'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'time'?: string;
     /**
      * 
      * @type {PrevBlockInfo}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'last_block_id'?: PrevBlockInfo;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'last_commit_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'data_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'validators_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'next_validators_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'consensus_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'app_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'last_results_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'evidence_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20068HistHeader
+     * @memberof InlineResponse20043HistHeader
      */
     'proposer_address'?: string;
 }
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse20069
+ * @interface InlineResponse20044
  */
-export interface InlineResponse20069 {
+export interface InlineResponse20044 {
     /**
      * 
-     * @type {InlineResponse20069Params}
-     * @memberof InlineResponse20069
+     * @type {InlineResponse20044Params}
+     * @memberof InlineResponse20044
      */
-    'params'?: InlineResponse20069Params;
+    'params'?: InlineResponse20044Params;
 }
 /**
  * params holds all the parameters of this module.
  * @export
- * @interface InlineResponse20069Params
+ * @interface InlineResponse20044Params
  */
-export interface InlineResponse20069Params {
+export interface InlineResponse20044Params {
     /**
      * unbonding_time is the time duration of unbonding.
      * @type {string}
-     * @memberof InlineResponse20069Params
+     * @memberof InlineResponse20044Params
      */
     'unbonding_time'?: string;
     /**
      * max_validators is the maximum number of validators.
      * @type {number}
-     * @memberof InlineResponse20069Params
+     * @memberof InlineResponse20044Params
      */
     'max_validators'?: number;
     /**
      * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
      * @type {number}
-     * @memberof InlineResponse20069Params
+     * @memberof InlineResponse20044Params
      */
     'max_entries'?: number;
     /**
      * historical_entries is the number of historical entries to persist.
      * @type {number}
-     * @memberof InlineResponse20069Params
+     * @memberof InlineResponse20044Params
      */
     'historical_entries'?: number;
     /**
      * bond_denom defines the bondable coin denomination.
      * @type {string}
-     * @memberof InlineResponse20069Params
+     * @memberof InlineResponse20044Params
      */
     'bond_denom'?: string;
 }
 /**
- * 
- * @export
- * @interface InlineResponse2006CheckTx
- */
-export interface InlineResponse2006CheckTx {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'code'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'data'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'gas_used'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'gas_wanted'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'info'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'log'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004ResultTags>}
-     * @memberof InlineResponse2006CheckTx
-     */
-    'tags'?: Array<InlineResponse2004ResultTags>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2006DeliverTx
- */
-export interface InlineResponse2006DeliverTx {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'code'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'data'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'gas_used'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'gas_wanted'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'info'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'log'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004ResultTags>}
-     * @memberof InlineResponse2006DeliverTx
-     */
-    'tags'?: Array<InlineResponse2004ResultTags>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2007
- */
-export interface InlineResponse2007 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2007
-     */
-    'tx'?: string;
-}
-/**
  * QueryPoolResponse is response type for the Query/Pool RPC method.
  * @export
- * @interface InlineResponse20070
+ * @interface InlineResponse20045
  */
-export interface InlineResponse20070 {
+export interface InlineResponse20045 {
     /**
      * 
-     * @type {InlineResponse20070Pool}
-     * @memberof InlineResponse20070
+     * @type {InlineResponse20045Pool}
+     * @memberof InlineResponse20045
      */
-    'pool'?: InlineResponse20070Pool;
+    'pool'?: InlineResponse20045Pool;
 }
 /**
  * pool defines the pool info.
  * @export
- * @interface InlineResponse20070Pool
+ * @interface InlineResponse20045Pool
  */
-export interface InlineResponse20070Pool {
+export interface InlineResponse20045Pool {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20070Pool
+     * @memberof InlineResponse20045Pool
      */
     'not_bonded_tokens'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20070Pool
+     * @memberof InlineResponse20045Pool
      */
     'bonded_tokens'?: string;
 }
 /**
  * QueryDelegationResponse is response type for the Query/Delegation RPC method.
  * @export
- * @interface InlineResponse20071
+ * @interface InlineResponse20046
  */
-export interface InlineResponse20071 {
+export interface InlineResponse20046 {
     /**
      * 
-     * @type {InlineResponse20063DelegationResponses}
-     * @memberof InlineResponse20071
+     * @type {InlineResponse20038DelegationResponses}
+     * @memberof InlineResponse20046
      */
-    'delegation_response'?: InlineResponse20063DelegationResponses;
+    'delegation_response'?: InlineResponse20038DelegationResponses;
 }
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
  * @export
- * @interface InlineResponse20072
+ * @interface InlineResponse20047
  */
-export interface InlineResponse20072 {
+export interface InlineResponse20047 {
     /**
      * 
-     * @type {InlineResponse20065UnbondingResponses}
-     * @memberof InlineResponse20072
+     * @type {InlineResponse20040UnbondingResponses}
+     * @memberof InlineResponse20047
      */
-    'unbond'?: InlineResponse20065UnbondingResponses;
+    'unbond'?: InlineResponse20040UnbondingResponses;
 }
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
  * @export
- * @interface InlineResponse20073
+ * @interface InlineResponse20048
  */
-export interface InlineResponse20073 {
+export interface InlineResponse20048 {
     /**
      * 
-     * @type {Array<InlineResponse20065UnbondingResponses>}
-     * @memberof InlineResponse20073
+     * @type {Array<InlineResponse20040UnbondingResponses>}
+     * @memberof InlineResponse20048
      */
-    'unbonding_responses'?: Array<InlineResponse20065UnbondingResponses>;
+    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
-     * @memberof InlineResponse20073
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse20048
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * SimulateResponse is the response type for the Service.SimulateRPC method.
  * @export
- * @interface InlineResponse20074
+ * @interface InlineResponse20049
  */
-export interface InlineResponse20074 {
+export interface InlineResponse20049 {
     /**
      * 
-     * @type {InlineResponse20074GasInfo}
-     * @memberof InlineResponse20074
+     * @type {InlineResponse20049GasInfo}
+     * @memberof InlineResponse20049
      */
-    'gas_info'?: InlineResponse20074GasInfo;
+    'gas_info'?: InlineResponse20049GasInfo;
     /**
      * 
-     * @type {InlineResponse20074Result}
-     * @memberof InlineResponse20074
+     * @type {InlineResponse20049Result}
+     * @memberof InlineResponse20049
      */
-    'result'?: InlineResponse20074Result;
+    'result'?: InlineResponse20049Result;
 }
 /**
  * gas_info is the information about gas used in the simulation.
  * @export
- * @interface InlineResponse20074GasInfo
+ * @interface InlineResponse20049GasInfo
  */
-export interface InlineResponse20074GasInfo {
+export interface InlineResponse20049GasInfo {
     /**
      * GasWanted is the maximum units of work we allow this tx to perform.
      * @type {string}
-     * @memberof InlineResponse20074GasInfo
+     * @memberof InlineResponse20049GasInfo
      */
     'gas_wanted'?: string;
     /**
      * GasUsed is the amount of gas actually consumed.
      * @type {string}
-     * @memberof InlineResponse20074GasInfo
+     * @memberof InlineResponse20049GasInfo
      */
     'gas_used'?: string;
 }
 /**
  * result is the result of the simulation.
  * @export
- * @interface InlineResponse20074Result
+ * @interface InlineResponse20049Result
  */
-export interface InlineResponse20074Result {
+export interface InlineResponse20049Result {
     /**
      * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
      * @type {string}
-     * @memberof InlineResponse20074Result
+     * @memberof InlineResponse20049Result
      */
     'data'?: string;
     /**
      * Log contains the log information from message or handler execution.
      * @type {string}
-     * @memberof InlineResponse20074Result
+     * @memberof InlineResponse20049Result
      */
     'log'?: string;
     /**
      * Events contains a slice of Event objects that were emitted during message or handler execution.
-     * @type {Array<InlineResponse20074ResultEvents>}
-     * @memberof InlineResponse20074Result
+     * @type {Array<InlineResponse20049ResultEvents>}
+     * @memberof InlineResponse20049Result
      */
-    'events'?: Array<InlineResponse20074ResultEvents>;
+    'events'?: Array<InlineResponse20049ResultEvents>;
 }
 /**
  * EventAttribute is a single key-value pair, associated with an event.
  * @export
- * @interface InlineResponse20074ResultAttributes
+ * @interface InlineResponse20049ResultAttributes
  */
-export interface InlineResponse20074ResultAttributes {
+export interface InlineResponse20049ResultAttributes {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20074ResultAttributes
+     * @memberof InlineResponse20049ResultAttributes
      */
     'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20074ResultAttributes
+     * @memberof InlineResponse20049ResultAttributes
      */
     'value'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof InlineResponse20074ResultAttributes
+     * @memberof InlineResponse20049ResultAttributes
      */
     'index'?: boolean;
 }
 /**
  * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
  * @export
- * @interface InlineResponse20074ResultEvents
+ * @interface InlineResponse20049ResultEvents
  */
-export interface InlineResponse20074ResultEvents {
+export interface InlineResponse20049ResultEvents {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20074ResultEvents
+     * @memberof InlineResponse20049ResultEvents
      */
     'type'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20074ResultAttributes>}
-     * @memberof InlineResponse20074ResultEvents
+     * @type {Array<InlineResponse20049ResultAttributes>}
+     * @memberof InlineResponse20049ResultEvents
      */
-    'attributes'?: Array<InlineResponse20074ResultAttributes>;
+    'attributes'?: Array<InlineResponse20049ResultAttributes>;
+}
+/**
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+ * @export
+ * @interface InlineResponse2005
+ */
+export interface InlineResponse2005 {
+    /**
+     * 
+     * @type {Array<InlineResponse2005DenomOwners>}
+     * @memberof InlineResponse2005
+     */
+    'denom_owners'?: Array<InlineResponse2005DenomOwners>;
+    /**
+     * 
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse2005
+     */
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * BroadcastTxResponse is the response type for the Service.BroadcastTx method.
  * @export
- * @interface InlineResponse20075
+ * @interface InlineResponse20050
  */
-export interface InlineResponse20075 {
+export interface InlineResponse20050 {
     /**
      * 
-     * @type {InlineResponse20075TxResponse}
-     * @memberof InlineResponse20075
+     * @type {InlineResponse20050TxResponse}
+     * @memberof InlineResponse20050
      */
-    'tx_response'?: InlineResponse20075TxResponse;
+    'tx_response'?: InlineResponse20050TxResponse;
 }
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
  * @export
- * @interface InlineResponse20075TxResponse
+ * @interface InlineResponse20050TxResponse
  */
-export interface InlineResponse20075TxResponse {
+export interface InlineResponse20050TxResponse {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'height'?: string;
     /**
      * The transaction hash.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'txhash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'codespace'?: string;
     /**
      * Response code.
      * @type {number}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'code'?: number;
     /**
      * Result bytes, if any.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'data'?: string;
     /**
      * The output of the application\'s logger (raw string). May be non-deterministic.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'raw_log'?: string;
     /**
      * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20075TxResponseLogs>}
-     * @memberof InlineResponse20075TxResponse
+     * @type {Array<InlineResponse20050TxResponseLogs>}
+     * @memberof InlineResponse20050TxResponse
      */
-    'logs'?: Array<InlineResponse20075TxResponseLogs>;
+    'logs'?: Array<InlineResponse20050TxResponseLogs>;
     /**
      * Additional information. May be non-deterministic.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'info'?: string;
     /**
      * Amount of gas requested for transaction.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'gas_wanted'?: string;
     /**
      * Amount of gas consumed by transaction.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'gas_used'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20075TxResponse
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20050TxResponse
      */
-    'tx'?: InlineResponse20025Accounts;
+    'tx'?: InlineResponse200Accounts;
     /**
      * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
      * @type {string}
-     * @memberof InlineResponse20075TxResponse
+     * @memberof InlineResponse20050TxResponse
      */
     'timestamp'?: string;
 }
 /**
  * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
  * @export
- * @interface InlineResponse20075TxResponseAttributes
+ * @interface InlineResponse20050TxResponseAttributes
  */
-export interface InlineResponse20075TxResponseAttributes {
+export interface InlineResponse20050TxResponseAttributes {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075TxResponseAttributes
+     * @memberof InlineResponse20050TxResponseAttributes
      */
     'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075TxResponseAttributes
+     * @memberof InlineResponse20050TxResponseAttributes
      */
     'value'?: string;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
  * @export
- * @interface InlineResponse20075TxResponseEvents
+ * @interface InlineResponse20050TxResponseEvents
  */
-export interface InlineResponse20075TxResponseEvents {
+export interface InlineResponse20050TxResponseEvents {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075TxResponseEvents
+     * @memberof InlineResponse20050TxResponseEvents
      */
     'type'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20075TxResponseAttributes>}
-     * @memberof InlineResponse20075TxResponseEvents
+     * @type {Array<InlineResponse20050TxResponseAttributes>}
+     * @memberof InlineResponse20050TxResponseEvents
      */
-    'attributes'?: Array<InlineResponse20075TxResponseAttributes>;
+    'attributes'?: Array<InlineResponse20050TxResponseAttributes>;
 }
 /**
  * ABCIMessageLog defines a structure containing an indexed tx ABCI message log.
  * @export
- * @interface InlineResponse20075TxResponseLogs
+ * @interface InlineResponse20050TxResponseLogs
  */
-export interface InlineResponse20075TxResponseLogs {
+export interface InlineResponse20050TxResponseLogs {
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse20075TxResponseLogs
+     * @memberof InlineResponse20050TxResponseLogs
      */
     'msg_index'?: number;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20075TxResponseLogs
+     * @memberof InlineResponse20050TxResponseLogs
      */
     'log'?: string;
     /**
      * Events contains a slice of Event objects that were emitted during some execution.
-     * @type {Array<InlineResponse20075TxResponseEvents>}
-     * @memberof InlineResponse20075TxResponseLogs
+     * @type {Array<InlineResponse20050TxResponseEvents>}
+     * @memberof InlineResponse20050TxResponseLogs
      */
-    'events'?: Array<InlineResponse20075TxResponseEvents>;
+    'events'?: Array<InlineResponse20050TxResponseEvents>;
 }
 /**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
  * @export
- * @interface InlineResponse20076
+ * @interface InlineResponse20051
  */
-export interface InlineResponse20076 {
+export interface InlineResponse20051 {
     /**
      * height is the block height at which the plan was applied.
      * @type {string}
-     * @memberof InlineResponse20076
+     * @memberof InlineResponse20051
      */
     'height'?: string;
 }
 /**
  * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC method.
  * @export
- * @interface InlineResponse20077
+ * @interface InlineResponse20052
  */
-export interface InlineResponse20077 {
+export interface InlineResponse20052 {
     /**
      * 
-     * @type {InlineResponse20077Plan}
-     * @memberof InlineResponse20077
+     * @type {InlineResponse20052Plan}
+     * @memberof InlineResponse20052
      */
-    'plan'?: InlineResponse20077Plan;
+    'plan'?: InlineResponse20052Plan;
 }
 /**
  * plan is the current upgrade plan.
  * @export
- * @interface InlineResponse20077Plan
+ * @interface InlineResponse20052Plan
  */
-export interface InlineResponse20077Plan {
+export interface InlineResponse20052Plan {
     /**
      * Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit.
      * @type {string}
-     * @memberof InlineResponse20077Plan
+     * @memberof InlineResponse20052Plan
      */
     'name'?: string;
     /**
      * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.
      * @type {string}
-     * @memberof InlineResponse20077Plan
+     * @memberof InlineResponse20052Plan
      */
     'time'?: string;
     /**
      * The height at which the upgrade must be performed. Only used if Time is not set.
      * @type {string}
-     * @memberof InlineResponse20077Plan
+     * @memberof InlineResponse20052Plan
      */
     'height'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20077Plan
+     * @memberof InlineResponse20052Plan
      */
     'info'?: string;
     /**
      * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20077Plan
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20052Plan
      */
-    'upgraded_client_state'?: InlineResponse20025Accounts;
+    'upgraded_client_state'?: InlineResponse200Accounts;
 }
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
  * @export
- * @interface InlineResponse20078
+ * @interface InlineResponse20053
  */
-export interface InlineResponse20078 {
+export interface InlineResponse20053 {
     /**
      * module_versions is a list of module names with their consensus versions.
-     * @type {Array<InlineResponse20078ModuleVersions>}
-     * @memberof InlineResponse20078
+     * @type {Array<InlineResponse20053ModuleVersions>}
+     * @memberof InlineResponse20053
      */
-    'module_versions'?: Array<InlineResponse20078ModuleVersions>;
+    'module_versions'?: Array<InlineResponse20053ModuleVersions>;
 }
 /**
  * ModuleVersion specifies a module and its consensus version.
  * @export
- * @interface InlineResponse20078ModuleVersions
+ * @interface InlineResponse20053ModuleVersions
  */
-export interface InlineResponse20078ModuleVersions {
+export interface InlineResponse20053ModuleVersions {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20078ModuleVersions
+     * @memberof InlineResponse20053ModuleVersions
      */
     'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20078ModuleVersions
+     * @memberof InlineResponse20053ModuleVersions
      */
     'version'?: string;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
  * @export
- * @interface InlineResponse20079
+ * @interface InlineResponse20054
  */
-export interface InlineResponse20079 {
+export interface InlineResponse20054 {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20079
+     * @memberof InlineResponse20054
      */
     'upgraded_consensus_state'?: string;
 }
 /**
- * 
- * @export
- * @interface InlineResponse2008
- */
-export interface InlineResponse2008 {
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse2008
-     */
-    'total'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
  * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
  * @export
- * @interface InlineResponse20080
+ * @interface InlineResponse20055
  */
-export interface InlineResponse20080 {
+export interface InlineResponse20055 {
     /**
      * authorizations is a list of grants granted for grantee by granter.
-     * @type {Array<InlineResponse20080Grants>}
-     * @memberof InlineResponse20080
+     * @type {Array<InlineResponse20055Grants>}
+     * @memberof InlineResponse20055
      */
-    'grants'?: Array<InlineResponse20080Grants>;
+    'grants'?: Array<InlineResponse20055Grants>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
-     * @memberof InlineResponse20080
+     * @type {InlineResponse20014Pagination}
+     * @memberof InlineResponse20055
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
  * Grant gives permissions to execute the provide method with expiration time.
  * @export
- * @interface InlineResponse20080Grants
+ * @interface InlineResponse20055Grants
  */
-export interface InlineResponse20080Grants {
+export interface InlineResponse20055Grants {
     /**
      * 
-     * @type {InlineResponse20025Accounts}
-     * @memberof InlineResponse20080Grants
+     * @type {InlineResponse200Accounts}
+     * @memberof InlineResponse20055Grants
      */
-    'authorization'?: InlineResponse20025Accounts;
+    'authorization'?: InlineResponse200Accounts;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20080Grants
+     * @memberof InlineResponse20055Grants
      */
     'expiration'?: string;
 }
 /**
  * QueryAllowanceResponse is the response type for the Query/Allowance RPC method.
  * @export
- * @interface InlineResponse20081
+ * @interface InlineResponse20056
  */
-export interface InlineResponse20081 {
+export interface InlineResponse20056 {
     /**
      * 
      * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext}
-     * @memberof InlineResponse20081
+     * @memberof InlineResponse20056
      */
     'allowance'?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext;
 }
 /**
  * QueryAllowancesResponse is the response type for the Query/Allowances RPC method.
  * @export
- * @interface InlineResponse20082
+ * @interface InlineResponse20057
  */
-export interface InlineResponse20082 {
+export interface InlineResponse20057 {
     /**
      * allowances are allowance\'s granted for grantee by granter.
      * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
-     * @memberof InlineResponse20082
+     * @memberof InlineResponse20057
      */
     'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
     /**
      * 
-     * @type {InlineResponse20039Pagination}
-     * @memberof InlineResponse20082
+     * @type {InlineResponse20014Pagination}
+     * @memberof InlineResponse20057
      */
-    'pagination'?: InlineResponse20039Pagination;
+    'pagination'?: InlineResponse20014Pagination;
 }
 /**
- * 
+ * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
+ * @export
+ * @interface InlineResponse2005DenomOwners
+ */
+export interface InlineResponse2005DenomOwners {
+    /**
+     * address defines the address that owns a particular denomination.
+     * @type {string}
+     * @memberof InlineResponse2005DenomOwners
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {InlineResponse2003Balances}
+     * @memberof InlineResponse2005DenomOwners
+     */
+    'balance'?: InlineResponse2003Balances;
+}
+/**
+ * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
+ * @export
+ * @interface InlineResponse2006
+ */
+export interface InlineResponse2006 {
+    /**
+     * metadata provides the client information for all the registered tokens.
+     * @type {Array<InlineResponse2006Metadatas>}
+     * @memberof InlineResponse2006
+     */
+    'metadatas'?: Array<InlineResponse2006Metadatas>;
+    /**
+     * 
+     * @type {InlineResponse200Pagination}
+     * @memberof InlineResponse2006
+     */
+    'pagination'?: InlineResponse200Pagination;
+}
+/**
+ * DenomUnit represents a struct that describes a given denomination unit of the basic token.
+ * @export
+ * @interface InlineResponse2006DenomUnits
+ */
+export interface InlineResponse2006DenomUnits {
+    /**
+     * denom represents the string name of the given denom unit (e.g uatom).
+     * @type {string}
+     * @memberof InlineResponse2006DenomUnits
+     */
+    'denom'?: string;
+    /**
+     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
+     * @type {number}
+     * @memberof InlineResponse2006DenomUnits
+     */
+    'exponent'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineResponse2006DenomUnits
+     */
+    'aliases'?: Array<string>;
+}
+/**
+ * Metadata represents a struct that describes a basic token.
+ * @export
+ * @interface InlineResponse2006Metadatas
+ */
+export interface InlineResponse2006Metadatas {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<InlineResponse2006DenomUnits>}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'denom_units'?: Array<InlineResponse2006DenomUnits>;
+    /**
+     * base represents the base denom (should be the DenomUnit with exponent = 0).
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'base'?: string;
+    /**
+     * display indicates the suggested denom that should be displayed in clients.
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'display'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'name'?: string;
+    /**
+     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'symbol'?: string;
+    /**
+     * URI to a document (on or off-chain) that contains additional information. Optional.
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'uri'?: string;
+    /**
+     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
+     * @type {string}
+     * @memberof InlineResponse2006Metadatas
+     */
+    'uri_hash'?: string;
+}
+/**
+ * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
+ * @export
+ * @interface InlineResponse2007
+ */
+export interface InlineResponse2007 {
+    /**
+     * 
+     * @type {InlineResponse2006Metadatas}
+     * @memberof InlineResponse2007
+     */
+    'metadata'?: InlineResponse2006Metadatas;
+}
+/**
+ * QueryParamsResponse defines the response type for querying x/bank parameters.
+ * @export
+ * @interface InlineResponse2008
+ */
+export interface InlineResponse2008 {
+    /**
+     * 
+     * @type {InlineResponse2008Params}
+     * @memberof InlineResponse2008
+     */
+    'params'?: InlineResponse2008Params;
+}
+/**
+ * Params defines the parameters for the bank module.
+ * @export
+ * @interface InlineResponse2008Params
+ */
+export interface InlineResponse2008Params {
+    /**
+     * 
+     * @type {Array<InlineResponse2008ParamsSendEnabled>}
+     * @memberof InlineResponse2008Params
+     */
+    'send_enabled'?: Array<InlineResponse2008ParamsSendEnabled>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2008Params
+     */
+    'default_send_enabled'?: boolean;
+}
+/**
+ * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
+ * @export
+ * @interface InlineResponse2008ParamsSendEnabled
+ */
+export interface InlineResponse2008ParamsSendEnabled {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2008ParamsSendEnabled
+     */
+    'denom'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2008ParamsSendEnabled
+     */
+    'enabled'?: boolean;
+}
+/**
+ * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
  * @export
  * @interface InlineResponse2009
  */
 export interface InlineResponse2009 {
     /**
      * 
-     * @type {string}
+     * @type {InlineResponse2003Balances}
      * @memberof InlineResponse2009
      */
-    'type'?: string;
-    /**
-     * 
-     * @type {InlineResponse2009Value}
-     * @memberof InlineResponse2009
-     */
-    'value'?: InlineResponse2009Value;
+    'amount'?: InlineResponse2003Balances;
 }
 /**
- * 
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
  * @export
- * @interface InlineResponse2009Value
+ * @interface InlineResponse200Accounts
  */
-export interface InlineResponse2009Value {
+export interface InlineResponse200Accounts {
     /**
-     * 
+     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
      * @type {string}
-     * @memberof InlineResponse2009Value
+     * @memberof InlineResponse200Accounts
      */
-    'account_number'?: string;
+    'type_url'?: string;
     /**
-     * 
+     * Must be a valid serialized protocol buffer of the above specified type.
      * @type {string}
-     * @memberof InlineResponse2009Value
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof InlineResponse2009Value
-     */
-    'coins'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {InlineResponse2009ValuePublicKey}
-     * @memberof InlineResponse2009Value
-     */
-    'public_key'?: InlineResponse2009ValuePublicKey;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2009Value
-     */
-    'sequence'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2009ValuePublicKey
- */
-export interface InlineResponse2009ValuePublicKey {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2009ValuePublicKey
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2009ValuePublicKey
+     * @memberof InlineResponse200Accounts
      */
     'value'?: string;
 }
 /**
- * 
+ * pagination defines the pagination in the response.
  * @export
- * @interface InlineResponse200ApplicationVersion
+ * @interface InlineResponse200Pagination
  */
-export interface InlineResponse200ApplicationVersion {
+export interface InlineResponse200Pagination {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
+     * @memberof InlineResponse200Pagination
      */
-    'build_tags'?: string;
+    'next_key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
+     * @memberof InlineResponse200Pagination
      */
-    'client_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
-     */
-    'commit'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
-     */
-    'go'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
-     */
-    'server_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200ApplicationVersion
-     */
-    'version'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse200NodeInfo
- */
-export interface InlineResponse200NodeInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'moniker'?: string;
-    /**
-     * 
-     * @type {InlineResponse200NodeInfoProtocolVersion}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'protocol_version'?: InlineResponse200NodeInfoProtocolVersion;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'network'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'channels'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'listen_addr'?: string;
-    /**
-     * Tendermint version
-     * @type {string}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'version'?: string;
-    /**
-     * 
-     * @type {InlineResponse200NodeInfoOther}
-     * @memberof InlineResponse200NodeInfo
-     */
-    'other'?: InlineResponse200NodeInfoOther;
-}
-/**
- * more information on versions
- * @export
- * @interface InlineResponse200NodeInfoOther
- */
-export interface InlineResponse200NodeInfoOther {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfoOther
-     */
-    'tx_index'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfoOther
-     */
-    'rpc_address'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse200NodeInfoProtocolVersion
- */
-export interface InlineResponse200NodeInfoProtocolVersion {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfoProtocolVersion
-     */
-    'p2p'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfoProtocolVersion
-     */
-    'block'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200NodeInfoProtocolVersion
-     */
-    'app'?: string;
+    'total'?: string;
 }
 /**
  * 
@@ -9028,10 +6461,10 @@ export interface InlineResponseDefault {
     'message'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20025Accounts>}
+     * @type {Array<InlineResponse200Accounts>}
      * @memberof InlineResponseDefault
      */
-    'details'?: Array<InlineResponse20025Accounts>;
+    'details'?: Array<InlineResponse200Accounts>;
 }
 /**
  * 
@@ -9086,25 +6519,6 @@ export interface InlineResponseDefault1Details {
 /**
  * 
  * @export
- * @interface KVPair
- */
-export interface KVPair {
-    /**
-     * 
-     * @type {string}
-     * @memberof KVPair
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof KVPair
-     */
-    'value'?: string;
-}
-/**
- * 
- * @export
  * @interface ModuleIsTheTypeForVersionInfo
  */
 export interface ModuleIsTheTypeForVersionInfo {
@@ -9126,80 +6540,6 @@ export interface ModuleIsTheTypeForVersionInfo {
      * @memberof ModuleIsTheTypeForVersionInfo
      */
     'sum'?: string;
-}
-/**
- * 
- * @export
- * @interface PaginatedQueryTxs
- */
-export interface PaginatedQueryTxs {
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedQueryTxs
-     */
-    'total_count'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedQueryTxs
-     */
-    'count'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedQueryTxs
-     */
-    'page_number'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedQueryTxs
-     */
-    'page_total'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedQueryTxs
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {Array<InlineResponse2004>}
-     * @memberof PaginatedQueryTxs
-     */
-    'txs'?: Array<InlineResponse2004>;
-}
-/**
- * 
- * @export
- * @interface ParamChange
- */
-export interface ParamChange {
-    /**
-     * 
-     * @type {string}
-     * @memberof ParamChange
-     */
-    'subspace'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParamChange
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParamChange
-     */
-    'subkey'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof ParamChange
-     */
-    'value'?: object;
 }
 /**
  * 
@@ -9238,44 +6578,6 @@ export interface PrevBlockInfo {
      * @memberof PrevBlockInfo
      */
     'part_set_header'?: PartsetHeader;
-}
-/**
- * 
- * @export
- * @interface Proposer
- */
-export interface Proposer {
-    /**
-     * 
-     * @type {string}
-     * @memberof Proposer
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Proposer
-     */
-    'proposer'?: string;
-}
-/**
- * 
- * @export
- * @interface PublicKey
- */
-export interface PublicKey {
-    /**
-     * 
-     * @type {string}
-     * @memberof PublicKey
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PublicKey
-     */
-    'value'?: string;
 }
 /**
  * 
@@ -9448,16 +6750,16 @@ export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInf
 export interface QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod {
     /**
      * 
-     * @type {Array<InlineResponse20028Balances>}
+     * @type {Array<InlineResponse2003Balances>}
      * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    'supply'?: Array<InlineResponse20028Balances>;
+    'supply'?: Array<InlineResponse2003Balances>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * 
@@ -9480,10 +6782,10 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
 export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission {
     /**
      * 
-     * @type {Array<InlineResponse20041Pool>}
+     * @type {Array<InlineResponse20016Pool>}
      * @memberof QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission
      */
-    'commission'?: Array<InlineResponse20041Pool>;
+    'commission'?: Array<InlineResponse20016Pool>;
 }
 /**
  * 
@@ -9493,16 +6795,16 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
 export interface QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod {
     /**
      * 
-     * @type {Array<InlineResponse20063DelegationResponses>}
+     * @type {Array<InlineResponse20038DelegationResponses>}
      * @memberof QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod
      */
-    'delegation_responses'?: Array<InlineResponse20063DelegationResponses>;
+    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod
      */
-    'pagination'?: InlineResponse20025Pagination;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * 
@@ -9512,10 +6814,10 @@ export interface QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValid
 export interface QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMethod {
     /**
      * 
-     * @type {InlineResponse20066Validators}
+     * @type {InlineResponse20041Validators}
      * @memberof QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMethod
      */
-    'validator'?: InlineResponse20066Validators;
+    'validator'?: InlineResponse20041Validators;
 }
 /**
  * 
@@ -9525,115 +6827,16 @@ export interface QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMeth
 export interface QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod {
     /**
      * validators contains all the queried validators.
-     * @type {Array<InlineResponse20066Validators>}
+     * @type {Array<InlineResponse20041Validators>}
      * @memberof QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod
      */
-    'validators'?: Array<InlineResponse20066Validators>;
+    'validators'?: Array<InlineResponse20041Validators>;
     /**
      * 
-     * @type {InlineResponse20025Pagination}
+     * @type {InlineResponse200Pagination}
      * @memberof QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod
      */
-    'pagination'?: InlineResponse20025Pagination;
-}
-/**
- * 
- * @export
- * @interface Redelegation
- */
-export interface Redelegation {
-    /**
-     * 
-     * @type {string}
-     * @memberof Redelegation
-     */
-    'delegator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Redelegation
-     */
-    'validator_src_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Redelegation
-     */
-    'validator_dst_address'?: string;
-    /**
-     * 
-     * @type {Array<Redelegation>}
-     * @memberof Redelegation
-     */
-    'entries'?: Array<Redelegation>;
-}
-/**
- * 
- * @export
- * @interface RedelegationEntry
- */
-export interface RedelegationEntry {
-    /**
-     * 
-     * @type {number}
-     * @memberof RedelegationEntry
-     */
-    'creation_height'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof RedelegationEntry
-     */
-    'completion_time'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof RedelegationEntry
-     */
-    'initial_balance'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RedelegationEntry
-     */
-    'balance'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RedelegationEntry
-     */
-    'shares_dst'?: string;
-}
-/**
- * 
- * @export
- * @interface SigningInfo
- */
-export interface SigningInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof SigningInfo
-     */
-    'start_height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SigningInfo
-     */
-    'index_offset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SigningInfo
-     */
-    'jailed_until'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SigningInfo
-     */
-    'missed_blocks_counter'?: string;
+    'pagination'?: InlineResponse200Pagination;
 }
 /**
  * 
@@ -9659,149 +6862,6 @@ export const SingleRepresentsASingleSignerModeEnum = {
 export type SingleRepresentsASingleSignerModeEnum = typeof SingleRepresentsASingleSignerModeEnum[keyof typeof SingleRepresentsASingleSignerModeEnum];
 
 /**
- * 
- * @export
- * @interface StakingDelegatorsDelegatorAddrValidatorsCommission
- */
-export interface StakingDelegatorsDelegatorAddrValidatorsCommission {
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsCommission
-     */
-    'rate'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsCommission
-     */
-    'max_rate'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsCommission
-     */
-    'max_change_rate'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsCommission
-     */
-    'update_time'?: string;
-}
-/**
- * 
- * @export
- * @interface StakingDelegatorsDelegatorAddrValidatorsDescription
- */
-export interface StakingDelegatorsDelegatorAddrValidatorsDescription {
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsDescription
-     */
-    'moniker'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsDescription
-     */
-    'identity'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsDescription
-     */
-    'website'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsDescription
-     */
-    'security_contact'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StakingDelegatorsDelegatorAddrValidatorsDescription
-     */
-    'details'?: string;
-}
-/**
- * 
- * @export
- * @interface StdTx
- */
-export interface StdTx {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof StdTx
-     */
-    'msg'?: Array<string>;
-    /**
-     * 
-     * @type {InlineResponse2004TxFee}
-     * @memberof StdTx
-     */
-    'fee'?: InlineResponse2004TxFee;
-    /**
-     * 
-     * @type {string}
-     * @memberof StdTx
-     */
-    'memo'?: string;
-    /**
-     * 
-     * @type {InlineResponse2004TxSignature}
-     * @memberof StdTx
-     */
-    'signature'?: InlineResponse2004TxSignature;
-}
-/**
- * 
- * @export
- * @interface Supply
- */
-export interface Supply {
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof Supply
-     */
-    'total'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface TallyResult
- */
-export interface TallyResult {
-    /**
-     * 
-     * @type {string}
-     * @memberof TallyResult
-     */
-    'yes'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TallyResult
-     */
-    'abstain'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TallyResult
-     */
-    'no'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TallyResult
-     */
-    'no_with_veto'?: string;
-}
-/**
  * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
  * @export
  * @interface TendermintAbciEvent
@@ -9815,10 +6875,10 @@ export interface TendermintAbciEvent {
     'type'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20074ResultAttributes>}
+     * @type {Array<InlineResponse20049ResultAttributes>}
      * @memberof TendermintAbciEvent
      */
-    'attributes'?: Array<InlineResponse20074ResultAttributes>;
+    'attributes'?: Array<InlineResponse20049ResultAttributes>;
 }
 /**
  * EventAttribute is a single key-value pair, associated with an event.
@@ -9872,10 +6932,10 @@ export interface TendermintCryptoPublicKey {
 export interface TendermintP2pDefaultNodeInfo {
     /**
      * 
-     * @type {InlineResponse20037DefaultNodeInfoProtocolVersion}
+     * @type {InlineResponse20012DefaultNodeInfoProtocolVersion}
      * @memberof TendermintP2pDefaultNodeInfo
      */
-    'protocol_version'?: InlineResponse20037DefaultNodeInfoProtocolVersion;
+    'protocol_version'?: InlineResponse20012DefaultNodeInfoProtocolVersion;
     /**
      * 
      * @type {string}
@@ -9914,10 +6974,10 @@ export interface TendermintP2pDefaultNodeInfo {
     'moniker'?: string;
     /**
      * 
-     * @type {InlineResponse20037DefaultNodeInfoOther}
+     * @type {InlineResponse20012DefaultNodeInfoOther}
      * @memberof TendermintP2pDefaultNodeInfo
      */
-    'other'?: InlineResponse20037DefaultNodeInfoOther;
+    'other'?: InlineResponse20012DefaultNodeInfoOther;
 }
 /**
  * 
@@ -9971,10 +7031,10 @@ export interface TendermintP2pProtocolVersion {
 export interface TendermintTypesBlock {
     /**
      * 
-     * @type {InlineResponse20035BlockHeader}
+     * @type {InlineResponse20010BlockHeader}
      * @memberof TendermintTypesBlock
      */
-    'header'?: InlineResponse20035BlockHeader;
+    'header'?: InlineResponse20010BlockHeader;
     /**
      * 
      * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
@@ -9983,16 +7043,16 @@ export interface TendermintTypesBlock {
     'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidence}
+     * @type {InlineResponse20010BlockEvidence}
      * @memberof TendermintTypesBlock
      */
-    'evidence'?: InlineResponse20035BlockEvidence;
+    'evidence'?: InlineResponse20010BlockEvidence;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesBlock
      */
-    'last_commit'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    'last_commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * 
@@ -10049,16 +7109,16 @@ export interface TendermintTypesCommit {
     'round'?: number;
     /**
      * 
-     * @type {BlockID1}
+     * @type {BlockID}
      * @memberof TendermintTypesCommit
      */
-    'block_id'?: BlockID1;
+    'block_id'?: BlockID;
     /**
      * 
-     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
+     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
      * @memberof TendermintTypesCommit
      */
-    'signatures'?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
+    'signatures'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
 }
 /**
  * CommitSig is a part of the Vote included in a Commit.
@@ -10122,16 +7182,16 @@ export interface TendermintTypesData {
 export interface TendermintTypesDuplicateVoteEvidence {
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    'vote_a'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
+    'vote_a'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    'vote_b'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidenceVoteA;
+    'vote_b'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
     /**
      * 
      * @type {string}
@@ -10159,16 +7219,16 @@ export interface TendermintTypesDuplicateVoteEvidence {
 export interface TendermintTypesEvidence {
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceDuplicateVoteEvidence}
+     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidence}
      * @memberof TendermintTypesEvidence
      */
-    'duplicate_vote_evidence'?: InlineResponse20035BlockEvidenceDuplicateVoteEvidence;
+    'duplicate_vote_evidence'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidence;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidence}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidence}
      * @memberof TendermintTypesEvidence
      */
-    'light_client_attack_evidence'?: InlineResponse20035BlockEvidenceLightClientAttackEvidence;
+    'light_client_attack_evidence'?: InlineResponse20010BlockEvidenceLightClientAttackEvidence;
 }
 /**
  * 
@@ -10178,10 +7238,10 @@ export interface TendermintTypesEvidence {
 export interface TendermintTypesEvidenceList {
     /**
      * 
-     * @type {Array<InlineResponse20035BlockEvidenceEvidence>}
+     * @type {Array<InlineResponse20010BlockEvidenceEvidence>}
      * @memberof TendermintTypesEvidenceList
      */
-    'evidence'?: Array<InlineResponse20035BlockEvidenceEvidence>;
+    'evidence'?: Array<InlineResponse20010BlockEvidenceEvidence>;
 }
 /**
  * Header defines the structure of a Tendermint block header.
@@ -10215,10 +7275,10 @@ export interface TendermintTypesHeader {
     'time'?: string;
     /**
      * 
-     * @type {BlockID1}
+     * @type {BlockID}
      * @memberof TendermintTypesHeader
      */
-    'last_block_id'?: BlockID1;
+    'last_block_id'?: BlockID;
     /**
      * 
      * @type {string}
@@ -10282,16 +7342,16 @@ export interface TendermintTypesHeader {
 export interface TendermintTypesLightBlock {
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
      * @memberof TendermintTypesLightBlock
      */
-    'signed_header'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
+    'signed_header'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
      * @memberof TendermintTypesLightBlock
      */
-    'validator_set'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
+    'validator_set'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
@@ -10301,10 +7361,10 @@ export interface TendermintTypesLightBlock {
 export interface TendermintTypesLightClientAttackEvidence {
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    'conflicting_block'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlock;
+    'conflicting_block'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock;
     /**
      * 
      * @type {string}
@@ -10313,10 +7373,10 @@ export interface TendermintTypesLightClientAttackEvidence {
     'common_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    'byzantine_validators'?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    'byzantine_validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
     /**
      * 
      * @type {string}
@@ -10357,16 +7417,16 @@ export interface TendermintTypesPartSetHeader {
 export interface TendermintTypesSignedHeader {
     /**
      * 
-     * @type {InlineResponse20035BlockHeader}
+     * @type {InlineResponse20010BlockHeader}
      * @memberof TendermintTypesSignedHeader
      */
-    'header'?: InlineResponse20035BlockHeader;
+    'header'?: InlineResponse20010BlockHeader;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesSignedHeader
      */
-    'commit'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    'commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
@@ -10423,16 +7483,16 @@ export interface TendermintTypesValidator {
 export interface TendermintTypesValidatorSet {
     /**
      * 
-     * @type {Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
      * @memberof TendermintTypesValidatorSet
      */
-    'validators'?: Array<InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    'validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
     /**
      * 
-     * @type {InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
+     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
      * @memberof TendermintTypesValidatorSet
      */
-    'proposer'?: InlineResponse20035BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
+    'proposer'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
     /**
      * 
      * @type {string}
@@ -10466,10 +7526,10 @@ export interface TendermintTypesVote {
     'round'?: number;
     /**
      * 
-     * @type {BlockID1}
+     * @type {BlockID}
      * @memberof TendermintTypesVote
      */
-    'block_id'?: BlockID1;
+    'block_id'?: BlockID;
     /**
      * 
      * @type {string}
@@ -10506,37 +7566,6 @@ export const TendermintTypesVoteTypeEnum = {
 export type TendermintTypesVoteTypeEnum = typeof TendermintTypesVoteTypeEnum[keyof typeof TendermintTypesVoteTypeEnum];
 
 /**
- * 
- * @export
- * @interface TendermintValidator
- */
-export interface TendermintValidator {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof TendermintValidator
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TendermintValidator
-     */
-    'pub_key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TendermintValidator
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TendermintValidator
-     */
-    'proposer_priority'?: string;
-}
-/**
  * Consensus captures the consensus rules for processing a block in the blockchain, including all blockchain data structures and the rules of the application\'s state transition machine.
  * @export
  * @interface TendermintVersionConsensus
@@ -10554,197 +7583,6 @@ export interface TendermintVersionConsensus {
      * @memberof TendermintVersionConsensus
      */
     'app'?: string;
-}
-/**
- * 
- * @export
- * @interface TextProposal
- */
-export interface TextProposal {
-    /**
-     * 
-     * @type {number}
-     * @memberof TextProposal
-     */
-    'proposal_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof TextProposal
-     */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TextProposal
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TextProposal
-     */
-    'proposal_type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TextProposal
-     */
-    'proposal_status'?: string;
-    /**
-     * 
-     * @type {GovProposalsFinalTallyResult}
-     * @memberof TextProposal
-     */
-    'final_tally_result'?: GovProposalsFinalTallyResult;
-    /**
-     * 
-     * @type {string}
-     * @memberof TextProposal
-     */
-    'submit_time'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof TextProposal
-     */
-    'total_deposit'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {string}
-     * @memberof TextProposal
-     */
-    'voting_start_time'?: string;
-}
-/**
- * 
- * @export
- * @interface TxQuery
- */
-export interface TxQuery {
-    /**
-     * 
-     * @type {string}
-     * @memberof TxQuery
-     */
-    'hash'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof TxQuery
-     */
-    'height'?: number;
-    /**
-     * 
-     * @type {InlineResponse2004Tx}
-     * @memberof TxQuery
-     */
-    'tx'?: InlineResponse2004Tx;
-    /**
-     * 
-     * @type {InlineResponse2004Result}
-     * @memberof TxQuery
-     */
-    'result'?: InlineResponse2004Result;
-}
-/**
- * 
- * @export
- * @interface UnbondingDelegation
- */
-export interface UnbondingDelegation {
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingDelegation
-     */
-    'delegator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingDelegation
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingDelegation
-     */
-    'initial_balance'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingDelegation
-     */
-    'balance'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnbondingDelegation
-     */
-    'creation_height'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnbondingDelegation
-     */
-    'min_time'?: number;
-}
-/**
- * 
- * @export
- * @interface UnbondingDelegationPair
- */
-export interface UnbondingDelegationPair {
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingDelegationPair
-     */
-    'delegator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingDelegationPair
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20012Entries>}
-     * @memberof UnbondingDelegationPair
-     */
-    'entries'?: Array<InlineResponse20012Entries>;
-}
-/**
- * 
- * @export
- * @interface UnbondingEntries
- */
-export interface UnbondingEntries {
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingEntries
-     */
-    'initial_balance'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingEntries
-     */
-    'balance'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingEntries
-     */
-    'creation_height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnbondingEntries
-     */
-    'min_time'?: string;
 }
 /**
  * ValidatorSigningInfo defines a validator\'s signing info for monitoring their liveness activity.
@@ -10789,2949 +7627,6 @@ export interface ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress {
      */
     'missed_blocks_counter'?: string;
 }
-/**
- * 
- * @export
- * @interface Validator
- */
-export interface Validator {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof Validator
-     */
-    'operator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Validator
-     */
-    'consensus_pubkey'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Validator
-     */
-    'jailed'?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof Validator
-     */
-    'status'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Validator
-     */
-    'tokens'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Validator
-     */
-    'delegator_shares'?: string;
-    /**
-     * 
-     * @type {StakingDelegatorsDelegatorAddrValidatorsDescription}
-     * @memberof Validator
-     */
-    'description'?: StakingDelegatorsDelegatorAddrValidatorsDescription;
-    /**
-     * 
-     * @type {string}
-     * @memberof Validator
-     */
-    'bond_height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Validator
-     */
-    'bond_intra_tx_counter'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Validator
-     */
-    'unbonding_height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Validator
-     */
-    'unbonding_time'?: string;
-    /**
-     * 
-     * @type {StakingDelegatorsDelegatorAddrValidatorsCommission}
-     * @memberof Validator
-     */
-    'commission'?: StakingDelegatorsDelegatorAddrValidatorsCommission;
-}
-/**
- * 
- * @export
- * @interface ValidatorDistInfo
- */
-export interface ValidatorDistInfo {
-    /**
-     * bech32 encoded address
-     * @type {string}
-     * @memberof ValidatorDistInfo
-     */
-    'operator_address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof ValidatorDistInfo
-     */
-    'self_bond_rewards'?: Array<InlineResponse2004TxFeeAmount>;
-    /**
-     * 
-     * @type {Array<InlineResponse2004TxFeeAmount>}
-     * @memberof ValidatorDistInfo
-     */
-    'val_commission'?: Array<InlineResponse2004TxFeeAmount>;
-}
-/**
- * 
- * @export
- * @interface Vote
- */
-export interface Vote {
-    /**
-     * 
-     * @type {string}
-     * @memberof Vote
-     */
-    'voter'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Vote
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Vote
-     */
-    'option'?: string;
-}
-
-/**
- * AuthApi - axios parameter creator
- * @export
- */
-export const AuthApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Get the account information on blockchain
-         * @param {string} address Account address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        authAccountsAddressGet: async (address: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'address' is not null or undefined
-            assertParamExists('authAccountsAddressGet', 'address', address)
-            const localVarPath = `/auth/accounts/{address}`
-                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * AuthApi - functional programming interface
- * @export
- */
-export const AuthApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Get the account information on blockchain
-         * @param {string} address Account address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async authAccountsAddressGet(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authAccountsAddressGet(address, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * AuthApi - factory interface
- * @export
- */
-export const AuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AuthApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Get the account information on blockchain
-         * @param {string} address Account address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        authAccountsAddressGet(address: string, options?: any): AxiosPromise<InlineResponse2009> {
-            return localVarFp.authAccountsAddressGet(address, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * AuthApi - object-oriented interface
- * @export
- * @class AuthApi
- * @extends {BaseAPI}
- */
-export class AuthApi extends BaseAPI {
-    /**
-     * 
-     * @summary Get the account information on blockchain
-     * @param {string} address Account address
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    public authAccountsAddressGet(address: string, options?: AxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authAccountsAddressGet(address, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * BankApi - axios parameter creator
- * @export
- */
-export const BankApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Send coins from one account to another
-         * @param {string} address Account address in bech32 format
-         * @param {InlineObject3} account 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankAccountsAddressTransfersPost: async (address: string, account: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'address' is not null or undefined
-            assertParamExists('bankAccountsAddressTransfersPost', 'address', address)
-            // verify required parameter 'account' is not null or undefined
-            assertParamExists('bankAccountsAddressTransfersPost', 'account', account)
-            const localVarPath = `/bank/accounts/{address}/transfers`
-                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(account, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the account balances
-         * @param {string} address Account address in bech32 format
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankBalancesAddressGet: async (address: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'address' is not null or undefined
-            assertParamExists('bankBalancesAddressGet', 'address', address)
-            const localVarPath = `/bank/balances/{address}`
-                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Total supply of a single coin denomination
-         * @param {string} denomination Coin denomination
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankTotalDenominationGet: async (denomination: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'denomination' is not null or undefined
-            assertParamExists('bankTotalDenominationGet', 'denomination', denomination)
-            const localVarPath = `/bank/total/{denomination}`
-                .replace(`{${"denomination"}}`, encodeURIComponent(String(denomination)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Total supply of coins in the chain
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankTotalGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/bank/total`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * BankApi - functional programming interface
- * @export
- */
-export const BankApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Send coins from one account to another
-         * @param {string} address Account address in bech32 format
-         * @param {InlineObject3} account 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async bankAccountsAddressTransfersPost(address: string, account: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsAddressTransfersPost(address, account, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the account balances
-         * @param {string} address Account address in bech32 format
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async bankBalancesAddressGet(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2004TxFeeAmount>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankBalancesAddressGet(address, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Total supply of a single coin denomination
-         * @param {string} denomination Coin denomination
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async bankTotalDenominationGet(denomination: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTotalDenominationGet(denomination, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Total supply of coins in the chain
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async bankTotalGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTotalGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * BankApi - factory interface
- * @export
- */
-export const BankApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Send coins from one account to another
-         * @param {string} address Account address in bech32 format
-         * @param {InlineObject3} account 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankAccountsAddressTransfersPost(address: string, account: InlineObject3, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.bankAccountsAddressTransfersPost(address, account, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the account balances
-         * @param {string} address Account address in bech32 format
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankBalancesAddressGet(address: string, options?: any): AxiosPromise<Array<InlineResponse2004TxFeeAmount>> {
-            return localVarFp.bankBalancesAddressGet(address, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Total supply of a single coin denomination
-         * @param {string} denomination Coin denomination
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankTotalDenominationGet(denomination: string, options?: any): AxiosPromise<string> {
-            return localVarFp.bankTotalDenominationGet(denomination, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Total supply of coins in the chain
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        bankTotalGet(options?: any): AxiosPromise<InlineResponse2008> {
-            return localVarFp.bankTotalGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BankApi - object-oriented interface
- * @export
- * @class BankApi
- * @extends {BaseAPI}
- */
-export class BankApi extends BaseAPI {
-    /**
-     * 
-     * @summary Send coins from one account to another
-     * @param {string} address Account address in bech32 format
-     * @param {InlineObject3} account 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof BankApi
-     */
-    public bankAccountsAddressTransfersPost(address: string, account: InlineObject3, options?: AxiosRequestConfig) {
-        return BankApiFp(this.configuration).bankAccountsAddressTransfersPost(address, account, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the account balances
-     * @param {string} address Account address in bech32 format
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof BankApi
-     */
-    public bankBalancesAddressGet(address: string, options?: AxiosRequestConfig) {
-        return BankApiFp(this.configuration).bankBalancesAddressGet(address, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Total supply of a single coin denomination
-     * @param {string} denomination Coin denomination
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof BankApi
-     */
-    public bankTotalDenominationGet(denomination: string, options?: AxiosRequestConfig) {
-        return BankApiFp(this.configuration).bankTotalDenominationGet(denomination, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Total supply of coins in the chain
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof BankApi
-     */
-    public bankTotalGet(options?: AxiosRequestConfig) {
-        return BankApiFp(this.configuration).bankTotalGet(options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * DistributionApi - axios parameter creator
- * @export
- */
-export const DistributionApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Community pool parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionCommunityPoolGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/distribution/community_pool`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get the sum of all the rewards earned by delegations by a single delegator
-         * @summary Get the total rewards balance from all delegations
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsGet: async (delegatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrRewardsGet', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/distribution/delegators/{delegatorAddr}/rewards`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Withdraw all the delegator\'s delegation rewards
-         * @summary Withdraw all the delegator\'s delegation rewards
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject12} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsPost: async (delegatorAddr: string, withdrawRequestBody?: InlineObject12, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrRewardsPost', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/distribution/delegators/{delegatorAddr}/rewards`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(withdrawRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query a single delegation reward by a delegator
-         * @summary Query a delegation reward
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet: async (delegatorAddr: string, validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet', 'delegatorAddr', delegatorAddr)
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)))
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Withdraw a delegator\'s delegation reward from a single validator
-         * @summary Withdraw a delegation reward
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {InlineObject13} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost: async (delegatorAddr: string, validatorAddr: string, withdrawRequestBody?: InlineObject13, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost', 'delegatorAddr', delegatorAddr)
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost', 'validatorAddr', validatorAddr)
-            const localVarPath = `/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)))
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(withdrawRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get the delegations\' rewards withdrawal address. This is the address in which the user will receive the reward funds
-         * @summary Get the rewards withdrawal address
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrWithdrawAddressGet: async (delegatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrWithdrawAddressGet', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/distribution/delegators/{delegatorAddr}/withdraw_address`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Replace the delegations\' rewards withdrawal address for a new one.
-         * @summary Replace the rewards withdrawal address
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject14} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrWithdrawAddressPost: async (delegatorAddr: string, withdrawRequestBody?: InlineObject14, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('distributionDelegatorsDelegatorAddrWithdrawAddressPost', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/distribution/delegators/{delegatorAddr}/withdraw_address`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(withdrawRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Fee distribution parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionParametersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/distribution/parameters`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query the distribution information of a single validator
-         * @summary Validator distribution information
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrGet: async (validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('distributionValidatorsValidatorAddrGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/distribution/validators/{validatorAddr}`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Fee distribution outstanding rewards of a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrOutstandingRewardsGet: async (validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('distributionValidatorsValidatorAddrOutstandingRewardsGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/distribution/validators/{validatorAddr}/outstanding_rewards`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query the commission and self-delegation rewards of validator.
-         * @summary Commission and self-delegation rewards of a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrRewardsGet: async (validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('distributionValidatorsValidatorAddrRewardsGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/distribution/validators/{validatorAddr}/rewards`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Withdraw the validator\'s self-delegation and commissions rewards
-         * @summary Withdraw the validator\'s rewards
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {InlineObject15} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrRewardsPost: async (validatorAddr: string, withdrawRequestBody?: InlineObject15, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('distributionValidatorsValidatorAddrRewardsPost', 'validatorAddr', validatorAddr)
-            const localVarPath = `/distribution/validators/{validatorAddr}/rewards`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(withdrawRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * DistributionApi - functional programming interface
- * @export
- */
-export const DistributionApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = DistributionApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Community pool parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionCommunityPoolGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2004TxFeeAmount>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionCommunityPoolGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Get the sum of all the rewards earned by delegations by a single delegator
-         * @summary Get the total rewards balance from all delegations
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Withdraw all the delegator\'s delegation rewards
-         * @summary Withdraw all the delegator\'s delegation rewards
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject12} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionDelegatorsDelegatorAddrRewardsPost(delegatorAddr: string, withdrawRequestBody?: InlineObject12, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionDelegatorsDelegatorAddrRewardsPost(delegatorAddr, withdrawRequestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query a single delegation reward by a delegator
-         * @summary Query a delegation reward
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2004TxFeeAmount>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(delegatorAddr, validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Withdraw a delegator\'s delegation reward from a single validator
-         * @summary Withdraw a delegation reward
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {InlineObject13} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(delegatorAddr: string, validatorAddr: string, withdrawRequestBody?: InlineObject13, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(delegatorAddr, validatorAddr, withdrawRequestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Get the delegations\' rewards withdrawal address. This is the address in which the user will receive the reward funds
-         * @summary Get the rewards withdrawal address
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Replace the delegations\' rewards withdrawal address for a new one.
-         * @summary Replace the rewards withdrawal address
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject14} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionDelegatorsDelegatorAddrWithdrawAddressPost(delegatorAddr: string, withdrawRequestBody?: InlineObject14, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionDelegatorsDelegatorAddrWithdrawAddressPost(delegatorAddr, withdrawRequestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Fee distribution parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionParametersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionParametersGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query the distribution information of a single validator
-         * @summary Validator distribution information
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionValidatorsValidatorAddrGet(validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Fee distribution outstanding rewards of a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionValidatorsValidatorAddrOutstandingRewardsGet(validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2004TxFeeAmount>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionValidatorsValidatorAddrOutstandingRewardsGet(validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query the commission and self-delegation rewards of validator.
-         * @summary Commission and self-delegation rewards of a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionValidatorsValidatorAddrRewardsGet(validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2004TxFeeAmount>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionValidatorsValidatorAddrRewardsGet(validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Withdraw the validator\'s self-delegation and commissions rewards
-         * @summary Withdraw the validator\'s rewards
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {InlineObject15} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async distributionValidatorsValidatorAddrRewardsPost(validatorAddr: string, withdrawRequestBody?: InlineObject15, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionValidatorsValidatorAddrRewardsPost(validatorAddr, withdrawRequestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * DistributionApi - factory interface
- * @export
- */
-export const DistributionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = DistributionApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Community pool parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionCommunityPoolGet(options?: any): AxiosPromise<Array<InlineResponse2004TxFeeAmount>> {
-            return localVarFp.distributionCommunityPoolGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get the sum of all the rewards earned by delegations by a single delegator
-         * @summary Get the total rewards balance from all delegations
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20023> {
-            return localVarFp.distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Withdraw all the delegator\'s delegation rewards
-         * @summary Withdraw all the delegator\'s delegation rewards
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject12} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsPost(delegatorAddr: string, withdrawRequestBody?: InlineObject12, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.distributionDelegatorsDelegatorAddrRewardsPost(delegatorAddr, withdrawRequestBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query a single delegation reward by a delegator
-         * @summary Query a delegation reward
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse2004TxFeeAmount>> {
-            return localVarFp.distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Withdraw a delegator\'s delegation reward from a single validator
-         * @summary Withdraw a delegation reward
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {InlineObject13} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(delegatorAddr: string, validatorAddr: string, withdrawRequestBody?: InlineObject13, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(delegatorAddr, validatorAddr, withdrawRequestBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get the delegations\' rewards withdrawal address. This is the address in which the user will receive the reward funds
-         * @summary Get the rewards withdrawal address
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegatorAddr: string, options?: any): AxiosPromise<string> {
-            return localVarFp.distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Replace the delegations\' rewards withdrawal address for a new one.
-         * @summary Replace the rewards withdrawal address
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject14} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionDelegatorsDelegatorAddrWithdrawAddressPost(delegatorAddr: string, withdrawRequestBody?: InlineObject14, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.distributionDelegatorsDelegatorAddrWithdrawAddressPost(delegatorAddr, withdrawRequestBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Fee distribution parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionParametersGet(options?: any): AxiosPromise<object> {
-            return localVarFp.distributionParametersGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query the distribution information of a single validator
-         * @summary Validator distribution information
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: any): AxiosPromise<InlineResponse20024> {
-            return localVarFp.distributionValidatorsValidatorAddrGet(validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Fee distribution outstanding rewards of a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrOutstandingRewardsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse2004TxFeeAmount>> {
-            return localVarFp.distributionValidatorsValidatorAddrOutstandingRewardsGet(validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query the commission and self-delegation rewards of validator.
-         * @summary Commission and self-delegation rewards of a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrRewardsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse2004TxFeeAmount>> {
-            return localVarFp.distributionValidatorsValidatorAddrRewardsGet(validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Withdraw the validator\'s self-delegation and commissions rewards
-         * @summary Withdraw the validator\'s rewards
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {InlineObject15} [withdrawRequestBody] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        distributionValidatorsValidatorAddrRewardsPost(validatorAddr: string, withdrawRequestBody?: InlineObject15, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.distributionValidatorsValidatorAddrRewardsPost(validatorAddr, withdrawRequestBody, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * DistributionApi - object-oriented interface
- * @export
- * @class DistributionApi
- * @extends {BaseAPI}
- */
-export class DistributionApi extends BaseAPI {
-    /**
-     * 
-     * @summary Community pool parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionCommunityPoolGet(options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionCommunityPoolGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get the sum of all the rewards earned by delegations by a single delegator
-     * @summary Get the total rewards balance from all delegations
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr: string, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionDelegatorsDelegatorAddrRewardsGet(delegatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Withdraw all the delegator\'s delegation rewards
-     * @summary Withdraw all the delegator\'s delegation rewards
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject12} [withdrawRequestBody] 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionDelegatorsDelegatorAddrRewardsPost(delegatorAddr: string, withdrawRequestBody?: InlineObject12, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionDelegatorsDelegatorAddrRewardsPost(delegatorAddr, withdrawRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query a single delegation reward by a delegator
-     * @summary Query a delegation reward
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionDelegatorsDelegatorAddrRewardsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Withdraw a delegator\'s delegation reward from a single validator
-     * @summary Withdraw a delegation reward
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject13} [withdrawRequestBody] 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(delegatorAddr: string, validatorAddr: string, withdrawRequestBody?: InlineObject13, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionDelegatorsDelegatorAddrRewardsValidatorAddrPost(delegatorAddr, validatorAddr, withdrawRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get the delegations\' rewards withdrawal address. This is the address in which the user will receive the reward funds
-     * @summary Get the rewards withdrawal address
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegatorAddr: string, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionDelegatorsDelegatorAddrWithdrawAddressGet(delegatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Replace the delegations\' rewards withdrawal address for a new one.
-     * @summary Replace the rewards withdrawal address
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject14} [withdrawRequestBody] 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionDelegatorsDelegatorAddrWithdrawAddressPost(delegatorAddr: string, withdrawRequestBody?: InlineObject14, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionDelegatorsDelegatorAddrWithdrawAddressPost(delegatorAddr, withdrawRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Fee distribution parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionParametersGet(options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionParametersGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query the distribution information of a single validator
-     * @summary Validator distribution information
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionValidatorsValidatorAddrGet(validatorAddr: string, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionValidatorsValidatorAddrGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Fee distribution outstanding rewards of a single validator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionValidatorsValidatorAddrOutstandingRewardsGet(validatorAddr: string, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionValidatorsValidatorAddrOutstandingRewardsGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query the commission and self-delegation rewards of validator.
-     * @summary Commission and self-delegation rewards of a single validator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionValidatorsValidatorAddrRewardsGet(validatorAddr: string, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionValidatorsValidatorAddrRewardsGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Withdraw the validator\'s self-delegation and commissions rewards
-     * @summary Withdraw the validator\'s rewards
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {InlineObject15} [withdrawRequestBody] 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof DistributionApi
-     */
-    public distributionValidatorsValidatorAddrRewardsPost(validatorAddr: string, withdrawRequestBody?: InlineObject15, options?: AxiosRequestConfig) {
-        return DistributionApiFp(this.configuration).distributionValidatorsValidatorAddrRewardsPost(validatorAddr, withdrawRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * GaiaRESTApi - axios parameter creator
- * @export
- */
-export const GaiaRESTApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Information about the connected node
-         * @summary The properties of the connected node
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        nodeInfoGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/node_info`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * GaiaRESTApi - functional programming interface
- * @export
- */
-export const GaiaRESTApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GaiaRESTApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Information about the connected node
-         * @summary The properties of the connected node
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async nodeInfoGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.nodeInfoGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * GaiaRESTApi - factory interface
- * @export
- */
-export const GaiaRESTApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GaiaRESTApiFp(configuration)
-    return {
-        /**
-         * Information about the connected node
-         * @summary The properties of the connected node
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        nodeInfoGet(options?: any): AxiosPromise<InlineResponse200> {
-            return localVarFp.nodeInfoGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * GaiaRESTApi - object-oriented interface
- * @export
- * @class GaiaRESTApi
- * @extends {BaseAPI}
- */
-export class GaiaRESTApi extends BaseAPI {
-    /**
-     * Information about the connected node
-     * @summary The properties of the connected node
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GaiaRESTApi
-     */
-    public nodeInfoGet(options?: AxiosRequestConfig) {
-        return GaiaRESTApiFp(this.configuration).nodeInfoGet(options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * GovernanceApi - axios parameter creator
- * @export
- */
-export const GovernanceApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Query governance deposit parameters. The max_deposit_period units are in nanoseconds.
-         * @summary Query governance deposit parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govParametersDepositGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/gov/parameters/deposit`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query governance tally parameters
-         * @summary Query governance tally parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govParametersTallyingGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/gov/parameters/tallying`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query governance voting parameters. The voting_period units are in nanoseconds.
-         * @summary Query governance voting parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govParametersVotingGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/gov/parameters/voting`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query proposals information with parameters
-         * @summary Query proposals
-         * @param {string} [voter] voter address
-         * @param {string} [depositor] depositor address
-         * @param {string} [status] proposal status, valid values can be &#x60;\&quot;deposit_period\&quot;&#x60;, &#x60;\&quot;voting_period\&quot;&#x60;, &#x60;\&quot;passed\&quot;&#x60;, &#x60;\&quot;rejected\&quot;&#x60;
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsGet: async (voter?: string, depositor?: string, status?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/gov/proposals`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (voter !== undefined) {
-                localVarQueryParameter['voter'] = voter;
-            }
-
-            if (depositor !== undefined) {
-                localVarQueryParameter['depositor'] = depositor;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Generate a parameter change proposal transaction
-         * @summary Generate a parameter change proposal transaction
-         * @param {InlineObject9} postProposalBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsParamChangePost: async (postProposalBody: InlineObject9, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'postProposalBody' is not null or undefined
-            assertParamExists('govProposalsParamChangePost', 'postProposalBody', postProposalBody)
-            const localVarPath = `/gov/proposals/param_change`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(postProposalBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Send transaction to submit a proposal
-         * @summary Submit a proposal
-         * @param {InlineObject8} postProposalBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsPost: async (postProposalBody: InlineObject8, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'postProposalBody' is not null or undefined
-            assertParamExists('govProposalsPost', 'postProposalBody', postProposalBody)
-            const localVarPath = `/gov/proposals`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(postProposalBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query deposit by proposalId and depositor address
-         * @summary Query deposit
-         * @param {string} proposalId proposal id
-         * @param {string} depositor Bech32 depositor address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdDepositsDepositorGet: async (proposalId: string, depositor: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdDepositsDepositorGet', 'proposalId', proposalId)
-            // verify required parameter 'depositor' is not null or undefined
-            assertParamExists('govProposalsProposalIdDepositsDepositorGet', 'depositor', depositor)
-            const localVarPath = `/gov/proposals/{proposalId}/deposits/{depositor}`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)))
-                .replace(`{${"depositor"}}`, encodeURIComponent(String(depositor)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query deposits by proposalId
-         * @summary Query deposits
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdDepositsGet: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdDepositsGet', 'proposalId', proposalId)
-            const localVarPath = `/gov/proposals/{proposalId}/deposits`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Send transaction to deposit tokens to a proposal
-         * @summary Deposit tokens to a proposal
-         * @param {string} proposalId proposal id
-         * @param {InlineObject10} postDepositBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdDepositsPost: async (proposalId: string, postDepositBody: InlineObject10, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdDepositsPost', 'proposalId', proposalId)
-            // verify required parameter 'postDepositBody' is not null or undefined
-            assertParamExists('govProposalsProposalIdDepositsPost', 'postDepositBody', postDepositBody)
-            const localVarPath = `/gov/proposals/{proposalId}/deposits`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(postDepositBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query a proposal by id
-         * @summary Query a proposal
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdGet: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdGet', 'proposalId', proposalId)
-            const localVarPath = `/gov/proposals/{proposalId}`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query for the proposer for a proposal
-         * @summary Query proposer
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdProposerGet: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdProposerGet', 'proposalId', proposalId)
-            const localVarPath = `/gov/proposals/{proposalId}/proposer`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Gets a proposal\'s tally result at the current time. If the proposal is pending deposits (i.e status \'DepositPeriod\') it returns an empty tally result.
-         * @summary Get a proposal\'s tally result at the current time
-         * @param {string} proposalId proposal id
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdTallyGet: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdTallyGet', 'proposalId', proposalId)
-            const localVarPath = `/gov/proposals/{proposalId}/tally`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query voters information by proposalId
-         * @summary Query voters
-         * @param {string} proposalId proposal id
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdVotesGet: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdVotesGet', 'proposalId', proposalId)
-            const localVarPath = `/gov/proposals/{proposalId}/votes`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Send transaction to vote a proposal
-         * @summary Vote a proposal
-         * @param {string} proposalId proposal id
-         * @param {InlineObject11} postVoteBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdVotesPost: async (proposalId: string, postVoteBody: InlineObject11, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdVotesPost', 'proposalId', proposalId)
-            // verify required parameter 'postVoteBody' is not null or undefined
-            assertParamExists('govProposalsProposalIdVotesPost', 'postVoteBody', postVoteBody)
-            const localVarPath = `/gov/proposals/{proposalId}/votes`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(postVoteBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Query vote information by proposal Id and voter address
-         * @summary Query vote
-         * @param {string} proposalId proposal id
-         * @param {string} voter Bech32 voter address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdVotesVoterGet: async (proposalId: string, voter: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govProposalsProposalIdVotesVoterGet', 'proposalId', proposalId)
-            // verify required parameter 'voter' is not null or undefined
-            assertParamExists('govProposalsProposalIdVotesVoterGet', 'voter', voter)
-            const localVarPath = `/gov/proposals/{proposalId}/votes/{voter}`
-                .replace(`{${"proposalId"}}`, encodeURIComponent(String(proposalId)))
-                .replace(`{${"voter"}}`, encodeURIComponent(String(voter)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * GovernanceApi - functional programming interface
- * @export
- */
-export const GovernanceApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GovernanceApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Query governance deposit parameters. The max_deposit_period units are in nanoseconds.
-         * @summary Query governance deposit parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govParametersDepositGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govParametersDepositGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query governance tally parameters
-         * @summary Query governance tally parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govParametersTallyingGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govParametersTallyingGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query governance voting parameters. The voting_period units are in nanoseconds.
-         * @summary Query governance voting parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govParametersVotingGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govParametersVotingGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query proposals information with parameters
-         * @summary Query proposals
-         * @param {string} [voter] voter address
-         * @param {string} [depositor] depositor address
-         * @param {string} [status] proposal status, valid values can be &#x60;\&quot;deposit_period\&quot;&#x60;, &#x60;\&quot;voting_period\&quot;&#x60;, &#x60;\&quot;passed\&quot;&#x60;, &#x60;\&quot;rejected\&quot;&#x60;
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsGet(voter?: string, depositor?: string, status?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20018>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsGet(voter, depositor, status, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Generate a parameter change proposal transaction
-         * @summary Generate a parameter change proposal transaction
-         * @param {InlineObject9} postProposalBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsParamChangePost(postProposalBody: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsParamChangePost(postProposalBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Send transaction to submit a proposal
-         * @summary Submit a proposal
-         * @param {InlineObject8} postProposalBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsPost(postProposalBody: InlineObject8, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsPost(postProposalBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query deposit by proposalId and depositor address
-         * @summary Query deposit
-         * @param {string} proposalId proposal id
-         * @param {string} depositor Bech32 depositor address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdDepositsDepositorGet(proposalId, depositor, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query deposits by proposalId
-         * @summary Query deposits
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdDepositsGet(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20020>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdDepositsGet(proposalId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Send transaction to deposit tokens to a proposal
-         * @summary Deposit tokens to a proposal
-         * @param {string} proposalId proposal id
-         * @param {InlineObject10} postDepositBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdDepositsPost(proposalId: string, postDepositBody: InlineObject10, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdDepositsPost(proposalId, postDepositBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query a proposal by id
-         * @summary Query a proposal
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdGet(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdGet(proposalId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query for the proposer for a proposal
-         * @summary Query proposer
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdProposerGet(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20019>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdProposerGet(proposalId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Gets a proposal\'s tally result at the current time. If the proposal is pending deposits (i.e status \'DepositPeriod\') it returns an empty tally result.
-         * @summary Get a proposal\'s tally result at the current time
-         * @param {string} proposalId proposal id
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdTallyGet(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovProposalsFinalTallyResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdTallyGet(proposalId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query voters information by proposalId
-         * @summary Query voters
-         * @param {string} proposalId proposal id
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdVotesGet(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20021>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdVotesGet(proposalId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Send transaction to vote a proposal
-         * @summary Vote a proposal
-         * @param {string} proposalId proposal id
-         * @param {InlineObject11} postVoteBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdVotesPost(proposalId: string, postVoteBody: InlineObject11, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdVotesPost(proposalId, postVoteBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Query vote information by proposal Id and voter address
-         * @summary Query vote
-         * @param {string} proposalId proposal id
-         * @param {string} voter Bech32 voter address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govProposalsProposalIdVotesVoterGet(proposalId, voter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * GovernanceApi - factory interface
- * @export
- */
-export const GovernanceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GovernanceApiFp(configuration)
-    return {
-        /**
-         * Query governance deposit parameters. The max_deposit_period units are in nanoseconds.
-         * @summary Query governance deposit parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govParametersDepositGet(options?: any): AxiosPromise<InlineResponse20022> {
-            return localVarFp.govParametersDepositGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query governance tally parameters
-         * @summary Query governance tally parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govParametersTallyingGet(options?: any): AxiosPromise<object> {
-            return localVarFp.govParametersTallyingGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query governance voting parameters. The voting_period units are in nanoseconds.
-         * @summary Query governance voting parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govParametersVotingGet(options?: any): AxiosPromise<object> {
-            return localVarFp.govParametersVotingGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query proposals information with parameters
-         * @summary Query proposals
-         * @param {string} [voter] voter address
-         * @param {string} [depositor] depositor address
-         * @param {string} [status] proposal status, valid values can be &#x60;\&quot;deposit_period\&quot;&#x60;, &#x60;\&quot;voting_period\&quot;&#x60;, &#x60;\&quot;passed\&quot;&#x60;, &#x60;\&quot;rejected\&quot;&#x60;
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsGet(voter?: string, depositor?: string, status?: string, options?: any): AxiosPromise<Array<InlineResponse20018>> {
-            return localVarFp.govProposalsGet(voter, depositor, status, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Generate a parameter change proposal transaction
-         * @summary Generate a parameter change proposal transaction
-         * @param {InlineObject9} postProposalBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsParamChangePost(postProposalBody: InlineObject9, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.govProposalsParamChangePost(postProposalBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Send transaction to submit a proposal
-         * @summary Submit a proposal
-         * @param {InlineObject8} postProposalBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsPost(postProposalBody: InlineObject8, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.govProposalsPost(postProposalBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query deposit by proposalId and depositor address
-         * @summary Query deposit
-         * @param {string} proposalId proposal id
-         * @param {string} depositor Bech32 depositor address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20020> {
-            return localVarFp.govProposalsProposalIdDepositsDepositorGet(proposalId, depositor, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query deposits by proposalId
-         * @summary Query deposits
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdDepositsGet(proposalId: string, options?: any): AxiosPromise<Array<InlineResponse20020>> {
-            return localVarFp.govProposalsProposalIdDepositsGet(proposalId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Send transaction to deposit tokens to a proposal
-         * @summary Deposit tokens to a proposal
-         * @param {string} proposalId proposal id
-         * @param {InlineObject10} postDepositBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdDepositsPost(proposalId: string, postDepositBody: InlineObject10, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.govProposalsProposalIdDepositsPost(proposalId, postDepositBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query a proposal by id
-         * @summary Query a proposal
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdGet(proposalId: string, options?: any): AxiosPromise<InlineResponse20018> {
-            return localVarFp.govProposalsProposalIdGet(proposalId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query for the proposer for a proposal
-         * @summary Query proposer
-         * @param {string} proposalId 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdProposerGet(proposalId: string, options?: any): AxiosPromise<InlineResponse20019> {
-            return localVarFp.govProposalsProposalIdProposerGet(proposalId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Gets a proposal\'s tally result at the current time. If the proposal is pending deposits (i.e status \'DepositPeriod\') it returns an empty tally result.
-         * @summary Get a proposal\'s tally result at the current time
-         * @param {string} proposalId proposal id
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdTallyGet(proposalId: string, options?: any): AxiosPromise<GovProposalsFinalTallyResult> {
-            return localVarFp.govProposalsProposalIdTallyGet(proposalId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query voters information by proposalId
-         * @summary Query voters
-         * @param {string} proposalId proposal id
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdVotesGet(proposalId: string, options?: any): AxiosPromise<Array<InlineResponse20021>> {
-            return localVarFp.govProposalsProposalIdVotesGet(proposalId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Send transaction to vote a proposal
-         * @summary Vote a proposal
-         * @param {string} proposalId proposal id
-         * @param {InlineObject11} postVoteBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdVotesPost(proposalId: string, postVoteBody: InlineObject11, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.govProposalsProposalIdVotesPost(proposalId, postVoteBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Query vote information by proposal Id and voter address
-         * @summary Query vote
-         * @param {string} proposalId proposal id
-         * @param {string} voter Bech32 voter address
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20021> {
-            return localVarFp.govProposalsProposalIdVotesVoterGet(proposalId, voter, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * GovernanceApi - object-oriented interface
- * @export
- * @class GovernanceApi
- * @extends {BaseAPI}
- */
-export class GovernanceApi extends BaseAPI {
-    /**
-     * Query governance deposit parameters. The max_deposit_period units are in nanoseconds.
-     * @summary Query governance deposit parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govParametersDepositGet(options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govParametersDepositGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query governance tally parameters
-     * @summary Query governance tally parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govParametersTallyingGet(options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govParametersTallyingGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query governance voting parameters. The voting_period units are in nanoseconds.
-     * @summary Query governance voting parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govParametersVotingGet(options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govParametersVotingGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query proposals information with parameters
-     * @summary Query proposals
-     * @param {string} [voter] voter address
-     * @param {string} [depositor] depositor address
-     * @param {string} [status] proposal status, valid values can be &#x60;\&quot;deposit_period\&quot;&#x60;, &#x60;\&quot;voting_period\&quot;&#x60;, &#x60;\&quot;passed\&quot;&#x60;, &#x60;\&quot;rejected\&quot;&#x60;
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsGet(voter?: string, depositor?: string, status?: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsGet(voter, depositor, status, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Generate a parameter change proposal transaction
-     * @summary Generate a parameter change proposal transaction
-     * @param {InlineObject9} postProposalBody 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsParamChangePost(postProposalBody: InlineObject9, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsParamChangePost(postProposalBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Send transaction to submit a proposal
-     * @summary Submit a proposal
-     * @param {InlineObject8} postProposalBody 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsPost(postProposalBody: InlineObject8, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsPost(postProposalBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query deposit by proposalId and depositor address
-     * @summary Query deposit
-     * @param {string} proposalId proposal id
-     * @param {string} depositor Bech32 depositor address
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdDepositsDepositorGet(proposalId: string, depositor: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdDepositsDepositorGet(proposalId, depositor, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query deposits by proposalId
-     * @summary Query deposits
-     * @param {string} proposalId 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdDepositsGet(proposalId: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdDepositsGet(proposalId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Send transaction to deposit tokens to a proposal
-     * @summary Deposit tokens to a proposal
-     * @param {string} proposalId proposal id
-     * @param {InlineObject10} postDepositBody 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdDepositsPost(proposalId: string, postDepositBody: InlineObject10, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdDepositsPost(proposalId, postDepositBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query a proposal by id
-     * @summary Query a proposal
-     * @param {string} proposalId 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdGet(proposalId: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdGet(proposalId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query for the proposer for a proposal
-     * @summary Query proposer
-     * @param {string} proposalId 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdProposerGet(proposalId: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdProposerGet(proposalId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Gets a proposal\'s tally result at the current time. If the proposal is pending deposits (i.e status \'DepositPeriod\') it returns an empty tally result.
-     * @summary Get a proposal\'s tally result at the current time
-     * @param {string} proposalId proposal id
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdTallyGet(proposalId: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdTallyGet(proposalId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query voters information by proposalId
-     * @summary Query voters
-     * @param {string} proposalId proposal id
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdVotesGet(proposalId: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdVotesGet(proposalId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Send transaction to vote a proposal
-     * @summary Vote a proposal
-     * @param {string} proposalId proposal id
-     * @param {InlineObject11} postVoteBody 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdVotesPost(proposalId: string, postVoteBody: InlineObject11, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdVotesPost(proposalId, postVoteBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Query vote information by proposal Id and voter address
-     * @summary Query vote
-     * @param {string} proposalId proposal id
-     * @param {string} voter Bech32 voter address
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof GovernanceApi
-     */
-    public govProposalsProposalIdVotesVoterGet(proposalId: string, voter: string, options?: AxiosRequestConfig) {
-        return GovernanceApiFp(this.configuration).govProposalsProposalIdVotesVoterGet(proposalId, voter, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * MintApi - axios parameter creator
- * @export
- */
-export const MintApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Current minting annual provisions value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        mintingAnnualProvisionsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/minting/annual-provisions`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Current minting inflation value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        mintingInflationGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/minting/inflation`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Minting module parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        mintingParametersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/minting/parameters`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * MintApi - functional programming interface
- * @export
- */
-export const MintApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = MintApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Current minting annual provisions value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async mintingAnnualProvisionsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.mintingAnnualProvisionsGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Current minting inflation value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async mintingInflationGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.mintingInflationGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Minting module parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async mintingParametersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.mintingParametersGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * MintApi - factory interface
- * @export
- */
-export const MintApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = MintApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Current minting annual provisions value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        mintingAnnualProvisionsGet(options?: any): AxiosPromise<string> {
-            return localVarFp.mintingAnnualProvisionsGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Current minting inflation value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        mintingInflationGet(options?: any): AxiosPromise<string> {
-            return localVarFp.mintingInflationGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Minting module parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        mintingParametersGet(options?: any): AxiosPromise<object> {
-            return localVarFp.mintingParametersGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * MintApi - object-oriented interface
- * @export
- * @class MintApi
- * @extends {BaseAPI}
- */
-export class MintApi extends BaseAPI {
-    /**
-     * 
-     * @summary Current minting annual provisions value
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof MintApi
-     */
-    public mintingAnnualProvisionsGet(options?: AxiosRequestConfig) {
-        return MintApiFp(this.configuration).mintingAnnualProvisionsGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Current minting inflation value
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof MintApi
-     */
-    public mintingInflationGet(options?: AxiosRequestConfig) {
-        return MintApiFp(this.configuration).mintingInflationGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Minting module parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof MintApi
-     */
-    public mintingParametersGet(options?: AxiosRequestConfig) {
-        return MintApiFp(this.configuration).mintingParametersGet(options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
 
 /**
  * QueryApi - axios parameter creator
@@ -16246,7 +10141,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async account(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
+        async account(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.account(address, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16261,7 +10156,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
+        async accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16277,7 +10172,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
+        async allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16292,7 +10187,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
+        async allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16304,7 +10199,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allowance(granter: string, grantee: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
+        async allowance(granter: string, grantee: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allowance(granter, grantee, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16320,7 +10215,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
+        async allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16330,7 +10225,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annualProvisions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
+        async annualProvisions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.annualProvisions(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16341,7 +10236,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appliedPlan(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
+        async appliedPlan(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appliedPlan(name, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16351,7 +10246,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
+        async authParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16363,7 +10258,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async balance(address: string, denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
+        async balance(address: string, denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.balance(address, denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16373,7 +10268,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
+        async bankParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16383,7 +10278,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async communityPool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+        async communityPool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.communityPool(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16393,7 +10288,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async currentPlan(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
+        async currentPlan(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.currentPlan(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16405,7 +10300,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
+        async delegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegation(validatorAddr, delegatorAddr, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16417,7 +10312,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegationRewards(delegatorAddress: string, validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+        async delegationRewards(delegatorAddress: string, validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegationRewards(delegatorAddress, validatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16428,7 +10323,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegationTotalRewards(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+        async delegationTotalRewards(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegationTotalRewards(delegatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16444,7 +10339,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+        async delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16460,7 +10355,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
+        async delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16472,7 +10367,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
+        async delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorValidator(delegatorAddr, validatorAddr, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16483,7 +10378,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorValidators(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
+        async delegatorValidators(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20019>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorValidators(delegatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16494,7 +10389,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorWithdrawAddress(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
+        async delegatorWithdrawAddress(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorWithdrawAddress(delegatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16505,7 +10400,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomMetadata(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
+        async denomMetadata(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.denomMetadata(denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16521,7 +10416,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
+        async denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16536,7 +10431,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
+        async denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16548,7 +10443,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+        async deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deposit(proposalId, depositor, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16564,7 +10459,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+        async deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16574,7 +10469,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async distributionParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
+        async distributionParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.distributionParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16585,7 +10480,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async evidence(evidenceHash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
+        async evidence(evidenceHash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.evidence(evidenceHash, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16596,7 +10491,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govParams(paramsType: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
+        async govParams(paramsType: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.govParams(paramsType, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16614,7 +10509,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
+        async grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16625,7 +10520,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async historicalInfo(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
+        async historicalInfo(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.historicalInfo(height, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16635,7 +10530,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async inflation(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
+        async inflation(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.inflation(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16645,7 +10540,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async mintParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
+        async mintParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.mintParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16656,7 +10551,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async moduleVersions(moduleName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
+        async moduleVersions(moduleName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.moduleVersions(moduleName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16668,7 +10563,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async params(subspace?: string, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
+        async params(subspace?: string, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.params(subspace, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16678,7 +10573,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20070>> {
+        async pool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.pool(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16689,7 +10584,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
+        async proposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.proposal(proposalId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16707,7 +10602,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
+        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16725,7 +10620,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
+        async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16777,7 +10672,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
+        async stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16787,7 +10682,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20069>> {
+        async stakingParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stakingParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16798,7 +10693,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async supplyOf(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
+        async supplyOf(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.supplyOf(denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16809,7 +10704,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tallyResult(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+        async tallyResult(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tallyResult(proposalId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16836,7 +10731,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20072>> {
+        async unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unbondingDelegation(validatorAddr, delegatorAddr, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16847,7 +10742,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async upgradedConsensusState(lastHeight: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
+        async upgradedConsensusState(lastHeight: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.upgradedConsensusState(lastHeight, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16896,7 +10791,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorOutstandingRewards(validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
+        async validatorOutstandingRewards(validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorOutstandingRewards(validatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16914,7 +10809,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
+        async validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16930,7 +10825,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
+        async validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16958,7 +10853,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async vote(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
+        async vote(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.vote(proposalId, voter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16974,7 +10869,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+        async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -16995,7 +10890,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        account(address: string, options?: any): AxiosPromise<InlineResponse20026> {
+        account(address: string, options?: any): AxiosPromise<InlineResponse2001> {
             return localVarFp.account(address, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17009,7 +10904,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20025> {
+        accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse200> {
             return localVarFp.accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17024,7 +10919,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20028> {
+        allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse2003> {
             return localVarFp.allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17038,7 +10933,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20049> {
+        allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20024> {
             return localVarFp.allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17049,7 +10944,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allowance(granter: string, grantee: string, options?: any): AxiosPromise<InlineResponse20081> {
+        allowance(granter: string, grantee: string, options?: any): AxiosPromise<InlineResponse20056> {
             return localVarFp.allowance(granter, grantee, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17064,7 +10959,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20082> {
+        allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20057> {
             return localVarFp.allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17073,7 +10968,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annualProvisions(options?: any): AxiosPromise<InlineResponse20059> {
+        annualProvisions(options?: any): AxiosPromise<InlineResponse20034> {
             return localVarFp.annualProvisions(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17083,7 +10978,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appliedPlan(name: string, options?: any): AxiosPromise<InlineResponse20076> {
+        appliedPlan(name: string, options?: any): AxiosPromise<InlineResponse20051> {
             return localVarFp.appliedPlan(name, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17092,7 +10987,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authParams(options?: any): AxiosPromise<InlineResponse20027> {
+        authParams(options?: any): AxiosPromise<InlineResponse2002> {
             return localVarFp.authParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17103,7 +10998,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        balance(address: string, denom: string, options?: any): AxiosPromise<InlineResponse20029> {
+        balance(address: string, denom: string, options?: any): AxiosPromise<InlineResponse2004> {
             return localVarFp.balance(address, denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17112,7 +11007,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankParams(options?: any): AxiosPromise<InlineResponse20033> {
+        bankParams(options?: any): AxiosPromise<InlineResponse2008> {
             return localVarFp.bankParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17121,7 +11016,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        communityPool(options?: any): AxiosPromise<InlineResponse20041> {
+        communityPool(options?: any): AxiosPromise<InlineResponse20016> {
             return localVarFp.communityPool(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17130,7 +11025,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        currentPlan(options?: any): AxiosPromise<InlineResponse20077> {
+        currentPlan(options?: any): AxiosPromise<InlineResponse20052> {
             return localVarFp.currentPlan(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17141,7 +11036,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20071> {
+        delegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20046> {
             return localVarFp.delegation(validatorAddr, delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17152,7 +11047,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): AxiosPromise<InlineResponse20043> {
+        delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): AxiosPromise<InlineResponse20018> {
             return localVarFp.delegationRewards(delegatorAddress, validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17162,7 +11057,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegationTotalRewards(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20042> {
+        delegationTotalRewards(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20017> {
             return localVarFp.delegationTotalRewards(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17177,7 +11072,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20063> {
+        delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20038> {
             return localVarFp.delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17192,7 +11087,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20065> {
+        delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20040> {
             return localVarFp.delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17203,7 +11098,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20067> {
+        delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20042> {
             return localVarFp.delegatorValidator(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17213,7 +11108,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorValidators(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20044> {
+        delegatorValidators(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20019> {
             return localVarFp.delegatorValidators(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17223,7 +11118,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorWithdrawAddress(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20045> {
+        delegatorWithdrawAddress(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20020> {
             return localVarFp.delegatorWithdrawAddress(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17233,7 +11128,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomMetadata(denom: string, options?: any): AxiosPromise<InlineResponse20032> {
+        denomMetadata(denom: string, options?: any): AxiosPromise<InlineResponse2007> {
             return localVarFp.denomMetadata(denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17248,7 +11143,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20030> {
+        denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse2005> {
             return localVarFp.denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17262,7 +11157,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20031> {
+        denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse2006> {
             return localVarFp.denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17273,7 +11168,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20055> {
+        deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20030> {
             return localVarFp.deposit(proposalId, depositor, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17288,7 +11183,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20054> {
+        deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20029> {
             return localVarFp.deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17297,7 +11192,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        distributionParams(options?: any): AxiosPromise<InlineResponse20046> {
+        distributionParams(options?: any): AxiosPromise<InlineResponse20021> {
             return localVarFp.distributionParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17307,7 +11202,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        evidence(evidenceHash: string, options?: any): AxiosPromise<InlineResponse20050> {
+        evidence(evidenceHash: string, options?: any): AxiosPromise<InlineResponse20025> {
             return localVarFp.evidence(evidenceHash, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17317,7 +11212,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govParams(paramsType: string, options?: any): AxiosPromise<InlineResponse20051> {
+        govParams(paramsType: string, options?: any): AxiosPromise<InlineResponse20026> {
             return localVarFp.govParams(paramsType, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17334,7 +11229,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20080> {
+        grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20055> {
             return localVarFp.grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17344,7 +11239,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        historicalInfo(height: string, options?: any): AxiosPromise<InlineResponse20068> {
+        historicalInfo(height: string, options?: any): AxiosPromise<InlineResponse20043> {
             return localVarFp.historicalInfo(height, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17353,7 +11248,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        inflation(options?: any): AxiosPromise<InlineResponse20060> {
+        inflation(options?: any): AxiosPromise<InlineResponse20035> {
             return localVarFp.inflation(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17362,7 +11257,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        mintParams(options?: any): AxiosPromise<InlineResponse20061> {
+        mintParams(options?: any): AxiosPromise<InlineResponse20036> {
             return localVarFp.mintParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17372,7 +11267,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        moduleVersions(moduleName?: string, options?: any): AxiosPromise<InlineResponse20078> {
+        moduleVersions(moduleName?: string, options?: any): AxiosPromise<InlineResponse20053> {
             return localVarFp.moduleVersions(moduleName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17383,7 +11278,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        params(subspace?: string, key?: string, options?: any): AxiosPromise<InlineResponse20062> {
+        params(subspace?: string, key?: string, options?: any): AxiosPromise<InlineResponse20037> {
             return localVarFp.params(subspace, key, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17392,7 +11287,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pool(options?: any): AxiosPromise<InlineResponse20070> {
+        pool(options?: any): AxiosPromise<InlineResponse20045> {
             return localVarFp.pool(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17402,7 +11297,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposal(proposalId: string, options?: any): AxiosPromise<InlineResponse20053> {
+        proposal(proposalId: string, options?: any): AxiosPromise<InlineResponse20028> {
             return localVarFp.proposal(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17419,7 +11314,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20052> {
+        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20027> {
             return localVarFp.proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17436,7 +11331,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20064> {
+        redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20039> {
             return localVarFp.redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17484,7 +11379,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20066> {
+        stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20041> {
             return localVarFp.stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17493,7 +11388,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingParams(options?: any): AxiosPromise<InlineResponse20069> {
+        stakingParams(options?: any): AxiosPromise<InlineResponse20044> {
             return localVarFp.stakingParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -17503,7 +11398,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        supplyOf(denom: string, options?: any): AxiosPromise<InlineResponse20034> {
+        supplyOf(denom: string, options?: any): AxiosPromise<InlineResponse2009> {
             return localVarFp.supplyOf(denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17513,7 +11408,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tallyResult(proposalId: string, options?: any): AxiosPromise<InlineResponse20056> {
+        tallyResult(proposalId: string, options?: any): AxiosPromise<InlineResponse20031> {
             return localVarFp.tallyResult(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17538,7 +11433,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20072> {
+        unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20047> {
             return localVarFp.unbondingDelegation(validatorAddr, delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17548,7 +11443,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        upgradedConsensusState(lastHeight: string, options?: any): AxiosPromise<InlineResponse20079> {
+        upgradedConsensusState(lastHeight: string, options?: any): AxiosPromise<InlineResponse20054> {
             return localVarFp.upgradedConsensusState(lastHeight, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17593,7 +11488,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorOutstandingRewards(validatorAddress: string, options?: any): AxiosPromise<InlineResponse20047> {
+        validatorOutstandingRewards(validatorAddress: string, options?: any): AxiosPromise<InlineResponse20022> {
             return localVarFp.validatorOutstandingRewards(validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17610,7 +11505,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20048> {
+        validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20023> {
             return localVarFp.validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17625,7 +11520,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20073> {
+        validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20048> {
             return localVarFp.validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17651,7 +11546,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        vote(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20058> {
+        vote(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20033> {
             return localVarFp.vote(proposalId, voter, options).then((request) => request(axios, basePath));
         },
         /**
@@ -17666,7 +11561,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20057> {
+        votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20032> {
             return localVarFp.votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
     };
@@ -18487,11 +12382,11 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
-         * @param {InlineObject16} body 
+         * @param {InlineObject} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        broadcastTx: async (body: InlineObject16, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        broadcastTx: async (body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('broadcastTx', 'body', body)
             const localVarPath = `/cosmos/tx/v1beta1/txs`;
@@ -18906,11 +12801,11 @@ export const ServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
-         * @param {InlineObject16} body 
+         * @param {InlineObject} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async broadcastTx(body: InlineObject16, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20075>> {
+        async broadcastTx(body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.broadcastTx(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -18921,7 +12816,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBlockByHeight(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
+        async getBlockByHeight(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getBlockByHeight(height, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -18931,7 +12826,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestBlock(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
+        async getLatestBlock(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLatestBlock(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -18946,7 +12841,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
+        async getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -18956,7 +12851,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getNodeInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
+        async getNodeInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNodeInfo(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -18966,7 +12861,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSyncing(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
+        async getSyncing(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSyncing(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -19010,7 +12905,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
+        async getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -19021,7 +12916,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulate(body: CosmosTxV1beta1SimulateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20074>> {
+        async simulate(body: CosmosTxV1beta1SimulateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.simulate(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -19038,11 +12933,11 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
-         * @param {InlineObject16} body 
+         * @param {InlineObject} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        broadcastTx(body: InlineObject16, options?: any): AxiosPromise<InlineResponse20075> {
+        broadcastTx(body: InlineObject, options?: any): AxiosPromise<InlineResponse20050> {
             return localVarFp.broadcastTx(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19052,7 +12947,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBlockByHeight(height: string, options?: any): AxiosPromise<InlineResponse20036> {
+        getBlockByHeight(height: string, options?: any): AxiosPromise<InlineResponse20011> {
             return localVarFp.getBlockByHeight(height, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19061,7 +12956,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestBlock(options?: any): AxiosPromise<InlineResponse20035> {
+        getLatestBlock(options?: any): AxiosPromise<InlineResponse20010> {
             return localVarFp.getLatestBlock(options).then((request) => request(axios, basePath));
         },
         /**
@@ -19075,7 +12970,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20039> {
+        getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20014> {
             return localVarFp.getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19084,7 +12979,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNodeInfo(options?: any): AxiosPromise<InlineResponse20037> {
+        getNodeInfo(options?: any): AxiosPromise<InlineResponse20012> {
             return localVarFp.getNodeInfo(options).then((request) => request(axios, basePath));
         },
         /**
@@ -19093,7 +12988,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSyncing(options?: any): AxiosPromise<InlineResponse20038> {
+        getSyncing(options?: any): AxiosPromise<InlineResponse20013> {
             return localVarFp.getSyncing(options).then((request) => request(axios, basePath));
         },
         /**
@@ -19134,7 +13029,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20040> {
+        getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20015> {
             return localVarFp.getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19144,7 +13039,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<InlineResponse20074> {
+        simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<InlineResponse20049> {
             return localVarFp.simulate(body, options).then((request) => request(axios, basePath));
         },
     };
@@ -19160,12 +13055,12 @@ export class ServiceApi extends BaseAPI {
     /**
      * 
      * @summary BroadcastTx broadcast transaction.
-     * @param {InlineObject16} body 
+     * @param {InlineObject} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public broadcastTx(body: InlineObject16, options?: AxiosRequestConfig) {
+    public broadcastTx(body: InlineObject, options?: AxiosRequestConfig) {
         return ServiceApiFp(this.configuration).broadcastTx(body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -19287,2288 +13182,6 @@ export class ServiceApi extends BaseAPI {
      */
     public simulate(body: CosmosTxV1beta1SimulateRequest, options?: AxiosRequestConfig) {
         return ServiceApiFp(this.configuration).simulate(body, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * SlashingApi - axios parameter creator
- * @export
- */
-export const SlashingApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Get the current slashing parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        slashingParametersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/slashing/parameters`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get sign info of all validators
-         * @summary Get sign info of given all validators
-         * @param {number} page Page number
-         * @param {number} limit Maximum number of items per page
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        slashingSigningInfosGet: async (page: number, limit: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'page' is not null or undefined
-            assertParamExists('slashingSigningInfosGet', 'page', page)
-            // verify required parameter 'limit' is not null or undefined
-            assertParamExists('slashingSigningInfosGet', 'limit', limit)
-            const localVarPath = `/slashing/signing_infos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Send transaction to unjail a jailed validator
-         * @summary Unjail a jailed validator
-         * @param {string} validatorAddr Bech32 validator address
-         * @param {InlineObject7} unjailBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        slashingValidatorsValidatorAddrUnjailPost: async (validatorAddr: string, unjailBody: InlineObject7, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('slashingValidatorsValidatorAddrUnjailPost', 'validatorAddr', validatorAddr)
-            // verify required parameter 'unjailBody' is not null or undefined
-            assertParamExists('slashingValidatorsValidatorAddrUnjailPost', 'unjailBody', unjailBody)
-            const localVarPath = `/slashing/validators/{validatorAddr}/unjail`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(unjailBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * SlashingApi - functional programming interface
- * @export
- */
-export const SlashingApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SlashingApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Get the current slashing parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async slashingParametersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.slashingParametersGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Get sign info of all validators
-         * @summary Get sign info of given all validators
-         * @param {number} page Page number
-         * @param {number} limit Maximum number of items per page
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async slashingSigningInfosGet(page: number, limit: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20016>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.slashingSigningInfosGet(page, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Send transaction to unjail a jailed validator
-         * @summary Unjail a jailed validator
-         * @param {string} validatorAddr Bech32 validator address
-         * @param {InlineObject7} unjailBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async slashingValidatorsValidatorAddrUnjailPost(validatorAddr: string, unjailBody: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.slashingValidatorsValidatorAddrUnjailPost(validatorAddr, unjailBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * SlashingApi - factory interface
- * @export
- */
-export const SlashingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SlashingApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Get the current slashing parameters
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        slashingParametersGet(options?: any): AxiosPromise<InlineResponse20017> {
-            return localVarFp.slashingParametersGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get sign info of all validators
-         * @summary Get sign info of given all validators
-         * @param {number} page Page number
-         * @param {number} limit Maximum number of items per page
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        slashingSigningInfosGet(page: number, limit: number, options?: any): AxiosPromise<Array<InlineResponse20016>> {
-            return localVarFp.slashingSigningInfosGet(page, limit, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Send transaction to unjail a jailed validator
-         * @summary Unjail a jailed validator
-         * @param {string} validatorAddr Bech32 validator address
-         * @param {InlineObject7} unjailBody 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        slashingValidatorsValidatorAddrUnjailPost(validatorAddr: string, unjailBody: InlineObject7, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.slashingValidatorsValidatorAddrUnjailPost(validatorAddr, unjailBody, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * SlashingApi - object-oriented interface
- * @export
- * @class SlashingApi
- * @extends {BaseAPI}
- */
-export class SlashingApi extends BaseAPI {
-    /**
-     * 
-     * @summary Get the current slashing parameters
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof SlashingApi
-     */
-    public slashingParametersGet(options?: AxiosRequestConfig) {
-        return SlashingApiFp(this.configuration).slashingParametersGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get sign info of all validators
-     * @summary Get sign info of given all validators
-     * @param {number} page Page number
-     * @param {number} limit Maximum number of items per page
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof SlashingApi
-     */
-    public slashingSigningInfosGet(page: number, limit: number, options?: AxiosRequestConfig) {
-        return SlashingApiFp(this.configuration).slashingSigningInfosGet(page, limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Send transaction to unjail a jailed validator
-     * @summary Unjail a jailed validator
-     * @param {string} validatorAddr Bech32 validator address
-     * @param {InlineObject7} unjailBody 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof SlashingApi
-     */
-    public slashingValidatorsValidatorAddrUnjailPost(validatorAddr: string, unjailBody: InlineObject7, options?: AxiosRequestConfig) {
-        return SlashingApiFp(this.configuration).slashingValidatorsValidatorAddrUnjailPost(validatorAddr, unjailBody, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * StakingApi - axios parameter creator
- * @export
- */
-export const StakingApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Get all delegations from a delegator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrDelegationsGet: async (delegatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrDelegationsGet', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/delegations`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Submit delegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject4} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrDelegationsPost: async (delegatorAddr: string, delegation?: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrDelegationsPost', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/delegations`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(delegation, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Query the current delegation between a delegator and a validator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet: async (delegatorAddr: string, validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet', 'delegatorAddr', delegatorAddr)
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/delegations/{validatorAddr}`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)))
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Submit a redelegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject6} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrRedelegationsPost: async (delegatorAddr: string, delegation?: InlineObject6, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrRedelegationsPost', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/redelegations`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(delegation, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all unbonding delegations from a delegator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsGet: async (delegatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrUnbondingDelegationsGet', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/unbonding_delegations`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Submit an unbonding delegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject5} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsPost: async (delegatorAddr: string, delegation?: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrUnbondingDelegationsPost', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/unbonding_delegations`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(delegation, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Query all unbonding delegations between a delegator and a validator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet: async (delegatorAddr: string, validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet', 'delegatorAddr', delegatorAddr)
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/unbonding_delegations/{validatorAddr}`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)))
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Query all validators that a delegator is bonded to
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrValidatorsGet: async (delegatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrValidatorsGet', 'delegatorAddr', delegatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/validators`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Query a validator that a delegator is bonded to
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 ValAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet: async (delegatorAddr: string, validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delegatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet', 'delegatorAddr', delegatorAddr)
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/staking/delegators/{delegatorAddr}/validators/{validatorAddr}`
-                .replace(`{${"delegatorAddr"}}`, encodeURIComponent(String(delegatorAddr)))
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the current staking parameter values
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingParametersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/staking/parameters`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the current state of the staking pool
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingPoolGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/staking/pool`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all redelegations (filter by query params)
-         * @param {string} [delegator] Bech32 AccAddress of Delegator
-         * @param {string} [validatorFrom] Bech32 ValAddress of SrcValidator
-         * @param {string} [validatorTo] Bech32 ValAddress of DstValidator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingRedelegationsGet: async (delegator?: string, validatorFrom?: string, validatorTo?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/staking/redelegations`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (delegator !== undefined) {
-                localVarQueryParameter['delegator'] = delegator;
-            }
-
-            if (validatorFrom !== undefined) {
-                localVarQueryParameter['validator_from'] = validatorFrom;
-            }
-
-            if (validatorTo !== undefined) {
-                localVarQueryParameter['validator_to'] = validatorTo;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all validator candidates. By default it returns only the bonded validators.
-         * @param {string} [status] The validator bond status. Must be either \&#39;bonded\&#39;, \&#39;unbonded\&#39;, or \&#39;unbonding\&#39;.
-         * @param {number} [page] The page number.
-         * @param {number} [limit] The maximum number of items per page.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsGet: async (status?: string, page?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/staking/validators`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all delegations from a validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsValidatorAddrDelegationsGet: async (validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('stakingValidatorsValidatorAddrDelegationsGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/staking/validators/{validatorAddr}/delegations`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Query the information from a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsValidatorAddrGet: async (validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('stakingValidatorsValidatorAddrGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/staking/validators/{validatorAddr}`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all unbonding delegations from a validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsValidatorAddrUnbondingDelegationsGet: async (validatorAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validatorAddr' is not null or undefined
-            assertParamExists('stakingValidatorsValidatorAddrUnbondingDelegationsGet', 'validatorAddr', validatorAddr)
-            const localVarPath = `/staking/validators/{validatorAddr}/unbonding_delegations`
-                .replace(`{${"validatorAddr"}}`, encodeURIComponent(String(validatorAddr)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * StakingApi - functional programming interface
- * @export
- */
-export const StakingApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = StakingApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Get all delegations from a delegator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20010>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Submit delegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject4} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrDelegationsPost(delegatorAddr: string, delegation?: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrDelegationsPost(delegatorAddr, delegation, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Query the current delegation between a delegator and a validator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Submit a redelegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject6} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrRedelegationsPost(delegatorAddr: string, delegation?: InlineObject6, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrRedelegationsPost(delegatorAddr, delegation, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all unbonding delegations from a delegator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20011>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Submit an unbonding delegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject5} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(delegatorAddr: string, delegation?: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(delegatorAddr, delegation, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Query all unbonding delegations between a delegator and a validator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Query all validators that a delegator is bonded to
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20013>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Query a validator that a delegator is bonded to
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 ValAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr, validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the current staking parameter values
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingParametersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingParametersGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the current state of the staking pool
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingPoolGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingPoolGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all redelegations (filter by query params)
-         * @param {string} [delegator] Bech32 AccAddress of Delegator
-         * @param {string} [validatorFrom] Bech32 ValAddress of SrcValidator
-         * @param {string} [validatorTo] Bech32 ValAddress of DstValidator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingRedelegationsGet(delegator?: string, validatorFrom?: string, validatorTo?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Redelegation>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingRedelegationsGet(delegator, validatorFrom, validatorTo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all validator candidates. By default it returns only the bonded validators.
-         * @param {string} [status] The validator bond status. Must be either \&#39;bonded\&#39;, \&#39;unbonded\&#39;, or \&#39;unbonding\&#39;.
-         * @param {number} [page] The page number.
-         * @param {number} [limit] The maximum number of items per page.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20013>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingValidatorsGet(status, page, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all delegations from a validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20010>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingValidatorsValidatorAddrDelegationsGet(validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Query the information from a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingValidatorsValidatorAddrGet(validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all unbonding delegations from a validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse20011>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * StakingApi - factory interface
- * @export
- */
-export const StakingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = StakingApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Get all delegations from a delegator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20010>> {
-            return localVarFp.stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Submit delegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject4} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrDelegationsPost(delegatorAddr: string, delegation?: InlineObject4, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.stakingDelegatorsDelegatorAddrDelegationsPost(delegatorAddr, delegation, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Query the current delegation between a delegator and a validator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20010> {
-            return localVarFp.stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Submit a redelegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject6} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrRedelegationsPost(delegatorAddr: string, delegation?: InlineObject6, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.stakingDelegatorsDelegatorAddrRedelegationsPost(delegatorAddr, delegation, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all unbonding delegations from a delegator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20011>> {
-            return localVarFp.stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Submit an unbonding delegation
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {InlineObject5} [delegation] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(delegatorAddr: string, delegation?: InlineObject5, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(delegatorAddr, delegation, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Query all unbonding delegations between a delegator and a validator
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20012> {
-            return localVarFp.stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Query all validators that a delegator is bonded to
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20013>> {
-            return localVarFp.stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Query a validator that a delegator is bonded to
-         * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-         * @param {string} validatorAddr Bech32 ValAddress of Delegator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20013> {
-            return localVarFp.stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the current staking parameter values
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingParametersGet(options?: any): AxiosPromise<InlineResponse20015> {
-            return localVarFp.stakingParametersGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the current state of the staking pool
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingPoolGet(options?: any): AxiosPromise<InlineResponse20014> {
-            return localVarFp.stakingPoolGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all redelegations (filter by query params)
-         * @param {string} [delegator] Bech32 AccAddress of Delegator
-         * @param {string} [validatorFrom] Bech32 ValAddress of SrcValidator
-         * @param {string} [validatorTo] Bech32 ValAddress of DstValidator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingRedelegationsGet(delegator?: string, validatorFrom?: string, validatorTo?: string, options?: any): AxiosPromise<Array<Redelegation>> {
-            return localVarFp.stakingRedelegationsGet(delegator, validatorFrom, validatorTo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all validator candidates. By default it returns only the bonded validators.
-         * @param {string} [status] The validator bond status. Must be either \&#39;bonded\&#39;, \&#39;unbonded\&#39;, or \&#39;unbonding\&#39;.
-         * @param {number} [page] The page number.
-         * @param {number} [limit] The maximum number of items per page.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: any): AxiosPromise<Array<InlineResponse20013>> {
-            return localVarFp.stakingValidatorsGet(status, page, limit, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all delegations from a validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20010>> {
-            return localVarFp.stakingValidatorsValidatorAddrDelegationsGet(validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Query the information from a single validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: any): AxiosPromise<InlineResponse20013> {
-            return localVarFp.stakingValidatorsValidatorAddrGet(validatorAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all unbonding delegations from a validator
-         * @param {string} validatorAddr Bech32 OperatorAddress of validator
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: any): AxiosPromise<Array<InlineResponse20011>> {
-            return localVarFp.stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * StakingApi - object-oriented interface
- * @export
- * @class StakingApi
- * @extends {BaseAPI}
- */
-export class StakingApi extends BaseAPI {
-    /**
-     * 
-     * @summary Get all delegations from a delegator
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrDelegationsGet(delegatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Submit delegation
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject4} [delegation] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrDelegationsPost(delegatorAddr: string, delegation?: InlineObject4, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrDelegationsPost(delegatorAddr, delegation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Query the current delegation between a delegator and a validator
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Submit a redelegation
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject6} [delegation] 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrRedelegationsPost(delegatorAddr: string, delegation?: InlineObject6, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrRedelegationsPost(delegatorAddr, delegation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all unbonding delegations from a delegator
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsGet(delegatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Submit an unbonding delegation
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {InlineObject5} [delegation] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(delegatorAddr: string, delegation?: InlineObject5, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsPost(delegatorAddr, delegation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Query all unbonding delegations between a delegator and a validator
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrUnbondingDelegationsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Query all validators that a delegator is bonded to
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrValidatorsGet(delegatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Query a validator that a delegator is bonded to
-     * @param {string} delegatorAddr Bech32 AccAddress of Delegator
-     * @param {string} validatorAddr Bech32 ValAddress of Delegator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingDelegatorsDelegatorAddrValidatorsValidatorAddrGet(delegatorAddr, validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the current staking parameter values
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingParametersGet(options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingParametersGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the current state of the staking pool
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingPoolGet(options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingPoolGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all redelegations (filter by query params)
-     * @param {string} [delegator] Bech32 AccAddress of Delegator
-     * @param {string} [validatorFrom] Bech32 ValAddress of SrcValidator
-     * @param {string} [validatorTo] Bech32 ValAddress of DstValidator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingRedelegationsGet(delegator?: string, validatorFrom?: string, validatorTo?: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingRedelegationsGet(delegator, validatorFrom, validatorTo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all validator candidates. By default it returns only the bonded validators.
-     * @param {string} [status] The validator bond status. Must be either \&#39;bonded\&#39;, \&#39;unbonded\&#39;, or \&#39;unbonding\&#39;.
-     * @param {number} [page] The page number.
-     * @param {number} [limit] The maximum number of items per page.
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingValidatorsGet(status?: string, page?: number, limit?: number, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingValidatorsGet(status, page, limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all delegations from a validator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingValidatorsValidatorAddrDelegationsGet(validatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingValidatorsValidatorAddrDelegationsGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Query the information from a single validator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingValidatorsValidatorAddrGet(validatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingValidatorsValidatorAddrGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all unbonding delegations from a validator
-     * @param {string} validatorAddr Bech32 OperatorAddress of validator
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof StakingApi
-     */
-    public stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr: string, options?: AxiosRequestConfig) {
-        return StakingApiFp(this.configuration).stakingValidatorsValidatorAddrUnbondingDelegationsGet(validatorAddr, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * TendermintRPCApi - axios parameter creator
- * @export
- */
-export const TendermintRPCApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Get a block at a certain height
-         * @param {number} height Block height
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        blocksHeightGet: async (height: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'height' is not null or undefined
-            assertParamExists('blocksHeightGet', 'height', height)
-            const localVarPath = `/blocks/{height}`
-                .replace(`{${"height"}}`, encodeURIComponent(String(height)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the latest block
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        blocksLatestGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/blocks/latest`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get if the node is currently syning with other nodes
-         * @summary Syncing state of node
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        syncingGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/syncing`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get a validator set a certain height
-         * @param {number} height Block height
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        validatorsetsHeightGet: async (height: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'height' is not null or undefined
-            assertParamExists('validatorsetsHeightGet', 'height', height)
-            const localVarPath = `/validatorsets/{height}`
-                .replace(`{${"height"}}`, encodeURIComponent(String(height)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the latest validator set
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        validatorsetsLatestGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/validatorsets/latest`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * TendermintRPCApi - functional programming interface
- * @export
- */
-export const TendermintRPCApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TendermintRPCApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Get a block at a certain height
-         * @param {number} height Block height
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async blocksHeightGet(height: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.blocksHeightGet(height, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the latest block
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async blocksLatestGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.blocksLatestGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Get if the node is currently syning with other nodes
-         * @summary Syncing state of node
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async syncingGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.syncingGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get a validator set a certain height
-         * @param {number} height Block height
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async validatorsetsHeightGet(height: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.validatorsetsHeightGet(height, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the latest validator set
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async validatorsetsLatestGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.validatorsetsLatestGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * TendermintRPCApi - factory interface
- * @export
- */
-export const TendermintRPCApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = TendermintRPCApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Get a block at a certain height
-         * @param {number} height Block height
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        blocksHeightGet(height: number, options?: any): AxiosPromise<InlineResponse2002> {
-            return localVarFp.blocksHeightGet(height, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the latest block
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        blocksLatestGet(options?: any): AxiosPromise<InlineResponse2002> {
-            return localVarFp.blocksLatestGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get if the node is currently syning with other nodes
-         * @summary Syncing state of node
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        syncingGet(options?: any): AxiosPromise<InlineResponse2001> {
-            return localVarFp.syncingGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get a validator set a certain height
-         * @param {number} height Block height
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        validatorsetsHeightGet(height: number, options?: any): AxiosPromise<InlineResponse2003> {
-            return localVarFp.validatorsetsHeightGet(height, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the latest validator set
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        validatorsetsLatestGet(options?: any): AxiosPromise<InlineResponse2003> {
-            return localVarFp.validatorsetsLatestGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * TendermintRPCApi - object-oriented interface
- * @export
- * @class TendermintRPCApi
- * @extends {BaseAPI}
- */
-export class TendermintRPCApi extends BaseAPI {
-    /**
-     * 
-     * @summary Get a block at a certain height
-     * @param {number} height Block height
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TendermintRPCApi
-     */
-    public blocksHeightGet(height: number, options?: AxiosRequestConfig) {
-        return TendermintRPCApiFp(this.configuration).blocksHeightGet(height, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the latest block
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TendermintRPCApi
-     */
-    public blocksLatestGet(options?: AxiosRequestConfig) {
-        return TendermintRPCApiFp(this.configuration).blocksLatestGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get if the node is currently syning with other nodes
-     * @summary Syncing state of node
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TendermintRPCApi
-     */
-    public syncingGet(options?: AxiosRequestConfig) {
-        return TendermintRPCApiFp(this.configuration).syncingGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get a validator set a certain height
-     * @param {number} height Block height
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TendermintRPCApi
-     */
-    public validatorsetsHeightGet(height: number, options?: AxiosRequestConfig) {
-        return TendermintRPCApiFp(this.configuration).validatorsetsHeightGet(height, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the latest validator set
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TendermintRPCApi
-     */
-    public validatorsetsLatestGet(options?: AxiosRequestConfig) {
-        return TendermintRPCApiFp(this.configuration).validatorsetsLatestGet(options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * TransactionsApi - axios parameter creator
- * @export
- */
-export const TransactionsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Decode a transaction (signed or not) from base64-encoded Amino serialized bytes to JSON
-         * @summary Decode a transaction from the Amino wire format
-         * @param {InlineObject2} tx 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsDecodePost: async (tx: InlineObject2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tx' is not null or undefined
-            assertParamExists('txsDecodePost', 'tx', tx)
-            const localVarPath = `/txs/decode`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tx, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Encode a transaction (signed or not) from JSON to base64-encoded Amino serialized bytes
-         * @summary Encode a transaction to the Amino wire format
-         * @param {InlineObject1} tx 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsEncodePost: async (tx: InlineObject1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tx' is not null or undefined
-            assertParamExists('txsEncodePost', 'tx', tx)
-            const localVarPath = `/txs/encode`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tx, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Search transactions by events.
-         * @summary Search transactions
-         * @param {string} [messageAction] transaction events such as \&#39;message.action&#x3D;send\&#39; which results in the following endpoint: \&#39;GET /txs?message.action&#x3D;send\&#39;. note that each module documents its own events. look for xx_events.md in the corresponding cosmos-sdk/docs/spec directory
-         * @param {string} [messageSender] transaction tags with sender: \&#39;GET /txs?message.action&#x3D;send&amp;message.sender&#x3D;cosmos16xyempempp92x9hyzz9wrgf94r6j9h5f06pxxv\&#39;
-         * @param {number} [page] Page number
-         * @param {number} [limit] Maximum number of items per page
-         * @param {number} [txMinheight] transactions on blocks with height greater or equal this value
-         * @param {number} [txMaxheight] transactions on blocks with height less than or equal this value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsGet: async (messageAction?: string, messageSender?: string, page?: number, limit?: number, txMinheight?: number, txMaxheight?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/txs`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (messageAction !== undefined) {
-                localVarQueryParameter['message.action'] = messageAction;
-            }
-
-            if (messageSender !== undefined) {
-                localVarQueryParameter['message.sender'] = messageSender;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (txMinheight !== undefined) {
-                localVarQueryParameter['tx.minheight'] = txMinheight;
-            }
-
-            if (txMaxheight !== undefined) {
-                localVarQueryParameter['tx.maxheight'] = txMaxheight;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieve a transaction using its hash.
-         * @summary Get a Tx by hash
-         * @param {string} hash Tx hash
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsHashGet: async (hash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'hash' is not null or undefined
-            assertParamExists('txsHashGet', 'hash', hash)
-            const localVarPath = `/txs/{hash}`
-                .replace(`{${"hash"}}`, encodeURIComponent(String(hash)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Broadcast a signed tx to a full node
-         * @summary Broadcast a signed tx
-         * @param {InlineObject} txBroadcast 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txsPost: async (txBroadcast: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'txBroadcast' is not null or undefined
-            assertParamExists('txsPost', 'txBroadcast', txBroadcast)
-            const localVarPath = `/txs`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(txBroadcast, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * TransactionsApi - functional programming interface
- * @export
- */
-export const TransactionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TransactionsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Decode a transaction (signed or not) from base64-encoded Amino serialized bytes to JSON
-         * @summary Decode a transaction from the Amino wire format
-         * @param {InlineObject2} tx 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async txsDecodePost(tx: InlineObject2, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004Tx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsDecodePost(tx, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Encode a transaction (signed or not) from JSON to base64-encoded Amino serialized bytes
-         * @summary Encode a transaction to the Amino wire format
-         * @param {InlineObject1} tx 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async txsEncodePost(tx: InlineObject1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsEncodePost(tx, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Search transactions by events.
-         * @summary Search transactions
-         * @param {string} [messageAction] transaction events such as \&#39;message.action&#x3D;send\&#39; which results in the following endpoint: \&#39;GET /txs?message.action&#x3D;send\&#39;. note that each module documents its own events. look for xx_events.md in the corresponding cosmos-sdk/docs/spec directory
-         * @param {string} [messageSender] transaction tags with sender: \&#39;GET /txs?message.action&#x3D;send&amp;message.sender&#x3D;cosmos16xyempempp92x9hyzz9wrgf94r6j9h5f06pxxv\&#39;
-         * @param {number} [page] Page number
-         * @param {number} [limit] Maximum number of items per page
-         * @param {number} [txMinheight] transactions on blocks with height greater or equal this value
-         * @param {number} [txMaxheight] transactions on blocks with height less than or equal this value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async txsGet(messageAction?: string, messageSender?: string, page?: number, limit?: number, txMinheight?: number, txMaxheight?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsGet(messageAction, messageSender, page, limit, txMinheight, txMaxheight, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Retrieve a transaction using its hash.
-         * @summary Get a Tx by hash
-         * @param {string} hash Tx hash
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async txsHashGet(hash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsHashGet(hash, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Broadcast a signed tx to a full node
-         * @summary Broadcast a signed tx
-         * @param {InlineObject} txBroadcast 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async txsPost(txBroadcast: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsPost(txBroadcast, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * TransactionsApi - factory interface
- * @export
- */
-export const TransactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = TransactionsApiFp(configuration)
-    return {
-        /**
-         * Decode a transaction (signed or not) from base64-encoded Amino serialized bytes to JSON
-         * @summary Decode a transaction from the Amino wire format
-         * @param {InlineObject2} tx 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsDecodePost(tx: InlineObject2, options?: any): AxiosPromise<InlineResponse2004Tx> {
-            return localVarFp.txsDecodePost(tx, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Encode a transaction (signed or not) from JSON to base64-encoded Amino serialized bytes
-         * @summary Encode a transaction to the Amino wire format
-         * @param {InlineObject1} tx 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsEncodePost(tx: InlineObject1, options?: any): AxiosPromise<InlineResponse2007> {
-            return localVarFp.txsEncodePost(tx, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Search transactions by events.
-         * @summary Search transactions
-         * @param {string} [messageAction] transaction events such as \&#39;message.action&#x3D;send\&#39; which results in the following endpoint: \&#39;GET /txs?message.action&#x3D;send\&#39;. note that each module documents its own events. look for xx_events.md in the corresponding cosmos-sdk/docs/spec directory
-         * @param {string} [messageSender] transaction tags with sender: \&#39;GET /txs?message.action&#x3D;send&amp;message.sender&#x3D;cosmos16xyempempp92x9hyzz9wrgf94r6j9h5f06pxxv\&#39;
-         * @param {number} [page] Page number
-         * @param {number} [limit] Maximum number of items per page
-         * @param {number} [txMinheight] transactions on blocks with height greater or equal this value
-         * @param {number} [txMaxheight] transactions on blocks with height less than or equal this value
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsGet(messageAction?: string, messageSender?: string, page?: number, limit?: number, txMinheight?: number, txMaxheight?: number, options?: any): AxiosPromise<InlineResponse2005> {
-            return localVarFp.txsGet(messageAction, messageSender, page, limit, txMinheight, txMaxheight, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Retrieve a transaction using its hash.
-         * @summary Get a Tx by hash
-         * @param {string} hash Tx hash
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        txsHashGet(hash: string, options?: any): AxiosPromise<InlineResponse2004> {
-            return localVarFp.txsHashGet(hash, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Broadcast a signed tx to a full node
-         * @summary Broadcast a signed tx
-         * @param {InlineObject} txBroadcast 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txsPost(txBroadcast: InlineObject, options?: any): AxiosPromise<InlineResponse2006> {
-            return localVarFp.txsPost(txBroadcast, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * TransactionsApi - object-oriented interface
- * @export
- * @class TransactionsApi
- * @extends {BaseAPI}
- */
-export class TransactionsApi extends BaseAPI {
-    /**
-     * Decode a transaction (signed or not) from base64-encoded Amino serialized bytes to JSON
-     * @summary Decode a transaction from the Amino wire format
-     * @param {InlineObject2} tx 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TransactionsApi
-     */
-    public txsDecodePost(tx: InlineObject2, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration).txsDecodePost(tx, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Encode a transaction (signed or not) from JSON to base64-encoded Amino serialized bytes
-     * @summary Encode a transaction to the Amino wire format
-     * @param {InlineObject1} tx 
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TransactionsApi
-     */
-    public txsEncodePost(tx: InlineObject1, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration).txsEncodePost(tx, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Search transactions by events.
-     * @summary Search transactions
-     * @param {string} [messageAction] transaction events such as \&#39;message.action&#x3D;send\&#39; which results in the following endpoint: \&#39;GET /txs?message.action&#x3D;send\&#39;. note that each module documents its own events. look for xx_events.md in the corresponding cosmos-sdk/docs/spec directory
-     * @param {string} [messageSender] transaction tags with sender: \&#39;GET /txs?message.action&#x3D;send&amp;message.sender&#x3D;cosmos16xyempempp92x9hyzz9wrgf94r6j9h5f06pxxv\&#39;
-     * @param {number} [page] Page number
-     * @param {number} [limit] Maximum number of items per page
-     * @param {number} [txMinheight] transactions on blocks with height greater or equal this value
-     * @param {number} [txMaxheight] transactions on blocks with height less than or equal this value
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TransactionsApi
-     */
-    public txsGet(messageAction?: string, messageSender?: string, page?: number, limit?: number, txMinheight?: number, txMaxheight?: number, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration).txsGet(messageAction, messageSender, page, limit, txMinheight, txMaxheight, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Retrieve a transaction using its hash.
-     * @summary Get a Tx by hash
-     * @param {string} hash Tx hash
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TransactionsApi
-     */
-    public txsHashGet(hash: string, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration).txsHashGet(hash, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Broadcast a signed tx to a full node
-     * @summary Broadcast a signed tx
-     * @param {InlineObject} txBroadcast 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TransactionsApi
-     */
-    public txsPost(txBroadcast: InlineObject, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration).txsPost(txBroadcast, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
