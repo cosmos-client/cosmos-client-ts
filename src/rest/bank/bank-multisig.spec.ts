@@ -25,8 +25,8 @@ describe('bank', () => {
         cosmosclient.codec.instanceToProtoAny(pubKey1),
         cosmosclient.codec.instanceToProtoAny(pubKey2),
         cosmosclient.codec.instanceToProtoAny(pubKey3),
-      ]
-    })
+      ],
+    });
     const address = cosmosclient.AccAddress.fromPublicKey(multisigPubKey);
 
     const fromAddress = address;
@@ -70,8 +70,8 @@ describe('bank', () => {
                   single: {
                     mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
                   },
-                }
-              ]
+                },
+              ],
             },
           },
           sequence: account.sequence,
@@ -85,7 +85,16 @@ describe('bank', () => {
     // sign
     const txBuilder = new cosmosclient.TxBuilder(sdk, txBody, authInfo);
     const signDocBytes = txBuilder.signDocBytes(account.account_number);
-    txBuilder.addSignature(privKey.sign(signDocBytes));
+
+    const signature = txBuilder.createSignatureOfMultisig(
+      [privKey1.sign(signDocBytes), null, privKey3.sign(signDocBytes)],
+      authInfo.signer_infos[0].mode_info?.multi!,
+    );
+    if (signature instanceof Error) {
+      console.error(signature);
+      return;
+    }
+    txBuilder.addSignature(signature);
 
     // broadcast
     const res = await rest.tx.broadcastTx(sdk, {
