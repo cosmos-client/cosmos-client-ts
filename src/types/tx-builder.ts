@@ -35,8 +35,32 @@ export class TxBuilder {
     return cosmos.tx.v1beta1.SignDoc.encode(this.signDoc(accountNumber)).finish();
   }
 
-  addSignature(sig: Uint8Array) {
-    this.txRaw.signatures.push(sig);
+  /**
+   * The order of signatures must be same to the declared order in authInfo.
+   * @param signature
+   */
+  addSignature(signature: Uint8Array) {
+    this.txRaw.signatures.push(signature);
+  }
+
+  /**
+   * Permutation of signatures must be same to the declared permutation in modeInfo.
+   * @param signatures
+   * @param modeInfo
+   * @returns
+   */
+  createSignatureOfMultisig(signatures: (Uint8Array | null)[], modeInfo: cosmos.tx.v1beta1.ModeInfo.IMulti): Uint8Array | Error {
+    const bitArray = cosmos.crypto.multisig.v1beta1.CompactBitArray.from(signatures.map((sig) => !!sig));
+    if (bitArray?.elems !== modeInfo.bitarray?.elems) {
+      return Error('Permutation of signatures is different from the declared permutation in modeInfo');
+    }
+
+    const multiSignature = new cosmos.crypto.multisig.v1beta1.MultiSignature({
+      signatures: signatures.filter((sig) => !!sig) as Uint8Array[],
+    });
+    const bundledSignature = cosmos.crypto.multisig.v1beta1.MultiSignature.encode(multiSignature).finish();
+
+    return bundledSignature;
   }
 
   /**
