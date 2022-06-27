@@ -188,24 +188,39 @@ describe('codec', () => {
 
   it('protoJSONToInstanceTxMsg', async () => {
     expect.hasAssertions();
-
     const sdk = new cosmosclient.CosmosSDK('https://ununifi-alpha-test-v2.cauchye.net:1318', 'ununifi-alpha-test-v2');
 
-    const hashSend = 'AF78448BFBF4725FA9EF8382B52743210B6EBC3B02BE26C2BCB288202F0DE73B'; //msgSend 100uguu
-    const txResponce = await cosmosclient.rest.tx.getTx(sdk, hashSend).then((res) => res.data);
-    const messase = txResponce.tx?.body?.messages?.[0];
-    const cast = cosmosclient.codec.castProtoJSONOfProtoAny(messase);
-    const instance = cosmosclient.codec.protoJSONToInstance(cast);
-    expect((instance as any).constructor.name).toBe('MsgSend');
-    console.log('cast-msgSend', cast);
-    console.log('instanceMsgSend', instance);
+    const hashSend = "AF78448BFBF4725FA9EF8382B52743210B6EBC3B02BE26C2BCB288202F0DE73B" //msgSend 100uguu
+    const txResponce = await cosmosclient.rest.tx.getTx(sdk, hashSend).then((res) => res.data)
+    const messase = txResponce.tx?.body?.messages?.[0]
+    const cast = cosmosclient.codec.castProtoJSONOfProtoAny(messase)
+    const instance = cosmosclient.codec.protoJSONToInstance(cast)
+    expect((instance as any).constructor.name).toBe("MsgSend");
+    console.log("cast-msgSend", cast)
+    console.log("instanceMsgSend", instance)
 
-    const hashSubmit = '8B21739E3568727D0C30E469910359643E2B85E88B0B223E644566692721F5D8'; //msgSubmitProposal
-    const txResponceS = await cosmosclient.rest.tx.getTx(sdk, hashSubmit).then((res) => res.data);
-    const instanceProposal = cosmosclient.codec.protoJSONToInstance(
-      cosmosclient.codec.castProtoJSONOfProtoAny(txResponceS.tx?.body?.messages?.[0]),
-    );
-    expect((instanceProposal as any).constructor.name).toBe('MsgSubmitProposal');
-    console.log('insetanceProposal', instanceProposal);
+    const hashSubmit = "8B21739E3568727D0C30E469910359643E2B85E88B0B223E644566692721F5D8" //msgSubmitProposal
+    const txResponceS = await cosmosclient.rest.tx.getTx(sdk, hashSubmit).then((res) => res.data)
+    const instanceProposal = cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(txResponceS.tx?.body?.messages?.[0]))
+    expect((instanceProposal as any).constructor.name).toBe("MsgSubmitProposal");
+    console.log("insetanceProposal", instanceProposal)
+
+    const hashDeposit = "41DDF3BB9F1275163CEA9B168925E9410E1686A34ECEEDC58EBCEF81219423CD" //msgDeposit
+    const txResponceDeposit = await cosmosclient.rest.tx.getTx(sdk, hashDeposit).then((res) => res.data)
+    const instanceDeposit = cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(txResponceDeposit.tx?.body?.messages?.[0]))
+    expect((instanceDeposit as any).constructor.name).toBe("MsgDeposit");
+    console.log("instanceDeposit", instanceDeposit)
+
+    const hashVoteWeighted = "66CB9D610E6C65892FF9720534E1AB3D29068B4FF0EAA69554389BC45995205A" //msgVoteWeighted
+    const txResponceVoteWeighted = await cosmosclient.rest.tx.getTx(sdk, hashVoteWeighted).then((res) => res.data)
+    const instanceVoteWeighted = cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(txResponceVoteWeighted.tx?.body?.messages?.[0]))
+    expect((instanceVoteWeighted as any).constructor.name).toBe("MsgVoteWeighted");
+    console.log("instanceVoteWeighted", instanceVoteWeighted)
+
+    const hashVote = "0363D6FA41F145B375E14966E6AED59AC4016BBED8EB7EFA1CEB37149BC9D553" //msgVote
+    const txResponceVote = await cosmosclient.rest.tx.getTx(sdk, hashVote).then((res) => res.data)
+    const instanceVote = cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(txResponceVote.tx?.body?.messages?.[0]))
+    expect((instanceVote as any).constructor.name).toBe("MsgVote");
+    console.log("instanceVote", instanceVote)
   });
 });
