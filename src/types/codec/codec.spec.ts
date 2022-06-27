@@ -185,4 +185,27 @@ describe('codec', () => {
     expect(date.getMinutes()).toBe(0);
     expect(date.getSeconds()).toBe(0);
   });
+
+  it('protoJSONToInstanceTxMsg', async () => {
+    expect.hasAssertions();
+
+    const sdk = new cosmosclient.CosmosSDK('https://ununifi-alpha-test-v2.cauchye.net:1318', 'ununifi-alpha-test-v2');
+
+    const hashSend = 'AF78448BFBF4725FA9EF8382B52743210B6EBC3B02BE26C2BCB288202F0DE73B'; //msgSend 100uguu
+    const txResponce = await cosmosclient.rest.tx.getTx(sdk, hashSend).then((res) => res.data);
+    const messase = txResponce.tx?.body?.messages?.[0];
+    const cast = cosmosclient.codec.castProtoJSONOfProtoAny(messase);
+    const instance = cosmosclient.codec.protoJSONToInstance(cast);
+    expect((instance as any).constructor.name).toBe('MsgSend');
+    console.log('cast-msgSend', cast);
+    console.log('instanceMsgSend', instance);
+
+    const hashSubmit = '8B21739E3568727D0C30E469910359643E2B85E88B0B223E644566692721F5D8'; //msgSubmitProposal
+    const txResponceS = await cosmosclient.rest.tx.getTx(sdk, hashSubmit).then((res) => res.data);
+    const instanceProposal = cosmosclient.codec.protoJSONToInstance(
+      cosmosclient.codec.castProtoJSONOfProtoAny(txResponceS.tx?.body?.messages?.[0]),
+    );
+    expect((instanceProposal as any).constructor.name).toBe('MsgSubmitProposal');
+    console.log('insetanceProposal', instanceProposal);
+  });
 });
