@@ -31,6 +31,10 @@ export function isProtoJSONOfProtoAny(value: unknown): value is ProtoJSONOfProto
   return typeof value === 'object' && value != null && '@type' in value;
 }
 
+export function isProtoJSONOfProtoAnyArray(value: unknown): value is ProtoJSONOfProtoAny[] {
+  return value instanceof Array && value.every((v) => isProtoJSONOfProtoAny(v))
+}
+
 /**
  * Instance -> ProtoJSON
  * @param value
@@ -127,7 +131,7 @@ export function protoJSONToInstance<T>(value: ProtoJSONOfProtoAny | null | undef
   for (const [key, _v] of Object.entries(value)) {
     const v: unknown = _v;
 
-    if (v instanceof Array) {
+    if (isProtoJSONOfProtoAnyArray(v)) {
       const array = protoJSONArrayToInstance(v);
       if (array instanceof Error) {
         return array;
