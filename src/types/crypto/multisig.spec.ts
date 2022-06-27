@@ -1,4 +1,4 @@
-import { proto, cosmosclient } from '../..';
+import cosmosclient from '../..';
 
 describe('multisig', () => {
   it('multisig_address', async () => {
@@ -12,7 +12,7 @@ describe('multisig', () => {
         { '@type': '/cosmos.crypto.secp256k1.PubKey', key: 'AhjJM0+S28UIJs5LuIh/ekQpaQJ+B9Zeki8KNXYFVSqs' },
       ],
     };
-    const publicKey = cosmosclient.codec.protoJSONToInstance(multisig) as proto.cosmos.crypto.multisig.LegacyAminoPubKey;
+    const publicKey = cosmosclient.codec.protoJSONToInstance(multisig) as cosmosclient.proto.cosmos.crypto.multisig.LegacyAminoPubKey;
     console.log(publicKey);
 
     const multisigAddress = cosmosclient.AccAddress.fromPublicKey(publicKey);

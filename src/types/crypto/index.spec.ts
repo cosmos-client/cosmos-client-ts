@@ -1,4 +1,4 @@
-import { cosmosclient } from '../..';
+import cosmosclient from '../..';
 
 describe('sdk', () => {
   it('multisig', async () => {

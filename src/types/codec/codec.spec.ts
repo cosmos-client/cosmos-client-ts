@@ -1,4 +1,4 @@
-import { proto, cosmosclient, rest } from '../..';
+import cosmosclient from '../..';
 import { google } from '../../proto';
 import { goTimeStringToJsDate, jsDateToGoTimeString, jsDateToProtobufTimestamp, protobufTimestampToJsDate } from './module';
 import Long from 'long';
@@ -9,7 +9,7 @@ describe('codec', () => {
 
     const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
 
-    const privKey = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
     });
     const pubKey = privKey.pubKey();
@@ -21,22 +21,22 @@ describe('codec', () => {
     const toAddress = address;
 
     // build tx
-    const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+    const msgSend = new cosmosclient.proto.cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
       amount: [{ denom: 'token', amount: '1' }],
     });
 
-    const txBody = new proto.cosmos.tx.v1beta1.TxBody({
+    const txBody = new cosmosclient.proto.cosmos.tx.v1beta1.TxBody({
       messages: [cosmosclient.codec.instanceToProtoAny(msgSend)],
     });
-    const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
+    const authInfo = new cosmosclient.proto.cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
           public_key: cosmosclient.codec.instanceToProtoAny(pubKey),
           mode_info: {
             single: {
-              mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+              mode: cosmosclient.proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
             },
           },
           sequence: Long.fromNumber(0),
@@ -71,7 +71,7 @@ describe('codec', () => {
     };
 
     const unpacked = cosmosclient.codec.protoJSONToInstance(account);
-    if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(unpacked instanceof cosmosclient.proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
     const json = cosmosclient.codec.instanceToProtoJSON(unpacked);
@@ -135,7 +135,7 @@ describe('codec', () => {
     };
 
     const unpacked = cosmosclient.codec.protoJSONToInstance(res.data.account);
-    if (!(unpacked instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(unpacked instanceof cosmosclient.proto.cosmos.auth.v1beta1.BaseAccount)) {
       throw Error('');
     }
 
@@ -186,26 +186,26 @@ describe('codec', () => {
     expect(date.getSeconds()).toBe(0);
   });
 
-
   it('protoJSONToInstanceTxMsg', async () => {
     expect.hasAssertions();
 
     const sdk = new cosmosclient.CosmosSDK('https://ununifi-alpha-test-v2.cauchye.net:1318', 'ununifi-alpha-test-v2');
 
-    const hashSend = "AF78448BFBF4725FA9EF8382B52743210B6EBC3B02BE26C2BCB288202F0DE73B" //msgSend 100uguu
-    const txResponce = await rest.tx.getTx(sdk, hashSend).then((res) => res.data)
-    const messase = txResponce.tx?.body?.messages?.[0]
-    const cast = cosmosclient.codec.castProtoJSONOfProtoAny(messase)
-    const instance = cosmosclient.codec.protoJSONToInstance(cast)
-    expect((instance as any).constructor.name).toBe("MsgSend");
-    console.log("cast-msgSend", cast)
-    console.log("instanceMsgSend", instance)
+    const hashSend = 'AF78448BFBF4725FA9EF8382B52743210B6EBC3B02BE26C2BCB288202F0DE73B'; //msgSend 100uguu
+    const txResponce = await cosmosclient.rest.tx.getTx(sdk, hashSend).then((res) => res.data);
+    const messase = txResponce.tx?.body?.messages?.[0];
+    const cast = cosmosclient.codec.castProtoJSONOfProtoAny(messase);
+    const instance = cosmosclient.codec.protoJSONToInstance(cast);
+    expect((instance as any).constructor.name).toBe('MsgSend');
+    console.log('cast-msgSend', cast);
+    console.log('instanceMsgSend', instance);
 
-    const hashSubmit = "8B21739E3568727D0C30E469910359643E2B85E88B0B223E644566692721F5D8" //msgSubmitProposal
-    const txResponceS = await rest.tx.getTx(sdk, hashSubmit).then((res) => res.data)
-    const instanceProposal = cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(txResponceS.tx?.body?.messages?.[0]))
-    expect((instanceProposal as any).constructor.name).toBe("MsgSubmitProposal");
-    console.log("insetanceProposal", instanceProposal)
+    const hashSubmit = '8B21739E3568727D0C30E469910359643E2B85E88B0B223E644566692721F5D8'; //msgSubmitProposal
+    const txResponceS = await cosmosclient.rest.tx.getTx(sdk, hashSubmit).then((res) => res.data);
+    const instanceProposal = cosmosclient.codec.protoJSONToInstance(
+      cosmosclient.codec.castProtoJSONOfProtoAny(txResponceS.tx?.body?.messages?.[0]),
+    );
+    expect((instanceProposal as any).constructor.name).toBe('MsgSubmitProposal');
+    console.log('insetanceProposal', instanceProposal);
   });
-
 });

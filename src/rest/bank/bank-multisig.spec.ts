@@ -1,4 +1,4 @@
-import { cosmosclient, proto, rest } from '../..';
+import cosmosclient from '../..';
 import Long from 'long';
 
 describe('bank', () => {
@@ -7,19 +7,19 @@ describe('bank', () => {
 
     const sdk = new cosmosclient.CosmosSDK('http://localhost:1317', 'testchain');
 
-    const privKey1 = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey1 = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law post fragile cruel torch silver siren mechanic flush surround'),
     });
     const pubKey1 = privKey1.pubKey();
-    const privKey2 = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey2 = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('torch silver siren mechanic flush surround joke door law post fragile cruel'),
     });
     const pubKey2 = privKey2.pubKey();
-    const privKey3 = new proto.cosmos.crypto.secp256k1.PrivKey({
+    const privKey3 = new cosmosclient.proto.cosmos.crypto.secp256k1.PrivKey({
       key: await cosmosclient.generatePrivKeyFromMnemonic('joke door law mechanic flush surround post fragile cruel torch silver siren'),
     });
     const pubKey3 = privKey3.pubKey();
-    const multisigPubKey = new proto.cosmos.crypto.multisig.LegacyAminoPubKey({
+    const multisigPubKey = new cosmosclient.proto.cosmos.crypto.multisig.LegacyAminoPubKey({
       threshold: 2,
       public_keys: [
         cosmosclient.codec.instanceToProtoAny(pubKey1),
@@ -33,42 +33,42 @@ describe('bank', () => {
     const toAddress = address;
 
     // get account info
-    const account = await rest.auth
+    const account = await cosmosclient.rest.auth
       .account(sdk, fromAddress)
       .then((res) => cosmosclient.codec.protoJSONToInstance(cosmosclient.codec.castProtoJSONOfProtoAny(res.data.account)))
       .catch(() => undefined);
 
-    if (!(account instanceof proto.cosmos.auth.v1beta1.BaseAccount)) {
+    if (!(account instanceof cosmosclient.proto.cosmos.auth.v1beta1.BaseAccount)) {
       console.log(account);
       return;
     }
 
     // build tx
-    const msgSend = new proto.cosmos.bank.v1beta1.MsgSend({
+    const msgSend = new cosmosclient.proto.cosmos.bank.v1beta1.MsgSend({
       from_address: fromAddress.toString(),
       to_address: toAddress.toString(),
       amount: [{ denom: 'token', amount: '1' }],
     });
 
-    const txBody = new proto.cosmos.tx.v1beta1.TxBody({
+    const txBody = new cosmosclient.proto.cosmos.tx.v1beta1.TxBody({
       messages: [cosmosclient.codec.instanceToProtoAny(msgSend)],
     });
-    const authInfo = new proto.cosmos.tx.v1beta1.AuthInfo({
+    const authInfo = new cosmosclient.proto.cosmos.tx.v1beta1.AuthInfo({
       signer_infos: [
         {
           public_key: cosmosclient.codec.instanceToProtoAny(multisigPubKey),
           mode_info: {
             multi: {
-              bitarray: proto.cosmos.crypto.multisig.v1beta1.CompactBitArray.from([true, false, true]),
+              bitarray: cosmosclient.proto.cosmos.crypto.multisig.v1beta1.CompactBitArray.from([true, false, true]),
               mode_infos: [
                 {
                   single: {
-                    mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+                    mode: cosmosclient.proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
                   },
                 },
                 {
                   single: {
-                    mode: proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
+                    mode: cosmosclient.proto.cosmos.tx.signing.v1beta1.SignMode.SIGN_MODE_DIRECT,
                   },
                 },
               ],
@@ -97,9 +97,9 @@ describe('bank', () => {
     txBuilder.addSignature(signature);
 
     // broadcast
-    const res = await rest.tx.broadcastTx(sdk, {
+    const res = await cosmosclient.rest.tx.broadcastTx(sdk, {
       tx_bytes: txBuilder.txBytes(),
-      mode: rest.tx.BroadcastTxMode.Block,
+      mode: cosmosclient.rest.tx.BroadcastTxMode.Block,
     });
     console.log(res);
 

@@ -1,4 +1,4 @@
-import { cosmosclient } from '../..';
+import cosmosclient from '../..';
 import { setBech32Prefix } from './../address/config';
 
 describe('ed25519', () => {
