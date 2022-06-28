@@ -20,7 +20,7 @@
         };
 
         const response = await cosmosclient.rest.tendermint.getNodeInfo(sdk.rest);
-        return response;
+        console.log(response.data);
       })();
     </script>
   </head>
