@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
   mode: 'production',
   entry: './src/cdn.ts',
@@ -20,4 +22,7 @@ module.exports = {
       stream: require.resolve('stream-browserify'),
     },
   },
+  plugins: [new webpack.ProvidePlugin({
+    process: 'process/browser',
+  })]
 };
