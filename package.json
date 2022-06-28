@@ -10,10 +10,10 @@
     "lint": "eslint \"src/**/*\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "rm -r dist ; mkdir dist && npm run build:cjs && npm run build:esm && node bundle",
+    "build": "rm -r dist ; mkdir dist && npm run build:cjs && npm run build:esm && npm run build:cdn && node bundle",
     "build:cjs": "tsc --build --clean && tsc --target es5 --module commonjs && mv lib dist/cjs",
     "build:esm": "tsc --build --clean && tsc --target esnext --module esnext && mv lib dist/esm",
-    "build:cdn": "tsc --build --clean && tsc --target esnext --module esnext && webpack",
+    "build:cdn": "tsc --build --clean && tsc --target esnext --module esnext && webpack && cp cdn/main.js dist/index.min.js",
     "gen:openapi": "bash ./gen-openapi.sh",
     "gen:proto": "bash ./gen-proto.sh",
     "prepare": "husky install || exit 0"
