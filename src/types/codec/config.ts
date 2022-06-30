@@ -7,6 +7,8 @@ export const codecMaps = {
 };
 
 export function mergeCodecMaps(src: typeof codecMaps) {
+  // Don't change the order of spread operators, not to overwrite the codecMaps.
+  // Overwriting codecMaps lead to bugs of `instanceof`.
   codecMaps.constructor = {
     ...src.constructor,
     ...codecMaps.constructor,
