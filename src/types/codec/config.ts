@@ -8,15 +8,19 @@ export const codecMaps = {
 
 export function mergeCodecMaps(src: typeof codecMaps) {
   codecMaps.constructor = {
-    ...codecMaps.constructor,
     ...src.constructor,
+    ...codecMaps.constructor,
   };
 
   for (const [key, value] of src.inv.entries()) {
-    codecMaps.inv.set(key, value);
+    if (!codecMaps.inv.has(key)) {
+      codecMaps.inv.set(key, value);
+    }
   }
 
   for (const [key, value] of src.convertJSON.entries()) {
-    codecMaps.convertJSON.set(key, value);
+    if (!codecMaps.convertJSON.has(key)) {
+      codecMaps.convertJSON.set(key, value);
+    }
   }
 }
