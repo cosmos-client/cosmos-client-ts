@@ -22,6 +22,386 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
 /**
+ * QueryAccountResponse is the response type for the Query/Account RPC method.
+ * @export
+ * @interface Account200Response
+ */
+export interface Account200Response {
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof Account200Response
+     */
+    'account'?: AccountsAreTheExistingAccountsInner;
+}
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * @export
+ * @interface Accounts200Response
+ */
+export interface Accounts200Response {
+    /**
+     * 
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @memberof Accounts200Response
+     */
+    'accounts'?: Array<AccountsAreTheExistingAccountsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof Accounts200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * pagination defines the pagination in the response.
+ * @export
+ * @interface Accounts200ResponsePagination
+ */
+export interface Accounts200ResponsePagination {
+    /**
+     * 
+     * @type {string}
+     * @memberof Accounts200ResponsePagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Accounts200ResponsePagination
+     */
+    'total'?: string;
+}
+/**
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
+ * @export
+ * @interface AccountsAreTheExistingAccountsInner
+ */
+export interface AccountsAreTheExistingAccountsInner {
+    /**
+     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+     * @type {string}
+     * @memberof AccountsAreTheExistingAccountsInner
+     */
+    'type_url'?: string;
+    /**
+     * Must be a valid serialized protocol buffer of the above specified type.
+     * @type {string}
+     * @memberof AccountsAreTheExistingAccountsInner
+     */
+    'value'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AccountsDefaultResponse
+ */
+export interface AccountsDefaultResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountsDefaultResponse
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountsDefaultResponse
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountsDefaultResponse
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @memberof AccountsDefaultResponse
+     */
+    'details'?: Array<AccountsAreTheExistingAccountsInner>;
+}
+/**
+ * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC method.
+ * @export
+ * @interface AllBalances200Response
+ */
+export interface AllBalances200Response {
+    /**
+     * balances is the balances of all the coins.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof AllBalances200Response
+     */
+    'balances'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof AllBalances200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
+ * @export
+ * @interface AllBalances200ResponseBalancesInner
+ */
+export interface AllBalances200ResponseBalancesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof AllBalances200ResponseBalancesInner
+     */
+    'denom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AllBalances200ResponseBalancesInner
+     */
+    'amount'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AllBalancesDefaultResponse
+ */
+export interface AllBalancesDefaultResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof AllBalancesDefaultResponse
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AllBalancesDefaultResponse
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AllBalancesDefaultResponse
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {Array<AllBalancesDefaultResponseDetailsInner>}
+     * @memberof AllBalancesDefaultResponse
+     */
+    'details'?: Array<AllBalancesDefaultResponseDetailsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface AllBalancesDefaultResponseDetailsInner
+ */
+export interface AllBalancesDefaultResponseDetailsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof AllBalancesDefaultResponseDetailsInner
+     */
+    'type_url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AllBalancesDefaultResponseDetailsInner
+     */
+    'value'?: string;
+}
+/**
+ * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC method.
+ * @export
+ * @interface AllEvidence200Response
+ */
+export interface AllEvidence200Response {
+    /**
+     * evidence returns all evidences.
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @memberof AllEvidence200Response
+     */
+    'evidence'?: Array<AccountsAreTheExistingAccountsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof AllEvidence200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryAllowanceResponse is the response type for the Query/Allowance RPC method.
+ * @export
+ * @interface Allowance200Response
+ */
+export interface Allowance200Response {
+    /**
+     * 
+     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext}
+     * @memberof Allowance200Response
+     */
+    'allowance'?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext;
+}
+/**
+ * QueryAllowancesResponse is the response type for the Query/Allowances RPC method.
+ * @export
+ * @interface Allowances200Response
+ */
+export interface Allowances200Response {
+    /**
+     * allowances are allowance\'s granted for grantee by granter.
+     * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
+     * @memberof Allowances200Response
+     */
+    'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof Allowances200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
+ * QueryAnnualProvisionsResponse is the response type for the Query/AnnualProvisions RPC method.
+ * @export
+ * @interface AnnualProvisions200Response
+ */
+export interface AnnualProvisions200Response {
+    /**
+     * annual_provisions is the current minting annual provisions value.
+     * @type {string}
+     * @memberof AnnualProvisions200Response
+     */
+    'annual_provisions'?: string;
+}
+/**
+ * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
+ * @export
+ * @interface AppliedPlan200Response
+ */
+export interface AppliedPlan200Response {
+    /**
+     * height is the block height at which the plan was applied.
+     * @type {string}
+     * @memberof AppliedPlan200Response
+     */
+    'height'?: string;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface AuthParams200Response
+ */
+export interface AuthParams200Response {
+    /**
+     * 
+     * @type {AuthParams200ResponseParams}
+     * @memberof AuthParams200Response
+     */
+    'params'?: AuthParams200ResponseParams;
+}
+/**
+ * params defines the parameters of the module.
+ * @export
+ * @interface AuthParams200ResponseParams
+ */
+export interface AuthParams200ResponseParams {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthParams200ResponseParams
+     */
+    'max_memo_characters'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthParams200ResponseParams
+     */
+    'tx_sig_limit'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthParams200ResponseParams
+     */
+    'tx_size_cost_per_byte'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthParams200ResponseParams
+     */
+    'sig_verify_cost_ed25519'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthParams200ResponseParams
+     */
+    'sig_verify_cost_secp256k1'?: string;
+}
+/**
+ * QueryBalanceResponse is the response type for the Query/Balance RPC method.
+ * @export
+ * @interface Balance200Response
+ */
+export interface Balance200Response {
+    /**
+     * 
+     * @type {AllBalances200ResponseBalancesInner}
+     * @memberof Balance200Response
+     */
+    'balance'?: AllBalances200ResponseBalancesInner;
+}
+/**
+ * QueryParamsResponse defines the response type for querying x/bank parameters.
+ * @export
+ * @interface BankParams200Response
+ */
+export interface BankParams200Response {
+    /**
+     * 
+     * @type {BankParams200ResponseParams}
+     * @memberof BankParams200Response
+     */
+    'params'?: BankParams200ResponseParams;
+}
+/**
+ * Params defines the parameters for the bank module.
+ * @export
+ * @interface BankParams200ResponseParams
+ */
+export interface BankParams200ResponseParams {
+    /**
+     * 
+     * @type {Array<BankParams200ResponseParamsSendEnabledInner>}
+     * @memberof BankParams200ResponseParams
+     */
+    'send_enabled'?: Array<BankParams200ResponseParamsSendEnabledInner>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BankParams200ResponseParams
+     */
+    'default_send_enabled'?: boolean;
+}
+/**
+ * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
+ * @export
+ * @interface BankParams200ResponseParamsSendEnabledInner
+ */
+export interface BankParams200ResponseParamsSendEnabledInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankParams200ResponseParamsSendEnabledInner
+     */
+    'denom'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BankParams200ResponseParamsSendEnabledInner
+     */
+    'enabled'?: boolean;
+}
+/**
  * Consensus captures the consensus rules for processing a block in the blockchain, including all blockchain data structures and the rules of the application\'s state transition machine.
  * @export
  * @interface BasicBlockInfo
@@ -86,10 +466,10 @@ export interface BlockID {
 export interface BodyIsTheProcessableContentOfTheTransaction {
     /**
      * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'messages'?: Array<InlineResponse200Accounts>;
+    'messages'?: Array<AccountsAreTheExistingAccountsInner>;
     /**
      * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
@@ -104,16 +484,232 @@ export interface BodyIsTheProcessableContentOfTheTransaction {
     'timeout_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'extension_options'?: Array<InlineResponse200Accounts>;
+    'extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
     /**
      * 
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'non_critical_extension_options'?: Array<InlineResponse200Accounts>;
+    'non_critical_extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
+}
+/**
+ * BroadcastTxResponse is the response type for the Service.BroadcastTx method.
+ * @export
+ * @interface BroadcastTx200Response
+ */
+export interface BroadcastTx200Response {
+    /**
+     * 
+     * @type {BroadcastTx200ResponseTxResponse}
+     * @memberof BroadcastTx200Response
+     */
+    'tx_response'?: BroadcastTx200ResponseTxResponse;
+}
+/**
+ * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
+ * @export
+ * @interface BroadcastTx200ResponseTxResponse
+ */
+export interface BroadcastTx200ResponseTxResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'height'?: string;
+    /**
+     * The transaction hash.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'txhash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'codespace'?: string;
+    /**
+     * Response code.
+     * @type {number}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'code'?: number;
+    /**
+     * Result bytes, if any.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'data'?: string;
+    /**
+     * The output of the application\'s logger (raw string). May be non-deterministic.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'raw_log'?: string;
+    /**
+     * The output of the application\'s logger (typed). May be non-deterministic.
+     * @type {Array<BroadcastTx200ResponseTxResponseLogsInner>}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'logs'?: Array<BroadcastTx200ResponseTxResponseLogsInner>;
+    /**
+     * Additional information. May be non-deterministic.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'info'?: string;
+    /**
+     * Amount of gas requested for transaction.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'gas_wanted'?: string;
+    /**
+     * Amount of gas consumed by transaction.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'gas_used'?: string;
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'tx'?: AccountsAreTheExistingAccountsInner;
+    /**
+     * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'timestamp'?: string;
+}
+/**
+ * ABCIMessageLog defines a structure containing an indexed tx ABCI message log.
+ * @export
+ * @interface BroadcastTx200ResponseTxResponseLogsInner
+ */
+export interface BroadcastTx200ResponseTxResponseLogsInner {
+    /**
+     * 
+     * @type {number}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInner
+     */
+    'msg_index'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInner
+     */
+    'log'?: string;
+    /**
+     * Events contains a slice of Event objects that were emitted during some execution.
+     * @type {Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInner>}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInner
+     */
+    'events'?: Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInner>;
+}
+/**
+ * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
+ * @export
+ * @interface BroadcastTx200ResponseTxResponseLogsInnerEventsInner
+ */
+export interface BroadcastTx200ResponseTxResponseLogsInnerEventsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInnerEventsInner
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner>}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInnerEventsInner
+     */
+    'attributes'?: Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner>;
+}
+/**
+ * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
+ * @export
+ * @interface BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner
+ */
+export interface BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner
+     */
+    'value'?: string;
+}
+/**
+ * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest RPC method.
+ * @export
+ * @interface BroadcastTxRequest
+ */
+export interface BroadcastTxRequest {
+    /**
+     * tx_bytes is the raw transaction.
+     * @type {string}
+     * @memberof BroadcastTxRequest
+     */
+    'tx_bytes'?: string;
+    /**
+     * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
+     * @type {string}
+     * @memberof BroadcastTxRequest
+     */
+    'mode'?: BroadcastTxRequestModeEnum;
+}
+
+export const BroadcastTxRequestModeEnum = {
+    Unspecified: 'BROADCAST_MODE_UNSPECIFIED',
+    Block: 'BROADCAST_MODE_BLOCK',
+    Sync: 'BROADCAST_MODE_SYNC',
+    Async: 'BROADCAST_MODE_ASYNC'
+} as const;
+
+export type BroadcastTxRequestModeEnum = typeof BroadcastTxRequestModeEnum[keyof typeof BroadcastTxRequestModeEnum];
+
+/**
+ * QueryCommunityPoolResponse is the response type for the Query/CommunityPool RPC method.
+ * @export
+ * @interface CommunityPool200Response
+ */
+export interface CommunityPool200Response {
+    /**
+     * pool defines community pool\'s coins.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof CommunityPool200Response
+     */
+    'pool'?: Array<CommunityPool200ResponsePoolInner>;
+}
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.  NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto.
+ * @export
+ * @interface CommunityPool200ResponsePoolInner
+ */
+export interface CommunityPool200ResponsePoolInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof CommunityPool200ResponsePoolInner
+     */
+    'denom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CommunityPool200ResponsePoolInner
+     */
+    'amount'?: string;
 }
 /**
  * Params defines the parameters for the auth module.
@@ -160,10 +756,10 @@ export interface CosmosAuthV1beta1Params {
 export interface CosmosAuthV1beta1QueryAccountResponse {
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosAuthV1beta1QueryAccountResponse
      */
-    'account'?: InlineResponse200Accounts;
+    'account'?: AccountsAreTheExistingAccountsInner;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -173,16 +769,16 @@ export interface CosmosAuthV1beta1QueryAccountResponse {
 export interface CosmosAuthV1beta1QueryAccountsResponse {
     /**
      * 
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof CosmosAuthV1beta1QueryAccountsResponse
      */
-    'accounts'?: Array<InlineResponse200Accounts>;
+    'accounts'?: Array<AccountsAreTheExistingAccountsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosAuthV1beta1QueryAccountsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -192,10 +788,10 @@ export interface CosmosAuthV1beta1QueryAccountsResponse {
 export interface CosmosAuthV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse2002Params}
+     * @type {AuthParams200ResponseParams}
      * @memberof CosmosAuthV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse2002Params;
+    'params'?: AuthParams200ResponseParams;
 }
 /**
  * Grant gives permissions to execute the provide method with expiration time.
@@ -205,10 +801,10 @@ export interface CosmosAuthV1beta1QueryParamsResponse {
 export interface CosmosAuthzV1beta1Grant {
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosAuthzV1beta1Grant
      */
-    'authorization'?: InlineResponse200Accounts;
+    'authorization'?: AccountsAreTheExistingAccountsInner;
     /**
      * 
      * @type {string}
@@ -224,16 +820,16 @@ export interface CosmosAuthzV1beta1Grant {
 export interface CosmosAuthzV1beta1QueryGrantsResponse {
     /**
      * authorizations is a list of grants granted for grantee by granter.
-     * @type {Array<InlineResponse20055Grants>}
+     * @type {Array<Grants200ResponseGrantsInner>}
      * @memberof CosmosAuthzV1beta1QueryGrantsResponse
      */
-    'grants'?: Array<InlineResponse20055Grants>;
+    'grants'?: Array<Grants200ResponseGrantsInner>;
     /**
      * 
-     * @type {InlineResponse20014Pagination}
+     * @type {GetLatestValidatorSet200ResponsePagination}
      * @memberof CosmosAuthzV1beta1QueryGrantsResponse
      */
-    'pagination'?: InlineResponse20014Pagination;
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
@@ -249,10 +845,10 @@ export interface CosmosBankV1beta1DenomOwner {
     'address'?: string;
     /**
      * 
-     * @type {InlineResponse2003Balances}
+     * @type {AllBalances200ResponseBalancesInner}
      * @memberof CosmosBankV1beta1DenomOwner
      */
-    'balance'?: InlineResponse2003Balances;
+    'balance'?: AllBalances200ResponseBalancesInner;
 }
 /**
  * DenomUnit represents a struct that describes a given denomination unit of the basic token.
@@ -293,10 +889,10 @@ export interface CosmosBankV1beta1Metadata {
     'description'?: string;
     /**
      * 
-     * @type {Array<InlineResponse2006DenomUnits>}
+     * @type {Array<DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner>}
      * @memberof CosmosBankV1beta1Metadata
      */
-    'denom_units'?: Array<InlineResponse2006DenomUnits>;
+    'denom_units'?: Array<DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner>;
     /**
      * base represents the base denom (should be the DenomUnit with exponent = 0).
      * @type {string}
@@ -342,10 +938,10 @@ export interface CosmosBankV1beta1Metadata {
 export interface CosmosBankV1beta1Params {
     /**
      * 
-     * @type {Array<InlineResponse2008ParamsSendEnabled>}
+     * @type {Array<BankParams200ResponseParamsSendEnabledInner>}
      * @memberof CosmosBankV1beta1Params
      */
-    'send_enabled'?: Array<InlineResponse2008ParamsSendEnabled>;
+    'send_enabled'?: Array<BankParams200ResponseParamsSendEnabledInner>;
     /**
      * 
      * @type {boolean}
@@ -361,16 +957,16 @@ export interface CosmosBankV1beta1Params {
 export interface CosmosBankV1beta1QueryAllBalancesResponse {
     /**
      * balances is the balances of all the coins.
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosBankV1beta1QueryAllBalancesResponse
      */
-    'balances'?: Array<InlineResponse2003Balances>;
+    'balances'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosBankV1beta1QueryAllBalancesResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryBalanceResponse is the response type for the Query/Balance RPC method.
@@ -380,10 +976,10 @@ export interface CosmosBankV1beta1QueryAllBalancesResponse {
 export interface CosmosBankV1beta1QueryBalanceResponse {
     /**
      * 
-     * @type {InlineResponse2003Balances}
+     * @type {AllBalances200ResponseBalancesInner}
      * @memberof CosmosBankV1beta1QueryBalanceResponse
      */
-    'balance'?: InlineResponse2003Balances;
+    'balance'?: AllBalances200ResponseBalancesInner;
 }
 /**
  * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
@@ -393,10 +989,10 @@ export interface CosmosBankV1beta1QueryBalanceResponse {
 export interface CosmosBankV1beta1QueryDenomMetadataResponse {
     /**
      * 
-     * @type {InlineResponse2006Metadatas}
+     * @type {DenomsMetadata200ResponseMetadatasInner}
      * @memberof CosmosBankV1beta1QueryDenomMetadataResponse
      */
-    'metadata'?: InlineResponse2006Metadatas;
+    'metadata'?: DenomsMetadata200ResponseMetadatasInner;
 }
 /**
  * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
@@ -406,16 +1002,16 @@ export interface CosmosBankV1beta1QueryDenomMetadataResponse {
 export interface CosmosBankV1beta1QueryDenomOwnersResponse {
     /**
      * 
-     * @type {Array<InlineResponse2005DenomOwners>}
+     * @type {Array<DenomOwners200ResponseDenomOwnersInner>}
      * @memberof CosmosBankV1beta1QueryDenomOwnersResponse
      */
-    'denom_owners'?: Array<InlineResponse2005DenomOwners>;
+    'denom_owners'?: Array<DenomOwners200ResponseDenomOwnersInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosBankV1beta1QueryDenomOwnersResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
@@ -425,16 +1021,16 @@ export interface CosmosBankV1beta1QueryDenomOwnersResponse {
 export interface CosmosBankV1beta1QueryDenomsMetadataResponse {
     /**
      * metadata provides the client information for all the registered tokens.
-     * @type {Array<InlineResponse2006Metadatas>}
+     * @type {Array<DenomsMetadata200ResponseMetadatasInner>}
      * @memberof CosmosBankV1beta1QueryDenomsMetadataResponse
      */
-    'metadatas'?: Array<InlineResponse2006Metadatas>;
+    'metadatas'?: Array<DenomsMetadata200ResponseMetadatasInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosBankV1beta1QueryDenomsMetadataResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryParamsResponse defines the response type for querying x/bank parameters.
@@ -444,10 +1040,10 @@ export interface CosmosBankV1beta1QueryDenomsMetadataResponse {
 export interface CosmosBankV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse2008Params}
+     * @type {BankParams200ResponseParams}
      * @memberof CosmosBankV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse2008Params;
+    'params'?: BankParams200ResponseParams;
 }
 /**
  * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
@@ -457,10 +1053,10 @@ export interface CosmosBankV1beta1QueryParamsResponse {
 export interface CosmosBankV1beta1QuerySupplyOfResponse {
     /**
      * 
-     * @type {InlineResponse2003Balances}
+     * @type {AllBalances200ResponseBalancesInner}
      * @memberof CosmosBankV1beta1QuerySupplyOfResponse
      */
-    'amount'?: InlineResponse2003Balances;
+    'amount'?: AllBalances200ResponseBalancesInner;
 }
 /**
  * 
@@ -470,16 +1066,16 @@ export interface CosmosBankV1beta1QuerySupplyOfResponse {
 export interface CosmosBankV1beta1QueryTotalSupplyResponse {
     /**
      * 
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
      */
-    'supply'?: Array<InlineResponse2003Balances>;
+    'supply'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
@@ -520,10 +1116,10 @@ export interface CosmosBaseAbciV1beta1ABCIMessageLog {
     'log'?: string;
     /**
      * Events contains a slice of Event objects that were emitted during some execution.
-     * @type {Array<InlineResponse20050TxResponseEvents>}
+     * @type {Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInner>}
      * @memberof CosmosBaseAbciV1beta1ABCIMessageLog
      */
-    'events'?: Array<InlineResponse20050TxResponseEvents>;
+    'events'?: Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInner>;
 }
 /**
  * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
@@ -583,10 +1179,10 @@ export interface CosmosBaseAbciV1beta1Result {
     'log'?: string;
     /**
      * Events contains a slice of Event objects that were emitted during message or handler execution.
-     * @type {Array<InlineResponse20049ResultEvents>}
+     * @type {Array<Simulate200ResponseResultEventsInner>}
      * @memberof CosmosBaseAbciV1beta1Result
      */
-    'events'?: Array<InlineResponse20049ResultEvents>;
+    'events'?: Array<Simulate200ResponseResultEventsInner>;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
@@ -602,10 +1198,10 @@ export interface CosmosBaseAbciV1beta1StringEvent {
     'type'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20050TxResponseAttributes>}
+     * @type {Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner>}
      * @memberof CosmosBaseAbciV1beta1StringEvent
      */
-    'attributes'?: Array<InlineResponse20050TxResponseAttributes>;
+    'attributes'?: Array<BroadcastTx200ResponseTxResponseLogsInnerEventsInnerAttributesInner>;
 }
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
@@ -651,10 +1247,10 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     'raw_log'?: string;
     /**
      * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20050TxResponseLogs>}
+     * @type {Array<BroadcastTx200ResponseTxResponseLogsInner>}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    'logs'?: Array<InlineResponse20050TxResponseLogs>;
+    'logs'?: Array<BroadcastTx200ResponseTxResponseLogsInner>;
     /**
      * Additional information. May be non-deterministic.
      * @type {string}
@@ -675,10 +1271,10 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     'gas_used'?: string;
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    'tx'?: InlineResponse200Accounts;
+    'tx'?: AccountsAreTheExistingAccountsInner;
     /**
      * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
      * @type {string}
@@ -756,10 +1352,10 @@ export interface CosmosBaseTendermintV1beta1GetBlockByHeightResponse {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {InlineResponse20010Block}
+     * @type {GetLatestBlock200ResponseBlock}
      * @memberof CosmosBaseTendermintV1beta1GetBlockByHeightResponse
      */
-    'block'?: InlineResponse20010Block;
+    'block'?: GetLatestBlock200ResponseBlock;
 }
 /**
  * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
@@ -775,10 +1371,10 @@ export interface CosmosBaseTendermintV1beta1GetLatestBlockResponse {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {InlineResponse20010Block}
+     * @type {GetLatestBlock200ResponseBlock}
      * @memberof CosmosBaseTendermintV1beta1GetLatestBlockResponse
      */
-    'block'?: InlineResponse20010Block;
+    'block'?: GetLatestBlock200ResponseBlock;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
@@ -794,16 +1390,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
     'block_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20014Validators>}
+     * @type {Array<GetLatestValidatorSet200ResponseValidatorsInner>}
      * @memberof CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse
      */
-    'validators'?: Array<InlineResponse20014Validators>;
+    'validators'?: Array<GetLatestValidatorSet200ResponseValidatorsInner>;
     /**
      * 
-     * @type {InlineResponse20014Pagination}
+     * @type {GetLatestValidatorSet200ResponsePagination}
      * @memberof CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse
      */
-    'pagination'?: InlineResponse20014Pagination;
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
@@ -813,16 +1409,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
 export interface CosmosBaseTendermintV1beta1GetNodeInfoResponse {
     /**
      * 
-     * @type {InlineResponse20012DefaultNodeInfo}
+     * @type {GetNodeInfo200ResponseDefaultNodeInfo}
      * @memberof CosmosBaseTendermintV1beta1GetNodeInfoResponse
      */
-    'default_node_info'?: InlineResponse20012DefaultNodeInfo;
+    'default_node_info'?: GetNodeInfo200ResponseDefaultNodeInfo;
     /**
      * 
-     * @type {InlineResponse20012ApplicationVersion}
+     * @type {GetNodeInfo200ResponseApplicationVersion}
      * @memberof CosmosBaseTendermintV1beta1GetNodeInfoResponse
      */
-    'application_version'?: InlineResponse20012ApplicationVersion;
+    'application_version'?: GetNodeInfo200ResponseApplicationVersion;
 }
 /**
  * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
@@ -851,16 +1447,16 @@ export interface CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse {
     'block_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20014Validators>}
+     * @type {Array<GetLatestValidatorSet200ResponseValidatorsInner>}
      * @memberof CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse
      */
-    'validators'?: Array<InlineResponse20014Validators>;
+    'validators'?: Array<GetLatestValidatorSet200ResponseValidatorsInner>;
     /**
      * 
-     * @type {InlineResponse20014Pagination}
+     * @type {GetLatestValidatorSet200ResponsePagination}
      * @memberof CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse
      */
-    'pagination'?: InlineResponse20014Pagination;
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * 
@@ -901,10 +1497,10 @@ export interface CosmosBaseTendermintV1beta1Validator {
     'address'?: string;
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosBaseTendermintV1beta1Validator
      */
-    'pub_key'?: InlineResponse200Accounts;
+    'pub_key'?: AccountsAreTheExistingAccountsInner;
     /**
      * 
      * @type {string}
@@ -1044,10 +1640,10 @@ export interface CosmosDistributionV1beta1DelegationDelegatorReward {
     'validator_address'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof CosmosDistributionV1beta1DelegationDelegatorReward
      */
-    'reward'?: Array<InlineResponse20016Pool>;
+    'reward'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * Params defines the set of params for the distribution module.
@@ -1088,10 +1684,10 @@ export interface CosmosDistributionV1beta1Params {
 export interface CosmosDistributionV1beta1QueryCommunityPoolResponse {
     /**
      * pool defines community pool\'s coins.
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof CosmosDistributionV1beta1QueryCommunityPoolResponse
      */
-    'pool'?: Array<InlineResponse20016Pool>;
+    'pool'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
@@ -1101,10 +1697,10 @@ export interface CosmosDistributionV1beta1QueryCommunityPoolResponse {
 export interface CosmosDistributionV1beta1QueryDelegationRewardsResponse {
     /**
      * rewards defines the rewards accrued by a delegation.
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof CosmosDistributionV1beta1QueryDelegationRewardsResponse
      */
-    'rewards'?: Array<InlineResponse20016Pool>;
+    'rewards'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
@@ -1114,16 +1710,16 @@ export interface CosmosDistributionV1beta1QueryDelegationRewardsResponse {
 export interface CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse {
     /**
      * rewards defines all the rewards accrued by a delegator.
-     * @type {Array<InlineResponse20017Rewards>}
+     * @type {Array<DelegationTotalRewards200ResponseRewardsInner>}
      * @memberof CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse
      */
-    'rewards'?: Array<InlineResponse20017Rewards>;
+    'rewards'?: Array<DelegationTotalRewards200ResponseRewardsInner>;
     /**
      * total defines the sum of all the rewards.
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof CosmosDistributionV1beta1QueryDelegationTotalRewardsResponse
      */
-    'total'?: Array<InlineResponse20016Pool>;
+    'total'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
@@ -1159,10 +1755,10 @@ export interface CosmosDistributionV1beta1QueryDelegatorWithdrawAddressResponse 
 export interface CosmosDistributionV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20021Params}
+     * @type {DistributionParams200ResponseParams}
      * @memberof CosmosDistributionV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20021Params;
+    'params'?: DistributionParams200ResponseParams;
 }
 /**
  * 
@@ -1185,10 +1781,10 @@ export interface CosmosDistributionV1beta1QueryValidatorCommissionResponse {
 export interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse {
     /**
      * 
-     * @type {InlineResponse20022Rewards}
+     * @type {ValidatorOutstandingRewards200ResponseRewards}
      * @memberof CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse
      */
-    'rewards'?: InlineResponse20022Rewards;
+    'rewards'?: ValidatorOutstandingRewards200ResponseRewards;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
@@ -1198,16 +1794,16 @@ export interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsRespon
 export interface CosmosDistributionV1beta1QueryValidatorSlashesResponse {
     /**
      * slashes defines the slashes the validator received.
-     * @type {Array<InlineResponse20023Slashes>}
+     * @type {Array<ValidatorSlashes200ResponseSlashesInner>}
      * @memberof CosmosDistributionV1beta1QueryValidatorSlashesResponse
      */
-    'slashes'?: Array<InlineResponse20023Slashes>;
+    'slashes'?: Array<ValidatorSlashes200ResponseSlashesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosDistributionV1beta1QueryValidatorSlashesResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * ValidatorAccumulatedCommission represents accumulated commission for a validator kept as a running counter, can be withdrawn at any time.
@@ -1217,10 +1813,10 @@ export interface CosmosDistributionV1beta1QueryValidatorSlashesResponse {
 export interface CosmosDistributionV1beta1ValidatorAccumulatedCommission {
     /**
      * 
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof CosmosDistributionV1beta1ValidatorAccumulatedCommission
      */
-    'commission'?: Array<InlineResponse20016Pool>;
+    'commission'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
@@ -1230,10 +1826,10 @@ export interface CosmosDistributionV1beta1ValidatorAccumulatedCommission {
 export interface CosmosDistributionV1beta1ValidatorOutstandingRewards {
     /**
      * 
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof CosmosDistributionV1beta1ValidatorOutstandingRewards
      */
-    'rewards'?: Array<InlineResponse20016Pool>;
+    'rewards'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
@@ -1262,16 +1858,16 @@ export interface CosmosDistributionV1beta1ValidatorSlashEvent {
 export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
     /**
      * evidence returns all evidences.
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    'evidence'?: Array<InlineResponse200Accounts>;
+    'evidence'?: Array<AccountsAreTheExistingAccountsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
@@ -1281,10 +1877,10 @@ export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
 export interface CosmosEvidenceV1beta1QueryEvidenceResponse {
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosEvidenceV1beta1QueryEvidenceResponse
      */
-    'evidence'?: InlineResponse200Accounts;
+    'evidence'?: AccountsAreTheExistingAccountsInner;
 }
 /**
  * 
@@ -1338,10 +1934,10 @@ export interface CosmosFeegrantV1beta1QueryAllowancesResponse {
     'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
     /**
      * 
-     * @type {InlineResponse20014Pagination}
+     * @type {GetLatestValidatorSet200ResponsePagination}
      * @memberof CosmosFeegrantV1beta1QueryAllowancesResponse
      */
-    'pagination'?: InlineResponse20014Pagination;
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active proposal.
@@ -1363,10 +1959,10 @@ export interface CosmosGovV1beta1Deposit {
     'depositor'?: string;
     /**
      * 
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosGovV1beta1Deposit
      */
-    'amount'?: Array<InlineResponse2003Balances>;
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
 }
 /**
  * DepositParams defines the params for deposits on governance proposals.
@@ -1376,10 +1972,10 @@ export interface CosmosGovV1beta1Deposit {
 export interface CosmosGovV1beta1DepositParams {
     /**
      * Minimum deposit for a proposal to enter voting period.
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosGovV1beta1DepositParams
      */
-    'min_deposit'?: Array<InlineResponse2003Balances>;
+    'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
      * @type {string}
@@ -1401,10 +1997,10 @@ export interface CosmosGovV1beta1Proposal {
     'proposal_id'?: string;
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'content'?: InlineResponse200Accounts;
+    'content'?: AccountsAreTheExistingAccountsInner;
     /**
      * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @type {string}
@@ -1413,10 +2009,10 @@ export interface CosmosGovV1beta1Proposal {
     'status'?: CosmosGovV1beta1ProposalStatusEnum;
     /**
      * 
-     * @type {InlineResponse20027FinalTallyResult}
+     * @type {Proposals200ResponseProposalsInnerFinalTallyResult}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'final_tally_result'?: InlineResponse20027FinalTallyResult;
+    'final_tally_result'?: Proposals200ResponseProposalsInnerFinalTallyResult;
     /**
      * 
      * @type {string}
@@ -1431,10 +2027,10 @@ export interface CosmosGovV1beta1Proposal {
     'deposit_end_time'?: string;
     /**
      * 
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'total_deposit'?: Array<InlineResponse2003Balances>;
+    'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
      * @type {string}
@@ -1486,10 +2082,10 @@ export type CosmosGovV1beta1ProposalStatus = typeof CosmosGovV1beta1ProposalStat
 export interface CosmosGovV1beta1QueryDepositResponse {
     /**
      * 
-     * @type {InlineResponse20029Deposits}
+     * @type {Deposits200ResponseDepositsInner}
      * @memberof CosmosGovV1beta1QueryDepositResponse
      */
-    'deposit'?: InlineResponse20029Deposits;
+    'deposit'?: Deposits200ResponseDepositsInner;
 }
 /**
  * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
@@ -1499,16 +2095,16 @@ export interface CosmosGovV1beta1QueryDepositResponse {
 export interface CosmosGovV1beta1QueryDepositsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20029Deposits>}
+     * @type {Array<Deposits200ResponseDepositsInner>}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
-    'deposits'?: Array<InlineResponse20029Deposits>;
+    'deposits'?: Array<Deposits200ResponseDepositsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -1518,22 +2114,22 @@ export interface CosmosGovV1beta1QueryDepositsResponse {
 export interface CosmosGovV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20026VotingParams}
+     * @type {GovParams200ResponseVotingParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    'voting_params'?: InlineResponse20026VotingParams;
+    'voting_params'?: GovParams200ResponseVotingParams;
     /**
      * 
-     * @type {InlineResponse20026DepositParams}
+     * @type {GovParams200ResponseDepositParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    'deposit_params'?: InlineResponse20026DepositParams;
+    'deposit_params'?: GovParams200ResponseDepositParams;
     /**
      * 
-     * @type {InlineResponse20026TallyParams}
+     * @type {GovParams200ResponseTallyParams}
      * @memberof CosmosGovV1beta1QueryParamsResponse
      */
-    'tally_params'?: InlineResponse20026TallyParams;
+    'tally_params'?: GovParams200ResponseTallyParams;
 }
 /**
  * QueryProposalResponse is the response type for the Query/Proposal RPC method.
@@ -1543,10 +2139,10 @@ export interface CosmosGovV1beta1QueryParamsResponse {
 export interface CosmosGovV1beta1QueryProposalResponse {
     /**
      * 
-     * @type {InlineResponse20027Proposals}
+     * @type {Proposals200ResponseProposalsInner}
      * @memberof CosmosGovV1beta1QueryProposalResponse
      */
-    'proposal'?: InlineResponse20027Proposals;
+    'proposal'?: Proposals200ResponseProposalsInner;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
@@ -1556,16 +2152,16 @@ export interface CosmosGovV1beta1QueryProposalResponse {
 export interface CosmosGovV1beta1QueryProposalsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20027Proposals>}
+     * @type {Array<Proposals200ResponseProposalsInner>}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
-    'proposals'?: Array<InlineResponse20027Proposals>;
+    'proposals'?: Array<Proposals200ResponseProposalsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
@@ -1575,10 +2171,10 @@ export interface CosmosGovV1beta1QueryProposalsResponse {
 export interface CosmosGovV1beta1QueryTallyResultResponse {
     /**
      * 
-     * @type {InlineResponse20027FinalTallyResult}
+     * @type {Proposals200ResponseProposalsInnerFinalTallyResult}
      * @memberof CosmosGovV1beta1QueryTallyResultResponse
      */
-    'tally'?: InlineResponse20027FinalTallyResult;
+    'tally'?: Proposals200ResponseProposalsInnerFinalTallyResult;
 }
 /**
  * QueryVoteResponse is the response type for the Query/Vote RPC method.
@@ -1588,10 +2184,10 @@ export interface CosmosGovV1beta1QueryTallyResultResponse {
 export interface CosmosGovV1beta1QueryVoteResponse {
     /**
      * 
-     * @type {InlineResponse20032Votes}
+     * @type {Votes200ResponseVotesInner}
      * @memberof CosmosGovV1beta1QueryVoteResponse
      */
-    'vote'?: InlineResponse20032Votes;
+    'vote'?: Votes200ResponseVotesInner;
 }
 /**
  * QueryVotesResponse is the response type for the Query/Votes RPC method.
@@ -1601,16 +2197,16 @@ export interface CosmosGovV1beta1QueryVoteResponse {
 export interface CosmosGovV1beta1QueryVotesResponse {
     /**
      * votes defined the queried votes.
-     * @type {Array<InlineResponse20032Votes>}
+     * @type {Array<Votes200ResponseVotesInner>}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
-    'votes'?: Array<InlineResponse20032Votes>;
+    'votes'?: Array<Votes200ResponseVotesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * TallyParams defines the params for tallying votes on governance proposals.
@@ -1694,10 +2290,10 @@ export interface CosmosGovV1beta1Vote {
     'option'?: CosmosGovV1beta1VoteOptionEnum;
     /**
      * 
-     * @type {Array<InlineResponse20032Options>}
+     * @type {Array<Votes200ResponseVotesInnerOptionsInner>}
      * @memberof CosmosGovV1beta1Vote
      */
-    'options'?: Array<InlineResponse20032Options>;
+    'options'?: Array<Votes200ResponseVotesInnerOptionsInner>;
 }
 
 export const CosmosGovV1beta1VoteOptionEnum = {
@@ -1847,10 +2443,10 @@ export interface CosmosMintV1beta1QueryInflationResponse {
 export interface CosmosMintV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20036Params}
+     * @type {MintParams200ResponseParams}
      * @memberof CosmosMintV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20036Params;
+    'params'?: MintParams200ResponseParams;
 }
 /**
  * ParamChange defines an individual parameter change, for use in ParameterChangeProposal.
@@ -1885,10 +2481,10 @@ export interface CosmosParamsV1beta1ParamChange {
 export interface CosmosParamsV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20037Param}
+     * @type {Params200ResponseParam}
      * @memberof CosmosParamsV1beta1QueryParamsResponse
      */
-    'param'?: InlineResponse20037Param;
+    'param'?: Params200ResponseParam;
 }
 /**
  * Params represents the parameters used for by the slashing module.
@@ -1961,10 +2557,10 @@ export interface CosmosSlashingV1beta1QuerySigningInfoResponse {
 export interface CosmosSlashingV1beta1QuerySigningInfosResponse {
     /**
      * 
-     * @type {Array<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo>}
+     * @type {Array<InfoIsTheSigningInfoOfAllValidatorsInner>}
      * @memberof CosmosSlashingV1beta1QuerySigningInfosResponse
      */
-    'info'?: Array<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo>;
+    'info'?: Array<InfoIsTheSigningInfoOfAllValidatorsInner>;
     /**
      * 
      * @type {QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodPagination}
@@ -2039,10 +2635,10 @@ export type CosmosStakingV1beta1BondStatus = typeof CosmosStakingV1beta1BondStat
 export interface CosmosStakingV1beta1Commission {
     /**
      * 
-     * @type {InlineResponse20041CommissionCommissionRates}
+     * @type {StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates}
      * @memberof CosmosStakingV1beta1Commission
      */
-    'commission_rates'?: InlineResponse20041CommissionCommissionRates;
+    'commission_rates'?: StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates;
     /**
      * update_time is the last time the commission rate was changed.
      * @type {string}
@@ -2108,16 +2704,16 @@ export interface CosmosStakingV1beta1Delegation {
 export interface CosmosStakingV1beta1DelegationResponse {
     /**
      * 
-     * @type {InlineResponse20038Delegation}
+     * @type {DelegatorDelegations200ResponseDelegationResponsesInnerDelegation}
      * @memberof CosmosStakingV1beta1DelegationResponse
      */
-    'delegation'?: InlineResponse20038Delegation;
+    'delegation'?: DelegatorDelegations200ResponseDelegationResponsesInnerDelegation;
     /**
      * 
-     * @type {InlineResponse2003Balances}
+     * @type {AllBalances200ResponseBalancesInner}
      * @memberof CosmosStakingV1beta1DelegationResponse
      */
-    'balance'?: InlineResponse2003Balances;
+    'balance'?: AllBalances200ResponseBalancesInner;
 }
 /**
  * Description defines a validator description.
@@ -2164,16 +2760,16 @@ export interface CosmosStakingV1beta1Description {
 export interface CosmosStakingV1beta1HistoricalInfo {
     /**
      * 
-     * @type {InlineResponse20043HistHeader}
+     * @type {HistoricalInfo200ResponseHistHeader}
      * @memberof CosmosStakingV1beta1HistoricalInfo
      */
-    'header'?: InlineResponse20043HistHeader;
+    'header'?: HistoricalInfo200ResponseHistHeader;
     /**
      * 
-     * @type {Array<InlineResponse20041Validators>}
+     * @type {Array<StakingDelegatorValidators200ResponseValidatorsInner>}
      * @memberof CosmosStakingV1beta1HistoricalInfo
      */
-    'valset'?: Array<InlineResponse20041Validators>;
+    'valset'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
 }
 /**
  * Params defines the parameters for the staking module.
@@ -2239,10 +2835,10 @@ export interface CosmosStakingV1beta1Pool {
 export interface CosmosStakingV1beta1QueryDelegationResponse {
     /**
      * 
-     * @type {InlineResponse20038DelegationResponses}
+     * @type {DelegatorDelegations200ResponseDelegationResponsesInner}
      * @memberof CosmosStakingV1beta1QueryDelegationResponse
      */
-    'delegation_response'?: InlineResponse20038DelegationResponses;
+    'delegation_response'?: DelegatorDelegations200ResponseDelegationResponsesInner;
 }
 /**
  * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
@@ -2252,16 +2848,16 @@ export interface CosmosStakingV1beta1QueryDelegationResponse {
 export interface CosmosStakingV1beta1QueryDelegatorDelegationsResponse {
     /**
      * delegation_responses defines all the delegations\' info of a delegator.
-     * @type {Array<InlineResponse20038DelegationResponses>}
+     * @type {Array<DelegatorDelegations200ResponseDelegationResponsesInner>}
      * @memberof CosmosStakingV1beta1QueryDelegatorDelegationsResponse
      */
-    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
+    'delegation_responses'?: Array<DelegatorDelegations200ResponseDelegationResponsesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorDelegationsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
@@ -2271,16 +2867,16 @@ export interface CosmosStakingV1beta1QueryDelegatorDelegationsResponse {
 export interface CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20040UnbondingResponses>}
+     * @type {Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>}
      * @memberof CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse
      */
-    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
+    'unbonding_responses'?: Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
@@ -2290,10 +2886,10 @@ export interface CosmosStakingV1beta1QueryDelegatorUnbondingDelegationsResponse 
 export interface CosmosStakingV1beta1QueryDelegatorValidatorResponse {
     /**
      * 
-     * @type {InlineResponse20041Validators}
+     * @type {StakingDelegatorValidators200ResponseValidatorsInner}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorResponse
      */
-    'validator'?: InlineResponse20041Validators;
+    'validator'?: StakingDelegatorValidators200ResponseValidatorsInner;
 }
 /**
  * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
@@ -2303,16 +2899,16 @@ export interface CosmosStakingV1beta1QueryDelegatorValidatorResponse {
 export interface CosmosStakingV1beta1QueryDelegatorValidatorsResponse {
     /**
      * validators defines the validators\' info of a delegator.
-     * @type {Array<InlineResponse20041Validators>}
+     * @type {Array<StakingDelegatorValidators200ResponseValidatorsInner>}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorsResponse
      */
-    'validators'?: Array<InlineResponse20041Validators>;
+    'validators'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryDelegatorValidatorsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
@@ -2322,10 +2918,10 @@ export interface CosmosStakingV1beta1QueryDelegatorValidatorsResponse {
 export interface CosmosStakingV1beta1QueryHistoricalInfoResponse {
     /**
      * 
-     * @type {InlineResponse20043Hist}
+     * @type {HistoricalInfo200ResponseHist}
      * @memberof CosmosStakingV1beta1QueryHistoricalInfoResponse
      */
-    'hist'?: InlineResponse20043Hist;
+    'hist'?: HistoricalInfo200ResponseHist;
 }
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -2335,10 +2931,10 @@ export interface CosmosStakingV1beta1QueryHistoricalInfoResponse {
 export interface CosmosStakingV1beta1QueryParamsResponse {
     /**
      * 
-     * @type {InlineResponse20044Params}
+     * @type {StakingParams200ResponseParams}
      * @memberof CosmosStakingV1beta1QueryParamsResponse
      */
-    'params'?: InlineResponse20044Params;
+    'params'?: StakingParams200ResponseParams;
 }
 /**
  * QueryPoolResponse is response type for the Query/Pool RPC method.
@@ -2348,10 +2944,10 @@ export interface CosmosStakingV1beta1QueryParamsResponse {
 export interface CosmosStakingV1beta1QueryPoolResponse {
     /**
      * 
-     * @type {InlineResponse20045Pool}
+     * @type {Pool200ResponsePool}
      * @memberof CosmosStakingV1beta1QueryPoolResponse
      */
-    'pool'?: InlineResponse20045Pool;
+    'pool'?: Pool200ResponsePool;
 }
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
@@ -2361,16 +2957,16 @@ export interface CosmosStakingV1beta1QueryPoolResponse {
 export interface CosmosStakingV1beta1QueryRedelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20039RedelegationResponses>}
+     * @type {Array<Redelegations200ResponseRedelegationResponsesInner>}
      * @memberof CosmosStakingV1beta1QueryRedelegationsResponse
      */
-    'redelegation_responses'?: Array<InlineResponse20039RedelegationResponses>;
+    'redelegation_responses'?: Array<Redelegations200ResponseRedelegationResponsesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryRedelegationsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
@@ -2380,10 +2976,10 @@ export interface CosmosStakingV1beta1QueryRedelegationsResponse {
 export interface CosmosStakingV1beta1QueryUnbondingDelegationResponse {
     /**
      * 
-     * @type {InlineResponse20040UnbondingResponses}
+     * @type {DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner}
      * @memberof CosmosStakingV1beta1QueryUnbondingDelegationResponse
      */
-    'unbond'?: InlineResponse20040UnbondingResponses;
+    'unbond'?: DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner;
 }
 /**
  * 
@@ -2393,16 +2989,16 @@ export interface CosmosStakingV1beta1QueryUnbondingDelegationResponse {
 export interface CosmosStakingV1beta1QueryValidatorDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20038DelegationResponses>}
+     * @type {Array<DelegatorDelegations200ResponseDelegationResponsesInner>}
      * @memberof CosmosStakingV1beta1QueryValidatorDelegationsResponse
      */
-    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
+    'delegation_responses'?: Array<DelegatorDelegations200ResponseDelegationResponsesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryValidatorDelegationsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * 
@@ -2412,10 +3008,10 @@ export interface CosmosStakingV1beta1QueryValidatorDelegationsResponse {
 export interface CosmosStakingV1beta1QueryValidatorResponse {
     /**
      * 
-     * @type {InlineResponse20041Validators}
+     * @type {StakingDelegatorValidators200ResponseValidatorsInner}
      * @memberof CosmosStakingV1beta1QueryValidatorResponse
      */
-    'validator'?: InlineResponse20041Validators;
+    'validator'?: StakingDelegatorValidators200ResponseValidatorsInner;
 }
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
@@ -2425,16 +3021,16 @@ export interface CosmosStakingV1beta1QueryValidatorResponse {
 export interface CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse {
     /**
      * 
-     * @type {Array<InlineResponse20040UnbondingResponses>}
+     * @type {Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>}
      * @memberof CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse
      */
-    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
+    'unbonding_responses'?: Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * 
@@ -2444,16 +3040,16 @@ export interface CosmosStakingV1beta1QueryValidatorUnbondingDelegationsResponse 
 export interface CosmosStakingV1beta1QueryValidatorsResponse {
     /**
      * validators contains all the queried validators.
-     * @type {Array<InlineResponse20041Validators>}
+     * @type {Array<StakingDelegatorValidators200ResponseValidatorsInner>}
      * @memberof CosmosStakingV1beta1QueryValidatorsResponse
      */
-    'validators'?: Array<InlineResponse20041Validators>;
+    'validators'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof CosmosStakingV1beta1QueryValidatorsResponse
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
@@ -2481,10 +3077,10 @@ export interface CosmosStakingV1beta1Redelegation {
     'validator_dst_address'?: string;
     /**
      * entries are the redelegation entries.
-     * @type {Array<InlineResponse20039RedelegationEntries>}
+     * @type {Array<Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner>}
      * @memberof CosmosStakingV1beta1Redelegation
      */
-    'entries'?: Array<InlineResponse20039RedelegationEntries>;
+    'entries'?: Array<Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner>;
 }
 /**
  * RedelegationEntry defines a redelegation object with relevant metadata.
@@ -2525,10 +3121,10 @@ export interface CosmosStakingV1beta1RedelegationEntry {
 export interface CosmosStakingV1beta1RedelegationEntryResponse {
     /**
      * 
-     * @type {InlineResponse20039RedelegationEntries}
+     * @type {Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner}
      * @memberof CosmosStakingV1beta1RedelegationEntryResponse
      */
-    'redelegation_entry'?: InlineResponse20039RedelegationEntries;
+    'redelegation_entry'?: Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner;
     /**
      * 
      * @type {string}
@@ -2544,16 +3140,16 @@ export interface CosmosStakingV1beta1RedelegationEntryResponse {
 export interface CosmosStakingV1beta1RedelegationResponse {
     /**
      * 
-     * @type {InlineResponse20039Redelegation}
+     * @type {Redelegations200ResponseRedelegationResponsesInnerRedelegation}
      * @memberof CosmosStakingV1beta1RedelegationResponse
      */
-    'redelegation'?: InlineResponse20039Redelegation;
+    'redelegation'?: Redelegations200ResponseRedelegationResponsesInnerRedelegation;
     /**
      * 
-     * @type {Array<InlineResponse20039Entries>}
+     * @type {Array<Redelegations200ResponseRedelegationResponsesInnerEntriesInner>}
      * @memberof CosmosStakingV1beta1RedelegationResponse
      */
-    'entries'?: Array<InlineResponse20039Entries>;
+    'entries'?: Array<Redelegations200ResponseRedelegationResponsesInnerEntriesInner>;
 }
 /**
  * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
@@ -2575,10 +3171,10 @@ export interface CosmosStakingV1beta1UnbondingDelegation {
     'validator_address'?: string;
     /**
      * entries are the unbonding delegation entries.
-     * @type {Array<InlineResponse20040Entries>}
+     * @type {Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner>}
      * @memberof CosmosStakingV1beta1UnbondingDelegation
      */
-    'entries'?: Array<InlineResponse20040Entries>;
+    'entries'?: Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner>;
 }
 /**
  * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
@@ -2625,10 +3221,10 @@ export interface CosmosStakingV1beta1Validator {
     'operator_address'?: string;
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'consensus_pubkey'?: InlineResponse200Accounts;
+    'consensus_pubkey'?: AccountsAreTheExistingAccountsInner;
     /**
      * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
@@ -2655,10 +3251,10 @@ export interface CosmosStakingV1beta1Validator {
     'delegator_shares'?: string;
     /**
      * 
-     * @type {InlineResponse20041Description}
+     * @type {StakingDelegatorValidators200ResponseValidatorsInnerDescription}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'description'?: InlineResponse20041Description;
+    'description'?: StakingDelegatorValidators200ResponseValidatorsInnerDescription;
     /**
      * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
      * @type {string}
@@ -2673,10 +3269,10 @@ export interface CosmosStakingV1beta1Validator {
     'unbonding_time'?: string;
     /**
      * 
-     * @type {InlineResponse20041Commission}
+     * @type {StakingDelegatorValidators200ResponseValidatorsInnerCommission}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'commission'?: InlineResponse20041Commission;
+    'commission'?: StakingDelegatorValidators200ResponseValidatorsInnerCommission;
     /**
      * min_self_delegation is the validator\'s self declared minimum self delegation.
      * @type {string}
@@ -2737,10 +3333,10 @@ export interface CosmosTxV1beta1AuthInfo {
 export interface CosmosTxV1beta1AuthInfoFee {
     /**
      * 
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosTxV1beta1AuthInfoFee
      */
-    'amount'?: Array<InlineResponse2003Balances>;
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
      * @type {string}
@@ -2813,10 +3409,10 @@ export type CosmosTxV1beta1BroadcastTxRequestModeEnum = typeof CosmosTxV1beta1Br
 export interface CosmosTxV1beta1BroadcastTxResponse {
     /**
      * 
-     * @type {InlineResponse20050TxResponse}
+     * @type {BroadcastTx200ResponseTxResponse}
      * @memberof CosmosTxV1beta1BroadcastTxResponse
      */
-    'tx_response'?: InlineResponse20050TxResponse;
+    'tx_response'?: BroadcastTx200ResponseTxResponse;
 }
 /**
  * Fee includes the amount of coins paid in fees and the maximum gas to be used by the transaction. The ratio yields an effective \"gasprice\", which must be above some miminum to be accepted into the mempool.
@@ -2826,10 +3422,10 @@ export interface CosmosTxV1beta1BroadcastTxResponse {
 export interface CosmosTxV1beta1Fee {
     /**
      * 
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosTxV1beta1Fee
      */
-    'amount'?: Array<InlineResponse2003Balances>;
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
      * @type {string}
@@ -2863,10 +3459,10 @@ export interface CosmosTxV1beta1GetTxResponse {
     'tx'?: CosmosTxV1beta1Tx;
     /**
      * 
-     * @type {InlineResponse20050TxResponse}
+     * @type {BroadcastTx200ResponseTxResponse}
      * @memberof CosmosTxV1beta1GetTxResponse
      */
-    'tx_response'?: InlineResponse20050TxResponse;
+    'tx_response'?: BroadcastTx200ResponseTxResponse;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents RPC method.
@@ -2882,16 +3478,16 @@ export interface CosmosTxV1beta1GetTxsEventResponse {
     'txs'?: Array<CosmosTxV1beta1Tx>;
     /**
      * tx_responses is the list of queried TxResponses.
-     * @type {Array<InlineResponse20050TxResponse>}
+     * @type {Array<BroadcastTx200ResponseTxResponse>}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    'tx_responses'?: Array<InlineResponse20050TxResponse>;
+    'tx_responses'?: Array<BroadcastTx200ResponseTxResponse>;
     /**
      * 
-     * @type {InlineResponse20014Pagination}
+     * @type {GetLatestValidatorSet200ResponsePagination}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    'pagination'?: InlineResponse20014Pagination;
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * ModeInfo describes the signing mode of a single or nested multisig signer.
@@ -2977,10 +3573,10 @@ export type CosmosTxV1beta1OrderBy = typeof CosmosTxV1beta1OrderBy[keyof typeof 
 export interface CosmosTxV1beta1SignerInfo {
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosTxV1beta1SignerInfo
      */
-    'public_key'?: InlineResponse200Accounts;
+    'public_key'?: AccountsAreTheExistingAccountsInner;
     /**
      * 
      * @type {CosmosTxV1beta1ModeInfo}
@@ -3021,16 +3617,16 @@ export interface CosmosTxV1beta1SimulateRequest {
 export interface CosmosTxV1beta1SimulateResponse {
     /**
      * 
-     * @type {InlineResponse20049GasInfo}
+     * @type {Simulate200ResponseGasInfo}
      * @memberof CosmosTxV1beta1SimulateResponse
      */
-    'gas_info'?: InlineResponse20049GasInfo;
+    'gas_info'?: Simulate200ResponseGasInfo;
     /**
      * 
-     * @type {InlineResponse20049Result}
+     * @type {Simulate200ResponseResult}
      * @memberof CosmosTxV1beta1SimulateResponse
      */
-    'result'?: InlineResponse20049Result;
+    'result'?: Simulate200ResponseResult;
 }
 /**
  * Tx is the standard type used for broadcasting transactions.
@@ -3065,10 +3661,10 @@ export interface CosmosTxV1beta1Tx {
 export interface CosmosTxV1beta1TxBody {
     /**
      * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'messages'?: Array<InlineResponse200Accounts>;
+    'messages'?: Array<AccountsAreTheExistingAccountsInner>;
     /**
      * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
@@ -3083,16 +3679,16 @@ export interface CosmosTxV1beta1TxBody {
     'timeout_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'extension_options'?: Array<InlineResponse200Accounts>;
+    'extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
     /**
      * 
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'non_critical_extension_options'?: Array<InlineResponse200Accounts>;
+    'non_critical_extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
 }
 /**
  * ModuleVersion specifies a module and its consensus version.
@@ -3145,10 +3741,10 @@ export interface CosmosUpgradeV1beta1Plan {
     'info'?: string;
     /**
      * 
-     * @type {InlineResponse200Accounts}
+     * @type {AccountsAreTheExistingAccountsInner}
      * @memberof CosmosUpgradeV1beta1Plan
      */
-    'upgraded_client_state'?: InlineResponse200Accounts;
+    'upgraded_client_state'?: AccountsAreTheExistingAccountsInner;
 }
 /**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
@@ -3171,10 +3767,10 @@ export interface CosmosUpgradeV1beta1QueryAppliedPlanResponse {
 export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
     /**
      * 
-     * @type {InlineResponse20052Plan}
+     * @type {CurrentPlan200ResponsePlan}
      * @memberof CosmosUpgradeV1beta1QueryCurrentPlanResponse
      */
-    'plan'?: InlineResponse20052Plan;
+    'plan'?: CurrentPlan200ResponsePlan;
 }
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
@@ -3184,10 +3780,10 @@ export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
 export interface CosmosUpgradeV1beta1QueryModuleVersionsResponse {
     /**
      * module_versions is a list of module names with their consensus versions.
-     * @type {Array<InlineResponse20053ModuleVersions>}
+     * @type {Array<ModuleVersions200ResponseModuleVersionsInner>}
      * @memberof CosmosUpgradeV1beta1QueryModuleVersionsResponse
      */
-    'module_versions'?: Array<InlineResponse20053ModuleVersions>;
+    'module_versions'?: Array<ModuleVersions200ResponseModuleVersionsInner>;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
@@ -3203,6 +3799,56 @@ export interface CosmosUpgradeV1beta1QueryUpgradedConsensusStateResponse {
     'upgraded_consensus_state'?: string;
 }
 /**
+ * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC method.
+ * @export
+ * @interface CurrentPlan200Response
+ */
+export interface CurrentPlan200Response {
+    /**
+     * 
+     * @type {CurrentPlan200ResponsePlan}
+     * @memberof CurrentPlan200Response
+     */
+    'plan'?: CurrentPlan200ResponsePlan;
+}
+/**
+ * plan is the current upgrade plan.
+ * @export
+ * @interface CurrentPlan200ResponsePlan
+ */
+export interface CurrentPlan200ResponsePlan {
+    /**
+     * Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit.
+     * @type {string}
+     * @memberof CurrentPlan200ResponsePlan
+     */
+    'name'?: string;
+    /**
+     * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.
+     * @type {string}
+     * @memberof CurrentPlan200ResponsePlan
+     */
+    'time'?: string;
+    /**
+     * The height at which the upgrade must be performed. Only used if Time is not set.
+     * @type {string}
+     * @memberof CurrentPlan200ResponsePlan
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CurrentPlan200ResponsePlan
+     */
+    'info'?: string;
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof CurrentPlan200ResponsePlan
+     */
+    'upgraded_client_state'?: AccountsAreTheExistingAccountsInner;
+}
+/**
  * 
  * @export
  * @interface DataContainsTheSetOfTransactionsIncludedInTheBlock
@@ -3214,6 +3860,1294 @@ export interface DataContainsTheSetOfTransactionsIncludedInTheBlock {
      * @memberof DataContainsTheSetOfTransactionsIncludedInTheBlock
      */
     'txs'?: Array<string>;
+}
+/**
+ * QueryDelegationResponse is response type for the Query/Delegation RPC method.
+ * @export
+ * @interface Delegation200Response
+ */
+export interface Delegation200Response {
+    /**
+     * 
+     * @type {DelegatorDelegations200ResponseDelegationResponsesInner}
+     * @memberof Delegation200Response
+     */
+    'delegation_response'?: DelegatorDelegations200ResponseDelegationResponsesInner;
+}
+/**
+ * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
+ * @export
+ * @interface DelegationRewards200Response
+ */
+export interface DelegationRewards200Response {
+    /**
+     * rewards defines the rewards accrued by a delegation.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof DelegationRewards200Response
+     */
+    'rewards'?: Array<CommunityPool200ResponsePoolInner>;
+}
+/**
+ * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
+ * @export
+ * @interface DelegationTotalRewards200Response
+ */
+export interface DelegationTotalRewards200Response {
+    /**
+     * rewards defines all the rewards accrued by a delegator.
+     * @type {Array<DelegationTotalRewards200ResponseRewardsInner>}
+     * @memberof DelegationTotalRewards200Response
+     */
+    'rewards'?: Array<DelegationTotalRewards200ResponseRewardsInner>;
+    /**
+     * total defines the sum of all the rewards.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof DelegationTotalRewards200Response
+     */
+    'total'?: Array<CommunityPool200ResponsePoolInner>;
+}
+/**
+ * DelegationDelegatorReward represents the properties of a delegator\'s delegation reward.
+ * @export
+ * @interface DelegationTotalRewards200ResponseRewardsInner
+ */
+export interface DelegationTotalRewards200ResponseRewardsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof DelegationTotalRewards200ResponseRewardsInner
+     */
+    'validator_address'?: string;
+    /**
+     * 
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof DelegationTotalRewards200ResponseRewardsInner
+     */
+    'reward'?: Array<CommunityPool200ResponsePoolInner>;
+}
+/**
+ * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
+ * @export
+ * @interface DelegatorDelegations200Response
+ */
+export interface DelegatorDelegations200Response {
+    /**
+     * delegation_responses defines all the delegations\' info of a delegator.
+     * @type {Array<DelegatorDelegations200ResponseDelegationResponsesInner>}
+     * @memberof DelegatorDelegations200Response
+     */
+    'delegation_responses'?: Array<DelegatorDelegations200ResponseDelegationResponsesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof DelegatorDelegations200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * DelegationResponse is equivalent to Delegation except that it contains a balance in addition to shares which is more suitable for client responses.
+ * @export
+ * @interface DelegatorDelegations200ResponseDelegationResponsesInner
+ */
+export interface DelegatorDelegations200ResponseDelegationResponsesInner {
+    /**
+     * 
+     * @type {DelegatorDelegations200ResponseDelegationResponsesInnerDelegation}
+     * @memberof DelegatorDelegations200ResponseDelegationResponsesInner
+     */
+    'delegation'?: DelegatorDelegations200ResponseDelegationResponsesInnerDelegation;
+    /**
+     * 
+     * @type {AllBalances200ResponseBalancesInner}
+     * @memberof DelegatorDelegations200ResponseDelegationResponsesInner
+     */
+    'balance'?: AllBalances200ResponseBalancesInner;
+}
+/**
+ * Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator.
+ * @export
+ * @interface DelegatorDelegations200ResponseDelegationResponsesInnerDelegation
+ */
+export interface DelegatorDelegations200ResponseDelegationResponsesInnerDelegation {
+    /**
+     * delegator_address is the bech32-encoded address of the delegator.
+     * @type {string}
+     * @memberof DelegatorDelegations200ResponseDelegationResponsesInnerDelegation
+     */
+    'delegator_address'?: string;
+    /**
+     * validator_address is the bech32-encoded address of the validator.
+     * @type {string}
+     * @memberof DelegatorDelegations200ResponseDelegationResponsesInnerDelegation
+     */
+    'validator_address'?: string;
+    /**
+     * shares define the delegation shares received.
+     * @type {string}
+     * @memberof DelegatorDelegations200ResponseDelegationResponsesInnerDelegation
+     */
+    'shares'?: string;
+}
+/**
+ * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
+ * @export
+ * @interface DelegatorUnbondingDelegations200Response
+ */
+export interface DelegatorUnbondingDelegations200Response {
+    /**
+     * 
+     * @type {Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>}
+     * @memberof DelegatorUnbondingDelegations200Response
+     */
+    'unbonding_responses'?: Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof DelegatorUnbondingDelegations200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
+ * @export
+ * @interface DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner
+ */
+export interface DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner {
+    /**
+     * delegator_address is the bech32-encoded address of the delegator.
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner
+     */
+    'delegator_address'?: string;
+    /**
+     * validator_address is the bech32-encoded address of the validator.
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner
+     */
+    'validator_address'?: string;
+    /**
+     * entries are the unbonding delegation entries.
+     * @type {Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner>}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner
+     */
+    'entries'?: Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner>;
+}
+/**
+ * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
+ * @export
+ * @interface DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+ */
+export interface DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner {
+    /**
+     * creation_height is the height which the unbonding took place.
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+     */
+    'creation_height'?: string;
+    /**
+     * completion_time is the unix time for unbonding completion.
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+     */
+    'completion_time'?: string;
+    /**
+     * initial_balance defines the tokens initially scheduled to receive at completion.
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+     */
+    'initial_balance'?: string;
+    /**
+     * balance defines the tokens to receive at completion.
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+     */
+    'balance'?: string;
+}
+/**
+ * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
+ * @export
+ * @interface DelegatorValidator200Response
+ */
+export interface DelegatorValidator200Response {
+    /**
+     * 
+     * @type {StakingDelegatorValidators200ResponseValidatorsInner}
+     * @memberof DelegatorValidator200Response
+     */
+    'validator'?: StakingDelegatorValidators200ResponseValidatorsInner;
+}
+/**
+ * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
+ * @export
+ * @interface DelegatorValidators200Response
+ */
+export interface DelegatorValidators200Response {
+    /**
+     * validators defines the validators a delegator is delegating for.
+     * @type {Array<string>}
+     * @memberof DelegatorValidators200Response
+     */
+    'validators'?: Array<string>;
+}
+/**
+ * QueryDelegatorWithdrawAddressResponse is the response type for the Query/DelegatorWithdrawAddress RPC method.
+ * @export
+ * @interface DelegatorWithdrawAddress200Response
+ */
+export interface DelegatorWithdrawAddress200Response {
+    /**
+     * withdraw_address defines the delegator address to query for.
+     * @type {string}
+     * @memberof DelegatorWithdrawAddress200Response
+     */
+    'withdraw_address'?: string;
+}
+/**
+ * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
+ * @export
+ * @interface DenomMetadata200Response
+ */
+export interface DenomMetadata200Response {
+    /**
+     * 
+     * @type {DenomsMetadata200ResponseMetadatasInner}
+     * @memberof DenomMetadata200Response
+     */
+    'metadata'?: DenomsMetadata200ResponseMetadatasInner;
+}
+/**
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+ * @export
+ * @interface DenomOwners200Response
+ */
+export interface DenomOwners200Response {
+    /**
+     * 
+     * @type {Array<DenomOwners200ResponseDenomOwnersInner>}
+     * @memberof DenomOwners200Response
+     */
+    'denom_owners'?: Array<DenomOwners200ResponseDenomOwnersInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof DenomOwners200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
+ * @export
+ * @interface DenomOwners200ResponseDenomOwnersInner
+ */
+export interface DenomOwners200ResponseDenomOwnersInner {
+    /**
+     * address defines the address that owns a particular denomination.
+     * @type {string}
+     * @memberof DenomOwners200ResponseDenomOwnersInner
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {AllBalances200ResponseBalancesInner}
+     * @memberof DenomOwners200ResponseDenomOwnersInner
+     */
+    'balance'?: AllBalances200ResponseBalancesInner;
+}
+/**
+ * DenomUnit represents a struct that describes a given denomination unit of the basic token.
+ * @export
+ * @interface DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner
+ */
+export interface DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner {
+    /**
+     * denom represents the string name of the given denom unit (e.g uatom).
+     * @type {string}
+     * @memberof DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner
+     */
+    'denom'?: string;
+    /**
+     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
+     * @type {number}
+     * @memberof DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner
+     */
+    'exponent'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner
+     */
+    'aliases'?: Array<string>;
+}
+/**
+ * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
+ * @export
+ * @interface DenomsMetadata200Response
+ */
+export interface DenomsMetadata200Response {
+    /**
+     * metadata provides the client information for all the registered tokens.
+     * @type {Array<DenomsMetadata200ResponseMetadatasInner>}
+     * @memberof DenomsMetadata200Response
+     */
+    'metadatas'?: Array<DenomsMetadata200ResponseMetadatasInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof DenomsMetadata200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Metadata represents a struct that describes a basic token.
+ * @export
+ * @interface DenomsMetadata200ResponseMetadatasInner
+ */
+export interface DenomsMetadata200ResponseMetadatasInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner>}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'denom_units'?: Array<DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner>;
+    /**
+     * base represents the base denom (should be the DenomUnit with exponent = 0).
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'base'?: string;
+    /**
+     * display indicates the suggested denom that should be displayed in clients.
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'display'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'name'?: string;
+    /**
+     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'symbol'?: string;
+    /**
+     * URI to a document (on or off-chain) that contains additional information. Optional.
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'uri'?: string;
+    /**
+     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
+     * @type {string}
+     * @memberof DenomsMetadata200ResponseMetadatasInner
+     */
+    'uri_hash'?: string;
+}
+/**
+ * QueryDepositResponse is the response type for the Query/Deposit RPC method.
+ * @export
+ * @interface Deposit200Response
+ */
+export interface Deposit200Response {
+    /**
+     * 
+     * @type {Deposits200ResponseDepositsInner}
+     * @memberof Deposit200Response
+     */
+    'deposit'?: Deposits200ResponseDepositsInner;
+}
+/**
+ * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
+ * @export
+ * @interface Deposits200Response
+ */
+export interface Deposits200Response {
+    /**
+     * 
+     * @type {Array<Deposits200ResponseDepositsInner>}
+     * @memberof Deposits200Response
+     */
+    'deposits'?: Array<Deposits200ResponseDepositsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof Deposits200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Deposit defines an amount deposited by an account address to an active proposal.
+ * @export
+ * @interface Deposits200ResponseDepositsInner
+ */
+export interface Deposits200ResponseDepositsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof Deposits200ResponseDepositsInner
+     */
+    'proposal_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Deposits200ResponseDepositsInner
+     */
+    'depositor'?: string;
+    /**
+     * 
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof Deposits200ResponseDepositsInner
+     */
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface DistributionParams200Response
+ */
+export interface DistributionParams200Response {
+    /**
+     * 
+     * @type {DistributionParams200ResponseParams}
+     * @memberof DistributionParams200Response
+     */
+    'params'?: DistributionParams200ResponseParams;
+}
+/**
+ * params defines the parameters of the module.
+ * @export
+ * @interface DistributionParams200ResponseParams
+ */
+export interface DistributionParams200ResponseParams {
+    /**
+     * 
+     * @type {string}
+     * @memberof DistributionParams200ResponseParams
+     */
+    'community_tax'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DistributionParams200ResponseParams
+     */
+    'base_proposer_reward'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DistributionParams200ResponseParams
+     */
+    'bonus_proposer_reward'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DistributionParams200ResponseParams
+     */
+    'withdraw_addr_enabled'?: boolean;
+}
+/**
+ * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
+ * @export
+ * @interface Evidence200Response
+ */
+export interface Evidence200Response {
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof Evidence200Response
+     */
+    'evidence'?: AccountsAreTheExistingAccountsInner;
+}
+/**
+ * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
+ * @export
+ * @interface GetBlockByHeight200Response
+ */
+export interface GetBlockByHeight200Response {
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof GetBlockByHeight200Response
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlock}
+     * @memberof GetBlockByHeight200Response
+     */
+    'block'?: GetLatestBlock200ResponseBlock;
+}
+/**
+ * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
+ * @export
+ * @interface GetLatestBlock200Response
+ */
+export interface GetLatestBlock200Response {
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof GetLatestBlock200Response
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlock}
+     * @memberof GetLatestBlock200Response
+     */
+    'block'?: GetLatestBlock200ResponseBlock;
+}
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlock
+ */
+export interface GetLatestBlock200ResponseBlock {
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockHeader}
+     * @memberof GetLatestBlock200ResponseBlock
+     */
+    'header'?: GetLatestBlock200ResponseBlockHeader;
+    /**
+     * 
+     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
+     * @memberof GetLatestBlock200ResponseBlock
+     */
+    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidence}
+     * @memberof GetLatestBlock200ResponseBlock
+     */
+    'evidence'?: GetLatestBlock200ResponseBlockEvidence;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof GetLatestBlock200ResponseBlock
+     */
+    'last_commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidence
+ */
+export interface GetLatestBlock200ResponseBlockEvidence {
+    /**
+     * 
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>}
+     * @memberof GetLatestBlock200ResponseBlockEvidence
+     */
+    'evidence'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>;
+}
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInner
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInner {
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInner
+     */
+    'duplicate_vote_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInner
+     */
+    'light_client_attack_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence;
+}
+/**
+ * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence {
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'vote_a'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'vote_b'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'total_voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'validator_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'timestamp'?: string;
+}
+/**
+ * Vote represents a prevote, precommit, or commit vote from validators for consensus.
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA {
+    /**
+     * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'type'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'round'?: number;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'validator_address'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'validator_index'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'signature'?: string;
+}
+
+export const GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum = {
+    Unknown: 'SIGNED_MSG_TYPE_UNKNOWN',
+    Prevote: 'SIGNED_MSG_TYPE_PREVOTE',
+    Precommit: 'SIGNED_MSG_TYPE_PRECOMMIT',
+    Proposal: 'SIGNED_MSG_TYPE_PROPOSAL'
+} as const;
+
+export type GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum = typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum[keyof typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum];
+
+/**
+ * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence {
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'conflicting_block'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'common_height'?: string;
+    /**
+     * 
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'byzantine_validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'total_voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'timestamp'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock {
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
+     */
+    'signed_header'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
+     */
+    'validator_set'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet;
+}
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader {
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockHeader}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
+     */
+    'header'?: GetLatestBlock200ResponseBlockHeader;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
+     */
+    'commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * Commit contains the evidence that a block was committed by a set of validators.
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'round'?: number;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'signatures'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>;
+}
+/**
+ * CommitSig is a part of the Vote included in a Commit.
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'block_id_flag'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'validator_address'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'signature'?: string;
+}
+
+export const GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum = {
+    Unknown: 'BLOCK_ID_FLAG_UNKNOWN',
+    Absent: 'BLOCK_ID_FLAG_ABSENT',
+    Commit: 'BLOCK_ID_FLAG_COMMIT',
+    Nil: 'BLOCK_ID_FLAG_NIL'
+} as const;
+
+export type GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum = typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum[keyof typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum];
+
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet {
+    /**
+     * 
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
+    /**
+     * 
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'proposer'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'total_voting_power'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+ */
+export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'pub_key'?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'proposer_priority'?: string;
+}
+/**
+ * Header defines the structure of a Tendermint block header.
+ * @export
+ * @interface GetLatestBlock200ResponseBlockHeader
+ */
+export interface GetLatestBlock200ResponseBlockHeader {
+    /**
+     * 
+     * @type {BasicBlockInfo}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'version'?: BasicBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'chain_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'time'?: string;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'last_block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'last_commit_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'data_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'next_validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'consensus_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'app_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'last_results_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'evidence_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestBlock200ResponseBlockHeader
+     */
+    'proposer_address'?: string;
+}
+/**
+ * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
+ * @export
+ * @interface GetLatestValidatorSet200Response
+ */
+export interface GetLatestValidatorSet200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestValidatorSet200Response
+     */
+    'block_height'?: string;
+    /**
+     * 
+     * @type {Array<GetLatestValidatorSet200ResponseValidatorsInner>}
+     * @memberof GetLatestValidatorSet200Response
+     */
+    'validators'?: Array<GetLatestValidatorSet200ResponseValidatorsInner>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof GetLatestValidatorSet200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
+ * pagination defines an pagination for the response.
+ * @export
+ * @interface GetLatestValidatorSet200ResponsePagination
+ */
+export interface GetLatestValidatorSet200ResponsePagination {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestValidatorSet200ResponsePagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestValidatorSet200ResponsePagination
+     */
+    'total'?: string;
+}
+/**
+ * Validator is the type for the validator-set.
+ * @export
+ * @interface GetLatestValidatorSet200ResponseValidatorsInner
+ */
+export interface GetLatestValidatorSet200ResponseValidatorsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestValidatorSet200ResponseValidatorsInner
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof GetLatestValidatorSet200ResponseValidatorsInner
+     */
+    'pub_key'?: AccountsAreTheExistingAccountsInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestValidatorSet200ResponseValidatorsInner
+     */
+    'voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetLatestValidatorSet200ResponseValidatorsInner
+     */
+    'proposer_priority'?: string;
+}
+/**
+ * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
+ * @export
+ * @interface GetNodeInfo200Response
+ */
+export interface GetNodeInfo200Response {
+    /**
+     * 
+     * @type {GetNodeInfo200ResponseDefaultNodeInfo}
+     * @memberof GetNodeInfo200Response
+     */
+    'default_node_info'?: GetNodeInfo200ResponseDefaultNodeInfo;
+    /**
+     * 
+     * @type {GetNodeInfo200ResponseApplicationVersion}
+     * @memberof GetNodeInfo200Response
+     */
+    'application_version'?: GetNodeInfo200ResponseApplicationVersion;
+}
+/**
+ * VersionInfo is the type for the GetNodeInfoResponse message.
+ * @export
+ * @interface GetNodeInfo200ResponseApplicationVersion
+ */
+export interface GetNodeInfo200ResponseApplicationVersion {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'app_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'version'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'git_commit'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'build_tags'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'go_version'?: string;
+    /**
+     * 
+     * @type {Array<ModuleIsTheTypeForVersionInfo>}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'build_deps'?: Array<ModuleIsTheTypeForVersionInfo>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseApplicationVersion
+     */
+    'cosmos_sdk_version'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetNodeInfo200ResponseDefaultNodeInfo
+ */
+export interface GetNodeInfo200ResponseDefaultNodeInfo {
+    /**
+     * 
+     * @type {GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'protocol_version'?: GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'default_node_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'listen_addr'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'network'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'version'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'channels'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'moniker'?: string;
+    /**
+     * 
+     * @type {GetNodeInfo200ResponseDefaultNodeInfoOther}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfo
+     */
+    'other'?: GetNodeInfo200ResponseDefaultNodeInfoOther;
+}
+/**
+ * 
+ * @export
+ * @interface GetNodeInfo200ResponseDefaultNodeInfoOther
+ */
+export interface GetNodeInfo200ResponseDefaultNodeInfoOther {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfoOther
+     */
+    'tx_index'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfoOther
+     */
+    'rpc_address'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion
+ */
+export interface GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion
+     */
+    'p2p'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion
+     */
+    'block'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion
+     */
+    'app'?: string;
+}
+/**
+ * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
+ * @export
+ * @interface GetSyncing200Response
+ */
+export interface GetSyncing200Response {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetSyncing200Response
+     */
+    'syncing'?: boolean;
+}
+/**
+ * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
+ * @export
+ * @interface GetValidatorSetByHeight200Response
+ */
+export interface GetValidatorSetByHeight200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetValidatorSetByHeight200Response
+     */
+    'block_height'?: string;
+    /**
+     * 
+     * @type {Array<GetLatestValidatorSet200ResponseValidatorsInner>}
+     * @memberof GetValidatorSetByHeight200Response
+     */
+    'validators'?: Array<GetLatestValidatorSet200ResponseValidatorsInner>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof GetValidatorSetByHeight200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
@@ -3233,6 +5167,88 @@ export interface GoogleProtobufAny {
      * @memberof GoogleProtobufAny
      */
     'value'?: string;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface GovParams200Response
+ */
+export interface GovParams200Response {
+    /**
+     * 
+     * @type {GovParams200ResponseVotingParams}
+     * @memberof GovParams200Response
+     */
+    'voting_params'?: GovParams200ResponseVotingParams;
+    /**
+     * 
+     * @type {GovParams200ResponseDepositParams}
+     * @memberof GovParams200Response
+     */
+    'deposit_params'?: GovParams200ResponseDepositParams;
+    /**
+     * 
+     * @type {GovParams200ResponseTallyParams}
+     * @memberof GovParams200Response
+     */
+    'tally_params'?: GovParams200ResponseTallyParams;
+}
+/**
+ * deposit_params defines the parameters related to deposit.
+ * @export
+ * @interface GovParams200ResponseDepositParams
+ */
+export interface GovParams200ResponseDepositParams {
+    /**
+     * Minimum deposit for a proposal to enter voting period.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof GovParams200ResponseDepositParams
+     */
+    'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
+     * @type {string}
+     * @memberof GovParams200ResponseDepositParams
+     */
+    'max_deposit_period'?: string;
+}
+/**
+ * tally_params defines the parameters related to tally.
+ * @export
+ * @interface GovParams200ResponseTallyParams
+ */
+export interface GovParams200ResponseTallyParams {
+    /**
+     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
+     * @type {string}
+     * @memberof GovParams200ResponseTallyParams
+     */
+    'quorum'?: string;
+    /**
+     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
+     * @type {string}
+     * @memberof GovParams200ResponseTallyParams
+     */
+    'threshold'?: string;
+    /**
+     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
+     * @type {string}
+     * @memberof GovParams200ResponseTallyParams
+     */
+    'veto_threshold'?: string;
+}
+/**
+ * voting_params defines the parameters related to voting.
+ * @export
+ * @interface GovParams200ResponseVotingParams
+ */
+export interface GovParams200ResponseVotingParams {
+    /**
+     * Length of the voting period.
+     * @type {string}
+     * @memberof GovParams200ResponseVotingParams
+     */
+    'voting_period'?: string;
 }
 /**
  * allowance is a allowance granted for grantee by granter.
@@ -3304,6 +5320,44 @@ export interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
     'value'?: string;
 }
 /**
+ * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
+ * @export
+ * @interface Grants200Response
+ */
+export interface Grants200Response {
+    /**
+     * authorizations is a list of grants granted for grantee by granter.
+     * @type {Array<Grants200ResponseGrantsInner>}
+     * @memberof Grants200Response
+     */
+    'grants'?: Array<Grants200ResponseGrantsInner>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof Grants200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
+ * Grant gives permissions to execute the provide method with expiration time.
+ * @export
+ * @interface Grants200ResponseGrantsInner
+ */
+export interface Grants200ResponseGrantsInner {
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof Grants200ResponseGrantsInner
+     */
+    'authorization'?: AccountsAreTheExistingAccountsInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof Grants200ResponseGrantsInner
+     */
+    'expiration'?: string;
+}
+/**
  * 
  * @export
  * @interface GrpcGatewayRuntimeError
@@ -3329,3192 +5383,245 @@ export interface GrpcGatewayRuntimeError {
     'message'?: string;
     /**
      * 
-     * @type {Array<InlineResponse200Accounts>}
+     * @type {Array<AccountsAreTheExistingAccountsInner>}
      * @memberof GrpcGatewayRuntimeError
      */
-    'details'?: Array<InlineResponse200Accounts>;
-}
-/**
- * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest RPC method.
- * @export
- * @interface InlineObject
- */
-export interface InlineObject {
-    /**
-     * tx_bytes is the raw transaction.
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'tx_bytes'?: string;
-    /**
-     * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'mode'?: InlineObjectModeEnum;
-}
-
-export const InlineObjectModeEnum = {
-    Unspecified: 'BROADCAST_MODE_UNSPECIFIED',
-    Block: 'BROADCAST_MODE_BLOCK',
-    Sync: 'BROADCAST_MODE_SYNC',
-    Async: 'BROADCAST_MODE_ASYNC'
-} as const;
-
-export type InlineObjectModeEnum = typeof InlineObjectModeEnum[keyof typeof InlineObjectModeEnum];
-
-/**
- * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- * @export
- * @interface InlineResponse200
- */
-export interface InlineResponse200 {
-    /**
-     * 
-     * @type {Array<InlineResponse200Accounts>}
-     * @memberof InlineResponse200
-     */
-    'accounts'?: Array<InlineResponse200Accounts>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse200
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * QueryAccountResponse is the response type for the Query/Account RPC method.
- * @export
- * @interface InlineResponse2001
- */
-export interface InlineResponse2001 {
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse2001
-     */
-    'account'?: InlineResponse200Accounts;
-}
-/**
- * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
- * @export
- * @interface InlineResponse20010
- */
-export interface InlineResponse20010 {
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof InlineResponse20010
-     */
-    'block_id'?: BlockID;
-    /**
-     * 
-     * @type {InlineResponse20010Block}
-     * @memberof InlineResponse20010
-     */
-    'block'?: InlineResponse20010Block;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20010Block
- */
-export interface InlineResponse20010Block {
-    /**
-     * 
-     * @type {InlineResponse20010BlockHeader}
-     * @memberof InlineResponse20010Block
-     */
-    'header'?: InlineResponse20010BlockHeader;
-    /**
-     * 
-     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
-     * @memberof InlineResponse20010Block
-     */
-    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidence}
-     * @memberof InlineResponse20010Block
-     */
-    'evidence'?: InlineResponse20010BlockEvidence;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof InlineResponse20010Block
-     */
-    'last_commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20010BlockEvidence
- */
-export interface InlineResponse20010BlockEvidence {
-    /**
-     * 
-     * @type {Array<InlineResponse20010BlockEvidenceEvidence>}
-     * @memberof InlineResponse20010BlockEvidence
-     */
-    'evidence'?: Array<InlineResponse20010BlockEvidenceEvidence>;
-}
-/**
- * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
- * @export
- * @interface InlineResponse20010BlockEvidenceDuplicateVoteEvidence
- */
-export interface InlineResponse20010BlockEvidenceDuplicateVoteEvidence {
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
-     */
-    'vote_a'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
-     */
-    'vote_b'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
-     */
-    'total_voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
-     */
-    'validator_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidence
-     */
-    'timestamp'?: string;
-}
-/**
- * Vote represents a prevote, precommit, or commit vote from validators for consensus.
- * @export
- * @interface InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
- */
-export interface InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA {
-    /**
-     * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'type'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'round'?: number;
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'block_id'?: BlockID;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'validator_index'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA
-     */
-    'signature'?: string;
-}
-
-export const InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum = {
-    Unknown: 'SIGNED_MSG_TYPE_UNKNOWN',
-    Prevote: 'SIGNED_MSG_TYPE_PREVOTE',
-    Precommit: 'SIGNED_MSG_TYPE_PRECOMMIT',
-    Proposal: 'SIGNED_MSG_TYPE_PROPOSAL'
-} as const;
-
-export type InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum = typeof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum[keyof typeof InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteATypeEnum];
-
-/**
- * 
- * @export
- * @interface InlineResponse20010BlockEvidenceEvidence
- */
-export interface InlineResponse20010BlockEvidenceEvidence {
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidence}
-     * @memberof InlineResponse20010BlockEvidenceEvidence
-     */
-    'duplicate_vote_evidence'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidence;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidence}
-     * @memberof InlineResponse20010BlockEvidenceEvidence
-     */
-    'light_client_attack_evidence'?: InlineResponse20010BlockEvidenceLightClientAttackEvidence;
-}
-/**
- * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidence
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidence {
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
-     */
-    'conflicting_block'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
-     */
-    'common_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
-     */
-    'byzantine_validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
-     */
-    'total_voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidence
-     */
-    'timestamp'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock {
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock
-     */
-    'signed_header'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock
-     */
-    'validator_set'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader {
-    /**
-     * 
-     * @type {InlineResponse20010BlockHeader}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
-     */
-    'header'?: InlineResponse20010BlockHeader;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader
-     */
-    'commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
-}
-/**
- * Commit contains the evidence that a block was committed by a set of validators.
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'round'?: number;
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'block_id'?: BlockID;
-    /**
-     * 
-     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'signatures'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
-}
-/**
- * CommitSig is a part of the Vote included in a Commit.
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'block_id_flag'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures
-     */
-    'signature'?: string;
-}
-
-export const InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum = {
-    Unknown: 'BLOCK_ID_FLAG_UNKNOWN',
-    Absent: 'BLOCK_ID_FLAG_ABSENT',
-    Commit: 'BLOCK_ID_FLAG_COMMIT',
-    Nil: 'BLOCK_ID_FLAG_NIL'
-} as const;
-
-export type InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum = typeof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum[keyof typeof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesBlockIdFlagEnum];
-
-/**
- * 
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet {
-    /**
-     * 
-     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
-    /**
-     * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'proposer'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'total_voting_power'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
- */
-export interface InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'pub_key'?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators
-     */
-    'proposer_priority'?: string;
-}
-/**
- * Header defines the structure of a Tendermint block header.
- * @export
- * @interface InlineResponse20010BlockHeader
- */
-export interface InlineResponse20010BlockHeader {
-    /**
-     * 
-     * @type {BasicBlockInfo}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'version'?: BasicBlockInfo;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'time'?: string;
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'last_block_id'?: BlockID;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'last_commit_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'data_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'next_validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'consensus_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'app_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'last_results_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'evidence_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20010BlockHeader
-     */
-    'proposer_address'?: string;
-}
-/**
- * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
- * @export
- * @interface InlineResponse20011
- */
-export interface InlineResponse20011 {
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof InlineResponse20011
-     */
-    'block_id'?: BlockID;
-    /**
-     * 
-     * @type {InlineResponse20010Block}
-     * @memberof InlineResponse20011
-     */
-    'block'?: InlineResponse20010Block;
-}
-/**
- * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
- * @export
- * @interface InlineResponse20012
- */
-export interface InlineResponse20012 {
-    /**
-     * 
-     * @type {InlineResponse20012DefaultNodeInfo}
-     * @memberof InlineResponse20012
-     */
-    'default_node_info'?: InlineResponse20012DefaultNodeInfo;
-    /**
-     * 
-     * @type {InlineResponse20012ApplicationVersion}
-     * @memberof InlineResponse20012
-     */
-    'application_version'?: InlineResponse20012ApplicationVersion;
-}
-/**
- * VersionInfo is the type for the GetNodeInfoResponse message.
- * @export
- * @interface InlineResponse20012ApplicationVersion
- */
-export interface InlineResponse20012ApplicationVersion {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'app_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'version'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'git_commit'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'build_tags'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'go_version'?: string;
-    /**
-     * 
-     * @type {Array<ModuleIsTheTypeForVersionInfo>}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'build_deps'?: Array<ModuleIsTheTypeForVersionInfo>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012ApplicationVersion
-     */
-    'cosmos_sdk_version'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20012DefaultNodeInfo
- */
-export interface InlineResponse20012DefaultNodeInfo {
-    /**
-     * 
-     * @type {InlineResponse20012DefaultNodeInfoProtocolVersion}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'protocol_version'?: InlineResponse20012DefaultNodeInfoProtocolVersion;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'default_node_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'listen_addr'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'network'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'version'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'channels'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'moniker'?: string;
-    /**
-     * 
-     * @type {InlineResponse20012DefaultNodeInfoOther}
-     * @memberof InlineResponse20012DefaultNodeInfo
-     */
-    'other'?: InlineResponse20012DefaultNodeInfoOther;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20012DefaultNodeInfoOther
- */
-export interface InlineResponse20012DefaultNodeInfoOther {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfoOther
-     */
-    'tx_index'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfoOther
-     */
-    'rpc_address'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse20012DefaultNodeInfoProtocolVersion
- */
-export interface InlineResponse20012DefaultNodeInfoProtocolVersion {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfoProtocolVersion
-     */
-    'p2p'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfoProtocolVersion
-     */
-    'block'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20012DefaultNodeInfoProtocolVersion
-     */
-    'app'?: string;
-}
-/**
- * GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
- * @export
- * @interface InlineResponse20013
- */
-export interface InlineResponse20013 {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20013
-     */
-    'syncing'?: boolean;
-}
-/**
- * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
- * @export
- * @interface InlineResponse20014
- */
-export interface InlineResponse20014 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014
-     */
-    'block_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20014Validators>}
-     * @memberof InlineResponse20014
-     */
-    'validators'?: Array<InlineResponse20014Validators>;
-    /**
-     * 
-     * @type {InlineResponse20014Pagination}
-     * @memberof InlineResponse20014
-     */
-    'pagination'?: InlineResponse20014Pagination;
-}
-/**
- * pagination defines an pagination for the response.
- * @export
- * @interface InlineResponse20014Pagination
- */
-export interface InlineResponse20014Pagination {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014Pagination
-     */
-    'next_key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014Pagination
-     */
-    'total'?: string;
-}
-/**
- * Validator is the type for the validator-set.
- * @export
- * @interface InlineResponse20014Validators
- */
-export interface InlineResponse20014Validators {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014Validators
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20014Validators
-     */
-    'pub_key'?: InlineResponse200Accounts;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014Validators
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20014Validators
-     */
-    'proposer_priority'?: string;
-}
-/**
- * GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
- * @export
- * @interface InlineResponse20015
- */
-export interface InlineResponse20015 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20015
-     */
-    'block_height'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20014Validators>}
-     * @memberof InlineResponse20015
-     */
-    'validators'?: Array<InlineResponse20014Validators>;
-    /**
-     * 
-     * @type {InlineResponse20014Pagination}
-     * @memberof InlineResponse20015
-     */
-    'pagination'?: InlineResponse20014Pagination;
-}
-/**
- * QueryCommunityPoolResponse is the response type for the Query/CommunityPool RPC method.
- * @export
- * @interface InlineResponse20016
- */
-export interface InlineResponse20016 {
-    /**
-     * pool defines community pool\'s coins.
-     * @type {Array<InlineResponse20016Pool>}
-     * @memberof InlineResponse20016
-     */
-    'pool'?: Array<InlineResponse20016Pool>;
-}
-/**
- * DecCoin defines a token with a denomination and a decimal amount.  NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto.
- * @export
- * @interface InlineResponse20016Pool
- */
-export interface InlineResponse20016Pool {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016Pool
-     */
-    'denom'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20016Pool
-     */
-    'amount'?: string;
-}
-/**
- * QueryDelegationTotalRewardsResponse is the response type for the Query/DelegationTotalRewards RPC method.
- * @export
- * @interface InlineResponse20017
- */
-export interface InlineResponse20017 {
-    /**
-     * rewards defines all the rewards accrued by a delegator.
-     * @type {Array<InlineResponse20017Rewards>}
-     * @memberof InlineResponse20017
-     */
-    'rewards'?: Array<InlineResponse20017Rewards>;
-    /**
-     * total defines the sum of all the rewards.
-     * @type {Array<InlineResponse20016Pool>}
-     * @memberof InlineResponse20017
-     */
-    'total'?: Array<InlineResponse20016Pool>;
-}
-/**
- * DelegationDelegatorReward represents the properties of a delegator\'s delegation reward.
- * @export
- * @interface InlineResponse20017Rewards
- */
-export interface InlineResponse20017Rewards {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20017Rewards
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20016Pool>}
-     * @memberof InlineResponse20017Rewards
-     */
-    'reward'?: Array<InlineResponse20016Pool>;
-}
-/**
- * QueryDelegationRewardsResponse is the response type for the Query/DelegationRewards RPC method.
- * @export
- * @interface InlineResponse20018
- */
-export interface InlineResponse20018 {
-    /**
-     * rewards defines the rewards accrued by a delegation.
-     * @type {Array<InlineResponse20016Pool>}
-     * @memberof InlineResponse20018
-     */
-    'rewards'?: Array<InlineResponse20016Pool>;
-}
-/**
- * QueryDelegatorValidatorsResponse is the response type for the Query/DelegatorValidators RPC method.
- * @export
- * @interface InlineResponse20019
- */
-export interface InlineResponse20019 {
-    /**
-     * validators defines the validators a delegator is delegating for.
-     * @type {Array<string>}
-     * @memberof InlineResponse20019
-     */
-    'validators'?: Array<string>;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse2002
- */
-export interface InlineResponse2002 {
-    /**
-     * 
-     * @type {InlineResponse2002Params}
-     * @memberof InlineResponse2002
-     */
-    'params'?: InlineResponse2002Params;
-}
-/**
- * QueryDelegatorWithdrawAddressResponse is the response type for the Query/DelegatorWithdrawAddress RPC method.
- * @export
- * @interface InlineResponse20020
- */
-export interface InlineResponse20020 {
-    /**
-     * withdraw_address defines the delegator address to query for.
-     * @type {string}
-     * @memberof InlineResponse20020
-     */
-    'withdraw_address'?: string;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20021
- */
-export interface InlineResponse20021 {
-    /**
-     * 
-     * @type {InlineResponse20021Params}
-     * @memberof InlineResponse20021
-     */
-    'params'?: InlineResponse20021Params;
-}
-/**
- * params defines the parameters of the module.
- * @export
- * @interface InlineResponse20021Params
- */
-export interface InlineResponse20021Params {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20021Params
-     */
-    'community_tax'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20021Params
-     */
-    'base_proposer_reward'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20021Params
-     */
-    'bonus_proposer_reward'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20021Params
-     */
-    'withdraw_addr_enabled'?: boolean;
-}
-/**
- * QueryValidatorOutstandingRewardsResponse is the response type for the Query/ValidatorOutstandingRewards RPC method.
- * @export
- * @interface InlineResponse20022
- */
-export interface InlineResponse20022 {
-    /**
-     * 
-     * @type {InlineResponse20022Rewards}
-     * @memberof InlineResponse20022
-     */
-    'rewards'?: InlineResponse20022Rewards;
-}
-/**
- * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
- * @export
- * @interface InlineResponse20022Rewards
- */
-export interface InlineResponse20022Rewards {
-    /**
-     * 
-     * @type {Array<InlineResponse20016Pool>}
-     * @memberof InlineResponse20022Rewards
-     */
-    'rewards'?: Array<InlineResponse20016Pool>;
-}
-/**
- * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
- * @export
- * @interface InlineResponse20023
- */
-export interface InlineResponse20023 {
-    /**
-     * slashes defines the slashes the validator received.
-     * @type {Array<InlineResponse20023Slashes>}
-     * @memberof InlineResponse20023
-     */
-    'slashes'?: Array<InlineResponse20023Slashes>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20023
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
- * @export
- * @interface InlineResponse20023Slashes
- */
-export interface InlineResponse20023Slashes {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20023Slashes
-     */
-    'validator_period'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20023Slashes
-     */
-    'fraction'?: string;
-}
-/**
- * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC method.
- * @export
- * @interface InlineResponse20024
- */
-export interface InlineResponse20024 {
-    /**
-     * evidence returns all evidences.
-     * @type {Array<InlineResponse200Accounts>}
-     * @memberof InlineResponse20024
-     */
-    'evidence'?: Array<InlineResponse200Accounts>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20024
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * QueryEvidenceResponse is the response type for the Query/Evidence RPC method.
- * @export
- * @interface InlineResponse20025
- */
-export interface InlineResponse20025 {
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20025
-     */
-    'evidence'?: InlineResponse200Accounts;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20026
- */
-export interface InlineResponse20026 {
-    /**
-     * 
-     * @type {InlineResponse20026VotingParams}
-     * @memberof InlineResponse20026
-     */
-    'voting_params'?: InlineResponse20026VotingParams;
-    /**
-     * 
-     * @type {InlineResponse20026DepositParams}
-     * @memberof InlineResponse20026
-     */
-    'deposit_params'?: InlineResponse20026DepositParams;
-    /**
-     * 
-     * @type {InlineResponse20026TallyParams}
-     * @memberof InlineResponse20026
-     */
-    'tally_params'?: InlineResponse20026TallyParams;
-}
-/**
- * deposit_params defines the parameters related to deposit.
- * @export
- * @interface InlineResponse20026DepositParams
- */
-export interface InlineResponse20026DepositParams {
-    /**
-     * Minimum deposit for a proposal to enter voting period.
-     * @type {Array<InlineResponse2003Balances>}
-     * @memberof InlineResponse20026DepositParams
-     */
-    'min_deposit'?: Array<InlineResponse2003Balances>;
-    /**
-     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
-     * @type {string}
-     * @memberof InlineResponse20026DepositParams
-     */
-    'max_deposit_period'?: string;
-}
-/**
- * tally_params defines the parameters related to tally.
- * @export
- * @interface InlineResponse20026TallyParams
- */
-export interface InlineResponse20026TallyParams {
-    /**
-     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
-     * @type {string}
-     * @memberof InlineResponse20026TallyParams
-     */
-    'quorum'?: string;
-    /**
-     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
-     * @type {string}
-     * @memberof InlineResponse20026TallyParams
-     */
-    'threshold'?: string;
-    /**
-     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
-     * @type {string}
-     * @memberof InlineResponse20026TallyParams
-     */
-    'veto_threshold'?: string;
-}
-/**
- * voting_params defines the parameters related to voting.
- * @export
- * @interface InlineResponse20026VotingParams
- */
-export interface InlineResponse20026VotingParams {
-    /**
-     * Length of the voting period.
-     * @type {string}
-     * @memberof InlineResponse20026VotingParams
-     */
-    'voting_period'?: string;
-}
-/**
- * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
- * @export
- * @interface InlineResponse20027
- */
-export interface InlineResponse20027 {
-    /**
-     * 
-     * @type {Array<InlineResponse20027Proposals>}
-     * @memberof InlineResponse20027
-     */
-    'proposals'?: Array<InlineResponse20027Proposals>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20027
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * TallyResult defines a standard tally for a governance proposal.
- * @export
- * @interface InlineResponse20027FinalTallyResult
- */
-export interface InlineResponse20027FinalTallyResult {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027FinalTallyResult
-     */
-    'yes'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027FinalTallyResult
-     */
-    'abstain'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027FinalTallyResult
-     */
-    'no'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027FinalTallyResult
-     */
-    'no_with_veto'?: string;
-}
-/**
- * Proposal defines the core field members of a governance proposal.
- * @export
- * @interface InlineResponse20027Proposals
- */
-export interface InlineResponse20027Proposals {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Proposals
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20027Proposals
-     */
-    'content'?: InlineResponse200Accounts;
-    /**
-     * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
-     * @type {string}
-     * @memberof InlineResponse20027Proposals
-     */
-    'status'?: InlineResponse20027ProposalsStatusEnum;
-    /**
-     * 
-     * @type {InlineResponse20027FinalTallyResult}
-     * @memberof InlineResponse20027Proposals
-     */
-    'final_tally_result'?: InlineResponse20027FinalTallyResult;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Proposals
-     */
-    'submit_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Proposals
-     */
-    'deposit_end_time'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2003Balances>}
-     * @memberof InlineResponse20027Proposals
-     */
-    'total_deposit'?: Array<InlineResponse2003Balances>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Proposals
-     */
-    'voting_start_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20027Proposals
-     */
-    'voting_end_time'?: string;
-}
-
-export const InlineResponse20027ProposalsStatusEnum = {
-    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
-    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
-    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
-    Passed: 'PROPOSAL_STATUS_PASSED',
-    Rejected: 'PROPOSAL_STATUS_REJECTED',
-    Failed: 'PROPOSAL_STATUS_FAILED'
-} as const;
-
-export type InlineResponse20027ProposalsStatusEnum = typeof InlineResponse20027ProposalsStatusEnum[keyof typeof InlineResponse20027ProposalsStatusEnum];
-
-/**
- * QueryProposalResponse is the response type for the Query/Proposal RPC method.
- * @export
- * @interface InlineResponse20028
- */
-export interface InlineResponse20028 {
-    /**
-     * 
-     * @type {InlineResponse20027Proposals}
-     * @memberof InlineResponse20028
-     */
-    'proposal'?: InlineResponse20027Proposals;
-}
-/**
- * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
- * @export
- * @interface InlineResponse20029
- */
-export interface InlineResponse20029 {
-    /**
-     * 
-     * @type {Array<InlineResponse20029Deposits>}
-     * @memberof InlineResponse20029
-     */
-    'deposits'?: Array<InlineResponse20029Deposits>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20029
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * Deposit defines an amount deposited by an account address to an active proposal.
- * @export
- * @interface InlineResponse20029Deposits
- */
-export interface InlineResponse20029Deposits {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20029Deposits
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20029Deposits
-     */
-    'depositor'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse2003Balances>}
-     * @memberof InlineResponse20029Deposits
-     */
-    'amount'?: Array<InlineResponse2003Balances>;
-}
-/**
- * params defines the parameters of the module.
- * @export
- * @interface InlineResponse2002Params
- */
-export interface InlineResponse2002Params {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002Params
-     */
-    'max_memo_characters'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002Params
-     */
-    'tx_sig_limit'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002Params
-     */
-    'tx_size_cost_per_byte'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002Params
-     */
-    'sig_verify_cost_ed25519'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002Params
-     */
-    'sig_verify_cost_secp256k1'?: string;
-}
-/**
- * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC method.
- * @export
- * @interface InlineResponse2003
- */
-export interface InlineResponse2003 {
-    /**
-     * balances is the balances of all the coins.
-     * @type {Array<InlineResponse2003Balances>}
-     * @memberof InlineResponse2003
-     */
-    'balances'?: Array<InlineResponse2003Balances>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse2003
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * QueryDepositResponse is the response type for the Query/Deposit RPC method.
- * @export
- * @interface InlineResponse20030
- */
-export interface InlineResponse20030 {
-    /**
-     * 
-     * @type {InlineResponse20029Deposits}
-     * @memberof InlineResponse20030
-     */
-    'deposit'?: InlineResponse20029Deposits;
-}
-/**
- * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
- * @export
- * @interface InlineResponse20031
- */
-export interface InlineResponse20031 {
-    /**
-     * 
-     * @type {InlineResponse20027FinalTallyResult}
-     * @memberof InlineResponse20031
-     */
-    'tally'?: InlineResponse20027FinalTallyResult;
-}
-/**
- * QueryVotesResponse is the response type for the Query/Votes RPC method.
- * @export
- * @interface InlineResponse20032
- */
-export interface InlineResponse20032 {
-    /**
-     * votes defined the queried votes.
-     * @type {Array<InlineResponse20032Votes>}
-     * @memberof InlineResponse20032
-     */
-    'votes'?: Array<InlineResponse20032Votes>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20032
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * WeightedVoteOption defines a unit of vote for vote split.
- * @export
- * @interface InlineResponse20032Options
- */
-export interface InlineResponse20032Options {
-    /**
-     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
-     * @type {string}
-     * @memberof InlineResponse20032Options
-     */
-    'option'?: InlineResponse20032OptionsOptionEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20032Options
-     */
-    'weight'?: string;
-}
-
-export const InlineResponse20032OptionsOptionEnum = {
-    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
-    Yes: 'VOTE_OPTION_YES',
-    Abstain: 'VOTE_OPTION_ABSTAIN',
-    No: 'VOTE_OPTION_NO',
-    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
-} as const;
-
-export type InlineResponse20032OptionsOptionEnum = typeof InlineResponse20032OptionsOptionEnum[keyof typeof InlineResponse20032OptionsOptionEnum];
-
-/**
- * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
- * @export
- * @interface InlineResponse20032Votes
- */
-export interface InlineResponse20032Votes {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20032Votes
-     */
-    'proposal_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20032Votes
-     */
-    'voter'?: string;
-    /**
-     * Deprecated: Prefer to use `options` instead. This field is set in queries if and only if `len(options) == 1` and that option has weight 1. In all other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
-     * @type {string}
-     * @memberof InlineResponse20032Votes
-     */
-    'option'?: InlineResponse20032VotesOptionEnum;
-    /**
-     * 
-     * @type {Array<InlineResponse20032Options>}
-     * @memberof InlineResponse20032Votes
-     */
-    'options'?: Array<InlineResponse20032Options>;
-}
-
-export const InlineResponse20032VotesOptionEnum = {
-    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
-    Yes: 'VOTE_OPTION_YES',
-    Abstain: 'VOTE_OPTION_ABSTAIN',
-    No: 'VOTE_OPTION_NO',
-    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
-} as const;
-
-export type InlineResponse20032VotesOptionEnum = typeof InlineResponse20032VotesOptionEnum[keyof typeof InlineResponse20032VotesOptionEnum];
-
-/**
- * QueryVoteResponse is the response type for the Query/Vote RPC method.
- * @export
- * @interface InlineResponse20033
- */
-export interface InlineResponse20033 {
-    /**
-     * 
-     * @type {InlineResponse20032Votes}
-     * @memberof InlineResponse20033
-     */
-    'vote'?: InlineResponse20032Votes;
-}
-/**
- * QueryAnnualProvisionsResponse is the response type for the Query/AnnualProvisions RPC method.
- * @export
- * @interface InlineResponse20034
- */
-export interface InlineResponse20034 {
-    /**
-     * annual_provisions is the current minting annual provisions value.
-     * @type {string}
-     * @memberof InlineResponse20034
-     */
-    'annual_provisions'?: string;
-}
-/**
- * QueryInflationResponse is the response type for the Query/Inflation RPC method.
- * @export
- * @interface InlineResponse20035
- */
-export interface InlineResponse20035 {
-    /**
-     * inflation is the current minting inflation value.
-     * @type {string}
-     * @memberof InlineResponse20035
-     */
-    'inflation'?: string;
-}
-/**
- * QueryParamsResponse is the response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20036
- */
-export interface InlineResponse20036 {
-    /**
-     * 
-     * @type {InlineResponse20036Params}
-     * @memberof InlineResponse20036
-     */
-    'params'?: InlineResponse20036Params;
-}
-/**
- * params defines the parameters of the module.
- * @export
- * @interface InlineResponse20036Params
- */
-export interface InlineResponse20036Params {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036Params
-     */
-    'mint_denom'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036Params
-     */
-    'inflation_rate_change'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036Params
-     */
-    'inflation_max'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036Params
-     */
-    'inflation_min'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036Params
-     */
-    'goal_bonded'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20036Params
-     */
-    'blocks_per_year'?: string;
-}
-/**
- * QueryParamsResponse is response type for the Query/Params RPC method.
- * @export
- * @interface InlineResponse20037
- */
-export interface InlineResponse20037 {
-    /**
-     * 
-     * @type {InlineResponse20037Param}
-     * @memberof InlineResponse20037
-     */
-    'param'?: InlineResponse20037Param;
-}
-/**
- * param defines the queried parameter.
- * @export
- * @interface InlineResponse20037Param
- */
-export interface InlineResponse20037Param {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037Param
-     */
-    'subspace'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037Param
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20037Param
-     */
-    'value'?: string;
-}
-/**
- * QueryDelegatorDelegationsResponse is response type for the Query/DelegatorDelegations RPC method.
- * @export
- * @interface InlineResponse20038
- */
-export interface InlineResponse20038 {
-    /**
-     * delegation_responses defines all the delegations\' info of a delegator.
-     * @type {Array<InlineResponse20038DelegationResponses>}
-     * @memberof InlineResponse20038
-     */
-    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20038
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator.
- * @export
- * @interface InlineResponse20038Delegation
- */
-export interface InlineResponse20038Delegation {
-    /**
-     * delegator_address is the bech32-encoded address of the delegator.
-     * @type {string}
-     * @memberof InlineResponse20038Delegation
-     */
-    'delegator_address'?: string;
-    /**
-     * validator_address is the bech32-encoded address of the validator.
-     * @type {string}
-     * @memberof InlineResponse20038Delegation
-     */
-    'validator_address'?: string;
-    /**
-     * shares define the delegation shares received.
-     * @type {string}
-     * @memberof InlineResponse20038Delegation
-     */
-    'shares'?: string;
-}
-/**
- * DelegationResponse is equivalent to Delegation except that it contains a balance in addition to shares which is more suitable for client responses.
- * @export
- * @interface InlineResponse20038DelegationResponses
- */
-export interface InlineResponse20038DelegationResponses {
-    /**
-     * 
-     * @type {InlineResponse20038Delegation}
-     * @memberof InlineResponse20038DelegationResponses
-     */
-    'delegation'?: InlineResponse20038Delegation;
-    /**
-     * 
-     * @type {InlineResponse2003Balances}
-     * @memberof InlineResponse20038DelegationResponses
-     */
-    'balance'?: InlineResponse2003Balances;
-}
-/**
- * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
- * @export
- * @interface InlineResponse20039
- */
-export interface InlineResponse20039 {
-    /**
-     * 
-     * @type {Array<InlineResponse20039RedelegationResponses>}
-     * @memberof InlineResponse20039
-     */
-    'redelegation_responses'?: Array<InlineResponse20039RedelegationResponses>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20039
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it contains a balance in addition to shares which is more suitable for client responses.
- * @export
- * @interface InlineResponse20039Entries
- */
-export interface InlineResponse20039Entries {
-    /**
-     * 
-     * @type {InlineResponse20039RedelegationEntries}
-     * @memberof InlineResponse20039Entries
-     */
-    'redelegation_entry'?: InlineResponse20039RedelegationEntries;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20039Entries
-     */
-    'balance'?: string;
-}
-/**
- * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
- * @export
- * @interface InlineResponse20039Redelegation
- */
-export interface InlineResponse20039Redelegation {
-    /**
-     * delegator_address is the bech32-encoded address of the delegator.
-     * @type {string}
-     * @memberof InlineResponse20039Redelegation
-     */
-    'delegator_address'?: string;
-    /**
-     * validator_src_address is the validator redelegation source operator address.
-     * @type {string}
-     * @memberof InlineResponse20039Redelegation
-     */
-    'validator_src_address'?: string;
-    /**
-     * validator_dst_address is the validator redelegation destination operator address.
-     * @type {string}
-     * @memberof InlineResponse20039Redelegation
-     */
-    'validator_dst_address'?: string;
-    /**
-     * entries are the redelegation entries.
-     * @type {Array<InlineResponse20039RedelegationEntries>}
-     * @memberof InlineResponse20039Redelegation
-     */
-    'entries'?: Array<InlineResponse20039RedelegationEntries>;
-}
-/**
- * RedelegationEntry defines a redelegation object with relevant metadata.
- * @export
- * @interface InlineResponse20039RedelegationEntries
- */
-export interface InlineResponse20039RedelegationEntries {
-    /**
-     * creation_height  defines the height which the redelegation took place.
-     * @type {string}
-     * @memberof InlineResponse20039RedelegationEntries
-     */
-    'creation_height'?: string;
-    /**
-     * completion_time defines the unix time for redelegation completion.
-     * @type {string}
-     * @memberof InlineResponse20039RedelegationEntries
-     */
-    'completion_time'?: string;
-    /**
-     * initial_balance defines the initial balance when redelegation started.
-     * @type {string}
-     * @memberof InlineResponse20039RedelegationEntries
-     */
-    'initial_balance'?: string;
-    /**
-     * shares_dst is the amount of destination-validator shares created by redelegation.
-     * @type {string}
-     * @memberof InlineResponse20039RedelegationEntries
-     */
-    'shares_dst'?: string;
-}
-/**
- * RedelegationResponse is equivalent to a Redelegation except that its entries contain a balance in addition to shares which is more suitable for client responses.
- * @export
- * @interface InlineResponse20039RedelegationResponses
- */
-export interface InlineResponse20039RedelegationResponses {
-    /**
-     * 
-     * @type {InlineResponse20039Redelegation}
-     * @memberof InlineResponse20039RedelegationResponses
-     */
-    'redelegation'?: InlineResponse20039Redelegation;
-    /**
-     * 
-     * @type {Array<InlineResponse20039Entries>}
-     * @memberof InlineResponse20039RedelegationResponses
-     */
-    'entries'?: Array<InlineResponse20039Entries>;
-}
-/**
- * Coin defines a token with a denomination and an amount.  NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto.
- * @export
- * @interface InlineResponse2003Balances
- */
-export interface InlineResponse2003Balances {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Balances
-     */
-    'denom'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Balances
-     */
-    'amount'?: string;
-}
-/**
- * QueryBalanceResponse is the response type for the Query/Balance RPC method.
- * @export
- * @interface InlineResponse2004
- */
-export interface InlineResponse2004 {
-    /**
-     * 
-     * @type {InlineResponse2003Balances}
-     * @memberof InlineResponse2004
-     */
-    'balance'?: InlineResponse2003Balances;
-}
-/**
- * QueryUnbondingDelegatorDelegationsResponse is response type for the Query/UnbondingDelegatorDelegations RPC method.
- * @export
- * @interface InlineResponse20040
- */
-export interface InlineResponse20040 {
-    /**
-     * 
-     * @type {Array<InlineResponse20040UnbondingResponses>}
-     * @memberof InlineResponse20040
-     */
-    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20040
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * UnbondingDelegationEntry defines an unbonding object with relevant metadata.
- * @export
- * @interface InlineResponse20040Entries
- */
-export interface InlineResponse20040Entries {
-    /**
-     * creation_height is the height which the unbonding took place.
-     * @type {string}
-     * @memberof InlineResponse20040Entries
-     */
-    'creation_height'?: string;
-    /**
-     * completion_time is the unix time for unbonding completion.
-     * @type {string}
-     * @memberof InlineResponse20040Entries
-     */
-    'completion_time'?: string;
-    /**
-     * initial_balance defines the tokens initially scheduled to receive at completion.
-     * @type {string}
-     * @memberof InlineResponse20040Entries
-     */
-    'initial_balance'?: string;
-    /**
-     * balance defines the tokens to receive at completion.
-     * @type {string}
-     * @memberof InlineResponse20040Entries
-     */
-    'balance'?: string;
-}
-/**
- * UnbondingDelegation stores all of a single delegator\'s unbonding bonds for a single validator in an time-ordered list.
- * @export
- * @interface InlineResponse20040UnbondingResponses
- */
-export interface InlineResponse20040UnbondingResponses {
-    /**
-     * delegator_address is the bech32-encoded address of the delegator.
-     * @type {string}
-     * @memberof InlineResponse20040UnbondingResponses
-     */
-    'delegator_address'?: string;
-    /**
-     * validator_address is the bech32-encoded address of the validator.
-     * @type {string}
-     * @memberof InlineResponse20040UnbondingResponses
-     */
-    'validator_address'?: string;
-    /**
-     * entries are the unbonding delegation entries.
-     * @type {Array<InlineResponse20040Entries>}
-     * @memberof InlineResponse20040UnbondingResponses
-     */
-    'entries'?: Array<InlineResponse20040Entries>;
-}
-/**
- * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
- * @export
- * @interface InlineResponse20041
- */
-export interface InlineResponse20041 {
-    /**
-     * validators defines the validators\' info of a delegator.
-     * @type {Array<InlineResponse20041Validators>}
-     * @memberof InlineResponse20041
-     */
-    'validators'?: Array<InlineResponse20041Validators>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20041
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * commission defines the commission parameters.
- * @export
- * @interface InlineResponse20041Commission
- */
-export interface InlineResponse20041Commission {
-    /**
-     * 
-     * @type {InlineResponse20041CommissionCommissionRates}
-     * @memberof InlineResponse20041Commission
-     */
-    'commission_rates'?: InlineResponse20041CommissionCommissionRates;
-    /**
-     * update_time is the last time the commission rate was changed.
-     * @type {string}
-     * @memberof InlineResponse20041Commission
-     */
-    'update_time'?: string;
-}
-/**
- * commission_rates defines the initial commission rates to be used for creating a validator.
- * @export
- * @interface InlineResponse20041CommissionCommissionRates
- */
-export interface InlineResponse20041CommissionCommissionRates {
-    /**
-     * rate is the commission rate charged to delegators, as a fraction.
-     * @type {string}
-     * @memberof InlineResponse20041CommissionCommissionRates
-     */
-    'rate'?: string;
-    /**
-     * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
-     * @type {string}
-     * @memberof InlineResponse20041CommissionCommissionRates
-     */
-    'max_rate'?: string;
-    /**
-     * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
-     * @type {string}
-     * @memberof InlineResponse20041CommissionCommissionRates
-     */
-    'max_change_rate'?: string;
-}
-/**
- * description defines the description terms for the validator.
- * @export
- * @interface InlineResponse20041Description
- */
-export interface InlineResponse20041Description {
-    /**
-     * moniker defines a human-readable name for the validator.
-     * @type {string}
-     * @memberof InlineResponse20041Description
-     */
-    'moniker'?: string;
-    /**
-     * identity defines an optional identity signature (ex. UPort or Keybase).
-     * @type {string}
-     * @memberof InlineResponse20041Description
-     */
-    'identity'?: string;
-    /**
-     * website defines an optional website link.
-     * @type {string}
-     * @memberof InlineResponse20041Description
-     */
-    'website'?: string;
-    /**
-     * security_contact defines an optional email for security contact.
-     * @type {string}
-     * @memberof InlineResponse20041Description
-     */
-    'security_contact'?: string;
-    /**
-     * details define other optional details.
-     * @type {string}
-     * @memberof InlineResponse20041Description
-     */
-    'details'?: string;
-}
-/**
- * Validator defines a validator, together with the total amount of the Validator\'s bond shares and their exchange rate to coins. Slashing results in a decrease in the exchange rate, allowing correct calculation of future undelegations without iterating over delegators. When coins are delegated to this validator, the validator is credited with a delegation whose number of bond shares is based on the amount of coins delegated divided by the current exchange rate. Voting power can be calculated as total bonded shares multiplied by exchange rate.
- * @export
- * @interface InlineResponse20041Validators
- */
-export interface InlineResponse20041Validators {
-    /**
-     * operator_address defines the address of the validator\'s operator; bech encoded in JSON.
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'operator_address'?: string;
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20041Validators
-     */
-    'consensus_pubkey'?: InlineResponse200Accounts;
-    /**
-     * jailed defined whether the validator has been jailed from bonded status or not.
-     * @type {boolean}
-     * @memberof InlineResponse20041Validators
-     */
-    'jailed'?: boolean;
-    /**
-     * status is the validator status (bonded/unbonding/unbonded).
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'status'?: InlineResponse20041ValidatorsStatusEnum;
-    /**
-     * tokens define the delegated tokens (incl. self-delegation).
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'tokens'?: string;
-    /**
-     * delegator_shares defines total shares issued to a validator\'s delegators.
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'delegator_shares'?: string;
-    /**
-     * 
-     * @type {InlineResponse20041Description}
-     * @memberof InlineResponse20041Validators
-     */
-    'description'?: InlineResponse20041Description;
-    /**
-     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'unbonding_height'?: string;
-    /**
-     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'unbonding_time'?: string;
-    /**
-     * 
-     * @type {InlineResponse20041Commission}
-     * @memberof InlineResponse20041Validators
-     */
-    'commission'?: InlineResponse20041Commission;
-    /**
-     * min_self_delegation is the validator\'s self declared minimum self delegation.
-     * @type {string}
-     * @memberof InlineResponse20041Validators
-     */
-    'min_self_delegation'?: string;
-}
-
-export const InlineResponse20041ValidatorsStatusEnum = {
-    Unspecified: 'BOND_STATUS_UNSPECIFIED',
-    Unbonded: 'BOND_STATUS_UNBONDED',
-    Unbonding: 'BOND_STATUS_UNBONDING',
-    Bonded: 'BOND_STATUS_BONDED'
-} as const;
-
-export type InlineResponse20041ValidatorsStatusEnum = typeof InlineResponse20041ValidatorsStatusEnum[keyof typeof InlineResponse20041ValidatorsStatusEnum];
-
-/**
- * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
- * @export
- * @interface InlineResponse20042
- */
-export interface InlineResponse20042 {
-    /**
-     * 
-     * @type {InlineResponse20041Validators}
-     * @memberof InlineResponse20042
-     */
-    'validator'?: InlineResponse20041Validators;
+    'details'?: Array<AccountsAreTheExistingAccountsInner>;
 }
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
  * @export
- * @interface InlineResponse20043
+ * @interface HistoricalInfo200Response
  */
-export interface InlineResponse20043 {
+export interface HistoricalInfo200Response {
     /**
      * 
-     * @type {InlineResponse20043Hist}
-     * @memberof InlineResponse20043
+     * @type {HistoricalInfo200ResponseHist}
+     * @memberof HistoricalInfo200Response
      */
-    'hist'?: InlineResponse20043Hist;
+    'hist'?: HistoricalInfo200ResponseHist;
 }
 /**
  * hist defines the historical info at the given height.
  * @export
- * @interface InlineResponse20043Hist
+ * @interface HistoricalInfo200ResponseHist
  */
-export interface InlineResponse20043Hist {
+export interface HistoricalInfo200ResponseHist {
     /**
      * 
-     * @type {InlineResponse20043HistHeader}
-     * @memberof InlineResponse20043Hist
+     * @type {HistoricalInfo200ResponseHistHeader}
+     * @memberof HistoricalInfo200ResponseHist
      */
-    'header'?: InlineResponse20043HistHeader;
+    'header'?: HistoricalInfo200ResponseHistHeader;
     /**
      * 
-     * @type {Array<InlineResponse20041Validators>}
-     * @memberof InlineResponse20043Hist
+     * @type {Array<StakingDelegatorValidators200ResponseValidatorsInner>}
+     * @memberof HistoricalInfo200ResponseHist
      */
-    'valset'?: Array<InlineResponse20041Validators>;
+    'valset'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
 }
 /**
  * Header defines the structure of a Tendermint block header.
  * @export
- * @interface InlineResponse20043HistHeader
+ * @interface HistoricalInfo200ResponseHistHeader
  */
-export interface InlineResponse20043HistHeader {
+export interface HistoricalInfo200ResponseHistHeader {
     /**
      * 
      * @type {BasicBlockInfo}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'version'?: BasicBlockInfo;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'chain_id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'height'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'time'?: string;
     /**
      * 
      * @type {PrevBlockInfo}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'last_block_id'?: PrevBlockInfo;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'last_commit_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'data_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'validators_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'next_validators_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'consensus_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'app_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'last_results_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'evidence_hash'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20043HistHeader
+     * @memberof HistoricalInfo200ResponseHistHeader
      */
     'proposer_address'?: string;
 }
 /**
- * QueryParamsResponse is response type for the Query/Params RPC method.
+ * QueryInflationResponse is the response type for the Query/Inflation RPC method.
  * @export
- * @interface InlineResponse20044
+ * @interface Inflation200Response
  */
-export interface InlineResponse20044 {
+export interface Inflation200Response {
     /**
-     * 
-     * @type {InlineResponse20044Params}
-     * @memberof InlineResponse20044
+     * inflation is the current minting inflation value.
+     * @type {string}
+     * @memberof Inflation200Response
      */
-    'params'?: InlineResponse20044Params;
+    'inflation'?: string;
 }
 /**
- * params holds all the parameters of this module.
+ * ValidatorSigningInfo defines a validator\'s signing info for monitoring their liveness activity.
  * @export
- * @interface InlineResponse20044Params
+ * @interface InfoIsTheSigningInfoOfAllValidatorsInner
  */
-export interface InlineResponse20044Params {
-    /**
-     * unbonding_time is the time duration of unbonding.
-     * @type {string}
-     * @memberof InlineResponse20044Params
-     */
-    'unbonding_time'?: string;
-    /**
-     * max_validators is the maximum number of validators.
-     * @type {number}
-     * @memberof InlineResponse20044Params
-     */
-    'max_validators'?: number;
-    /**
-     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
-     * @type {number}
-     * @memberof InlineResponse20044Params
-     */
-    'max_entries'?: number;
-    /**
-     * historical_entries is the number of historical entries to persist.
-     * @type {number}
-     * @memberof InlineResponse20044Params
-     */
-    'historical_entries'?: number;
-    /**
-     * bond_denom defines the bondable coin denomination.
-     * @type {string}
-     * @memberof InlineResponse20044Params
-     */
-    'bond_denom'?: string;
-}
-/**
- * QueryPoolResponse is response type for the Query/Pool RPC method.
- * @export
- * @interface InlineResponse20045
- */
-export interface InlineResponse20045 {
-    /**
-     * 
-     * @type {InlineResponse20045Pool}
-     * @memberof InlineResponse20045
-     */
-    'pool'?: InlineResponse20045Pool;
-}
-/**
- * pool defines the pool info.
- * @export
- * @interface InlineResponse20045Pool
- */
-export interface InlineResponse20045Pool {
+export interface InfoIsTheSigningInfoOfAllValidatorsInner {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20045Pool
-     */
-    'not_bonded_tokens'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20045Pool
-     */
-    'bonded_tokens'?: string;
-}
-/**
- * QueryDelegationResponse is response type for the Query/Delegation RPC method.
- * @export
- * @interface InlineResponse20046
- */
-export interface InlineResponse20046 {
-    /**
-     * 
-     * @type {InlineResponse20038DelegationResponses}
-     * @memberof InlineResponse20046
-     */
-    'delegation_response'?: InlineResponse20038DelegationResponses;
-}
-/**
- * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
- * @export
- * @interface InlineResponse20047
- */
-export interface InlineResponse20047 {
-    /**
-     * 
-     * @type {InlineResponse20040UnbondingResponses}
-     * @memberof InlineResponse20047
-     */
-    'unbond'?: InlineResponse20040UnbondingResponses;
-}
-/**
- * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
- * @export
- * @interface InlineResponse20048
- */
-export interface InlineResponse20048 {
-    /**
-     * 
-     * @type {Array<InlineResponse20040UnbondingResponses>}
-     * @memberof InlineResponse20048
-     */
-    'unbonding_responses'?: Array<InlineResponse20040UnbondingResponses>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse20048
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * SimulateResponse is the response type for the Service.SimulateRPC method.
- * @export
- * @interface InlineResponse20049
- */
-export interface InlineResponse20049 {
-    /**
-     * 
-     * @type {InlineResponse20049GasInfo}
-     * @memberof InlineResponse20049
-     */
-    'gas_info'?: InlineResponse20049GasInfo;
-    /**
-     * 
-     * @type {InlineResponse20049Result}
-     * @memberof InlineResponse20049
-     */
-    'result'?: InlineResponse20049Result;
-}
-/**
- * gas_info is the information about gas used in the simulation.
- * @export
- * @interface InlineResponse20049GasInfo
- */
-export interface InlineResponse20049GasInfo {
-    /**
-     * GasWanted is the maximum units of work we allow this tx to perform.
-     * @type {string}
-     * @memberof InlineResponse20049GasInfo
-     */
-    'gas_wanted'?: string;
-    /**
-     * GasUsed is the amount of gas actually consumed.
-     * @type {string}
-     * @memberof InlineResponse20049GasInfo
-     */
-    'gas_used'?: string;
-}
-/**
- * result is the result of the simulation.
- * @export
- * @interface InlineResponse20049Result
- */
-export interface InlineResponse20049Result {
-    /**
-     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
-     * @type {string}
-     * @memberof InlineResponse20049Result
-     */
-    'data'?: string;
-    /**
-     * Log contains the log information from message or handler execution.
-     * @type {string}
-     * @memberof InlineResponse20049Result
-     */
-    'log'?: string;
-    /**
-     * Events contains a slice of Event objects that were emitted during message or handler execution.
-     * @type {Array<InlineResponse20049ResultEvents>}
-     * @memberof InlineResponse20049Result
-     */
-    'events'?: Array<InlineResponse20049ResultEvents>;
-}
-/**
- * EventAttribute is a single key-value pair, associated with an event.
- * @export
- * @interface InlineResponse20049ResultAttributes
- */
-export interface InlineResponse20049ResultAttributes {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20049ResultAttributes
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20049ResultAttributes
-     */
-    'value'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20049ResultAttributes
-     */
-    'index'?: boolean;
-}
-/**
- * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
- * @export
- * @interface InlineResponse20049ResultEvents
- */
-export interface InlineResponse20049ResultEvents {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20049ResultEvents
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20049ResultAttributes>}
-     * @memberof InlineResponse20049ResultEvents
-     */
-    'attributes'?: Array<InlineResponse20049ResultAttributes>;
-}
-/**
- * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
- * @export
- * @interface InlineResponse2005
- */
-export interface InlineResponse2005 {
-    /**
-     * 
-     * @type {Array<InlineResponse2005DenomOwners>}
-     * @memberof InlineResponse2005
-     */
-    'denom_owners'?: Array<InlineResponse2005DenomOwners>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse2005
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * BroadcastTxResponse is the response type for the Service.BroadcastTx method.
- * @export
- * @interface InlineResponse20050
- */
-export interface InlineResponse20050 {
-    /**
-     * 
-     * @type {InlineResponse20050TxResponse}
-     * @memberof InlineResponse20050
-     */
-    'tx_response'?: InlineResponse20050TxResponse;
-}
-/**
- * TxResponse defines a structure containing relevant tx data and metadata. The tags are stringified and the log is JSON decoded.
- * @export
- * @interface InlineResponse20050TxResponse
- */
-export interface InlineResponse20050TxResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'height'?: string;
-    /**
-     * The transaction hash.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'txhash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'codespace'?: string;
-    /**
-     * Response code.
-     * @type {number}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'code'?: number;
-    /**
-     * Result bytes, if any.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'data'?: string;
-    /**
-     * The output of the application\'s logger (raw string). May be non-deterministic.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'raw_log'?: string;
-    /**
-     * The output of the application\'s logger (typed). May be non-deterministic.
-     * @type {Array<InlineResponse20050TxResponseLogs>}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'logs'?: Array<InlineResponse20050TxResponseLogs>;
-    /**
-     * Additional information. May be non-deterministic.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'info'?: string;
-    /**
-     * Amount of gas requested for transaction.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'gas_wanted'?: string;
-    /**
-     * Amount of gas consumed by transaction.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'gas_used'?: string;
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'tx'?: InlineResponse200Accounts;
-    /**
-     * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
-     * @type {string}
-     * @memberof InlineResponse20050TxResponse
-     */
-    'timestamp'?: string;
-}
-/**
- * Attribute defines an attribute wrapper where the key and value are strings instead of raw bytes.
- * @export
- * @interface InlineResponse20050TxResponseAttributes
- */
-export interface InlineResponse20050TxResponseAttributes {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050TxResponseAttributes
-     */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050TxResponseAttributes
-     */
-    'value'?: string;
-}
-/**
- * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
- * @export
- * @interface InlineResponse20050TxResponseEvents
- */
-export interface InlineResponse20050TxResponseEvents {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050TxResponseEvents
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse20050TxResponseAttributes>}
-     * @memberof InlineResponse20050TxResponseEvents
-     */
-    'attributes'?: Array<InlineResponse20050TxResponseAttributes>;
-}
-/**
- * ABCIMessageLog defines a structure containing an indexed tx ABCI message log.
- * @export
- * @interface InlineResponse20050TxResponseLogs
- */
-export interface InlineResponse20050TxResponseLogs {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse20050TxResponseLogs
-     */
-    'msg_index'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20050TxResponseLogs
-     */
-    'log'?: string;
-    /**
-     * Events contains a slice of Event objects that were emitted during some execution.
-     * @type {Array<InlineResponse20050TxResponseEvents>}
-     * @memberof InlineResponse20050TxResponseLogs
-     */
-    'events'?: Array<InlineResponse20050TxResponseEvents>;
-}
-/**
- * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
- * @export
- * @interface InlineResponse20051
- */
-export interface InlineResponse20051 {
-    /**
-     * height is the block height at which the plan was applied.
-     * @type {string}
-     * @memberof InlineResponse20051
-     */
-    'height'?: string;
-}
-/**
- * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC method.
- * @export
- * @interface InlineResponse20052
- */
-export interface InlineResponse20052 {
-    /**
-     * 
-     * @type {InlineResponse20052Plan}
-     * @memberof InlineResponse20052
-     */
-    'plan'?: InlineResponse20052Plan;
-}
-/**
- * plan is the current upgrade plan.
- * @export
- * @interface InlineResponse20052Plan
- */
-export interface InlineResponse20052Plan {
-    /**
-     * Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit.
-     * @type {string}
-     * @memberof InlineResponse20052Plan
-     */
-    'name'?: string;
-    /**
-     * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.
-     * @type {string}
-     * @memberof InlineResponse20052Plan
-     */
-    'time'?: string;
-    /**
-     * The height at which the upgrade must be performed. Only used if Time is not set.
-     * @type {string}
-     * @memberof InlineResponse20052Plan
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20052Plan
-     */
-    'info'?: string;
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20052Plan
-     */
-    'upgraded_client_state'?: InlineResponse200Accounts;
-}
-/**
- * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
- * @export
- * @interface InlineResponse20053
- */
-export interface InlineResponse20053 {
-    /**
-     * module_versions is a list of module names with their consensus versions.
-     * @type {Array<InlineResponse20053ModuleVersions>}
-     * @memberof InlineResponse20053
-     */
-    'module_versions'?: Array<InlineResponse20053ModuleVersions>;
-}
-/**
- * ModuleVersion specifies a module and its consensus version.
- * @export
- * @interface InlineResponse20053ModuleVersions
- */
-export interface InlineResponse20053ModuleVersions {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20053ModuleVersions
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20053ModuleVersions
-     */
-    'version'?: string;
-}
-/**
- * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
- * @export
- * @interface InlineResponse20054
- */
-export interface InlineResponse20054 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20054
-     */
-    'upgraded_consensus_state'?: string;
-}
-/**
- * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
- * @export
- * @interface InlineResponse20055
- */
-export interface InlineResponse20055 {
-    /**
-     * authorizations is a list of grants granted for grantee by granter.
-     * @type {Array<InlineResponse20055Grants>}
-     * @memberof InlineResponse20055
-     */
-    'grants'?: Array<InlineResponse20055Grants>;
-    /**
-     * 
-     * @type {InlineResponse20014Pagination}
-     * @memberof InlineResponse20055
-     */
-    'pagination'?: InlineResponse20014Pagination;
-}
-/**
- * Grant gives permissions to execute the provide method with expiration time.
- * @export
- * @interface InlineResponse20055Grants
- */
-export interface InlineResponse20055Grants {
-    /**
-     * 
-     * @type {InlineResponse200Accounts}
-     * @memberof InlineResponse20055Grants
-     */
-    'authorization'?: InlineResponse200Accounts;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20055Grants
-     */
-    'expiration'?: string;
-}
-/**
- * QueryAllowanceResponse is the response type for the Query/Allowance RPC method.
- * @export
- * @interface InlineResponse20056
- */
-export interface InlineResponse20056 {
-    /**
-     * 
-     * @type {GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext}
-     * @memberof InlineResponse20056
-     */
-    'allowance'?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext;
-}
-/**
- * QueryAllowancesResponse is the response type for the Query/Allowances RPC method.
- * @export
- * @interface InlineResponse20057
- */
-export interface InlineResponse20057 {
-    /**
-     * allowances are allowance\'s granted for grantee by granter.
-     * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
-     * @memberof InlineResponse20057
-     */
-    'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
-    /**
-     * 
-     * @type {InlineResponse20014Pagination}
-     * @memberof InlineResponse20057
-     */
-    'pagination'?: InlineResponse20014Pagination;
-}
-/**
- * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
- * @export
- * @interface InlineResponse2005DenomOwners
- */
-export interface InlineResponse2005DenomOwners {
-    /**
-     * address defines the address that owns a particular denomination.
-     * @type {string}
-     * @memberof InlineResponse2005DenomOwners
+     * @memberof InfoIsTheSigningInfoOfAllValidatorsInner
      */
     'address'?: string;
     /**
      * 
-     * @type {InlineResponse2003Balances}
-     * @memberof InlineResponse2005DenomOwners
-     */
-    'balance'?: InlineResponse2003Balances;
-}
-/**
- * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC method.
- * @export
- * @interface InlineResponse2006
- */
-export interface InlineResponse2006 {
-    /**
-     * metadata provides the client information for all the registered tokens.
-     * @type {Array<InlineResponse2006Metadatas>}
-     * @memberof InlineResponse2006
-     */
-    'metadatas'?: Array<InlineResponse2006Metadatas>;
-    /**
-     * 
-     * @type {InlineResponse200Pagination}
-     * @memberof InlineResponse2006
-     */
-    'pagination'?: InlineResponse200Pagination;
-}
-/**
- * DenomUnit represents a struct that describes a given denomination unit of the basic token.
- * @export
- * @interface InlineResponse2006DenomUnits
- */
-export interface InlineResponse2006DenomUnits {
-    /**
-     * denom represents the string name of the given denom unit (e.g uatom).
      * @type {string}
-     * @memberof InlineResponse2006DenomUnits
+     * @memberof InfoIsTheSigningInfoOfAllValidatorsInner
      */
-    'denom'?: string;
+    'start_height'?: string;
     /**
-     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
-     * @type {number}
-     * @memberof InlineResponse2006DenomUnits
-     */
-    'exponent'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineResponse2006DenomUnits
-     */
-    'aliases'?: Array<string>;
-}
-/**
- * Metadata represents a struct that describes a basic token.
- * @export
- * @interface InlineResponse2006Metadatas
- */
-export interface InlineResponse2006Metadatas {
-    /**
-     * 
+     * Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      * @type {string}
-     * @memberof InlineResponse2006Metadatas
+     * @memberof InfoIsTheSigningInfoOfAllValidatorsInner
      */
-    'description'?: string;
+    'index_offset'?: string;
     /**
-     * 
-     * @type {Array<InlineResponse2006DenomUnits>}
-     * @memberof InlineResponse2006Metadatas
-     */
-    'denom_units'?: Array<InlineResponse2006DenomUnits>;
-    /**
-     * base represents the base denom (should be the DenomUnit with exponent = 0).
+     * Timestamp until which the validator is jailed due to liveness downtime.
      * @type {string}
-     * @memberof InlineResponse2006Metadatas
+     * @memberof InfoIsTheSigningInfoOfAllValidatorsInner
      */
-    'base'?: string;
+    'jailed_until'?: string;
     /**
-     * display indicates the suggested denom that should be displayed in clients.
-     * @type {string}
-     * @memberof InlineResponse2006Metadatas
-     */
-    'display'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006Metadatas
-     */
-    'name'?: string;
-    /**
-     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
-     * @type {string}
-     * @memberof InlineResponse2006Metadatas
-     */
-    'symbol'?: string;
-    /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
-     * @type {string}
-     * @memberof InlineResponse2006Metadatas
-     */
-    'uri'?: string;
-    /**
-     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
-     * @type {string}
-     * @memberof InlineResponse2006Metadatas
-     */
-    'uri_hash'?: string;
-}
-/**
- * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC method.
- * @export
- * @interface InlineResponse2007
- */
-export interface InlineResponse2007 {
-    /**
-     * 
-     * @type {InlineResponse2006Metadatas}
-     * @memberof InlineResponse2007
-     */
-    'metadata'?: InlineResponse2006Metadatas;
-}
-/**
- * QueryParamsResponse defines the response type for querying x/bank parameters.
- * @export
- * @interface InlineResponse2008
- */
-export interface InlineResponse2008 {
-    /**
-     * 
-     * @type {InlineResponse2008Params}
-     * @memberof InlineResponse2008
-     */
-    'params'?: InlineResponse2008Params;
-}
-/**
- * Params defines the parameters for the bank module.
- * @export
- * @interface InlineResponse2008Params
- */
-export interface InlineResponse2008Params {
-    /**
-     * 
-     * @type {Array<InlineResponse2008ParamsSendEnabled>}
-     * @memberof InlineResponse2008Params
-     */
-    'send_enabled'?: Array<InlineResponse2008ParamsSendEnabled>;
-    /**
-     * 
+     * Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor.
      * @type {boolean}
-     * @memberof InlineResponse2008Params
+     * @memberof InfoIsTheSigningInfoOfAllValidatorsInner
      */
-    'default_send_enabled'?: boolean;
+    'tombstoned'?: boolean;
+    /**
+     * A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+     * @type {string}
+     * @memberof InfoIsTheSigningInfoOfAllValidatorsInner
+     */
+    'missed_blocks_counter'?: string;
 }
 /**
- * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
  * @export
- * @interface InlineResponse2008ParamsSendEnabled
+ * @interface MintParams200Response
  */
-export interface InlineResponse2008ParamsSendEnabled {
+export interface MintParams200Response {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse2008ParamsSendEnabled
+     * @type {MintParams200ResponseParams}
+     * @memberof MintParams200Response
      */
-    'denom'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse2008ParamsSendEnabled
-     */
-    'enabled'?: boolean;
+    'params'?: MintParams200ResponseParams;
 }
 /**
- * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
+ * params defines the parameters of the module.
  * @export
- * @interface InlineResponse2009
+ * @interface MintParams200ResponseParams
  */
-export interface InlineResponse2009 {
-    /**
-     * 
-     * @type {InlineResponse2003Balances}
-     * @memberof InlineResponse2009
-     */
-    'amount'?: InlineResponse2003Balances;
-}
-/**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
- * @export
- * @interface InlineResponse200Accounts
- */
-export interface InlineResponse200Accounts {
-    /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
-     * @type {string}
-     * @memberof InlineResponse200Accounts
-     */
-    'type_url'?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof InlineResponse200Accounts
-     */
-    'value'?: string;
-}
-/**
- * pagination defines the pagination in the response.
- * @export
- * @interface InlineResponse200Pagination
- */
-export interface InlineResponse200Pagination {
+export interface MintParams200ResponseParams {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200Pagination
+     * @memberof MintParams200ResponseParams
      */
-    'next_key'?: string;
+    'mint_denom'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200Pagination
+     * @memberof MintParams200ResponseParams
      */
-    'total'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponseDefault
- */
-export interface InlineResponseDefault {
+    'inflation_rate_change'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponseDefault
+     * @memberof MintParams200ResponseParams
      */
-    'error'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponseDefault
-     */
-    'code'?: number;
+    'inflation_max'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponseDefault
+     * @memberof MintParams200ResponseParams
      */
-    'message'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponse200Accounts>}
-     * @memberof InlineResponseDefault
-     */
-    'details'?: Array<InlineResponse200Accounts>;
-}
-/**
- * 
- * @export
- * @interface InlineResponseDefault1
- */
-export interface InlineResponseDefault1 {
+    'inflation_min'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponseDefault1
+     * @memberof MintParams200ResponseParams
      */
-    'error'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponseDefault1
-     */
-    'code'?: number;
+    'goal_bonded'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponseDefault1
+     * @memberof MintParams200ResponseParams
      */
-    'message'?: string;
-    /**
-     * 
-     * @type {Array<InlineResponseDefault1Details>}
-     * @memberof InlineResponseDefault1
-     */
-    'details'?: Array<InlineResponseDefault1Details>;
-}
-/**
- * 
- * @export
- * @interface InlineResponseDefault1Details
- */
-export interface InlineResponseDefault1Details {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponseDefault1Details
-     */
-    'type_url'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponseDefault1Details
-     */
-    'value'?: string;
+    'blocks_per_year'?: string;
 }
 /**
  * 
@@ -6542,6 +5649,76 @@ export interface ModuleIsTheTypeForVersionInfo {
     'sum'?: string;
 }
 /**
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
+ * @export
+ * @interface ModuleVersions200Response
+ */
+export interface ModuleVersions200Response {
+    /**
+     * module_versions is a list of module names with their consensus versions.
+     * @type {Array<ModuleVersions200ResponseModuleVersionsInner>}
+     * @memberof ModuleVersions200Response
+     */
+    'module_versions'?: Array<ModuleVersions200ResponseModuleVersionsInner>;
+}
+/**
+ * ModuleVersion specifies a module and its consensus version.
+ * @export
+ * @interface ModuleVersions200ResponseModuleVersionsInner
+ */
+export interface ModuleVersions200ResponseModuleVersionsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ModuleVersions200ResponseModuleVersionsInner
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ModuleVersions200ResponseModuleVersionsInner
+     */
+    'version'?: string;
+}
+/**
+ * QueryParamsResponse is response type for the Query/Params RPC method.
+ * @export
+ * @interface Params200Response
+ */
+export interface Params200Response {
+    /**
+     * 
+     * @type {Params200ResponseParam}
+     * @memberof Params200Response
+     */
+    'param'?: Params200ResponseParam;
+}
+/**
+ * param defines the queried parameter.
+ * @export
+ * @interface Params200ResponseParam
+ */
+export interface Params200ResponseParam {
+    /**
+     * 
+     * @type {string}
+     * @memberof Params200ResponseParam
+     */
+    'subspace'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Params200ResponseParam
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Params200ResponseParam
+     */
+    'value'?: string;
+}
+/**
  * 
  * @export
  * @interface PartsetHeader
@@ -6561,6 +5738,38 @@ export interface PartsetHeader {
     'hash'?: string;
 }
 /**
+ * QueryPoolResponse is response type for the Query/Pool RPC method.
+ * @export
+ * @interface Pool200Response
+ */
+export interface Pool200Response {
+    /**
+     * 
+     * @type {Pool200ResponsePool}
+     * @memberof Pool200Response
+     */
+    'pool'?: Pool200ResponsePool;
+}
+/**
+ * pool defines the pool info.
+ * @export
+ * @interface Pool200ResponsePool
+ */
+export interface Pool200ResponsePool {
+    /**
+     * 
+     * @type {string}
+     * @memberof Pool200ResponsePool
+     */
+    'not_bonded_tokens'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Pool200ResponsePool
+     */
+    'bonded_tokens'?: string;
+}
+/**
  * 
  * @export
  * @interface PrevBlockInfo
@@ -6578,6 +5787,142 @@ export interface PrevBlockInfo {
      * @memberof PrevBlockInfo
      */
     'part_set_header'?: PartsetHeader;
+}
+/**
+ * QueryProposalResponse is the response type for the Query/Proposal RPC method.
+ * @export
+ * @interface Proposal200Response
+ */
+export interface Proposal200Response {
+    /**
+     * 
+     * @type {Proposals200ResponseProposalsInner}
+     * @memberof Proposal200Response
+     */
+    'proposal'?: Proposals200ResponseProposalsInner;
+}
+/**
+ * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
+ * @export
+ * @interface Proposals200Response
+ */
+export interface Proposals200Response {
+    /**
+     * 
+     * @type {Array<Proposals200ResponseProposalsInner>}
+     * @memberof Proposals200Response
+     */
+    'proposals'?: Array<Proposals200ResponseProposalsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof Proposals200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Proposal defines the core field members of a governance proposal.
+ * @export
+ * @interface Proposals200ResponseProposalsInner
+ */
+export interface Proposals200ResponseProposalsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'proposal_id'?: string;
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'content'?: AccountsAreTheExistingAccountsInner;
+    /**
+     * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'status'?: Proposals200ResponseProposalsInnerStatusEnum;
+    /**
+     * 
+     * @type {Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'final_tally_result'?: Proposals200ResponseProposalsInnerFinalTallyResult;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'submit_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'deposit_end_time'?: string;
+    /**
+     * 
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'voting_start_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInner
+     */
+    'voting_end_time'?: string;
+}
+
+export const Proposals200ResponseProposalsInnerStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed: 'PROPOSAL_STATUS_PASSED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Failed: 'PROPOSAL_STATUS_FAILED'
+} as const;
+
+export type Proposals200ResponseProposalsInnerStatusEnum = typeof Proposals200ResponseProposalsInnerStatusEnum[keyof typeof Proposals200ResponseProposalsInnerStatusEnum];
+
+/**
+ * TallyResult defines a standard tally for a governance proposal.
+ * @export
+ * @interface Proposals200ResponseProposalsInnerFinalTallyResult
+ */
+export interface Proposals200ResponseProposalsInnerFinalTallyResult {
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'yes'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'abstain'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'no'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'no_with_veto'?: string;
 }
 /**
  * 
@@ -6669,59 +6014,16 @@ export interface QuerySigningInfoResponseIsTheResponseTypeForTheQuerySigningInfo
 export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod {
     /**
      * 
-     * @type {Array<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo>}
+     * @type {Array<InfoIsTheSigningInfoOfAllValidatorsInner>}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod
      */
-    'info'?: Array<QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo>;
+    'info'?: Array<InfoIsTheSigningInfoOfAllValidatorsInner>;
     /**
      * 
      * @type {QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodPagination}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethod
      */
     'pagination'?: QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodPagination;
-}
-/**
- * ValidatorSigningInfo defines a validator\'s signing info for monitoring their liveness activity.
- * @export
- * @interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
- */
-export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
-     */
-    'start_height'?: string;
-    /**
-     * Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
-     * @type {string}
-     * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
-     */
-    'index_offset'?: string;
-    /**
-     * Timestamp until which the validator is jailed due to liveness downtime.
-     * @type {string}
-     * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
-     */
-    'jailed_until'?: string;
-    /**
-     * Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor.
-     * @type {boolean}
-     * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
-     */
-    'tombstoned'?: boolean;
-    /**
-     * A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
-     * @type {string}
-     * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodInfo
-     */
-    'missed_blocks_counter'?: string;
 }
 /**
  * PageResponse is to be embedded in gRPC response messages where the corresponding request message has used PageRequest.   message SomeResponse {          repeated Bar results = 1;          PageResponse page = 2;  }
@@ -6750,16 +6052,16 @@ export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInf
 export interface QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod {
     /**
      * 
-     * @type {Array<InlineResponse2003Balances>}
+     * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    'supply'?: Array<InlineResponse2003Balances>;
+    'supply'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * 
@@ -6782,10 +6084,10 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
 export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission {
     /**
      * 
-     * @type {Array<InlineResponse20016Pool>}
+     * @type {Array<CommunityPool200ResponsePoolInner>}
      * @memberof QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission
      */
-    'commission'?: Array<InlineResponse20016Pool>;
+    'commission'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * 
@@ -6795,16 +6097,16 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
 export interface QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod {
     /**
      * 
-     * @type {Array<InlineResponse20038DelegationResponses>}
+     * @type {Array<DelegatorDelegations200ResponseDelegationResponsesInner>}
      * @memberof QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod
      */
-    'delegation_responses'?: Array<InlineResponse20038DelegationResponses>;
+    'delegation_responses'?: Array<DelegatorDelegations200ResponseDelegationResponsesInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * 
@@ -6814,10 +6116,10 @@ export interface QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValid
 export interface QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMethod {
     /**
      * 
-     * @type {InlineResponse20041Validators}
+     * @type {StakingDelegatorValidators200ResponseValidatorsInner}
      * @memberof QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMethod
      */
-    'validator'?: InlineResponse20041Validators;
+    'validator'?: StakingDelegatorValidators200ResponseValidatorsInner;
 }
 /**
  * 
@@ -6827,16 +6129,242 @@ export interface QueryValidatorResponseIsResponseTypeForTheQueryValidatorRPCMeth
 export interface QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod {
     /**
      * validators contains all the queried validators.
-     * @type {Array<InlineResponse20041Validators>}
+     * @type {Array<StakingDelegatorValidators200ResponseValidatorsInner>}
      * @memberof QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod
      */
-    'validators'?: Array<InlineResponse20041Validators>;
+    'validators'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
     /**
      * 
-     * @type {InlineResponse200Pagination}
+     * @type {Accounts200ResponsePagination}
      * @memberof QueryValidatorsResponseIsResponseTypeForTheQueryValidatorsRPCMethod
      */
-    'pagination'?: InlineResponse200Pagination;
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryRedelegationsResponse is response type for the Query/Redelegations RPC method.
+ * @export
+ * @interface Redelegations200Response
+ */
+export interface Redelegations200Response {
+    /**
+     * 
+     * @type {Array<Redelegations200ResponseRedelegationResponsesInner>}
+     * @memberof Redelegations200Response
+     */
+    'redelegation_responses'?: Array<Redelegations200ResponseRedelegationResponsesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof Redelegations200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * RedelegationResponse is equivalent to a Redelegation except that its entries contain a balance in addition to shares which is more suitable for client responses.
+ * @export
+ * @interface Redelegations200ResponseRedelegationResponsesInner
+ */
+export interface Redelegations200ResponseRedelegationResponsesInner {
+    /**
+     * 
+     * @type {Redelegations200ResponseRedelegationResponsesInnerRedelegation}
+     * @memberof Redelegations200ResponseRedelegationResponsesInner
+     */
+    'redelegation'?: Redelegations200ResponseRedelegationResponsesInnerRedelegation;
+    /**
+     * 
+     * @type {Array<Redelegations200ResponseRedelegationResponsesInnerEntriesInner>}
+     * @memberof Redelegations200ResponseRedelegationResponsesInner
+     */
+    'entries'?: Array<Redelegations200ResponseRedelegationResponsesInnerEntriesInner>;
+}
+/**
+ * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it contains a balance in addition to shares which is more suitable for client responses.
+ * @export
+ * @interface Redelegations200ResponseRedelegationResponsesInnerEntriesInner
+ */
+export interface Redelegations200ResponseRedelegationResponsesInnerEntriesInner {
+    /**
+     * 
+     * @type {Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerEntriesInner
+     */
+    'redelegation_entry'?: Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerEntriesInner
+     */
+    'balance'?: string;
+}
+/**
+ * Redelegation contains the list of a particular delegator\'s redelegating bonds from a particular source validator to a particular destination validator.
+ * @export
+ * @interface Redelegations200ResponseRedelegationResponsesInnerRedelegation
+ */
+export interface Redelegations200ResponseRedelegationResponsesInnerRedelegation {
+    /**
+     * delegator_address is the bech32-encoded address of the delegator.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegation
+     */
+    'delegator_address'?: string;
+    /**
+     * validator_src_address is the validator redelegation source operator address.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegation
+     */
+    'validator_src_address'?: string;
+    /**
+     * validator_dst_address is the validator redelegation destination operator address.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegation
+     */
+    'validator_dst_address'?: string;
+    /**
+     * entries are the redelegation entries.
+     * @type {Array<Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner>}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegation
+     */
+    'entries'?: Array<Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner>;
+}
+/**
+ * RedelegationEntry defines a redelegation object with relevant metadata.
+ * @export
+ * @interface Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+ */
+export interface Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner {
+    /**
+     * creation_height  defines the height which the redelegation took place.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+     */
+    'creation_height'?: string;
+    /**
+     * completion_time defines the unix time for redelegation completion.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+     */
+    'completion_time'?: string;
+    /**
+     * initial_balance defines the initial balance when redelegation started.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+     */
+    'initial_balance'?: string;
+    /**
+     * shares_dst is the amount of destination-validator shares created by redelegation.
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+     */
+    'shares_dst'?: string;
+}
+/**
+ * SimulateResponse is the response type for the Service.SimulateRPC method.
+ * @export
+ * @interface Simulate200Response
+ */
+export interface Simulate200Response {
+    /**
+     * 
+     * @type {Simulate200ResponseGasInfo}
+     * @memberof Simulate200Response
+     */
+    'gas_info'?: Simulate200ResponseGasInfo;
+    /**
+     * 
+     * @type {Simulate200ResponseResult}
+     * @memberof Simulate200Response
+     */
+    'result'?: Simulate200ResponseResult;
+}
+/**
+ * gas_info is the information about gas used in the simulation.
+ * @export
+ * @interface Simulate200ResponseGasInfo
+ */
+export interface Simulate200ResponseGasInfo {
+    /**
+     * GasWanted is the maximum units of work we allow this tx to perform.
+     * @type {string}
+     * @memberof Simulate200ResponseGasInfo
+     */
+    'gas_wanted'?: string;
+    /**
+     * GasUsed is the amount of gas actually consumed.
+     * @type {string}
+     * @memberof Simulate200ResponseGasInfo
+     */
+    'gas_used'?: string;
+}
+/**
+ * result is the result of the simulation.
+ * @export
+ * @interface Simulate200ResponseResult
+ */
+export interface Simulate200ResponseResult {
+    /**
+     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
+     * @type {string}
+     * @memberof Simulate200ResponseResult
+     */
+    'data'?: string;
+    /**
+     * Log contains the log information from message or handler execution.
+     * @type {string}
+     * @memberof Simulate200ResponseResult
+     */
+    'log'?: string;
+    /**
+     * Events contains a slice of Event objects that were emitted during message or handler execution.
+     * @type {Array<Simulate200ResponseResultEventsInner>}
+     * @memberof Simulate200ResponseResult
+     */
+    'events'?: Array<Simulate200ResponseResultEventsInner>;
+}
+/**
+ * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
+ * @export
+ * @interface Simulate200ResponseResultEventsInner
+ */
+export interface Simulate200ResponseResultEventsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof Simulate200ResponseResultEventsInner
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {Array<Simulate200ResponseResultEventsInnerAttributesInner>}
+     * @memberof Simulate200ResponseResultEventsInner
+     */
+    'attributes'?: Array<Simulate200ResponseResultEventsInnerAttributesInner>;
+}
+/**
+ * EventAttribute is a single key-value pair, associated with an event.
+ * @export
+ * @interface Simulate200ResponseResultEventsInnerAttributesInner
+ */
+export interface Simulate200ResponseResultEventsInnerAttributesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof Simulate200ResponseResultEventsInnerAttributesInner
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Simulate200ResponseResultEventsInnerAttributesInner
+     */
+    'value'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Simulate200ResponseResultEventsInnerAttributesInner
+     */
+    'index'?: boolean;
 }
 /**
  * 
@@ -6862,6 +6390,265 @@ export const SingleRepresentsASingleSignerModeEnum = {
 export type SingleRepresentsASingleSignerModeEnum = typeof SingleRepresentsASingleSignerModeEnum[keyof typeof SingleRepresentsASingleSignerModeEnum];
 
 /**
+ * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
+ * @export
+ * @interface StakingDelegatorValidators200Response
+ */
+export interface StakingDelegatorValidators200Response {
+    /**
+     * validators defines the validators\' info of a delegator.
+     * @type {Array<StakingDelegatorValidators200ResponseValidatorsInner>}
+     * @memberof StakingDelegatorValidators200Response
+     */
+    'validators'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof StakingDelegatorValidators200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Validator defines a validator, together with the total amount of the Validator\'s bond shares and their exchange rate to coins. Slashing results in a decrease in the exchange rate, allowing correct calculation of future undelegations without iterating over delegators. When coins are delegated to this validator, the validator is credited with a delegation whose number of bond shares is based on the amount of coins delegated divided by the current exchange rate. Voting power can be calculated as total bonded shares multiplied by exchange rate.
+ * @export
+ * @interface StakingDelegatorValidators200ResponseValidatorsInner
+ */
+export interface StakingDelegatorValidators200ResponseValidatorsInner {
+    /**
+     * operator_address defines the address of the validator\'s operator; bech encoded in JSON.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'operator_address'?: string;
+    /**
+     * 
+     * @type {AccountsAreTheExistingAccountsInner}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'consensus_pubkey'?: AccountsAreTheExistingAccountsInner;
+    /**
+     * jailed defined whether the validator has been jailed from bonded status or not.
+     * @type {boolean}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'jailed'?: boolean;
+    /**
+     * status is the validator status (bonded/unbonding/unbonded).
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'status'?: StakingDelegatorValidators200ResponseValidatorsInnerStatusEnum;
+    /**
+     * tokens define the delegated tokens (incl. self-delegation).
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'tokens'?: string;
+    /**
+     * delegator_shares defines total shares issued to a validator\'s delegators.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'delegator_shares'?: string;
+    /**
+     * 
+     * @type {StakingDelegatorValidators200ResponseValidatorsInnerDescription}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'description'?: StakingDelegatorValidators200ResponseValidatorsInnerDescription;
+    /**
+     * unbonding_height defines, if unbonding, the height at which this validator has begun unbonding.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'unbonding_height'?: string;
+    /**
+     * unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'unbonding_time'?: string;
+    /**
+     * 
+     * @type {StakingDelegatorValidators200ResponseValidatorsInnerCommission}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'commission'?: StakingDelegatorValidators200ResponseValidatorsInnerCommission;
+    /**
+     * min_self_delegation is the validator\'s self declared minimum self delegation.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'min_self_delegation'?: string;
+}
+
+export const StakingDelegatorValidators200ResponseValidatorsInnerStatusEnum = {
+    Unspecified: 'BOND_STATUS_UNSPECIFIED',
+    Unbonded: 'BOND_STATUS_UNBONDED',
+    Unbonding: 'BOND_STATUS_UNBONDING',
+    Bonded: 'BOND_STATUS_BONDED'
+} as const;
+
+export type StakingDelegatorValidators200ResponseValidatorsInnerStatusEnum = typeof StakingDelegatorValidators200ResponseValidatorsInnerStatusEnum[keyof typeof StakingDelegatorValidators200ResponseValidatorsInnerStatusEnum];
+
+/**
+ * commission defines the commission parameters.
+ * @export
+ * @interface StakingDelegatorValidators200ResponseValidatorsInnerCommission
+ */
+export interface StakingDelegatorValidators200ResponseValidatorsInnerCommission {
+    /**
+     * 
+     * @type {StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerCommission
+     */
+    'commission_rates'?: StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates;
+    /**
+     * update_time is the last time the commission rate was changed.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerCommission
+     */
+    'update_time'?: string;
+}
+/**
+ * commission_rates defines the initial commission rates to be used for creating a validator.
+ * @export
+ * @interface StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates
+ */
+export interface StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates {
+    /**
+     * rate is the commission rate charged to delegators, as a fraction.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates
+     */
+    'rate'?: string;
+    /**
+     * max_rate defines the maximum commission rate which validator can ever charge, as a fraction.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates
+     */
+    'max_rate'?: string;
+    /**
+     * max_change_rate defines the maximum daily increase of the validator commission, as a fraction.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerCommissionCommissionRates
+     */
+    'max_change_rate'?: string;
+}
+/**
+ * description defines the description terms for the validator.
+ * @export
+ * @interface StakingDelegatorValidators200ResponseValidatorsInnerDescription
+ */
+export interface StakingDelegatorValidators200ResponseValidatorsInnerDescription {
+    /**
+     * moniker defines a human-readable name for the validator.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerDescription
+     */
+    'moniker'?: string;
+    /**
+     * identity defines an optional identity signature (ex. UPort or Keybase).
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerDescription
+     */
+    'identity'?: string;
+    /**
+     * website defines an optional website link.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerDescription
+     */
+    'website'?: string;
+    /**
+     * security_contact defines an optional email for security contact.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerDescription
+     */
+    'security_contact'?: string;
+    /**
+     * details define other optional details.
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInnerDescription
+     */
+    'details'?: string;
+}
+/**
+ * QueryParamsResponse is response type for the Query/Params RPC method.
+ * @export
+ * @interface StakingParams200Response
+ */
+export interface StakingParams200Response {
+    /**
+     * 
+     * @type {StakingParams200ResponseParams}
+     * @memberof StakingParams200Response
+     */
+    'params'?: StakingParams200ResponseParams;
+}
+/**
+ * params holds all the parameters of this module.
+ * @export
+ * @interface StakingParams200ResponseParams
+ */
+export interface StakingParams200ResponseParams {
+    /**
+     * unbonding_time is the time duration of unbonding.
+     * @type {string}
+     * @memberof StakingParams200ResponseParams
+     */
+    'unbonding_time'?: string;
+    /**
+     * max_validators is the maximum number of validators.
+     * @type {number}
+     * @memberof StakingParams200ResponseParams
+     */
+    'max_validators'?: number;
+    /**
+     * max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio).
+     * @type {number}
+     * @memberof StakingParams200ResponseParams
+     */
+    'max_entries'?: number;
+    /**
+     * historical_entries is the number of historical entries to persist.
+     * @type {number}
+     * @memberof StakingParams200ResponseParams
+     */
+    'historical_entries'?: number;
+    /**
+     * bond_denom defines the bondable coin denomination.
+     * @type {string}
+     * @memberof StakingParams200ResponseParams
+     */
+    'bond_denom'?: string;
+}
+/**
+ * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
+ * @export
+ * @interface SupplyOf200Response
+ */
+export interface SupplyOf200Response {
+    /**
+     * 
+     * @type {AllBalances200ResponseBalancesInner}
+     * @memberof SupplyOf200Response
+     */
+    'amount'?: AllBalances200ResponseBalancesInner;
+}
+/**
+ * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
+ * @export
+ * @interface TallyResult200Response
+ */
+export interface TallyResult200Response {
+    /**
+     * 
+     * @type {Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @memberof TallyResult200Response
+     */
+    'tally'?: Proposals200ResponseProposalsInnerFinalTallyResult;
+}
+/**
  * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
  * @export
  * @interface TendermintAbciEvent
@@ -6875,10 +6662,10 @@ export interface TendermintAbciEvent {
     'type'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20049ResultAttributes>}
+     * @type {Array<Simulate200ResponseResultEventsInnerAttributesInner>}
      * @memberof TendermintAbciEvent
      */
-    'attributes'?: Array<InlineResponse20049ResultAttributes>;
+    'attributes'?: Array<Simulate200ResponseResultEventsInnerAttributesInner>;
 }
 /**
  * EventAttribute is a single key-value pair, associated with an event.
@@ -6932,10 +6719,10 @@ export interface TendermintCryptoPublicKey {
 export interface TendermintP2pDefaultNodeInfo {
     /**
      * 
-     * @type {InlineResponse20012DefaultNodeInfoProtocolVersion}
+     * @type {GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion}
      * @memberof TendermintP2pDefaultNodeInfo
      */
-    'protocol_version'?: InlineResponse20012DefaultNodeInfoProtocolVersion;
+    'protocol_version'?: GetNodeInfo200ResponseDefaultNodeInfoProtocolVersion;
     /**
      * 
      * @type {string}
@@ -6974,10 +6761,10 @@ export interface TendermintP2pDefaultNodeInfo {
     'moniker'?: string;
     /**
      * 
-     * @type {InlineResponse20012DefaultNodeInfoOther}
+     * @type {GetNodeInfo200ResponseDefaultNodeInfoOther}
      * @memberof TendermintP2pDefaultNodeInfo
      */
-    'other'?: InlineResponse20012DefaultNodeInfoOther;
+    'other'?: GetNodeInfo200ResponseDefaultNodeInfoOther;
 }
 /**
  * 
@@ -7031,10 +6818,10 @@ export interface TendermintP2pProtocolVersion {
 export interface TendermintTypesBlock {
     /**
      * 
-     * @type {InlineResponse20010BlockHeader}
+     * @type {GetLatestBlock200ResponseBlockHeader}
      * @memberof TendermintTypesBlock
      */
-    'header'?: InlineResponse20010BlockHeader;
+    'header'?: GetLatestBlock200ResponseBlockHeader;
     /**
      * 
      * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
@@ -7043,16 +6830,16 @@ export interface TendermintTypesBlock {
     'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidence}
+     * @type {GetLatestBlock200ResponseBlockEvidence}
      * @memberof TendermintTypesBlock
      */
-    'evidence'?: InlineResponse20010BlockEvidence;
+    'evidence'?: GetLatestBlock200ResponseBlockEvidence;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesBlock
      */
-    'last_commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    'last_commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * 
@@ -7115,10 +6902,10 @@ export interface TendermintTypesCommit {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>}
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>}
      * @memberof TendermintTypesCommit
      */
-    'signatures'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignatures>;
+    'signatures'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>;
 }
 /**
  * CommitSig is a part of the Vote included in a Commit.
@@ -7182,16 +6969,16 @@ export interface TendermintTypesData {
 export interface TendermintTypesDuplicateVoteEvidence {
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    'vote_a'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
+    'vote_a'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    'vote_b'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidenceVoteA;
+    'vote_b'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
     /**
      * 
      * @type {string}
@@ -7219,16 +7006,16 @@ export interface TendermintTypesDuplicateVoteEvidence {
 export interface TendermintTypesEvidence {
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceDuplicateVoteEvidence}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence}
      * @memberof TendermintTypesEvidence
      */
-    'duplicate_vote_evidence'?: InlineResponse20010BlockEvidenceDuplicateVoteEvidence;
+    'duplicate_vote_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidence}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence}
      * @memberof TendermintTypesEvidence
      */
-    'light_client_attack_evidence'?: InlineResponse20010BlockEvidenceLightClientAttackEvidence;
+    'light_client_attack_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence;
 }
 /**
  * 
@@ -7238,10 +7025,10 @@ export interface TendermintTypesEvidence {
 export interface TendermintTypesEvidenceList {
     /**
      * 
-     * @type {Array<InlineResponse20010BlockEvidenceEvidence>}
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>}
      * @memberof TendermintTypesEvidenceList
      */
-    'evidence'?: Array<InlineResponse20010BlockEvidenceEvidence>;
+    'evidence'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>;
 }
 /**
  * Header defines the structure of a Tendermint block header.
@@ -7342,16 +7129,16 @@ export interface TendermintTypesHeader {
 export interface TendermintTypesLightBlock {
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader}
      * @memberof TendermintTypesLightBlock
      */
-    'signed_header'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeader;
+    'signed_header'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet}
      * @memberof TendermintTypesLightBlock
      */
-    'validator_set'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSet;
+    'validator_set'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
@@ -7361,10 +7148,10 @@ export interface TendermintTypesLightBlock {
 export interface TendermintTypesLightClientAttackEvidence {
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    'conflicting_block'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlock;
+    'conflicting_block'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock;
     /**
      * 
      * @type {string}
@@ -7373,10 +7160,10 @@ export interface TendermintTypesLightClientAttackEvidence {
     'common_height'?: string;
     /**
      * 
-     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    'byzantine_validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    'byzantine_validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
     /**
      * 
      * @type {string}
@@ -7417,16 +7204,16 @@ export interface TendermintTypesPartSetHeader {
 export interface TendermintTypesSignedHeader {
     /**
      * 
-     * @type {InlineResponse20010BlockHeader}
+     * @type {GetLatestBlock200ResponseBlockHeader}
      * @memberof TendermintTypesSignedHeader
      */
-    'header'?: InlineResponse20010BlockHeader;
+    'header'?: GetLatestBlock200ResponseBlockHeader;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesSignedHeader
      */
-    'commit'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    'commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
@@ -7483,16 +7270,16 @@ export interface TendermintTypesValidator {
 export interface TendermintTypesValidatorSet {
     /**
      * 
-     * @type {Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>}
+     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
      * @memberof TendermintTypesValidatorSet
      */
-    'validators'?: Array<InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators>;
+    'validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
     /**
      * 
-     * @type {InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators}
+     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner}
      * @memberof TendermintTypesValidatorSet
      */
-    'proposer'?: InlineResponse20010BlockEvidenceLightClientAttackEvidenceConflictingBlockValidatorSetValidators;
+    'proposer'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner;
     /**
      * 
      * @type {string}
@@ -7585,6 +7372,32 @@ export interface TendermintVersionConsensus {
     'app'?: string;
 }
 /**
+ * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
+ * @export
+ * @interface UnbondingDelegation200Response
+ */
+export interface UnbondingDelegation200Response {
+    /**
+     * 
+     * @type {DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner}
+     * @memberof UnbondingDelegation200Response
+     */
+    'unbond'?: DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner;
+}
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method.
+ * @export
+ * @interface UpgradedConsensusState200Response
+ */
+export interface UpgradedConsensusState200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpgradedConsensusState200Response
+     */
+    'upgraded_consensus_state'?: string;
+}
+/**
  * ValidatorSigningInfo defines a validator\'s signing info for monitoring their liveness activity.
  * @export
  * @interface ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress
@@ -7627,6 +7440,193 @@ export interface ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress {
      */
     'missed_blocks_counter'?: string;
 }
+/**
+ * QueryValidatorOutstandingRewardsResponse is the response type for the Query/ValidatorOutstandingRewards RPC method.
+ * @export
+ * @interface ValidatorOutstandingRewards200Response
+ */
+export interface ValidatorOutstandingRewards200Response {
+    /**
+     * 
+     * @type {ValidatorOutstandingRewards200ResponseRewards}
+     * @memberof ValidatorOutstandingRewards200Response
+     */
+    'rewards'?: ValidatorOutstandingRewards200ResponseRewards;
+}
+/**
+ * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards for a validator inexpensive to track, allows simple sanity checks.
+ * @export
+ * @interface ValidatorOutstandingRewards200ResponseRewards
+ */
+export interface ValidatorOutstandingRewards200ResponseRewards {
+    /**
+     * 
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof ValidatorOutstandingRewards200ResponseRewards
+     */
+    'rewards'?: Array<CommunityPool200ResponsePoolInner>;
+}
+/**
+ * QueryValidatorSlashesResponse is the response type for the Query/ValidatorSlashes RPC method.
+ * @export
+ * @interface ValidatorSlashes200Response
+ */
+export interface ValidatorSlashes200Response {
+    /**
+     * slashes defines the slashes the validator received.
+     * @type {Array<ValidatorSlashes200ResponseSlashesInner>}
+     * @memberof ValidatorSlashes200Response
+     */
+    'slashes'?: Array<ValidatorSlashes200ResponseSlashesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof ValidatorSlashes200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred.
+ * @export
+ * @interface ValidatorSlashes200ResponseSlashesInner
+ */
+export interface ValidatorSlashes200ResponseSlashesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ValidatorSlashes200ResponseSlashesInner
+     */
+    'validator_period'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ValidatorSlashes200ResponseSlashesInner
+     */
+    'fraction'?: string;
+}
+/**
+ * QueryValidatorUnbondingDelegationsResponse is response type for the Query/ValidatorUnbondingDelegations RPC method.
+ * @export
+ * @interface ValidatorUnbondingDelegations200Response
+ */
+export interface ValidatorUnbondingDelegations200Response {
+    /**
+     * 
+     * @type {Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>}
+     * @memberof ValidatorUnbondingDelegations200Response
+     */
+    'unbonding_responses'?: Array<DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof ValidatorUnbondingDelegations200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryVoteResponse is the response type for the Query/Vote RPC method.
+ * @export
+ * @interface Vote200Response
+ */
+export interface Vote200Response {
+    /**
+     * 
+     * @type {Votes200ResponseVotesInner}
+     * @memberof Vote200Response
+     */
+    'vote'?: Votes200ResponseVotesInner;
+}
+/**
+ * QueryVotesResponse is the response type for the Query/Votes RPC method.
+ * @export
+ * @interface Votes200Response
+ */
+export interface Votes200Response {
+    /**
+     * votes defined the queried votes.
+     * @type {Array<Votes200ResponseVotesInner>}
+     * @memberof Votes200Response
+     */
+    'votes'?: Array<Votes200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof Votes200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
+ * @export
+ * @interface Votes200ResponseVotesInner
+ */
+export interface Votes200ResponseVotesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof Votes200ResponseVotesInner
+     */
+    'proposal_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Votes200ResponseVotesInner
+     */
+    'voter'?: string;
+    /**
+     * Deprecated: Prefer to use `options` instead. This field is set in queries if and only if `len(options) == 1` and that option has weight 1. In all other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
+     * @type {string}
+     * @memberof Votes200ResponseVotesInner
+     */
+    'option'?: Votes200ResponseVotesInnerOptionEnum;
+    /**
+     * 
+     * @type {Array<Votes200ResponseVotesInnerOptionsInner>}
+     * @memberof Votes200ResponseVotesInner
+     */
+    'options'?: Array<Votes200ResponseVotesInnerOptionsInner>;
+}
+
+export const Votes200ResponseVotesInnerOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type Votes200ResponseVotesInnerOptionEnum = typeof Votes200ResponseVotesInnerOptionEnum[keyof typeof Votes200ResponseVotesInnerOptionEnum];
+
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ * @export
+ * @interface Votes200ResponseVotesInnerOptionsInner
+ */
+export interface Votes200ResponseVotesInnerOptionsInner {
+    /**
+     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * @type {string}
+     * @memberof Votes200ResponseVotesInnerOptionsInner
+     */
+    'option'?: Votes200ResponseVotesInnerOptionsInnerOptionEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Votes200ResponseVotesInnerOptionsInner
+     */
+    'weight'?: string;
+}
+
+export const Votes200ResponseVotesInnerOptionsInnerOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type Votes200ResponseVotesInnerOptionsInnerOptionEnum = typeof Votes200ResponseVotesInnerOptionsInnerOptionEnum[keyof typeof Votes200ResponseVotesInnerOptionsInnerOptionEnum];
+
 
 /**
  * QueryApi - axios parameter creator
@@ -10141,7 +10141,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async account(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+        async account(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.account(address, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10156,7 +10156,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+        async accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Accounts200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10172,7 +10172,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
+        async allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllBalances200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10187,7 +10187,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
+        async allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllEvidence200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10199,7 +10199,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allowance(granter: string, grantee: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+        async allowance(granter: string, grantee: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Allowance200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allowance(granter, grantee, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10215,7 +10215,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+        async allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Allowances200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10225,7 +10225,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annualProvisions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
+        async annualProvisions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnualProvisions200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.annualProvisions(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10236,7 +10236,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appliedPlan(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
+        async appliedPlan(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppliedPlan200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appliedPlan(name, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10246,7 +10246,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+        async authParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10258,7 +10258,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async balance(address: string, denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
+        async balance(address: string, denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Balance200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.balance(address, denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10268,7 +10268,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
+        async bankParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10278,7 +10278,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async communityPool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
+        async communityPool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CommunityPool200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.communityPool(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10288,7 +10288,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async currentPlan(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
+        async currentPlan(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrentPlan200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.currentPlan(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10300,7 +10300,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
+        async delegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Delegation200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegation(validatorAddr, delegatorAddr, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10312,7 +10312,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegationRewards(delegatorAddress: string, validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
+        async delegationRewards(delegatorAddress: string, validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegationRewards200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegationRewards(delegatorAddress, validatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10323,7 +10323,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegationTotalRewards(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
+        async delegationTotalRewards(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegationTotalRewards200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegationTotalRewards(delegatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10339,7 +10339,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
+        async delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegatorDelegations200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10355,7 +10355,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
+        async delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegatorUnbondingDelegations200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10367,7 +10367,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+        async delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegatorValidator200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorValidator(delegatorAddr, validatorAddr, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10378,7 +10378,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorValidators(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20019>> {
+        async delegatorValidators(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegatorValidators200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorValidators(delegatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10389,7 +10389,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delegatorWithdrawAddress(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
+        async delegatorWithdrawAddress(delegatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DelegatorWithdrawAddress200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delegatorWithdrawAddress(delegatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10400,7 +10400,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomMetadata(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
+        async denomMetadata(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DenomMetadata200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.denomMetadata(denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10416,7 +10416,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
+        async denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DenomOwners200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10431,7 +10431,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+        async denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DenomsMetadata200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10443,7 +10443,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
+        async deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposit200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deposit(proposalId, depositor, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10459,7 +10459,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
+        async deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposits200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10469,7 +10469,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async distributionParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
+        async distributionParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DistributionParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.distributionParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10480,7 +10480,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async evidence(evidenceHash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
+        async evidence(evidenceHash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Evidence200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.evidence(evidenceHash, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10491,7 +10491,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govParams(paramsType: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
+        async govParams(paramsType: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.govParams(paramsType, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10509,7 +10509,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+        async grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Grants200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10520,7 +10520,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async historicalInfo(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+        async historicalInfo(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoricalInfo200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.historicalInfo(height, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10530,7 +10530,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async inflation(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
+        async inflation(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Inflation200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.inflation(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10540,7 +10540,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async mintParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
+        async mintParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MintParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.mintParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10551,7 +10551,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async moduleVersions(moduleName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
+        async moduleVersions(moduleName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModuleVersions200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.moduleVersions(moduleName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10563,7 +10563,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async params(subspace?: string, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
+        async params(subspace?: string, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Params200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.params(subspace, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10573,7 +10573,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
+        async pool(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Pool200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.pool(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10584,7 +10584,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
+        async proposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Proposal200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.proposal(proposalId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10602,7 +10602,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
+        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Proposals200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10620,7 +10620,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
+        async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Redelegations200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10672,7 +10672,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+        async stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StakingDelegatorValidators200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10682,7 +10682,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async stakingParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
+        async stakingParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StakingParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stakingParams(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10693,7 +10693,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async supplyOf(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
+        async supplyOf(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SupplyOf200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.supplyOf(denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10704,7 +10704,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tallyResult(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
+        async tallyResult(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TallyResult200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tallyResult(proposalId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10731,7 +10731,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
+        async unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnbondingDelegation200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unbondingDelegation(validatorAddr, delegatorAddr, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10742,7 +10742,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async upgradedConsensusState(lastHeight: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+        async upgradedConsensusState(lastHeight: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpgradedConsensusState200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.upgradedConsensusState(lastHeight, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10791,7 +10791,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorOutstandingRewards(validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
+        async validatorOutstandingRewards(validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorOutstandingRewards200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorOutstandingRewards(validatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10809,7 +10809,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
+        async validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorSlashes200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10825,7 +10825,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
+        async validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorUnbondingDelegations200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10853,7 +10853,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async vote(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
+        async vote(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Vote200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.vote(proposalId, voter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10869,7 +10869,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
+        async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Votes200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10890,7 +10890,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        account(address: string, options?: any): AxiosPromise<InlineResponse2001> {
+        account(address: string, options?: any): AxiosPromise<Account200Response> {
             return localVarFp.account(address, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10904,7 +10904,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse200> {
+        accounts(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Accounts200Response> {
             return localVarFp.accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10919,7 +10919,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse2003> {
+        allBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<AllBalances200Response> {
             return localVarFp.allBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10933,7 +10933,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20024> {
+        allEvidence(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<AllEvidence200Response> {
             return localVarFp.allEvidence(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10944,7 +10944,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allowance(granter: string, grantee: string, options?: any): AxiosPromise<InlineResponse20056> {
+        allowance(granter: string, grantee: string, options?: any): AxiosPromise<Allowance200Response> {
             return localVarFp.allowance(granter, grantee, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10959,7 +10959,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20057> {
+        allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Allowances200Response> {
             return localVarFp.allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10968,7 +10968,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annualProvisions(options?: any): AxiosPromise<InlineResponse20034> {
+        annualProvisions(options?: any): AxiosPromise<AnnualProvisions200Response> {
             return localVarFp.annualProvisions(options).then((request) => request(axios, basePath));
         },
         /**
@@ -10978,7 +10978,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appliedPlan(name: string, options?: any): AxiosPromise<InlineResponse20051> {
+        appliedPlan(name: string, options?: any): AxiosPromise<AppliedPlan200Response> {
             return localVarFp.appliedPlan(name, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10987,7 +10987,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authParams(options?: any): AxiosPromise<InlineResponse2002> {
+        authParams(options?: any): AxiosPromise<AuthParams200Response> {
             return localVarFp.authParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -10998,7 +10998,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        balance(address: string, denom: string, options?: any): AxiosPromise<InlineResponse2004> {
+        balance(address: string, denom: string, options?: any): AxiosPromise<Balance200Response> {
             return localVarFp.balance(address, denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11007,7 +11007,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankParams(options?: any): AxiosPromise<InlineResponse2008> {
+        bankParams(options?: any): AxiosPromise<BankParams200Response> {
             return localVarFp.bankParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11016,7 +11016,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        communityPool(options?: any): AxiosPromise<InlineResponse20016> {
+        communityPool(options?: any): AxiosPromise<CommunityPool200Response> {
             return localVarFp.communityPool(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11025,7 +11025,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        currentPlan(options?: any): AxiosPromise<InlineResponse20052> {
+        currentPlan(options?: any): AxiosPromise<CurrentPlan200Response> {
             return localVarFp.currentPlan(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11036,7 +11036,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20046> {
+        delegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<Delegation200Response> {
             return localVarFp.delegation(validatorAddr, delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11047,7 +11047,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): AxiosPromise<InlineResponse20018> {
+        delegationRewards(delegatorAddress: string, validatorAddress: string, options?: any): AxiosPromise<DelegationRewards200Response> {
             return localVarFp.delegationRewards(delegatorAddress, validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11057,7 +11057,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegationTotalRewards(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20017> {
+        delegationTotalRewards(delegatorAddress: string, options?: any): AxiosPromise<DelegationTotalRewards200Response> {
             return localVarFp.delegationTotalRewards(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11072,7 +11072,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20038> {
+        delegatorDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<DelegatorDelegations200Response> {
             return localVarFp.delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11087,7 +11087,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20040> {
+        delegatorUnbondingDelegations(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<DelegatorUnbondingDelegations200Response> {
             return localVarFp.delegatorUnbondingDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11098,7 +11098,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<InlineResponse20042> {
+        delegatorValidator(delegatorAddr: string, validatorAddr: string, options?: any): AxiosPromise<DelegatorValidator200Response> {
             return localVarFp.delegatorValidator(delegatorAddr, validatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11108,7 +11108,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorValidators(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20019> {
+        delegatorValidators(delegatorAddress: string, options?: any): AxiosPromise<DelegatorValidators200Response> {
             return localVarFp.delegatorValidators(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11118,7 +11118,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delegatorWithdrawAddress(delegatorAddress: string, options?: any): AxiosPromise<InlineResponse20020> {
+        delegatorWithdrawAddress(delegatorAddress: string, options?: any): AxiosPromise<DelegatorWithdrawAddress200Response> {
             return localVarFp.delegatorWithdrawAddress(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11128,7 +11128,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomMetadata(denom: string, options?: any): AxiosPromise<InlineResponse2007> {
+        denomMetadata(denom: string, options?: any): AxiosPromise<DenomMetadata200Response> {
             return localVarFp.denomMetadata(denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11143,7 +11143,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse2005> {
+        denomOwners(denom: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<DenomOwners200Response> {
             return localVarFp.denomOwners(denom, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11157,7 +11157,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse2006> {
+        denomsMetadata(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<DenomsMetadata200Response> {
             return localVarFp.denomsMetadata(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11168,7 +11168,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<InlineResponse20030> {
+        deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<Deposit200Response> {
             return localVarFp.deposit(proposalId, depositor, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11183,7 +11183,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20029> {
+        deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Deposits200Response> {
             return localVarFp.deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11192,7 +11192,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        distributionParams(options?: any): AxiosPromise<InlineResponse20021> {
+        distributionParams(options?: any): AxiosPromise<DistributionParams200Response> {
             return localVarFp.distributionParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11202,7 +11202,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        evidence(evidenceHash: string, options?: any): AxiosPromise<InlineResponse20025> {
+        evidence(evidenceHash: string, options?: any): AxiosPromise<Evidence200Response> {
             return localVarFp.evidence(evidenceHash, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11212,7 +11212,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govParams(paramsType: string, options?: any): AxiosPromise<InlineResponse20026> {
+        govParams(paramsType: string, options?: any): AxiosPromise<GovParams200Response> {
             return localVarFp.govParams(paramsType, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11229,7 +11229,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20055> {
+        grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Grants200Response> {
             return localVarFp.grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11239,7 +11239,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        historicalInfo(height: string, options?: any): AxiosPromise<InlineResponse20043> {
+        historicalInfo(height: string, options?: any): AxiosPromise<HistoricalInfo200Response> {
             return localVarFp.historicalInfo(height, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11248,7 +11248,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        inflation(options?: any): AxiosPromise<InlineResponse20035> {
+        inflation(options?: any): AxiosPromise<Inflation200Response> {
             return localVarFp.inflation(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11257,7 +11257,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        mintParams(options?: any): AxiosPromise<InlineResponse20036> {
+        mintParams(options?: any): AxiosPromise<MintParams200Response> {
             return localVarFp.mintParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11267,7 +11267,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        moduleVersions(moduleName?: string, options?: any): AxiosPromise<InlineResponse20053> {
+        moduleVersions(moduleName?: string, options?: any): AxiosPromise<ModuleVersions200Response> {
             return localVarFp.moduleVersions(moduleName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11278,7 +11278,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        params(subspace?: string, key?: string, options?: any): AxiosPromise<InlineResponse20037> {
+        params(subspace?: string, key?: string, options?: any): AxiosPromise<Params200Response> {
             return localVarFp.params(subspace, key, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11287,7 +11287,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pool(options?: any): AxiosPromise<InlineResponse20045> {
+        pool(options?: any): AxiosPromise<Pool200Response> {
             return localVarFp.pool(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11297,7 +11297,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposal(proposalId: string, options?: any): AxiosPromise<InlineResponse20028> {
+        proposal(proposalId: string, options?: any): AxiosPromise<Proposal200Response> {
             return localVarFp.proposal(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11314,7 +11314,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20027> {
+        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Proposals200Response> {
             return localVarFp.proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11331,7 +11331,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20039> {
+        redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Redelegations200Response> {
             return localVarFp.redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11379,7 +11379,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20041> {
+        stakingDelegatorValidators(delegatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<StakingDelegatorValidators200Response> {
             return localVarFp.stakingDelegatorValidators(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11388,7 +11388,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stakingParams(options?: any): AxiosPromise<InlineResponse20044> {
+        stakingParams(options?: any): AxiosPromise<StakingParams200Response> {
             return localVarFp.stakingParams(options).then((request) => request(axios, basePath));
         },
         /**
@@ -11398,7 +11398,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        supplyOf(denom: string, options?: any): AxiosPromise<InlineResponse2009> {
+        supplyOf(denom: string, options?: any): AxiosPromise<SupplyOf200Response> {
             return localVarFp.supplyOf(denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11408,7 +11408,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tallyResult(proposalId: string, options?: any): AxiosPromise<InlineResponse20031> {
+        tallyResult(proposalId: string, options?: any): AxiosPromise<TallyResult200Response> {
             return localVarFp.tallyResult(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11433,7 +11433,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<InlineResponse20047> {
+        unbondingDelegation(validatorAddr: string, delegatorAddr: string, options?: any): AxiosPromise<UnbondingDelegation200Response> {
             return localVarFp.unbondingDelegation(validatorAddr, delegatorAddr, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11443,7 +11443,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        upgradedConsensusState(lastHeight: string, options?: any): AxiosPromise<InlineResponse20054> {
+        upgradedConsensusState(lastHeight: string, options?: any): AxiosPromise<UpgradedConsensusState200Response> {
             return localVarFp.upgradedConsensusState(lastHeight, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11488,7 +11488,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorOutstandingRewards(validatorAddress: string, options?: any): AxiosPromise<InlineResponse20022> {
+        validatorOutstandingRewards(validatorAddress: string, options?: any): AxiosPromise<ValidatorOutstandingRewards200Response> {
             return localVarFp.validatorOutstandingRewards(validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11505,7 +11505,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20023> {
+        validatorSlashes(validatorAddress: string, startingHeight?: string, endingHeight?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<ValidatorSlashes200Response> {
             return localVarFp.validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11520,7 +11520,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20048> {
+        validatorUnbondingDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<ValidatorUnbondingDelegations200Response> {
             return localVarFp.validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11546,7 +11546,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        vote(proposalId: string, voter: string, options?: any): AxiosPromise<InlineResponse20033> {
+        vote(proposalId: string, voter: string, options?: any): AxiosPromise<Vote200Response> {
             return localVarFp.vote(proposalId, voter, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11561,7 +11561,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20032> {
+        votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Votes200Response> {
             return localVarFp.votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
     };
@@ -12382,11 +12382,11 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
-         * @param {InlineObject} body 
+         * @param {BroadcastTxRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        broadcastTx: async (body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        broadcastTx: async (body: BroadcastTxRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('broadcastTx', 'body', body)
             const localVarPath = `/cosmos/tx/v1beta1/txs`;
@@ -12801,11 +12801,11 @@ export const ServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
-         * @param {InlineObject} body 
+         * @param {BroadcastTxRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async broadcastTx(body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
+        async broadcastTx(body: BroadcastTxRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BroadcastTx200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.broadcastTx(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12816,7 +12816,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBlockByHeight(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
+        async getBlockByHeight(height: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetBlockByHeight200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getBlockByHeight(height, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12826,7 +12826,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestBlock(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
+        async getLatestBlock(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetLatestBlock200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLatestBlock(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12841,7 +12841,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
+        async getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetLatestValidatorSet200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12851,7 +12851,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getNodeInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
+        async getNodeInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetNodeInfo200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNodeInfo(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12861,7 +12861,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSyncing(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
+        async getSyncing(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetSyncing200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSyncing(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12905,7 +12905,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
+        async getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetValidatorSetByHeight200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12916,7 +12916,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulate(body: CosmosTxV1beta1SimulateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
+        async simulate(body: CosmosTxV1beta1SimulateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Simulate200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.simulate(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12933,11 +12933,11 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
-         * @param {InlineObject} body 
+         * @param {BroadcastTxRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        broadcastTx(body: InlineObject, options?: any): AxiosPromise<InlineResponse20050> {
+        broadcastTx(body: BroadcastTxRequest, options?: any): AxiosPromise<BroadcastTx200Response> {
             return localVarFp.broadcastTx(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12947,7 +12947,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBlockByHeight(height: string, options?: any): AxiosPromise<InlineResponse20011> {
+        getBlockByHeight(height: string, options?: any): AxiosPromise<GetBlockByHeight200Response> {
             return localVarFp.getBlockByHeight(height, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12956,7 +12956,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestBlock(options?: any): AxiosPromise<InlineResponse20010> {
+        getLatestBlock(options?: any): AxiosPromise<GetLatestBlock200Response> {
             return localVarFp.getLatestBlock(options).then((request) => request(axios, basePath));
         },
         /**
@@ -12970,7 +12970,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20014> {
+        getLatestValidatorSet(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GetLatestValidatorSet200Response> {
             return localVarFp.getLatestValidatorSet(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12979,7 +12979,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNodeInfo(options?: any): AxiosPromise<InlineResponse20012> {
+        getNodeInfo(options?: any): AxiosPromise<GetNodeInfo200Response> {
             return localVarFp.getNodeInfo(options).then((request) => request(axios, basePath));
         },
         /**
@@ -12988,7 +12988,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSyncing(options?: any): AxiosPromise<InlineResponse20013> {
+        getSyncing(options?: any): AxiosPromise<GetSyncing200Response> {
             return localVarFp.getSyncing(options).then((request) => request(axios, basePath));
         },
         /**
@@ -13029,7 +13029,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<InlineResponse20015> {
+        getValidatorSetByHeight(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GetValidatorSetByHeight200Response> {
             return localVarFp.getValidatorSetByHeight(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -13039,7 +13039,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<InlineResponse20049> {
+        simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<Simulate200Response> {
             return localVarFp.simulate(body, options).then((request) => request(axios, basePath));
         },
     };
@@ -13055,12 +13055,12 @@ export class ServiceApi extends BaseAPI {
     /**
      * 
      * @summary BroadcastTx broadcast transaction.
-     * @param {InlineObject} body 
+     * @param {BroadcastTxRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public broadcastTx(body: InlineObject, options?: AxiosRequestConfig) {
+    public broadcastTx(body: BroadcastTxRequest, options?: AxiosRequestConfig) {
         return ServiceApiFp(this.configuration).broadcastTx(body, options).then((request) => request(this.axios, this.basePath));
     }
 
