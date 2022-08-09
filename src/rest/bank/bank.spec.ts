@@ -64,7 +64,7 @@ describe('bank', () => {
     // broadcast
     const res = await cosmosclient.rest.tx.broadcastTx(sdk, {
       tx_bytes: txBuilder.txBytes(),
-      mode: cosmosclient.rest.tx.BroadcastTxMode.Block,
+      mode: cosmosclient.rest.tx.BroadcastTxRequestModeEnum.Block,
     });
     console.log(res);
 
