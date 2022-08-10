@@ -2,11 +2,11 @@ import {
   CosmosTxV1beta1SimulateRequest,
   ServiceApi,
   BroadcastTxRequest,
-  BroadcastTxRequestModeEnum,
+  BroadcastTxRequestModeEnum as BroadcastTxMode,
 } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
 
-export { BroadcastTxRequestModeEnum };
+export { BroadcastTxMode };
 
 export function broadcastTx(sdk: CosmosSDK, body: BroadcastTxRequest) {
   return new ServiceApi(undefined, sdk.url).broadcastTx(body);
