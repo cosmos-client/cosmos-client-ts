@@ -1,8 +1,8 @@
 import {
   CosmosTxV1beta1SimulateRequest,
   ServiceApi,
-  InlineObject as BroadcastTxRequest,
-  InlineObjectModeEnum as BroadcastTxMode,
+  BroadcastTxRequest,
+  BroadcastTxRequestModeEnum as BroadcastTxMode,
 } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
 
