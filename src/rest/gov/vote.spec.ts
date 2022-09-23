@@ -29,7 +29,8 @@ describe('gov', () => {
     }
 
     // build tx
-    const msgVote = new cosmosclient.proto.cosmos.gov.v1beta1.MsgVote({
+    // cosmosclient.proto.cosmos.gov.v1beta1.MsgVote is not available.
+    const msgVote = new cosmosclient.proto.cosmos.gov.v1.MsgVote({
       proposal_id: Long.fromNumber(1),
       voter: fromAddress.toString(),
       option: cosmosclient.proto.cosmos.gov.v1beta1.VoteOption.VOTE_OPTION_YES,
