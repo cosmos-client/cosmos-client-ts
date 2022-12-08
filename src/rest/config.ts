@@ -1,3 +1,4 @@
 import Axios from 'axios';
 
-export const axios = Axios.defaults;
+export const globalAxios = Axios;
+export const axiosDefaults = Axios.defaults;
