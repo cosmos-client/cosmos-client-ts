@@ -5,6 +5,6 @@ cp ~/src/github.com/cosmos/cosmos-sdk/client/docs/swagger-ui/swagger.yaml ./swag
 
 docker run --rm \
   -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-  -g typescript-axios -i /local/swagger.yaml -o /local/src/openapi/
+  -g typescript-axios -i /local/swagger.yaml -o /local/src/openapi/ --skip-validate-spec
 
 rm swagger.yaml
