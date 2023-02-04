@@ -1,1 +1,1 @@
-export * from './tendermint';
+export * as base from './module';
