@@ -3,7 +3,7 @@
 rm -r ./proto
 wget https://github.com/bufbuild/buf/releases/download/v1.13.1/buf-Linux-x86_64
 sudo chmod 777 ./buf-Linux-x86_64
-./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:8cb30a2c4de74dc9bd8d260b1e75e176 --output ./cosmos-sdk/third_party/proto
+./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:8cb30a2c4de74dc9bd8d260b1e75e176 --output ./proto-thirdparty
 rm ./buf-Linux-x86_64
 cp -r ./cosmos-sdk/proto ./
 cp -r ./proto-thirdparty/tendermint ./proto/
@@ -15,8 +15,6 @@ for dir in $proto_dirs; do
   proto_files=("${proto_files[@]} $(find "${dir}" -maxdepth 1 -name '*.proto')")
 done
 
-echo ${proto_files[@]}
-
 npx pbjs \
   -o ./src/proto.cjs \
   -t static-module \
@@ -24,7 +22,7 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
-  --path=./cosmos-sdk/third_party/proto \
+  --path=./proto-thirdparty/ \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -37,7 +35,7 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
-  --path=./cosmos-sdk/third_party/proto \
+  --path=./proto-thirdparty/ \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -46,3 +44,4 @@ npx pbts \
   ./src/proto.js
 
 rm -r ./proto
+rm -rf ./proto-thirdparty
