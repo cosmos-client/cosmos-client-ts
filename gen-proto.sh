@@ -2,8 +2,9 @@
 
 rm -r ./proto
 rm -r ./proto-thirdparty
-cp -r ~/src/github.com/cosmos/cosmos-sdk/proto ./proto
-cp -r ~/src/github.com/cosmos/cosmos-sdk/third_party/proto ./proto-thirdparty
+cp -r ./cosmos-sdk/proto ./proto
+cp -r ./cosmos-sdk/third_party/proto ./proto-thirdparty
+rm -r ./proto/tendermint
 mv ./proto-thirdparty/tendermint ./proto/
 
 proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
