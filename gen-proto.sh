@@ -3,9 +3,8 @@
 rm -r ./proto
 rm -r ./proto-thirdparty
 cp -r ./cosmos-sdk/proto ./proto
-cp -r ./cosmos-sdk/third_party/proto ./proto-thirdparty
-rm -r ./proto/tendermint
-mv ./proto-thirdparty/tendermint ./proto/
+# cp -r ./cosmos-sdk/third_party/proto ./proto-thirdparty
+# mv ./proto-thirdparty/tendermint ./proto/
 
 proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
 proto_files=()
@@ -14,6 +13,8 @@ for dir in $proto_dirs; do
   proto_files=("${proto_files[@]} $(find "${dir}" -maxdepth 1 -name '*.proto')")
 done
 
+echo ${proto_files[@]}
+
 npx pbjs \
   -o ./src/proto.cjs \
   -t static-module \
@@ -21,7 +22,6 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
-  --path=./proto-thirdparty/ \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -34,7 +34,6 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
-  --path=./proto-thirdparty/ \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
