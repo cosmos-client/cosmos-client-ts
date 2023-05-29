@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 rm -r ./proto
-rm -r ./proto-thirdparty
-cp -r ./cosmos-sdk/proto ./proto
-# cp -r ./cosmos-sdk/third_party/proto ./proto-thirdparty
-# mv ./proto-thirdparty/tendermint ./proto/
+wget https://github.com/bufbuild/buf/releases/download/v1.13.1/buf-Linux-x86_64
+sudo chmod 777 ./buf-Linux-x86_64
+./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:8cb30a2c4de74dc9bd8d260b1e75e176 --output ./cosmos-sdk/third_party/proto
+rm ./buf-Linux-x86_64
+cp -r ./cosmos-sdk/proto ./
+cp -r ./proto-thirdparty/tendermint ./proto/
 
 proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
 proto_files=()
@@ -22,6 +24,7 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
+  --path=./cosmos-sdk/third_party/proto \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -34,6 +37,7 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
+  --path=./cosmos-sdk/third_party/proto \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -42,4 +46,3 @@ npx pbts \
   ./src/proto.js
 
 rm -r ./proto
-rm -r ./proto-thirdparty
