@@ -23,6 +23,10 @@ export function getTxsEvent(
   paginationOffset?: bigint,
   paginationLimit?: bigint,
   paginationCountTotal?: boolean,
+  paginationReverse?: boolean,
+  orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC',
+  page?: string, 
+  limit?: string
 ) {
   return new ServiceApi(undefined, sdk.url).getTxsEvent(
     events,
@@ -30,6 +34,10 @@ export function getTxsEvent(
     paginationOffset?.toString(),
     paginationLimit?.toString(),
     paginationCountTotal,
+    paginationReverse,
+    orderBy,
+    page,
+    limit
   );
 }
 
