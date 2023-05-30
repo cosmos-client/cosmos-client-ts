@@ -4319,7 +4319,7 @@ export namespace cosmos {
                     timestamp?: (string|null);
 
                     /** TxResponse events */
-                    events?: (tendermint.abci.IEvent[]|null);
+                    events?: (cometbft.abci.IEvent[]|null);
                 }
 
                 /** Represents a TxResponse. */
@@ -4368,7 +4368,7 @@ export namespace cosmos {
                     public timestamp: string;
 
                     /** TxResponse events. */
-                    public events: tendermint.abci.IEvent[];
+                    public events: cometbft.abci.IEvent[];
 
                     /**
                      * Encodes the specified TxResponse message. Does not implicitly {@link cosmos.base.abci.v1beta1.TxResponse.verify|verify} messages.
@@ -4806,7 +4806,7 @@ export namespace cosmos {
                     log?: (string|null);
 
                     /** Result events */
-                    events?: (tendermint.abci.IEvent[]|null);
+                    events?: (cometbft.abci.IEvent[]|null);
 
                     /** Result msg_responses */
                     msg_responses?: (google.protobuf.IAny[]|null);
@@ -4828,7 +4828,7 @@ export namespace cosmos {
                     public log: string;
 
                     /** Result events. */
-                    public events: tendermint.abci.IEvent[];
+                    public events: cometbft.abci.IEvent[];
 
                     /** Result msg_responses. */
                     public msg_responses: google.protobuf.IAny[];
@@ -9631,22 +9631,22 @@ export namespace cosmos {
                 interface IBlockMetadata {
 
                     /** BlockMetadata request_begin_block */
-                    request_begin_block?: (tendermint.abci.IRequestBeginBlock|null);
+                    request_begin_block?: (cometbft.abci.IRequestBeginBlock|null);
 
                     /** BlockMetadata response_begin_block */
-                    response_begin_block?: (tendermint.abci.IResponseBeginBlock|null);
+                    response_begin_block?: (cometbft.abci.IResponseBeginBlock|null);
 
                     /** BlockMetadata deliver_txs */
                     deliver_txs?: (cosmos.base.store.v1beta1.BlockMetadata.IDeliverTx[]|null);
 
                     /** BlockMetadata request_end_block */
-                    request_end_block?: (tendermint.abci.IRequestEndBlock|null);
+                    request_end_block?: (cometbft.abci.IRequestEndBlock|null);
 
                     /** BlockMetadata response_end_block */
-                    response_end_block?: (tendermint.abci.IResponseEndBlock|null);
+                    response_end_block?: (cometbft.abci.IResponseEndBlock|null);
 
                     /** BlockMetadata response_commit */
-                    response_commit?: (tendermint.abci.IResponseCommit|null);
+                    response_commit?: (cometbft.abci.IResponseCommit|null);
                 }
 
                 /** Represents a BlockMetadata. */
@@ -9659,22 +9659,22 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.store.v1beta1.IBlockMetadata);
 
                     /** BlockMetadata request_begin_block. */
-                    public request_begin_block?: (tendermint.abci.IRequestBeginBlock|null);
+                    public request_begin_block?: (cometbft.abci.IRequestBeginBlock|null);
 
                     /** BlockMetadata response_begin_block. */
-                    public response_begin_block?: (tendermint.abci.IResponseBeginBlock|null);
+                    public response_begin_block?: (cometbft.abci.IResponseBeginBlock|null);
 
                     /** BlockMetadata deliver_txs. */
                     public deliver_txs: cosmos.base.store.v1beta1.BlockMetadata.IDeliverTx[];
 
                     /** BlockMetadata request_end_block. */
-                    public request_end_block?: (tendermint.abci.IRequestEndBlock|null);
+                    public request_end_block?: (cometbft.abci.IRequestEndBlock|null);
 
                     /** BlockMetadata response_end_block. */
-                    public response_end_block?: (tendermint.abci.IResponseEndBlock|null);
+                    public response_end_block?: (cometbft.abci.IResponseEndBlock|null);
 
                     /** BlockMetadata response_commit. */
-                    public response_commit?: (tendermint.abci.IResponseCommit|null);
+                    public response_commit?: (cometbft.abci.IResponseCommit|null);
 
                     /**
                      * Encodes the specified BlockMetadata message. Does not implicitly {@link cosmos.base.store.v1beta1.BlockMetadata.verify|verify} messages.
@@ -9746,10 +9746,10 @@ export namespace cosmos {
                     interface IDeliverTx {
 
                         /** DeliverTx request */
-                        request?: (tendermint.abci.IRequestDeliverTx|null);
+                        request?: (cometbft.abci.IRequestDeliverTx|null);
 
                         /** DeliverTx response */
-                        response?: (tendermint.abci.IResponseDeliverTx|null);
+                        response?: (cometbft.abci.IResponseDeliverTx|null);
                     }
 
                     /** Represents a DeliverTx. */
@@ -9762,10 +9762,10 @@ export namespace cosmos {
                         constructor(properties?: cosmos.base.store.v1beta1.BlockMetadata.IDeliverTx);
 
                         /** DeliverTx request. */
-                        public request?: (tendermint.abci.IRequestDeliverTx|null);
+                        public request?: (cometbft.abci.IRequestDeliverTx|null);
 
                         /** DeliverTx response. */
-                        public response?: (tendermint.abci.IResponseDeliverTx|null);
+                        public response?: (cometbft.abci.IResponseDeliverTx|null);
 
                         /**
                          * Encodes the specified DeliverTx message. Does not implicitly {@link cosmos.base.store.v1beta1.BlockMetadata.DeliverTx.verify|verify} messages.
@@ -10552,10 +10552,10 @@ export namespace cosmos {
                 interface IGetBlockByHeightResponse {
 
                     /** GetBlockByHeightResponse block_id */
-                    block_id?: (tendermint.types.IBlockID|null);
+                    block_id?: (cometbft.types.IBlockID|null);
 
                     /** GetBlockByHeightResponse block */
-                    block?: (tendermint.types.IBlock|null);
+                    block?: (cometbft.types.IBlock|null);
 
                     /** GetBlockByHeightResponse sdk_block */
                     sdk_block?: (cosmos.base.tendermint.v1beta1.IBlock|null);
@@ -10571,10 +10571,10 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IGetBlockByHeightResponse);
 
                     /** GetBlockByHeightResponse block_id. */
-                    public block_id?: (tendermint.types.IBlockID|null);
+                    public block_id?: (cometbft.types.IBlockID|null);
 
                     /** GetBlockByHeightResponse block. */
-                    public block?: (tendermint.types.IBlock|null);
+                    public block?: (cometbft.types.IBlock|null);
 
                     /** GetBlockByHeightResponse sdk_block. */
                     public sdk_block?: (cosmos.base.tendermint.v1beta1.IBlock|null);
@@ -10724,10 +10724,10 @@ export namespace cosmos {
                 interface IGetLatestBlockResponse {
 
                     /** GetLatestBlockResponse block_id */
-                    block_id?: (tendermint.types.IBlockID|null);
+                    block_id?: (cometbft.types.IBlockID|null);
 
                     /** GetLatestBlockResponse block */
-                    block?: (tendermint.types.IBlock|null);
+                    block?: (cometbft.types.IBlock|null);
 
                     /** GetLatestBlockResponse sdk_block */
                     sdk_block?: (cosmos.base.tendermint.v1beta1.IBlock|null);
@@ -10743,10 +10743,10 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IGetLatestBlockResponse);
 
                     /** GetLatestBlockResponse block_id. */
-                    public block_id?: (tendermint.types.IBlockID|null);
+                    public block_id?: (cometbft.types.IBlockID|null);
 
                     /** GetLatestBlockResponse block. */
-                    public block?: (tendermint.types.IBlock|null);
+                    public block?: (cometbft.types.IBlock|null);
 
                     /** GetLatestBlockResponse sdk_block. */
                     public sdk_block?: (cosmos.base.tendermint.v1beta1.IBlock|null);
@@ -11056,7 +11056,7 @@ export namespace cosmos {
                 interface IGetNodeInfoResponse {
 
                     /** GetNodeInfoResponse default_node_info */
-                    default_node_info?: (tendermint.p2p.IDefaultNodeInfo|null);
+                    default_node_info?: (cometbft.p2p.IDefaultNodeInfo|null);
 
                     /** GetNodeInfoResponse application_version */
                     application_version?: (cosmos.base.tendermint.v1beta1.IVersionInfo|null);
@@ -11072,7 +11072,7 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IGetNodeInfoResponse);
 
                     /** GetNodeInfoResponse default_node_info. */
-                    public default_node_info?: (tendermint.p2p.IDefaultNodeInfo|null);
+                    public default_node_info?: (cometbft.p2p.IDefaultNodeInfo|null);
 
                     /** GetNodeInfoResponse application_version. */
                     public application_version?: (cosmos.base.tendermint.v1beta1.IVersionInfo|null);
@@ -11778,13 +11778,13 @@ export namespace cosmos {
                     header?: (cosmos.base.tendermint.v1beta1.IHeader|null);
 
                     /** Block data */
-                    data?: (tendermint.types.IData|null);
+                    data?: (cometbft.types.IData|null);
 
                     /** Block evidence */
-                    evidence?: (tendermint.types.IEvidenceList|null);
+                    evidence?: (cometbft.types.IEvidenceList|null);
 
                     /** Block last_commit */
-                    last_commit?: (tendermint.types.ICommit|null);
+                    last_commit?: (cometbft.types.ICommit|null);
                 }
 
                 /** Represents a Block. */
@@ -11800,13 +11800,13 @@ export namespace cosmos {
                     public header?: (cosmos.base.tendermint.v1beta1.IHeader|null);
 
                     /** Block data. */
-                    public data?: (tendermint.types.IData|null);
+                    public data?: (cometbft.types.IData|null);
 
                     /** Block evidence. */
-                    public evidence?: (tendermint.types.IEvidenceList|null);
+                    public evidence?: (cometbft.types.IEvidenceList|null);
 
                     /** Block last_commit. */
-                    public last_commit?: (tendermint.types.ICommit|null);
+                    public last_commit?: (cometbft.types.ICommit|null);
 
                     /**
                      * Encodes the specified Block message. Does not implicitly {@link cosmos.base.tendermint.v1beta1.Block.verify|verify} messages.
@@ -11876,7 +11876,7 @@ export namespace cosmos {
                 interface IHeader {
 
                     /** Header version */
-                    version?: (tendermint.version.IConsensus|null);
+                    version?: (cometbft.version.IConsensus|null);
 
                     /** Header chain_id */
                     chain_id?: (string|null);
@@ -11888,7 +11888,7 @@ export namespace cosmos {
                     time?: (google.protobuf.ITimestamp|null);
 
                     /** Header last_block_id */
-                    last_block_id?: (tendermint.types.IBlockID|null);
+                    last_block_id?: (cometbft.types.IBlockID|null);
 
                     /** Header last_commit_hash */
                     last_commit_hash?: (Uint8Array|null);
@@ -11928,7 +11928,7 @@ export namespace cosmos {
                     constructor(properties?: cosmos.base.tendermint.v1beta1.IHeader);
 
                     /** Header version. */
-                    public version?: (tendermint.version.IConsensus|null);
+                    public version?: (cometbft.version.IConsensus|null);
 
                     /** Header chain_id. */
                     public chain_id: string;
@@ -11940,7 +11940,7 @@ export namespace cosmos {
                     public time?: (google.protobuf.ITimestamp|null);
 
                     /** Header last_block_id. */
-                    public last_block_id?: (tendermint.types.IBlockID|null);
+                    public last_block_id?: (cometbft.types.IBlockID|null);
 
                     /** Header last_commit_hash. */
                     public last_commit_hash: Uint8Array;
@@ -19532,7 +19532,7 @@ export namespace cosmos {
             interface IQueryParamsResponse {
 
                 /** QueryParamsResponse params */
-                params?: (tendermint.types.IConsensusParams|null);
+                params?: (cometbft.types.IConsensusParams|null);
             }
 
             /** Represents a QueryParamsResponse. */
@@ -19545,7 +19545,7 @@ export namespace cosmos {
                 constructor(properties?: cosmos.consensus.v1.IQueryParamsResponse);
 
                 /** QueryParamsResponse params. */
-                public params?: (tendermint.types.IConsensusParams|null);
+                public params?: (cometbft.types.IConsensusParams|null);
 
                 /**
                  * Encodes the specified QueryParamsResponse message. Does not implicitly {@link cosmos.consensus.v1.QueryParamsResponse.verify|verify} messages.
@@ -19654,13 +19654,13 @@ export namespace cosmos {
                 authority?: (string|null);
 
                 /** MsgUpdateParams block */
-                block?: (tendermint.types.IBlockParams|null);
+                block?: (cometbft.types.IBlockParams|null);
 
                 /** MsgUpdateParams evidence */
-                evidence?: (tendermint.types.IEvidenceParams|null);
+                evidence?: (cometbft.types.IEvidenceParams|null);
 
                 /** MsgUpdateParams validator */
-                validator?: (tendermint.types.IValidatorParams|null);
+                validator?: (cometbft.types.IValidatorParams|null);
             }
 
             /** Represents a MsgUpdateParams. */
@@ -19676,13 +19676,13 @@ export namespace cosmos {
                 public authority: string;
 
                 /** MsgUpdateParams block. */
-                public block?: (tendermint.types.IBlockParams|null);
+                public block?: (cometbft.types.IBlockParams|null);
 
                 /** MsgUpdateParams evidence. */
-                public evidence?: (tendermint.types.IEvidenceParams|null);
+                public evidence?: (cometbft.types.IEvidenceParams|null);
 
                 /** MsgUpdateParams validator. */
-                public validator?: (tendermint.types.IValidatorParams|null);
+                public validator?: (cometbft.types.IValidatorParams|null);
 
                 /**
                  * Encodes the specified MsgUpdateParams message. Does not implicitly {@link cosmos.consensus.v1.MsgUpdateParams.verify|verify} messages.
@@ -37091,20 +37091,6 @@ export namespace cosmos {
                  * @returns Promise
                  */
                 public tallyResult(request: cosmos.group.v1.IQueryTallyResultRequest): Promise<cosmos.group.v1.QueryTallyResultResponse>;
-
-                /**
-                 * Calls Groups.
-                 * @param request QueryGroupsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and QueryGroupsResponse
-                 */
-                public groups(request: cosmos.group.v1.IQueryGroupsRequest, callback: cosmos.group.v1.Query.GroupsCallback): void;
-
-                /**
-                 * Calls Groups.
-                 * @param request QueryGroupsRequest message or plain object
-                 * @returns Promise
-                 */
-                public groups(request: cosmos.group.v1.IQueryGroupsRequest): Promise<cosmos.group.v1.QueryGroupsResponse>;
             }
 
             namespace Query {
@@ -37199,13 +37185,6 @@ export namespace cosmos {
                  * @param [response] QueryTallyResultResponse
                  */
                 type TallyResultCallback = (error: (Error|null), response?: cosmos.group.v1.QueryTallyResultResponse) => void;
-
-                /**
-                 * Callback as used by {@link cosmos.group.v1.Query#groups}.
-                 * @param error Error, if any
-                 * @param [response] QueryGroupsResponse
-                 */
-                type GroupsCallback = (error: (Error|null), response?: cosmos.group.v1.QueryGroupsResponse) => void;
             }
 
             /** Properties of a QueryGroupInfoRequest. */
@@ -39463,178 +39442,6 @@ export namespace cosmos {
 
                 /**
                  * Converts this QueryTallyResultResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-
-            /** Properties of a QueryGroupsRequest. */
-            interface IQueryGroupsRequest {
-
-                /** QueryGroupsRequest pagination */
-                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
-            }
-
-            /** Represents a QueryGroupsRequest. */
-            class QueryGroupsRequest implements IQueryGroupsRequest {
-
-                /**
-                 * Constructs a new QueryGroupsRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: cosmos.group.v1.IQueryGroupsRequest);
-
-                /** QueryGroupsRequest pagination. */
-                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
-
-                /**
-                 * Encodes the specified QueryGroupsRequest message. Does not implicitly {@link cosmos.group.v1.QueryGroupsRequest.verify|verify} messages.
-                 * @param message QueryGroupsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: cosmos.group.v1.IQueryGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified QueryGroupsRequest message, length delimited. Does not implicitly {@link cosmos.group.v1.QueryGroupsRequest.verify|verify} messages.
-                 * @param message QueryGroupsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: cosmos.group.v1.IQueryGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a QueryGroupsRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns QueryGroupsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.group.v1.QueryGroupsRequest;
-
-                /**
-                 * Decodes a QueryGroupsRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns QueryGroupsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.group.v1.QueryGroupsRequest;
-
-                /**
-                 * Verifies a QueryGroupsRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a QueryGroupsRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns QueryGroupsRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): cosmos.group.v1.QueryGroupsRequest;
-
-                /**
-                 * Creates a plain object from a QueryGroupsRequest message. Also converts values to other types if specified.
-                 * @param message QueryGroupsRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: cosmos.group.v1.QueryGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this QueryGroupsRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-
-            /** Properties of a QueryGroupsResponse. */
-            interface IQueryGroupsResponse {
-
-                /** QueryGroupsResponse groups */
-                groups?: (cosmos.group.v1.IGroupInfo[]|null);
-
-                /** QueryGroupsResponse pagination */
-                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
-            }
-
-            /** Represents a QueryGroupsResponse. */
-            class QueryGroupsResponse implements IQueryGroupsResponse {
-
-                /**
-                 * Constructs a new QueryGroupsResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: cosmos.group.v1.IQueryGroupsResponse);
-
-                /** QueryGroupsResponse groups. */
-                public groups: cosmos.group.v1.IGroupInfo[];
-
-                /** QueryGroupsResponse pagination. */
-                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
-
-                /**
-                 * Encodes the specified QueryGroupsResponse message. Does not implicitly {@link cosmos.group.v1.QueryGroupsResponse.verify|verify} messages.
-                 * @param message QueryGroupsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: cosmos.group.v1.IQueryGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified QueryGroupsResponse message, length delimited. Does not implicitly {@link cosmos.group.v1.QueryGroupsResponse.verify|verify} messages.
-                 * @param message QueryGroupsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: cosmos.group.v1.IQueryGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a QueryGroupsResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns QueryGroupsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.group.v1.QueryGroupsResponse;
-
-                /**
-                 * Decodes a QueryGroupsResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns QueryGroupsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.group.v1.QueryGroupsResponse;
-
-                /**
-                 * Verifies a QueryGroupsResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a QueryGroupsResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns QueryGroupsResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): cosmos.group.v1.QueryGroupsResponse;
-
-                /**
-                 * Creates a plain object from a QueryGroupsResponse message. Also converts values to other types if specified.
-                 * @param message QueryGroupsResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: cosmos.group.v1.QueryGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this QueryGroupsResponse to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
@@ -52149,7 +51956,7 @@ export namespace cosmos {
             interface IHistoricalInfo {
 
                 /** HistoricalInfo header */
-                header?: (tendermint.types.IHeader|null);
+                header?: (cometbft.types.IHeader|null);
 
                 /** HistoricalInfo valset */
                 valset?: (cosmos.staking.v1beta1.IValidator[]|null);
@@ -52165,7 +51972,7 @@ export namespace cosmos {
                 constructor(properties?: cosmos.staking.v1beta1.IHistoricalInfo);
 
                 /** HistoricalInfo header. */
-                public header?: (tendermint.types.IHeader|null);
+                public header?: (cometbft.types.IHeader|null);
 
                 /** HistoricalInfo valset. */
                 public valset: cosmos.staking.v1beta1.IValidator[];
@@ -54118,7 +53925,7 @@ export namespace cosmos {
             interface IValidatorUpdates {
 
                 /** ValidatorUpdates updates */
-                updates?: (tendermint.abci.IValidatorUpdate[]|null);
+                updates?: (cometbft.abci.IValidatorUpdate[]|null);
             }
 
             /** Represents a ValidatorUpdates. */
@@ -54131,7 +53938,7 @@ export namespace cosmos {
                 constructor(properties?: cosmos.staking.v1beta1.IValidatorUpdates);
 
                 /** ValidatorUpdates updates. */
-                public updates: tendermint.abci.IValidatorUpdate[];
+                public updates: cometbft.abci.IValidatorUpdate[];
 
                 /**
                  * Encodes the specified ValidatorUpdates message. Does not implicitly {@link cosmos.staking.v1beta1.ValidatorUpdates.verify|verify} messages.
@@ -61639,10 +61446,10 @@ export namespace cosmos {
                 txs?: (cosmos.tx.v1beta1.ITx[]|null);
 
                 /** GetBlockWithTxsResponse block_id */
-                block_id?: (tendermint.types.IBlockID|null);
+                block_id?: (cometbft.types.IBlockID|null);
 
                 /** GetBlockWithTxsResponse block */
-                block?: (tendermint.types.IBlock|null);
+                block?: (cometbft.types.IBlock|null);
 
                 /** GetBlockWithTxsResponse pagination */
                 pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
@@ -61661,10 +61468,10 @@ export namespace cosmos {
                 public txs: cosmos.tx.v1beta1.ITx[];
 
                 /** GetBlockWithTxsResponse block_id. */
-                public block_id?: (tendermint.types.IBlockID|null);
+                public block_id?: (cometbft.types.IBlockID|null);
 
                 /** GetBlockWithTxsResponse block. */
-                public block?: (tendermint.types.IBlock|null);
+                public block?: (cometbft.types.IBlock|null);
 
                 /** GetBlockWithTxsResponse pagination. */
                 public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
@@ -65647,7 +65454,7 @@ export namespace cosmos_proto {
 }
 
 /** Namespace tendermint. */
-export namespace tendermint {
+export namespace cometbft {
 
     /** Namespace abci. */
     namespace abci {
@@ -65656,52 +65463,52 @@ export namespace tendermint {
         interface IRequest {
 
             /** Request echo */
-            echo?: (tendermint.abci.IRequestEcho|null);
+            echo?: (cometbft.abci.IRequestEcho|null);
 
             /** Request flush */
-            flush?: (tendermint.abci.IRequestFlush|null);
+            flush?: (cometbft.abci.IRequestFlush|null);
 
             /** Request info */
-            info?: (tendermint.abci.IRequestInfo|null);
+            info?: (cometbft.abci.IRequestInfo|null);
 
             /** Request init_chain */
-            init_chain?: (tendermint.abci.IRequestInitChain|null);
+            init_chain?: (cometbft.abci.IRequestInitChain|null);
 
             /** Request query */
-            query?: (tendermint.abci.IRequestQuery|null);
+            query?: (cometbft.abci.IRequestQuery|null);
 
             /** Request begin_block */
-            begin_block?: (tendermint.abci.IRequestBeginBlock|null);
+            begin_block?: (cometbft.abci.IRequestBeginBlock|null);
 
             /** Request check_tx */
-            check_tx?: (tendermint.abci.IRequestCheckTx|null);
+            check_tx?: (cometbft.abci.IRequestCheckTx|null);
 
             /** Request deliver_tx */
-            deliver_tx?: (tendermint.abci.IRequestDeliverTx|null);
+            deliver_tx?: (cometbft.abci.IRequestDeliverTx|null);
 
             /** Request end_block */
-            end_block?: (tendermint.abci.IRequestEndBlock|null);
+            end_block?: (cometbft.abci.IRequestEndBlock|null);
 
             /** Request commit */
-            commit?: (tendermint.abci.IRequestCommit|null);
+            commit?: (cometbft.abci.IRequestCommit|null);
 
             /** Request list_snapshots */
-            list_snapshots?: (tendermint.abci.IRequestListSnapshots|null);
+            list_snapshots?: (cometbft.abci.IRequestListSnapshots|null);
 
             /** Request offer_snapshot */
-            offer_snapshot?: (tendermint.abci.IRequestOfferSnapshot|null);
+            offer_snapshot?: (cometbft.abci.IRequestOfferSnapshot|null);
 
             /** Request load_snapshot_chunk */
-            load_snapshot_chunk?: (tendermint.abci.IRequestLoadSnapshotChunk|null);
+            load_snapshot_chunk?: (cometbft.abci.IRequestLoadSnapshotChunk|null);
 
             /** Request apply_snapshot_chunk */
-            apply_snapshot_chunk?: (tendermint.abci.IRequestApplySnapshotChunk|null);
+            apply_snapshot_chunk?: (cometbft.abci.IRequestApplySnapshotChunk|null);
 
             /** Request prepare_proposal */
-            prepare_proposal?: (tendermint.abci.IRequestPrepareProposal|null);
+            prepare_proposal?: (cometbft.abci.IRequestPrepareProposal|null);
 
             /** Request process_proposal */
-            process_proposal?: (tendermint.abci.IRequestProcessProposal|null);
+            process_proposal?: (cometbft.abci.IRequestProcessProposal|null);
         }
 
         /** Represents a Request. */
@@ -65711,74 +65518,74 @@ export namespace tendermint {
              * Constructs a new Request.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequest);
+            constructor(properties?: cometbft.abci.IRequest);
 
             /** Request echo. */
-            public echo?: (tendermint.abci.IRequestEcho|null);
+            public echo?: (cometbft.abci.IRequestEcho|null);
 
             /** Request flush. */
-            public flush?: (tendermint.abci.IRequestFlush|null);
+            public flush?: (cometbft.abci.IRequestFlush|null);
 
             /** Request info. */
-            public info?: (tendermint.abci.IRequestInfo|null);
+            public info?: (cometbft.abci.IRequestInfo|null);
 
             /** Request init_chain. */
-            public init_chain?: (tendermint.abci.IRequestInitChain|null);
+            public init_chain?: (cometbft.abci.IRequestInitChain|null);
 
             /** Request query. */
-            public query?: (tendermint.abci.IRequestQuery|null);
+            public query?: (cometbft.abci.IRequestQuery|null);
 
             /** Request begin_block. */
-            public begin_block?: (tendermint.abci.IRequestBeginBlock|null);
+            public begin_block?: (cometbft.abci.IRequestBeginBlock|null);
 
             /** Request check_tx. */
-            public check_tx?: (tendermint.abci.IRequestCheckTx|null);
+            public check_tx?: (cometbft.abci.IRequestCheckTx|null);
 
             /** Request deliver_tx. */
-            public deliver_tx?: (tendermint.abci.IRequestDeliverTx|null);
+            public deliver_tx?: (cometbft.abci.IRequestDeliverTx|null);
 
             /** Request end_block. */
-            public end_block?: (tendermint.abci.IRequestEndBlock|null);
+            public end_block?: (cometbft.abci.IRequestEndBlock|null);
 
             /** Request commit. */
-            public commit?: (tendermint.abci.IRequestCommit|null);
+            public commit?: (cometbft.abci.IRequestCommit|null);
 
             /** Request list_snapshots. */
-            public list_snapshots?: (tendermint.abci.IRequestListSnapshots|null);
+            public list_snapshots?: (cometbft.abci.IRequestListSnapshots|null);
 
             /** Request offer_snapshot. */
-            public offer_snapshot?: (tendermint.abci.IRequestOfferSnapshot|null);
+            public offer_snapshot?: (cometbft.abci.IRequestOfferSnapshot|null);
 
             /** Request load_snapshot_chunk. */
-            public load_snapshot_chunk?: (tendermint.abci.IRequestLoadSnapshotChunk|null);
+            public load_snapshot_chunk?: (cometbft.abci.IRequestLoadSnapshotChunk|null);
 
             /** Request apply_snapshot_chunk. */
-            public apply_snapshot_chunk?: (tendermint.abci.IRequestApplySnapshotChunk|null);
+            public apply_snapshot_chunk?: (cometbft.abci.IRequestApplySnapshotChunk|null);
 
             /** Request prepare_proposal. */
-            public prepare_proposal?: (tendermint.abci.IRequestPrepareProposal|null);
+            public prepare_proposal?: (cometbft.abci.IRequestPrepareProposal|null);
 
             /** Request process_proposal. */
-            public process_proposal?: (tendermint.abci.IRequestProcessProposal|null);
+            public process_proposal?: (cometbft.abci.IRequestProcessProposal|null);
 
             /** Request value. */
             public value?: ("echo"|"flush"|"info"|"init_chain"|"query"|"begin_block"|"check_tx"|"deliver_tx"|"end_block"|"commit"|"list_snapshots"|"offer_snapshot"|"load_snapshot_chunk"|"apply_snapshot_chunk"|"prepare_proposal"|"process_proposal");
 
             /**
-             * Encodes the specified Request message. Does not implicitly {@link tendermint.abci.Request.verify|verify} messages.
+             * Encodes the specified Request message. Does not implicitly {@link cometbft.abci.Request.verify|verify} messages.
              * @param message Request message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Request message, length delimited. Does not implicitly {@link tendermint.abci.Request.verify|verify} messages.
+             * Encodes the specified Request message, length delimited. Does not implicitly {@link cometbft.abci.Request.verify|verify} messages.
              * @param message Request message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Request message from the specified reader or buffer.
@@ -65788,7 +65595,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Request;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.Request;
 
             /**
              * Decodes a Request message from the specified reader or buffer, length delimited.
@@ -65797,7 +65604,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Request;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.Request;
 
             /**
              * Verifies a Request message.
@@ -65811,7 +65618,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Request
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Request;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.Request;
 
             /**
              * Creates a plain object from a Request message. Also converts values to other types if specified.
@@ -65819,7 +65626,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Request to JSON.
@@ -65842,26 +65649,26 @@ export namespace tendermint {
              * Constructs a new RequestEcho.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestEcho);
+            constructor(properties?: cometbft.abci.IRequestEcho);
 
             /** RequestEcho message. */
             public message: string;
 
             /**
-             * Encodes the specified RequestEcho message. Does not implicitly {@link tendermint.abci.RequestEcho.verify|verify} messages.
+             * Encodes the specified RequestEcho message. Does not implicitly {@link cometbft.abci.RequestEcho.verify|verify} messages.
              * @param message RequestEcho message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestEcho, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestEcho, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestEcho message, length delimited. Does not implicitly {@link tendermint.abci.RequestEcho.verify|verify} messages.
+             * Encodes the specified RequestEcho message, length delimited. Does not implicitly {@link cometbft.abci.RequestEcho.verify|verify} messages.
              * @param message RequestEcho message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestEcho, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestEcho, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestEcho message from the specified reader or buffer.
@@ -65871,7 +65678,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestEcho;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestEcho;
 
             /**
              * Decodes a RequestEcho message from the specified reader or buffer, length delimited.
@@ -65880,7 +65687,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestEcho;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestEcho;
 
             /**
              * Verifies a RequestEcho message.
@@ -65894,7 +65701,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestEcho
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestEcho;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestEcho;
 
             /**
              * Creates a plain object from a RequestEcho message. Also converts values to other types if specified.
@@ -65902,7 +65709,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestEcho, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestEcho, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestEcho to JSON.
@@ -65922,23 +65729,23 @@ export namespace tendermint {
              * Constructs a new RequestFlush.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestFlush);
+            constructor(properties?: cometbft.abci.IRequestFlush);
 
             /**
-             * Encodes the specified RequestFlush message. Does not implicitly {@link tendermint.abci.RequestFlush.verify|verify} messages.
+             * Encodes the specified RequestFlush message. Does not implicitly {@link cometbft.abci.RequestFlush.verify|verify} messages.
              * @param message RequestFlush message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestFlush, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestFlush, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestFlush message, length delimited. Does not implicitly {@link tendermint.abci.RequestFlush.verify|verify} messages.
+             * Encodes the specified RequestFlush message, length delimited. Does not implicitly {@link cometbft.abci.RequestFlush.verify|verify} messages.
              * @param message RequestFlush message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestFlush, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestFlush, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestFlush message from the specified reader or buffer.
@@ -65948,7 +65755,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestFlush;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestFlush;
 
             /**
              * Decodes a RequestFlush message from the specified reader or buffer, length delimited.
@@ -65957,7 +65764,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestFlush;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestFlush;
 
             /**
              * Verifies a RequestFlush message.
@@ -65971,7 +65778,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestFlush
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestFlush;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestFlush;
 
             /**
              * Creates a plain object from a RequestFlush message. Also converts values to other types if specified.
@@ -65979,7 +65786,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestFlush, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestFlush, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestFlush to JSON.
@@ -66011,7 +65818,7 @@ export namespace tendermint {
              * Constructs a new RequestInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestInfo);
+            constructor(properties?: cometbft.abci.IRequestInfo);
 
             /** RequestInfo version. */
             public version: string;
@@ -66026,20 +65833,20 @@ export namespace tendermint {
             public abci_version: string;
 
             /**
-             * Encodes the specified RequestInfo message. Does not implicitly {@link tendermint.abci.RequestInfo.verify|verify} messages.
+             * Encodes the specified RequestInfo message. Does not implicitly {@link cometbft.abci.RequestInfo.verify|verify} messages.
              * @param message RequestInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestInfo message, length delimited. Does not implicitly {@link tendermint.abci.RequestInfo.verify|verify} messages.
+             * Encodes the specified RequestInfo message, length delimited. Does not implicitly {@link cometbft.abci.RequestInfo.verify|verify} messages.
              * @param message RequestInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestInfo message from the specified reader or buffer.
@@ -66049,7 +65856,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestInfo;
 
             /**
              * Decodes a RequestInfo message from the specified reader or buffer, length delimited.
@@ -66058,7 +65865,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestInfo;
 
             /**
              * Verifies a RequestInfo message.
@@ -66072,7 +65879,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestInfo;
 
             /**
              * Creates a plain object from a RequestInfo message. Also converts values to other types if specified.
@@ -66080,7 +65887,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestInfo to JSON.
@@ -66099,10 +65906,10 @@ export namespace tendermint {
             chain_id?: (string|null);
 
             /** RequestInitChain consensus_params */
-            consensus_params?: (tendermint.types.IConsensusParams|null);
+            consensus_params?: (cometbft.types.IConsensusParams|null);
 
             /** RequestInitChain validators */
-            validators?: (tendermint.abci.IValidatorUpdate[]|null);
+            validators?: (cometbft.abci.IValidatorUpdate[]|null);
 
             /** RequestInitChain app_state_bytes */
             app_state_bytes?: (Uint8Array|null);
@@ -66118,7 +65925,7 @@ export namespace tendermint {
              * Constructs a new RequestInitChain.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestInitChain);
+            constructor(properties?: cometbft.abci.IRequestInitChain);
 
             /** RequestInitChain time. */
             public time?: (google.protobuf.ITimestamp|null);
@@ -66127,10 +65934,10 @@ export namespace tendermint {
             public chain_id: string;
 
             /** RequestInitChain consensus_params. */
-            public consensus_params?: (tendermint.types.IConsensusParams|null);
+            public consensus_params?: (cometbft.types.IConsensusParams|null);
 
             /** RequestInitChain validators. */
-            public validators: tendermint.abci.IValidatorUpdate[];
+            public validators: cometbft.abci.IValidatorUpdate[];
 
             /** RequestInitChain app_state_bytes. */
             public app_state_bytes: Uint8Array;
@@ -66139,20 +65946,20 @@ export namespace tendermint {
             public initial_height: Long;
 
             /**
-             * Encodes the specified RequestInitChain message. Does not implicitly {@link tendermint.abci.RequestInitChain.verify|verify} messages.
+             * Encodes the specified RequestInitChain message. Does not implicitly {@link cometbft.abci.RequestInitChain.verify|verify} messages.
              * @param message RequestInitChain message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestInitChain message, length delimited. Does not implicitly {@link tendermint.abci.RequestInitChain.verify|verify} messages.
+             * Encodes the specified RequestInitChain message, length delimited. Does not implicitly {@link cometbft.abci.RequestInitChain.verify|verify} messages.
              * @param message RequestInitChain message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestInitChain message from the specified reader or buffer.
@@ -66162,7 +65969,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestInitChain;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestInitChain;
 
             /**
              * Decodes a RequestInitChain message from the specified reader or buffer, length delimited.
@@ -66171,7 +65978,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestInitChain;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestInitChain;
 
             /**
              * Verifies a RequestInitChain message.
@@ -66185,7 +65992,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestInitChain
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestInitChain;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestInitChain;
 
             /**
              * Creates a plain object from a RequestInitChain message. Also converts values to other types if specified.
@@ -66193,7 +66000,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestInitChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestInitChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestInitChain to JSON.
@@ -66225,7 +66032,7 @@ export namespace tendermint {
              * Constructs a new RequestQuery.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestQuery);
+            constructor(properties?: cometbft.abci.IRequestQuery);
 
             /** RequestQuery data. */
             public data: Uint8Array;
@@ -66240,20 +66047,20 @@ export namespace tendermint {
             public prove: boolean;
 
             /**
-             * Encodes the specified RequestQuery message. Does not implicitly {@link tendermint.abci.RequestQuery.verify|verify} messages.
+             * Encodes the specified RequestQuery message. Does not implicitly {@link cometbft.abci.RequestQuery.verify|verify} messages.
              * @param message RequestQuery message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestQuery, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestQuery message, length delimited. Does not implicitly {@link tendermint.abci.RequestQuery.verify|verify} messages.
+             * Encodes the specified RequestQuery message, length delimited. Does not implicitly {@link cometbft.abci.RequestQuery.verify|verify} messages.
              * @param message RequestQuery message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestQuery, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestQuery message from the specified reader or buffer.
@@ -66263,7 +66070,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestQuery;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestQuery;
 
             /**
              * Decodes a RequestQuery message from the specified reader or buffer, length delimited.
@@ -66272,7 +66079,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestQuery;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestQuery;
 
             /**
              * Verifies a RequestQuery message.
@@ -66286,7 +66093,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestQuery
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestQuery;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestQuery;
 
             /**
              * Creates a plain object from a RequestQuery message. Also converts values to other types if specified.
@@ -66294,7 +66101,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestQuery to JSON.
@@ -66310,13 +66117,13 @@ export namespace tendermint {
             hash?: (Uint8Array|null);
 
             /** RequestBeginBlock header */
-            header?: (tendermint.types.IHeader|null);
+            header?: (cometbft.types.IHeader|null);
 
             /** RequestBeginBlock last_commit_info */
-            last_commit_info?: (tendermint.abci.ICommitInfo|null);
+            last_commit_info?: (cometbft.abci.ICommitInfo|null);
 
             /** RequestBeginBlock byzantine_validators */
-            byzantine_validators?: (tendermint.abci.IMisbehavior[]|null);
+            byzantine_validators?: (cometbft.abci.IMisbehavior[]|null);
         }
 
         /** Represents a RequestBeginBlock. */
@@ -66326,35 +66133,35 @@ export namespace tendermint {
              * Constructs a new RequestBeginBlock.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestBeginBlock);
+            constructor(properties?: cometbft.abci.IRequestBeginBlock);
 
             /** RequestBeginBlock hash. */
             public hash: Uint8Array;
 
             /** RequestBeginBlock header. */
-            public header?: (tendermint.types.IHeader|null);
+            public header?: (cometbft.types.IHeader|null);
 
             /** RequestBeginBlock last_commit_info. */
-            public last_commit_info?: (tendermint.abci.ICommitInfo|null);
+            public last_commit_info?: (cometbft.abci.ICommitInfo|null);
 
             /** RequestBeginBlock byzantine_validators. */
-            public byzantine_validators: tendermint.abci.IMisbehavior[];
+            public byzantine_validators: cometbft.abci.IMisbehavior[];
 
             /**
-             * Encodes the specified RequestBeginBlock message. Does not implicitly {@link tendermint.abci.RequestBeginBlock.verify|verify} messages.
+             * Encodes the specified RequestBeginBlock message. Does not implicitly {@link cometbft.abci.RequestBeginBlock.verify|verify} messages.
              * @param message RequestBeginBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestBeginBlock message, length delimited. Does not implicitly {@link tendermint.abci.RequestBeginBlock.verify|verify} messages.
+             * Encodes the specified RequestBeginBlock message, length delimited. Does not implicitly {@link cometbft.abci.RequestBeginBlock.verify|verify} messages.
              * @param message RequestBeginBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestBeginBlock message from the specified reader or buffer.
@@ -66364,7 +66171,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestBeginBlock;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestBeginBlock;
 
             /**
              * Decodes a RequestBeginBlock message from the specified reader or buffer, length delimited.
@@ -66373,7 +66180,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestBeginBlock;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestBeginBlock;
 
             /**
              * Verifies a RequestBeginBlock message.
@@ -66387,7 +66194,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestBeginBlock
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestBeginBlock;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestBeginBlock;
 
             /**
              * Creates a plain object from a RequestBeginBlock message. Also converts values to other types if specified.
@@ -66395,7 +66202,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestBeginBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestBeginBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestBeginBlock to JSON.
@@ -66417,7 +66224,7 @@ export namespace tendermint {
             tx?: (Uint8Array|null);
 
             /** RequestCheckTx type */
-            type?: (tendermint.abci.CheckTxType|null);
+            type?: (cometbft.abci.CheckTxType|null);
         }
 
         /** Represents a RequestCheckTx. */
@@ -66427,29 +66234,29 @@ export namespace tendermint {
              * Constructs a new RequestCheckTx.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestCheckTx);
+            constructor(properties?: cometbft.abci.IRequestCheckTx);
 
             /** RequestCheckTx tx. */
             public tx: Uint8Array;
 
             /** RequestCheckTx type. */
-            public type: tendermint.abci.CheckTxType;
+            public type: cometbft.abci.CheckTxType;
 
             /**
-             * Encodes the specified RequestCheckTx message. Does not implicitly {@link tendermint.abci.RequestCheckTx.verify|verify} messages.
+             * Encodes the specified RequestCheckTx message. Does not implicitly {@link cometbft.abci.RequestCheckTx.verify|verify} messages.
              * @param message RequestCheckTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestCheckTx message, length delimited. Does not implicitly {@link tendermint.abci.RequestCheckTx.verify|verify} messages.
+             * Encodes the specified RequestCheckTx message, length delimited. Does not implicitly {@link cometbft.abci.RequestCheckTx.verify|verify} messages.
              * @param message RequestCheckTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestCheckTx message from the specified reader or buffer.
@@ -66459,7 +66266,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestCheckTx;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestCheckTx;
 
             /**
              * Decodes a RequestCheckTx message from the specified reader or buffer, length delimited.
@@ -66468,7 +66275,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestCheckTx;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestCheckTx;
 
             /**
              * Verifies a RequestCheckTx message.
@@ -66482,7 +66289,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestCheckTx
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestCheckTx;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestCheckTx;
 
             /**
              * Creates a plain object from a RequestCheckTx message. Also converts values to other types if specified.
@@ -66490,7 +66297,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestCheckTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestCheckTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestCheckTx to JSON.
@@ -66513,26 +66320,26 @@ export namespace tendermint {
              * Constructs a new RequestDeliverTx.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestDeliverTx);
+            constructor(properties?: cometbft.abci.IRequestDeliverTx);
 
             /** RequestDeliverTx tx. */
             public tx: Uint8Array;
 
             /**
-             * Encodes the specified RequestDeliverTx message. Does not implicitly {@link tendermint.abci.RequestDeliverTx.verify|verify} messages.
+             * Encodes the specified RequestDeliverTx message. Does not implicitly {@link cometbft.abci.RequestDeliverTx.verify|verify} messages.
              * @param message RequestDeliverTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestDeliverTx message, length delimited. Does not implicitly {@link tendermint.abci.RequestDeliverTx.verify|verify} messages.
+             * Encodes the specified RequestDeliverTx message, length delimited. Does not implicitly {@link cometbft.abci.RequestDeliverTx.verify|verify} messages.
              * @param message RequestDeliverTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestDeliverTx message from the specified reader or buffer.
@@ -66542,7 +66349,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestDeliverTx;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestDeliverTx;
 
             /**
              * Decodes a RequestDeliverTx message from the specified reader or buffer, length delimited.
@@ -66551,7 +66358,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestDeliverTx;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestDeliverTx;
 
             /**
              * Verifies a RequestDeliverTx message.
@@ -66565,7 +66372,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestDeliverTx
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestDeliverTx;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestDeliverTx;
 
             /**
              * Creates a plain object from a RequestDeliverTx message. Also converts values to other types if specified.
@@ -66573,7 +66380,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestDeliverTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestDeliverTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestDeliverTx to JSON.
@@ -66596,26 +66403,26 @@ export namespace tendermint {
              * Constructs a new RequestEndBlock.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestEndBlock);
+            constructor(properties?: cometbft.abci.IRequestEndBlock);
 
             /** RequestEndBlock height. */
             public height: Long;
 
             /**
-             * Encodes the specified RequestEndBlock message. Does not implicitly {@link tendermint.abci.RequestEndBlock.verify|verify} messages.
+             * Encodes the specified RequestEndBlock message. Does not implicitly {@link cometbft.abci.RequestEndBlock.verify|verify} messages.
              * @param message RequestEndBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestEndBlock message, length delimited. Does not implicitly {@link tendermint.abci.RequestEndBlock.verify|verify} messages.
+             * Encodes the specified RequestEndBlock message, length delimited. Does not implicitly {@link cometbft.abci.RequestEndBlock.verify|verify} messages.
              * @param message RequestEndBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestEndBlock message from the specified reader or buffer.
@@ -66625,7 +66432,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestEndBlock;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestEndBlock;
 
             /**
              * Decodes a RequestEndBlock message from the specified reader or buffer, length delimited.
@@ -66634,7 +66441,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestEndBlock;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestEndBlock;
 
             /**
              * Verifies a RequestEndBlock message.
@@ -66648,7 +66455,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestEndBlock
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestEndBlock;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestEndBlock;
 
             /**
              * Creates a plain object from a RequestEndBlock message. Also converts values to other types if specified.
@@ -66656,7 +66463,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestEndBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestEndBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestEndBlock to JSON.
@@ -66676,23 +66483,23 @@ export namespace tendermint {
              * Constructs a new RequestCommit.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestCommit);
+            constructor(properties?: cometbft.abci.IRequestCommit);
 
             /**
-             * Encodes the specified RequestCommit message. Does not implicitly {@link tendermint.abci.RequestCommit.verify|verify} messages.
+             * Encodes the specified RequestCommit message. Does not implicitly {@link cometbft.abci.RequestCommit.verify|verify} messages.
              * @param message RequestCommit message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestCommit, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestCommit, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestCommit message, length delimited. Does not implicitly {@link tendermint.abci.RequestCommit.verify|verify} messages.
+             * Encodes the specified RequestCommit message, length delimited. Does not implicitly {@link cometbft.abci.RequestCommit.verify|verify} messages.
              * @param message RequestCommit message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestCommit, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestCommit, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestCommit message from the specified reader or buffer.
@@ -66702,7 +66509,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestCommit;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestCommit;
 
             /**
              * Decodes a RequestCommit message from the specified reader or buffer, length delimited.
@@ -66711,7 +66518,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestCommit;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestCommit;
 
             /**
              * Verifies a RequestCommit message.
@@ -66725,7 +66532,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestCommit
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestCommit;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestCommit;
 
             /**
              * Creates a plain object from a RequestCommit message. Also converts values to other types if specified.
@@ -66733,7 +66540,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestCommit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestCommit, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestCommit to JSON.
@@ -66753,23 +66560,23 @@ export namespace tendermint {
              * Constructs a new RequestListSnapshots.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestListSnapshots);
+            constructor(properties?: cometbft.abci.IRequestListSnapshots);
 
             /**
-             * Encodes the specified RequestListSnapshots message. Does not implicitly {@link tendermint.abci.RequestListSnapshots.verify|verify} messages.
+             * Encodes the specified RequestListSnapshots message. Does not implicitly {@link cometbft.abci.RequestListSnapshots.verify|verify} messages.
              * @param message RequestListSnapshots message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestListSnapshots message, length delimited. Does not implicitly {@link tendermint.abci.RequestListSnapshots.verify|verify} messages.
+             * Encodes the specified RequestListSnapshots message, length delimited. Does not implicitly {@link cometbft.abci.RequestListSnapshots.verify|verify} messages.
              * @param message RequestListSnapshots message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestListSnapshots message from the specified reader or buffer.
@@ -66779,7 +66586,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestListSnapshots;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestListSnapshots;
 
             /**
              * Decodes a RequestListSnapshots message from the specified reader or buffer, length delimited.
@@ -66788,7 +66595,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestListSnapshots;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestListSnapshots;
 
             /**
              * Verifies a RequestListSnapshots message.
@@ -66802,7 +66609,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestListSnapshots
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestListSnapshots;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestListSnapshots;
 
             /**
              * Creates a plain object from a RequestListSnapshots message. Also converts values to other types if specified.
@@ -66810,7 +66617,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestListSnapshots, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestListSnapshots, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestListSnapshots to JSON.
@@ -66823,7 +66630,7 @@ export namespace tendermint {
         interface IRequestOfferSnapshot {
 
             /** RequestOfferSnapshot snapshot */
-            snapshot?: (tendermint.abci.ISnapshot|null);
+            snapshot?: (cometbft.abci.ISnapshot|null);
 
             /** RequestOfferSnapshot app_hash */
             app_hash?: (Uint8Array|null);
@@ -66836,29 +66643,29 @@ export namespace tendermint {
              * Constructs a new RequestOfferSnapshot.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestOfferSnapshot);
+            constructor(properties?: cometbft.abci.IRequestOfferSnapshot);
 
             /** RequestOfferSnapshot snapshot. */
-            public snapshot?: (tendermint.abci.ISnapshot|null);
+            public snapshot?: (cometbft.abci.ISnapshot|null);
 
             /** RequestOfferSnapshot app_hash. */
             public app_hash: Uint8Array;
 
             /**
-             * Encodes the specified RequestOfferSnapshot message. Does not implicitly {@link tendermint.abci.RequestOfferSnapshot.verify|verify} messages.
+             * Encodes the specified RequestOfferSnapshot message. Does not implicitly {@link cometbft.abci.RequestOfferSnapshot.verify|verify} messages.
              * @param message RequestOfferSnapshot message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestOfferSnapshot message, length delimited. Does not implicitly {@link tendermint.abci.RequestOfferSnapshot.verify|verify} messages.
+             * Encodes the specified RequestOfferSnapshot message, length delimited. Does not implicitly {@link cometbft.abci.RequestOfferSnapshot.verify|verify} messages.
              * @param message RequestOfferSnapshot message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestOfferSnapshot message from the specified reader or buffer.
@@ -66868,7 +66675,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestOfferSnapshot;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestOfferSnapshot;
 
             /**
              * Decodes a RequestOfferSnapshot message from the specified reader or buffer, length delimited.
@@ -66877,7 +66684,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestOfferSnapshot;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestOfferSnapshot;
 
             /**
              * Verifies a RequestOfferSnapshot message.
@@ -66891,7 +66698,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestOfferSnapshot
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestOfferSnapshot;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestOfferSnapshot;
 
             /**
              * Creates a plain object from a RequestOfferSnapshot message. Also converts values to other types if specified.
@@ -66899,7 +66706,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestOfferSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestOfferSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestOfferSnapshot to JSON.
@@ -66928,7 +66735,7 @@ export namespace tendermint {
              * Constructs a new RequestLoadSnapshotChunk.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestLoadSnapshotChunk);
+            constructor(properties?: cometbft.abci.IRequestLoadSnapshotChunk);
 
             /** RequestLoadSnapshotChunk height. */
             public height: Long;
@@ -66940,20 +66747,20 @@ export namespace tendermint {
             public chunk: number;
 
             /**
-             * Encodes the specified RequestLoadSnapshotChunk message. Does not implicitly {@link tendermint.abci.RequestLoadSnapshotChunk.verify|verify} messages.
+             * Encodes the specified RequestLoadSnapshotChunk message. Does not implicitly {@link cometbft.abci.RequestLoadSnapshotChunk.verify|verify} messages.
              * @param message RequestLoadSnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestLoadSnapshotChunk message, length delimited. Does not implicitly {@link tendermint.abci.RequestLoadSnapshotChunk.verify|verify} messages.
+             * Encodes the specified RequestLoadSnapshotChunk message, length delimited. Does not implicitly {@link cometbft.abci.RequestLoadSnapshotChunk.verify|verify} messages.
              * @param message RequestLoadSnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestLoadSnapshotChunk message from the specified reader or buffer.
@@ -66963,7 +66770,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestLoadSnapshotChunk;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestLoadSnapshotChunk;
 
             /**
              * Decodes a RequestLoadSnapshotChunk message from the specified reader or buffer, length delimited.
@@ -66972,7 +66779,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestLoadSnapshotChunk;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestLoadSnapshotChunk;
 
             /**
              * Verifies a RequestLoadSnapshotChunk message.
@@ -66986,7 +66793,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestLoadSnapshotChunk
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestLoadSnapshotChunk;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestLoadSnapshotChunk;
 
             /**
              * Creates a plain object from a RequestLoadSnapshotChunk message. Also converts values to other types if specified.
@@ -66994,7 +66801,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestLoadSnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestLoadSnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestLoadSnapshotChunk to JSON.
@@ -67023,7 +66830,7 @@ export namespace tendermint {
              * Constructs a new RequestApplySnapshotChunk.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestApplySnapshotChunk);
+            constructor(properties?: cometbft.abci.IRequestApplySnapshotChunk);
 
             /** RequestApplySnapshotChunk index. */
             public index: number;
@@ -67035,20 +66842,20 @@ export namespace tendermint {
             public sender: string;
 
             /**
-             * Encodes the specified RequestApplySnapshotChunk message. Does not implicitly {@link tendermint.abci.RequestApplySnapshotChunk.verify|verify} messages.
+             * Encodes the specified RequestApplySnapshotChunk message. Does not implicitly {@link cometbft.abci.RequestApplySnapshotChunk.verify|verify} messages.
              * @param message RequestApplySnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestApplySnapshotChunk message, length delimited. Does not implicitly {@link tendermint.abci.RequestApplySnapshotChunk.verify|verify} messages.
+             * Encodes the specified RequestApplySnapshotChunk message, length delimited. Does not implicitly {@link cometbft.abci.RequestApplySnapshotChunk.verify|verify} messages.
              * @param message RequestApplySnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestApplySnapshotChunk message from the specified reader or buffer.
@@ -67058,7 +66865,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestApplySnapshotChunk;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestApplySnapshotChunk;
 
             /**
              * Decodes a RequestApplySnapshotChunk message from the specified reader or buffer, length delimited.
@@ -67067,7 +66874,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestApplySnapshotChunk;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestApplySnapshotChunk;
 
             /**
              * Verifies a RequestApplySnapshotChunk message.
@@ -67081,7 +66888,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestApplySnapshotChunk
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestApplySnapshotChunk;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestApplySnapshotChunk;
 
             /**
              * Creates a plain object from a RequestApplySnapshotChunk message. Also converts values to other types if specified.
@@ -67089,7 +66896,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestApplySnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestApplySnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestApplySnapshotChunk to JSON.
@@ -67108,10 +66915,10 @@ export namespace tendermint {
             txs?: (Uint8Array[]|null);
 
             /** RequestPrepareProposal local_last_commit */
-            local_last_commit?: (tendermint.abci.IExtendedCommitInfo|null);
+            local_last_commit?: (cometbft.abci.IExtendedCommitInfo|null);
 
             /** RequestPrepareProposal misbehavior */
-            misbehavior?: (tendermint.abci.IMisbehavior[]|null);
+            misbehavior?: (cometbft.abci.IMisbehavior[]|null);
 
             /** RequestPrepareProposal height */
             height?: (Long|null);
@@ -67133,7 +66940,7 @@ export namespace tendermint {
              * Constructs a new RequestPrepareProposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestPrepareProposal);
+            constructor(properties?: cometbft.abci.IRequestPrepareProposal);
 
             /** RequestPrepareProposal max_tx_bytes. */
             public max_tx_bytes: Long;
@@ -67142,10 +66949,10 @@ export namespace tendermint {
             public txs: Uint8Array[];
 
             /** RequestPrepareProposal local_last_commit. */
-            public local_last_commit?: (tendermint.abci.IExtendedCommitInfo|null);
+            public local_last_commit?: (cometbft.abci.IExtendedCommitInfo|null);
 
             /** RequestPrepareProposal misbehavior. */
-            public misbehavior: tendermint.abci.IMisbehavior[];
+            public misbehavior: cometbft.abci.IMisbehavior[];
 
             /** RequestPrepareProposal height. */
             public height: Long;
@@ -67160,20 +66967,20 @@ export namespace tendermint {
             public proposer_address: Uint8Array;
 
             /**
-             * Encodes the specified RequestPrepareProposal message. Does not implicitly {@link tendermint.abci.RequestPrepareProposal.verify|verify} messages.
+             * Encodes the specified RequestPrepareProposal message. Does not implicitly {@link cometbft.abci.RequestPrepareProposal.verify|verify} messages.
              * @param message RequestPrepareProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestPrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestPrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestPrepareProposal message, length delimited. Does not implicitly {@link tendermint.abci.RequestPrepareProposal.verify|verify} messages.
+             * Encodes the specified RequestPrepareProposal message, length delimited. Does not implicitly {@link cometbft.abci.RequestPrepareProposal.verify|verify} messages.
              * @param message RequestPrepareProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestPrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestPrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestPrepareProposal message from the specified reader or buffer.
@@ -67183,7 +66990,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestPrepareProposal;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestPrepareProposal;
 
             /**
              * Decodes a RequestPrepareProposal message from the specified reader or buffer, length delimited.
@@ -67192,7 +66999,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestPrepareProposal;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestPrepareProposal;
 
             /**
              * Verifies a RequestPrepareProposal message.
@@ -67206,7 +67013,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestPrepareProposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestPrepareProposal;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestPrepareProposal;
 
             /**
              * Creates a plain object from a RequestPrepareProposal message. Also converts values to other types if specified.
@@ -67214,7 +67021,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestPrepareProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestPrepareProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestPrepareProposal to JSON.
@@ -67230,10 +67037,10 @@ export namespace tendermint {
             txs?: (Uint8Array[]|null);
 
             /** RequestProcessProposal proposed_last_commit */
-            proposed_last_commit?: (tendermint.abci.ICommitInfo|null);
+            proposed_last_commit?: (cometbft.abci.ICommitInfo|null);
 
             /** RequestProcessProposal misbehavior */
-            misbehavior?: (tendermint.abci.IMisbehavior[]|null);
+            misbehavior?: (cometbft.abci.IMisbehavior[]|null);
 
             /** RequestProcessProposal hash */
             hash?: (Uint8Array|null);
@@ -67258,16 +67065,16 @@ export namespace tendermint {
              * Constructs a new RequestProcessProposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IRequestProcessProposal);
+            constructor(properties?: cometbft.abci.IRequestProcessProposal);
 
             /** RequestProcessProposal txs. */
             public txs: Uint8Array[];
 
             /** RequestProcessProposal proposed_last_commit. */
-            public proposed_last_commit?: (tendermint.abci.ICommitInfo|null);
+            public proposed_last_commit?: (cometbft.abci.ICommitInfo|null);
 
             /** RequestProcessProposal misbehavior. */
-            public misbehavior: tendermint.abci.IMisbehavior[];
+            public misbehavior: cometbft.abci.IMisbehavior[];
 
             /** RequestProcessProposal hash. */
             public hash: Uint8Array;
@@ -67285,20 +67092,20 @@ export namespace tendermint {
             public proposer_address: Uint8Array;
 
             /**
-             * Encodes the specified RequestProcessProposal message. Does not implicitly {@link tendermint.abci.RequestProcessProposal.verify|verify} messages.
+             * Encodes the specified RequestProcessProposal message. Does not implicitly {@link cometbft.abci.RequestProcessProposal.verify|verify} messages.
              * @param message RequestProcessProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IRequestProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IRequestProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified RequestProcessProposal message, length delimited. Does not implicitly {@link tendermint.abci.RequestProcessProposal.verify|verify} messages.
+             * Encodes the specified RequestProcessProposal message, length delimited. Does not implicitly {@link cometbft.abci.RequestProcessProposal.verify|verify} messages.
              * @param message RequestProcessProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IRequestProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IRequestProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a RequestProcessProposal message from the specified reader or buffer.
@@ -67308,7 +67115,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestProcessProposal;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.RequestProcessProposal;
 
             /**
              * Decodes a RequestProcessProposal message from the specified reader or buffer, length delimited.
@@ -67317,7 +67124,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestProcessProposal;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.RequestProcessProposal;
 
             /**
              * Verifies a RequestProcessProposal message.
@@ -67331,7 +67138,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns RequestProcessProposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestProcessProposal;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.RequestProcessProposal;
 
             /**
              * Creates a plain object from a RequestProcessProposal message. Also converts values to other types if specified.
@@ -67339,7 +67146,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.RequestProcessProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.RequestProcessProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this RequestProcessProposal to JSON.
@@ -67352,55 +67159,55 @@ export namespace tendermint {
         interface IResponse {
 
             /** Response exception */
-            exception?: (tendermint.abci.IResponseException|null);
+            exception?: (cometbft.abci.IResponseException|null);
 
             /** Response echo */
-            echo?: (tendermint.abci.IResponseEcho|null);
+            echo?: (cometbft.abci.IResponseEcho|null);
 
             /** Response flush */
-            flush?: (tendermint.abci.IResponseFlush|null);
+            flush?: (cometbft.abci.IResponseFlush|null);
 
             /** Response info */
-            info?: (tendermint.abci.IResponseInfo|null);
+            info?: (cometbft.abci.IResponseInfo|null);
 
             /** Response init_chain */
-            init_chain?: (tendermint.abci.IResponseInitChain|null);
+            init_chain?: (cometbft.abci.IResponseInitChain|null);
 
             /** Response query */
-            query?: (tendermint.abci.IResponseQuery|null);
+            query?: (cometbft.abci.IResponseQuery|null);
 
             /** Response begin_block */
-            begin_block?: (tendermint.abci.IResponseBeginBlock|null);
+            begin_block?: (cometbft.abci.IResponseBeginBlock|null);
 
             /** Response check_tx */
-            check_tx?: (tendermint.abci.IResponseCheckTx|null);
+            check_tx?: (cometbft.abci.IResponseCheckTx|null);
 
             /** Response deliver_tx */
-            deliver_tx?: (tendermint.abci.IResponseDeliverTx|null);
+            deliver_tx?: (cometbft.abci.IResponseDeliverTx|null);
 
             /** Response end_block */
-            end_block?: (tendermint.abci.IResponseEndBlock|null);
+            end_block?: (cometbft.abci.IResponseEndBlock|null);
 
             /** Response commit */
-            commit?: (tendermint.abci.IResponseCommit|null);
+            commit?: (cometbft.abci.IResponseCommit|null);
 
             /** Response list_snapshots */
-            list_snapshots?: (tendermint.abci.IResponseListSnapshots|null);
+            list_snapshots?: (cometbft.abci.IResponseListSnapshots|null);
 
             /** Response offer_snapshot */
-            offer_snapshot?: (tendermint.abci.IResponseOfferSnapshot|null);
+            offer_snapshot?: (cometbft.abci.IResponseOfferSnapshot|null);
 
             /** Response load_snapshot_chunk */
-            load_snapshot_chunk?: (tendermint.abci.IResponseLoadSnapshotChunk|null);
+            load_snapshot_chunk?: (cometbft.abci.IResponseLoadSnapshotChunk|null);
 
             /** Response apply_snapshot_chunk */
-            apply_snapshot_chunk?: (tendermint.abci.IResponseApplySnapshotChunk|null);
+            apply_snapshot_chunk?: (cometbft.abci.IResponseApplySnapshotChunk|null);
 
             /** Response prepare_proposal */
-            prepare_proposal?: (tendermint.abci.IResponsePrepareProposal|null);
+            prepare_proposal?: (cometbft.abci.IResponsePrepareProposal|null);
 
             /** Response process_proposal */
-            process_proposal?: (tendermint.abci.IResponseProcessProposal|null);
+            process_proposal?: (cometbft.abci.IResponseProcessProposal|null);
         }
 
         /** Represents a Response. */
@@ -67410,77 +67217,77 @@ export namespace tendermint {
              * Constructs a new Response.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponse);
+            constructor(properties?: cometbft.abci.IResponse);
 
             /** Response exception. */
-            public exception?: (tendermint.abci.IResponseException|null);
+            public exception?: (cometbft.abci.IResponseException|null);
 
             /** Response echo. */
-            public echo?: (tendermint.abci.IResponseEcho|null);
+            public echo?: (cometbft.abci.IResponseEcho|null);
 
             /** Response flush. */
-            public flush?: (tendermint.abci.IResponseFlush|null);
+            public flush?: (cometbft.abci.IResponseFlush|null);
 
             /** Response info. */
-            public info?: (tendermint.abci.IResponseInfo|null);
+            public info?: (cometbft.abci.IResponseInfo|null);
 
             /** Response init_chain. */
-            public init_chain?: (tendermint.abci.IResponseInitChain|null);
+            public init_chain?: (cometbft.abci.IResponseInitChain|null);
 
             /** Response query. */
-            public query?: (tendermint.abci.IResponseQuery|null);
+            public query?: (cometbft.abci.IResponseQuery|null);
 
             /** Response begin_block. */
-            public begin_block?: (tendermint.abci.IResponseBeginBlock|null);
+            public begin_block?: (cometbft.abci.IResponseBeginBlock|null);
 
             /** Response check_tx. */
-            public check_tx?: (tendermint.abci.IResponseCheckTx|null);
+            public check_tx?: (cometbft.abci.IResponseCheckTx|null);
 
             /** Response deliver_tx. */
-            public deliver_tx?: (tendermint.abci.IResponseDeliverTx|null);
+            public deliver_tx?: (cometbft.abci.IResponseDeliverTx|null);
 
             /** Response end_block. */
-            public end_block?: (tendermint.abci.IResponseEndBlock|null);
+            public end_block?: (cometbft.abci.IResponseEndBlock|null);
 
             /** Response commit. */
-            public commit?: (tendermint.abci.IResponseCommit|null);
+            public commit?: (cometbft.abci.IResponseCommit|null);
 
             /** Response list_snapshots. */
-            public list_snapshots?: (tendermint.abci.IResponseListSnapshots|null);
+            public list_snapshots?: (cometbft.abci.IResponseListSnapshots|null);
 
             /** Response offer_snapshot. */
-            public offer_snapshot?: (tendermint.abci.IResponseOfferSnapshot|null);
+            public offer_snapshot?: (cometbft.abci.IResponseOfferSnapshot|null);
 
             /** Response load_snapshot_chunk. */
-            public load_snapshot_chunk?: (tendermint.abci.IResponseLoadSnapshotChunk|null);
+            public load_snapshot_chunk?: (cometbft.abci.IResponseLoadSnapshotChunk|null);
 
             /** Response apply_snapshot_chunk. */
-            public apply_snapshot_chunk?: (tendermint.abci.IResponseApplySnapshotChunk|null);
+            public apply_snapshot_chunk?: (cometbft.abci.IResponseApplySnapshotChunk|null);
 
             /** Response prepare_proposal. */
-            public prepare_proposal?: (tendermint.abci.IResponsePrepareProposal|null);
+            public prepare_proposal?: (cometbft.abci.IResponsePrepareProposal|null);
 
             /** Response process_proposal. */
-            public process_proposal?: (tendermint.abci.IResponseProcessProposal|null);
+            public process_proposal?: (cometbft.abci.IResponseProcessProposal|null);
 
             /** Response value. */
             public value?: ("exception"|"echo"|"flush"|"info"|"init_chain"|"query"|"begin_block"|"check_tx"|"deliver_tx"|"end_block"|"commit"|"list_snapshots"|"offer_snapshot"|"load_snapshot_chunk"|"apply_snapshot_chunk"|"prepare_proposal"|"process_proposal");
 
             /**
-             * Encodes the specified Response message. Does not implicitly {@link tendermint.abci.Response.verify|verify} messages.
+             * Encodes the specified Response message. Does not implicitly {@link cometbft.abci.Response.verify|verify} messages.
              * @param message Response message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Response message, length delimited. Does not implicitly {@link tendermint.abci.Response.verify|verify} messages.
+             * Encodes the specified Response message, length delimited. Does not implicitly {@link cometbft.abci.Response.verify|verify} messages.
              * @param message Response message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Response message from the specified reader or buffer.
@@ -67490,7 +67297,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Response;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.Response;
 
             /**
              * Decodes a Response message from the specified reader or buffer, length delimited.
@@ -67499,7 +67306,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Response;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.Response;
 
             /**
              * Verifies a Response message.
@@ -67513,7 +67320,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Response
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Response;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.Response;
 
             /**
              * Creates a plain object from a Response message. Also converts values to other types if specified.
@@ -67521,7 +67328,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Response to JSON.
@@ -67544,26 +67351,26 @@ export namespace tendermint {
              * Constructs a new ResponseException.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseException);
+            constructor(properties?: cometbft.abci.IResponseException);
 
             /** ResponseException error. */
             public error: string;
 
             /**
-             * Encodes the specified ResponseException message. Does not implicitly {@link tendermint.abci.ResponseException.verify|verify} messages.
+             * Encodes the specified ResponseException message. Does not implicitly {@link cometbft.abci.ResponseException.verify|verify} messages.
              * @param message ResponseException message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseException, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseException, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseException message, length delimited. Does not implicitly {@link tendermint.abci.ResponseException.verify|verify} messages.
+             * Encodes the specified ResponseException message, length delimited. Does not implicitly {@link cometbft.abci.ResponseException.verify|verify} messages.
              * @param message ResponseException message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseException, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseException, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseException message from the specified reader or buffer.
@@ -67573,7 +67380,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseException;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseException;
 
             /**
              * Decodes a ResponseException message from the specified reader or buffer, length delimited.
@@ -67582,7 +67389,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseException;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseException;
 
             /**
              * Verifies a ResponseException message.
@@ -67596,7 +67403,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseException
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseException;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseException;
 
             /**
              * Creates a plain object from a ResponseException message. Also converts values to other types if specified.
@@ -67604,7 +67411,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseException, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseException, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseException to JSON.
@@ -67627,26 +67434,26 @@ export namespace tendermint {
              * Constructs a new ResponseEcho.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseEcho);
+            constructor(properties?: cometbft.abci.IResponseEcho);
 
             /** ResponseEcho message. */
             public message: string;
 
             /**
-             * Encodes the specified ResponseEcho message. Does not implicitly {@link tendermint.abci.ResponseEcho.verify|verify} messages.
+             * Encodes the specified ResponseEcho message. Does not implicitly {@link cometbft.abci.ResponseEcho.verify|verify} messages.
              * @param message ResponseEcho message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseEcho, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseEcho, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseEcho message, length delimited. Does not implicitly {@link tendermint.abci.ResponseEcho.verify|verify} messages.
+             * Encodes the specified ResponseEcho message, length delimited. Does not implicitly {@link cometbft.abci.ResponseEcho.verify|verify} messages.
              * @param message ResponseEcho message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseEcho, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseEcho, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseEcho message from the specified reader or buffer.
@@ -67656,7 +67463,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseEcho;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseEcho;
 
             /**
              * Decodes a ResponseEcho message from the specified reader or buffer, length delimited.
@@ -67665,7 +67472,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseEcho;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseEcho;
 
             /**
              * Verifies a ResponseEcho message.
@@ -67679,7 +67486,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseEcho
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseEcho;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseEcho;
 
             /**
              * Creates a plain object from a ResponseEcho message. Also converts values to other types if specified.
@@ -67687,7 +67494,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseEcho, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseEcho, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseEcho to JSON.
@@ -67707,23 +67514,23 @@ export namespace tendermint {
              * Constructs a new ResponseFlush.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseFlush);
+            constructor(properties?: cometbft.abci.IResponseFlush);
 
             /**
-             * Encodes the specified ResponseFlush message. Does not implicitly {@link tendermint.abci.ResponseFlush.verify|verify} messages.
+             * Encodes the specified ResponseFlush message. Does not implicitly {@link cometbft.abci.ResponseFlush.verify|verify} messages.
              * @param message ResponseFlush message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseFlush, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseFlush, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseFlush message, length delimited. Does not implicitly {@link tendermint.abci.ResponseFlush.verify|verify} messages.
+             * Encodes the specified ResponseFlush message, length delimited. Does not implicitly {@link cometbft.abci.ResponseFlush.verify|verify} messages.
              * @param message ResponseFlush message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseFlush, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseFlush, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseFlush message from the specified reader or buffer.
@@ -67733,7 +67540,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseFlush;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseFlush;
 
             /**
              * Decodes a ResponseFlush message from the specified reader or buffer, length delimited.
@@ -67742,7 +67549,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseFlush;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseFlush;
 
             /**
              * Verifies a ResponseFlush message.
@@ -67756,7 +67563,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseFlush
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseFlush;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseFlush;
 
             /**
              * Creates a plain object from a ResponseFlush message. Also converts values to other types if specified.
@@ -67764,7 +67571,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseFlush, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseFlush, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseFlush to JSON.
@@ -67799,7 +67606,7 @@ export namespace tendermint {
              * Constructs a new ResponseInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseInfo);
+            constructor(properties?: cometbft.abci.IResponseInfo);
 
             /** ResponseInfo data. */
             public data: string;
@@ -67817,20 +67624,20 @@ export namespace tendermint {
             public last_block_app_hash: Uint8Array;
 
             /**
-             * Encodes the specified ResponseInfo message. Does not implicitly {@link tendermint.abci.ResponseInfo.verify|verify} messages.
+             * Encodes the specified ResponseInfo message. Does not implicitly {@link cometbft.abci.ResponseInfo.verify|verify} messages.
              * @param message ResponseInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseInfo message, length delimited. Does not implicitly {@link tendermint.abci.ResponseInfo.verify|verify} messages.
+             * Encodes the specified ResponseInfo message, length delimited. Does not implicitly {@link cometbft.abci.ResponseInfo.verify|verify} messages.
              * @param message ResponseInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseInfo message from the specified reader or buffer.
@@ -67840,7 +67647,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseInfo;
 
             /**
              * Decodes a ResponseInfo message from the specified reader or buffer, length delimited.
@@ -67849,7 +67656,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseInfo;
 
             /**
              * Verifies a ResponseInfo message.
@@ -67863,7 +67670,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseInfo;
 
             /**
              * Creates a plain object from a ResponseInfo message. Also converts values to other types if specified.
@@ -67871,7 +67678,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseInfo to JSON.
@@ -67884,10 +67691,10 @@ export namespace tendermint {
         interface IResponseInitChain {
 
             /** ResponseInitChain consensus_params */
-            consensus_params?: (tendermint.types.IConsensusParams|null);
+            consensus_params?: (cometbft.types.IConsensusParams|null);
 
             /** ResponseInitChain validators */
-            validators?: (tendermint.abci.IValidatorUpdate[]|null);
+            validators?: (cometbft.abci.IValidatorUpdate[]|null);
 
             /** ResponseInitChain app_hash */
             app_hash?: (Uint8Array|null);
@@ -67900,32 +67707,32 @@ export namespace tendermint {
              * Constructs a new ResponseInitChain.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseInitChain);
+            constructor(properties?: cometbft.abci.IResponseInitChain);
 
             /** ResponseInitChain consensus_params. */
-            public consensus_params?: (tendermint.types.IConsensusParams|null);
+            public consensus_params?: (cometbft.types.IConsensusParams|null);
 
             /** ResponseInitChain validators. */
-            public validators: tendermint.abci.IValidatorUpdate[];
+            public validators: cometbft.abci.IValidatorUpdate[];
 
             /** ResponseInitChain app_hash. */
             public app_hash: Uint8Array;
 
             /**
-             * Encodes the specified ResponseInitChain message. Does not implicitly {@link tendermint.abci.ResponseInitChain.verify|verify} messages.
+             * Encodes the specified ResponseInitChain message. Does not implicitly {@link cometbft.abci.ResponseInitChain.verify|verify} messages.
              * @param message ResponseInitChain message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseInitChain message, length delimited. Does not implicitly {@link tendermint.abci.ResponseInitChain.verify|verify} messages.
+             * Encodes the specified ResponseInitChain message, length delimited. Does not implicitly {@link cometbft.abci.ResponseInitChain.verify|verify} messages.
              * @param message ResponseInitChain message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseInitChain, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseInitChain message from the specified reader or buffer.
@@ -67935,7 +67742,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseInitChain;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseInitChain;
 
             /**
              * Decodes a ResponseInitChain message from the specified reader or buffer, length delimited.
@@ -67944,7 +67751,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseInitChain;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseInitChain;
 
             /**
              * Verifies a ResponseInitChain message.
@@ -67958,7 +67765,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseInitChain
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseInitChain;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseInitChain;
 
             /**
              * Creates a plain object from a ResponseInitChain message. Also converts values to other types if specified.
@@ -67966,7 +67773,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseInitChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseInitChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseInitChain to JSON.
@@ -67997,7 +67804,7 @@ export namespace tendermint {
             value?: (Uint8Array|null);
 
             /** ResponseQuery proof_ops */
-            proof_ops?: (tendermint.crypto.IProofOps|null);
+            proof_ops?: (cometbft.crypto.IProofOps|null);
 
             /** ResponseQuery height */
             height?: (Long|null);
@@ -68013,7 +67820,7 @@ export namespace tendermint {
              * Constructs a new ResponseQuery.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseQuery);
+            constructor(properties?: cometbft.abci.IResponseQuery);
 
             /** ResponseQuery code. */
             public code: number;
@@ -68034,7 +67841,7 @@ export namespace tendermint {
             public value: Uint8Array;
 
             /** ResponseQuery proof_ops. */
-            public proof_ops?: (tendermint.crypto.IProofOps|null);
+            public proof_ops?: (cometbft.crypto.IProofOps|null);
 
             /** ResponseQuery height. */
             public height: Long;
@@ -68043,20 +67850,20 @@ export namespace tendermint {
             public codespace: string;
 
             /**
-             * Encodes the specified ResponseQuery message. Does not implicitly {@link tendermint.abci.ResponseQuery.verify|verify} messages.
+             * Encodes the specified ResponseQuery message. Does not implicitly {@link cometbft.abci.ResponseQuery.verify|verify} messages.
              * @param message ResponseQuery message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseQuery, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseQuery message, length delimited. Does not implicitly {@link tendermint.abci.ResponseQuery.verify|verify} messages.
+             * Encodes the specified ResponseQuery message, length delimited. Does not implicitly {@link cometbft.abci.ResponseQuery.verify|verify} messages.
              * @param message ResponseQuery message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseQuery, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseQuery message from the specified reader or buffer.
@@ -68066,7 +67873,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseQuery;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseQuery;
 
             /**
              * Decodes a ResponseQuery message from the specified reader or buffer, length delimited.
@@ -68075,7 +67882,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseQuery;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseQuery;
 
             /**
              * Verifies a ResponseQuery message.
@@ -68089,7 +67896,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseQuery
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseQuery;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseQuery;
 
             /**
              * Creates a plain object from a ResponseQuery message. Also converts values to other types if specified.
@@ -68097,7 +67904,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseQuery to JSON.
@@ -68110,7 +67917,7 @@ export namespace tendermint {
         interface IResponseBeginBlock {
 
             /** ResponseBeginBlock events */
-            events?: (tendermint.abci.IEvent[]|null);
+            events?: (cometbft.abci.IEvent[]|null);
         }
 
         /** Represents a ResponseBeginBlock. */
@@ -68120,26 +67927,26 @@ export namespace tendermint {
              * Constructs a new ResponseBeginBlock.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseBeginBlock);
+            constructor(properties?: cometbft.abci.IResponseBeginBlock);
 
             /** ResponseBeginBlock events. */
-            public events: tendermint.abci.IEvent[];
+            public events: cometbft.abci.IEvent[];
 
             /**
-             * Encodes the specified ResponseBeginBlock message. Does not implicitly {@link tendermint.abci.ResponseBeginBlock.verify|verify} messages.
+             * Encodes the specified ResponseBeginBlock message. Does not implicitly {@link cometbft.abci.ResponseBeginBlock.verify|verify} messages.
              * @param message ResponseBeginBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseBeginBlock message, length delimited. Does not implicitly {@link tendermint.abci.ResponseBeginBlock.verify|verify} messages.
+             * Encodes the specified ResponseBeginBlock message, length delimited. Does not implicitly {@link cometbft.abci.ResponseBeginBlock.verify|verify} messages.
              * @param message ResponseBeginBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseBeginBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseBeginBlock message from the specified reader or buffer.
@@ -68149,7 +67956,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseBeginBlock;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseBeginBlock;
 
             /**
              * Decodes a ResponseBeginBlock message from the specified reader or buffer, length delimited.
@@ -68158,7 +67965,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseBeginBlock;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseBeginBlock;
 
             /**
              * Verifies a ResponseBeginBlock message.
@@ -68172,7 +67979,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseBeginBlock
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseBeginBlock;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseBeginBlock;
 
             /**
              * Creates a plain object from a ResponseBeginBlock message. Also converts values to other types if specified.
@@ -68180,7 +67987,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseBeginBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseBeginBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseBeginBlock to JSON.
@@ -68211,7 +68018,7 @@ export namespace tendermint {
             gas_used?: (Long|null);
 
             /** ResponseCheckTx events */
-            events?: (tendermint.abci.IEvent[]|null);
+            events?: (cometbft.abci.IEvent[]|null);
 
             /** ResponseCheckTx codespace */
             codespace?: (string|null);
@@ -68233,7 +68040,7 @@ export namespace tendermint {
              * Constructs a new ResponseCheckTx.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseCheckTx);
+            constructor(properties?: cometbft.abci.IResponseCheckTx);
 
             /** ResponseCheckTx code. */
             public code: number;
@@ -68254,7 +68061,7 @@ export namespace tendermint {
             public gas_used: Long;
 
             /** ResponseCheckTx events. */
-            public events: tendermint.abci.IEvent[];
+            public events: cometbft.abci.IEvent[];
 
             /** ResponseCheckTx codespace. */
             public codespace: string;
@@ -68269,20 +68076,20 @@ export namespace tendermint {
             public mempool_error: string;
 
             /**
-             * Encodes the specified ResponseCheckTx message. Does not implicitly {@link tendermint.abci.ResponseCheckTx.verify|verify} messages.
+             * Encodes the specified ResponseCheckTx message. Does not implicitly {@link cometbft.abci.ResponseCheckTx.verify|verify} messages.
              * @param message ResponseCheckTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseCheckTx message, length delimited. Does not implicitly {@link tendermint.abci.ResponseCheckTx.verify|verify} messages.
+             * Encodes the specified ResponseCheckTx message, length delimited. Does not implicitly {@link cometbft.abci.ResponseCheckTx.verify|verify} messages.
              * @param message ResponseCheckTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseCheckTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseCheckTx message from the specified reader or buffer.
@@ -68292,7 +68099,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseCheckTx;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseCheckTx;
 
             /**
              * Decodes a ResponseCheckTx message from the specified reader or buffer, length delimited.
@@ -68301,7 +68108,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseCheckTx;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseCheckTx;
 
             /**
              * Verifies a ResponseCheckTx message.
@@ -68315,7 +68122,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseCheckTx
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseCheckTx;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseCheckTx;
 
             /**
              * Creates a plain object from a ResponseCheckTx message. Also converts values to other types if specified.
@@ -68323,7 +68130,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseCheckTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseCheckTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseCheckTx to JSON.
@@ -68354,7 +68161,7 @@ export namespace tendermint {
             gas_used?: (Long|null);
 
             /** ResponseDeliverTx events */
-            events?: (tendermint.abci.IEvent[]|null);
+            events?: (cometbft.abci.IEvent[]|null);
 
             /** ResponseDeliverTx codespace */
             codespace?: (string|null);
@@ -68367,7 +68174,7 @@ export namespace tendermint {
              * Constructs a new ResponseDeliverTx.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseDeliverTx);
+            constructor(properties?: cometbft.abci.IResponseDeliverTx);
 
             /** ResponseDeliverTx code. */
             public code: number;
@@ -68388,26 +68195,26 @@ export namespace tendermint {
             public gas_used: Long;
 
             /** ResponseDeliverTx events. */
-            public events: tendermint.abci.IEvent[];
+            public events: cometbft.abci.IEvent[];
 
             /** ResponseDeliverTx codespace. */
             public codespace: string;
 
             /**
-             * Encodes the specified ResponseDeliverTx message. Does not implicitly {@link tendermint.abci.ResponseDeliverTx.verify|verify} messages.
+             * Encodes the specified ResponseDeliverTx message. Does not implicitly {@link cometbft.abci.ResponseDeliverTx.verify|verify} messages.
              * @param message ResponseDeliverTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseDeliverTx message, length delimited. Does not implicitly {@link tendermint.abci.ResponseDeliverTx.verify|verify} messages.
+             * Encodes the specified ResponseDeliverTx message, length delimited. Does not implicitly {@link cometbft.abci.ResponseDeliverTx.verify|verify} messages.
              * @param message ResponseDeliverTx message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseDeliverTx, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseDeliverTx message from the specified reader or buffer.
@@ -68417,7 +68224,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseDeliverTx;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseDeliverTx;
 
             /**
              * Decodes a ResponseDeliverTx message from the specified reader or buffer, length delimited.
@@ -68426,7 +68233,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseDeliverTx;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseDeliverTx;
 
             /**
              * Verifies a ResponseDeliverTx message.
@@ -68440,7 +68247,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseDeliverTx
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseDeliverTx;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseDeliverTx;
 
             /**
              * Creates a plain object from a ResponseDeliverTx message. Also converts values to other types if specified.
@@ -68448,7 +68255,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseDeliverTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseDeliverTx, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseDeliverTx to JSON.
@@ -68461,13 +68268,13 @@ export namespace tendermint {
         interface IResponseEndBlock {
 
             /** ResponseEndBlock validator_updates */
-            validator_updates?: (tendermint.abci.IValidatorUpdate[]|null);
+            validator_updates?: (cometbft.abci.IValidatorUpdate[]|null);
 
             /** ResponseEndBlock consensus_param_updates */
-            consensus_param_updates?: (tendermint.types.IConsensusParams|null);
+            consensus_param_updates?: (cometbft.types.IConsensusParams|null);
 
             /** ResponseEndBlock events */
-            events?: (tendermint.abci.IEvent[]|null);
+            events?: (cometbft.abci.IEvent[]|null);
         }
 
         /** Represents a ResponseEndBlock. */
@@ -68477,32 +68284,32 @@ export namespace tendermint {
              * Constructs a new ResponseEndBlock.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseEndBlock);
+            constructor(properties?: cometbft.abci.IResponseEndBlock);
 
             /** ResponseEndBlock validator_updates. */
-            public validator_updates: tendermint.abci.IValidatorUpdate[];
+            public validator_updates: cometbft.abci.IValidatorUpdate[];
 
             /** ResponseEndBlock consensus_param_updates. */
-            public consensus_param_updates?: (tendermint.types.IConsensusParams|null);
+            public consensus_param_updates?: (cometbft.types.IConsensusParams|null);
 
             /** ResponseEndBlock events. */
-            public events: tendermint.abci.IEvent[];
+            public events: cometbft.abci.IEvent[];
 
             /**
-             * Encodes the specified ResponseEndBlock message. Does not implicitly {@link tendermint.abci.ResponseEndBlock.verify|verify} messages.
+             * Encodes the specified ResponseEndBlock message. Does not implicitly {@link cometbft.abci.ResponseEndBlock.verify|verify} messages.
              * @param message ResponseEndBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseEndBlock message, length delimited. Does not implicitly {@link tendermint.abci.ResponseEndBlock.verify|verify} messages.
+             * Encodes the specified ResponseEndBlock message, length delimited. Does not implicitly {@link cometbft.abci.ResponseEndBlock.verify|verify} messages.
              * @param message ResponseEndBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseEndBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseEndBlock message from the specified reader or buffer.
@@ -68512,7 +68319,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseEndBlock;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseEndBlock;
 
             /**
              * Decodes a ResponseEndBlock message from the specified reader or buffer, length delimited.
@@ -68521,7 +68328,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseEndBlock;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseEndBlock;
 
             /**
              * Verifies a ResponseEndBlock message.
@@ -68535,7 +68342,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseEndBlock
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseEndBlock;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseEndBlock;
 
             /**
              * Creates a plain object from a ResponseEndBlock message. Also converts values to other types if specified.
@@ -68543,7 +68350,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseEndBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseEndBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseEndBlock to JSON.
@@ -68569,7 +68376,7 @@ export namespace tendermint {
              * Constructs a new ResponseCommit.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseCommit);
+            constructor(properties?: cometbft.abci.IResponseCommit);
 
             /** ResponseCommit data. */
             public data: Uint8Array;
@@ -68578,20 +68385,20 @@ export namespace tendermint {
             public retain_height: Long;
 
             /**
-             * Encodes the specified ResponseCommit message. Does not implicitly {@link tendermint.abci.ResponseCommit.verify|verify} messages.
+             * Encodes the specified ResponseCommit message. Does not implicitly {@link cometbft.abci.ResponseCommit.verify|verify} messages.
              * @param message ResponseCommit message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseCommit, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseCommit, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseCommit message, length delimited. Does not implicitly {@link tendermint.abci.ResponseCommit.verify|verify} messages.
+             * Encodes the specified ResponseCommit message, length delimited. Does not implicitly {@link cometbft.abci.ResponseCommit.verify|verify} messages.
              * @param message ResponseCommit message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseCommit, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseCommit, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseCommit message from the specified reader or buffer.
@@ -68601,7 +68408,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseCommit;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseCommit;
 
             /**
              * Decodes a ResponseCommit message from the specified reader or buffer, length delimited.
@@ -68610,7 +68417,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseCommit;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseCommit;
 
             /**
              * Verifies a ResponseCommit message.
@@ -68624,7 +68431,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseCommit
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseCommit;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseCommit;
 
             /**
              * Creates a plain object from a ResponseCommit message. Also converts values to other types if specified.
@@ -68632,7 +68439,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseCommit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseCommit, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseCommit to JSON.
@@ -68645,7 +68452,7 @@ export namespace tendermint {
         interface IResponseListSnapshots {
 
             /** ResponseListSnapshots snapshots */
-            snapshots?: (tendermint.abci.ISnapshot[]|null);
+            snapshots?: (cometbft.abci.ISnapshot[]|null);
         }
 
         /** Represents a ResponseListSnapshots. */
@@ -68655,26 +68462,26 @@ export namespace tendermint {
              * Constructs a new ResponseListSnapshots.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseListSnapshots);
+            constructor(properties?: cometbft.abci.IResponseListSnapshots);
 
             /** ResponseListSnapshots snapshots. */
-            public snapshots: tendermint.abci.ISnapshot[];
+            public snapshots: cometbft.abci.ISnapshot[];
 
             /**
-             * Encodes the specified ResponseListSnapshots message. Does not implicitly {@link tendermint.abci.ResponseListSnapshots.verify|verify} messages.
+             * Encodes the specified ResponseListSnapshots message. Does not implicitly {@link cometbft.abci.ResponseListSnapshots.verify|verify} messages.
              * @param message ResponseListSnapshots message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseListSnapshots message, length delimited. Does not implicitly {@link tendermint.abci.ResponseListSnapshots.verify|verify} messages.
+             * Encodes the specified ResponseListSnapshots message, length delimited. Does not implicitly {@link cometbft.abci.ResponseListSnapshots.verify|verify} messages.
              * @param message ResponseListSnapshots message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseListSnapshots, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseListSnapshots message from the specified reader or buffer.
@@ -68684,7 +68491,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseListSnapshots;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseListSnapshots;
 
             /**
              * Decodes a ResponseListSnapshots message from the specified reader or buffer, length delimited.
@@ -68693,7 +68500,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseListSnapshots;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseListSnapshots;
 
             /**
              * Verifies a ResponseListSnapshots message.
@@ -68707,7 +68514,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseListSnapshots
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseListSnapshots;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseListSnapshots;
 
             /**
              * Creates a plain object from a ResponseListSnapshots message. Also converts values to other types if specified.
@@ -68715,7 +68522,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseListSnapshots, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseListSnapshots, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseListSnapshots to JSON.
@@ -68728,7 +68535,7 @@ export namespace tendermint {
         interface IResponseOfferSnapshot {
 
             /** ResponseOfferSnapshot result */
-            result?: (tendermint.abci.ResponseOfferSnapshot.Result|null);
+            result?: (cometbft.abci.ResponseOfferSnapshot.Result|null);
         }
 
         /** Represents a ResponseOfferSnapshot. */
@@ -68738,26 +68545,26 @@ export namespace tendermint {
              * Constructs a new ResponseOfferSnapshot.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseOfferSnapshot);
+            constructor(properties?: cometbft.abci.IResponseOfferSnapshot);
 
             /** ResponseOfferSnapshot result. */
-            public result: tendermint.abci.ResponseOfferSnapshot.Result;
+            public result: cometbft.abci.ResponseOfferSnapshot.Result;
 
             /**
-             * Encodes the specified ResponseOfferSnapshot message. Does not implicitly {@link tendermint.abci.ResponseOfferSnapshot.verify|verify} messages.
+             * Encodes the specified ResponseOfferSnapshot message. Does not implicitly {@link cometbft.abci.ResponseOfferSnapshot.verify|verify} messages.
              * @param message ResponseOfferSnapshot message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseOfferSnapshot message, length delimited. Does not implicitly {@link tendermint.abci.ResponseOfferSnapshot.verify|verify} messages.
+             * Encodes the specified ResponseOfferSnapshot message, length delimited. Does not implicitly {@link cometbft.abci.ResponseOfferSnapshot.verify|verify} messages.
              * @param message ResponseOfferSnapshot message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseOfferSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseOfferSnapshot message from the specified reader or buffer.
@@ -68767,7 +68574,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseOfferSnapshot;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseOfferSnapshot;
 
             /**
              * Decodes a ResponseOfferSnapshot message from the specified reader or buffer, length delimited.
@@ -68776,7 +68583,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseOfferSnapshot;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseOfferSnapshot;
 
             /**
              * Verifies a ResponseOfferSnapshot message.
@@ -68790,7 +68597,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseOfferSnapshot
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseOfferSnapshot;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseOfferSnapshot;
 
             /**
              * Creates a plain object from a ResponseOfferSnapshot message. Also converts values to other types if specified.
@@ -68798,7 +68605,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseOfferSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseOfferSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseOfferSnapshot to JSON.
@@ -68834,26 +68641,26 @@ export namespace tendermint {
              * Constructs a new ResponseLoadSnapshotChunk.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseLoadSnapshotChunk);
+            constructor(properties?: cometbft.abci.IResponseLoadSnapshotChunk);
 
             /** ResponseLoadSnapshotChunk chunk. */
             public chunk: Uint8Array;
 
             /**
-             * Encodes the specified ResponseLoadSnapshotChunk message. Does not implicitly {@link tendermint.abci.ResponseLoadSnapshotChunk.verify|verify} messages.
+             * Encodes the specified ResponseLoadSnapshotChunk message. Does not implicitly {@link cometbft.abci.ResponseLoadSnapshotChunk.verify|verify} messages.
              * @param message ResponseLoadSnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseLoadSnapshotChunk message, length delimited. Does not implicitly {@link tendermint.abci.ResponseLoadSnapshotChunk.verify|verify} messages.
+             * Encodes the specified ResponseLoadSnapshotChunk message, length delimited. Does not implicitly {@link cometbft.abci.ResponseLoadSnapshotChunk.verify|verify} messages.
              * @param message ResponseLoadSnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseLoadSnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseLoadSnapshotChunk message from the specified reader or buffer.
@@ -68863,7 +68670,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseLoadSnapshotChunk;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseLoadSnapshotChunk;
 
             /**
              * Decodes a ResponseLoadSnapshotChunk message from the specified reader or buffer, length delimited.
@@ -68872,7 +68679,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseLoadSnapshotChunk;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseLoadSnapshotChunk;
 
             /**
              * Verifies a ResponseLoadSnapshotChunk message.
@@ -68886,7 +68693,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseLoadSnapshotChunk
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseLoadSnapshotChunk;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseLoadSnapshotChunk;
 
             /**
              * Creates a plain object from a ResponseLoadSnapshotChunk message. Also converts values to other types if specified.
@@ -68894,7 +68701,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseLoadSnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseLoadSnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseLoadSnapshotChunk to JSON.
@@ -68907,7 +68714,7 @@ export namespace tendermint {
         interface IResponseApplySnapshotChunk {
 
             /** ResponseApplySnapshotChunk result */
-            result?: (tendermint.abci.ResponseApplySnapshotChunk.Result|null);
+            result?: (cometbft.abci.ResponseApplySnapshotChunk.Result|null);
 
             /** ResponseApplySnapshotChunk refetch_chunks */
             refetch_chunks?: (number[]|null);
@@ -68923,10 +68730,10 @@ export namespace tendermint {
              * Constructs a new ResponseApplySnapshotChunk.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseApplySnapshotChunk);
+            constructor(properties?: cometbft.abci.IResponseApplySnapshotChunk);
 
             /** ResponseApplySnapshotChunk result. */
-            public result: tendermint.abci.ResponseApplySnapshotChunk.Result;
+            public result: cometbft.abci.ResponseApplySnapshotChunk.Result;
 
             /** ResponseApplySnapshotChunk refetch_chunks. */
             public refetch_chunks: number[];
@@ -68935,20 +68742,20 @@ export namespace tendermint {
             public reject_senders: string[];
 
             /**
-             * Encodes the specified ResponseApplySnapshotChunk message. Does not implicitly {@link tendermint.abci.ResponseApplySnapshotChunk.verify|verify} messages.
+             * Encodes the specified ResponseApplySnapshotChunk message. Does not implicitly {@link cometbft.abci.ResponseApplySnapshotChunk.verify|verify} messages.
              * @param message ResponseApplySnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseApplySnapshotChunk message, length delimited. Does not implicitly {@link tendermint.abci.ResponseApplySnapshotChunk.verify|verify} messages.
+             * Encodes the specified ResponseApplySnapshotChunk message, length delimited. Does not implicitly {@link cometbft.abci.ResponseApplySnapshotChunk.verify|verify} messages.
              * @param message ResponseApplySnapshotChunk message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseApplySnapshotChunk, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseApplySnapshotChunk message from the specified reader or buffer.
@@ -68958,7 +68765,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseApplySnapshotChunk;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseApplySnapshotChunk;
 
             /**
              * Decodes a ResponseApplySnapshotChunk message from the specified reader or buffer, length delimited.
@@ -68967,7 +68774,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseApplySnapshotChunk;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseApplySnapshotChunk;
 
             /**
              * Verifies a ResponseApplySnapshotChunk message.
@@ -68981,7 +68788,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseApplySnapshotChunk
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseApplySnapshotChunk;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseApplySnapshotChunk;
 
             /**
              * Creates a plain object from a ResponseApplySnapshotChunk message. Also converts values to other types if specified.
@@ -68989,7 +68796,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseApplySnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseApplySnapshotChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseApplySnapshotChunk to JSON.
@@ -69025,26 +68832,26 @@ export namespace tendermint {
              * Constructs a new ResponsePrepareProposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponsePrepareProposal);
+            constructor(properties?: cometbft.abci.IResponsePrepareProposal);
 
             /** ResponsePrepareProposal txs. */
             public txs: Uint8Array[];
 
             /**
-             * Encodes the specified ResponsePrepareProposal message. Does not implicitly {@link tendermint.abci.ResponsePrepareProposal.verify|verify} messages.
+             * Encodes the specified ResponsePrepareProposal message. Does not implicitly {@link cometbft.abci.ResponsePrepareProposal.verify|verify} messages.
              * @param message ResponsePrepareProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponsePrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponsePrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponsePrepareProposal message, length delimited. Does not implicitly {@link tendermint.abci.ResponsePrepareProposal.verify|verify} messages.
+             * Encodes the specified ResponsePrepareProposal message, length delimited. Does not implicitly {@link cometbft.abci.ResponsePrepareProposal.verify|verify} messages.
              * @param message ResponsePrepareProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponsePrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponsePrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponsePrepareProposal message from the specified reader or buffer.
@@ -69054,7 +68861,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponsePrepareProposal;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponsePrepareProposal;
 
             /**
              * Decodes a ResponsePrepareProposal message from the specified reader or buffer, length delimited.
@@ -69063,7 +68870,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponsePrepareProposal;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponsePrepareProposal;
 
             /**
              * Verifies a ResponsePrepareProposal message.
@@ -69077,7 +68884,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponsePrepareProposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponsePrepareProposal;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponsePrepareProposal;
 
             /**
              * Creates a plain object from a ResponsePrepareProposal message. Also converts values to other types if specified.
@@ -69085,7 +68892,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponsePrepareProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponsePrepareProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponsePrepareProposal to JSON.
@@ -69098,7 +68905,7 @@ export namespace tendermint {
         interface IResponseProcessProposal {
 
             /** ResponseProcessProposal status */
-            status?: (tendermint.abci.ResponseProcessProposal.ProposalStatus|null);
+            status?: (cometbft.abci.ResponseProcessProposal.ProposalStatus|null);
         }
 
         /** Represents a ResponseProcessProposal. */
@@ -69108,26 +68915,26 @@ export namespace tendermint {
              * Constructs a new ResponseProcessProposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IResponseProcessProposal);
+            constructor(properties?: cometbft.abci.IResponseProcessProposal);
 
             /** ResponseProcessProposal status. */
-            public status: tendermint.abci.ResponseProcessProposal.ProposalStatus;
+            public status: cometbft.abci.ResponseProcessProposal.ProposalStatus;
 
             /**
-             * Encodes the specified ResponseProcessProposal message. Does not implicitly {@link tendermint.abci.ResponseProcessProposal.verify|verify} messages.
+             * Encodes the specified ResponseProcessProposal message. Does not implicitly {@link cometbft.abci.ResponseProcessProposal.verify|verify} messages.
              * @param message ResponseProcessProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IResponseProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IResponseProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ResponseProcessProposal message, length delimited. Does not implicitly {@link tendermint.abci.ResponseProcessProposal.verify|verify} messages.
+             * Encodes the specified ResponseProcessProposal message, length delimited. Does not implicitly {@link cometbft.abci.ResponseProcessProposal.verify|verify} messages.
              * @param message ResponseProcessProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IResponseProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IResponseProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ResponseProcessProposal message from the specified reader or buffer.
@@ -69137,7 +68944,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseProcessProposal;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ResponseProcessProposal;
 
             /**
              * Decodes a ResponseProcessProposal message from the specified reader or buffer, length delimited.
@@ -69146,7 +68953,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseProcessProposal;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ResponseProcessProposal;
 
             /**
              * Verifies a ResponseProcessProposal message.
@@ -69160,7 +68967,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ResponseProcessProposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseProcessProposal;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ResponseProcessProposal;
 
             /**
              * Creates a plain object from a ResponseProcessProposal message. Also converts values to other types if specified.
@@ -69168,7 +68975,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ResponseProcessProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ResponseProcessProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ResponseProcessProposal to JSON.
@@ -69194,7 +69001,7 @@ export namespace tendermint {
             round?: (number|null);
 
             /** CommitInfo votes */
-            votes?: (tendermint.abci.IVoteInfo[]|null);
+            votes?: (cometbft.abci.IVoteInfo[]|null);
         }
 
         /** Represents a CommitInfo. */
@@ -69204,29 +69011,29 @@ export namespace tendermint {
              * Constructs a new CommitInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.ICommitInfo);
+            constructor(properties?: cometbft.abci.ICommitInfo);
 
             /** CommitInfo round. */
             public round: number;
 
             /** CommitInfo votes. */
-            public votes: tendermint.abci.IVoteInfo[];
+            public votes: cometbft.abci.IVoteInfo[];
 
             /**
-             * Encodes the specified CommitInfo message. Does not implicitly {@link tendermint.abci.CommitInfo.verify|verify} messages.
+             * Encodes the specified CommitInfo message. Does not implicitly {@link cometbft.abci.CommitInfo.verify|verify} messages.
              * @param message CommitInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.ICommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.ICommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified CommitInfo message, length delimited. Does not implicitly {@link tendermint.abci.CommitInfo.verify|verify} messages.
+             * Encodes the specified CommitInfo message, length delimited. Does not implicitly {@link cometbft.abci.CommitInfo.verify|verify} messages.
              * @param message CommitInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.ICommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.ICommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a CommitInfo message from the specified reader or buffer.
@@ -69236,7 +69043,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.CommitInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.CommitInfo;
 
             /**
              * Decodes a CommitInfo message from the specified reader or buffer, length delimited.
@@ -69245,7 +69052,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.CommitInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.CommitInfo;
 
             /**
              * Verifies a CommitInfo message.
@@ -69259,7 +69066,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns CommitInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.CommitInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.CommitInfo;
 
             /**
              * Creates a plain object from a CommitInfo message. Also converts values to other types if specified.
@@ -69267,7 +69074,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.CommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.CommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this CommitInfo to JSON.
@@ -69283,7 +69090,7 @@ export namespace tendermint {
             round?: (number|null);
 
             /** ExtendedCommitInfo votes */
-            votes?: (tendermint.abci.IExtendedVoteInfo[]|null);
+            votes?: (cometbft.abci.IExtendedVoteInfo[]|null);
         }
 
         /** Represents an ExtendedCommitInfo. */
@@ -69293,29 +69100,29 @@ export namespace tendermint {
              * Constructs a new ExtendedCommitInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IExtendedCommitInfo);
+            constructor(properties?: cometbft.abci.IExtendedCommitInfo);
 
             /** ExtendedCommitInfo round. */
             public round: number;
 
             /** ExtendedCommitInfo votes. */
-            public votes: tendermint.abci.IExtendedVoteInfo[];
+            public votes: cometbft.abci.IExtendedVoteInfo[];
 
             /**
-             * Encodes the specified ExtendedCommitInfo message. Does not implicitly {@link tendermint.abci.ExtendedCommitInfo.verify|verify} messages.
+             * Encodes the specified ExtendedCommitInfo message. Does not implicitly {@link cometbft.abci.ExtendedCommitInfo.verify|verify} messages.
              * @param message ExtendedCommitInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IExtendedCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IExtendedCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ExtendedCommitInfo message, length delimited. Does not implicitly {@link tendermint.abci.ExtendedCommitInfo.verify|verify} messages.
+             * Encodes the specified ExtendedCommitInfo message, length delimited. Does not implicitly {@link cometbft.abci.ExtendedCommitInfo.verify|verify} messages.
              * @param message ExtendedCommitInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IExtendedCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IExtendedCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an ExtendedCommitInfo message from the specified reader or buffer.
@@ -69325,7 +69132,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ExtendedCommitInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ExtendedCommitInfo;
 
             /**
              * Decodes an ExtendedCommitInfo message from the specified reader or buffer, length delimited.
@@ -69334,7 +69141,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ExtendedCommitInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ExtendedCommitInfo;
 
             /**
              * Verifies an ExtendedCommitInfo message.
@@ -69348,7 +69155,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ExtendedCommitInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ExtendedCommitInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ExtendedCommitInfo;
 
             /**
              * Creates a plain object from an ExtendedCommitInfo message. Also converts values to other types if specified.
@@ -69356,7 +69163,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ExtendedCommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ExtendedCommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ExtendedCommitInfo to JSON.
@@ -69372,7 +69179,7 @@ export namespace tendermint {
             type?: (string|null);
 
             /** Event attributes */
-            attributes?: (tendermint.abci.IEventAttribute[]|null);
+            attributes?: (cometbft.abci.IEventAttribute[]|null);
         }
 
         /** Represents an Event. */
@@ -69382,29 +69189,29 @@ export namespace tendermint {
              * Constructs a new Event.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IEvent);
+            constructor(properties?: cometbft.abci.IEvent);
 
             /** Event type. */
             public type: string;
 
             /** Event attributes. */
-            public attributes: tendermint.abci.IEventAttribute[];
+            public attributes: cometbft.abci.IEventAttribute[];
 
             /**
-             * Encodes the specified Event message. Does not implicitly {@link tendermint.abci.Event.verify|verify} messages.
+             * Encodes the specified Event message. Does not implicitly {@link cometbft.abci.Event.verify|verify} messages.
              * @param message Event message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Event message, length delimited. Does not implicitly {@link tendermint.abci.Event.verify|verify} messages.
+             * Encodes the specified Event message, length delimited. Does not implicitly {@link cometbft.abci.Event.verify|verify} messages.
              * @param message Event message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an Event message from the specified reader or buffer.
@@ -69414,7 +69221,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Event;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.Event;
 
             /**
              * Decodes an Event message from the specified reader or buffer, length delimited.
@@ -69423,7 +69230,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Event;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.Event;
 
             /**
              * Verifies an Event message.
@@ -69437,7 +69244,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Event
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Event;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.Event;
 
             /**
              * Creates a plain object from an Event message. Also converts values to other types if specified.
@@ -69445,7 +69252,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Event to JSON.
@@ -69474,7 +69281,7 @@ export namespace tendermint {
              * Constructs a new EventAttribute.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IEventAttribute);
+            constructor(properties?: cometbft.abci.IEventAttribute);
 
             /** EventAttribute key. */
             public key: string;
@@ -69486,20 +69293,20 @@ export namespace tendermint {
             public index: boolean;
 
             /**
-             * Encodes the specified EventAttribute message. Does not implicitly {@link tendermint.abci.EventAttribute.verify|verify} messages.
+             * Encodes the specified EventAttribute message. Does not implicitly {@link cometbft.abci.EventAttribute.verify|verify} messages.
              * @param message EventAttribute message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IEventAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IEventAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified EventAttribute message, length delimited. Does not implicitly {@link tendermint.abci.EventAttribute.verify|verify} messages.
+             * Encodes the specified EventAttribute message, length delimited. Does not implicitly {@link cometbft.abci.EventAttribute.verify|verify} messages.
              * @param message EventAttribute message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IEventAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IEventAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an EventAttribute message from the specified reader or buffer.
@@ -69509,7 +69316,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.EventAttribute;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.EventAttribute;
 
             /**
              * Decodes an EventAttribute message from the specified reader or buffer, length delimited.
@@ -69518,7 +69325,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.EventAttribute;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.EventAttribute;
 
             /**
              * Verifies an EventAttribute message.
@@ -69532,7 +69339,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns EventAttribute
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.EventAttribute;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.EventAttribute;
 
             /**
              * Creates a plain object from an EventAttribute message. Also converts values to other types if specified.
@@ -69540,7 +69347,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.EventAttribute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.EventAttribute, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this EventAttribute to JSON.
@@ -69562,7 +69369,7 @@ export namespace tendermint {
             tx?: (Uint8Array|null);
 
             /** TxResult result */
-            result?: (tendermint.abci.IResponseDeliverTx|null);
+            result?: (cometbft.abci.IResponseDeliverTx|null);
         }
 
         /** Represents a TxResult. */
@@ -69572,7 +69379,7 @@ export namespace tendermint {
              * Constructs a new TxResult.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.ITxResult);
+            constructor(properties?: cometbft.abci.ITxResult);
 
             /** TxResult height. */
             public height: Long;
@@ -69584,23 +69391,23 @@ export namespace tendermint {
             public tx: Uint8Array;
 
             /** TxResult result. */
-            public result?: (tendermint.abci.IResponseDeliverTx|null);
+            public result?: (cometbft.abci.IResponseDeliverTx|null);
 
             /**
-             * Encodes the specified TxResult message. Does not implicitly {@link tendermint.abci.TxResult.verify|verify} messages.
+             * Encodes the specified TxResult message. Does not implicitly {@link cometbft.abci.TxResult.verify|verify} messages.
              * @param message TxResult message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.ITxResult, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.ITxResult, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified TxResult message, length delimited. Does not implicitly {@link tendermint.abci.TxResult.verify|verify} messages.
+             * Encodes the specified TxResult message, length delimited. Does not implicitly {@link cometbft.abci.TxResult.verify|verify} messages.
              * @param message TxResult message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.ITxResult, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.ITxResult, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a TxResult message from the specified reader or buffer.
@@ -69610,7 +69417,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.TxResult;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.TxResult;
 
             /**
              * Decodes a TxResult message from the specified reader or buffer, length delimited.
@@ -69619,7 +69426,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.TxResult;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.TxResult;
 
             /**
              * Verifies a TxResult message.
@@ -69633,7 +69440,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns TxResult
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.TxResult;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.TxResult;
 
             /**
              * Creates a plain object from a TxResult message. Also converts values to other types if specified.
@@ -69641,7 +69448,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.TxResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.TxResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this TxResult to JSON.
@@ -69667,7 +69474,7 @@ export namespace tendermint {
              * Constructs a new Validator.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IValidator);
+            constructor(properties?: cometbft.abci.IValidator);
 
             /** Validator address. */
             public address: Uint8Array;
@@ -69676,20 +69483,20 @@ export namespace tendermint {
             public power: Long;
 
             /**
-             * Encodes the specified Validator message. Does not implicitly {@link tendermint.abci.Validator.verify|verify} messages.
+             * Encodes the specified Validator message. Does not implicitly {@link cometbft.abci.Validator.verify|verify} messages.
              * @param message Validator message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Validator message, length delimited. Does not implicitly {@link tendermint.abci.Validator.verify|verify} messages.
+             * Encodes the specified Validator message, length delimited. Does not implicitly {@link cometbft.abci.Validator.verify|verify} messages.
              * @param message Validator message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Validator message from the specified reader or buffer.
@@ -69699,7 +69506,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Validator;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.Validator;
 
             /**
              * Decodes a Validator message from the specified reader or buffer, length delimited.
@@ -69708,7 +69515,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Validator;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.Validator;
 
             /**
              * Verifies a Validator message.
@@ -69722,7 +69529,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Validator
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Validator;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.Validator;
 
             /**
              * Creates a plain object from a Validator message. Also converts values to other types if specified.
@@ -69730,7 +69537,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Validator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.Validator, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Validator to JSON.
@@ -69743,7 +69550,7 @@ export namespace tendermint {
         interface IValidatorUpdate {
 
             /** ValidatorUpdate pub_key */
-            pub_key?: (tendermint.crypto.IPublicKey|null);
+            pub_key?: (cometbft.crypto.IPublicKey|null);
 
             /** ValidatorUpdate power */
             power?: (Long|null);
@@ -69756,29 +69563,29 @@ export namespace tendermint {
              * Constructs a new ValidatorUpdate.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IValidatorUpdate);
+            constructor(properties?: cometbft.abci.IValidatorUpdate);
 
             /** ValidatorUpdate pub_key. */
-            public pub_key?: (tendermint.crypto.IPublicKey|null);
+            public pub_key?: (cometbft.crypto.IPublicKey|null);
 
             /** ValidatorUpdate power. */
             public power: Long;
 
             /**
-             * Encodes the specified ValidatorUpdate message. Does not implicitly {@link tendermint.abci.ValidatorUpdate.verify|verify} messages.
+             * Encodes the specified ValidatorUpdate message. Does not implicitly {@link cometbft.abci.ValidatorUpdate.verify|verify} messages.
              * @param message ValidatorUpdate message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IValidatorUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IValidatorUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ValidatorUpdate message, length delimited. Does not implicitly {@link tendermint.abci.ValidatorUpdate.verify|verify} messages.
+             * Encodes the specified ValidatorUpdate message, length delimited. Does not implicitly {@link cometbft.abci.ValidatorUpdate.verify|verify} messages.
              * @param message ValidatorUpdate message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IValidatorUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IValidatorUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ValidatorUpdate message from the specified reader or buffer.
@@ -69788,7 +69595,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ValidatorUpdate;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ValidatorUpdate;
 
             /**
              * Decodes a ValidatorUpdate message from the specified reader or buffer, length delimited.
@@ -69797,7 +69604,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ValidatorUpdate;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ValidatorUpdate;
 
             /**
              * Verifies a ValidatorUpdate message.
@@ -69811,7 +69618,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ValidatorUpdate
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ValidatorUpdate;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ValidatorUpdate;
 
             /**
              * Creates a plain object from a ValidatorUpdate message. Also converts values to other types if specified.
@@ -69819,7 +69626,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ValidatorUpdate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ValidatorUpdate, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ValidatorUpdate to JSON.
@@ -69832,7 +69639,7 @@ export namespace tendermint {
         interface IVoteInfo {
 
             /** VoteInfo validator */
-            validator?: (tendermint.abci.IValidator|null);
+            validator?: (cometbft.abci.IValidator|null);
 
             /** VoteInfo signed_last_block */
             signed_last_block?: (boolean|null);
@@ -69845,29 +69652,29 @@ export namespace tendermint {
              * Constructs a new VoteInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IVoteInfo);
+            constructor(properties?: cometbft.abci.IVoteInfo);
 
             /** VoteInfo validator. */
-            public validator?: (tendermint.abci.IValidator|null);
+            public validator?: (cometbft.abci.IValidator|null);
 
             /** VoteInfo signed_last_block. */
             public signed_last_block: boolean;
 
             /**
-             * Encodes the specified VoteInfo message. Does not implicitly {@link tendermint.abci.VoteInfo.verify|verify} messages.
+             * Encodes the specified VoteInfo message. Does not implicitly {@link cometbft.abci.VoteInfo.verify|verify} messages.
              * @param message VoteInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified VoteInfo message, length delimited. Does not implicitly {@link tendermint.abci.VoteInfo.verify|verify} messages.
+             * Encodes the specified VoteInfo message, length delimited. Does not implicitly {@link cometbft.abci.VoteInfo.verify|verify} messages.
              * @param message VoteInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a VoteInfo message from the specified reader or buffer.
@@ -69877,7 +69684,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.VoteInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.VoteInfo;
 
             /**
              * Decodes a VoteInfo message from the specified reader or buffer, length delimited.
@@ -69886,7 +69693,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.VoteInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.VoteInfo;
 
             /**
              * Verifies a VoteInfo message.
@@ -69900,7 +69707,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns VoteInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.VoteInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.VoteInfo;
 
             /**
              * Creates a plain object from a VoteInfo message. Also converts values to other types if specified.
@@ -69908,7 +69715,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.VoteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.VoteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this VoteInfo to JSON.
@@ -69921,7 +69728,7 @@ export namespace tendermint {
         interface IExtendedVoteInfo {
 
             /** ExtendedVoteInfo validator */
-            validator?: (tendermint.abci.IValidator|null);
+            validator?: (cometbft.abci.IValidator|null);
 
             /** ExtendedVoteInfo signed_last_block */
             signed_last_block?: (boolean|null);
@@ -69937,10 +69744,10 @@ export namespace tendermint {
              * Constructs a new ExtendedVoteInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IExtendedVoteInfo);
+            constructor(properties?: cometbft.abci.IExtendedVoteInfo);
 
             /** ExtendedVoteInfo validator. */
-            public validator?: (tendermint.abci.IValidator|null);
+            public validator?: (cometbft.abci.IValidator|null);
 
             /** ExtendedVoteInfo signed_last_block. */
             public signed_last_block: boolean;
@@ -69949,20 +69756,20 @@ export namespace tendermint {
             public vote_extension: Uint8Array;
 
             /**
-             * Encodes the specified ExtendedVoteInfo message. Does not implicitly {@link tendermint.abci.ExtendedVoteInfo.verify|verify} messages.
+             * Encodes the specified ExtendedVoteInfo message. Does not implicitly {@link cometbft.abci.ExtendedVoteInfo.verify|verify} messages.
              * @param message ExtendedVoteInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IExtendedVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IExtendedVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ExtendedVoteInfo message, length delimited. Does not implicitly {@link tendermint.abci.ExtendedVoteInfo.verify|verify} messages.
+             * Encodes the specified ExtendedVoteInfo message, length delimited. Does not implicitly {@link cometbft.abci.ExtendedVoteInfo.verify|verify} messages.
              * @param message ExtendedVoteInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IExtendedVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IExtendedVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an ExtendedVoteInfo message from the specified reader or buffer.
@@ -69972,7 +69779,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ExtendedVoteInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.ExtendedVoteInfo;
 
             /**
              * Decodes an ExtendedVoteInfo message from the specified reader or buffer, length delimited.
@@ -69981,7 +69788,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ExtendedVoteInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.ExtendedVoteInfo;
 
             /**
              * Verifies an ExtendedVoteInfo message.
@@ -69995,7 +69802,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ExtendedVoteInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ExtendedVoteInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.ExtendedVoteInfo;
 
             /**
              * Creates a plain object from an ExtendedVoteInfo message. Also converts values to other types if specified.
@@ -70003,7 +69810,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ExtendedVoteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.ExtendedVoteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ExtendedVoteInfo to JSON.
@@ -70023,10 +69830,10 @@ export namespace tendermint {
         interface IMisbehavior {
 
             /** Misbehavior type */
-            type?: (tendermint.abci.MisbehaviorType|null);
+            type?: (cometbft.abci.MisbehaviorType|null);
 
             /** Misbehavior validator */
-            validator?: (tendermint.abci.IValidator|null);
+            validator?: (cometbft.abci.IValidator|null);
 
             /** Misbehavior height */
             height?: (Long|null);
@@ -70045,13 +69852,13 @@ export namespace tendermint {
              * Constructs a new Misbehavior.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IMisbehavior);
+            constructor(properties?: cometbft.abci.IMisbehavior);
 
             /** Misbehavior type. */
-            public type: tendermint.abci.MisbehaviorType;
+            public type: cometbft.abci.MisbehaviorType;
 
             /** Misbehavior validator. */
-            public validator?: (tendermint.abci.IValidator|null);
+            public validator?: (cometbft.abci.IValidator|null);
 
             /** Misbehavior height. */
             public height: Long;
@@ -70063,20 +69870,20 @@ export namespace tendermint {
             public total_voting_power: Long;
 
             /**
-             * Encodes the specified Misbehavior message. Does not implicitly {@link tendermint.abci.Misbehavior.verify|verify} messages.
+             * Encodes the specified Misbehavior message. Does not implicitly {@link cometbft.abci.Misbehavior.verify|verify} messages.
              * @param message Misbehavior message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IMisbehavior, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.IMisbehavior, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Misbehavior message, length delimited. Does not implicitly {@link tendermint.abci.Misbehavior.verify|verify} messages.
+             * Encodes the specified Misbehavior message, length delimited. Does not implicitly {@link cometbft.abci.Misbehavior.verify|verify} messages.
              * @param message Misbehavior message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IMisbehavior, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.IMisbehavior, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Misbehavior message from the specified reader or buffer.
@@ -70086,7 +69893,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Misbehavior;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.Misbehavior;
 
             /**
              * Decodes a Misbehavior message from the specified reader or buffer, length delimited.
@@ -70095,7 +69902,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Misbehavior;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.Misbehavior;
 
             /**
              * Verifies a Misbehavior message.
@@ -70109,7 +69916,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Misbehavior
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Misbehavior;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.Misbehavior;
 
             /**
              * Creates a plain object from a Misbehavior message. Also converts values to other types if specified.
@@ -70117,7 +69924,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Misbehavior, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.Misbehavior, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Misbehavior to JSON.
@@ -70152,7 +69959,7 @@ export namespace tendermint {
              * Constructs a new Snapshot.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.ISnapshot);
+            constructor(properties?: cometbft.abci.ISnapshot);
 
             /** Snapshot height. */
             public height: Long;
@@ -70170,20 +69977,20 @@ export namespace tendermint {
             public metadata: Uint8Array;
 
             /**
-             * Encodes the specified Snapshot message. Does not implicitly {@link tendermint.abci.Snapshot.verify|verify} messages.
+             * Encodes the specified Snapshot message. Does not implicitly {@link cometbft.abci.Snapshot.verify|verify} messages.
              * @param message Snapshot message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.ISnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.abci.ISnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Snapshot message, length delimited. Does not implicitly {@link tendermint.abci.Snapshot.verify|verify} messages.
+             * Encodes the specified Snapshot message, length delimited. Does not implicitly {@link cometbft.abci.Snapshot.verify|verify} messages.
              * @param message Snapshot message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.ISnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.abci.ISnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Snapshot message from the specified reader or buffer.
@@ -70193,7 +70000,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Snapshot;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.abci.Snapshot;
 
             /**
              * Decodes a Snapshot message from the specified reader or buffer, length delimited.
@@ -70202,7 +70009,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Snapshot;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.abci.Snapshot;
 
             /**
              * Verifies a Snapshot message.
@@ -70216,7 +70023,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Snapshot
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Snapshot;
+            public static fromObject(object: { [k: string]: any }): cometbft.abci.Snapshot;
 
             /**
              * Creates a plain object from a Snapshot message. Also converts values to other types if specified.
@@ -70224,7 +70031,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Snapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.abci.Snapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Snapshot to JSON.
@@ -70249,339 +70056,339 @@ export namespace tendermint {
              * @param request RequestEcho message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseEcho
              */
-            public echo(request: tendermint.abci.IRequestEcho, callback: tendermint.abci.ABCIApplication.EchoCallback): void;
+            public echo(request: cometbft.abci.IRequestEcho, callback: cometbft.abci.ABCIApplication.EchoCallback): void;
 
             /**
              * Calls Echo.
              * @param request RequestEcho message or plain object
              * @returns Promise
              */
-            public echo(request: tendermint.abci.IRequestEcho): Promise<tendermint.abci.ResponseEcho>;
+            public echo(request: cometbft.abci.IRequestEcho): Promise<cometbft.abci.ResponseEcho>;
 
             /**
              * Calls Flush.
              * @param request RequestFlush message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseFlush
              */
-            public flush(request: tendermint.abci.IRequestFlush, callback: tendermint.abci.ABCIApplication.FlushCallback): void;
+            public flush(request: cometbft.abci.IRequestFlush, callback: cometbft.abci.ABCIApplication.FlushCallback): void;
 
             /**
              * Calls Flush.
              * @param request RequestFlush message or plain object
              * @returns Promise
              */
-            public flush(request: tendermint.abci.IRequestFlush): Promise<tendermint.abci.ResponseFlush>;
+            public flush(request: cometbft.abci.IRequestFlush): Promise<cometbft.abci.ResponseFlush>;
 
             /**
              * Calls Info.
              * @param request RequestInfo message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseInfo
              */
-            public info(request: tendermint.abci.IRequestInfo, callback: tendermint.abci.ABCIApplication.InfoCallback): void;
+            public info(request: cometbft.abci.IRequestInfo, callback: cometbft.abci.ABCIApplication.InfoCallback): void;
 
             /**
              * Calls Info.
              * @param request RequestInfo message or plain object
              * @returns Promise
              */
-            public info(request: tendermint.abci.IRequestInfo): Promise<tendermint.abci.ResponseInfo>;
+            public info(request: cometbft.abci.IRequestInfo): Promise<cometbft.abci.ResponseInfo>;
 
             /**
              * Calls DeliverTx.
              * @param request RequestDeliverTx message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseDeliverTx
              */
-            public deliverTx(request: tendermint.abci.IRequestDeliverTx, callback: tendermint.abci.ABCIApplication.DeliverTxCallback): void;
+            public deliverTx(request: cometbft.abci.IRequestDeliverTx, callback: cometbft.abci.ABCIApplication.DeliverTxCallback): void;
 
             /**
              * Calls DeliverTx.
              * @param request RequestDeliverTx message or plain object
              * @returns Promise
              */
-            public deliverTx(request: tendermint.abci.IRequestDeliverTx): Promise<tendermint.abci.ResponseDeliverTx>;
+            public deliverTx(request: cometbft.abci.IRequestDeliverTx): Promise<cometbft.abci.ResponseDeliverTx>;
 
             /**
              * Calls CheckTx.
              * @param request RequestCheckTx message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseCheckTx
              */
-            public checkTx(request: tendermint.abci.IRequestCheckTx, callback: tendermint.abci.ABCIApplication.CheckTxCallback): void;
+            public checkTx(request: cometbft.abci.IRequestCheckTx, callback: cometbft.abci.ABCIApplication.CheckTxCallback): void;
 
             /**
              * Calls CheckTx.
              * @param request RequestCheckTx message or plain object
              * @returns Promise
              */
-            public checkTx(request: tendermint.abci.IRequestCheckTx): Promise<tendermint.abci.ResponseCheckTx>;
+            public checkTx(request: cometbft.abci.IRequestCheckTx): Promise<cometbft.abci.ResponseCheckTx>;
 
             /**
              * Calls Query.
              * @param request RequestQuery message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseQuery
              */
-            public query(request: tendermint.abci.IRequestQuery, callback: tendermint.abci.ABCIApplication.QueryCallback): void;
+            public query(request: cometbft.abci.IRequestQuery, callback: cometbft.abci.ABCIApplication.QueryCallback): void;
 
             /**
              * Calls Query.
              * @param request RequestQuery message or plain object
              * @returns Promise
              */
-            public query(request: tendermint.abci.IRequestQuery): Promise<tendermint.abci.ResponseQuery>;
+            public query(request: cometbft.abci.IRequestQuery): Promise<cometbft.abci.ResponseQuery>;
 
             /**
              * Calls Commit.
              * @param request RequestCommit message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseCommit
              */
-            public commit(request: tendermint.abci.IRequestCommit, callback: tendermint.abci.ABCIApplication.CommitCallback): void;
+            public commit(request: cometbft.abci.IRequestCommit, callback: cometbft.abci.ABCIApplication.CommitCallback): void;
 
             /**
              * Calls Commit.
              * @param request RequestCommit message or plain object
              * @returns Promise
              */
-            public commit(request: tendermint.abci.IRequestCommit): Promise<tendermint.abci.ResponseCommit>;
+            public commit(request: cometbft.abci.IRequestCommit): Promise<cometbft.abci.ResponseCommit>;
 
             /**
              * Calls InitChain.
              * @param request RequestInitChain message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseInitChain
              */
-            public initChain(request: tendermint.abci.IRequestInitChain, callback: tendermint.abci.ABCIApplication.InitChainCallback): void;
+            public initChain(request: cometbft.abci.IRequestInitChain, callback: cometbft.abci.ABCIApplication.InitChainCallback): void;
 
             /**
              * Calls InitChain.
              * @param request RequestInitChain message or plain object
              * @returns Promise
              */
-            public initChain(request: tendermint.abci.IRequestInitChain): Promise<tendermint.abci.ResponseInitChain>;
+            public initChain(request: cometbft.abci.IRequestInitChain): Promise<cometbft.abci.ResponseInitChain>;
 
             /**
              * Calls BeginBlock.
              * @param request RequestBeginBlock message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseBeginBlock
              */
-            public beginBlock(request: tendermint.abci.IRequestBeginBlock, callback: tendermint.abci.ABCIApplication.BeginBlockCallback): void;
+            public beginBlock(request: cometbft.abci.IRequestBeginBlock, callback: cometbft.abci.ABCIApplication.BeginBlockCallback): void;
 
             /**
              * Calls BeginBlock.
              * @param request RequestBeginBlock message or plain object
              * @returns Promise
              */
-            public beginBlock(request: tendermint.abci.IRequestBeginBlock): Promise<tendermint.abci.ResponseBeginBlock>;
+            public beginBlock(request: cometbft.abci.IRequestBeginBlock): Promise<cometbft.abci.ResponseBeginBlock>;
 
             /**
              * Calls EndBlock.
              * @param request RequestEndBlock message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseEndBlock
              */
-            public endBlock(request: tendermint.abci.IRequestEndBlock, callback: tendermint.abci.ABCIApplication.EndBlockCallback): void;
+            public endBlock(request: cometbft.abci.IRequestEndBlock, callback: cometbft.abci.ABCIApplication.EndBlockCallback): void;
 
             /**
              * Calls EndBlock.
              * @param request RequestEndBlock message or plain object
              * @returns Promise
              */
-            public endBlock(request: tendermint.abci.IRequestEndBlock): Promise<tendermint.abci.ResponseEndBlock>;
+            public endBlock(request: cometbft.abci.IRequestEndBlock): Promise<cometbft.abci.ResponseEndBlock>;
 
             /**
              * Calls ListSnapshots.
              * @param request RequestListSnapshots message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseListSnapshots
              */
-            public listSnapshots(request: tendermint.abci.IRequestListSnapshots, callback: tendermint.abci.ABCIApplication.ListSnapshotsCallback): void;
+            public listSnapshots(request: cometbft.abci.IRequestListSnapshots, callback: cometbft.abci.ABCIApplication.ListSnapshotsCallback): void;
 
             /**
              * Calls ListSnapshots.
              * @param request RequestListSnapshots message or plain object
              * @returns Promise
              */
-            public listSnapshots(request: tendermint.abci.IRequestListSnapshots): Promise<tendermint.abci.ResponseListSnapshots>;
+            public listSnapshots(request: cometbft.abci.IRequestListSnapshots): Promise<cometbft.abci.ResponseListSnapshots>;
 
             /**
              * Calls OfferSnapshot.
              * @param request RequestOfferSnapshot message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseOfferSnapshot
              */
-            public offerSnapshot(request: tendermint.abci.IRequestOfferSnapshot, callback: tendermint.abci.ABCIApplication.OfferSnapshotCallback): void;
+            public offerSnapshot(request: cometbft.abci.IRequestOfferSnapshot, callback: cometbft.abci.ABCIApplication.OfferSnapshotCallback): void;
 
             /**
              * Calls OfferSnapshot.
              * @param request RequestOfferSnapshot message or plain object
              * @returns Promise
              */
-            public offerSnapshot(request: tendermint.abci.IRequestOfferSnapshot): Promise<tendermint.abci.ResponseOfferSnapshot>;
+            public offerSnapshot(request: cometbft.abci.IRequestOfferSnapshot): Promise<cometbft.abci.ResponseOfferSnapshot>;
 
             /**
              * Calls LoadSnapshotChunk.
              * @param request RequestLoadSnapshotChunk message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseLoadSnapshotChunk
              */
-            public loadSnapshotChunk(request: tendermint.abci.IRequestLoadSnapshotChunk, callback: tendermint.abci.ABCIApplication.LoadSnapshotChunkCallback): void;
+            public loadSnapshotChunk(request: cometbft.abci.IRequestLoadSnapshotChunk, callback: cometbft.abci.ABCIApplication.LoadSnapshotChunkCallback): void;
 
             /**
              * Calls LoadSnapshotChunk.
              * @param request RequestLoadSnapshotChunk message or plain object
              * @returns Promise
              */
-            public loadSnapshotChunk(request: tendermint.abci.IRequestLoadSnapshotChunk): Promise<tendermint.abci.ResponseLoadSnapshotChunk>;
+            public loadSnapshotChunk(request: cometbft.abci.IRequestLoadSnapshotChunk): Promise<cometbft.abci.ResponseLoadSnapshotChunk>;
 
             /**
              * Calls ApplySnapshotChunk.
              * @param request RequestApplySnapshotChunk message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseApplySnapshotChunk
              */
-            public applySnapshotChunk(request: tendermint.abci.IRequestApplySnapshotChunk, callback: tendermint.abci.ABCIApplication.ApplySnapshotChunkCallback): void;
+            public applySnapshotChunk(request: cometbft.abci.IRequestApplySnapshotChunk, callback: cometbft.abci.ABCIApplication.ApplySnapshotChunkCallback): void;
 
             /**
              * Calls ApplySnapshotChunk.
              * @param request RequestApplySnapshotChunk message or plain object
              * @returns Promise
              */
-            public applySnapshotChunk(request: tendermint.abci.IRequestApplySnapshotChunk): Promise<tendermint.abci.ResponseApplySnapshotChunk>;
+            public applySnapshotChunk(request: cometbft.abci.IRequestApplySnapshotChunk): Promise<cometbft.abci.ResponseApplySnapshotChunk>;
 
             /**
              * Calls PrepareProposal.
              * @param request RequestPrepareProposal message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponsePrepareProposal
              */
-            public prepareProposal(request: tendermint.abci.IRequestPrepareProposal, callback: tendermint.abci.ABCIApplication.PrepareProposalCallback): void;
+            public prepareProposal(request: cometbft.abci.IRequestPrepareProposal, callback: cometbft.abci.ABCIApplication.PrepareProposalCallback): void;
 
             /**
              * Calls PrepareProposal.
              * @param request RequestPrepareProposal message or plain object
              * @returns Promise
              */
-            public prepareProposal(request: tendermint.abci.IRequestPrepareProposal): Promise<tendermint.abci.ResponsePrepareProposal>;
+            public prepareProposal(request: cometbft.abci.IRequestPrepareProposal): Promise<cometbft.abci.ResponsePrepareProposal>;
 
             /**
              * Calls ProcessProposal.
              * @param request RequestProcessProposal message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseProcessProposal
              */
-            public processProposal(request: tendermint.abci.IRequestProcessProposal, callback: tendermint.abci.ABCIApplication.ProcessProposalCallback): void;
+            public processProposal(request: cometbft.abci.IRequestProcessProposal, callback: cometbft.abci.ABCIApplication.ProcessProposalCallback): void;
 
             /**
              * Calls ProcessProposal.
              * @param request RequestProcessProposal message or plain object
              * @returns Promise
              */
-            public processProposal(request: tendermint.abci.IRequestProcessProposal): Promise<tendermint.abci.ResponseProcessProposal>;
+            public processProposal(request: cometbft.abci.IRequestProcessProposal): Promise<cometbft.abci.ResponseProcessProposal>;
         }
 
         namespace ABCIApplication {
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#echo}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#echo}.
              * @param error Error, if any
              * @param [response] ResponseEcho
              */
-            type EchoCallback = (error: (Error|null), response?: tendermint.abci.ResponseEcho) => void;
+            type EchoCallback = (error: (Error|null), response?: cometbft.abci.ResponseEcho) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#flush}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#flush}.
              * @param error Error, if any
              * @param [response] ResponseFlush
              */
-            type FlushCallback = (error: (Error|null), response?: tendermint.abci.ResponseFlush) => void;
+            type FlushCallback = (error: (Error|null), response?: cometbft.abci.ResponseFlush) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#info}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#info}.
              * @param error Error, if any
              * @param [response] ResponseInfo
              */
-            type InfoCallback = (error: (Error|null), response?: tendermint.abci.ResponseInfo) => void;
+            type InfoCallback = (error: (Error|null), response?: cometbft.abci.ResponseInfo) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#deliverTx}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#deliverTx}.
              * @param error Error, if any
              * @param [response] ResponseDeliverTx
              */
-            type DeliverTxCallback = (error: (Error|null), response?: tendermint.abci.ResponseDeliverTx) => void;
+            type DeliverTxCallback = (error: (Error|null), response?: cometbft.abci.ResponseDeliverTx) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#checkTx}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#checkTx}.
              * @param error Error, if any
              * @param [response] ResponseCheckTx
              */
-            type CheckTxCallback = (error: (Error|null), response?: tendermint.abci.ResponseCheckTx) => void;
+            type CheckTxCallback = (error: (Error|null), response?: cometbft.abci.ResponseCheckTx) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#query}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#query}.
              * @param error Error, if any
              * @param [response] ResponseQuery
              */
-            type QueryCallback = (error: (Error|null), response?: tendermint.abci.ResponseQuery) => void;
+            type QueryCallback = (error: (Error|null), response?: cometbft.abci.ResponseQuery) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#commit}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#commit}.
              * @param error Error, if any
              * @param [response] ResponseCommit
              */
-            type CommitCallback = (error: (Error|null), response?: tendermint.abci.ResponseCommit) => void;
+            type CommitCallback = (error: (Error|null), response?: cometbft.abci.ResponseCommit) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#initChain}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#initChain}.
              * @param error Error, if any
              * @param [response] ResponseInitChain
              */
-            type InitChainCallback = (error: (Error|null), response?: tendermint.abci.ResponseInitChain) => void;
+            type InitChainCallback = (error: (Error|null), response?: cometbft.abci.ResponseInitChain) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#beginBlock}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#beginBlock}.
              * @param error Error, if any
              * @param [response] ResponseBeginBlock
              */
-            type BeginBlockCallback = (error: (Error|null), response?: tendermint.abci.ResponseBeginBlock) => void;
+            type BeginBlockCallback = (error: (Error|null), response?: cometbft.abci.ResponseBeginBlock) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#endBlock}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#endBlock}.
              * @param error Error, if any
              * @param [response] ResponseEndBlock
              */
-            type EndBlockCallback = (error: (Error|null), response?: tendermint.abci.ResponseEndBlock) => void;
+            type EndBlockCallback = (error: (Error|null), response?: cometbft.abci.ResponseEndBlock) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#listSnapshots}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#listSnapshots}.
              * @param error Error, if any
              * @param [response] ResponseListSnapshots
              */
-            type ListSnapshotsCallback = (error: (Error|null), response?: tendermint.abci.ResponseListSnapshots) => void;
+            type ListSnapshotsCallback = (error: (Error|null), response?: cometbft.abci.ResponseListSnapshots) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#offerSnapshot}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#offerSnapshot}.
              * @param error Error, if any
              * @param [response] ResponseOfferSnapshot
              */
-            type OfferSnapshotCallback = (error: (Error|null), response?: tendermint.abci.ResponseOfferSnapshot) => void;
+            type OfferSnapshotCallback = (error: (Error|null), response?: cometbft.abci.ResponseOfferSnapshot) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#loadSnapshotChunk}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#loadSnapshotChunk}.
              * @param error Error, if any
              * @param [response] ResponseLoadSnapshotChunk
              */
-            type LoadSnapshotChunkCallback = (error: (Error|null), response?: tendermint.abci.ResponseLoadSnapshotChunk) => void;
+            type LoadSnapshotChunkCallback = (error: (Error|null), response?: cometbft.abci.ResponseLoadSnapshotChunk) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#applySnapshotChunk}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#applySnapshotChunk}.
              * @param error Error, if any
              * @param [response] ResponseApplySnapshotChunk
              */
-            type ApplySnapshotChunkCallback = (error: (Error|null), response?: tendermint.abci.ResponseApplySnapshotChunk) => void;
+            type ApplySnapshotChunkCallback = (error: (Error|null), response?: cometbft.abci.ResponseApplySnapshotChunk) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#prepareProposal}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#prepareProposal}.
              * @param error Error, if any
              * @param [response] ResponsePrepareProposal
              */
-            type PrepareProposalCallback = (error: (Error|null), response?: tendermint.abci.ResponsePrepareProposal) => void;
+            type PrepareProposalCallback = (error: (Error|null), response?: cometbft.abci.ResponsePrepareProposal) => void;
 
             /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#processProposal}.
+             * Callback as used by {@link cometbft.abci.ABCIApplication#processProposal}.
              * @param error Error, if any
              * @param [response] ResponseProcessProposal
              */
-            type ProcessProposalCallback = (error: (Error|null), response?: tendermint.abci.ResponseProcessProposal) => void;
+            type ProcessProposalCallback = (error: (Error|null), response?: cometbft.abci.ResponseProcessProposal) => void;
         }
     }
 
@@ -70611,7 +70418,7 @@ export namespace tendermint {
              * Constructs a new Proof.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.crypto.IProof);
+            constructor(properties?: cometbft.crypto.IProof);
 
             /** Proof total. */
             public total: Long;
@@ -70626,20 +70433,20 @@ export namespace tendermint {
             public aunts: Uint8Array[];
 
             /**
-             * Encodes the specified Proof message. Does not implicitly {@link tendermint.crypto.Proof.verify|verify} messages.
+             * Encodes the specified Proof message. Does not implicitly {@link cometbft.crypto.Proof.verify|verify} messages.
              * @param message Proof message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.crypto.IProof, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.crypto.IProof, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Proof message, length delimited. Does not implicitly {@link tendermint.crypto.Proof.verify|verify} messages.
+             * Encodes the specified Proof message, length delimited. Does not implicitly {@link cometbft.crypto.Proof.verify|verify} messages.
              * @param message Proof message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.crypto.IProof, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.crypto.IProof, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Proof message from the specified reader or buffer.
@@ -70649,7 +70456,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.crypto.Proof;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.crypto.Proof;
 
             /**
              * Decodes a Proof message from the specified reader or buffer, length delimited.
@@ -70658,7 +70465,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.crypto.Proof;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.crypto.Proof;
 
             /**
              * Verifies a Proof message.
@@ -70672,7 +70479,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Proof
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.crypto.Proof;
+            public static fromObject(object: { [k: string]: any }): cometbft.crypto.Proof;
 
             /**
              * Creates a plain object from a Proof message. Also converts values to other types if specified.
@@ -70680,7 +70487,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.crypto.Proof, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.crypto.Proof, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Proof to JSON.
@@ -70696,7 +70503,7 @@ export namespace tendermint {
             key?: (Uint8Array|null);
 
             /** ValueOp proof */
-            proof?: (tendermint.crypto.IProof|null);
+            proof?: (cometbft.crypto.IProof|null);
         }
 
         /** Represents a ValueOp. */
@@ -70706,29 +70513,29 @@ export namespace tendermint {
              * Constructs a new ValueOp.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.crypto.IValueOp);
+            constructor(properties?: cometbft.crypto.IValueOp);
 
             /** ValueOp key. */
             public key: Uint8Array;
 
             /** ValueOp proof. */
-            public proof?: (tendermint.crypto.IProof|null);
+            public proof?: (cometbft.crypto.IProof|null);
 
             /**
-             * Encodes the specified ValueOp message. Does not implicitly {@link tendermint.crypto.ValueOp.verify|verify} messages.
+             * Encodes the specified ValueOp message. Does not implicitly {@link cometbft.crypto.ValueOp.verify|verify} messages.
              * @param message ValueOp message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.crypto.IValueOp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.crypto.IValueOp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ValueOp message, length delimited. Does not implicitly {@link tendermint.crypto.ValueOp.verify|verify} messages.
+             * Encodes the specified ValueOp message, length delimited. Does not implicitly {@link cometbft.crypto.ValueOp.verify|verify} messages.
              * @param message ValueOp message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.crypto.IValueOp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.crypto.IValueOp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ValueOp message from the specified reader or buffer.
@@ -70738,7 +70545,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.crypto.ValueOp;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.crypto.ValueOp;
 
             /**
              * Decodes a ValueOp message from the specified reader or buffer, length delimited.
@@ -70747,7 +70554,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.crypto.ValueOp;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.crypto.ValueOp;
 
             /**
              * Verifies a ValueOp message.
@@ -70761,7 +70568,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ValueOp
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.crypto.ValueOp;
+            public static fromObject(object: { [k: string]: any }): cometbft.crypto.ValueOp;
 
             /**
              * Creates a plain object from a ValueOp message. Also converts values to other types if specified.
@@ -70769,7 +70576,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.crypto.ValueOp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.crypto.ValueOp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ValueOp to JSON.
@@ -70798,7 +70605,7 @@ export namespace tendermint {
              * Constructs a new DominoOp.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.crypto.IDominoOp);
+            constructor(properties?: cometbft.crypto.IDominoOp);
 
             /** DominoOp key. */
             public key: string;
@@ -70810,20 +70617,20 @@ export namespace tendermint {
             public output: string;
 
             /**
-             * Encodes the specified DominoOp message. Does not implicitly {@link tendermint.crypto.DominoOp.verify|verify} messages.
+             * Encodes the specified DominoOp message. Does not implicitly {@link cometbft.crypto.DominoOp.verify|verify} messages.
              * @param message DominoOp message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.crypto.IDominoOp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.crypto.IDominoOp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified DominoOp message, length delimited. Does not implicitly {@link tendermint.crypto.DominoOp.verify|verify} messages.
+             * Encodes the specified DominoOp message, length delimited. Does not implicitly {@link cometbft.crypto.DominoOp.verify|verify} messages.
              * @param message DominoOp message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.crypto.IDominoOp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.crypto.IDominoOp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a DominoOp message from the specified reader or buffer.
@@ -70833,7 +70640,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.crypto.DominoOp;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.crypto.DominoOp;
 
             /**
              * Decodes a DominoOp message from the specified reader or buffer, length delimited.
@@ -70842,7 +70649,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.crypto.DominoOp;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.crypto.DominoOp;
 
             /**
              * Verifies a DominoOp message.
@@ -70856,7 +70663,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns DominoOp
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.crypto.DominoOp;
+            public static fromObject(object: { [k: string]: any }): cometbft.crypto.DominoOp;
 
             /**
              * Creates a plain object from a DominoOp message. Also converts values to other types if specified.
@@ -70864,7 +70671,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.crypto.DominoOp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.crypto.DominoOp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this DominoOp to JSON.
@@ -70893,7 +70700,7 @@ export namespace tendermint {
              * Constructs a new ProofOp.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.crypto.IProofOp);
+            constructor(properties?: cometbft.crypto.IProofOp);
 
             /** ProofOp type. */
             public type: string;
@@ -70905,20 +70712,20 @@ export namespace tendermint {
             public data: Uint8Array;
 
             /**
-             * Encodes the specified ProofOp message. Does not implicitly {@link tendermint.crypto.ProofOp.verify|verify} messages.
+             * Encodes the specified ProofOp message. Does not implicitly {@link cometbft.crypto.ProofOp.verify|verify} messages.
              * @param message ProofOp message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.crypto.IProofOp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.crypto.IProofOp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ProofOp message, length delimited. Does not implicitly {@link tendermint.crypto.ProofOp.verify|verify} messages.
+             * Encodes the specified ProofOp message, length delimited. Does not implicitly {@link cometbft.crypto.ProofOp.verify|verify} messages.
              * @param message ProofOp message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.crypto.IProofOp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.crypto.IProofOp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ProofOp message from the specified reader or buffer.
@@ -70928,7 +70735,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.crypto.ProofOp;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.crypto.ProofOp;
 
             /**
              * Decodes a ProofOp message from the specified reader or buffer, length delimited.
@@ -70937,7 +70744,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.crypto.ProofOp;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.crypto.ProofOp;
 
             /**
              * Verifies a ProofOp message.
@@ -70951,7 +70758,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ProofOp
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.crypto.ProofOp;
+            public static fromObject(object: { [k: string]: any }): cometbft.crypto.ProofOp;
 
             /**
              * Creates a plain object from a ProofOp message. Also converts values to other types if specified.
@@ -70959,7 +70766,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.crypto.ProofOp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.crypto.ProofOp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ProofOp to JSON.
@@ -70972,7 +70779,7 @@ export namespace tendermint {
         interface IProofOps {
 
             /** ProofOps ops */
-            ops?: (tendermint.crypto.IProofOp[]|null);
+            ops?: (cometbft.crypto.IProofOp[]|null);
         }
 
         /** Represents a ProofOps. */
@@ -70982,26 +70789,26 @@ export namespace tendermint {
              * Constructs a new ProofOps.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.crypto.IProofOps);
+            constructor(properties?: cometbft.crypto.IProofOps);
 
             /** ProofOps ops. */
-            public ops: tendermint.crypto.IProofOp[];
+            public ops: cometbft.crypto.IProofOp[];
 
             /**
-             * Encodes the specified ProofOps message. Does not implicitly {@link tendermint.crypto.ProofOps.verify|verify} messages.
+             * Encodes the specified ProofOps message. Does not implicitly {@link cometbft.crypto.ProofOps.verify|verify} messages.
              * @param message ProofOps message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.crypto.IProofOps, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.crypto.IProofOps, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ProofOps message, length delimited. Does not implicitly {@link tendermint.crypto.ProofOps.verify|verify} messages.
+             * Encodes the specified ProofOps message, length delimited. Does not implicitly {@link cometbft.crypto.ProofOps.verify|verify} messages.
              * @param message ProofOps message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.crypto.IProofOps, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.crypto.IProofOps, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ProofOps message from the specified reader or buffer.
@@ -71011,7 +70818,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.crypto.ProofOps;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.crypto.ProofOps;
 
             /**
              * Decodes a ProofOps message from the specified reader or buffer, length delimited.
@@ -71020,7 +70827,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.crypto.ProofOps;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.crypto.ProofOps;
 
             /**
              * Verifies a ProofOps message.
@@ -71034,7 +70841,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ProofOps
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.crypto.ProofOps;
+            public static fromObject(object: { [k: string]: any }): cometbft.crypto.ProofOps;
 
             /**
              * Creates a plain object from a ProofOps message. Also converts values to other types if specified.
@@ -71042,7 +70849,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.crypto.ProofOps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.crypto.ProofOps, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ProofOps to JSON.
@@ -71068,7 +70875,7 @@ export namespace tendermint {
              * Constructs a new PublicKey.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.crypto.IPublicKey);
+            constructor(properties?: cometbft.crypto.IPublicKey);
 
             /** PublicKey ed25519. */
             public ed25519?: (Uint8Array|null);
@@ -71080,20 +70887,20 @@ export namespace tendermint {
             public sum?: ("ed25519"|"secp256k1");
 
             /**
-             * Encodes the specified PublicKey message. Does not implicitly {@link tendermint.crypto.PublicKey.verify|verify} messages.
+             * Encodes the specified PublicKey message. Does not implicitly {@link cometbft.crypto.PublicKey.verify|verify} messages.
              * @param message PublicKey message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.crypto.IPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.crypto.IPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified PublicKey message, length delimited. Does not implicitly {@link tendermint.crypto.PublicKey.verify|verify} messages.
+             * Encodes the specified PublicKey message, length delimited. Does not implicitly {@link cometbft.crypto.PublicKey.verify|verify} messages.
              * @param message PublicKey message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.crypto.IPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.crypto.IPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a PublicKey message from the specified reader or buffer.
@@ -71103,7 +70910,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.crypto.PublicKey;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.crypto.PublicKey;
 
             /**
              * Decodes a PublicKey message from the specified reader or buffer, length delimited.
@@ -71112,7 +70919,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.crypto.PublicKey;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.crypto.PublicKey;
 
             /**
              * Verifies a PublicKey message.
@@ -71126,7 +70933,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns PublicKey
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.crypto.PublicKey;
+            public static fromObject(object: { [k: string]: any }): cometbft.crypto.PublicKey;
 
             /**
              * Creates a plain object from a PublicKey message. Also converts values to other types if specified.
@@ -71134,7 +70941,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.crypto.PublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.crypto.PublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this PublicKey to JSON.
@@ -71180,7 +70987,7 @@ export namespace tendermint {
              * Constructs a new PartSetHeader.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IPartSetHeader);
+            constructor(properties?: cometbft.types.IPartSetHeader);
 
             /** PartSetHeader total. */
             public total: number;
@@ -71189,20 +70996,20 @@ export namespace tendermint {
             public hash: Uint8Array;
 
             /**
-             * Encodes the specified PartSetHeader message. Does not implicitly {@link tendermint.types.PartSetHeader.verify|verify} messages.
+             * Encodes the specified PartSetHeader message. Does not implicitly {@link cometbft.types.PartSetHeader.verify|verify} messages.
              * @param message PartSetHeader message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IPartSetHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IPartSetHeader, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified PartSetHeader message, length delimited. Does not implicitly {@link tendermint.types.PartSetHeader.verify|verify} messages.
+             * Encodes the specified PartSetHeader message, length delimited. Does not implicitly {@link cometbft.types.PartSetHeader.verify|verify} messages.
              * @param message PartSetHeader message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IPartSetHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IPartSetHeader, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a PartSetHeader message from the specified reader or buffer.
@@ -71212,7 +71019,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.PartSetHeader;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.PartSetHeader;
 
             /**
              * Decodes a PartSetHeader message from the specified reader or buffer, length delimited.
@@ -71221,7 +71028,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.PartSetHeader;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.PartSetHeader;
 
             /**
              * Verifies a PartSetHeader message.
@@ -71235,7 +71042,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns PartSetHeader
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.PartSetHeader;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.PartSetHeader;
 
             /**
              * Creates a plain object from a PartSetHeader message. Also converts values to other types if specified.
@@ -71243,7 +71050,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.PartSetHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.PartSetHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this PartSetHeader to JSON.
@@ -71262,7 +71069,7 @@ export namespace tendermint {
             bytes?: (Uint8Array|null);
 
             /** Part proof */
-            proof?: (tendermint.crypto.IProof|null);
+            proof?: (cometbft.crypto.IProof|null);
         }
 
         /** Represents a Part. */
@@ -71272,7 +71079,7 @@ export namespace tendermint {
              * Constructs a new Part.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IPart);
+            constructor(properties?: cometbft.types.IPart);
 
             /** Part index. */
             public index: number;
@@ -71281,23 +71088,23 @@ export namespace tendermint {
             public bytes: Uint8Array;
 
             /** Part proof. */
-            public proof?: (tendermint.crypto.IProof|null);
+            public proof?: (cometbft.crypto.IProof|null);
 
             /**
-             * Encodes the specified Part message. Does not implicitly {@link tendermint.types.Part.verify|verify} messages.
+             * Encodes the specified Part message. Does not implicitly {@link cometbft.types.Part.verify|verify} messages.
              * @param message Part message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IPart, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IPart, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Part message, length delimited. Does not implicitly {@link tendermint.types.Part.verify|verify} messages.
+             * Encodes the specified Part message, length delimited. Does not implicitly {@link cometbft.types.Part.verify|verify} messages.
              * @param message Part message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IPart, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IPart, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Part message from the specified reader or buffer.
@@ -71307,7 +71114,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Part;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Part;
 
             /**
              * Decodes a Part message from the specified reader or buffer, length delimited.
@@ -71316,7 +71123,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Part;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Part;
 
             /**
              * Verifies a Part message.
@@ -71330,7 +71137,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Part
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Part;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Part;
 
             /**
              * Creates a plain object from a Part message. Also converts values to other types if specified.
@@ -71338,7 +71145,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Part, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Part, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Part to JSON.
@@ -71354,7 +71161,7 @@ export namespace tendermint {
             hash?: (Uint8Array|null);
 
             /** BlockID part_set_header */
-            part_set_header?: (tendermint.types.IPartSetHeader|null);
+            part_set_header?: (cometbft.types.IPartSetHeader|null);
         }
 
         /** Represents a BlockID. */
@@ -71364,29 +71171,29 @@ export namespace tendermint {
              * Constructs a new BlockID.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IBlockID);
+            constructor(properties?: cometbft.types.IBlockID);
 
             /** BlockID hash. */
             public hash: Uint8Array;
 
             /** BlockID part_set_header. */
-            public part_set_header?: (tendermint.types.IPartSetHeader|null);
+            public part_set_header?: (cometbft.types.IPartSetHeader|null);
 
             /**
-             * Encodes the specified BlockID message. Does not implicitly {@link tendermint.types.BlockID.verify|verify} messages.
+             * Encodes the specified BlockID message. Does not implicitly {@link cometbft.types.BlockID.verify|verify} messages.
              * @param message BlockID message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BlockID message, length delimited. Does not implicitly {@link tendermint.types.BlockID.verify|verify} messages.
+             * Encodes the specified BlockID message, length delimited. Does not implicitly {@link cometbft.types.BlockID.verify|verify} messages.
              * @param message BlockID message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IBlockID, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a BlockID message from the specified reader or buffer.
@@ -71396,7 +71203,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.BlockID;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.BlockID;
 
             /**
              * Decodes a BlockID message from the specified reader or buffer, length delimited.
@@ -71405,7 +71212,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.BlockID;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.BlockID;
 
             /**
              * Verifies a BlockID message.
@@ -71419,7 +71226,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns BlockID
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.BlockID;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.BlockID;
 
             /**
              * Creates a plain object from a BlockID message. Also converts values to other types if specified.
@@ -71427,7 +71234,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.BlockID, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.BlockID, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this BlockID to JSON.
@@ -71440,7 +71247,7 @@ export namespace tendermint {
         interface IHeader {
 
             /** Header version */
-            version?: (tendermint.version.IConsensus|null);
+            version?: (cometbft.version.IConsensus|null);
 
             /** Header chain_id */
             chain_id?: (string|null);
@@ -71452,7 +71259,7 @@ export namespace tendermint {
             time?: (google.protobuf.ITimestamp|null);
 
             /** Header last_block_id */
-            last_block_id?: (tendermint.types.IBlockID|null);
+            last_block_id?: (cometbft.types.IBlockID|null);
 
             /** Header last_commit_hash */
             last_commit_hash?: (Uint8Array|null);
@@ -71489,10 +71296,10 @@ export namespace tendermint {
              * Constructs a new Header.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IHeader);
+            constructor(properties?: cometbft.types.IHeader);
 
             /** Header version. */
-            public version?: (tendermint.version.IConsensus|null);
+            public version?: (cometbft.version.IConsensus|null);
 
             /** Header chain_id. */
             public chain_id: string;
@@ -71504,7 +71311,7 @@ export namespace tendermint {
             public time?: (google.protobuf.ITimestamp|null);
 
             /** Header last_block_id. */
-            public last_block_id?: (tendermint.types.IBlockID|null);
+            public last_block_id?: (cometbft.types.IBlockID|null);
 
             /** Header last_commit_hash. */
             public last_commit_hash: Uint8Array;
@@ -71534,20 +71341,20 @@ export namespace tendermint {
             public proposer_address: Uint8Array;
 
             /**
-             * Encodes the specified Header message. Does not implicitly {@link tendermint.types.Header.verify|verify} messages.
+             * Encodes the specified Header message. Does not implicitly {@link cometbft.types.Header.verify|verify} messages.
              * @param message Header message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Header message, length delimited. Does not implicitly {@link tendermint.types.Header.verify|verify} messages.
+             * Encodes the specified Header message, length delimited. Does not implicitly {@link cometbft.types.Header.verify|verify} messages.
              * @param message Header message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Header message from the specified reader or buffer.
@@ -71557,7 +71364,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Header;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Header;
 
             /**
              * Decodes a Header message from the specified reader or buffer, length delimited.
@@ -71566,7 +71373,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Header;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Header;
 
             /**
              * Verifies a Header message.
@@ -71580,7 +71387,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Header
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Header;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Header;
 
             /**
              * Creates a plain object from a Header message. Also converts values to other types if specified.
@@ -71588,7 +71395,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Header, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Header, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Header to JSON.
@@ -71611,26 +71418,26 @@ export namespace tendermint {
              * Constructs a new Data.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IData);
+            constructor(properties?: cometbft.types.IData);
 
             /** Data txs. */
             public txs: Uint8Array[];
 
             /**
-             * Encodes the specified Data message. Does not implicitly {@link tendermint.types.Data.verify|verify} messages.
+             * Encodes the specified Data message. Does not implicitly {@link cometbft.types.Data.verify|verify} messages.
              * @param message Data message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IData, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IData, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Data message, length delimited. Does not implicitly {@link tendermint.types.Data.verify|verify} messages.
+             * Encodes the specified Data message, length delimited. Does not implicitly {@link cometbft.types.Data.verify|verify} messages.
              * @param message Data message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IData, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IData, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Data message from the specified reader or buffer.
@@ -71640,7 +71447,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Data;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Data;
 
             /**
              * Decodes a Data message from the specified reader or buffer, length delimited.
@@ -71649,7 +71456,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Data;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Data;
 
             /**
              * Verifies a Data message.
@@ -71663,7 +71470,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Data
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Data;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Data;
 
             /**
              * Creates a plain object from a Data message. Also converts values to other types if specified.
@@ -71671,7 +71478,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Data, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Data, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Data to JSON.
@@ -71684,7 +71491,7 @@ export namespace tendermint {
         interface IVote {
 
             /** Vote type */
-            type?: (tendermint.types.SignedMsgType|null);
+            type?: (cometbft.types.SignedMsgType|null);
 
             /** Vote height */
             height?: (Long|null);
@@ -71693,7 +71500,7 @@ export namespace tendermint {
             round?: (number|null);
 
             /** Vote block_id */
-            block_id?: (tendermint.types.IBlockID|null);
+            block_id?: (cometbft.types.IBlockID|null);
 
             /** Vote timestamp */
             timestamp?: (google.protobuf.ITimestamp|null);
@@ -71715,10 +71522,10 @@ export namespace tendermint {
              * Constructs a new Vote.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IVote);
+            constructor(properties?: cometbft.types.IVote);
 
             /** Vote type. */
-            public type: tendermint.types.SignedMsgType;
+            public type: cometbft.types.SignedMsgType;
 
             /** Vote height. */
             public height: Long;
@@ -71727,7 +71534,7 @@ export namespace tendermint {
             public round: number;
 
             /** Vote block_id. */
-            public block_id?: (tendermint.types.IBlockID|null);
+            public block_id?: (cometbft.types.IBlockID|null);
 
             /** Vote timestamp. */
             public timestamp?: (google.protobuf.ITimestamp|null);
@@ -71742,20 +71549,20 @@ export namespace tendermint {
             public signature: Uint8Array;
 
             /**
-             * Encodes the specified Vote message. Does not implicitly {@link tendermint.types.Vote.verify|verify} messages.
+             * Encodes the specified Vote message. Does not implicitly {@link cometbft.types.Vote.verify|verify} messages.
              * @param message Vote message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IVote, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IVote, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Vote message, length delimited. Does not implicitly {@link tendermint.types.Vote.verify|verify} messages.
+             * Encodes the specified Vote message, length delimited. Does not implicitly {@link cometbft.types.Vote.verify|verify} messages.
              * @param message Vote message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IVote, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IVote, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Vote message from the specified reader or buffer.
@@ -71765,7 +71572,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Vote;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Vote;
 
             /**
              * Decodes a Vote message from the specified reader or buffer, length delimited.
@@ -71774,7 +71581,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Vote;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Vote;
 
             /**
              * Verifies a Vote message.
@@ -71788,7 +71595,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Vote
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Vote;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Vote;
 
             /**
              * Creates a plain object from a Vote message. Also converts values to other types if specified.
@@ -71796,7 +71603,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Vote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Vote, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Vote to JSON.
@@ -71815,10 +71622,10 @@ export namespace tendermint {
             round?: (number|null);
 
             /** Commit block_id */
-            block_id?: (tendermint.types.IBlockID|null);
+            block_id?: (cometbft.types.IBlockID|null);
 
             /** Commit signatures */
-            signatures?: (tendermint.types.ICommitSig[]|null);
+            signatures?: (cometbft.types.ICommitSig[]|null);
         }
 
         /** Represents a Commit. */
@@ -71828,7 +71635,7 @@ export namespace tendermint {
              * Constructs a new Commit.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ICommit);
+            constructor(properties?: cometbft.types.ICommit);
 
             /** Commit height. */
             public height: Long;
@@ -71837,26 +71644,26 @@ export namespace tendermint {
             public round: number;
 
             /** Commit block_id. */
-            public block_id?: (tendermint.types.IBlockID|null);
+            public block_id?: (cometbft.types.IBlockID|null);
 
             /** Commit signatures. */
-            public signatures: tendermint.types.ICommitSig[];
+            public signatures: cometbft.types.ICommitSig[];
 
             /**
-             * Encodes the specified Commit message. Does not implicitly {@link tendermint.types.Commit.verify|verify} messages.
+             * Encodes the specified Commit message. Does not implicitly {@link cometbft.types.Commit.verify|verify} messages.
              * @param message Commit message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ICommit, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ICommit, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Commit message, length delimited. Does not implicitly {@link tendermint.types.Commit.verify|verify} messages.
+             * Encodes the specified Commit message, length delimited. Does not implicitly {@link cometbft.types.Commit.verify|verify} messages.
              * @param message Commit message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ICommit, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ICommit, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Commit message from the specified reader or buffer.
@@ -71866,7 +71673,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Commit;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Commit;
 
             /**
              * Decodes a Commit message from the specified reader or buffer, length delimited.
@@ -71875,7 +71682,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Commit;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Commit;
 
             /**
              * Verifies a Commit message.
@@ -71889,7 +71696,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Commit
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Commit;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Commit;
 
             /**
              * Creates a plain object from a Commit message. Also converts values to other types if specified.
@@ -71897,7 +71704,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Commit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Commit, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Commit to JSON.
@@ -71910,7 +71717,7 @@ export namespace tendermint {
         interface ICommitSig {
 
             /** CommitSig block_id_flag */
-            block_id_flag?: (tendermint.types.BlockIDFlag|null);
+            block_id_flag?: (cometbft.types.BlockIDFlag|null);
 
             /** CommitSig validator_address */
             validator_address?: (Uint8Array|null);
@@ -71929,10 +71736,10 @@ export namespace tendermint {
              * Constructs a new CommitSig.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ICommitSig);
+            constructor(properties?: cometbft.types.ICommitSig);
 
             /** CommitSig block_id_flag. */
-            public block_id_flag: tendermint.types.BlockIDFlag;
+            public block_id_flag: cometbft.types.BlockIDFlag;
 
             /** CommitSig validator_address. */
             public validator_address: Uint8Array;
@@ -71944,20 +71751,20 @@ export namespace tendermint {
             public signature: Uint8Array;
 
             /**
-             * Encodes the specified CommitSig message. Does not implicitly {@link tendermint.types.CommitSig.verify|verify} messages.
+             * Encodes the specified CommitSig message. Does not implicitly {@link cometbft.types.CommitSig.verify|verify} messages.
              * @param message CommitSig message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ICommitSig, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ICommitSig, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified CommitSig message, length delimited. Does not implicitly {@link tendermint.types.CommitSig.verify|verify} messages.
+             * Encodes the specified CommitSig message, length delimited. Does not implicitly {@link cometbft.types.CommitSig.verify|verify} messages.
              * @param message CommitSig message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ICommitSig, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ICommitSig, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a CommitSig message from the specified reader or buffer.
@@ -71967,7 +71774,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.CommitSig;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.CommitSig;
 
             /**
              * Decodes a CommitSig message from the specified reader or buffer, length delimited.
@@ -71976,7 +71783,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.CommitSig;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.CommitSig;
 
             /**
              * Verifies a CommitSig message.
@@ -71990,7 +71797,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns CommitSig
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.CommitSig;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.CommitSig;
 
             /**
              * Creates a plain object from a CommitSig message. Also converts values to other types if specified.
@@ -71998,7 +71805,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.CommitSig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.CommitSig, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this CommitSig to JSON.
@@ -72011,7 +71818,7 @@ export namespace tendermint {
         interface IProposal {
 
             /** Proposal type */
-            type?: (tendermint.types.SignedMsgType|null);
+            type?: (cometbft.types.SignedMsgType|null);
 
             /** Proposal height */
             height?: (Long|null);
@@ -72023,7 +71830,7 @@ export namespace tendermint {
             pol_round?: (number|null);
 
             /** Proposal block_id */
-            block_id?: (tendermint.types.IBlockID|null);
+            block_id?: (cometbft.types.IBlockID|null);
 
             /** Proposal timestamp */
             timestamp?: (google.protobuf.ITimestamp|null);
@@ -72039,10 +71846,10 @@ export namespace tendermint {
              * Constructs a new Proposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IProposal);
+            constructor(properties?: cometbft.types.IProposal);
 
             /** Proposal type. */
-            public type: tendermint.types.SignedMsgType;
+            public type: cometbft.types.SignedMsgType;
 
             /** Proposal height. */
             public height: Long;
@@ -72054,7 +71861,7 @@ export namespace tendermint {
             public pol_round: number;
 
             /** Proposal block_id. */
-            public block_id?: (tendermint.types.IBlockID|null);
+            public block_id?: (cometbft.types.IBlockID|null);
 
             /** Proposal timestamp. */
             public timestamp?: (google.protobuf.ITimestamp|null);
@@ -72063,20 +71870,20 @@ export namespace tendermint {
             public signature: Uint8Array;
 
             /**
-             * Encodes the specified Proposal message. Does not implicitly {@link tendermint.types.Proposal.verify|verify} messages.
+             * Encodes the specified Proposal message. Does not implicitly {@link cometbft.types.Proposal.verify|verify} messages.
              * @param message Proposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Proposal message, length delimited. Does not implicitly {@link tendermint.types.Proposal.verify|verify} messages.
+             * Encodes the specified Proposal message, length delimited. Does not implicitly {@link cometbft.types.Proposal.verify|verify} messages.
              * @param message Proposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Proposal message from the specified reader or buffer.
@@ -72086,7 +71893,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Proposal;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Proposal;
 
             /**
              * Decodes a Proposal message from the specified reader or buffer, length delimited.
@@ -72095,7 +71902,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Proposal;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Proposal;
 
             /**
              * Verifies a Proposal message.
@@ -72109,7 +71916,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Proposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Proposal;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Proposal;
 
             /**
              * Creates a plain object from a Proposal message. Also converts values to other types if specified.
@@ -72117,7 +71924,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Proposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Proposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Proposal to JSON.
@@ -72130,10 +71937,10 @@ export namespace tendermint {
         interface ISignedHeader {
 
             /** SignedHeader header */
-            header?: (tendermint.types.IHeader|null);
+            header?: (cometbft.types.IHeader|null);
 
             /** SignedHeader commit */
-            commit?: (tendermint.types.ICommit|null);
+            commit?: (cometbft.types.ICommit|null);
         }
 
         /** Represents a SignedHeader. */
@@ -72143,29 +71950,29 @@ export namespace tendermint {
              * Constructs a new SignedHeader.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ISignedHeader);
+            constructor(properties?: cometbft.types.ISignedHeader);
 
             /** SignedHeader header. */
-            public header?: (tendermint.types.IHeader|null);
+            public header?: (cometbft.types.IHeader|null);
 
             /** SignedHeader commit. */
-            public commit?: (tendermint.types.ICommit|null);
+            public commit?: (cometbft.types.ICommit|null);
 
             /**
-             * Encodes the specified SignedHeader message. Does not implicitly {@link tendermint.types.SignedHeader.verify|verify} messages.
+             * Encodes the specified SignedHeader message. Does not implicitly {@link cometbft.types.SignedHeader.verify|verify} messages.
              * @param message SignedHeader message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ISignedHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ISignedHeader, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified SignedHeader message, length delimited. Does not implicitly {@link tendermint.types.SignedHeader.verify|verify} messages.
+             * Encodes the specified SignedHeader message, length delimited. Does not implicitly {@link cometbft.types.SignedHeader.verify|verify} messages.
              * @param message SignedHeader message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ISignedHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ISignedHeader, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a SignedHeader message from the specified reader or buffer.
@@ -72175,7 +71982,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.SignedHeader;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.SignedHeader;
 
             /**
              * Decodes a SignedHeader message from the specified reader or buffer, length delimited.
@@ -72184,7 +71991,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.SignedHeader;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.SignedHeader;
 
             /**
              * Verifies a SignedHeader message.
@@ -72198,7 +72005,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns SignedHeader
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.SignedHeader;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.SignedHeader;
 
             /**
              * Creates a plain object from a SignedHeader message. Also converts values to other types if specified.
@@ -72206,7 +72013,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.SignedHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.SignedHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this SignedHeader to JSON.
@@ -72219,10 +72026,10 @@ export namespace tendermint {
         interface ILightBlock {
 
             /** LightBlock signed_header */
-            signed_header?: (tendermint.types.ISignedHeader|null);
+            signed_header?: (cometbft.types.ISignedHeader|null);
 
             /** LightBlock validator_set */
-            validator_set?: (tendermint.types.IValidatorSet|null);
+            validator_set?: (cometbft.types.IValidatorSet|null);
         }
 
         /** Represents a LightBlock. */
@@ -72232,29 +72039,29 @@ export namespace tendermint {
              * Constructs a new LightBlock.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ILightBlock);
+            constructor(properties?: cometbft.types.ILightBlock);
 
             /** LightBlock signed_header. */
-            public signed_header?: (tendermint.types.ISignedHeader|null);
+            public signed_header?: (cometbft.types.ISignedHeader|null);
 
             /** LightBlock validator_set. */
-            public validator_set?: (tendermint.types.IValidatorSet|null);
+            public validator_set?: (cometbft.types.IValidatorSet|null);
 
             /**
-             * Encodes the specified LightBlock message. Does not implicitly {@link tendermint.types.LightBlock.verify|verify} messages.
+             * Encodes the specified LightBlock message. Does not implicitly {@link cometbft.types.LightBlock.verify|verify} messages.
              * @param message LightBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ILightBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ILightBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified LightBlock message, length delimited. Does not implicitly {@link tendermint.types.LightBlock.verify|verify} messages.
+             * Encodes the specified LightBlock message, length delimited. Does not implicitly {@link cometbft.types.LightBlock.verify|verify} messages.
              * @param message LightBlock message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ILightBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ILightBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a LightBlock message from the specified reader or buffer.
@@ -72264,7 +72071,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.LightBlock;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.LightBlock;
 
             /**
              * Decodes a LightBlock message from the specified reader or buffer, length delimited.
@@ -72273,7 +72080,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.LightBlock;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.LightBlock;
 
             /**
              * Verifies a LightBlock message.
@@ -72287,7 +72094,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns LightBlock
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.LightBlock;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.LightBlock;
 
             /**
              * Creates a plain object from a LightBlock message. Also converts values to other types if specified.
@@ -72295,7 +72102,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.LightBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.LightBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this LightBlock to JSON.
@@ -72308,13 +72115,13 @@ export namespace tendermint {
         interface IBlockMeta {
 
             /** BlockMeta block_id */
-            block_id?: (tendermint.types.IBlockID|null);
+            block_id?: (cometbft.types.IBlockID|null);
 
             /** BlockMeta block_size */
             block_size?: (Long|null);
 
             /** BlockMeta header */
-            header?: (tendermint.types.IHeader|null);
+            header?: (cometbft.types.IHeader|null);
 
             /** BlockMeta num_txs */
             num_txs?: (Long|null);
@@ -72327,35 +72134,35 @@ export namespace tendermint {
              * Constructs a new BlockMeta.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IBlockMeta);
+            constructor(properties?: cometbft.types.IBlockMeta);
 
             /** BlockMeta block_id. */
-            public block_id?: (tendermint.types.IBlockID|null);
+            public block_id?: (cometbft.types.IBlockID|null);
 
             /** BlockMeta block_size. */
             public block_size: Long;
 
             /** BlockMeta header. */
-            public header?: (tendermint.types.IHeader|null);
+            public header?: (cometbft.types.IHeader|null);
 
             /** BlockMeta num_txs. */
             public num_txs: Long;
 
             /**
-             * Encodes the specified BlockMeta message. Does not implicitly {@link tendermint.types.BlockMeta.verify|verify} messages.
+             * Encodes the specified BlockMeta message. Does not implicitly {@link cometbft.types.BlockMeta.verify|verify} messages.
              * @param message BlockMeta message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BlockMeta message, length delimited. Does not implicitly {@link tendermint.types.BlockMeta.verify|verify} messages.
+             * Encodes the specified BlockMeta message, length delimited. Does not implicitly {@link cometbft.types.BlockMeta.verify|verify} messages.
              * @param message BlockMeta message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IBlockMeta, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a BlockMeta message from the specified reader or buffer.
@@ -72365,7 +72172,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.BlockMeta;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.BlockMeta;
 
             /**
              * Decodes a BlockMeta message from the specified reader or buffer, length delimited.
@@ -72374,7 +72181,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.BlockMeta;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.BlockMeta;
 
             /**
              * Verifies a BlockMeta message.
@@ -72388,7 +72195,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns BlockMeta
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.BlockMeta;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.BlockMeta;
 
             /**
              * Creates a plain object from a BlockMeta message. Also converts values to other types if specified.
@@ -72396,7 +72203,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.BlockMeta, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.BlockMeta, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this BlockMeta to JSON.
@@ -72415,7 +72222,7 @@ export namespace tendermint {
             data?: (Uint8Array|null);
 
             /** TxProof proof */
-            proof?: (tendermint.crypto.IProof|null);
+            proof?: (cometbft.crypto.IProof|null);
         }
 
         /** Represents a TxProof. */
@@ -72425,7 +72232,7 @@ export namespace tendermint {
              * Constructs a new TxProof.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ITxProof);
+            constructor(properties?: cometbft.types.ITxProof);
 
             /** TxProof root_hash. */
             public root_hash: Uint8Array;
@@ -72434,23 +72241,23 @@ export namespace tendermint {
             public data: Uint8Array;
 
             /** TxProof proof. */
-            public proof?: (tendermint.crypto.IProof|null);
+            public proof?: (cometbft.crypto.IProof|null);
 
             /**
-             * Encodes the specified TxProof message. Does not implicitly {@link tendermint.types.TxProof.verify|verify} messages.
+             * Encodes the specified TxProof message. Does not implicitly {@link cometbft.types.TxProof.verify|verify} messages.
              * @param message TxProof message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ITxProof, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ITxProof, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified TxProof message, length delimited. Does not implicitly {@link tendermint.types.TxProof.verify|verify} messages.
+             * Encodes the specified TxProof message, length delimited. Does not implicitly {@link cometbft.types.TxProof.verify|verify} messages.
              * @param message TxProof message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ITxProof, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ITxProof, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a TxProof message from the specified reader or buffer.
@@ -72460,7 +72267,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.TxProof;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.TxProof;
 
             /**
              * Decodes a TxProof message from the specified reader or buffer, length delimited.
@@ -72469,7 +72276,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.TxProof;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.TxProof;
 
             /**
              * Verifies a TxProof message.
@@ -72483,7 +72290,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns TxProof
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.TxProof;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.TxProof;
 
             /**
              * Creates a plain object from a TxProof message. Also converts values to other types if specified.
@@ -72491,7 +72298,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.TxProof, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.TxProof, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this TxProof to JSON.
@@ -72504,10 +72311,10 @@ export namespace tendermint {
         interface IValidatorSet {
 
             /** ValidatorSet validators */
-            validators?: (tendermint.types.IValidator[]|null);
+            validators?: (cometbft.types.IValidator[]|null);
 
             /** ValidatorSet proposer */
-            proposer?: (tendermint.types.IValidator|null);
+            proposer?: (cometbft.types.IValidator|null);
 
             /** ValidatorSet total_voting_power */
             total_voting_power?: (Long|null);
@@ -72520,32 +72327,32 @@ export namespace tendermint {
              * Constructs a new ValidatorSet.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IValidatorSet);
+            constructor(properties?: cometbft.types.IValidatorSet);
 
             /** ValidatorSet validators. */
-            public validators: tendermint.types.IValidator[];
+            public validators: cometbft.types.IValidator[];
 
             /** ValidatorSet proposer. */
-            public proposer?: (tendermint.types.IValidator|null);
+            public proposer?: (cometbft.types.IValidator|null);
 
             /** ValidatorSet total_voting_power. */
             public total_voting_power: Long;
 
             /**
-             * Encodes the specified ValidatorSet message. Does not implicitly {@link tendermint.types.ValidatorSet.verify|verify} messages.
+             * Encodes the specified ValidatorSet message. Does not implicitly {@link cometbft.types.ValidatorSet.verify|verify} messages.
              * @param message ValidatorSet message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IValidatorSet, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IValidatorSet, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ValidatorSet message, length delimited. Does not implicitly {@link tendermint.types.ValidatorSet.verify|verify} messages.
+             * Encodes the specified ValidatorSet message, length delimited. Does not implicitly {@link cometbft.types.ValidatorSet.verify|verify} messages.
              * @param message ValidatorSet message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IValidatorSet, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IValidatorSet, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ValidatorSet message from the specified reader or buffer.
@@ -72555,7 +72362,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.ValidatorSet;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.ValidatorSet;
 
             /**
              * Decodes a ValidatorSet message from the specified reader or buffer, length delimited.
@@ -72564,7 +72371,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.ValidatorSet;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.ValidatorSet;
 
             /**
              * Verifies a ValidatorSet message.
@@ -72578,7 +72385,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ValidatorSet
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.ValidatorSet;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.ValidatorSet;
 
             /**
              * Creates a plain object from a ValidatorSet message. Also converts values to other types if specified.
@@ -72586,7 +72393,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.ValidatorSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.ValidatorSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ValidatorSet to JSON.
@@ -72602,7 +72409,7 @@ export namespace tendermint {
             address?: (Uint8Array|null);
 
             /** Validator pub_key */
-            pub_key?: (tendermint.crypto.IPublicKey|null);
+            pub_key?: (cometbft.crypto.IPublicKey|null);
 
             /** Validator voting_power */
             voting_power?: (Long|null);
@@ -72618,13 +72425,13 @@ export namespace tendermint {
              * Constructs a new Validator.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IValidator);
+            constructor(properties?: cometbft.types.IValidator);
 
             /** Validator address. */
             public address: Uint8Array;
 
             /** Validator pub_key. */
-            public pub_key?: (tendermint.crypto.IPublicKey|null);
+            public pub_key?: (cometbft.crypto.IPublicKey|null);
 
             /** Validator voting_power. */
             public voting_power: Long;
@@ -72633,20 +72440,20 @@ export namespace tendermint {
             public proposer_priority: Long;
 
             /**
-             * Encodes the specified Validator message. Does not implicitly {@link tendermint.types.Validator.verify|verify} messages.
+             * Encodes the specified Validator message. Does not implicitly {@link cometbft.types.Validator.verify|verify} messages.
              * @param message Validator message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Validator message, length delimited. Does not implicitly {@link tendermint.types.Validator.verify|verify} messages.
+             * Encodes the specified Validator message, length delimited. Does not implicitly {@link cometbft.types.Validator.verify|verify} messages.
              * @param message Validator message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IValidator, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Validator message from the specified reader or buffer.
@@ -72656,7 +72463,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Validator;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Validator;
 
             /**
              * Decodes a Validator message from the specified reader or buffer, length delimited.
@@ -72665,7 +72472,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Validator;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Validator;
 
             /**
              * Verifies a Validator message.
@@ -72679,7 +72486,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Validator
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Validator;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Validator;
 
             /**
              * Creates a plain object from a Validator message. Also converts values to other types if specified.
@@ -72687,7 +72494,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Validator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Validator, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Validator to JSON.
@@ -72700,7 +72507,7 @@ export namespace tendermint {
         interface ISimpleValidator {
 
             /** SimpleValidator pub_key */
-            pub_key?: (tendermint.crypto.IPublicKey|null);
+            pub_key?: (cometbft.crypto.IPublicKey|null);
 
             /** SimpleValidator voting_power */
             voting_power?: (Long|null);
@@ -72713,29 +72520,29 @@ export namespace tendermint {
              * Constructs a new SimpleValidator.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ISimpleValidator);
+            constructor(properties?: cometbft.types.ISimpleValidator);
 
             /** SimpleValidator pub_key. */
-            public pub_key?: (tendermint.crypto.IPublicKey|null);
+            public pub_key?: (cometbft.crypto.IPublicKey|null);
 
             /** SimpleValidator voting_power. */
             public voting_power: Long;
 
             /**
-             * Encodes the specified SimpleValidator message. Does not implicitly {@link tendermint.types.SimpleValidator.verify|verify} messages.
+             * Encodes the specified SimpleValidator message. Does not implicitly {@link cometbft.types.SimpleValidator.verify|verify} messages.
              * @param message SimpleValidator message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ISimpleValidator, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ISimpleValidator, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified SimpleValidator message, length delimited. Does not implicitly {@link tendermint.types.SimpleValidator.verify|verify} messages.
+             * Encodes the specified SimpleValidator message, length delimited. Does not implicitly {@link cometbft.types.SimpleValidator.verify|verify} messages.
              * @param message SimpleValidator message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ISimpleValidator, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ISimpleValidator, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a SimpleValidator message from the specified reader or buffer.
@@ -72745,7 +72552,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.SimpleValidator;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.SimpleValidator;
 
             /**
              * Decodes a SimpleValidator message from the specified reader or buffer, length delimited.
@@ -72754,7 +72561,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.SimpleValidator;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.SimpleValidator;
 
             /**
              * Verifies a SimpleValidator message.
@@ -72768,7 +72575,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns SimpleValidator
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.SimpleValidator;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.SimpleValidator;
 
             /**
              * Creates a plain object from a SimpleValidator message. Also converts values to other types if specified.
@@ -72776,7 +72583,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.SimpleValidator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.SimpleValidator, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this SimpleValidator to JSON.
@@ -72789,16 +72596,16 @@ export namespace tendermint {
         interface IConsensusParams {
 
             /** ConsensusParams block */
-            block?: (tendermint.types.IBlockParams|null);
+            block?: (cometbft.types.IBlockParams|null);
 
             /** ConsensusParams evidence */
-            evidence?: (tendermint.types.IEvidenceParams|null);
+            evidence?: (cometbft.types.IEvidenceParams|null);
 
             /** ConsensusParams validator */
-            validator?: (tendermint.types.IValidatorParams|null);
+            validator?: (cometbft.types.IValidatorParams|null);
 
             /** ConsensusParams version */
-            version?: (tendermint.types.IVersionParams|null);
+            version?: (cometbft.types.IVersionParams|null);
         }
 
         /** Represents a ConsensusParams. */
@@ -72808,35 +72615,35 @@ export namespace tendermint {
              * Constructs a new ConsensusParams.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IConsensusParams);
+            constructor(properties?: cometbft.types.IConsensusParams);
 
             /** ConsensusParams block. */
-            public block?: (tendermint.types.IBlockParams|null);
+            public block?: (cometbft.types.IBlockParams|null);
 
             /** ConsensusParams evidence. */
-            public evidence?: (tendermint.types.IEvidenceParams|null);
+            public evidence?: (cometbft.types.IEvidenceParams|null);
 
             /** ConsensusParams validator. */
-            public validator?: (tendermint.types.IValidatorParams|null);
+            public validator?: (cometbft.types.IValidatorParams|null);
 
             /** ConsensusParams version. */
-            public version?: (tendermint.types.IVersionParams|null);
+            public version?: (cometbft.types.IVersionParams|null);
 
             /**
-             * Encodes the specified ConsensusParams message. Does not implicitly {@link tendermint.types.ConsensusParams.verify|verify} messages.
+             * Encodes the specified ConsensusParams message. Does not implicitly {@link cometbft.types.ConsensusParams.verify|verify} messages.
              * @param message ConsensusParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IConsensusParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IConsensusParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ConsensusParams message, length delimited. Does not implicitly {@link tendermint.types.ConsensusParams.verify|verify} messages.
+             * Encodes the specified ConsensusParams message, length delimited. Does not implicitly {@link cometbft.types.ConsensusParams.verify|verify} messages.
              * @param message ConsensusParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IConsensusParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IConsensusParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ConsensusParams message from the specified reader or buffer.
@@ -72846,7 +72653,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.ConsensusParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.ConsensusParams;
 
             /**
              * Decodes a ConsensusParams message from the specified reader or buffer, length delimited.
@@ -72855,7 +72662,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.ConsensusParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.ConsensusParams;
 
             /**
              * Verifies a ConsensusParams message.
@@ -72869,7 +72676,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ConsensusParams
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.ConsensusParams;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.ConsensusParams;
 
             /**
              * Creates a plain object from a ConsensusParams message. Also converts values to other types if specified.
@@ -72877,7 +72684,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.ConsensusParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.ConsensusParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ConsensusParams to JSON.
@@ -72903,7 +72710,7 @@ export namespace tendermint {
              * Constructs a new BlockParams.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IBlockParams);
+            constructor(properties?: cometbft.types.IBlockParams);
 
             /** BlockParams max_bytes. */
             public max_bytes: Long;
@@ -72912,20 +72719,20 @@ export namespace tendermint {
             public max_gas: Long;
 
             /**
-             * Encodes the specified BlockParams message. Does not implicitly {@link tendermint.types.BlockParams.verify|verify} messages.
+             * Encodes the specified BlockParams message. Does not implicitly {@link cometbft.types.BlockParams.verify|verify} messages.
              * @param message BlockParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BlockParams message, length delimited. Does not implicitly {@link tendermint.types.BlockParams.verify|verify} messages.
+             * Encodes the specified BlockParams message, length delimited. Does not implicitly {@link cometbft.types.BlockParams.verify|verify} messages.
              * @param message BlockParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a BlockParams message from the specified reader or buffer.
@@ -72935,7 +72742,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.BlockParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.BlockParams;
 
             /**
              * Decodes a BlockParams message from the specified reader or buffer, length delimited.
@@ -72944,7 +72751,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.BlockParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.BlockParams;
 
             /**
              * Verifies a BlockParams message.
@@ -72958,7 +72765,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns BlockParams
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.BlockParams;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.BlockParams;
 
             /**
              * Creates a plain object from a BlockParams message. Also converts values to other types if specified.
@@ -72966,7 +72773,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.BlockParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.BlockParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this BlockParams to JSON.
@@ -72995,7 +72802,7 @@ export namespace tendermint {
              * Constructs a new EvidenceParams.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IEvidenceParams);
+            constructor(properties?: cometbft.types.IEvidenceParams);
 
             /** EvidenceParams max_age_num_blocks. */
             public max_age_num_blocks: Long;
@@ -73007,20 +72814,20 @@ export namespace tendermint {
             public max_bytes: Long;
 
             /**
-             * Encodes the specified EvidenceParams message. Does not implicitly {@link tendermint.types.EvidenceParams.verify|verify} messages.
+             * Encodes the specified EvidenceParams message. Does not implicitly {@link cometbft.types.EvidenceParams.verify|verify} messages.
              * @param message EvidenceParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IEvidenceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IEvidenceParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified EvidenceParams message, length delimited. Does not implicitly {@link tendermint.types.EvidenceParams.verify|verify} messages.
+             * Encodes the specified EvidenceParams message, length delimited. Does not implicitly {@link cometbft.types.EvidenceParams.verify|verify} messages.
              * @param message EvidenceParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IEvidenceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IEvidenceParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an EvidenceParams message from the specified reader or buffer.
@@ -73030,7 +72837,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.EvidenceParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.EvidenceParams;
 
             /**
              * Decodes an EvidenceParams message from the specified reader or buffer, length delimited.
@@ -73039,7 +72846,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.EvidenceParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.EvidenceParams;
 
             /**
              * Verifies an EvidenceParams message.
@@ -73053,7 +72860,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns EvidenceParams
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.EvidenceParams;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.EvidenceParams;
 
             /**
              * Creates a plain object from an EvidenceParams message. Also converts values to other types if specified.
@@ -73061,7 +72868,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.EvidenceParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.EvidenceParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this EvidenceParams to JSON.
@@ -73084,26 +72891,26 @@ export namespace tendermint {
              * Constructs a new ValidatorParams.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IValidatorParams);
+            constructor(properties?: cometbft.types.IValidatorParams);
 
             /** ValidatorParams pub_key_types. */
             public pub_key_types: string[];
 
             /**
-             * Encodes the specified ValidatorParams message. Does not implicitly {@link tendermint.types.ValidatorParams.verify|verify} messages.
+             * Encodes the specified ValidatorParams message. Does not implicitly {@link cometbft.types.ValidatorParams.verify|verify} messages.
              * @param message ValidatorParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IValidatorParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IValidatorParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ValidatorParams message, length delimited. Does not implicitly {@link tendermint.types.ValidatorParams.verify|verify} messages.
+             * Encodes the specified ValidatorParams message, length delimited. Does not implicitly {@link cometbft.types.ValidatorParams.verify|verify} messages.
              * @param message ValidatorParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IValidatorParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IValidatorParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ValidatorParams message from the specified reader or buffer.
@@ -73113,7 +72920,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.ValidatorParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.ValidatorParams;
 
             /**
              * Decodes a ValidatorParams message from the specified reader or buffer, length delimited.
@@ -73122,7 +72929,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.ValidatorParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.ValidatorParams;
 
             /**
              * Verifies a ValidatorParams message.
@@ -73136,7 +72943,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ValidatorParams
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.ValidatorParams;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.ValidatorParams;
 
             /**
              * Creates a plain object from a ValidatorParams message. Also converts values to other types if specified.
@@ -73144,7 +72951,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.ValidatorParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.ValidatorParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ValidatorParams to JSON.
@@ -73167,26 +72974,26 @@ export namespace tendermint {
              * Constructs a new VersionParams.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IVersionParams);
+            constructor(properties?: cometbft.types.IVersionParams);
 
             /** VersionParams app. */
             public app: Long;
 
             /**
-             * Encodes the specified VersionParams message. Does not implicitly {@link tendermint.types.VersionParams.verify|verify} messages.
+             * Encodes the specified VersionParams message. Does not implicitly {@link cometbft.types.VersionParams.verify|verify} messages.
              * @param message VersionParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IVersionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IVersionParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified VersionParams message, length delimited. Does not implicitly {@link tendermint.types.VersionParams.verify|verify} messages.
+             * Encodes the specified VersionParams message, length delimited. Does not implicitly {@link cometbft.types.VersionParams.verify|verify} messages.
              * @param message VersionParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IVersionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IVersionParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a VersionParams message from the specified reader or buffer.
@@ -73196,7 +73003,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.VersionParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.VersionParams;
 
             /**
              * Decodes a VersionParams message from the specified reader or buffer, length delimited.
@@ -73205,7 +73012,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.VersionParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.VersionParams;
 
             /**
              * Verifies a VersionParams message.
@@ -73219,7 +73026,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns VersionParams
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.VersionParams;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.VersionParams;
 
             /**
              * Creates a plain object from a VersionParams message. Also converts values to other types if specified.
@@ -73227,7 +73034,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.VersionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.VersionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this VersionParams to JSON.
@@ -73253,7 +73060,7 @@ export namespace tendermint {
              * Constructs a new HashedParams.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IHashedParams);
+            constructor(properties?: cometbft.types.IHashedParams);
 
             /** HashedParams block_max_bytes. */
             public block_max_bytes: Long;
@@ -73262,20 +73069,20 @@ export namespace tendermint {
             public block_max_gas: Long;
 
             /**
-             * Encodes the specified HashedParams message. Does not implicitly {@link tendermint.types.HashedParams.verify|verify} messages.
+             * Encodes the specified HashedParams message. Does not implicitly {@link cometbft.types.HashedParams.verify|verify} messages.
              * @param message HashedParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IHashedParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IHashedParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified HashedParams message, length delimited. Does not implicitly {@link tendermint.types.HashedParams.verify|verify} messages.
+             * Encodes the specified HashedParams message, length delimited. Does not implicitly {@link cometbft.types.HashedParams.verify|verify} messages.
              * @param message HashedParams message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IHashedParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IHashedParams, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a HashedParams message from the specified reader or buffer.
@@ -73285,7 +73092,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.HashedParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.HashedParams;
 
             /**
              * Decodes a HashedParams message from the specified reader or buffer, length delimited.
@@ -73294,7 +73101,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.HashedParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.HashedParams;
 
             /**
              * Verifies a HashedParams message.
@@ -73308,7 +73115,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns HashedParams
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.HashedParams;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.HashedParams;
 
             /**
              * Creates a plain object from a HashedParams message. Also converts values to other types if specified.
@@ -73316,7 +73123,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.HashedParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.HashedParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this HashedParams to JSON.
@@ -73329,10 +73136,10 @@ export namespace tendermint {
         interface IEvidence {
 
             /** Evidence duplicate_vote_evidence */
-            duplicate_vote_evidence?: (tendermint.types.IDuplicateVoteEvidence|null);
+            duplicate_vote_evidence?: (cometbft.types.IDuplicateVoteEvidence|null);
 
             /** Evidence light_client_attack_evidence */
-            light_client_attack_evidence?: (tendermint.types.ILightClientAttackEvidence|null);
+            light_client_attack_evidence?: (cometbft.types.ILightClientAttackEvidence|null);
         }
 
         /** Represents an Evidence. */
@@ -73342,32 +73149,32 @@ export namespace tendermint {
              * Constructs a new Evidence.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IEvidence);
+            constructor(properties?: cometbft.types.IEvidence);
 
             /** Evidence duplicate_vote_evidence. */
-            public duplicate_vote_evidence?: (tendermint.types.IDuplicateVoteEvidence|null);
+            public duplicate_vote_evidence?: (cometbft.types.IDuplicateVoteEvidence|null);
 
             /** Evidence light_client_attack_evidence. */
-            public light_client_attack_evidence?: (tendermint.types.ILightClientAttackEvidence|null);
+            public light_client_attack_evidence?: (cometbft.types.ILightClientAttackEvidence|null);
 
             /** Evidence sum. */
             public sum?: ("duplicate_vote_evidence"|"light_client_attack_evidence");
 
             /**
-             * Encodes the specified Evidence message. Does not implicitly {@link tendermint.types.Evidence.verify|verify} messages.
+             * Encodes the specified Evidence message. Does not implicitly {@link cometbft.types.Evidence.verify|verify} messages.
              * @param message Evidence message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Evidence message, length delimited. Does not implicitly {@link tendermint.types.Evidence.verify|verify} messages.
+             * Encodes the specified Evidence message, length delimited. Does not implicitly {@link cometbft.types.Evidence.verify|verify} messages.
              * @param message Evidence message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an Evidence message from the specified reader or buffer.
@@ -73377,7 +73184,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Evidence;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Evidence;
 
             /**
              * Decodes an Evidence message from the specified reader or buffer, length delimited.
@@ -73386,7 +73193,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Evidence;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Evidence;
 
             /**
              * Verifies an Evidence message.
@@ -73400,7 +73207,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Evidence
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Evidence;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Evidence;
 
             /**
              * Creates a plain object from an Evidence message. Also converts values to other types if specified.
@@ -73408,7 +73215,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Evidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Evidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Evidence to JSON.
@@ -73421,10 +73228,10 @@ export namespace tendermint {
         interface IDuplicateVoteEvidence {
 
             /** DuplicateVoteEvidence vote_a */
-            vote_a?: (tendermint.types.IVote|null);
+            vote_a?: (cometbft.types.IVote|null);
 
             /** DuplicateVoteEvidence vote_b */
-            vote_b?: (tendermint.types.IVote|null);
+            vote_b?: (cometbft.types.IVote|null);
 
             /** DuplicateVoteEvidence total_voting_power */
             total_voting_power?: (Long|null);
@@ -73443,13 +73250,13 @@ export namespace tendermint {
              * Constructs a new DuplicateVoteEvidence.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IDuplicateVoteEvidence);
+            constructor(properties?: cometbft.types.IDuplicateVoteEvidence);
 
             /** DuplicateVoteEvidence vote_a. */
-            public vote_a?: (tendermint.types.IVote|null);
+            public vote_a?: (cometbft.types.IVote|null);
 
             /** DuplicateVoteEvidence vote_b. */
-            public vote_b?: (tendermint.types.IVote|null);
+            public vote_b?: (cometbft.types.IVote|null);
 
             /** DuplicateVoteEvidence total_voting_power. */
             public total_voting_power: Long;
@@ -73461,20 +73268,20 @@ export namespace tendermint {
             public timestamp?: (google.protobuf.ITimestamp|null);
 
             /**
-             * Encodes the specified DuplicateVoteEvidence message. Does not implicitly {@link tendermint.types.DuplicateVoteEvidence.verify|verify} messages.
+             * Encodes the specified DuplicateVoteEvidence message. Does not implicitly {@link cometbft.types.DuplicateVoteEvidence.verify|verify} messages.
              * @param message DuplicateVoteEvidence message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IDuplicateVoteEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IDuplicateVoteEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified DuplicateVoteEvidence message, length delimited. Does not implicitly {@link tendermint.types.DuplicateVoteEvidence.verify|verify} messages.
+             * Encodes the specified DuplicateVoteEvidence message, length delimited. Does not implicitly {@link cometbft.types.DuplicateVoteEvidence.verify|verify} messages.
              * @param message DuplicateVoteEvidence message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IDuplicateVoteEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IDuplicateVoteEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a DuplicateVoteEvidence message from the specified reader or buffer.
@@ -73484,7 +73291,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.DuplicateVoteEvidence;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.DuplicateVoteEvidence;
 
             /**
              * Decodes a DuplicateVoteEvidence message from the specified reader or buffer, length delimited.
@@ -73493,7 +73300,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.DuplicateVoteEvidence;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.DuplicateVoteEvidence;
 
             /**
              * Verifies a DuplicateVoteEvidence message.
@@ -73507,7 +73314,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns DuplicateVoteEvidence
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.DuplicateVoteEvidence;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.DuplicateVoteEvidence;
 
             /**
              * Creates a plain object from a DuplicateVoteEvidence message. Also converts values to other types if specified.
@@ -73515,7 +73322,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.DuplicateVoteEvidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.DuplicateVoteEvidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this DuplicateVoteEvidence to JSON.
@@ -73528,13 +73335,13 @@ export namespace tendermint {
         interface ILightClientAttackEvidence {
 
             /** LightClientAttackEvidence conflicting_block */
-            conflicting_block?: (tendermint.types.ILightBlock|null);
+            conflicting_block?: (cometbft.types.ILightBlock|null);
 
             /** LightClientAttackEvidence common_height */
             common_height?: (Long|null);
 
             /** LightClientAttackEvidence byzantine_validators */
-            byzantine_validators?: (tendermint.types.IValidator[]|null);
+            byzantine_validators?: (cometbft.types.IValidator[]|null);
 
             /** LightClientAttackEvidence total_voting_power */
             total_voting_power?: (Long|null);
@@ -73550,16 +73357,16 @@ export namespace tendermint {
              * Constructs a new LightClientAttackEvidence.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.ILightClientAttackEvidence);
+            constructor(properties?: cometbft.types.ILightClientAttackEvidence);
 
             /** LightClientAttackEvidence conflicting_block. */
-            public conflicting_block?: (tendermint.types.ILightBlock|null);
+            public conflicting_block?: (cometbft.types.ILightBlock|null);
 
             /** LightClientAttackEvidence common_height. */
             public common_height: Long;
 
             /** LightClientAttackEvidence byzantine_validators. */
-            public byzantine_validators: tendermint.types.IValidator[];
+            public byzantine_validators: cometbft.types.IValidator[];
 
             /** LightClientAttackEvidence total_voting_power. */
             public total_voting_power: Long;
@@ -73568,20 +73375,20 @@ export namespace tendermint {
             public timestamp?: (google.protobuf.ITimestamp|null);
 
             /**
-             * Encodes the specified LightClientAttackEvidence message. Does not implicitly {@link tendermint.types.LightClientAttackEvidence.verify|verify} messages.
+             * Encodes the specified LightClientAttackEvidence message. Does not implicitly {@link cometbft.types.LightClientAttackEvidence.verify|verify} messages.
              * @param message LightClientAttackEvidence message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.ILightClientAttackEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.ILightClientAttackEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified LightClientAttackEvidence message, length delimited. Does not implicitly {@link tendermint.types.LightClientAttackEvidence.verify|verify} messages.
+             * Encodes the specified LightClientAttackEvidence message, length delimited. Does not implicitly {@link cometbft.types.LightClientAttackEvidence.verify|verify} messages.
              * @param message LightClientAttackEvidence message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.ILightClientAttackEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.ILightClientAttackEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a LightClientAttackEvidence message from the specified reader or buffer.
@@ -73591,7 +73398,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.LightClientAttackEvidence;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.LightClientAttackEvidence;
 
             /**
              * Decodes a LightClientAttackEvidence message from the specified reader or buffer, length delimited.
@@ -73600,7 +73407,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.LightClientAttackEvidence;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.LightClientAttackEvidence;
 
             /**
              * Verifies a LightClientAttackEvidence message.
@@ -73614,7 +73421,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns LightClientAttackEvidence
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.LightClientAttackEvidence;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.LightClientAttackEvidence;
 
             /**
              * Creates a plain object from a LightClientAttackEvidence message. Also converts values to other types if specified.
@@ -73622,7 +73429,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.LightClientAttackEvidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.LightClientAttackEvidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this LightClientAttackEvidence to JSON.
@@ -73635,7 +73442,7 @@ export namespace tendermint {
         interface IEvidenceList {
 
             /** EvidenceList evidence */
-            evidence?: (tendermint.types.IEvidence[]|null);
+            evidence?: (cometbft.types.IEvidence[]|null);
         }
 
         /** Represents an EvidenceList. */
@@ -73645,26 +73452,26 @@ export namespace tendermint {
              * Constructs a new EvidenceList.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IEvidenceList);
+            constructor(properties?: cometbft.types.IEvidenceList);
 
             /** EvidenceList evidence. */
-            public evidence: tendermint.types.IEvidence[];
+            public evidence: cometbft.types.IEvidence[];
 
             /**
-             * Encodes the specified EvidenceList message. Does not implicitly {@link tendermint.types.EvidenceList.verify|verify} messages.
+             * Encodes the specified EvidenceList message. Does not implicitly {@link cometbft.types.EvidenceList.verify|verify} messages.
              * @param message EvidenceList message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IEvidenceList, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IEvidenceList, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified EvidenceList message, length delimited. Does not implicitly {@link tendermint.types.EvidenceList.verify|verify} messages.
+             * Encodes the specified EvidenceList message, length delimited. Does not implicitly {@link cometbft.types.EvidenceList.verify|verify} messages.
              * @param message EvidenceList message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IEvidenceList, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IEvidenceList, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an EvidenceList message from the specified reader or buffer.
@@ -73674,7 +73481,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.EvidenceList;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.EvidenceList;
 
             /**
              * Decodes an EvidenceList message from the specified reader or buffer, length delimited.
@@ -73683,7 +73490,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.EvidenceList;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.EvidenceList;
 
             /**
              * Verifies an EvidenceList message.
@@ -73697,7 +73504,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns EvidenceList
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.EvidenceList;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.EvidenceList;
 
             /**
              * Creates a plain object from an EvidenceList message. Also converts values to other types if specified.
@@ -73705,7 +73512,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.EvidenceList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.EvidenceList, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this EvidenceList to JSON.
@@ -73718,16 +73525,16 @@ export namespace tendermint {
         interface IBlock {
 
             /** Block header */
-            header?: (tendermint.types.IHeader|null);
+            header?: (cometbft.types.IHeader|null);
 
             /** Block data */
-            data?: (tendermint.types.IData|null);
+            data?: (cometbft.types.IData|null);
 
             /** Block evidence */
-            evidence?: (tendermint.types.IEvidenceList|null);
+            evidence?: (cometbft.types.IEvidenceList|null);
 
             /** Block last_commit */
-            last_commit?: (tendermint.types.ICommit|null);
+            last_commit?: (cometbft.types.ICommit|null);
         }
 
         /** Represents a Block. */
@@ -73737,35 +73544,35 @@ export namespace tendermint {
              * Constructs a new Block.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.types.IBlock);
+            constructor(properties?: cometbft.types.IBlock);
 
             /** Block header. */
-            public header?: (tendermint.types.IHeader|null);
+            public header?: (cometbft.types.IHeader|null);
 
             /** Block data. */
-            public data?: (tendermint.types.IData|null);
+            public data?: (cometbft.types.IData|null);
 
             /** Block evidence. */
-            public evidence?: (tendermint.types.IEvidenceList|null);
+            public evidence?: (cometbft.types.IEvidenceList|null);
 
             /** Block last_commit. */
-            public last_commit?: (tendermint.types.ICommit|null);
+            public last_commit?: (cometbft.types.ICommit|null);
 
             /**
-             * Encodes the specified Block message. Does not implicitly {@link tendermint.types.Block.verify|verify} messages.
+             * Encodes the specified Block message. Does not implicitly {@link cometbft.types.Block.verify|verify} messages.
              * @param message Block message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Block message, length delimited. Does not implicitly {@link tendermint.types.Block.verify|verify} messages.
+             * Encodes the specified Block message, length delimited. Does not implicitly {@link cometbft.types.Block.verify|verify} messages.
              * @param message Block message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.types.IBlock, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Block message from the specified reader or buffer.
@@ -73775,7 +73582,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.types.Block;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.types.Block;
 
             /**
              * Decodes a Block message from the specified reader or buffer, length delimited.
@@ -73784,7 +73591,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.types.Block;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.types.Block;
 
             /**
              * Verifies a Block message.
@@ -73798,7 +73605,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Block
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.types.Block;
+            public static fromObject(object: { [k: string]: any }): cometbft.types.Block;
 
             /**
              * Creates a plain object from a Block message. Also converts values to other types if specified.
@@ -73806,7 +73613,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.types.Block, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.types.Block, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Block to JSON.
@@ -73836,7 +73643,7 @@ export namespace tendermint {
              * Constructs a new App.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.version.IApp);
+            constructor(properties?: cometbft.version.IApp);
 
             /** App protocol. */
             public protocol: Long;
@@ -73845,20 +73652,20 @@ export namespace tendermint {
             public software: string;
 
             /**
-             * Encodes the specified App message. Does not implicitly {@link tendermint.version.App.verify|verify} messages.
+             * Encodes the specified App message. Does not implicitly {@link cometbft.version.App.verify|verify} messages.
              * @param message App message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.version.IApp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.version.IApp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified App message, length delimited. Does not implicitly {@link tendermint.version.App.verify|verify} messages.
+             * Encodes the specified App message, length delimited. Does not implicitly {@link cometbft.version.App.verify|verify} messages.
              * @param message App message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.version.IApp, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.version.IApp, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes an App message from the specified reader or buffer.
@@ -73868,7 +73675,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.version.App;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.version.App;
 
             /**
              * Decodes an App message from the specified reader or buffer, length delimited.
@@ -73877,7 +73684,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.version.App;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.version.App;
 
             /**
              * Verifies an App message.
@@ -73891,7 +73698,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns App
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.version.App;
+            public static fromObject(object: { [k: string]: any }): cometbft.version.App;
 
             /**
              * Creates a plain object from an App message. Also converts values to other types if specified.
@@ -73899,7 +73706,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.version.App, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.version.App, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this App to JSON.
@@ -73925,7 +73732,7 @@ export namespace tendermint {
              * Constructs a new Consensus.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.version.IConsensus);
+            constructor(properties?: cometbft.version.IConsensus);
 
             /** Consensus block. */
             public block: Long;
@@ -73934,20 +73741,20 @@ export namespace tendermint {
             public app: Long;
 
             /**
-             * Encodes the specified Consensus message. Does not implicitly {@link tendermint.version.Consensus.verify|verify} messages.
+             * Encodes the specified Consensus message. Does not implicitly {@link cometbft.version.Consensus.verify|verify} messages.
              * @param message Consensus message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.version.IConsensus, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.version.IConsensus, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Consensus message, length delimited. Does not implicitly {@link tendermint.version.Consensus.verify|verify} messages.
+             * Encodes the specified Consensus message, length delimited. Does not implicitly {@link cometbft.version.Consensus.verify|verify} messages.
              * @param message Consensus message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.version.IConsensus, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.version.IConsensus, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a Consensus message from the specified reader or buffer.
@@ -73957,7 +73764,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.version.Consensus;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.version.Consensus;
 
             /**
              * Decodes a Consensus message from the specified reader or buffer, length delimited.
@@ -73966,7 +73773,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.version.Consensus;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.version.Consensus;
 
             /**
              * Verifies a Consensus message.
@@ -73980,7 +73787,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns Consensus
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.version.Consensus;
+            public static fromObject(object: { [k: string]: any }): cometbft.version.Consensus;
 
             /**
              * Creates a plain object from a Consensus message. Also converts values to other types if specified.
@@ -73988,7 +73795,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.version.Consensus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.version.Consensus, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Consensus to JSON.
@@ -74021,7 +73828,7 @@ export namespace tendermint {
              * Constructs a new NetAddress.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.p2p.INetAddress);
+            constructor(properties?: cometbft.p2p.INetAddress);
 
             /** NetAddress id. */
             public id: string;
@@ -74033,20 +73840,20 @@ export namespace tendermint {
             public port: number;
 
             /**
-             * Encodes the specified NetAddress message. Does not implicitly {@link tendermint.p2p.NetAddress.verify|verify} messages.
+             * Encodes the specified NetAddress message. Does not implicitly {@link cometbft.p2p.NetAddress.verify|verify} messages.
              * @param message NetAddress message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.p2p.INetAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.p2p.INetAddress, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified NetAddress message, length delimited. Does not implicitly {@link tendermint.p2p.NetAddress.verify|verify} messages.
+             * Encodes the specified NetAddress message, length delimited. Does not implicitly {@link cometbft.p2p.NetAddress.verify|verify} messages.
              * @param message NetAddress message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.p2p.INetAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.p2p.INetAddress, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a NetAddress message from the specified reader or buffer.
@@ -74056,7 +73863,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.p2p.NetAddress;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.p2p.NetAddress;
 
             /**
              * Decodes a NetAddress message from the specified reader or buffer, length delimited.
@@ -74065,7 +73872,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.p2p.NetAddress;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.p2p.NetAddress;
 
             /**
              * Verifies a NetAddress message.
@@ -74079,7 +73886,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns NetAddress
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.p2p.NetAddress;
+            public static fromObject(object: { [k: string]: any }): cometbft.p2p.NetAddress;
 
             /**
              * Creates a plain object from a NetAddress message. Also converts values to other types if specified.
@@ -74087,7 +73894,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.p2p.NetAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.p2p.NetAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this NetAddress to JSON.
@@ -74116,7 +73923,7 @@ export namespace tendermint {
              * Constructs a new ProtocolVersion.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.p2p.IProtocolVersion);
+            constructor(properties?: cometbft.p2p.IProtocolVersion);
 
             /** ProtocolVersion p2p. */
             public p2p: Long;
@@ -74128,20 +73935,20 @@ export namespace tendermint {
             public app: Long;
 
             /**
-             * Encodes the specified ProtocolVersion message. Does not implicitly {@link tendermint.p2p.ProtocolVersion.verify|verify} messages.
+             * Encodes the specified ProtocolVersion message. Does not implicitly {@link cometbft.p2p.ProtocolVersion.verify|verify} messages.
              * @param message ProtocolVersion message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.p2p.IProtocolVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.p2p.IProtocolVersion, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ProtocolVersion message, length delimited. Does not implicitly {@link tendermint.p2p.ProtocolVersion.verify|verify} messages.
+             * Encodes the specified ProtocolVersion message, length delimited. Does not implicitly {@link cometbft.p2p.ProtocolVersion.verify|verify} messages.
              * @param message ProtocolVersion message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.p2p.IProtocolVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.p2p.IProtocolVersion, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a ProtocolVersion message from the specified reader or buffer.
@@ -74151,7 +73958,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.p2p.ProtocolVersion;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.p2p.ProtocolVersion;
 
             /**
              * Decodes a ProtocolVersion message from the specified reader or buffer, length delimited.
@@ -74160,7 +73967,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.p2p.ProtocolVersion;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.p2p.ProtocolVersion;
 
             /**
              * Verifies a ProtocolVersion message.
@@ -74174,7 +73981,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns ProtocolVersion
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.p2p.ProtocolVersion;
+            public static fromObject(object: { [k: string]: any }): cometbft.p2p.ProtocolVersion;
 
             /**
              * Creates a plain object from a ProtocolVersion message. Also converts values to other types if specified.
@@ -74182,7 +73989,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.p2p.ProtocolVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.p2p.ProtocolVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this ProtocolVersion to JSON.
@@ -74195,7 +74002,7 @@ export namespace tendermint {
         interface IDefaultNodeInfo {
 
             /** DefaultNodeInfo protocol_version */
-            protocol_version?: (tendermint.p2p.IProtocolVersion|null);
+            protocol_version?: (cometbft.p2p.IProtocolVersion|null);
 
             /** DefaultNodeInfo default_node_id */
             default_node_id?: (string|null);
@@ -74216,7 +74023,7 @@ export namespace tendermint {
             moniker?: (string|null);
 
             /** DefaultNodeInfo other */
-            other?: (tendermint.p2p.IDefaultNodeInfoOther|null);
+            other?: (cometbft.p2p.IDefaultNodeInfoOther|null);
         }
 
         /** Represents a DefaultNodeInfo. */
@@ -74226,10 +74033,10 @@ export namespace tendermint {
              * Constructs a new DefaultNodeInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.p2p.IDefaultNodeInfo);
+            constructor(properties?: cometbft.p2p.IDefaultNodeInfo);
 
             /** DefaultNodeInfo protocol_version. */
-            public protocol_version?: (tendermint.p2p.IProtocolVersion|null);
+            public protocol_version?: (cometbft.p2p.IProtocolVersion|null);
 
             /** DefaultNodeInfo default_node_id. */
             public default_node_id: string;
@@ -74250,23 +74057,23 @@ export namespace tendermint {
             public moniker: string;
 
             /** DefaultNodeInfo other. */
-            public other?: (tendermint.p2p.IDefaultNodeInfoOther|null);
+            public other?: (cometbft.p2p.IDefaultNodeInfoOther|null);
 
             /**
-             * Encodes the specified DefaultNodeInfo message. Does not implicitly {@link tendermint.p2p.DefaultNodeInfo.verify|verify} messages.
+             * Encodes the specified DefaultNodeInfo message. Does not implicitly {@link cometbft.p2p.DefaultNodeInfo.verify|verify} messages.
              * @param message DefaultNodeInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified DefaultNodeInfo message, length delimited. Does not implicitly {@link tendermint.p2p.DefaultNodeInfo.verify|verify} messages.
+             * Encodes the specified DefaultNodeInfo message, length delimited. Does not implicitly {@link cometbft.p2p.DefaultNodeInfo.verify|verify} messages.
              * @param message DefaultNodeInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.p2p.IDefaultNodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a DefaultNodeInfo message from the specified reader or buffer.
@@ -74276,7 +74083,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.p2p.DefaultNodeInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.p2p.DefaultNodeInfo;
 
             /**
              * Decodes a DefaultNodeInfo message from the specified reader or buffer, length delimited.
@@ -74285,7 +74092,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.p2p.DefaultNodeInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.p2p.DefaultNodeInfo;
 
             /**
              * Verifies a DefaultNodeInfo message.
@@ -74299,7 +74106,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns DefaultNodeInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.p2p.DefaultNodeInfo;
+            public static fromObject(object: { [k: string]: any }): cometbft.p2p.DefaultNodeInfo;
 
             /**
              * Creates a plain object from a DefaultNodeInfo message. Also converts values to other types if specified.
@@ -74307,7 +74114,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.p2p.DefaultNodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.p2p.DefaultNodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this DefaultNodeInfo to JSON.
@@ -74333,7 +74140,7 @@ export namespace tendermint {
              * Constructs a new DefaultNodeInfoOther.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.p2p.IDefaultNodeInfoOther);
+            constructor(properties?: cometbft.p2p.IDefaultNodeInfoOther);
 
             /** DefaultNodeInfoOther tx_index. */
             public tx_index: string;
@@ -74342,20 +74149,20 @@ export namespace tendermint {
             public rpc_address: string;
 
             /**
-             * Encodes the specified DefaultNodeInfoOther message. Does not implicitly {@link tendermint.p2p.DefaultNodeInfoOther.verify|verify} messages.
+             * Encodes the specified DefaultNodeInfoOther message. Does not implicitly {@link cometbft.p2p.DefaultNodeInfoOther.verify|verify} messages.
              * @param message DefaultNodeInfoOther message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: cometbft.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified DefaultNodeInfoOther message, length delimited. Does not implicitly {@link tendermint.p2p.DefaultNodeInfoOther.verify|verify} messages.
+             * Encodes the specified DefaultNodeInfoOther message, length delimited. Does not implicitly {@link cometbft.p2p.DefaultNodeInfoOther.verify|verify} messages.
              * @param message DefaultNodeInfoOther message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: cometbft.p2p.IDefaultNodeInfoOther, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a DefaultNodeInfoOther message from the specified reader or buffer.
@@ -74365,7 +74172,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.p2p.DefaultNodeInfoOther;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.p2p.DefaultNodeInfoOther;
 
             /**
              * Decodes a DefaultNodeInfoOther message from the specified reader or buffer, length delimited.
@@ -74374,7 +74181,7 @@ export namespace tendermint {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.p2p.DefaultNodeInfoOther;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.p2p.DefaultNodeInfoOther;
 
             /**
              * Verifies a DefaultNodeInfoOther message.
@@ -74388,7 +74195,7 @@ export namespace tendermint {
              * @param object Plain object
              * @returns DefaultNodeInfoOther
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.p2p.DefaultNodeInfoOther;
+            public static fromObject(object: { [k: string]: any }): cometbft.p2p.DefaultNodeInfoOther;
 
             /**
              * Creates a plain object from a DefaultNodeInfoOther message. Also converts values to other types if specified.
@@ -74396,7 +74203,7 @@ export namespace tendermint {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.p2p.DefaultNodeInfoOther, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: cometbft.p2p.DefaultNodeInfoOther, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this DefaultNodeInfoOther to JSON.
@@ -74429,7 +74236,7 @@ export namespace tendermint {
                  * Constructs a new BitArray.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: tendermint.libs.bits.IBitArray);
+                constructor(properties?: cometbft.libs.bits.IBitArray);
 
                 /** BitArray bits. */
                 public bits: Long;
@@ -74438,20 +74245,20 @@ export namespace tendermint {
                 public elems: Long[];
 
                 /**
-                 * Encodes the specified BitArray message. Does not implicitly {@link tendermint.libs.bits.BitArray.verify|verify} messages.
+                 * Encodes the specified BitArray message. Does not implicitly {@link cometbft.libs.bits.BitArray.verify|verify} messages.
                  * @param message BitArray message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: tendermint.libs.bits.IBitArray, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: cometbft.libs.bits.IBitArray, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified BitArray message, length delimited. Does not implicitly {@link tendermint.libs.bits.BitArray.verify|verify} messages.
+                 * Encodes the specified BitArray message, length delimited. Does not implicitly {@link cometbft.libs.bits.BitArray.verify|verify} messages.
                  * @param message BitArray message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: tendermint.libs.bits.IBitArray, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: cometbft.libs.bits.IBitArray, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
                  * Decodes a BitArray message from the specified reader or buffer.
@@ -74461,7 +74268,7 @@ export namespace tendermint {
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.libs.bits.BitArray;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cometbft.libs.bits.BitArray;
 
                 /**
                  * Decodes a BitArray message from the specified reader or buffer, length delimited.
@@ -74470,7 +74277,7 @@ export namespace tendermint {
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.libs.bits.BitArray;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cometbft.libs.bits.BitArray;
 
                 /**
                  * Verifies a BitArray message.
@@ -74484,7 +74291,7 @@ export namespace tendermint {
                  * @param object Plain object
                  * @returns BitArray
                  */
-                public static fromObject(object: { [k: string]: any }): tendermint.libs.bits.BitArray;
+                public static fromObject(object: { [k: string]: any }): cometbft.libs.bits.BitArray;
 
                 /**
                  * Creates a plain object from a BitArray message. Also converts values to other types if specified.
@@ -74492,7 +74299,7 @@ export namespace tendermint {
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: tendermint.libs.bits.BitArray, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: cometbft.libs.bits.BitArray, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
                  * Converts this BitArray to JSON.
