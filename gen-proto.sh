@@ -3,7 +3,7 @@
 rm -r ./proto
 wget https://github.com/bufbuild/buf/releases/download/v1.13.1/buf-Linux-x86_64
 sudo chmod 777 ./buf-Linux-x86_64
-./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:8cb30a2c4de74dc9bd8d260b1e75e176 --output ./proto-thirdparty
+./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:v0.47.0 --output ./proto-thirdparty
 rm ./buf-Linux-x86_64
 cp -r ./cosmos-sdk/proto ./
 cp -r ./proto-thirdparty/tendermint ./proto/
@@ -44,4 +44,4 @@ npx pbts \
   ./src/proto.js
 
 rm -r ./proto
-rm -rf ./proto-thirdparty
+rm -r ./proto-thirdparty
