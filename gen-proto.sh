@@ -3,10 +3,8 @@
 rm -r ./proto
 wget https://github.com/bufbuild/buf/releases/download/v1.13.1/buf-Linux-x86_64
 sudo chmod 777 ./buf-Linux-x86_64
-./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:v0.47.0 --output ./proto-thirdparty
+./buf-Linux-x86_64 export buf.build/cosmos/cosmos-sdk:v0.47.0 --output ./proto
 rm ./buf-Linux-x86_64
-cp -r ./cosmos-sdk/proto ./
-cp -r ./proto-thirdparty/tendermint ./proto/
 
 proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
 proto_files=()
@@ -22,7 +20,6 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
-  --path=./proto-thirdparty/ \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -35,7 +32,6 @@ npx pbjs \
   --keep-case \
   --no-create \
   --path=./proto/ \
-  --path=./proto-thirdparty/ \
   --root="@cosmos-client/core" \
   ${proto_files[@]}
 
@@ -43,5 +39,7 @@ npx pbts \
   -o ./src/proto.d.ts \
   ./src/proto.js
 
+echo Edit proto.d.ts to resolve the conflict of `tendermint` namespace.
+echo Require to rename `cometbft` proto
+
 rm -r ./proto
-rm -r ./proto-thirdparty
