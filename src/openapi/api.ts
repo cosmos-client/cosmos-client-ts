@@ -13,14 +13,115 @@
  */
 
 
-import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { Configuration } from './configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import type { RequestArgs } from './base';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
+import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 
+/**
+ * ABCIQueryResponse defines the response structure for the ABCIQuery gRPC query.  Note: This type is a duplicate of the ResponseQuery proto type defined in Tendermint.
+ * @export
+ * @interface ABCIQuery200Response
+ */
+export interface ABCIQuery200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof ABCIQuery200Response
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'log'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'info'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'index'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'value'?: string;
+    /**
+     * 
+     * @type {ABCIQuery200ResponseProofOps}
+     * @memberof ABCIQuery200Response
+     */
+    'proof_ops'?: ABCIQuery200ResponseProofOps;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200Response
+     */
+    'codespace'?: string;
+}
+/**
+ * ProofOps is Merkle proof defined by the list of ProofOps.  Note: This type is a duplicate of the ProofOps proto type defined in Tendermint.
+ * @export
+ * @interface ABCIQuery200ResponseProofOps
+ */
+export interface ABCIQuery200ResponseProofOps {
+    /**
+     * 
+     * @type {Array<ABCIQuery200ResponseProofOpsOpsInner>}
+     * @memberof ABCIQuery200ResponseProofOps
+     */
+    'ops'?: Array<ABCIQuery200ResponseProofOpsOpsInner>;
+}
+/**
+ * ProofOp defines an operation used for calculating Merkle root. The data could be arbitrary format, providing necessary data for example neighbouring node hash.  Note: This type is a duplicate of the ProofOp proto type defined in Tendermint.
+ * @export
+ * @interface ABCIQuery200ResponseProofOpsOpsInner
+ */
+export interface ABCIQuery200ResponseProofOpsOpsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200ResponseProofOpsOpsInner
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200ResponseProofOpsOpsInner
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ABCIQuery200ResponseProofOpsOpsInner
+     */
+    'data'?: string;
+}
 /**
  * QueryAccountResponse is the response type for the Query/Account RPC method.
  * @export
@@ -29,23 +130,117 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 export interface Account200Response {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof Account200Response
      */
-    'account'?: AccountsAreTheExistingAccountsInner;
+    'account'?: AccountInfo200ResponseInfoPubKey;
 }
 /**
- * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * QueryAccountInfoResponse is the Query/AccountInfo response type.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface AccountInfo200Response
+ */
+export interface AccountInfo200Response {
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfo}
+     * @memberof AccountInfo200Response
+     */
+    'info'?: AccountInfo200ResponseInfo;
+}
+/**
+ * info is the account info which is represented by BaseAccount.
+ * @export
+ * @interface AccountInfo200ResponseInfo
+ */
+export interface AccountInfo200ResponseInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo200ResponseInfo
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof AccountInfo200ResponseInfo
+     */
+    'pub_key'?: AccountInfo200ResponseInfoPubKey;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo200ResponseInfo
+     */
+    'account_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo200ResponseInfo
+     */
+    'sequence'?: string;
+}
+/**
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }  Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON  The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
+ * @export
+ * @interface AccountInfo200ResponseInfoPubKey
+ */
+export interface AccountInfo200ResponseInfoPubKey {
+    /**
+     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+     * @type {string}
+     * @memberof AccountInfo200ResponseInfoPubKey
+     */
+    'type_url'?: string;
+    /**
+     * Must be a valid serialized protocol buffer of the above specified type.
+     * @type {string}
+     * @memberof AccountInfo200ResponseInfoPubKey
+     */
+    'value'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AccountInfoDefaultResponse
+ */
+export interface AccountInfoDefaultResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfoDefaultResponse
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountInfoDefaultResponse
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfoDefaultResponse
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof AccountInfoDefaultResponse
+     */
+    'details'?: Array<AccountInfo200ResponseInfoPubKey>;
+}
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.  Since: cosmos-sdk 0.43
  * @export
  * @interface Accounts200Response
  */
 export interface Accounts200Response {
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof Accounts200Response
      */
-    'accounts'?: Array<AccountsAreTheExistingAccountsInner>;
+    'accounts'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * 
      * @type {Accounts200ResponsePagination}
@@ -60,7 +255,7 @@ export interface Accounts200Response {
  */
 export interface Accounts200ResponsePagination {
     /**
-     * 
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
      * @type {string}
      * @memberof Accounts200ResponsePagination
      */
@@ -73,54 +268,30 @@ export interface Accounts200ResponsePagination {
     'total'?: string;
 }
 /**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
+ * AddressBytesToStringResponse is the response type for AddressString rpc method.  Since: cosmos-sdk 0.46
  * @export
- * @interface AccountsAreTheExistingAccountsInner
+ * @interface AddressBytesToString200Response
  */
-export interface AccountsAreTheExistingAccountsInner {
+export interface AddressBytesToString200Response {
     /**
-     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+     * 
      * @type {string}
-     * @memberof AccountsAreTheExistingAccountsInner
+     * @memberof AddressBytesToString200Response
      */
-    'type_url'?: string;
-    /**
-     * Must be a valid serialized protocol buffer of the above specified type.
-     * @type {string}
-     * @memberof AccountsAreTheExistingAccountsInner
-     */
-    'value'?: string;
+    'address_string'?: string;
 }
 /**
- * 
+ * AddressStringToBytesResponse is the response type for AddressBytes rpc method.  Since: cosmos-sdk 0.46
  * @export
- * @interface AccountsDefaultResponse
+ * @interface AddressStringToBytes200Response
  */
-export interface AccountsDefaultResponse {
+export interface AddressStringToBytes200Response {
     /**
      * 
      * @type {string}
-     * @memberof AccountsDefaultResponse
+     * @memberof AddressStringToBytes200Response
      */
-    'error'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountsDefaultResponse
-     */
-    'code'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountsDefaultResponse
-     */
-    'message'?: string;
-    /**
-     * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
-     * @memberof AccountsDefaultResponse
-     */
-    'details'?: Array<AccountsAreTheExistingAccountsInner>;
+    'address_bytes'?: string;
 }
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC method.
@@ -218,10 +389,10 @@ export interface AllBalancesDefaultResponseDetailsInner {
 export interface AllEvidence200Response {
     /**
      * evidence returns all evidences.
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof AllEvidence200Response
      */
-    'evidence'?: Array<AccountsAreTheExistingAccountsInner>;
+    'evidence'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * 
      * @type {Accounts200ResponsePagination}
@@ -258,6 +429,25 @@ export interface Allowances200Response {
      * 
      * @type {GetLatestValidatorSet200ResponsePagination}
      * @memberof Allowances200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
+ * QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface AllowancesByGranter200Response
+ */
+export interface AllowancesByGranter200Response {
+    /**
+     * allowances that have been issued by the granter.
+     * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
+     * @memberof AllowancesByGranter200Response
+     */
+    'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof AllowancesByGranter200Response
      */
     'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
@@ -370,7 +560,7 @@ export interface BankParams200Response {
  */
 export interface BankParams200ResponseParams {
     /**
-     * 
+     * Deprecated: Use of SendEnabled in params is deprecated. For genesis, use the newly added send_enabled field in the genesis object. Storage, lookup, and manipulation of this information is now in the keeper.  As of cosmos-sdk 0.47, this only exists for backwards compatibility of genesis files.
      * @type {Array<BankParams200ResponseParamsSendEnabledInner>}
      * @memberof BankParams200ResponseParams
      */
@@ -421,6 +611,19 @@ export interface BasicBlockInfo {
     'app'?: string;
 }
 /**
+ * Bech32PrefixResponse is the response type for Bech32Prefix rpc method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface Bech32Prefix200Response
+ */
+export interface Bech32Prefix200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof Bech32Prefix200Response
+     */
+    'bech32_prefix'?: string;
+}
+/**
  * CompactBitArray is an implementation of a space efficient bit array. This is used to ensure that the encoded data takes up a minimal amount of space after proto encoding. This is not thread safe, and is not intended for concurrent usage.
  * @export
  * @interface BitarraySpecifiesWhichKeysWithinTheMultisigAreSigning
@@ -466,10 +669,10 @@ export interface BlockID {
 export interface BodyIsTheProcessableContentOfTheTransaction {
     /**
      * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'messages'?: Array<AccountsAreTheExistingAccountsInner>;
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
@@ -484,16 +687,16 @@ export interface BodyIsTheProcessableContentOfTheTransaction {
     'timeout_height'?: string;
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
+    'extension_options'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof BodyIsTheProcessableContentOfTheTransaction
      */
-    'non_critical_extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
+    'non_critical_extension_options'?: Array<AccountInfo200ResponseInfoPubKey>;
 }
 /**
  * BroadcastTxResponse is the response type for the Service.BroadcastTx method.
@@ -576,16 +779,22 @@ export interface BroadcastTx200ResponseTxResponse {
     'gas_used'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof BroadcastTx200ResponseTxResponse
      */
-    'tx'?: AccountsAreTheExistingAccountsInner;
+    'tx'?: AccountInfo200ResponseInfoPubKey;
     /**
      * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
      * @type {string}
      * @memberof BroadcastTx200ResponseTxResponse
      */
     'timestamp'?: string;
+    /**
+     * Events defines all the events emitted by processing a transaction. Note, these events include those emitted by processing all the messages and those emitted from the ante. Whereas Logs contains the events, with additional metadata, emitted only by processing the messages.  Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
+     * @type {Array<Simulate200ResponseResultEventsInner>}
+     * @memberof BroadcastTx200ResponseTxResponse
+     */
+    'events'?: Array<Simulate200ResponseResultEventsInner>;
 }
 /**
  * ABCIMessageLog defines a structure containing an indexed tx ABCI message log.
@@ -663,7 +872,7 @@ export interface BroadcastTxRequest {
      */
     'tx_bytes'?: string;
     /**
-     * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
+     * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: DEPRECATED: use BROADCAST_MODE_SYNC instead, BROADCAST_MODE_BLOCK is not supported by the SDK from v0.47.x onwards.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
      * @type {string}
      * @memberof BroadcastTxRequest
      */
@@ -712,6 +921,76 @@ export interface CommunityPool200ResponsePoolInner {
     'amount'?: string;
 }
 /**
+ * AddressBytesToStringResponse is the response type for AddressString rpc method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosAuthV1beta1AddressBytesToStringResponse
+ */
+export interface CosmosAuthV1beta1AddressBytesToStringResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1AddressBytesToStringResponse
+     */
+    'address_string'?: string;
+}
+/**
+ * AddressStringToBytesResponse is the response type for AddressBytes rpc method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosAuthV1beta1AddressStringToBytesResponse
+ */
+export interface CosmosAuthV1beta1AddressStringToBytesResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1AddressStringToBytesResponse
+     */
+    'address_bytes'?: string;
+}
+/**
+ * BaseAccount defines a base account type. It contains all the necessary fields for basic account functionality. Any custom account type should extend this type for additional functionality (e.g. vesting).
+ * @export
+ * @interface CosmosAuthV1beta1BaseAccount
+ */
+export interface CosmosAuthV1beta1BaseAccount {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1BaseAccount
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof CosmosAuthV1beta1BaseAccount
+     */
+    'pub_key'?: AccountInfo200ResponseInfoPubKey;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1BaseAccount
+     */
+    'account_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1BaseAccount
+     */
+    'sequence'?: string;
+}
+/**
+ * Bech32PrefixResponse is the response type for Bech32Prefix rpc method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosAuthV1beta1Bech32PrefixResponse
+ */
+export interface CosmosAuthV1beta1Bech32PrefixResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1Bech32PrefixResponse
+     */
+    'bech32_prefix'?: string;
+}
+/**
  * Params defines the parameters for the auth module.
  * @export
  * @interface CosmosAuthV1beta1Params
@@ -749,6 +1028,32 @@ export interface CosmosAuthV1beta1Params {
     'sig_verify_cost_secp256k1'?: string;
 }
 /**
+ * Since: cosmos-sdk 0.46.2
+ * @export
+ * @interface CosmosAuthV1beta1QueryAccountAddressByIDResponse
+ */
+export interface CosmosAuthV1beta1QueryAccountAddressByIDResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthV1beta1QueryAccountAddressByIDResponse
+     */
+    'account_address'?: string;
+}
+/**
+ * QueryAccountInfoResponse is the Query/AccountInfo response type.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosAuthV1beta1QueryAccountInfoResponse
+ */
+export interface CosmosAuthV1beta1QueryAccountInfoResponse {
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfo}
+     * @memberof CosmosAuthV1beta1QueryAccountInfoResponse
+     */
+    'info'?: AccountInfo200ResponseInfo;
+}
+/**
  * QueryAccountResponse is the response type for the Query/Account RPC method.
  * @export
  * @interface CosmosAuthV1beta1QueryAccountResponse
@@ -756,29 +1061,55 @@ export interface CosmosAuthV1beta1Params {
 export interface CosmosAuthV1beta1QueryAccountResponse {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosAuthV1beta1QueryAccountResponse
      */
-    'account'?: AccountsAreTheExistingAccountsInner;
+    'account'?: AccountInfo200ResponseInfoPubKey;
 }
 /**
- * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.  Since: cosmos-sdk 0.43
  * @export
  * @interface CosmosAuthV1beta1QueryAccountsResponse
  */
 export interface CosmosAuthV1beta1QueryAccountsResponse {
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof CosmosAuthV1beta1QueryAccountsResponse
      */
-    'accounts'?: Array<AccountsAreTheExistingAccountsInner>;
+    'accounts'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * 
      * @type {Accounts200ResponsePagination}
      * @memberof CosmosAuthV1beta1QueryAccountsResponse
      */
     'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method.
+ * @export
+ * @interface CosmosAuthV1beta1QueryModuleAccountByNameResponse
+ */
+export interface CosmosAuthV1beta1QueryModuleAccountByNameResponse {
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof CosmosAuthV1beta1QueryModuleAccountByNameResponse
+     */
+    'account'?: AccountInfo200ResponseInfoPubKey;
+}
+/**
+ * QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosAuthV1beta1QueryModuleAccountsResponse
+ */
+export interface CosmosAuthV1beta1QueryModuleAccountsResponse {
+    /**
+     * 
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof CosmosAuthV1beta1QueryModuleAccountsResponse
+     */
+    'accounts'?: Array<AccountInfo200ResponseInfoPubKey>;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -801,16 +1132,85 @@ export interface CosmosAuthV1beta1QueryParamsResponse {
 export interface CosmosAuthzV1beta1Grant {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosAuthzV1beta1Grant
      */
-    'authorization'?: AccountsAreTheExistingAccountsInner;
+    'authorization'?: AccountInfo200ResponseInfoPubKey;
     /**
      * 
      * @type {string}
      * @memberof CosmosAuthzV1beta1Grant
      */
     'expiration'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosAuthzV1beta1GrantAuthorization
+ */
+export interface CosmosAuthzV1beta1GrantAuthorization {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthzV1beta1GrantAuthorization
+     */
+    'granter'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthzV1beta1GrantAuthorization
+     */
+    'grantee'?: string;
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof CosmosAuthzV1beta1GrantAuthorization
+     */
+    'authorization'?: AccountInfo200ResponseInfoPubKey;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosAuthzV1beta1GrantAuthorization
+     */
+    'expiration'?: string;
+}
+/**
+ * QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method.
+ * @export
+ * @interface CosmosAuthzV1beta1QueryGranteeGrantsResponse
+ */
+export interface CosmosAuthzV1beta1QueryGranteeGrantsResponse {
+    /**
+     * grants is a list of grants granted to the grantee.
+     * @type {Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>}
+     * @memberof CosmosAuthzV1beta1QueryGranteeGrantsResponse
+     */
+    'grants'?: Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof CosmosAuthzV1beta1QueryGranteeGrantsResponse
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
+ * QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method.
+ * @export
+ * @interface CosmosAuthzV1beta1QueryGranterGrantsResponse
+ */
+export interface CosmosAuthzV1beta1QueryGranterGrantsResponse {
+    /**
+     * grants is a list of grants granted by the granter.
+     * @type {Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>}
+     * @memberof CosmosAuthzV1beta1QueryGranterGrantsResponse
+     */
+    'grants'?: Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof CosmosAuthzV1beta1QueryGranterGrantsResponse
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
@@ -832,7 +1232,7 @@ export interface CosmosAuthzV1beta1QueryGrantsResponse {
     'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
- * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
+ * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.  Since: cosmos-sdk 0.46
  * @export
  * @interface CosmosBankV1beta1DenomOwner
  */
@@ -863,7 +1263,7 @@ export interface CosmosBankV1beta1DenomUnit {
      */
     'denom'?: string;
     /**
-     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
+     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 10^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
      * @type {number}
      * @memberof CosmosBankV1beta1DenomUnit
      */
@@ -906,25 +1306,25 @@ export interface CosmosBankV1beta1Metadata {
      */
     'display'?: string;
     /**
-     * 
+     * Since: cosmos-sdk 0.43
      * @type {string}
      * @memberof CosmosBankV1beta1Metadata
      */
     'name'?: string;
     /**
-     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
+     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.  Since: cosmos-sdk 0.43
      * @type {string}
      * @memberof CosmosBankV1beta1Metadata
      */
     'symbol'?: string;
     /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
+     * URI to a document (on or off-chain) that contains additional information. Optional.  Since: cosmos-sdk 0.46
      * @type {string}
      * @memberof CosmosBankV1beta1Metadata
      */
     'uri'?: string;
     /**
-     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
+     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.  Since: cosmos-sdk 0.46
      * @type {string}
      * @memberof CosmosBankV1beta1Metadata
      */
@@ -937,7 +1337,7 @@ export interface CosmosBankV1beta1Metadata {
  */
 export interface CosmosBankV1beta1Params {
     /**
-     * 
+     * Deprecated: Use of SendEnabled in params is deprecated. For genesis, use the newly added send_enabled field in the genesis object. Storage, lookup, and manipulation of this information is now in the keeper.  As of cosmos-sdk 0.47, this only exists for backwards compatibility of genesis files.
      * @type {Array<BankParams200ResponseParamsSendEnabledInner>}
      * @memberof CosmosBankV1beta1Params
      */
@@ -995,7 +1395,7 @@ export interface CosmosBankV1beta1QueryDenomMetadataResponse {
     'metadata'?: DenomsMetadata200ResponseMetadatasInner;
 }
 /**
- * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.  Since: cosmos-sdk 0.46
  * @export
  * @interface CosmosBankV1beta1QueryDenomOwnersResponse
  */
@@ -1046,6 +1446,57 @@ export interface CosmosBankV1beta1QueryParamsResponse {
     'params'?: BankParams200ResponseParams;
 }
 /**
+ * QuerySendEnabledResponse defines the RPC response of a SendEnable query.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosBankV1beta1QuerySendEnabledResponse
+ */
+export interface CosmosBankV1beta1QuerySendEnabledResponse {
+    /**
+     * 
+     * @type {Array<BankParams200ResponseParamsSendEnabledInner>}
+     * @memberof CosmosBankV1beta1QuerySendEnabledResponse
+     */
+    'send_enabled'?: Array<BankParams200ResponseParamsSendEnabledInner>;
+    /**
+     * 
+     * @type {SendEnabled200ResponsePagination}
+     * @memberof CosmosBankV1beta1QuerySendEnabledResponse
+     */
+    'pagination'?: SendEnabled200ResponsePagination;
+}
+/**
+ * QuerySpendableBalanceByDenomResponse defines the gRPC response structure for querying an account\'s spendable balance for a specific denom.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosBankV1beta1QuerySpendableBalanceByDenomResponse
+ */
+export interface CosmosBankV1beta1QuerySpendableBalanceByDenomResponse {
+    /**
+     * 
+     * @type {AllBalances200ResponseBalancesInner}
+     * @memberof CosmosBankV1beta1QuerySpendableBalanceByDenomResponse
+     */
+    'balance'?: AllBalances200ResponseBalancesInner;
+}
+/**
+ * QuerySpendableBalancesResponse defines the gRPC response structure for querying an account\'s spendable balances.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosBankV1beta1QuerySpendableBalancesResponse
+ */
+export interface CosmosBankV1beta1QuerySpendableBalancesResponse {
+    /**
+     * balances is the spendable balances of all the coins.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosBankV1beta1QuerySpendableBalancesResponse
+     */
+    'balances'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosBankV1beta1QuerySpendableBalancesResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
  * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
  * @export
  * @interface CosmosBankV1beta1QuerySupplyOfResponse
@@ -1072,10 +1523,10 @@ export interface CosmosBankV1beta1QueryTotalSupplyResponse {
     'supply'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
-     * @type {Accounts200ResponsePagination}
+     * @type {QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination}
      * @memberof CosmosBankV1beta1QueryTotalSupplyResponse
      */
-    'pagination'?: Accounts200ResponsePagination;
+    'pagination'?: QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination;
 }
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable).
@@ -1166,7 +1617,7 @@ export interface CosmosBaseAbciV1beta1GasInfo {
  */
 export interface CosmosBaseAbciV1beta1Result {
     /**
-     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
+     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions. Deprecated. This field is still populated, but prefer msg_response instead because it also contains the Msg response typeURL.
      * @type {string}
      * @memberof CosmosBaseAbciV1beta1Result
      */
@@ -1183,6 +1634,12 @@ export interface CosmosBaseAbciV1beta1Result {
      * @memberof CosmosBaseAbciV1beta1Result
      */
     'events'?: Array<Simulate200ResponseResultEventsInner>;
+    /**
+     * msg_responses contains the Msg handler responses type packed in Anys.  Since: cosmos-sdk 0.46
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof CosmosBaseAbciV1beta1Result
+     */
+    'msg_responses'?: Array<AccountInfo200ResponseInfoPubKey>;
 }
 /**
  * StringEvent defines en Event object wrapper where all the attributes contain key/value pairs that are strings instead of raw bytes.
@@ -1271,16 +1728,22 @@ export interface CosmosBaseAbciV1beta1TxResponse {
     'gas_used'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
-    'tx'?: AccountsAreTheExistingAccountsInner;
+    'tx'?: AccountInfo200ResponseInfoPubKey;
     /**
      * Time of the previous block. For heights > 1, it\'s the weighted median of the timestamps of the valid votes in the block.LastCommit. For height == 1, it\'s genesis time.
      * @type {string}
      * @memberof CosmosBaseAbciV1beta1TxResponse
      */
     'timestamp'?: string;
+    /**
+     * Events defines all the events emitted by processing a transaction. Note, these events include those emitted by processing all the messages and those emitted from the ante. Whereas Logs contains the events, with additional metadata, emitted only by processing the messages.  Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
+     * @type {Array<Simulate200ResponseResultEventsInner>}
+     * @memberof CosmosBaseAbciV1beta1TxResponse
+     */
+    'events'?: Array<Simulate200ResponseResultEventsInner>;
 }
 /**
  * message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }
@@ -1313,7 +1776,7 @@ export interface CosmosBaseQueryV1beta1PageRequest {
      */
     'count_total'?: boolean;
     /**
-     * reverse is set to true if results are to be returned in the descending order.
+     * reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @type {boolean}
      * @memberof CosmosBaseQueryV1beta1PageRequest
      */
@@ -1326,7 +1789,7 @@ export interface CosmosBaseQueryV1beta1PageRequest {
  */
 export interface CosmosBaseQueryV1beta1PageResponse {
     /**
-     * 
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
      * @type {string}
      * @memberof CosmosBaseQueryV1beta1PageResponse
      */
@@ -1337,6 +1800,98 @@ export interface CosmosBaseQueryV1beta1PageResponse {
      * @memberof CosmosBaseQueryV1beta1PageResponse
      */
     'total'?: string;
+}
+/**
+ * ABCIQueryResponse defines the response structure for the ABCIQuery gRPC query.  Note: This type is a duplicate of the ResponseQuery proto type defined in Tendermint.
+ * @export
+ * @interface CosmosBaseTendermintV1beta1ABCIQueryResponse
+ */
+export interface CosmosBaseTendermintV1beta1ABCIQueryResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'log'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'info'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'index'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'value'?: string;
+    /**
+     * 
+     * @type {ABCIQuery200ResponseProofOps}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'proof_ops'?: ABCIQuery200ResponseProofOps;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ABCIQueryResponse
+     */
+    'codespace'?: string;
+}
+/**
+ * Block is tendermint type Block, with the Header proposer address field converted to bech32 string.
+ * @export
+ * @interface CosmosBaseTendermintV1beta1Block
+ */
+export interface CosmosBaseTendermintV1beta1Block {
+    /**
+     * 
+     * @type {SinceCosmosSdk047Header}
+     * @memberof CosmosBaseTendermintV1beta1Block
+     */
+    'header'?: SinceCosmosSdk047Header;
+    /**
+     * 
+     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
+     * @memberof CosmosBaseTendermintV1beta1Block
+     */
+    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidence}
+     * @memberof CosmosBaseTendermintV1beta1Block
+     */
+    'evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidence;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof CosmosBaseTendermintV1beta1Block
+     */
+    'last_commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
@@ -1352,10 +1907,16 @@ export interface CosmosBaseTendermintV1beta1GetBlockByHeightResponse {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlock}
+     * @type {DeprecatedPleaseUseSdkBlockInstead}
      * @memberof CosmosBaseTendermintV1beta1GetBlockByHeightResponse
      */
-    'block'?: GetLatestBlock200ResponseBlock;
+    'block'?: DeprecatedPleaseUseSdkBlockInstead;
+    /**
+     * 
+     * @type {SinceCosmosSdk047}
+     * @memberof CosmosBaseTendermintV1beta1GetBlockByHeightResponse
+     */
+    'sdk_block'?: SinceCosmosSdk047;
 }
 /**
  * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
@@ -1371,10 +1932,16 @@ export interface CosmosBaseTendermintV1beta1GetLatestBlockResponse {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlock}
+     * @type {DeprecatedPleaseUseSdkBlockInstead}
      * @memberof CosmosBaseTendermintV1beta1GetLatestBlockResponse
      */
-    'block'?: GetLatestBlock200ResponseBlock;
+    'block'?: DeprecatedPleaseUseSdkBlockInstead;
+    /**
+     * 
+     * @type {SinceCosmosSdk047}
+     * @memberof CosmosBaseTendermintV1beta1GetLatestBlockResponse
+     */
+    'sdk_block'?: SinceCosmosSdk047;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
@@ -1402,7 +1969,7 @@ export interface CosmosBaseTendermintV1beta1GetLatestValidatorSetResponse {
     'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
- * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
+ * GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method.
  * @export
  * @interface CosmosBaseTendermintV1beta1GetNodeInfoResponse
  */
@@ -1459,6 +2026,97 @@ export interface CosmosBaseTendermintV1beta1GetValidatorSetByHeightResponse {
     'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
+ * Header defines the structure of a Tendermint block header.
+ * @export
+ * @interface CosmosBaseTendermintV1beta1Header
+ */
+export interface CosmosBaseTendermintV1beta1Header {
+    /**
+     * 
+     * @type {BasicBlockInfo}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'version'?: BasicBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'chain_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'time'?: string;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'last_block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'last_commit_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'data_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'next_validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'consensus_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'app_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'last_results_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'evidence_hash'?: string;
+    /**
+     * proposer_address is the original block proposer address, formatted as a Bech32 string. In Tendermint, this type is `bytes`, but in the SDK, we convert it to a Bech32 string for better UX.
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1Header
+     */
+    'proposer_address'?: string;
+}
+/**
  * 
  * @export
  * @interface CosmosBaseTendermintV1beta1Module
@@ -1484,6 +2142,44 @@ export interface CosmosBaseTendermintV1beta1Module {
     'sum'?: string;
 }
 /**
+ * ProofOp defines an operation used for calculating Merkle root. The data could be arbitrary format, providing necessary data for example neighbouring node hash.  Note: This type is a duplicate of the ProofOp proto type defined in Tendermint.
+ * @export
+ * @interface CosmosBaseTendermintV1beta1ProofOp
+ */
+export interface CosmosBaseTendermintV1beta1ProofOp {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ProofOp
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ProofOp
+     */
+    'key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosBaseTendermintV1beta1ProofOp
+     */
+    'data'?: string;
+}
+/**
+ * ProofOps is Merkle proof defined by the list of ProofOps.  Note: This type is a duplicate of the ProofOps proto type defined in Tendermint.
+ * @export
+ * @interface CosmosBaseTendermintV1beta1ProofOps
+ */
+export interface CosmosBaseTendermintV1beta1ProofOps {
+    /**
+     * 
+     * @type {Array<ABCIQuery200ResponseProofOpsOpsInner>}
+     * @memberof CosmosBaseTendermintV1beta1ProofOps
+     */
+    'ops'?: Array<ABCIQuery200ResponseProofOpsOpsInner>;
+}
+/**
  * Validator is the type for the validator-set.
  * @export
  * @interface CosmosBaseTendermintV1beta1Validator
@@ -1497,10 +2193,10 @@ export interface CosmosBaseTendermintV1beta1Validator {
     'address'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosBaseTendermintV1beta1Validator
      */
-    'pub_key'?: AccountsAreTheExistingAccountsInner;
+    'pub_key'?: AccountInfo200ResponseInfoPubKey;
     /**
      * 
      * @type {string}
@@ -1658,13 +2354,13 @@ export interface CosmosDistributionV1beta1Params {
      */
     'community_tax'?: string;
     /**
-     * 
+     * Deprecated: The base_proposer_reward field is deprecated and is no longer used in the x/distribution module\'s reward mechanism.
      * @type {string}
      * @memberof CosmosDistributionV1beta1Params
      */
     'base_proposer_reward'?: string;
     /**
-     * 
+     * Deprecated: The bonus_proposer_reward field is deprecated and is no longer used in the x/distribution module\'s reward mechanism.
      * @type {string}
      * @memberof CosmosDistributionV1beta1Params
      */
@@ -1774,6 +2470,31 @@ export interface CosmosDistributionV1beta1QueryValidatorCommissionResponse {
     'commission'?: QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission;
 }
 /**
+ * QueryValidatorDistributionInfoResponse is the response type for the Query/ValidatorDistributionInfo RPC method.
+ * @export
+ * @interface CosmosDistributionV1beta1QueryValidatorDistributionInfoResponse
+ */
+export interface CosmosDistributionV1beta1QueryValidatorDistributionInfoResponse {
+    /**
+     * operator_address defines the validator operator address.
+     * @type {string}
+     * @memberof CosmosDistributionV1beta1QueryValidatorDistributionInfoResponse
+     */
+    'operator_address'?: string;
+    /**
+     * self_bond_rewards defines the self delegations rewards.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof CosmosDistributionV1beta1QueryValidatorDistributionInfoResponse
+     */
+    'self_bond_rewards'?: Array<CommunityPool200ResponsePoolInner>;
+    /**
+     * commission defines the commission the validator received.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof CosmosDistributionV1beta1QueryValidatorDistributionInfoResponse
+     */
+    'commission'?: Array<CommunityPool200ResponsePoolInner>;
+}
+/**
  * QueryValidatorOutstandingRewardsResponse is the response type for the Query/ValidatorOutstandingRewards RPC method.
  * @export
  * @interface CosmosDistributionV1beta1QueryValidatorOutstandingRewardsResponse
@@ -1858,10 +2579,10 @@ export interface CosmosDistributionV1beta1ValidatorSlashEvent {
 export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
     /**
      * evidence returns all evidences.
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof CosmosEvidenceV1beta1QueryAllEvidenceResponse
      */
-    'evidence'?: Array<AccountsAreTheExistingAccountsInner>;
+    'evidence'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * 
      * @type {Accounts200ResponsePagination}
@@ -1877,10 +2598,10 @@ export interface CosmosEvidenceV1beta1QueryAllEvidenceResponse {
 export interface CosmosEvidenceV1beta1QueryEvidenceResponse {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosEvidenceV1beta1QueryEvidenceResponse
      */
-    'evidence'?: AccountsAreTheExistingAccountsInner;
+    'evidence'?: AccountInfo200ResponseInfoPubKey;
 }
 /**
  * 
@@ -1921,6 +2642,25 @@ export interface CosmosFeegrantV1beta1QueryAllowanceResponse {
     'allowance'?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext;
 }
 /**
+ * QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosFeegrantV1beta1QueryAllowancesByGranterResponse
+ */
+export interface CosmosFeegrantV1beta1QueryAllowancesByGranterResponse {
+    /**
+     * allowances that have been issued by the granter.
+     * @type {Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>}
+     * @memberof CosmosFeegrantV1beta1QueryAllowancesByGranterResponse
+     */
+    'allowances'?: Array<GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof CosmosFeegrantV1beta1QueryAllowancesByGranterResponse
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
  * QueryAllowancesResponse is the response type for the Query/Allowances RPC method.
  * @export
  * @interface CosmosFeegrantV1beta1QueryAllowancesResponse
@@ -1942,23 +2682,518 @@ export interface CosmosFeegrantV1beta1QueryAllowancesResponse {
 /**
  * Deposit defines an amount deposited by an account address to an active proposal.
  * @export
+ * @interface CosmosGovV1Deposit
+ */
+export interface CosmosGovV1Deposit {
+    /**
+     * proposal_id defines the unique id of the proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Deposit
+     */
+    'proposal_id'?: string;
+    /**
+     * depositor defines the deposit addresses from the proposals.
+     * @type {string}
+     * @memberof CosmosGovV1Deposit
+     */
+    'depositor'?: string;
+    /**
+     * amount to be deposited by depositor.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosGovV1Deposit
+     */
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
+}
+/**
+ * DepositParams defines the params for deposits on governance proposals.
+ * @export
+ * @interface CosmosGovV1DepositParams
+ */
+export interface CosmosGovV1DepositParams {
+    /**
+     * Minimum deposit for a proposal to enter voting period.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosGovV1DepositParams
+     */
+    'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.
+     * @type {string}
+     * @memberof CosmosGovV1DepositParams
+     */
+    'max_deposit_period'?: string;
+}
+/**
+ * Params defines the parameters for the x/gov module.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosGovV1Params
+ */
+export interface CosmosGovV1Params {
+    /**
+     * Minimum deposit for a proposal to enter voting period.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosGovV1Params
+     */
+    'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.
+     * @type {string}
+     * @memberof CosmosGovV1Params
+     */
+    'max_deposit_period'?: string;
+    /**
+     * Duration of the voting period.
+     * @type {string}
+     * @memberof CosmosGovV1Params
+     */
+    'voting_period'?: string;
+    /**
+     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
+     * @type {string}
+     * @memberof CosmosGovV1Params
+     */
+    'quorum'?: string;
+    /**
+     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
+     * @type {string}
+     * @memberof CosmosGovV1Params
+     */
+    'threshold'?: string;
+    /**
+     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
+     * @type {string}
+     * @memberof CosmosGovV1Params
+     */
+    'veto_threshold'?: string;
+    /**
+     * The ratio representing the proportion of the deposit value that must be paid at proposal submission.
+     * @type {string}
+     * @memberof CosmosGovV1Params
+     */
+    'min_initial_deposit_ratio'?: string;
+}
+/**
+ * Proposal defines the core field members of a governance proposal.
+ * @export
+ * @interface CosmosGovV1Proposal
+ */
+export interface CosmosGovV1Proposal {
+    /**
+     * id defines the unique id of the proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'id'?: string;
+    /**
+     * messages are the arbitrary messages to be executed if the proposal passes.
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof CosmosGovV1Proposal
+     */
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
+    /**
+     * status defines the proposal status.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'status'?: CosmosGovV1ProposalStatusEnum;
+    /**
+     * 
+     * @type {GovV1Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @memberof CosmosGovV1Proposal
+     */
+    'final_tally_result'?: GovV1Proposals200ResponseProposalsInnerFinalTallyResult;
+    /**
+     * submit_time is the time of proposal submission.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'submit_time'?: string;
+    /**
+     * deposit_end_time is the end time for deposition.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'deposit_end_time'?: string;
+    /**
+     * total_deposit is the total deposit on the proposal.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosGovV1Proposal
+     */
+    'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * voting_start_time is the starting time to vote on a proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'voting_start_time'?: string;
+    /**
+     * voting_end_time is the end time of voting on a proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'voting_end_time'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'metadata'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'title'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'summary'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof CosmosGovV1Proposal
+     */
+    'proposer'?: string;
+}
+
+export const CosmosGovV1ProposalStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed: 'PROPOSAL_STATUS_PASSED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Failed: 'PROPOSAL_STATUS_FAILED'
+} as const;
+
+export type CosmosGovV1ProposalStatusEnum = typeof CosmosGovV1ProposalStatusEnum[keyof typeof CosmosGovV1ProposalStatusEnum];
+
+/**
+ * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+ * @export
+ * @enum {string}
+ */
+
+export const CosmosGovV1ProposalStatus = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed: 'PROPOSAL_STATUS_PASSED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Failed: 'PROPOSAL_STATUS_FAILED'
+} as const;
+
+export type CosmosGovV1ProposalStatus = typeof CosmosGovV1ProposalStatus[keyof typeof CosmosGovV1ProposalStatus];
+
+
+/**
+ * QueryDepositResponse is the response type for the Query/Deposit RPC method.
+ * @export
+ * @interface CosmosGovV1QueryDepositResponse
+ */
+export interface CosmosGovV1QueryDepositResponse {
+    /**
+     * 
+     * @type {Deposits200ResponseDepositsInner}
+     * @memberof CosmosGovV1QueryDepositResponse
+     */
+    'deposit'?: Deposits200ResponseDepositsInner;
+}
+/**
+ * QueryDepositsResponse is the response type for the Query/Deposits RPC method.
+ * @export
+ * @interface CosmosGovV1QueryDepositsResponse
+ */
+export interface CosmosGovV1QueryDepositsResponse {
+    /**
+     * deposits defines the requested deposits.
+     * @type {Array<Deposits200ResponseDepositsInner>}
+     * @memberof CosmosGovV1QueryDepositsResponse
+     */
+    'deposits'?: Array<Deposits200ResponseDepositsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGovV1QueryDepositsResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface CosmosGovV1QueryParamsResponse
+ */
+export interface CosmosGovV1QueryParamsResponse {
+    /**
+     * 
+     * @type {GovV1Params200ResponseVotingParams}
+     * @memberof CosmosGovV1QueryParamsResponse
+     */
+    'voting_params'?: GovV1Params200ResponseVotingParams;
+    /**
+     * 
+     * @type {GovV1Params200ResponseDepositParams}
+     * @memberof CosmosGovV1QueryParamsResponse
+     */
+    'deposit_params'?: GovV1Params200ResponseDepositParams;
+    /**
+     * 
+     * @type {GovV1Params200ResponseTallyParams}
+     * @memberof CosmosGovV1QueryParamsResponse
+     */
+    'tally_params'?: GovV1Params200ResponseTallyParams;
+    /**
+     * 
+     * @type {GovV1Params200ResponseParams}
+     * @memberof CosmosGovV1QueryParamsResponse
+     */
+    'params'?: GovV1Params200ResponseParams;
+}
+/**
+ * QueryProposalResponse is the response type for the Query/Proposal RPC method.
+ * @export
+ * @interface CosmosGovV1QueryProposalResponse
+ */
+export interface CosmosGovV1QueryProposalResponse {
+    /**
+     * 
+     * @type {GovV1Proposals200ResponseProposalsInner}
+     * @memberof CosmosGovV1QueryProposalResponse
+     */
+    'proposal'?: GovV1Proposals200ResponseProposalsInner;
+}
+/**
+ * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
+ * @export
+ * @interface CosmosGovV1QueryProposalsResponse
+ */
+export interface CosmosGovV1QueryProposalsResponse {
+    /**
+     * proposals defines all the requested governance proposals.
+     * @type {Array<GovV1Proposals200ResponseProposalsInner>}
+     * @memberof CosmosGovV1QueryProposalsResponse
+     */
+    'proposals'?: Array<GovV1Proposals200ResponseProposalsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGovV1QueryProposalsResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
+ * @export
+ * @interface CosmosGovV1QueryTallyResultResponse
+ */
+export interface CosmosGovV1QueryTallyResultResponse {
+    /**
+     * 
+     * @type {GovV1TallyResult200ResponseTally}
+     * @memberof CosmosGovV1QueryTallyResultResponse
+     */
+    'tally'?: GovV1TallyResult200ResponseTally;
+}
+/**
+ * QueryVoteResponse is the response type for the Query/Vote RPC method.
+ * @export
+ * @interface CosmosGovV1QueryVoteResponse
+ */
+export interface CosmosGovV1QueryVoteResponse {
+    /**
+     * 
+     * @type {GovV1Votes200ResponseVotesInner}
+     * @memberof CosmosGovV1QueryVoteResponse
+     */
+    'vote'?: GovV1Votes200ResponseVotesInner;
+}
+/**
+ * QueryVotesResponse is the response type for the Query/Votes RPC method.
+ * @export
+ * @interface CosmosGovV1QueryVotesResponse
+ */
+export interface CosmosGovV1QueryVotesResponse {
+    /**
+     * votes defines the queried votes.
+     * @type {Array<GovV1Votes200ResponseVotesInner>}
+     * @memberof CosmosGovV1QueryVotesResponse
+     */
+    'votes'?: Array<GovV1Votes200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGovV1QueryVotesResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * TallyParams defines the params for tallying votes on governance proposals.
+ * @export
+ * @interface CosmosGovV1TallyParams
+ */
+export interface CosmosGovV1TallyParams {
+    /**
+     * Minimum percentage of total stake needed to vote for a result to be considered valid.
+     * @type {string}
+     * @memberof CosmosGovV1TallyParams
+     */
+    'quorum'?: string;
+    /**
+     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
+     * @type {string}
+     * @memberof CosmosGovV1TallyParams
+     */
+    'threshold'?: string;
+    /**
+     * Minimum value of Veto votes to Total votes ratio for proposal to be vetoed. Default value: 1/3.
+     * @type {string}
+     * @memberof CosmosGovV1TallyParams
+     */
+    'veto_threshold'?: string;
+}
+/**
+ * TallyResult defines a standard tally for a governance proposal.
+ * @export
+ * @interface CosmosGovV1TallyResult
+ */
+export interface CosmosGovV1TallyResult {
+    /**
+     * yes_count is the number of yes votes on a proposal.
+     * @type {string}
+     * @memberof CosmosGovV1TallyResult
+     */
+    'yes_count'?: string;
+    /**
+     * abstain_count is the number of abstain votes on a proposal.
+     * @type {string}
+     * @memberof CosmosGovV1TallyResult
+     */
+    'abstain_count'?: string;
+    /**
+     * no_count is the number of no votes on a proposal.
+     * @type {string}
+     * @memberof CosmosGovV1TallyResult
+     */
+    'no_count'?: string;
+    /**
+     * no_with_veto_count is the number of no with veto votes on a proposal.
+     * @type {string}
+     * @memberof CosmosGovV1TallyResult
+     */
+    'no_with_veto_count'?: string;
+}
+/**
+ * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
+ * @export
+ * @interface CosmosGovV1Vote
+ */
+export interface CosmosGovV1Vote {
+    /**
+     * proposal_id defines the unique id of the proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Vote
+     */
+    'proposal_id'?: string;
+    /**
+     * voter is the voter address of the proposal.
+     * @type {string}
+     * @memberof CosmosGovV1Vote
+     */
+    'voter'?: string;
+    /**
+     * options is the weighted vote options.
+     * @type {Array<GovV1Votes200ResponseVotesInnerOptionsInner>}
+     * @memberof CosmosGovV1Vote
+     */
+    'options'?: Array<GovV1Votes200ResponseVotesInnerOptionsInner>;
+    /**
+     * metadata is any  arbitrary metadata to attached to the vote.
+     * @type {string}
+     * @memberof CosmosGovV1Vote
+     */
+    'metadata'?: string;
+}
+/**
+ * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+ * @export
+ * @enum {string}
+ */
+
+export const CosmosGovV1VoteOption = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type CosmosGovV1VoteOption = typeof CosmosGovV1VoteOption[keyof typeof CosmosGovV1VoteOption];
+
+
+/**
+ * VotingParams defines the params for voting on governance proposals.
+ * @export
+ * @interface CosmosGovV1VotingParams
+ */
+export interface CosmosGovV1VotingParams {
+    /**
+     * Duration of the voting period.
+     * @type {string}
+     * @memberof CosmosGovV1VotingParams
+     */
+    'voting_period'?: string;
+}
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ * @export
+ * @interface CosmosGovV1WeightedVoteOption
+ */
+export interface CosmosGovV1WeightedVoteOption {
+    /**
+     * option defines the valid vote options, it must not contain duplicate vote options.
+     * @type {string}
+     * @memberof CosmosGovV1WeightedVoteOption
+     */
+    'option'?: CosmosGovV1WeightedVoteOptionOptionEnum;
+    /**
+     * weight is the vote weight associated with the vote option.
+     * @type {string}
+     * @memberof CosmosGovV1WeightedVoteOption
+     */
+    'weight'?: string;
+}
+
+export const CosmosGovV1WeightedVoteOptionOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type CosmosGovV1WeightedVoteOptionOptionEnum = typeof CosmosGovV1WeightedVoteOptionOptionEnum[keyof typeof CosmosGovV1WeightedVoteOptionOptionEnum];
+
+/**
+ * Deposit defines an amount deposited by an account address to an active proposal.
+ * @export
  * @interface CosmosGovV1beta1Deposit
  */
 export interface CosmosGovV1beta1Deposit {
     /**
-     * 
+     * proposal_id defines the unique id of the proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1Deposit
      */
     'proposal_id'?: string;
     /**
-     * 
+     * depositor defines the deposit addresses from the proposals.
      * @type {string}
      * @memberof CosmosGovV1beta1Deposit
      */
     'depositor'?: string;
     /**
-     * 
+     * amount to be deposited by depositor.
      * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosGovV1beta1Deposit
      */
@@ -1977,7 +3212,7 @@ export interface CosmosGovV1beta1DepositParams {
      */
     'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
-     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.
      * @type {string}
      * @memberof CosmosGovV1beta1DepositParams
      */
@@ -1990,19 +3225,19 @@ export interface CosmosGovV1beta1DepositParams {
  */
 export interface CosmosGovV1beta1Proposal {
     /**
-     * 
+     * proposal_id defines the unique id of the proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1Proposal
      */
     'proposal_id'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosGovV1beta1Proposal
      */
-    'content'?: AccountsAreTheExistingAccountsInner;
+    'content'?: AccountInfo200ResponseInfoPubKey;
     /**
-     * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * status defines the proposal status.
      * @type {string}
      * @memberof CosmosGovV1beta1Proposal
      */
@@ -2014,31 +3249,31 @@ export interface CosmosGovV1beta1Proposal {
      */
     'final_tally_result'?: Proposals200ResponseProposalsInnerFinalTallyResult;
     /**
-     * 
+     * submit_time is the time of proposal submission.
      * @type {string}
      * @memberof CosmosGovV1beta1Proposal
      */
     'submit_time'?: string;
     /**
-     * 
+     * deposit_end_time is the end time for deposition.
      * @type {string}
      * @memberof CosmosGovV1beta1Proposal
      */
     'deposit_end_time'?: string;
     /**
-     * 
+     * total_deposit is the total deposit on the proposal.
      * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof CosmosGovV1beta1Proposal
      */
     'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
-     * 
+     * voting_start_time is the starting time to vote on a proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1Proposal
      */
     'voting_start_time'?: string;
     /**
-     * 
+     * voting_end_time is the end time of voting on a proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1Proposal
      */
@@ -2057,7 +3292,7 @@ export const CosmosGovV1beta1ProposalStatusEnum = {
 export type CosmosGovV1beta1ProposalStatusEnum = typeof CosmosGovV1beta1ProposalStatusEnum[keyof typeof CosmosGovV1beta1ProposalStatusEnum];
 
 /**
- * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+ * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
  * @export
  * @enum {string}
  */
@@ -2094,7 +3329,7 @@ export interface CosmosGovV1beta1QueryDepositResponse {
  */
 export interface CosmosGovV1beta1QueryDepositsResponse {
     /**
-     * 
+     * deposits defines the requested deposits.
      * @type {Array<Deposits200ResponseDepositsInner>}
      * @memberof CosmosGovV1beta1QueryDepositsResponse
      */
@@ -2151,7 +3386,7 @@ export interface CosmosGovV1beta1QueryProposalResponse {
  */
 export interface CosmosGovV1beta1QueryProposalsResponse {
     /**
-     * 
+     * proposals defines all the requested governance proposals.
      * @type {Array<Proposals200ResponseProposalsInner>}
      * @memberof CosmosGovV1beta1QueryProposalsResponse
      */
@@ -2171,10 +3406,10 @@ export interface CosmosGovV1beta1QueryProposalsResponse {
 export interface CosmosGovV1beta1QueryTallyResultResponse {
     /**
      * 
-     * @type {Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @type {TallyResult200ResponseTally}
      * @memberof CosmosGovV1beta1QueryTallyResultResponse
      */
-    'tally'?: Proposals200ResponseProposalsInnerFinalTallyResult;
+    'tally'?: TallyResult200ResponseTally;
 }
 /**
  * QueryVoteResponse is the response type for the Query/Vote RPC method.
@@ -2196,7 +3431,7 @@ export interface CosmosGovV1beta1QueryVoteResponse {
  */
 export interface CosmosGovV1beta1QueryVotesResponse {
     /**
-     * votes defined the queried votes.
+     * votes defines the queried votes.
      * @type {Array<Votes200ResponseVotesInner>}
      * @memberof CosmosGovV1beta1QueryVotesResponse
      */
@@ -2215,7 +3450,7 @@ export interface CosmosGovV1beta1QueryVotesResponse {
  */
 export interface CosmosGovV1beta1TallyParams {
     /**
-     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
+     * Minimum percentage of total stake needed to vote for a result to be considered valid.
      * @type {string}
      * @memberof CosmosGovV1beta1TallyParams
      */
@@ -2227,7 +3462,7 @@ export interface CosmosGovV1beta1TallyParams {
      */
     'threshold'?: string;
     /**
-     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
+     * Minimum value of Veto votes to Total votes ratio for proposal to be vetoed. Default value: 1/3.
      * @type {string}
      * @memberof CosmosGovV1beta1TallyParams
      */
@@ -2240,25 +3475,25 @@ export interface CosmosGovV1beta1TallyParams {
  */
 export interface CosmosGovV1beta1TallyResult {
     /**
-     * 
+     * yes is the number of yes votes on a proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1TallyResult
      */
     'yes'?: string;
     /**
-     * 
+     * abstain is the number of abstain votes on a proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1TallyResult
      */
     'abstain'?: string;
     /**
-     * 
+     * no is the number of no votes on a proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1TallyResult
      */
     'no'?: string;
     /**
-     * 
+     * no_with_veto is the number of no with veto votes on a proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1TallyResult
      */
@@ -2271,13 +3506,13 @@ export interface CosmosGovV1beta1TallyResult {
  */
 export interface CosmosGovV1beta1Vote {
     /**
-     * 
+     * proposal_id defines the unique id of the proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1Vote
      */
     'proposal_id'?: string;
     /**
-     * 
+     * voter is the voter address of the proposal.
      * @type {string}
      * @memberof CosmosGovV1beta1Vote
      */
@@ -2289,7 +3524,7 @@ export interface CosmosGovV1beta1Vote {
      */
     'option'?: CosmosGovV1beta1VoteOptionEnum;
     /**
-     * 
+     * options is the weighted vote options.  Since: cosmos-sdk 0.43
      * @type {Array<Votes200ResponseVotesInnerOptionsInner>}
      * @memberof CosmosGovV1beta1Vote
      */
@@ -2330,26 +3565,26 @@ export type CosmosGovV1beta1VoteOption = typeof CosmosGovV1beta1VoteOption[keyof
  */
 export interface CosmosGovV1beta1VotingParams {
     /**
-     * Length of the voting period.
+     * Duration of the voting period.
      * @type {string}
      * @memberof CosmosGovV1beta1VotingParams
      */
     'voting_period'?: string;
 }
 /**
- * WeightedVoteOption defines a unit of vote for vote split.
+ * WeightedVoteOption defines a unit of vote for vote split.  Since: cosmos-sdk 0.43
  * @export
  * @interface CosmosGovV1beta1WeightedVoteOption
  */
 export interface CosmosGovV1beta1WeightedVoteOption {
     /**
-     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * option defines the valid vote options, it must not contain duplicate vote options.
      * @type {string}
      * @memberof CosmosGovV1beta1WeightedVoteOption
      */
     'option'?: CosmosGovV1beta1WeightedVoteOptionOptionEnum;
     /**
-     * 
+     * weight is the vote weight associated with the vote option.
      * @type {string}
      * @memberof CosmosGovV1beta1WeightedVoteOption
      */
@@ -2367,7 +3602,607 @@ export const CosmosGovV1beta1WeightedVoteOptionOptionEnum = {
 export type CosmosGovV1beta1WeightedVoteOptionOptionEnum = typeof CosmosGovV1beta1WeightedVoteOptionOptionEnum[keyof typeof CosmosGovV1beta1WeightedVoteOptionOptionEnum];
 
 /**
- * Params holds parameters for the mint module.
+ * GroupInfo represents the high-level on-chain information for a group.
+ * @export
+ * @interface CosmosGroupV1GroupInfo
+ */
+export interface CosmosGroupV1GroupInfo {
+    /**
+     * id is the unique ID of the group.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupInfo
+     */
+    'id'?: string;
+    /**
+     * admin is the account address of the group\'s admin.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupInfo
+     */
+    'admin'?: string;
+    /**
+     * metadata is any arbitrary metadata to attached to the group.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupInfo
+     */
+    'metadata'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosGroupV1GroupInfo
+     */
+    'version'?: string;
+    /**
+     * total_weight is the sum of the group members\' weights.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupInfo
+     */
+    'total_weight'?: string;
+    /**
+     * created_at is a timestamp specifying when a group was created.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupInfo
+     */
+    'created_at'?: string;
+}
+/**
+ * GroupMember represents the relationship between a group and a member.
+ * @export
+ * @interface CosmosGroupV1GroupMember
+ */
+export interface CosmosGroupV1GroupMember {
+    /**
+     * group_id is the unique ID of the group.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupMember
+     */
+    'group_id'?: string;
+    /**
+     * 
+     * @type {GroupMembers200ResponseMembersInnerMember}
+     * @memberof CosmosGroupV1GroupMember
+     */
+    'member'?: GroupMembers200ResponseMembersInnerMember;
+}
+/**
+ * GroupPolicyInfo represents the high-level on-chain information for a group policy.
+ * @export
+ * @interface CosmosGroupV1GroupPolicyInfo
+ */
+export interface CosmosGroupV1GroupPolicyInfo {
+    /**
+     * address is the account address of group policy.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'address'?: string;
+    /**
+     * group_id is the unique ID of the group.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'group_id'?: string;
+    /**
+     * admin is the account address of the group admin.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'admin'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the group policy.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'metadata'?: string;
+    /**
+     * version is used to track changes to a group\'s GroupPolicyInfo structure that would create a different result on a running proposal.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'version'?: string;
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'decision_policy'?: AccountInfo200ResponseInfoPubKey;
+    /**
+     * created_at is a timestamp specifying when a group policy was created.
+     * @type {string}
+     * @memberof CosmosGroupV1GroupPolicyInfo
+     */
+    'created_at'?: string;
+}
+/**
+ * Member represents a group member with an account address, non-zero weight, metadata and added_at timestamp.
+ * @export
+ * @interface CosmosGroupV1Member
+ */
+export interface CosmosGroupV1Member {
+    /**
+     * address is the member\'s account address.
+     * @type {string}
+     * @memberof CosmosGroupV1Member
+     */
+    'address'?: string;
+    /**
+     * weight is the member\'s voting weight that should be greater than 0.
+     * @type {string}
+     * @memberof CosmosGroupV1Member
+     */
+    'weight'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the member.
+     * @type {string}
+     * @memberof CosmosGroupV1Member
+     */
+    'metadata'?: string;
+    /**
+     * added_at is a timestamp specifying when a member was added.
+     * @type {string}
+     * @memberof CosmosGroupV1Member
+     */
+    'added_at'?: string;
+}
+/**
+ * Proposal defines a group proposal. Any member of a group can submit a proposal for a group policy to decide upon. A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal passes as well as some optional metadata associated with the proposal.
+ * @export
+ * @interface CosmosGroupV1Proposal
+ */
+export interface CosmosGroupV1Proposal {
+    /**
+     * id is the unique id of the proposal.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'id'?: string;
+    /**
+     * group_policy_address is the account address of group policy.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'group_policy_address'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the proposal.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'metadata'?: string;
+    /**
+     * proposers are the account addresses of the proposers.
+     * @type {Array<string>}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'proposers'?: Array<string>;
+    /**
+     * submit_time is a timestamp specifying when a proposal was submitted.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'submit_time'?: string;
+    /**
+     * group_version tracks the version of the group at proposal submission. This field is here for informational purposes only.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'group_version'?: string;
+    /**
+     * group_policy_version tracks the version of the group policy at proposal submission. When a decision policy is changed, existing proposals from previous policy versions will become invalid with the `ABORTED` status. This field is here for informational purposes only.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'group_policy_version'?: string;
+    /**
+     * status represents the high level position in the life cycle of the proposal. Initial value is Submitted.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'status'?: CosmosGroupV1ProposalStatusEnum;
+    /**
+     * 
+     * @type {GroupProposal200ResponseProposalFinalTallyResult}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'final_tally_result'?: GroupProposal200ResponseProposalFinalTallyResult;
+    /**
+     * voting_period_end is the timestamp before which voting must be done. Unless a successful MsgExec is called before (to execute a proposal whose tally is successful before the voting period ends), tallying will be done at this point, and the `final_tally_result`and `status` fields will be accordingly updated.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'voting_period_end'?: string;
+    /**
+     * executor_result is the final result of the proposal execution. Initial value is NotRun.
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'executor_result'?: CosmosGroupV1ProposalExecutorResultEnum;
+    /**
+     * messages is a list of `sdk.Msg`s that will be executed if the proposal passes.
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'title'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof CosmosGroupV1Proposal
+     */
+    'summary'?: string;
+}
+
+export const CosmosGroupV1ProposalStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    Submitted: 'PROPOSAL_STATUS_SUBMITTED',
+    Accepted: 'PROPOSAL_STATUS_ACCEPTED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Aborted: 'PROPOSAL_STATUS_ABORTED',
+    Withdrawn: 'PROPOSAL_STATUS_WITHDRAWN'
+} as const;
+
+export type CosmosGroupV1ProposalStatusEnum = typeof CosmosGroupV1ProposalStatusEnum[keyof typeof CosmosGroupV1ProposalStatusEnum];
+export const CosmosGroupV1ProposalExecutorResultEnum = {
+    Unspecified: 'PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED',
+    NotRun: 'PROPOSAL_EXECUTOR_RESULT_NOT_RUN',
+    Success: 'PROPOSAL_EXECUTOR_RESULT_SUCCESS',
+    Failure: 'PROPOSAL_EXECUTOR_RESULT_FAILURE'
+} as const;
+
+export type CosmosGroupV1ProposalExecutorResultEnum = typeof CosmosGroupV1ProposalExecutorResultEnum[keyof typeof CosmosGroupV1ProposalExecutorResultEnum];
+
+/**
+ * ProposalExecutorResult defines types of proposal executor results.   - PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED: An empty value is not allowed.  - PROPOSAL_EXECUTOR_RESULT_NOT_RUN: We have not yet run the executor.  - PROPOSAL_EXECUTOR_RESULT_SUCCESS: The executor was successful and proposed action updated state.  - PROPOSAL_EXECUTOR_RESULT_FAILURE: The executor returned an error and proposed action didn\'t update state.
+ * @export
+ * @enum {string}
+ */
+
+export const CosmosGroupV1ProposalExecutorResult = {
+    Unspecified: 'PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED',
+    NotRun: 'PROPOSAL_EXECUTOR_RESULT_NOT_RUN',
+    Success: 'PROPOSAL_EXECUTOR_RESULT_SUCCESS',
+    Failure: 'PROPOSAL_EXECUTOR_RESULT_FAILURE'
+} as const;
+
+export type CosmosGroupV1ProposalExecutorResult = typeof CosmosGroupV1ProposalExecutorResult[keyof typeof CosmosGroupV1ProposalExecutorResult];
+
+
+/**
+ * ProposalStatus defines proposal statuses.   - PROPOSAL_STATUS_UNSPECIFIED: An empty value is invalid and not allowed.  - PROPOSAL_STATUS_SUBMITTED: Initial status of a proposal when submitted.  - PROPOSAL_STATUS_ACCEPTED: Final status of a proposal when the final tally is done and the outcome passes the group policy\'s decision policy.  - PROPOSAL_STATUS_REJECTED: Final status of a proposal when the final tally is done and the outcome is rejected by the group policy\'s decision policy.  - PROPOSAL_STATUS_ABORTED: Final status of a proposal when the group policy is modified before the final tally.  - PROPOSAL_STATUS_WITHDRAWN: A proposal can be withdrawn before the voting start time by the owner. When this happens the final status is Withdrawn.
+ * @export
+ * @enum {string}
+ */
+
+export const CosmosGroupV1ProposalStatus = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    Submitted: 'PROPOSAL_STATUS_SUBMITTED',
+    Accepted: 'PROPOSAL_STATUS_ACCEPTED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Aborted: 'PROPOSAL_STATUS_ABORTED',
+    Withdrawn: 'PROPOSAL_STATUS_WITHDRAWN'
+} as const;
+
+export type CosmosGroupV1ProposalStatus = typeof CosmosGroupV1ProposalStatus[keyof typeof CosmosGroupV1ProposalStatus];
+
+
+/**
+ * QueryGroupInfoResponse is the Query/GroupInfo response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupInfoResponse
+ */
+export interface CosmosGroupV1QueryGroupInfoResponse {
+    /**
+     * 
+     * @type {GroupInfo200ResponseInfo}
+     * @memberof CosmosGroupV1QueryGroupInfoResponse
+     */
+    'info'?: GroupInfo200ResponseInfo;
+}
+/**
+ * QueryGroupMembersResponse is the Query/GroupMembersResponse response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupMembersResponse
+ */
+export interface CosmosGroupV1QueryGroupMembersResponse {
+    /**
+     * members are the members of the group with given group_id.
+     * @type {Array<GroupMembers200ResponseMembersInner>}
+     * @memberof CosmosGroupV1QueryGroupMembersResponse
+     */
+    'members'?: Array<GroupMembers200ResponseMembersInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryGroupMembersResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupPoliciesByAdminResponse
+ */
+export interface CosmosGroupV1QueryGroupPoliciesByAdminResponse {
+    /**
+     * group_policies are the group policies info with provided admin.
+     * @type {Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>}
+     * @memberof CosmosGroupV1QueryGroupPoliciesByAdminResponse
+     */
+    'group_policies'?: Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryGroupPoliciesByAdminResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupPoliciesByGroupResponse
+ */
+export interface CosmosGroupV1QueryGroupPoliciesByGroupResponse {
+    /**
+     * group_policies are the group policies info associated with the provided group.
+     * @type {Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>}
+     * @memberof CosmosGroupV1QueryGroupPoliciesByGroupResponse
+     */
+    'group_policies'?: Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryGroupPoliciesByGroupResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryGroupPolicyInfoResponse is the Query/GroupPolicyInfo response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupPolicyInfoResponse
+ */
+export interface CosmosGroupV1QueryGroupPolicyInfoResponse {
+    /**
+     * 
+     * @type {GroupPoliciesByAdmin200ResponseGroupPoliciesInner}
+     * @memberof CosmosGroupV1QueryGroupPolicyInfoResponse
+     */
+    'info'?: GroupPoliciesByAdmin200ResponseGroupPoliciesInner;
+}
+/**
+ * QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupsByAdminResponse
+ */
+export interface CosmosGroupV1QueryGroupsByAdminResponse {
+    /**
+     * groups are the groups info with the provided admin.
+     * @type {Array<GroupsByAdmin200ResponseGroupsInner>}
+     * @memberof CosmosGroupV1QueryGroupsByAdminResponse
+     */
+    'groups'?: Array<GroupsByAdmin200ResponseGroupsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryGroupsByAdminResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryGroupsByMemberResponse is the Query/GroupsByMember response type.
+ * @export
+ * @interface CosmosGroupV1QueryGroupsByMemberResponse
+ */
+export interface CosmosGroupV1QueryGroupsByMemberResponse {
+    /**
+     * groups are the groups info with the provided group member.
+     * @type {Array<GroupsByAdmin200ResponseGroupsInner>}
+     * @memberof CosmosGroupV1QueryGroupsByMemberResponse
+     */
+    'groups'?: Array<GroupsByAdmin200ResponseGroupsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryGroupsByMemberResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryProposalResponse is the Query/Proposal response type.
+ * @export
+ * @interface CosmosGroupV1QueryProposalResponse
+ */
+export interface CosmosGroupV1QueryProposalResponse {
+    /**
+     * 
+     * @type {GroupProposal200ResponseProposal}
+     * @memberof CosmosGroupV1QueryProposalResponse
+     */
+    'proposal'?: GroupProposal200ResponseProposal;
+}
+/**
+ * QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type.
+ * @export
+ * @interface CosmosGroupV1QueryProposalsByGroupPolicyResponse
+ */
+export interface CosmosGroupV1QueryProposalsByGroupPolicyResponse {
+    /**
+     * proposals are the proposals with given group policy.
+     * @type {Array<ProposalsByGroupPolicy200ResponseProposalsInner>}
+     * @memberof CosmosGroupV1QueryProposalsByGroupPolicyResponse
+     */
+    'proposals'?: Array<ProposalsByGroupPolicy200ResponseProposalsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryProposalsByGroupPolicyResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryTallyResultResponse is the Query/TallyResult response type.
+ * @export
+ * @interface CosmosGroupV1QueryTallyResultResponse
+ */
+export interface CosmosGroupV1QueryTallyResultResponse {
+    /**
+     * 
+     * @type {GroupTallyResult200ResponseTally}
+     * @memberof CosmosGroupV1QueryTallyResultResponse
+     */
+    'tally'?: GroupTallyResult200ResponseTally;
+}
+/**
+ * QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type.
+ * @export
+ * @interface CosmosGroupV1QueryVoteByProposalVoterResponse
+ */
+export interface CosmosGroupV1QueryVoteByProposalVoterResponse {
+    /**
+     * 
+     * @type {VoteByProposalVoter200ResponseVote}
+     * @memberof CosmosGroupV1QueryVoteByProposalVoterResponse
+     */
+    'vote'?: VoteByProposalVoter200ResponseVote;
+}
+/**
+ * QueryVotesByProposalResponse is the Query/VotesByProposal response type.
+ * @export
+ * @interface CosmosGroupV1QueryVotesByProposalResponse
+ */
+export interface CosmosGroupV1QueryVotesByProposalResponse {
+    /**
+     * votes are the list of votes for given proposal_id.
+     * @type {Array<VotesByProposal200ResponseVotesInner>}
+     * @memberof CosmosGroupV1QueryVotesByProposalResponse
+     */
+    'votes'?: Array<VotesByProposal200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryVotesByProposalResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryVotesByVoterResponse is the Query/VotesByVoter response type.
+ * @export
+ * @interface CosmosGroupV1QueryVotesByVoterResponse
+ */
+export interface CosmosGroupV1QueryVotesByVoterResponse {
+    /**
+     * votes are the list of votes by given voter.
+     * @type {Array<VotesByProposal200ResponseVotesInner>}
+     * @memberof CosmosGroupV1QueryVotesByVoterResponse
+     */
+    'votes'?: Array<VotesByProposal200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosGroupV1QueryVotesByVoterResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * TallyResult represents the sum of weighted votes for each vote option.
+ * @export
+ * @interface CosmosGroupV1TallyResult
+ */
+export interface CosmosGroupV1TallyResult {
+    /**
+     * yes_count is the weighted sum of yes votes.
+     * @type {string}
+     * @memberof CosmosGroupV1TallyResult
+     */
+    'yes_count'?: string;
+    /**
+     * abstain_count is the weighted sum of abstainers.
+     * @type {string}
+     * @memberof CosmosGroupV1TallyResult
+     */
+    'abstain_count'?: string;
+    /**
+     * no_count is the weighted sum of no votes.
+     * @type {string}
+     * @memberof CosmosGroupV1TallyResult
+     */
+    'no_count'?: string;
+    /**
+     * no_with_veto_count is the weighted sum of veto.
+     * @type {string}
+     * @memberof CosmosGroupV1TallyResult
+     */
+    'no_with_veto_count'?: string;
+}
+/**
+ * Vote represents a vote for a proposal.
+ * @export
+ * @interface CosmosGroupV1Vote
+ */
+export interface CosmosGroupV1Vote {
+    /**
+     * proposal is the unique ID of the proposal.
+     * @type {string}
+     * @memberof CosmosGroupV1Vote
+     */
+    'proposal_id'?: string;
+    /**
+     * voter is the account address of the voter.
+     * @type {string}
+     * @memberof CosmosGroupV1Vote
+     */
+    'voter'?: string;
+    /**
+     * option is the voter\'s choice on the proposal.
+     * @type {string}
+     * @memberof CosmosGroupV1Vote
+     */
+    'option'?: CosmosGroupV1VoteOptionEnum;
+    /**
+     * metadata is any arbitrary metadata attached to the vote.
+     * @type {string}
+     * @memberof CosmosGroupV1Vote
+     */
+    'metadata'?: string;
+    /**
+     * submit_time is the timestamp when the vote was submitted.
+     * @type {string}
+     * @memberof CosmosGroupV1Vote
+     */
+    'submit_time'?: string;
+}
+
+export const CosmosGroupV1VoteOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type CosmosGroupV1VoteOptionEnum = typeof CosmosGroupV1VoteOptionEnum[keyof typeof CosmosGroupV1VoteOptionEnum];
+
+/**
+ * VoteOption enumerates the valid vote options for a given proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines an unspecified vote option which will return an error.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+ * @export
+ * @enum {string}
+ */
+
+export const CosmosGroupV1VoteOption = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type CosmosGroupV1VoteOption = typeof CosmosGroupV1VoteOption[keyof typeof CosmosGroupV1VoteOption];
+
+
+/**
+ * Params defines the parameters for the x/mint module.
  * @export
  * @interface CosmosMintV1beta1Params
  */
@@ -2449,6 +4284,195 @@ export interface CosmosMintV1beta1QueryParamsResponse {
     'params'?: MintParams200ResponseParams;
 }
 /**
+ * Class defines the class of the nft type.
+ * @export
+ * @interface CosmosNftV1beta1Class
+ */
+export interface CosmosNftV1beta1Class {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'symbol'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'uri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'uri_hash'?: string;
+    /**
+     * 
+     * @type {DataIsTheAppSpecificMetadataOfTheNFTClassOptional}
+     * @memberof CosmosNftV1beta1Class
+     */
+    'data'?: DataIsTheAppSpecificMetadataOfTheNFTClassOptional;
+}
+/**
+ * NFT defines the NFT.
+ * @export
+ * @interface CosmosNftV1beta1NFT
+ */
+export interface CosmosNftV1beta1NFT {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1NFT
+     */
+    'class_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1NFT
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1NFT
+     */
+    'uri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1NFT
+     */
+    'uri_hash'?: string;
+    /**
+     * 
+     * @type {DataIsAnAppSpecificDataOfTheNFTOptional}
+     * @memberof CosmosNftV1beta1NFT
+     */
+    'data'?: DataIsAnAppSpecificDataOfTheNFTOptional;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QueryBalanceResponse
+ */
+export interface CosmosNftV1beta1QueryBalanceResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1QueryBalanceResponse
+     */
+    'amount'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QueryClassResponse
+ */
+export interface CosmosNftV1beta1QueryClassResponse {
+    /**
+     * 
+     * @type {QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner}
+     * @memberof CosmosNftV1beta1QueryClassResponse
+     */
+    'class'?: QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QueryClassesResponse
+ */
+export interface CosmosNftV1beta1QueryClassesResponse {
+    /**
+     * class defines the class of the nft type.
+     * @type {Array<QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner>}
+     * @memberof CosmosNftV1beta1QueryClassesResponse
+     */
+    'classes'?: Array<QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosNftV1beta1QueryClassesResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QueryNFTResponse
+ */
+export interface CosmosNftV1beta1QueryNFTResponse {
+    /**
+     * 
+     * @type {OwnerIsTheOwnerAddressOfTheNft}
+     * @memberof CosmosNftV1beta1QueryNFTResponse
+     */
+    'nft'?: OwnerIsTheOwnerAddressOfTheNft;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QueryNFTsResponse
+ */
+export interface CosmosNftV1beta1QueryNFTsResponse {
+    /**
+     * 
+     * @type {Array<NFTDefinesTheNFTInner>}
+     * @memberof CosmosNftV1beta1QueryNFTsResponse
+     */
+    'nfts'?: Array<NFTDefinesTheNFTInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof CosmosNftV1beta1QueryNFTsResponse
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QueryOwnerResponse
+ */
+export interface CosmosNftV1beta1QueryOwnerResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1QueryOwnerResponse
+     */
+    'owner'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosNftV1beta1QuerySupplyResponse
+ */
+export interface CosmosNftV1beta1QuerySupplyResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosNftV1beta1QuerySupplyResponse
+     */
+    'amount'?: string;
+}
+/**
  * ParamChange defines an individual parameter change, for use in ParameterChangeProposal.
  * @export
  * @interface CosmosParamsV1beta1ParamChange
@@ -2485,6 +4509,38 @@ export interface CosmosParamsV1beta1QueryParamsResponse {
      * @memberof CosmosParamsV1beta1QueryParamsResponse
      */
     'param'?: Params200ResponseParam;
+}
+/**
+ * QuerySubspacesResponse defines the response types for querying for all registered subspaces and all keys for a subspace.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosParamsV1beta1QuerySubspacesResponse
+ */
+export interface CosmosParamsV1beta1QuerySubspacesResponse {
+    /**
+     * 
+     * @type {Array<Subspaces200ResponseSubspacesInner>}
+     * @memberof CosmosParamsV1beta1QuerySubspacesResponse
+     */
+    'subspaces'?: Array<Subspaces200ResponseSubspacesInner>;
+}
+/**
+ * Subspace defines a parameter subspace name and all the keys that exist for the subspace.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosParamsV1beta1Subspace
+ */
+export interface CosmosParamsV1beta1Subspace {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosParamsV1beta1Subspace
+     */
+    'subspace'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CosmosParamsV1beta1Subspace
+     */
+    'keys'?: Array<string>;
 }
 /**
  * Params represents the parameters used for by the slashing module.
@@ -2772,7 +4828,7 @@ export interface CosmosStakingV1beta1HistoricalInfo {
     'valset'?: Array<StakingDelegatorValidators200ResponseValidatorsInner>;
 }
 /**
- * Params defines the parameters for the staking module.
+ * Params defines the parameters for the x/staking module.
  * @export
  * @interface CosmosStakingV1beta1Params
  */
@@ -2807,6 +4863,12 @@ export interface CosmosStakingV1beta1Params {
      * @memberof CosmosStakingV1beta1Params
      */
     'bond_denom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosStakingV1beta1Params
+     */
+    'min_commission_rate'?: string;
 }
 /**
  * Pool is used for tracking bonded and not-bonded token supply of the bond denomination.
@@ -3112,6 +5174,18 @@ export interface CosmosStakingV1beta1RedelegationEntry {
      * @memberof CosmosStakingV1beta1RedelegationEntry
      */
     'shares_dst'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosStakingV1beta1RedelegationEntry
+     */
+    'unbonding_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosStakingV1beta1RedelegationEntry
+     */
+    'unbonding_on_hold_ref_count'?: string;
 }
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it contains a balance in addition to shares which is more suitable for client responses.
@@ -3206,6 +5280,18 @@ export interface CosmosStakingV1beta1UnbondingDelegationEntry {
      * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
      */
     'balance'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
+     */
+    'unbonding_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosStakingV1beta1UnbondingDelegationEntry
+     */
+    'unbonding_on_hold_ref_count'?: string;
 }
 /**
  * Validator defines a validator, together with the total amount of the Validator\'s bond shares and their exchange rate to coins. Slashing results in a decrease in the exchange rate, allowing correct calculation of future undelegations without iterating over delegators. When coins are delegated to this validator, the validator is credited with a delegation whose number of bond shares is based on the amount of coins delegated divided by the current exchange rate. Voting power can be calculated as total bonded shares multiplied by exchange rate.
@@ -3221,10 +5307,10 @@ export interface CosmosStakingV1beta1Validator {
     'operator_address'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosStakingV1beta1Validator
      */
-    'consensus_pubkey'?: AccountsAreTheExistingAccountsInner;
+    'consensus_pubkey'?: AccountInfo200ResponseInfoPubKey;
     /**
      * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
@@ -3274,11 +5360,23 @@ export interface CosmosStakingV1beta1Validator {
      */
     'commission'?: StakingDelegatorValidators200ResponseValidatorsInnerCommission;
     /**
-     * min_self_delegation is the validator\'s self declared minimum self delegation.
+     * min_self_delegation is the validator\'s self declared minimum self delegation.  Since: cosmos-sdk 0.46
      * @type {string}
      * @memberof CosmosStakingV1beta1Validator
      */
     'min_self_delegation'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosStakingV1beta1Validator
+     */
+    'unbonding_on_hold_ref_count'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CosmosStakingV1beta1Validator
+     */
+    'unbonding_ids'?: Array<string>;
 }
 
 export const CosmosStakingV1beta1ValidatorStatusEnum = {
@@ -3291,7 +5389,7 @@ export const CosmosStakingV1beta1ValidatorStatusEnum = {
 export type CosmosStakingV1beta1ValidatorStatusEnum = typeof CosmosStakingV1beta1ValidatorStatusEnum[keyof typeof CosmosStakingV1beta1ValidatorStatusEnum];
 
 /**
- * SignMode represents a signing mode with its own security guarantees.   - SIGN_MODE_UNSPECIFIED: SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be rejected  - SIGN_MODE_DIRECT: SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is verified with raw bytes from Tx  - SIGN_MODE_TEXTUAL: SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-readable textual representation on top of the binary representation from SIGN_MODE_DIRECT  - SIGN_MODE_LEGACY_AMINO_JSON: SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses Amino JSON and will be removed in the future
+ * SignMode represents a signing mode with its own security guarantees.  This enum should be considered a registry of all known sign modes in the Cosmos ecosystem. Apps are not expected to support all known sign modes. Apps that would like to support custom  sign modes are encouraged to open a small PR against this file to add a new case to this SignMode enum describing their sign mode so that different apps have a consistent version of this enum.   - SIGN_MODE_UNSPECIFIED: SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be rejected.  - SIGN_MODE_DIRECT: SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is verified with raw bytes from Tx.  - SIGN_MODE_TEXTUAL: SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-readable textual representation on top of the binary representation from SIGN_MODE_DIRECT. It is currently not supported.  - SIGN_MODE_DIRECT_AUX: SIGN_MODE_DIRECT_AUX specifies a signing mode which uses SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not require signers signing over other signers\' `signer_info`. It also allows for adding Tips in transactions.  Since: cosmos-sdk 0.46  - SIGN_MODE_LEGACY_AMINO_JSON: SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses Amino JSON and will be removed in the future.  - SIGN_MODE_EIP_191: SIGN_MODE_EIP_191 specifies the sign mode for EIP 191 signing on the Cosmos SDK. Ref: https://eips.ethereum.org/EIPS/eip-191  Currently, SIGN_MODE_EIP_191 is registered as a SignMode enum variant, but is not implemented on the SDK by default. To enable EIP-191, you need to pass a custom `TxConfig` that has an implementation of `SignModeHandler` for EIP-191. The SDK may decide to fully support EIP-191 in the future.  Since: cosmos-sdk 0.45.2
  * @export
  * @enum {string}
  */
@@ -3300,7 +5398,9 @@ export const CosmosTxSigningV1beta1SignMode = {
     Unspecified: 'SIGN_MODE_UNSPECIFIED',
     Direct: 'SIGN_MODE_DIRECT',
     Textual: 'SIGN_MODE_TEXTUAL',
-    LegacyAminoJson: 'SIGN_MODE_LEGACY_AMINO_JSON'
+    DirectAux: 'SIGN_MODE_DIRECT_AUX',
+    LegacyAminoJson: 'SIGN_MODE_LEGACY_AMINO_JSON',
+    Eip191: 'SIGN_MODE_EIP_191'
 } as const;
 
 export type CosmosTxSigningV1beta1SignMode = typeof CosmosTxSigningV1beta1SignMode[keyof typeof CosmosTxSigningV1beta1SignMode];
@@ -3324,6 +5424,12 @@ export interface CosmosTxV1beta1AuthInfo {
      * @memberof CosmosTxV1beta1AuthInfo
      */
     'fee'?: CosmosTxV1beta1AuthInfoFee;
+    /**
+     * 
+     * @type {CosmosTxV1beta1AuthInfoTip}
+     * @memberof CosmosTxV1beta1AuthInfo
+     */
+    'tip'?: CosmosTxV1beta1AuthInfoTip;
 }
 /**
  * Fee is the fee and gas limit for the transaction. The first signer is the primary signer and the one which pays the fee. The fee can be calculated based on the cost of evaluating the body and doing signature verification of the signers. This can be estimated via simulation.
@@ -3357,7 +5463,26 @@ export interface CosmosTxV1beta1AuthInfoFee {
     'granter'?: string;
 }
 /**
- * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
+ * Tip is the optional tip used for transactions fees paid in another denom.  This field is ignored if the chain didn\'t enable tips, i.e. didn\'t add the `TipDecorator` in its posthandler.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosTxV1beta1AuthInfoTip
+ */
+export interface CosmosTxV1beta1AuthInfoTip {
+    /**
+     * 
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosTxV1beta1AuthInfoTip
+     */
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1AuthInfoTip
+     */
+    'tipper'?: string;
+}
+/**
+ * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: DEPRECATED: use BROADCAST_MODE_SYNC instead, BROADCAST_MODE_BLOCK is not supported by the SDK from v0.47.x onwards.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
  * @export
  * @enum {string}
  */
@@ -3385,7 +5510,7 @@ export interface CosmosTxV1beta1BroadcastTxRequest {
      */
     'tx_bytes'?: string;
     /**
-     * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for the tx to be committed in a block.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
+     * BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.   - BROADCAST_MODE_UNSPECIFIED: zero-value for mode ordering  - BROADCAST_MODE_BLOCK: DEPRECATED: use BROADCAST_MODE_SYNC instead, BROADCAST_MODE_BLOCK is not supported by the SDK from v0.47.x onwards.  - BROADCAST_MODE_SYNC: BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for a CheckTx execution response only.  - BROADCAST_MODE_ASYNC: BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns immediately.
      * @type {string}
      * @memberof CosmosTxV1beta1BroadcastTxRequest
      */
@@ -3446,6 +5571,87 @@ export interface CosmosTxV1beta1Fee {
     'granter'?: string;
 }
 /**
+ * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.  Since: cosmos-sdk 0.45.2
+ * @export
+ * @interface CosmosTxV1beta1GetBlockWithTxsResponse
+ */
+export interface CosmosTxV1beta1GetBlockWithTxsResponse {
+    /**
+     * txs are the transactions in the block.
+     * @type {Array<CosmosTxV1beta1Tx>}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponse
+     */
+    'txs'?: Array<CosmosTxV1beta1Tx>;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponse
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {CosmosTxV1beta1GetBlockWithTxsResponseBlock}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponse
+     */
+    'block'?: CosmosTxV1beta1GetBlockWithTxsResponseBlock;
+    /**
+     * 
+     * @type {CosmosTxV1beta1GetBlockWithTxsResponsePagination}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponse
+     */
+    'pagination'?: CosmosTxV1beta1GetBlockWithTxsResponsePagination;
+}
+/**
+ * 
+ * @export
+ * @interface CosmosTxV1beta1GetBlockWithTxsResponseBlock
+ */
+export interface CosmosTxV1beta1GetBlockWithTxsResponseBlock {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadHeader}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponseBlock
+     */
+    'header'?: DeprecatedPleaseUseSdkBlockInsteadHeader;
+    /**
+     * 
+     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponseBlock
+     */
+    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidence}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponseBlock
+     */
+    'evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidence;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponseBlock
+     */
+    'last_commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * pagination defines a pagination for the response.
+ * @export
+ * @interface CosmosTxV1beta1GetBlockWithTxsResponsePagination
+ */
+export interface CosmosTxV1beta1GetBlockWithTxsResponsePagination {
+    /**
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
+     * @type {string}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponsePagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1GetBlockWithTxsResponsePagination
+     */
+    'total'?: string;
+}
+/**
  * GetTxResponse is the response type for the Service.GetTx method.
  * @export
  * @interface CosmosTxV1beta1GetTxResponse
@@ -3484,10 +5690,35 @@ export interface CosmosTxV1beta1GetTxsEventResponse {
     'tx_responses'?: Array<BroadcastTx200ResponseTxResponse>;
     /**
      * 
-     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @type {CosmosTxV1beta1GetTxsEventResponsePagination}
      * @memberof CosmosTxV1beta1GetTxsEventResponse
      */
-    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+    'pagination'?: CosmosTxV1beta1GetTxsEventResponsePagination;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1GetTxsEventResponse
+     */
+    'total'?: string;
+}
+/**
+ * pagination defines a pagination for the response. Deprecated post v0.46.x: use total instead.
+ * @export
+ * @interface CosmosTxV1beta1GetTxsEventResponsePagination
+ */
+export interface CosmosTxV1beta1GetTxsEventResponsePagination {
+    /**
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
+     * @type {string}
+     * @memberof CosmosTxV1beta1GetTxsEventResponsePagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1GetTxsEventResponsePagination
+     */
+    'total'?: string;
 }
 /**
  * ModeInfo describes the signing mode of a single or nested multisig signer.
@@ -3534,7 +5765,7 @@ export interface CosmosTxV1beta1ModeInfoMulti {
  */
 export interface CosmosTxV1beta1ModeInfoSingle {
     /**
-     * SignMode represents a signing mode with its own security guarantees.   - SIGN_MODE_UNSPECIFIED: SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be rejected  - SIGN_MODE_DIRECT: SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is verified with raw bytes from Tx  - SIGN_MODE_TEXTUAL: SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-readable textual representation on top of the binary representation from SIGN_MODE_DIRECT  - SIGN_MODE_LEGACY_AMINO_JSON: SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses Amino JSON and will be removed in the future
+     * SignMode represents a signing mode with its own security guarantees.  This enum should be considered a registry of all known sign modes in the Cosmos ecosystem. Apps are not expected to support all known sign modes. Apps that would like to support custom  sign modes are encouraged to open a small PR against this file to add a new case to this SignMode enum describing their sign mode so that different apps have a consistent version of this enum.   - SIGN_MODE_UNSPECIFIED: SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be rejected.  - SIGN_MODE_DIRECT: SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is verified with raw bytes from Tx.  - SIGN_MODE_TEXTUAL: SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-readable textual representation on top of the binary representation from SIGN_MODE_DIRECT. It is currently not supported.  - SIGN_MODE_DIRECT_AUX: SIGN_MODE_DIRECT_AUX specifies a signing mode which uses SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not require signers signing over other signers\' `signer_info`. It also allows for adding Tips in transactions.  Since: cosmos-sdk 0.46  - SIGN_MODE_LEGACY_AMINO_JSON: SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses Amino JSON and will be removed in the future.  - SIGN_MODE_EIP_191: SIGN_MODE_EIP_191 specifies the sign mode for EIP 191 signing on the Cosmos SDK. Ref: https://eips.ethereum.org/EIPS/eip-191  Currently, SIGN_MODE_EIP_191 is registered as a SignMode enum variant, but is not implemented on the SDK by default. To enable EIP-191, you need to pass a custom `TxConfig` that has an implementation of `SignModeHandler` for EIP-191. The SDK may decide to fully support EIP-191 in the future.  Since: cosmos-sdk 0.45.2
      * @type {string}
      * @memberof CosmosTxV1beta1ModeInfoSingle
      */
@@ -3545,7 +5776,9 @@ export const CosmosTxV1beta1ModeInfoSingleModeEnum = {
     Unspecified: 'SIGN_MODE_UNSPECIFIED',
     Direct: 'SIGN_MODE_DIRECT',
     Textual: 'SIGN_MODE_TEXTUAL',
-    LegacyAminoJson: 'SIGN_MODE_LEGACY_AMINO_JSON'
+    DirectAux: 'SIGN_MODE_DIRECT_AUX',
+    LegacyAminoJson: 'SIGN_MODE_LEGACY_AMINO_JSON',
+    Eip191: 'SIGN_MODE_EIP_191'
 } as const;
 
 export type CosmosTxV1beta1ModeInfoSingleModeEnum = typeof CosmosTxV1beta1ModeInfoSingleModeEnum[keyof typeof CosmosTxV1beta1ModeInfoSingleModeEnum];
@@ -3573,10 +5806,10 @@ export type CosmosTxV1beta1OrderBy = typeof CosmosTxV1beta1OrderBy[keyof typeof 
 export interface CosmosTxV1beta1SignerInfo {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosTxV1beta1SignerInfo
      */
-    'public_key'?: AccountsAreTheExistingAccountsInner;
+    'public_key'?: AccountInfo200ResponseInfoPubKey;
     /**
      * 
      * @type {CosmosTxV1beta1ModeInfo}
@@ -3603,7 +5836,7 @@ export interface CosmosTxV1beta1SimulateRequest {
      */
     'tx'?: CosmosTxV1beta1Tx;
     /**
-     * tx_bytes is the raw transaction.
+     * tx_bytes is the raw transaction.  Since: cosmos-sdk 0.43
      * @type {string}
      * @memberof CosmosTxV1beta1SimulateRequest
      */
@@ -3627,6 +5860,25 @@ export interface CosmosTxV1beta1SimulateResponse {
      * @memberof CosmosTxV1beta1SimulateResponse
      */
     'result'?: Simulate200ResponseResult;
+}
+/**
+ * Tip is the tip used for meta-transactions.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosTxV1beta1Tip
+ */
+export interface CosmosTxV1beta1Tip {
+    /**
+     * 
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof CosmosTxV1beta1Tip
+     */
+    'amount'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1Tip
+     */
+    'tipper'?: string;
 }
 /**
  * Tx is the standard type used for broadcasting transactions.
@@ -3661,10 +5913,10 @@ export interface CosmosTxV1beta1Tx {
 export interface CosmosTxV1beta1TxBody {
     /**
      * messages is a list of messages to be executed. The required signers of those messages define the number and order of elements in AuthInfo\'s signer_infos and Tx\'s signatures. Each required signer address is added to the list only the first time it occurs. By convention, the first required signer (usually from the first message) is referred to as the primary signer and pays the fee for the whole transaction.
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'messages'?: Array<AccountsAreTheExistingAccountsInner>;
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * memo is any arbitrary note/comment to be added to the transaction. WARNING: in clients, any publicly exposed text should not be called memo, but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
      * @type {string}
@@ -3679,19 +5931,123 @@ export interface CosmosTxV1beta1TxBody {
     'timeout_height'?: string;
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
+    'extension_options'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof CosmosTxV1beta1TxBody
      */
-    'non_critical_extension_options'?: Array<AccountsAreTheExistingAccountsInner>;
+    'non_critical_extension_options'?: Array<AccountInfo200ResponseInfoPubKey>;
 }
 /**
- * ModuleVersion specifies a module and its consensus version.
+ * TxDecodeAminoRequest is the request type for the Service.TxDecodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxDecodeAminoRequest
+ */
+export interface CosmosTxV1beta1TxDecodeAminoRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1TxDecodeAminoRequest
+     */
+    'amino_binary'?: string;
+}
+/**
+ * TxDecodeAminoResponse is the response type for the Service.TxDecodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxDecodeAminoResponse
+ */
+export interface CosmosTxV1beta1TxDecodeAminoResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1TxDecodeAminoResponse
+     */
+    'amino_json'?: string;
+}
+/**
+ * TxDecodeRequest is the request type for the Service.TxDecode RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxDecodeRequest
+ */
+export interface CosmosTxV1beta1TxDecodeRequest {
+    /**
+     * tx_bytes is the raw transaction.
+     * @type {string}
+     * @memberof CosmosTxV1beta1TxDecodeRequest
+     */
+    'tx_bytes'?: string;
+}
+/**
+ * TxDecodeResponse is the response type for the Service.TxDecode method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxDecodeResponse
+ */
+export interface CosmosTxV1beta1TxDecodeResponse {
+    /**
+     * 
+     * @type {CosmosTxV1beta1Tx}
+     * @memberof CosmosTxV1beta1TxDecodeResponse
+     */
+    'tx'?: CosmosTxV1beta1Tx;
+}
+/**
+ * TxEncodeAminoRequest is the request type for the Service.TxEncodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxEncodeAminoRequest
+ */
+export interface CosmosTxV1beta1TxEncodeAminoRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1TxEncodeAminoRequest
+     */
+    'amino_json'?: string;
+}
+/**
+ * TxEncodeAminoResponse is the response type for the Service.TxEncodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxEncodeAminoResponse
+ */
+export interface CosmosTxV1beta1TxEncodeAminoResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosTxV1beta1TxEncodeAminoResponse
+     */
+    'amino_binary'?: string;
+}
+/**
+ * TxEncodeRequest is the request type for the Service.TxEncode RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxEncodeRequest
+ */
+export interface CosmosTxV1beta1TxEncodeRequest {
+    /**
+     * 
+     * @type {CosmosTxV1beta1Tx}
+     * @memberof CosmosTxV1beta1TxEncodeRequest
+     */
+    'tx'?: CosmosTxV1beta1Tx;
+}
+/**
+ * TxEncodeResponse is the response type for the Service.TxEncode method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface CosmosTxV1beta1TxEncodeResponse
+ */
+export interface CosmosTxV1beta1TxEncodeResponse {
+    /**
+     * tx_bytes is the encoded transaction bytes.
+     * @type {string}
+     * @memberof CosmosTxV1beta1TxEncodeResponse
+     */
+    'tx_bytes'?: string;
+}
+/**
+ * ModuleVersion specifies a module and its consensus version.  Since: cosmos-sdk 0.43
  * @export
  * @interface CosmosUpgradeV1beta1ModuleVersion
  */
@@ -3728,7 +6084,7 @@ export interface CosmosUpgradeV1beta1Plan {
      */
     'time'?: string;
     /**
-     * The height at which the upgrade must be performed. Only used if Time is not set.
+     * The height at which the upgrade must be performed.
      * @type {string}
      * @memberof CosmosUpgradeV1beta1Plan
      */
@@ -3741,10 +6097,10 @@ export interface CosmosUpgradeV1beta1Plan {
     'info'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CosmosUpgradeV1beta1Plan
      */
-    'upgraded_client_state'?: AccountsAreTheExistingAccountsInner;
+    'upgraded_client_state'?: AccountInfo200ResponseInfoPubKey;
 }
 /**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC method.
@@ -3760,6 +6116,19 @@ export interface CosmosUpgradeV1beta1QueryAppliedPlanResponse {
     'height'?: string;
 }
 /**
+ * Since: cosmos-sdk 0.46
+ * @export
+ * @interface CosmosUpgradeV1beta1QueryAuthorityResponse
+ */
+export interface CosmosUpgradeV1beta1QueryAuthorityResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CosmosUpgradeV1beta1QueryAuthorityResponse
+     */
+    'address'?: string;
+}
+/**
  * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC method.
  * @export
  * @interface CosmosUpgradeV1beta1QueryCurrentPlanResponse
@@ -3773,7 +6142,7 @@ export interface CosmosUpgradeV1beta1QueryCurrentPlanResponse {
     'plan'?: CurrentPlan200ResponsePlan;
 }
 /**
- * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.  Since: cosmos-sdk 0.43
  * @export
  * @interface CosmosUpgradeV1beta1QueryModuleVersionsResponse
  */
@@ -3830,7 +6199,7 @@ export interface CurrentPlan200ResponsePlan {
      */
     'time'?: string;
     /**
-     * The height at which the upgrade must be performed. Only used if Time is not set.
+     * The height at which the upgrade must be performed.
      * @type {string}
      * @memberof CurrentPlan200ResponsePlan
      */
@@ -3843,10 +6212,10 @@ export interface CurrentPlan200ResponsePlan {
     'info'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof CurrentPlan200ResponsePlan
      */
-    'upgraded_client_state'?: AccountsAreTheExistingAccountsInner;
+    'upgraded_client_state'?: AccountInfo200ResponseInfoPubKey;
 }
 /**
  * 
@@ -3860,6 +6229,44 @@ export interface DataContainsTheSetOfTransactionsIncludedInTheBlock {
      * @memberof DataContainsTheSetOfTransactionsIncludedInTheBlock
      */
     'txs'?: Array<string>;
+}
+/**
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }  Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON  The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
+ * @export
+ * @interface DataIsAnAppSpecificDataOfTheNFTOptional
+ */
+export interface DataIsAnAppSpecificDataOfTheNFTOptional {
+    /**
+     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+     * @type {string}
+     * @memberof DataIsAnAppSpecificDataOfTheNFTOptional
+     */
+    'type_url'?: string;
+    /**
+     * Must be a valid serialized protocol buffer of the above specified type.
+     * @type {string}
+     * @memberof DataIsAnAppSpecificDataOfTheNFTOptional
+     */
+    'value'?: string;
+}
+/**
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }  Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON  The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
+ * @export
+ * @interface DataIsTheAppSpecificMetadataOfTheNFTClassOptional
+ */
+export interface DataIsTheAppSpecificMetadataOfTheNFTClassOptional {
+    /**
+     * A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL\'s path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted).  In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:  * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.)  Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com.  Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics.
+     * @type {string}
+     * @memberof DataIsTheAppSpecificMetadataOfTheNFTClassOptional
+     */
+    'type_url'?: string;
+    /**
+     * Must be a valid serialized protocol buffer of the above specified type.
+     * @type {string}
+     * @memberof DataIsTheAppSpecificMetadataOfTheNFTClassOptional
+     */
+    'value'?: string;
 }
 /**
  * QueryDelegationResponse is response type for the Query/Delegation RPC method.
@@ -4062,6 +6469,18 @@ export interface DelegatorUnbondingDelegations200ResponseUnbondingResponsesInner
      * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
      */
     'balance'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+     */
+    'unbonding_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DelegatorUnbondingDelegations200ResponseUnbondingResponsesInnerEntriesInner
+     */
+    'unbonding_on_hold_ref_count'?: string;
 }
 /**
  * QueryDelegatorValidatorResponse response type for the Query/DelegatorValidator RPC method.
@@ -4116,7 +6535,7 @@ export interface DenomMetadata200Response {
     'metadata'?: DenomsMetadata200ResponseMetadatasInner;
 }
 /**
- * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.  Since: cosmos-sdk 0.46
  * @export
  * @interface DenomOwners200Response
  */
@@ -4135,7 +6554,7 @@ export interface DenomOwners200Response {
     'pagination'?: Accounts200ResponsePagination;
 }
 /**
- * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.
+ * DenomOwner defines structure representing an account that owns or holds a particular denominated token. It contains the account address and account balance of the denominated token.  Since: cosmos-sdk 0.46
  * @export
  * @interface DenomOwners200ResponseDenomOwnersInner
  */
@@ -4166,7 +6585,7 @@ export interface DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner {
      */
     'denom'?: string;
     /**
-     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
+     * exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit\'s denom 1 denom = 10^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of \'atom\' with exponent = 6, thus: 1 atom = 10^6 uatom).
      * @type {number}
      * @memberof DenomUnitsRepresentsTheListOfDenomUnitSForAGivenCoinInner
      */
@@ -4228,25 +6647,25 @@ export interface DenomsMetadata200ResponseMetadatasInner {
      */
     'display'?: string;
     /**
-     * 
+     * Since: cosmos-sdk 0.43
      * @type {string}
      * @memberof DenomsMetadata200ResponseMetadatasInner
      */
     'name'?: string;
     /**
-     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.
+     * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display.  Since: cosmos-sdk 0.43
      * @type {string}
      * @memberof DenomsMetadata200ResponseMetadatasInner
      */
     'symbol'?: string;
     /**
-     * URI to a document (on or off-chain) that contains additional information. Optional.
+     * URI to a document (on or off-chain) that contains additional information. Optional.  Since: cosmos-sdk 0.46
      * @type {string}
      * @memberof DenomsMetadata200ResponseMetadatasInner
      */
     'uri'?: string;
     /**
-     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.
+     * URIHash is a sha256 hash of a document pointed by URI. It\'s used to verify that the document didn\'t change. Optional.  Since: cosmos-sdk 0.46
      * @type {string}
      * @memberof DenomsMetadata200ResponseMetadatasInner
      */
@@ -4272,7 +6691,7 @@ export interface Deposit200Response {
  */
 export interface Deposits200Response {
     /**
-     * 
+     * deposits defines the requested deposits.
      * @type {Array<Deposits200ResponseDepositsInner>}
      * @memberof Deposits200Response
      */
@@ -4291,23 +6710,482 @@ export interface Deposits200Response {
  */
 export interface Deposits200ResponseDepositsInner {
     /**
-     * 
+     * proposal_id defines the unique id of the proposal.
      * @type {string}
      * @memberof Deposits200ResponseDepositsInner
      */
     'proposal_id'?: string;
     /**
-     * 
+     * depositor defines the deposit addresses from the proposals.
      * @type {string}
      * @memberof Deposits200ResponseDepositsInner
      */
     'depositor'?: string;
     /**
-     * 
+     * amount to be deposited by depositor.
      * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof Deposits200ResponseDepositsInner
      */
     'amount'?: Array<AllBalances200ResponseBalancesInner>;
+}
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInstead
+ */
+export interface DeprecatedPleaseUseSdkBlockInstead {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadHeader}
+     * @memberof DeprecatedPleaseUseSdkBlockInstead
+     */
+    'header'?: DeprecatedPleaseUseSdkBlockInsteadHeader;
+    /**
+     * 
+     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
+     * @memberof DeprecatedPleaseUseSdkBlockInstead
+     */
+    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidence}
+     * @memberof DeprecatedPleaseUseSdkBlockInstead
+     */
+    'evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidence;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof DeprecatedPleaseUseSdkBlockInstead
+     */
+    'last_commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidence
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidence {
+    /**
+     * 
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner>}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidence
+     */
+    'evidence'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner>;
+}
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner
+     */
+    'duplicate_vote_evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner
+     */
+    'light_client_attack_evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence;
+}
+/**
+ * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'vote_a'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'vote_b'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'total_voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'validator_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence
+     */
+    'timestamp'?: string;
+}
+/**
+ * Vote represents a prevote, precommit, or commit vote from validators for consensus.
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA {
+    /**
+     * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'type'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'round'?: number;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'validator_address'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'validator_index'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
+     */
+    'signature'?: string;
+}
+
+export const DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum = {
+    Unknown: 'SIGNED_MSG_TYPE_UNKNOWN',
+    Prevote: 'SIGNED_MSG_TYPE_PREVOTE',
+    Precommit: 'SIGNED_MSG_TYPE_PRECOMMIT',
+    Proposal: 'SIGNED_MSG_TYPE_PROPOSAL'
+} as const;
+
+export type DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum = typeof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum[keyof typeof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum];
+
+/**
+ * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'conflicting_block'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'common_height'?: string;
+    /**
+     * 
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'byzantine_validators'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'total_voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence
+     */
+    'timestamp'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
+     */
+    'signed_header'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
+     */
+    'validator_set'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet;
+}
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader {
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadHeader}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
+     */
+    'header'?: DeprecatedPleaseUseSdkBlockInsteadHeader;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
+     */
+    'commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * Commit contains the evidence that a block was committed by a set of validators.
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'round'?: number;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'block_id'?: BlockID;
+    /**
+     * 
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
+     */
+    'signatures'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>;
+}
+/**
+ * CommitSig is a part of the Vote included in a Commit.
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'block_id_flag'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'validator_address'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
+     */
+    'signature'?: string;
+}
+
+export const DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum = {
+    Unknown: 'BLOCK_ID_FLAG_UNKNOWN',
+    Absent: 'BLOCK_ID_FLAG_ABSENT',
+    Commit: 'BLOCK_ID_FLAG_COMMIT',
+    Nil: 'BLOCK_ID_FLAG_NIL'
+} as const;
+
+export type DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum = typeof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum[keyof typeof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum];
+
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet {
+    /**
+     * 
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'validators'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'proposer'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
+     */
+    'total_voting_power'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'address'?: string;
+    /**
+     * 
+     * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'pub_key'?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'voting_power'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
+     */
+    'proposer_priority'?: string;
+}
+/**
+ * Header defines the structure of a Tendermint block header.
+ * @export
+ * @interface DeprecatedPleaseUseSdkBlockInsteadHeader
+ */
+export interface DeprecatedPleaseUseSdkBlockInsteadHeader {
+    /**
+     * 
+     * @type {BasicBlockInfo}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'version'?: BasicBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'chain_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'time'?: string;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'last_block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'last_commit_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'data_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'next_validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'consensus_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'app_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'last_results_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'evidence_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeprecatedPleaseUseSdkBlockInsteadHeader
+     */
+    'proposer_address'?: string;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -4335,13 +7213,13 @@ export interface DistributionParams200ResponseParams {
      */
     'community_tax'?: string;
     /**
-     * 
+     * Deprecated: The base_proposer_reward field is deprecated and is no longer used in the x/distribution module\'s reward mechanism.
      * @type {string}
      * @memberof DistributionParams200ResponseParams
      */
     'base_proposer_reward'?: string;
     /**
-     * 
+     * Deprecated: The bonus_proposer_reward field is deprecated and is no longer used in the x/distribution module\'s reward mechanism.
      * @type {string}
      * @memberof DistributionParams200ResponseParams
      */
@@ -4361,10 +7239,10 @@ export interface DistributionParams200ResponseParams {
 export interface Evidence200Response {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof Evidence200Response
      */
-    'evidence'?: AccountsAreTheExistingAccountsInner;
+    'evidence'?: AccountInfo200ResponseInfoPubKey;
 }
 /**
  * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method.
@@ -4380,10 +7258,16 @@ export interface GetBlockByHeight200Response {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlock}
+     * @type {DeprecatedPleaseUseSdkBlockInstead}
      * @memberof GetBlockByHeight200Response
      */
-    'block'?: GetLatestBlock200ResponseBlock;
+    'block'?: DeprecatedPleaseUseSdkBlockInstead;
+    /**
+     * 
+     * @type {SinceCosmosSdk047}
+     * @memberof GetBlockByHeight200Response
+     */
+    'sdk_block'?: SinceCosmosSdk047;
 }
 /**
  * GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method.
@@ -4399,469 +7283,16 @@ export interface GetLatestBlock200Response {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlock}
+     * @type {DeprecatedPleaseUseSdkBlockInstead}
      * @memberof GetLatestBlock200Response
      */
-    'block'?: GetLatestBlock200ResponseBlock;
-}
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlock
- */
-export interface GetLatestBlock200ResponseBlock {
+    'block'?: DeprecatedPleaseUseSdkBlockInstead;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockHeader}
-     * @memberof GetLatestBlock200ResponseBlock
+     * @type {SinceCosmosSdk047}
+     * @memberof GetLatestBlock200Response
      */
-    'header'?: GetLatestBlock200ResponseBlockHeader;
-    /**
-     * 
-     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
-     * @memberof GetLatestBlock200ResponseBlock
-     */
-    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidence}
-     * @memberof GetLatestBlock200ResponseBlock
-     */
-    'evidence'?: GetLatestBlock200ResponseBlockEvidence;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof GetLatestBlock200ResponseBlock
-     */
-    'last_commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
-}
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidence
- */
-export interface GetLatestBlock200ResponseBlockEvidence {
-    /**
-     * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>}
-     * @memberof GetLatestBlock200ResponseBlockEvidence
-     */
-    'evidence'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>;
-}
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInner
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInner {
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInner
-     */
-    'duplicate_vote_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInner
-     */
-    'light_client_attack_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence;
-}
-/**
- * DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence {
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
-     */
-    'vote_a'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
-     */
-    'vote_b'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
-     */
-    'total_voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
-     */
-    'validator_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence
-     */
-    'timestamp'?: string;
-}
-/**
- * Vote represents a prevote, precommit, or commit vote from validators for consensus.
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA {
-    /**
-     * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'type'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'round'?: number;
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'block_id'?: BlockID;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'validator_index'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA
-     */
-    'signature'?: string;
-}
-
-export const GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum = {
-    Unknown: 'SIGNED_MSG_TYPE_UNKNOWN',
-    Prevote: 'SIGNED_MSG_TYPE_PREVOTE',
-    Precommit: 'SIGNED_MSG_TYPE_PRECOMMIT',
-    Proposal: 'SIGNED_MSG_TYPE_PROPOSAL'
-} as const;
-
-export type GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum = typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum[keyof typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteATypeEnum];
-
-/**
- * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence {
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
-     */
-    'conflicting_block'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
-     */
-    'common_height'?: string;
-    /**
-     * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
-     */
-    'byzantine_validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
-     */
-    'total_voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence
-     */
-    'timestamp'?: string;
-}
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock {
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
-     */
-    'signed_header'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock
-     */
-    'validator_set'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet;
-}
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader {
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockHeader}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
-     */
-    'header'?: GetLatestBlock200ResponseBlockHeader;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader
-     */
-    'commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
-}
-/**
- * Commit contains the evidence that a block was committed by a set of validators.
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit {
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'round'?: number;
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'block_id'?: BlockID;
-    /**
-     * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit
-     */
-    'signatures'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>;
-}
-/**
- * CommitSig is a part of the Vote included in a Commit.
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
-     */
-    'block_id_flag'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
-     */
-    'validator_address'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
-     */
-    'timestamp'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner
-     */
-    'signature'?: string;
-}
-
-export const GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum = {
-    Unknown: 'BLOCK_ID_FLAG_UNKNOWN',
-    Absent: 'BLOCK_ID_FLAG_ABSENT',
-    Commit: 'BLOCK_ID_FLAG_COMMIT',
-    Nil: 'BLOCK_ID_FLAG_NIL'
-} as const;
-
-export type GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum = typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum[keyof typeof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInnerBlockIdFlagEnum];
-
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet {
-    /**
-     * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
-    /**
-     * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'proposer'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet
-     */
-    'total_voting_power'?: string;
-}
-/**
- * 
- * @export
- * @interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
- */
-export interface GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
-     */
-    'address'?: string;
-    /**
-     * 
-     * @type {PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
-     */
-    'pub_key'?: PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
-     */
-    'voting_power'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner
-     */
-    'proposer_priority'?: string;
-}
-/**
- * Header defines the structure of a Tendermint block header.
- * @export
- * @interface GetLatestBlock200ResponseBlockHeader
- */
-export interface GetLatestBlock200ResponseBlockHeader {
-    /**
-     * 
-     * @type {BasicBlockInfo}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'version'?: BasicBlockInfo;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'chain_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'height'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'time'?: string;
-    /**
-     * 
-     * @type {BlockID}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'last_block_id'?: BlockID;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'last_commit_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'data_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'next_validators_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'consensus_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'app_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'last_results_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'evidence_hash'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetLatestBlock200ResponseBlockHeader
-     */
-    'proposer_address'?: string;
+    'sdk_block'?: SinceCosmosSdk047;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method.
@@ -4895,7 +7326,7 @@ export interface GetLatestValidatorSet200Response {
  */
 export interface GetLatestValidatorSet200ResponsePagination {
     /**
-     * 
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
      * @type {string}
      * @memberof GetLatestValidatorSet200ResponsePagination
      */
@@ -4921,10 +7352,10 @@ export interface GetLatestValidatorSet200ResponseValidatorsInner {
     'address'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof GetLatestValidatorSet200ResponseValidatorsInner
      */
-    'pub_key'?: AccountsAreTheExistingAccountsInner;
+    'pub_key'?: AccountInfo200ResponseInfoPubKey;
     /**
      * 
      * @type {string}
@@ -4939,7 +7370,7 @@ export interface GetLatestValidatorSet200ResponseValidatorsInner {
     'proposer_priority'?: string;
 }
 /**
- * GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method.
+ * GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method.
  * @export
  * @interface GetNodeInfo200Response
  */
@@ -5150,7 +7581,7 @@ export interface GetValidatorSetByHeight200Response {
     'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
- * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }   Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...   Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := ptypes.MarshalAny(foo)      ...      foo := &pb.Foo{}      if err := ptypes.UnmarshalAny(any, foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
+ * `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }  Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use \'type.googleapis.com/full.type.name\' as the type URL and the unpack methods only use the fully qualified type name after the last \'/\' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON  The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
  * @export
  * @interface GoogleProtobufAny
  */
@@ -5206,7 +7637,7 @@ export interface GovParams200ResponseDepositParams {
      */
     'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
-     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.
      * @type {string}
      * @memberof GovParams200ResponseDepositParams
      */
@@ -5219,7 +7650,7 @@ export interface GovParams200ResponseDepositParams {
  */
 export interface GovParams200ResponseTallyParams {
     /**
-     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
+     * Minimum percentage of total stake needed to vote for a result to be considered valid.
      * @type {string}
      * @memberof GovParams200ResponseTallyParams
      */
@@ -5231,7 +7662,7 @@ export interface GovParams200ResponseTallyParams {
      */
     'threshold'?: string;
     /**
-     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
+     * Minimum value of Veto votes to Total votes ratio for proposal to be vetoed. Default value: 1/3.
      * @type {string}
      * @memberof GovParams200ResponseTallyParams
      */
@@ -5244,11 +7675,476 @@ export interface GovParams200ResponseTallyParams {
  */
 export interface GovParams200ResponseVotingParams {
     /**
-     * Length of the voting period.
+     * Duration of the voting period.
      * @type {string}
      * @memberof GovParams200ResponseVotingParams
      */
     'voting_period'?: string;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC method.
+ * @export
+ * @interface GovV1Params200Response
+ */
+export interface GovV1Params200Response {
+    /**
+     * 
+     * @type {GovV1Params200ResponseVotingParams}
+     * @memberof GovV1Params200Response
+     */
+    'voting_params'?: GovV1Params200ResponseVotingParams;
+    /**
+     * 
+     * @type {GovV1Params200ResponseDepositParams}
+     * @memberof GovV1Params200Response
+     */
+    'deposit_params'?: GovV1Params200ResponseDepositParams;
+    /**
+     * 
+     * @type {GovV1Params200ResponseTallyParams}
+     * @memberof GovV1Params200Response
+     */
+    'tally_params'?: GovV1Params200ResponseTallyParams;
+    /**
+     * 
+     * @type {GovV1Params200ResponseParams}
+     * @memberof GovV1Params200Response
+     */
+    'params'?: GovV1Params200ResponseParams;
+}
+/**
+ * Deprecated: Prefer to use `params` instead. deposit_params defines the parameters related to deposit.
+ * @export
+ * @interface GovV1Params200ResponseDepositParams
+ */
+export interface GovV1Params200ResponseDepositParams {
+    /**
+     * Minimum deposit for a proposal to enter voting period.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof GovV1Params200ResponseDepositParams
+     */
+    'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.
+     * @type {string}
+     * @memberof GovV1Params200ResponseDepositParams
+     */
+    'max_deposit_period'?: string;
+}
+/**
+ * params defines all the paramaters of x/gov module.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface GovV1Params200ResponseParams
+ */
+export interface GovV1Params200ResponseParams {
+    /**
+     * Minimum deposit for a proposal to enter voting period.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'min_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.
+     * @type {string}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'max_deposit_period'?: string;
+    /**
+     * Duration of the voting period.
+     * @type {string}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'voting_period'?: string;
+    /**
+     * Minimum percentage of total stake needed to vote for a result to be  considered valid.
+     * @type {string}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'quorum'?: string;
+    /**
+     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
+     * @type {string}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'threshold'?: string;
+    /**
+     * Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.
+     * @type {string}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'veto_threshold'?: string;
+    /**
+     * The ratio representing the proportion of the deposit value that must be paid at proposal submission.
+     * @type {string}
+     * @memberof GovV1Params200ResponseParams
+     */
+    'min_initial_deposit_ratio'?: string;
+}
+/**
+ * Deprecated: Prefer to use `params` instead. tally_params defines the parameters related to tally.
+ * @export
+ * @interface GovV1Params200ResponseTallyParams
+ */
+export interface GovV1Params200ResponseTallyParams {
+    /**
+     * Minimum percentage of total stake needed to vote for a result to be considered valid.
+     * @type {string}
+     * @memberof GovV1Params200ResponseTallyParams
+     */
+    'quorum'?: string;
+    /**
+     * Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
+     * @type {string}
+     * @memberof GovV1Params200ResponseTallyParams
+     */
+    'threshold'?: string;
+    /**
+     * Minimum value of Veto votes to Total votes ratio for proposal to be vetoed. Default value: 1/3.
+     * @type {string}
+     * @memberof GovV1Params200ResponseTallyParams
+     */
+    'veto_threshold'?: string;
+}
+/**
+ * Deprecated: Prefer to use `params` instead. voting_params defines the parameters related to voting.
+ * @export
+ * @interface GovV1Params200ResponseVotingParams
+ */
+export interface GovV1Params200ResponseVotingParams {
+    /**
+     * Duration of the voting period.
+     * @type {string}
+     * @memberof GovV1Params200ResponseVotingParams
+     */
+    'voting_period'?: string;
+}
+/**
+ * QueryProposalResponse is the response type for the Query/Proposal RPC method.
+ * @export
+ * @interface GovV1Proposal200Response
+ */
+export interface GovV1Proposal200Response {
+    /**
+     * 
+     * @type {GovV1Proposals200ResponseProposalsInner}
+     * @memberof GovV1Proposal200Response
+     */
+    'proposal'?: GovV1Proposals200ResponseProposalsInner;
+}
+/**
+ * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
+ * @export
+ * @interface GovV1Proposals200Response
+ */
+export interface GovV1Proposals200Response {
+    /**
+     * proposals defines all the requested governance proposals.
+     * @type {Array<GovV1Proposals200ResponseProposalsInner>}
+     * @memberof GovV1Proposals200Response
+     */
+    'proposals'?: Array<GovV1Proposals200ResponseProposalsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GovV1Proposals200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Proposal defines the core field members of a governance proposal.
+ * @export
+ * @interface GovV1Proposals200ResponseProposalsInner
+ */
+export interface GovV1Proposals200ResponseProposalsInner {
+    /**
+     * id defines the unique id of the proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'id'?: string;
+    /**
+     * messages are the arbitrary messages to be executed if the proposal passes.
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
+    /**
+     * status defines the proposal status.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'status'?: GovV1Proposals200ResponseProposalsInnerStatusEnum;
+    /**
+     * 
+     * @type {GovV1Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'final_tally_result'?: GovV1Proposals200ResponseProposalsInnerFinalTallyResult;
+    /**
+     * submit_time is the time of proposal submission.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'submit_time'?: string;
+    /**
+     * deposit_end_time is the end time for deposition.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'deposit_end_time'?: string;
+    /**
+     * total_deposit is the total deposit on the proposal.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * voting_start_time is the starting time to vote on a proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'voting_start_time'?: string;
+    /**
+     * voting_end_time is the end time of voting on a proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'voting_end_time'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'metadata'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'title'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'summary'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInner
+     */
+    'proposer'?: string;
+}
+
+export const GovV1Proposals200ResponseProposalsInnerStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed: 'PROPOSAL_STATUS_PASSED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Failed: 'PROPOSAL_STATUS_FAILED'
+} as const;
+
+export type GovV1Proposals200ResponseProposalsInnerStatusEnum = typeof GovV1Proposals200ResponseProposalsInnerStatusEnum[keyof typeof GovV1Proposals200ResponseProposalsInnerStatusEnum];
+
+/**
+ * final_tally_result is the final tally result of the proposal. When querying a proposal via gRPC, this field is not populated until the proposal\'s voting period has ended.
+ * @export
+ * @interface GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+ */
+export interface GovV1Proposals200ResponseProposalsInnerFinalTallyResult {
+    /**
+     * yes_count is the number of yes votes on a proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'yes_count'?: string;
+    /**
+     * abstain_count is the number of abstain votes on a proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'abstain_count'?: string;
+    /**
+     * no_count is the number of no votes on a proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'no_count'?: string;
+    /**
+     * no_with_veto_count is the number of no with veto votes on a proposal.
+     * @type {string}
+     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     */
+    'no_with_veto_count'?: string;
+}
+/**
+ * QueryTallyResultResponse is the response type for the Query/Tally RPC method.
+ * @export
+ * @interface GovV1TallyResult200Response
+ */
+export interface GovV1TallyResult200Response {
+    /**
+     * 
+     * @type {GovV1TallyResult200ResponseTally}
+     * @memberof GovV1TallyResult200Response
+     */
+    'tally'?: GovV1TallyResult200ResponseTally;
+}
+/**
+ * tally defines the requested tally.
+ * @export
+ * @interface GovV1TallyResult200ResponseTally
+ */
+export interface GovV1TallyResult200ResponseTally {
+    /**
+     * yes_count is the number of yes votes on a proposal.
+     * @type {string}
+     * @memberof GovV1TallyResult200ResponseTally
+     */
+    'yes_count'?: string;
+    /**
+     * abstain_count is the number of abstain votes on a proposal.
+     * @type {string}
+     * @memberof GovV1TallyResult200ResponseTally
+     */
+    'abstain_count'?: string;
+    /**
+     * no_count is the number of no votes on a proposal.
+     * @type {string}
+     * @memberof GovV1TallyResult200ResponseTally
+     */
+    'no_count'?: string;
+    /**
+     * no_with_veto_count is the number of no with veto votes on a proposal.
+     * @type {string}
+     * @memberof GovV1TallyResult200ResponseTally
+     */
+    'no_with_veto_count'?: string;
+}
+/**
+ * QueryVoteResponse is the response type for the Query/Vote RPC method.
+ * @export
+ * @interface GovV1Vote200Response
+ */
+export interface GovV1Vote200Response {
+    /**
+     * 
+     * @type {GovV1Votes200ResponseVotesInner}
+     * @memberof GovV1Vote200Response
+     */
+    'vote'?: GovV1Votes200ResponseVotesInner;
+}
+/**
+ * QueryVotesResponse is the response type for the Query/Votes RPC method.
+ * @export
+ * @interface GovV1Votes200Response
+ */
+export interface GovV1Votes200Response {
+    /**
+     * votes defines the queried votes.
+     * @type {Array<GovV1Votes200ResponseVotesInner>}
+     * @memberof GovV1Votes200Response
+     */
+    'votes'?: Array<GovV1Votes200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GovV1Votes200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Vote defines a vote on a governance proposal. A Vote consists of a proposal ID, the voter, and the vote option.
+ * @export
+ * @interface GovV1Votes200ResponseVotesInner
+ */
+export interface GovV1Votes200ResponseVotesInner {
+    /**
+     * proposal_id defines the unique id of the proposal.
+     * @type {string}
+     * @memberof GovV1Votes200ResponseVotesInner
+     */
+    'proposal_id'?: string;
+    /**
+     * voter is the voter address of the proposal.
+     * @type {string}
+     * @memberof GovV1Votes200ResponseVotesInner
+     */
+    'voter'?: string;
+    /**
+     * options is the weighted vote options.
+     * @type {Array<GovV1Votes200ResponseVotesInnerOptionsInner>}
+     * @memberof GovV1Votes200ResponseVotesInner
+     */
+    'options'?: Array<GovV1Votes200ResponseVotesInnerOptionsInner>;
+    /**
+     * metadata is any  arbitrary metadata to attached to the vote.
+     * @type {string}
+     * @memberof GovV1Votes200ResponseVotesInner
+     */
+    'metadata'?: string;
+}
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ * @export
+ * @interface GovV1Votes200ResponseVotesInnerOptionsInner
+ */
+export interface GovV1Votes200ResponseVotesInnerOptionsInner {
+    /**
+     * option defines the valid vote options, it must not contain duplicate vote options.
+     * @type {string}
+     * @memberof GovV1Votes200ResponseVotesInnerOptionsInner
+     */
+    'option'?: GovV1Votes200ResponseVotesInnerOptionsInnerOptionEnum;
+    /**
+     * weight is the vote weight associated with the vote option.
+     * @type {string}
+     * @memberof GovV1Votes200ResponseVotesInnerOptionsInner
+     */
+    'weight'?: string;
+}
+
+export const GovV1Votes200ResponseVotesInnerOptionsInnerOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type GovV1Votes200ResponseVotesInnerOptionsInnerOptionEnum = typeof GovV1Votes200ResponseVotesInnerOptionsInnerOptionEnum[keyof typeof GovV1Votes200ResponseVotesInnerOptionsInnerOptionEnum];
+
+/**
+ * 
+ * @export
+ * @interface GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto
+ */
+export interface GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto {
+    /**
+     * 
+     * @type {string}
+     * @memberof GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto
+     */
+    'granter'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto
+     */
+    'grantee'?: string;
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto
+     */
+    'authorization'?: AccountInfo200ResponseInfoPubKey;
+    /**
+     * 
+     * @type {string}
+     * @memberof GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto
+     */
+    'expiration'?: string;
 }
 /**
  * allowance is a allowance granted for grantee by granter.
@@ -5301,7 +8197,7 @@ export interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContext1 {
     'allowance'?: GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance;
 }
 /**
- * allowance can be any of basic and filtered fee allowance.
+ * allowance can be any of basic, periodic, allowed fee allowance.
  * @export
  * @interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
  */
@@ -5318,6 +8214,44 @@ export interface GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
      * @memberof GrantIsStoredInTheKVStoreToRecordAGrantWithFullContextAllowance
      */
     'value'?: string;
+}
+/**
+ * QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method.
+ * @export
+ * @interface GranteeGrants200Response
+ */
+export interface GranteeGrants200Response {
+    /**
+     * grants is a list of grants granted to the grantee.
+     * @type {Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>}
+     * @memberof GranteeGrants200Response
+     */
+    'grants'?: Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof GranteeGrants200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
+}
+/**
+ * QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method.
+ * @export
+ * @interface GranterGrants200Response
+ */
+export interface GranterGrants200Response {
+    /**
+     * grants is a list of grants granted by the granter.
+     * @type {Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>}
+     * @memberof GranterGrants200Response
+     */
+    'grants'?: Array<GrantAuthorizationExtendsAGrantWithBothTheAddressesOfTheGranteeAndGranterItIsUsedInGenesisProtoAndQueryProto>;
+    /**
+     * 
+     * @type {GetLatestValidatorSet200ResponsePagination}
+     * @memberof GranterGrants200Response
+     */
+    'pagination'?: GetLatestValidatorSet200ResponsePagination;
 }
 /**
  * QueryGrantsResponse is the response type for the Query/Authorizations RPC method.
@@ -5346,16 +8280,521 @@ export interface Grants200Response {
 export interface Grants200ResponseGrantsInner {
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof Grants200ResponseGrantsInner
      */
-    'authorization'?: AccountsAreTheExistingAccountsInner;
+    'authorization'?: AccountInfo200ResponseInfoPubKey;
     /**
      * 
      * @type {string}
      * @memberof Grants200ResponseGrantsInner
      */
     'expiration'?: string;
+}
+/**
+ * QueryGroupInfoResponse is the Query/GroupInfo response type.
+ * @export
+ * @interface GroupInfo200Response
+ */
+export interface GroupInfo200Response {
+    /**
+     * 
+     * @type {GroupInfo200ResponseInfo}
+     * @memberof GroupInfo200Response
+     */
+    'info'?: GroupInfo200ResponseInfo;
+}
+/**
+ * info is the GroupInfo of the group.
+ * @export
+ * @interface GroupInfo200ResponseInfo
+ */
+export interface GroupInfo200ResponseInfo {
+    /**
+     * id is the unique ID of the group.
+     * @type {string}
+     * @memberof GroupInfo200ResponseInfo
+     */
+    'id'?: string;
+    /**
+     * admin is the account address of the group\'s admin.
+     * @type {string}
+     * @memberof GroupInfo200ResponseInfo
+     */
+    'admin'?: string;
+    /**
+     * metadata is any arbitrary metadata to attached to the group.
+     * @type {string}
+     * @memberof GroupInfo200ResponseInfo
+     */
+    'metadata'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupInfo200ResponseInfo
+     */
+    'version'?: string;
+    /**
+     * total_weight is the sum of the group members\' weights.
+     * @type {string}
+     * @memberof GroupInfo200ResponseInfo
+     */
+    'total_weight'?: string;
+    /**
+     * created_at is a timestamp specifying when a group was created.
+     * @type {string}
+     * @memberof GroupInfo200ResponseInfo
+     */
+    'created_at'?: string;
+}
+/**
+ * QueryGroupMembersResponse is the Query/GroupMembersResponse response type.
+ * @export
+ * @interface GroupMembers200Response
+ */
+export interface GroupMembers200Response {
+    /**
+     * members are the members of the group with given group_id.
+     * @type {Array<GroupMembers200ResponseMembersInner>}
+     * @memberof GroupMembers200Response
+     */
+    'members'?: Array<GroupMembers200ResponseMembersInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GroupMembers200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * GroupMember represents the relationship between a group and a member.
+ * @export
+ * @interface GroupMembers200ResponseMembersInner
+ */
+export interface GroupMembers200ResponseMembersInner {
+    /**
+     * group_id is the unique ID of the group.
+     * @type {string}
+     * @memberof GroupMembers200ResponseMembersInner
+     */
+    'group_id'?: string;
+    /**
+     * 
+     * @type {GroupMembers200ResponseMembersInnerMember}
+     * @memberof GroupMembers200ResponseMembersInner
+     */
+    'member'?: GroupMembers200ResponseMembersInnerMember;
+}
+/**
+ * member is the member data.
+ * @export
+ * @interface GroupMembers200ResponseMembersInnerMember
+ */
+export interface GroupMembers200ResponseMembersInnerMember {
+    /**
+     * address is the member\'s account address.
+     * @type {string}
+     * @memberof GroupMembers200ResponseMembersInnerMember
+     */
+    'address'?: string;
+    /**
+     * weight is the member\'s voting weight that should be greater than 0.
+     * @type {string}
+     * @memberof GroupMembers200ResponseMembersInnerMember
+     */
+    'weight'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the member.
+     * @type {string}
+     * @memberof GroupMembers200ResponseMembersInnerMember
+     */
+    'metadata'?: string;
+    /**
+     * added_at is a timestamp specifying when a member was added.
+     * @type {string}
+     * @memberof GroupMembers200ResponseMembersInnerMember
+     */
+    'added_at'?: string;
+}
+/**
+ * QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type.
+ * @export
+ * @interface GroupPoliciesByAdmin200Response
+ */
+export interface GroupPoliciesByAdmin200Response {
+    /**
+     * group_policies are the group policies info with provided admin.
+     * @type {Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>}
+     * @memberof GroupPoliciesByAdmin200Response
+     */
+    'group_policies'?: Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GroupPoliciesByAdmin200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * GroupPolicyInfo represents the high-level on-chain information for a group policy.
+ * @export
+ * @interface GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+ */
+export interface GroupPoliciesByAdmin200ResponseGroupPoliciesInner {
+    /**
+     * address is the account address of group policy.
+     * @type {string}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'address'?: string;
+    /**
+     * group_id is the unique ID of the group.
+     * @type {string}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'group_id'?: string;
+    /**
+     * admin is the account address of the group admin.
+     * @type {string}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'admin'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the group policy.
+     * @type {string}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'metadata'?: string;
+    /**
+     * version is used to track changes to a group\'s GroupPolicyInfo structure that would create a different result on a running proposal.
+     * @type {string}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'version'?: string;
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'decision_policy'?: AccountInfo200ResponseInfoPubKey;
+    /**
+     * created_at is a timestamp specifying when a group policy was created.
+     * @type {string}
+     * @memberof GroupPoliciesByAdmin200ResponseGroupPoliciesInner
+     */
+    'created_at'?: string;
+}
+/**
+ * QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type.
+ * @export
+ * @interface GroupPoliciesByGroup200Response
+ */
+export interface GroupPoliciesByGroup200Response {
+    /**
+     * group_policies are the group policies info associated with the provided group.
+     * @type {Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>}
+     * @memberof GroupPoliciesByGroup200Response
+     */
+    'group_policies'?: Array<GroupPoliciesByAdmin200ResponseGroupPoliciesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GroupPoliciesByGroup200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * QueryGroupPolicyInfoResponse is the Query/GroupPolicyInfo response type.
+ * @export
+ * @interface GroupPolicyInfo200Response
+ */
+export interface GroupPolicyInfo200Response {
+    /**
+     * 
+     * @type {GroupPoliciesByAdmin200ResponseGroupPoliciesInner}
+     * @memberof GroupPolicyInfo200Response
+     */
+    'info'?: GroupPoliciesByAdmin200ResponseGroupPoliciesInner;
+}
+/**
+ * QueryProposalResponse is the Query/Proposal response type.
+ * @export
+ * @interface GroupProposal200Response
+ */
+export interface GroupProposal200Response {
+    /**
+     * 
+     * @type {GroupProposal200ResponseProposal}
+     * @memberof GroupProposal200Response
+     */
+    'proposal'?: GroupProposal200ResponseProposal;
+}
+/**
+ * proposal is the proposal info.
+ * @export
+ * @interface GroupProposal200ResponseProposal
+ */
+export interface GroupProposal200ResponseProposal {
+    /**
+     * id is the unique id of the proposal.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'id'?: string;
+    /**
+     * group_policy_address is the account address of group policy.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'group_policy_address'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the proposal.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'metadata'?: string;
+    /**
+     * proposers are the account addresses of the proposers.
+     * @type {Array<string>}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'proposers'?: Array<string>;
+    /**
+     * submit_time is a timestamp specifying when a proposal was submitted.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'submit_time'?: string;
+    /**
+     * group_version tracks the version of the group at proposal submission. This field is here for informational purposes only.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'group_version'?: string;
+    /**
+     * group_policy_version tracks the version of the group policy at proposal submission. When a decision policy is changed, existing proposals from previous policy versions will become invalid with the `ABORTED` status. This field is here for informational purposes only.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'group_policy_version'?: string;
+    /**
+     * status represents the high level position in the life cycle of the proposal. Initial value is Submitted.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'status'?: GroupProposal200ResponseProposalStatusEnum;
+    /**
+     * 
+     * @type {GroupProposal200ResponseProposalFinalTallyResult}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'final_tally_result'?: GroupProposal200ResponseProposalFinalTallyResult;
+    /**
+     * voting_period_end is the timestamp before which voting must be done. Unless a successful MsgExec is called before (to execute a proposal whose tally is successful before the voting period ends), tallying will be done at this point, and the `final_tally_result`and `status` fields will be accordingly updated.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'voting_period_end'?: string;
+    /**
+     * executor_result is the final result of the proposal execution. Initial value is NotRun.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'executor_result'?: GroupProposal200ResponseProposalExecutorResultEnum;
+    /**
+     * messages is a list of `sdk.Msg`s that will be executed if the proposal passes.
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'title'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposal
+     */
+    'summary'?: string;
+}
+
+export const GroupProposal200ResponseProposalStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    Submitted: 'PROPOSAL_STATUS_SUBMITTED',
+    Accepted: 'PROPOSAL_STATUS_ACCEPTED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Aborted: 'PROPOSAL_STATUS_ABORTED',
+    Withdrawn: 'PROPOSAL_STATUS_WITHDRAWN'
+} as const;
+
+export type GroupProposal200ResponseProposalStatusEnum = typeof GroupProposal200ResponseProposalStatusEnum[keyof typeof GroupProposal200ResponseProposalStatusEnum];
+export const GroupProposal200ResponseProposalExecutorResultEnum = {
+    Unspecified: 'PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED',
+    NotRun: 'PROPOSAL_EXECUTOR_RESULT_NOT_RUN',
+    Success: 'PROPOSAL_EXECUTOR_RESULT_SUCCESS',
+    Failure: 'PROPOSAL_EXECUTOR_RESULT_FAILURE'
+} as const;
+
+export type GroupProposal200ResponseProposalExecutorResultEnum = typeof GroupProposal200ResponseProposalExecutorResultEnum[keyof typeof GroupProposal200ResponseProposalExecutorResultEnum];
+
+/**
+ * final_tally_result contains the sums of all weighted votes for this proposal for each vote option. It is empty at submission, and only populated after tallying, at voting period end or at proposal execution, whichever happens first.
+ * @export
+ * @interface GroupProposal200ResponseProposalFinalTallyResult
+ */
+export interface GroupProposal200ResponseProposalFinalTallyResult {
+    /**
+     * yes_count is the weighted sum of yes votes.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposalFinalTallyResult
+     */
+    'yes_count'?: string;
+    /**
+     * abstain_count is the weighted sum of abstainers.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposalFinalTallyResult
+     */
+    'abstain_count'?: string;
+    /**
+     * no_count is the weighted sum of no votes.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposalFinalTallyResult
+     */
+    'no_count'?: string;
+    /**
+     * no_with_veto_count is the weighted sum of veto.
+     * @type {string}
+     * @memberof GroupProposal200ResponseProposalFinalTallyResult
+     */
+    'no_with_veto_count'?: string;
+}
+/**
+ * QueryTallyResultResponse is the Query/TallyResult response type.
+ * @export
+ * @interface GroupTallyResult200Response
+ */
+export interface GroupTallyResult200Response {
+    /**
+     * 
+     * @type {GroupTallyResult200ResponseTally}
+     * @memberof GroupTallyResult200Response
+     */
+    'tally'?: GroupTallyResult200ResponseTally;
+}
+/**
+ * tally defines the requested tally.
+ * @export
+ * @interface GroupTallyResult200ResponseTally
+ */
+export interface GroupTallyResult200ResponseTally {
+    /**
+     * yes_count is the weighted sum of yes votes.
+     * @type {string}
+     * @memberof GroupTallyResult200ResponseTally
+     */
+    'yes_count'?: string;
+    /**
+     * abstain_count is the weighted sum of abstainers.
+     * @type {string}
+     * @memberof GroupTallyResult200ResponseTally
+     */
+    'abstain_count'?: string;
+    /**
+     * no_count is the weighted sum of no votes.
+     * @type {string}
+     * @memberof GroupTallyResult200ResponseTally
+     */
+    'no_count'?: string;
+    /**
+     * no_with_veto_count is the weighted sum of veto.
+     * @type {string}
+     * @memberof GroupTallyResult200ResponseTally
+     */
+    'no_with_veto_count'?: string;
+}
+/**
+ * QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type.
+ * @export
+ * @interface GroupsByAdmin200Response
+ */
+export interface GroupsByAdmin200Response {
+    /**
+     * groups are the groups info with the provided admin.
+     * @type {Array<GroupsByAdmin200ResponseGroupsInner>}
+     * @memberof GroupsByAdmin200Response
+     */
+    'groups'?: Array<GroupsByAdmin200ResponseGroupsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GroupsByAdmin200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * GroupInfo represents the high-level on-chain information for a group.
+ * @export
+ * @interface GroupsByAdmin200ResponseGroupsInner
+ */
+export interface GroupsByAdmin200ResponseGroupsInner {
+    /**
+     * id is the unique ID of the group.
+     * @type {string}
+     * @memberof GroupsByAdmin200ResponseGroupsInner
+     */
+    'id'?: string;
+    /**
+     * admin is the account address of the group\'s admin.
+     * @type {string}
+     * @memberof GroupsByAdmin200ResponseGroupsInner
+     */
+    'admin'?: string;
+    /**
+     * metadata is any arbitrary metadata to attached to the group.
+     * @type {string}
+     * @memberof GroupsByAdmin200ResponseGroupsInner
+     */
+    'metadata'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsByAdmin200ResponseGroupsInner
+     */
+    'version'?: string;
+    /**
+     * total_weight is the sum of the group members\' weights.
+     * @type {string}
+     * @memberof GroupsByAdmin200ResponseGroupsInner
+     */
+    'total_weight'?: string;
+    /**
+     * created_at is a timestamp specifying when a group was created.
+     * @type {string}
+     * @memberof GroupsByAdmin200ResponseGroupsInner
+     */
+    'created_at'?: string;
+}
+/**
+ * QueryGroupsByMemberResponse is the Query/GroupsByMember response type.
+ * @export
+ * @interface GroupsByMember200Response
+ */
+export interface GroupsByMember200Response {
+    /**
+     * groups are the groups info with the provided group member.
+     * @type {Array<GroupsByAdmin200ResponseGroupsInner>}
+     * @memberof GroupsByMember200Response
+     */
+    'groups'?: Array<GroupsByAdmin200ResponseGroupsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof GroupsByMember200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
 }
 /**
  * 
@@ -5383,10 +8822,10 @@ export interface GrpcGatewayRuntimeError {
     'message'?: string;
     /**
      * 
-     * @type {Array<AccountsAreTheExistingAccountsInner>}
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
      * @memberof GrpcGatewayRuntimeError
      */
-    'details'?: Array<AccountsAreTheExistingAccountsInner>;
+    'details'?: Array<AccountInfo200ResponseInfoPubKey>;
 }
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC method.
@@ -5624,6 +9063,32 @@ export interface MintParams200ResponseParams {
     'blocks_per_year'?: string;
 }
 /**
+ * QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method.
+ * @export
+ * @interface ModuleAccountByName200Response
+ */
+export interface ModuleAccountByName200Response {
+    /**
+     * 
+     * @type {AccountInfo200ResponseInfoPubKey}
+     * @memberof ModuleAccountByName200Response
+     */
+    'account'?: AccountInfo200ResponseInfoPubKey;
+}
+/**
+ * QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface ModuleAccounts200Response
+ */
+export interface ModuleAccounts200Response {
+    /**
+     * 
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof ModuleAccounts200Response
+     */
+    'accounts'?: Array<AccountInfo200ResponseInfoPubKey>;
+}
+/**
  * 
  * @export
  * @interface ModuleIsTheTypeForVersionInfo
@@ -5649,7 +9114,7 @@ export interface ModuleIsTheTypeForVersionInfo {
     'sum'?: string;
 }
 /**
- * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions RPC method.  Since: cosmos-sdk 0.43
  * @export
  * @interface ModuleVersions200Response
  */
@@ -5662,7 +9127,7 @@ export interface ModuleVersions200Response {
     'module_versions'?: Array<ModuleVersions200ResponseModuleVersionsInner>;
 }
 /**
- * ModuleVersion specifies a module and its consensus version.
+ * ModuleVersion specifies a module and its consensus version.  Since: cosmos-sdk 0.43
  * @export
  * @interface ModuleVersions200ResponseModuleVersionsInner
  */
@@ -5679,6 +9144,80 @@ export interface ModuleVersions200ResponseModuleVersionsInner {
      * @memberof ModuleVersions200ResponseModuleVersionsInner
      */
     'version'?: string;
+}
+/**
+ * NFT defines the NFT.
+ * @export
+ * @interface NFTDefinesTheNFTInner
+ */
+export interface NFTDefinesTheNFTInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof NFTDefinesTheNFTInner
+     */
+    'class_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NFTDefinesTheNFTInner
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NFTDefinesTheNFTInner
+     */
+    'uri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NFTDefinesTheNFTInner
+     */
+    'uri_hash'?: string;
+    /**
+     * 
+     * @type {DataIsAnAppSpecificDataOfTheNFTOptional}
+     * @memberof NFTDefinesTheNFTInner
+     */
+    'data'?: DataIsAnAppSpecificDataOfTheNFTOptional;
+}
+/**
+ * NFT defines the NFT.
+ * @export
+ * @interface OwnerIsTheOwnerAddressOfTheNft
+ */
+export interface OwnerIsTheOwnerAddressOfTheNft {
+    /**
+     * 
+     * @type {string}
+     * @memberof OwnerIsTheOwnerAddressOfTheNft
+     */
+    'class_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OwnerIsTheOwnerAddressOfTheNft
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OwnerIsTheOwnerAddressOfTheNft
+     */
+    'uri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OwnerIsTheOwnerAddressOfTheNft
+     */
+    'uri_hash'?: string;
+    /**
+     * 
+     * @type {DataIsAnAppSpecificDataOfTheNFTOptional}
+     * @memberof OwnerIsTheOwnerAddressOfTheNft
+     */
+    'data'?: DataIsAnAppSpecificDataOfTheNFTOptional;
 }
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -5808,7 +9347,7 @@ export interface Proposal200Response {
  */
 export interface Proposals200Response {
     /**
-     * 
+     * proposals defines all the requested governance proposals.
      * @type {Array<Proposals200ResponseProposalsInner>}
      * @memberof Proposals200Response
      */
@@ -5827,19 +9366,19 @@ export interface Proposals200Response {
  */
 export interface Proposals200ResponseProposalsInner {
     /**
-     * 
+     * proposal_id defines the unique id of the proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInner
      */
     'proposal_id'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof Proposals200ResponseProposalsInner
      */
-    'content'?: AccountsAreTheExistingAccountsInner;
+    'content'?: AccountInfo200ResponseInfoPubKey;
     /**
-     * ProposalStatus enumerates the valid statuses of a proposal.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * status defines the proposal status.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInner
      */
@@ -5851,31 +9390,31 @@ export interface Proposals200ResponseProposalsInner {
      */
     'final_tally_result'?: Proposals200ResponseProposalsInnerFinalTallyResult;
     /**
-     * 
+     * submit_time is the time of proposal submission.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInner
      */
     'submit_time'?: string;
     /**
-     * 
+     * deposit_end_time is the end time for deposition.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInner
      */
     'deposit_end_time'?: string;
     /**
-     * 
+     * total_deposit is the total deposit on the proposal.
      * @type {Array<AllBalances200ResponseBalancesInner>}
      * @memberof Proposals200ResponseProposalsInner
      */
     'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
-     * 
+     * voting_start_time is the starting time to vote on a proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInner
      */
     'voting_start_time'?: string;
     /**
-     * 
+     * voting_end_time is the end time of voting on a proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInner
      */
@@ -5894,36 +9433,166 @@ export const Proposals200ResponseProposalsInnerStatusEnum = {
 export type Proposals200ResponseProposalsInnerStatusEnum = typeof Proposals200ResponseProposalsInnerStatusEnum[keyof typeof Proposals200ResponseProposalsInnerStatusEnum];
 
 /**
- * TallyResult defines a standard tally for a governance proposal.
+ * final_tally_result is the final tally result of the proposal. When querying a proposal via gRPC, this field is not populated until the proposal\'s voting period has ended.
  * @export
  * @interface Proposals200ResponseProposalsInnerFinalTallyResult
  */
 export interface Proposals200ResponseProposalsInnerFinalTallyResult {
     /**
-     * 
+     * yes is the number of yes votes on a proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
      */
     'yes'?: string;
     /**
-     * 
+     * abstain is the number of abstain votes on a proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
      */
     'abstain'?: string;
     /**
-     * 
+     * no is the number of no votes on a proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
      */
     'no'?: string;
     /**
-     * 
+     * no_with_veto is the number of no with veto votes on a proposal.
      * @type {string}
      * @memberof Proposals200ResponseProposalsInnerFinalTallyResult
      */
     'no_with_veto'?: string;
 }
+/**
+ * QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type.
+ * @export
+ * @interface ProposalsByGroupPolicy200Response
+ */
+export interface ProposalsByGroupPolicy200Response {
+    /**
+     * proposals are the proposals with given group policy.
+     * @type {Array<ProposalsByGroupPolicy200ResponseProposalsInner>}
+     * @memberof ProposalsByGroupPolicy200Response
+     */
+    'proposals'?: Array<ProposalsByGroupPolicy200ResponseProposalsInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof ProposalsByGroupPolicy200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Proposal defines a group proposal. Any member of a group can submit a proposal for a group policy to decide upon. A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal passes as well as some optional metadata associated with the proposal.
+ * @export
+ * @interface ProposalsByGroupPolicy200ResponseProposalsInner
+ */
+export interface ProposalsByGroupPolicy200ResponseProposalsInner {
+    /**
+     * id is the unique id of the proposal.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'id'?: string;
+    /**
+     * group_policy_address is the account address of group policy.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'group_policy_address'?: string;
+    /**
+     * metadata is any arbitrary metadata attached to the proposal.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'metadata'?: string;
+    /**
+     * proposers are the account addresses of the proposers.
+     * @type {Array<string>}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'proposers'?: Array<string>;
+    /**
+     * submit_time is a timestamp specifying when a proposal was submitted.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'submit_time'?: string;
+    /**
+     * group_version tracks the version of the group at proposal submission. This field is here for informational purposes only.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'group_version'?: string;
+    /**
+     * group_policy_version tracks the version of the group policy at proposal submission. When a decision policy is changed, existing proposals from previous policy versions will become invalid with the `ABORTED` status. This field is here for informational purposes only.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'group_policy_version'?: string;
+    /**
+     * status represents the high level position in the life cycle of the proposal. Initial value is Submitted.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'status'?: ProposalsByGroupPolicy200ResponseProposalsInnerStatusEnum;
+    /**
+     * 
+     * @type {GroupProposal200ResponseProposalFinalTallyResult}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'final_tally_result'?: GroupProposal200ResponseProposalFinalTallyResult;
+    /**
+     * voting_period_end is the timestamp before which voting must be done. Unless a successful MsgExec is called before (to execute a proposal whose tally is successful before the voting period ends), tallying will be done at this point, and the `final_tally_result`and `status` fields will be accordingly updated.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'voting_period_end'?: string;
+    /**
+     * executor_result is the final result of the proposal execution. Initial value is NotRun.
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'executor_result'?: ProposalsByGroupPolicy200ResponseProposalsInnerExecutorResultEnum;
+    /**
+     * messages is a list of `sdk.Msg`s that will be executed if the proposal passes.
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'title'?: string;
+    /**
+     * Since: cosmos-sdk 0.47
+     * @type {string}
+     * @memberof ProposalsByGroupPolicy200ResponseProposalsInner
+     */
+    'summary'?: string;
+}
+
+export const ProposalsByGroupPolicy200ResponseProposalsInnerStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    Submitted: 'PROPOSAL_STATUS_SUBMITTED',
+    Accepted: 'PROPOSAL_STATUS_ACCEPTED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Aborted: 'PROPOSAL_STATUS_ABORTED',
+    Withdrawn: 'PROPOSAL_STATUS_WITHDRAWN'
+} as const;
+
+export type ProposalsByGroupPolicy200ResponseProposalsInnerStatusEnum = typeof ProposalsByGroupPolicy200ResponseProposalsInnerStatusEnum[keyof typeof ProposalsByGroupPolicy200ResponseProposalsInnerStatusEnum];
+export const ProposalsByGroupPolicy200ResponseProposalsInnerExecutorResultEnum = {
+    Unspecified: 'PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED',
+    NotRun: 'PROPOSAL_EXECUTOR_RESULT_NOT_RUN',
+    Success: 'PROPOSAL_EXECUTOR_RESULT_SUCCESS',
+    Failure: 'PROPOSAL_EXECUTOR_RESULT_FAILURE'
+} as const;
+
+export type ProposalsByGroupPolicy200ResponseProposalsInnerExecutorResultEnum = typeof ProposalsByGroupPolicy200ResponseProposalsInnerExecutorResultEnum[keyof typeof ProposalsByGroupPolicy200ResponseProposalsInnerExecutorResultEnum];
+
 /**
  * 
  * @export
@@ -5942,6 +9611,171 @@ export interface PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators 
      * @memberof PublicKeyDefinesTheKeysAvailableForUseWithTendermintValidators
      */
     'secp256k1'?: string;
+}
+/**
+ * Since: cosmos-sdk 0.46.2
+ * @export
+ * @interface QueryAccountAddressByIDResponseIsTheResponseTypeForAccountAddressByIDRpcMethod
+ */
+export interface QueryAccountAddressByIDResponseIsTheResponseTypeForAccountAddressByIDRpcMethod {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryAccountAddressByIDResponseIsTheResponseTypeForAccountAddressByIDRpcMethod
+     */
+    'account_address'?: string;
+}
+/**
+ * Since: cosmos-sdk 0.46
+ * @export
+ * @interface QueryAuthorityResponseIsTheResponseTypeForQueryAuthority
+ */
+export interface QueryAuthorityResponseIsTheResponseTypeForQueryAuthority {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryAuthorityResponseIsTheResponseTypeForQueryAuthority
+     */
+    'address'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface QueryBalanceResponseIsTheResponseTypeForTheQueryBalanceRPCMethod
+ */
+export interface QueryBalanceResponseIsTheResponseTypeForTheQueryBalanceRPCMethod {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryBalanceResponseIsTheResponseTypeForTheQueryBalanceRPCMethod
+     */
+    'amount'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface QueryClassResponseIsTheResponseTypeForTheQueryClassRPCMethod
+ */
+export interface QueryClassResponseIsTheResponseTypeForTheQueryClassRPCMethod {
+    /**
+     * 
+     * @type {QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner}
+     * @memberof QueryClassResponseIsTheResponseTypeForTheQueryClassRPCMethod
+     */
+    'class'?: QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner;
+}
+/**
+ * 
+ * @export
+ * @interface QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethod
+ */
+export interface QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethod {
+    /**
+     * class defines the class of the nft type.
+     * @type {Array<QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner>}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethod
+     */
+    'classes'?: Array<QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethod
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Class defines the class of the nft type.
+ * @export
+ * @interface QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+ */
+export interface QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'symbol'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'uri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'uri_hash'?: string;
+    /**
+     * 
+     * @type {DataIsTheAppSpecificMetadataOfTheNFTClassOptional}
+     * @memberof QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethodClassesInner
+     */
+    'data'?: DataIsTheAppSpecificMetadataOfTheNFTClassOptional;
+}
+/**
+ * 
+ * @export
+ * @interface QueryNFTResponseIsTheResponseTypeForTheQueryNFTRPCMethod
+ */
+export interface QueryNFTResponseIsTheResponseTypeForTheQueryNFTRPCMethod {
+    /**
+     * 
+     * @type {OwnerIsTheOwnerAddressOfTheNft}
+     * @memberof QueryNFTResponseIsTheResponseTypeForTheQueryNFTRPCMethod
+     */
+    'nft'?: OwnerIsTheOwnerAddressOfTheNft;
+}
+/**
+ * 
+ * @export
+ * @interface QueryNFTsResponseIsTheResponseTypeForTheQueryNFTsRPCMethods
+ */
+export interface QueryNFTsResponseIsTheResponseTypeForTheQueryNFTsRPCMethods {
+    /**
+     * 
+     * @type {Array<NFTDefinesTheNFTInner>}
+     * @memberof QueryNFTsResponseIsTheResponseTypeForTheQueryNFTsRPCMethods
+     */
+    'nfts'?: Array<NFTDefinesTheNFTInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof QueryNFTsResponseIsTheResponseTypeForTheQueryNFTsRPCMethods
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * 
+ * @export
+ * @interface QueryOwnerResponseIsTheResponseTypeForTheQueryOwnerRPCMethod
+ */
+export interface QueryOwnerResponseIsTheResponseTypeForTheQueryOwnerRPCMethod {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryOwnerResponseIsTheResponseTypeForTheQueryOwnerRPCMethod
+     */
+    'owner'?: string;
 }
 /**
  * 
@@ -6032,7 +9866,7 @@ export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInf
  */
 export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodPagination {
     /**
-     * 
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
      * @type {string}
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodPagination
      */
@@ -6043,6 +9877,19 @@ export interface QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInf
      * @memberof QuerySigningInfosResponseIsTheResponseTypeForTheQuerySigningInfosRPCMethodPagination
      */
     'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface QuerySupplyResponseIsTheResponseTypeForTheQuerySupplyRPCMethod
+ */
+export interface QuerySupplyResponseIsTheResponseTypeForTheQuerySupplyRPCMethod {
+    /**
+     * 
+     * @type {string}
+     * @memberof QuerySupplyResponseIsTheResponseTypeForTheQuerySupplyRPCMethod
+     */
+    'amount'?: string;
 }
 /**
  * 
@@ -6058,10 +9905,29 @@ export interface QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupply
     'supply'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * 
-     * @type {Accounts200ResponsePagination}
+     * @type {QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination}
      * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethod
      */
-    'pagination'?: Accounts200ResponsePagination;
+    'pagination'?: QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination;
+}
+/**
+ * pagination defines the pagination in the response.  Since: cosmos-sdk 0.43
+ * @export
+ * @interface QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination
+ */
+export interface QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination {
+    /**
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
+     * @type {string}
+     * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryTotalSupplyResponseIsTheResponseTypeForTheQueryTotalSupplyRPCMethodPagination
+     */
+    'total'?: string;
 }
 /**
  * 
@@ -6077,7 +9943,7 @@ export interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryVal
     'commission'?: QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission;
 }
 /**
- * commission defines the commision the validator received.
+ * commission defines the commission the validator received.
  * @export
  * @interface QueryValidatorCommissionResponseIsTheResponseTypeForTheQueryValidatorCommissionRPCMethodCommission
  */
@@ -6258,6 +10124,56 @@ export interface Redelegations200ResponseRedelegationResponsesInnerRedelegationE
      * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
      */
     'shares_dst'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+     */
+    'unbonding_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Redelegations200ResponseRedelegationResponsesInnerRedelegationEntriesInner
+     */
+    'unbonding_on_hold_ref_count'?: string;
+}
+/**
+ * QuerySendEnabledResponse defines the RPC response of a SendEnable query.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface SendEnabled200Response
+ */
+export interface SendEnabled200Response {
+    /**
+     * 
+     * @type {Array<BankParams200ResponseParamsSendEnabledInner>}
+     * @memberof SendEnabled200Response
+     */
+    'send_enabled'?: Array<BankParams200ResponseParamsSendEnabledInner>;
+    /**
+     * 
+     * @type {SendEnabled200ResponsePagination}
+     * @memberof SendEnabled200Response
+     */
+    'pagination'?: SendEnabled200ResponsePagination;
+}
+/**
+ * pagination defines the pagination in the response. This field is only populated if the denoms field in the request is empty.
+ * @export
+ * @interface SendEnabled200ResponsePagination
+ */
+export interface SendEnabled200ResponsePagination {
+    /**
+     * next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.
+     * @type {string}
+     * @memberof SendEnabled200ResponsePagination
+     */
+    'next_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SendEnabled200ResponsePagination
+     */
+    'total'?: string;
 }
 /**
  * SimulateResponse is the response type for the Service.SimulateRPC method.
@@ -6304,7 +10220,7 @@ export interface Simulate200ResponseGasInfo {
  */
 export interface Simulate200ResponseResult {
     /**
-     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions.
+     * Data is any data returned from message or handler execution. It MUST be length prefixed in order to separate data from multiple message executions. Deprecated. This field is still populated, but prefer msg_response instead because it also contains the Msg response typeURL.
      * @type {string}
      * @memberof Simulate200ResponseResult
      */
@@ -6321,6 +10237,12 @@ export interface Simulate200ResponseResult {
      * @memberof Simulate200ResponseResult
      */
     'events'?: Array<Simulate200ResponseResultEventsInner>;
+    /**
+     * msg_responses contains the Msg handler responses type packed in Anys.  Since: cosmos-sdk 0.46
+     * @type {Array<AccountInfo200ResponseInfoPubKey>}
+     * @memberof Simulate200ResponseResult
+     */
+    'msg_responses'?: Array<AccountInfo200ResponseInfoPubKey>;
 }
 /**
  * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
@@ -6367,13 +10289,135 @@ export interface Simulate200ResponseResultEventsInnerAttributesInner {
     'index'?: boolean;
 }
 /**
+ * Block is tendermint type Block, with the Header proposer address field converted to bech32 string.
+ * @export
+ * @interface SinceCosmosSdk047
+ */
+export interface SinceCosmosSdk047 {
+    /**
+     * 
+     * @type {SinceCosmosSdk047Header}
+     * @memberof SinceCosmosSdk047
+     */
+    'header'?: SinceCosmosSdk047Header;
+    /**
+     * 
+     * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
+     * @memberof SinceCosmosSdk047
+     */
+    'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidence}
+     * @memberof SinceCosmosSdk047
+     */
+    'evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidence;
+    /**
+     * 
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @memberof SinceCosmosSdk047
+     */
+    'last_commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+}
+/**
+ * Header defines the structure of a Tendermint block header.
+ * @export
+ * @interface SinceCosmosSdk047Header
+ */
+export interface SinceCosmosSdk047Header {
+    /**
+     * 
+     * @type {BasicBlockInfo}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'version'?: BasicBlockInfo;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'chain_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'height'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'time'?: string;
+    /**
+     * 
+     * @type {BlockID}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'last_block_id'?: BlockID;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'last_commit_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'data_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'next_validators_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'consensus_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'app_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'last_results_hash'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'evidence_hash'?: string;
+    /**
+     * proposer_address is the original block proposer address, formatted as a Bech32 string. In Tendermint, this type is `bytes`, but in the SDK, we convert it to a Bech32 string for better UX.
+     * @type {string}
+     * @memberof SinceCosmosSdk047Header
+     */
+    'proposer_address'?: string;
+}
+/**
  * 
  * @export
  * @interface SingleRepresentsASingleSigner
  */
 export interface SingleRepresentsASingleSigner {
     /**
-     * SignMode represents a signing mode with its own security guarantees.   - SIGN_MODE_UNSPECIFIED: SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be rejected  - SIGN_MODE_DIRECT: SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is verified with raw bytes from Tx  - SIGN_MODE_TEXTUAL: SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-readable textual representation on top of the binary representation from SIGN_MODE_DIRECT  - SIGN_MODE_LEGACY_AMINO_JSON: SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses Amino JSON and will be removed in the future
+     * SignMode represents a signing mode with its own security guarantees.  This enum should be considered a registry of all known sign modes in the Cosmos ecosystem. Apps are not expected to support all known sign modes. Apps that would like to support custom  sign modes are encouraged to open a small PR against this file to add a new case to this SignMode enum describing their sign mode so that different apps have a consistent version of this enum.   - SIGN_MODE_UNSPECIFIED: SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be rejected.  - SIGN_MODE_DIRECT: SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is verified with raw bytes from Tx.  - SIGN_MODE_TEXTUAL: SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-readable textual representation on top of the binary representation from SIGN_MODE_DIRECT. It is currently not supported.  - SIGN_MODE_DIRECT_AUX: SIGN_MODE_DIRECT_AUX specifies a signing mode which uses SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not require signers signing over other signers\' `signer_info`. It also allows for adding Tips in transactions.  Since: cosmos-sdk 0.46  - SIGN_MODE_LEGACY_AMINO_JSON: SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses Amino JSON and will be removed in the future.  - SIGN_MODE_EIP_191: SIGN_MODE_EIP_191 specifies the sign mode for EIP 191 signing on the Cosmos SDK. Ref: https://eips.ethereum.org/EIPS/eip-191  Currently, SIGN_MODE_EIP_191 is registered as a SignMode enum variant, but is not implemented on the SDK by default. To enable EIP-191, you need to pass a custom `TxConfig` that has an implementation of `SignModeHandler` for EIP-191. The SDK may decide to fully support EIP-191 in the future.  Since: cosmos-sdk 0.45.2
      * @type {string}
      * @memberof SingleRepresentsASingleSigner
      */
@@ -6384,11 +10428,45 @@ export const SingleRepresentsASingleSignerModeEnum = {
     Unspecified: 'SIGN_MODE_UNSPECIFIED',
     Direct: 'SIGN_MODE_DIRECT',
     Textual: 'SIGN_MODE_TEXTUAL',
-    LegacyAminoJson: 'SIGN_MODE_LEGACY_AMINO_JSON'
+    DirectAux: 'SIGN_MODE_DIRECT_AUX',
+    LegacyAminoJson: 'SIGN_MODE_LEGACY_AMINO_JSON',
+    Eip191: 'SIGN_MODE_EIP_191'
 } as const;
 
 export type SingleRepresentsASingleSignerModeEnum = typeof SingleRepresentsASingleSignerModeEnum[keyof typeof SingleRepresentsASingleSignerModeEnum];
 
+/**
+ * QuerySpendableBalanceByDenomResponse defines the gRPC response structure for querying an account\'s spendable balance for a specific denom.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface SpendableBalanceByDenom200Response
+ */
+export interface SpendableBalanceByDenom200Response {
+    /**
+     * 
+     * @type {AllBalances200ResponseBalancesInner}
+     * @memberof SpendableBalanceByDenom200Response
+     */
+    'balance'?: AllBalances200ResponseBalancesInner;
+}
+/**
+ * QuerySpendableBalancesResponse defines the gRPC response structure for querying an account\'s spendable balances.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface SpendableBalances200Response
+ */
+export interface SpendableBalances200Response {
+    /**
+     * balances is the spendable balances of all the coins.
+     * @type {Array<AllBalances200ResponseBalancesInner>}
+     * @memberof SpendableBalances200Response
+     */
+    'balances'?: Array<AllBalances200ResponseBalancesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof SpendableBalances200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
 /**
  * QueryDelegatorValidatorsResponse is response type for the Query/DelegatorValidators RPC method.
  * @export
@@ -6422,10 +10500,10 @@ export interface StakingDelegatorValidators200ResponseValidatorsInner {
     'operator_address'?: string;
     /**
      * 
-     * @type {AccountsAreTheExistingAccountsInner}
+     * @type {AccountInfo200ResponseInfoPubKey}
      * @memberof StakingDelegatorValidators200ResponseValidatorsInner
      */
-    'consensus_pubkey'?: AccountsAreTheExistingAccountsInner;
+    'consensus_pubkey'?: AccountInfo200ResponseInfoPubKey;
     /**
      * jailed defined whether the validator has been jailed from bonded status or not.
      * @type {boolean}
@@ -6475,11 +10553,23 @@ export interface StakingDelegatorValidators200ResponseValidatorsInner {
      */
     'commission'?: StakingDelegatorValidators200ResponseValidatorsInnerCommission;
     /**
-     * min_self_delegation is the validator\'s self declared minimum self delegation.
+     * min_self_delegation is the validator\'s self declared minimum self delegation.  Since: cosmos-sdk 0.46
      * @type {string}
      * @memberof StakingDelegatorValidators200ResponseValidatorsInner
      */
     'min_self_delegation'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'unbonding_on_hold_ref_count'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StakingDelegatorValidators200ResponseValidatorsInner
+     */
+    'unbonding_ids'?: Array<string>;
 }
 
 export const StakingDelegatorValidators200ResponseValidatorsInnerStatusEnum = {
@@ -6621,6 +10711,44 @@ export interface StakingParams200ResponseParams {
      * @memberof StakingParams200ResponseParams
      */
     'bond_denom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StakingParams200ResponseParams
+     */
+    'min_commission_rate'?: string;
+}
+/**
+ * QuerySubspacesResponse defines the response types for querying for all registered subspaces and all keys for a subspace.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface Subspaces200Response
+ */
+export interface Subspaces200Response {
+    /**
+     * 
+     * @type {Array<Subspaces200ResponseSubspacesInner>}
+     * @memberof Subspaces200Response
+     */
+    'subspaces'?: Array<Subspaces200ResponseSubspacesInner>;
+}
+/**
+ * Subspace defines a parameter subspace name and all the keys that exist for the subspace.  Since: cosmos-sdk 0.46
+ * @export
+ * @interface Subspaces200ResponseSubspacesInner
+ */
+export interface Subspaces200ResponseSubspacesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof Subspaces200ResponseSubspacesInner
+     */
+    'subspace'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Subspaces200ResponseSubspacesInner
+     */
+    'keys'?: Array<string>;
 }
 /**
  * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
@@ -6643,10 +10771,41 @@ export interface SupplyOf200Response {
 export interface TallyResult200Response {
     /**
      * 
-     * @type {Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @type {TallyResult200ResponseTally}
      * @memberof TallyResult200Response
      */
-    'tally'?: Proposals200ResponseProposalsInnerFinalTallyResult;
+    'tally'?: TallyResult200ResponseTally;
+}
+/**
+ * tally defines the requested tally.
+ * @export
+ * @interface TallyResult200ResponseTally
+ */
+export interface TallyResult200ResponseTally {
+    /**
+     * yes is the number of yes votes on a proposal.
+     * @type {string}
+     * @memberof TallyResult200ResponseTally
+     */
+    'yes'?: string;
+    /**
+     * abstain is the number of abstain votes on a proposal.
+     * @type {string}
+     * @memberof TallyResult200ResponseTally
+     */
+    'abstain'?: string;
+    /**
+     * no is the number of no votes on a proposal.
+     * @type {string}
+     * @memberof TallyResult200ResponseTally
+     */
+    'no'?: string;
+    /**
+     * no_with_veto is the number of no with veto votes on a proposal.
+     * @type {string}
+     * @memberof TallyResult200ResponseTally
+     */
+    'no_with_veto'?: string;
 }
 /**
  * Event allows application developers to attach additional information to ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx. Later, transactions may be queried using these events.
@@ -6818,10 +10977,10 @@ export interface TendermintP2pProtocolVersion {
 export interface TendermintTypesBlock {
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockHeader}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadHeader}
      * @memberof TendermintTypesBlock
      */
-    'header'?: GetLatestBlock200ResponseBlockHeader;
+    'header'?: DeprecatedPleaseUseSdkBlockInsteadHeader;
     /**
      * 
      * @type {DataContainsTheSetOfTransactionsIncludedInTheBlock}
@@ -6830,16 +10989,16 @@ export interface TendermintTypesBlock {
     'data'?: DataContainsTheSetOfTransactionsIncludedInTheBlock;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidence}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidence}
      * @memberof TendermintTypesBlock
      */
-    'evidence'?: GetLatestBlock200ResponseBlockEvidence;
+    'evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidence;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesBlock
      */
-    'last_commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    'last_commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * 
@@ -6902,10 +11061,10 @@ export interface TendermintTypesCommit {
     'block_id'?: BlockID;
     /**
      * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>}
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>}
      * @memberof TendermintTypesCommit
      */
-    'signatures'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>;
+    'signatures'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommitSignaturesInner>;
 }
 /**
  * CommitSig is a part of the Vote included in a Commit.
@@ -6969,16 +11128,16 @@ export interface TendermintTypesData {
 export interface TendermintTypesDuplicateVoteEvidence {
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    'vote_a'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
+    'vote_a'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA}
      * @memberof TendermintTypesDuplicateVoteEvidence
      */
-    'vote_b'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
+    'vote_b'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidenceVoteA;
     /**
      * 
      * @type {string}
@@ -7006,16 +11165,16 @@ export interface TendermintTypesDuplicateVoteEvidence {
 export interface TendermintTypesEvidence {
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence}
      * @memberof TendermintTypesEvidence
      */
-    'duplicate_vote_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerDuplicateVoteEvidence;
+    'duplicate_vote_evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerDuplicateVoteEvidence;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence}
      * @memberof TendermintTypesEvidence
      */
-    'light_client_attack_evidence'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidence;
+    'light_client_attack_evidence'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidence;
 }
 /**
  * 
@@ -7025,10 +11184,10 @@ export interface TendermintTypesEvidence {
 export interface TendermintTypesEvidenceList {
     /**
      * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>}
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner>}
      * @memberof TendermintTypesEvidenceList
      */
-    'evidence'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInner>;
+    'evidence'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInner>;
 }
 /**
  * Header defines the structure of a Tendermint block header.
@@ -7129,16 +11288,16 @@ export interface TendermintTypesHeader {
 export interface TendermintTypesLightBlock {
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader}
      * @memberof TendermintTypesLightBlock
      */
-    'signed_header'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader;
+    'signed_header'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeader;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet}
      * @memberof TendermintTypesLightBlock
      */
-    'validator_set'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet;
+    'validator_set'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSet;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
@@ -7148,10 +11307,10 @@ export interface TendermintTypesLightBlock {
 export interface TendermintTypesLightClientAttackEvidence {
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    'conflicting_block'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock;
+    'conflicting_block'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlock;
     /**
      * 
      * @type {string}
@@ -7160,10 +11319,10 @@ export interface TendermintTypesLightClientAttackEvidence {
     'common_height'?: string;
     /**
      * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
      * @memberof TendermintTypesLightClientAttackEvidence
      */
-    'byzantine_validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
+    'byzantine_validators'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
     /**
      * 
      * @type {string}
@@ -7204,16 +11363,16 @@ export interface TendermintTypesPartSetHeader {
 export interface TendermintTypesSignedHeader {
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockHeader}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadHeader}
      * @memberof TendermintTypesSignedHeader
      */
-    'header'?: GetLatestBlock200ResponseBlockHeader;
+    'header'?: DeprecatedPleaseUseSdkBlockInsteadHeader;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit}
      * @memberof TendermintTypesSignedHeader
      */
-    'commit'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
+    'commit'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockSignedHeaderCommit;
 }
 /**
  * SignedMsgType is a type of signed message in the consensus.   - SIGNED_MSG_TYPE_PREVOTE: Votes  - SIGNED_MSG_TYPE_PROPOSAL: Proposals
@@ -7270,16 +11429,16 @@ export interface TendermintTypesValidator {
 export interface TendermintTypesValidatorSet {
     /**
      * 
-     * @type {Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
+     * @type {Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>}
      * @memberof TendermintTypesValidatorSet
      */
-    'validators'?: Array<GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
+    'validators'?: Array<DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner>;
     /**
      * 
-     * @type {GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner}
+     * @type {DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner}
      * @memberof TendermintTypesValidatorSet
      */
-    'proposer'?: GetLatestBlock200ResponseBlockEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner;
+    'proposer'?: DeprecatedPleaseUseSdkBlockInsteadEvidenceEvidenceInnerLightClientAttackEvidenceConflictingBlockValidatorSetValidatorsInner;
     /**
      * 
      * @type {string}
@@ -7372,6 +11531,84 @@ export interface TendermintVersionConsensus {
     'app'?: string;
 }
 /**
+ * TxDecodeAminoResponse is the response type for the Service.TxDecodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface TxDecodeAmino200Response
+ */
+export interface TxDecodeAmino200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof TxDecodeAmino200Response
+     */
+    'amino_json'?: string;
+}
+/**
+ * TxDecodeAminoRequest is the request type for the Service.TxDecodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface TxDecodeAminoRequest
+ */
+export interface TxDecodeAminoRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof TxDecodeAminoRequest
+     */
+    'amino_binary'?: string;
+}
+/**
+ * TxDecodeRequest is the request type for the Service.TxDecode RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface TxDecodeRequest
+ */
+export interface TxDecodeRequest {
+    /**
+     * tx_bytes is the raw transaction.
+     * @type {string}
+     * @memberof TxDecodeRequest
+     */
+    'tx_bytes'?: string;
+}
+/**
+ * TxEncodeResponse is the response type for the Service.TxEncode method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface TxEncode200Response
+ */
+export interface TxEncode200Response {
+    /**
+     * tx_bytes is the encoded transaction bytes.
+     * @type {string}
+     * @memberof TxEncode200Response
+     */
+    'tx_bytes'?: string;
+}
+/**
+ * TxEncodeAminoResponse is the response type for the Service.TxEncodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface TxEncodeAmino200Response
+ */
+export interface TxEncodeAmino200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof TxEncodeAmino200Response
+     */
+    'amino_binary'?: string;
+}
+/**
+ * TxEncodeAminoRequest is the request type for the Service.TxEncodeAmino RPC method.  Since: cosmos-sdk 0.47
+ * @export
+ * @interface TxEncodeAminoRequest
+ */
+export interface TxEncodeAminoRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof TxEncodeAminoRequest
+     */
+    'amino_json'?: string;
+}
+/**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation RPC method.
  * @export
  * @interface UnbondingDelegation200Response
@@ -7439,6 +11676,31 @@ export interface ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress {
      * @memberof ValSigningInfoIsTheSigningInfoOfRequestedValConsAddress
      */
     'missed_blocks_counter'?: string;
+}
+/**
+ * QueryValidatorDistributionInfoResponse is the response type for the Query/ValidatorDistributionInfo RPC method.
+ * @export
+ * @interface ValidatorDistributionInfo200Response
+ */
+export interface ValidatorDistributionInfo200Response {
+    /**
+     * operator_address defines the validator operator address.
+     * @type {string}
+     * @memberof ValidatorDistributionInfo200Response
+     */
+    'operator_address'?: string;
+    /**
+     * self_bond_rewards defines the self delegations rewards.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof ValidatorDistributionInfo200Response
+     */
+    'self_bond_rewards'?: Array<CommunityPool200ResponsePoolInner>;
+    /**
+     * commission defines the commission the validator received.
+     * @type {Array<CommunityPool200ResponsePoolInner>}
+     * @memberof ValidatorDistributionInfo200Response
+     */
+    'commission'?: Array<CommunityPool200ResponsePoolInner>;
 }
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the Query/ValidatorOutstandingRewards RPC method.
@@ -7537,13 +11799,74 @@ export interface Vote200Response {
     'vote'?: Votes200ResponseVotesInner;
 }
 /**
+ * QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type.
+ * @export
+ * @interface VoteByProposalVoter200Response
+ */
+export interface VoteByProposalVoter200Response {
+    /**
+     * 
+     * @type {VoteByProposalVoter200ResponseVote}
+     * @memberof VoteByProposalVoter200Response
+     */
+    'vote'?: VoteByProposalVoter200ResponseVote;
+}
+/**
+ * vote is the vote with given proposal_id and voter.
+ * @export
+ * @interface VoteByProposalVoter200ResponseVote
+ */
+export interface VoteByProposalVoter200ResponseVote {
+    /**
+     * proposal is the unique ID of the proposal.
+     * @type {string}
+     * @memberof VoteByProposalVoter200ResponseVote
+     */
+    'proposal_id'?: string;
+    /**
+     * voter is the account address of the voter.
+     * @type {string}
+     * @memberof VoteByProposalVoter200ResponseVote
+     */
+    'voter'?: string;
+    /**
+     * option is the voter\'s choice on the proposal.
+     * @type {string}
+     * @memberof VoteByProposalVoter200ResponseVote
+     */
+    'option'?: VoteByProposalVoter200ResponseVoteOptionEnum;
+    /**
+     * metadata is any arbitrary metadata attached to the vote.
+     * @type {string}
+     * @memberof VoteByProposalVoter200ResponseVote
+     */
+    'metadata'?: string;
+    /**
+     * submit_time is the timestamp when the vote was submitted.
+     * @type {string}
+     * @memberof VoteByProposalVoter200ResponseVote
+     */
+    'submit_time'?: string;
+}
+
+export const VoteByProposalVoter200ResponseVoteOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type VoteByProposalVoter200ResponseVoteOptionEnum = typeof VoteByProposalVoter200ResponseVoteOptionEnum[keyof typeof VoteByProposalVoter200ResponseVoteOptionEnum];
+
+/**
  * QueryVotesResponse is the response type for the Query/Votes RPC method.
  * @export
  * @interface Votes200Response
  */
 export interface Votes200Response {
     /**
-     * votes defined the queried votes.
+     * votes defines the queried votes.
      * @type {Array<Votes200ResponseVotesInner>}
      * @memberof Votes200Response
      */
@@ -7562,13 +11885,13 @@ export interface Votes200Response {
  */
 export interface Votes200ResponseVotesInner {
     /**
-     * 
+     * proposal_id defines the unique id of the proposal.
      * @type {string}
      * @memberof Votes200ResponseVotesInner
      */
     'proposal_id'?: string;
     /**
-     * 
+     * voter is the voter address of the proposal.
      * @type {string}
      * @memberof Votes200ResponseVotesInner
      */
@@ -7580,7 +11903,7 @@ export interface Votes200ResponseVotesInner {
      */
     'option'?: Votes200ResponseVotesInnerOptionEnum;
     /**
-     * 
+     * options is the weighted vote options.  Since: cosmos-sdk 0.43
      * @type {Array<Votes200ResponseVotesInnerOptionsInner>}
      * @memberof Votes200ResponseVotesInner
      */
@@ -7598,19 +11921,19 @@ export const Votes200ResponseVotesInnerOptionEnum = {
 export type Votes200ResponseVotesInnerOptionEnum = typeof Votes200ResponseVotesInnerOptionEnum[keyof typeof Votes200ResponseVotesInnerOptionEnum];
 
 /**
- * WeightedVoteOption defines a unit of vote for vote split.
+ * WeightedVoteOption defines a unit of vote for vote split.  Since: cosmos-sdk 0.43
  * @export
  * @interface Votes200ResponseVotesInnerOptionsInner
  */
 export interface Votes200ResponseVotesInnerOptionsInner {
     /**
-     * VoteOption enumerates the valid vote options for a given governance proposal.   - VOTE_OPTION_UNSPECIFIED: VOTE_OPTION_UNSPECIFIED defines a no-op vote option.  - VOTE_OPTION_YES: VOTE_OPTION_YES defines a yes vote option.  - VOTE_OPTION_ABSTAIN: VOTE_OPTION_ABSTAIN defines an abstain vote option.  - VOTE_OPTION_NO: VOTE_OPTION_NO defines a no vote option.  - VOTE_OPTION_NO_WITH_VETO: VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+     * option defines the valid vote options, it must not contain duplicate vote options.
      * @type {string}
      * @memberof Votes200ResponseVotesInnerOptionsInner
      */
     'option'?: Votes200ResponseVotesInnerOptionsInnerOptionEnum;
     /**
-     * 
+     * weight is the vote weight associated with the vote option.
      * @type {string}
      * @memberof Votes200ResponseVotesInnerOptionsInner
      */
@@ -7627,6 +11950,92 @@ export const Votes200ResponseVotesInnerOptionsInnerOptionEnum = {
 
 export type Votes200ResponseVotesInnerOptionsInnerOptionEnum = typeof Votes200ResponseVotesInnerOptionsInnerOptionEnum[keyof typeof Votes200ResponseVotesInnerOptionsInnerOptionEnum];
 
+/**
+ * QueryVotesByProposalResponse is the Query/VotesByProposal response type.
+ * @export
+ * @interface VotesByProposal200Response
+ */
+export interface VotesByProposal200Response {
+    /**
+     * votes are the list of votes for given proposal_id.
+     * @type {Array<VotesByProposal200ResponseVotesInner>}
+     * @memberof VotesByProposal200Response
+     */
+    'votes'?: Array<VotesByProposal200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof VotesByProposal200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
+/**
+ * Vote represents a vote for a proposal.
+ * @export
+ * @interface VotesByProposal200ResponseVotesInner
+ */
+export interface VotesByProposal200ResponseVotesInner {
+    /**
+     * proposal is the unique ID of the proposal.
+     * @type {string}
+     * @memberof VotesByProposal200ResponseVotesInner
+     */
+    'proposal_id'?: string;
+    /**
+     * voter is the account address of the voter.
+     * @type {string}
+     * @memberof VotesByProposal200ResponseVotesInner
+     */
+    'voter'?: string;
+    /**
+     * option is the voter\'s choice on the proposal.
+     * @type {string}
+     * @memberof VotesByProposal200ResponseVotesInner
+     */
+    'option'?: VotesByProposal200ResponseVotesInnerOptionEnum;
+    /**
+     * metadata is any arbitrary metadata attached to the vote.
+     * @type {string}
+     * @memberof VotesByProposal200ResponseVotesInner
+     */
+    'metadata'?: string;
+    /**
+     * submit_time is the timestamp when the vote was submitted.
+     * @type {string}
+     * @memberof VotesByProposal200ResponseVotesInner
+     */
+    'submit_time'?: string;
+}
+
+export const VotesByProposal200ResponseVotesInnerOptionEnum = {
+    Unspecified: 'VOTE_OPTION_UNSPECIFIED',
+    Yes: 'VOTE_OPTION_YES',
+    Abstain: 'VOTE_OPTION_ABSTAIN',
+    No: 'VOTE_OPTION_NO',
+    NoWithVeto: 'VOTE_OPTION_NO_WITH_VETO'
+} as const;
+
+export type VotesByProposal200ResponseVotesInnerOptionEnum = typeof VotesByProposal200ResponseVotesInnerOptionEnum[keyof typeof VotesByProposal200ResponseVotesInnerOptionEnum];
+
+/**
+ * QueryVotesByVoterResponse is the Query/VotesByVoter response type.
+ * @export
+ * @interface VotesByVoter200Response
+ */
+export interface VotesByVoter200Response {
+    /**
+     * votes are the list of votes by given voter.
+     * @type {Array<VotesByProposal200ResponseVotesInner>}
+     * @memberof VotesByVoter200Response
+     */
+    'votes'?: Array<VotesByProposal200ResponseVotesInner>;
+    /**
+     * 
+     * @type {Accounts200ResponsePagination}
+     * @memberof VotesByVoter200Response
+     */
+    'pagination'?: Accounts200ResponsePagination;
+}
 
 /**
  * QueryApi - axios parameter creator
@@ -7634,6 +12043,40 @@ export type Votes200ResponseVotesInnerOptionsInnerOptionEnum = typeof Votes200Re
  */
 export const QueryApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @summary Class queries an NFT class based on its id
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        _class: async (classId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'classId' is not null or undefined
+            assertParamExists('_class', 'classId', classId)
+            const localVarPath = `/cosmos/nft/v1beta1/classes/{class_id}`
+                .replace(`{${"class_id"}}`, encodeURIComponent(String(classId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary Account returns account details based on address.
@@ -7669,13 +12112,86 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
-         * @summary Accounts returns all the existing accounts
+         * Since: cosmos-sdk 0.46.2
+         * @summary AccountAddressByID returns account address based on account number.
+         * @param {string} id Deprecated, use account_id instead  id is the account number of the address to be queried. This field should have been an uint64 (like all account numbers), and will be updated to uint64 in a future version of the auth query.
+         * @param {string} [accountId] account_id is the account number of the address to be queried.  Since: cosmos-sdk 0.47
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accountAddressByID: async (id: string, accountId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('accountAddressByID', 'id', id)
+            const localVarPath = `/cosmos/auth/v1beta1/address_by_id/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (accountId !== undefined) {
+                localVarQueryParameter['account_id'] = accountId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary AccountInfo queries account info which is common to all account types.
+         * @param {string} address address is the account address string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accountInfo: async (address: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('accountInfo', 'address', address)
+            const localVarPath = `/cosmos/auth/v1beta1/account_info/{address}`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.43
+         * @summary Accounts returns all the existing accounts.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7724,14 +12240,82 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Since: cosmos-sdk 0.46
+         * @summary AddressBytesToString converts Account Address bytes to string
+         * @param {string} addressBytes 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addressBytesToString: async (addressBytes: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'addressBytes' is not null or undefined
+            assertParamExists('addressBytesToString', 'addressBytes', addressBytes)
+            const localVarPath = `/cosmos/auth/v1beta1/bech32/{address_bytes}`
+                .replace(`{${"address_bytes"}}`, encodeURIComponent(String(addressBytes)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary AddressStringToBytes converts Address string to bytes
+         * @param {string} addressString 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addressStringToBytes: async (addressString: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'addressString' is not null or undefined
+            assertParamExists('addressStringToBytes', 'addressString', addressString)
+            const localVarPath = `/cosmos/auth/v1beta1/bech32/{address_string}`
+                .replace(`{${"address_string"}}`, encodeURIComponent(String(addressString)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary AllBalances queries the balance of all coins for a single account.
          * @param {string} address address is the address to query balances for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7789,7 +12373,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7883,7 +12467,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7892,6 +12476,65 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('allowances', 'grantee', grantee)
             const localVarPath = `/cosmos/feegrant/v1beta1/allowances/{grantee}`
                 .replace(`{${"grantee"}}`, encodeURIComponent(String(grantee)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary AllowancesByGranter returns all the grants given by an address
+         * @param {string} granter 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        allowancesByGranter: async (granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'granter' is not null or undefined
+            assertParamExists('allowancesByGranter', 'granter', granter)
+            const localVarPath = `/cosmos/feegrant/v1beta1/issued/{granter}`
+                .replace(`{${"granter"}}`, encodeURIComponent(String(granter)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8029,21 +12672,13 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
-         * @summary Balance queries the balance of a single coin for a single account.
-         * @param {string} address address is the address to query balances for.
-         * @param {string} denom denom is the coin denom to query balances for.
+         * Since: cosmos-sdk 0.46
+         * @summary Returns the account with authority to conduct upgrades
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        balance: async (address: string, denom: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'address' is not null or undefined
-            assertParamExists('balance', 'address', address)
-            // verify required parameter 'denom' is not null or undefined
-            assertParamExists('balance', 'denom', denom)
-            const localVarPath = `/cosmos/bank/v1beta1/balances/{address}/{denom}`
-                .replace(`{${"address"}}`, encodeURIComponent(String(address)))
-                .replace(`{${"denom"}}`, encodeURIComponent(String(denom)));
+        authority: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/upgrade/v1beta1/authority`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8054,6 +12689,45 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Balance queries the balance of a single coin for a single account.
+         * @param {string} address address is the address to query balances for.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        balance: async (address: string, denom?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('balance', 'address', address)
+            const localVarPath = `/cosmos/bank/v1beta1/balances/{address}/by_denom`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (denom !== undefined) {
+                localVarQueryParameter['denom'] = denom;
+            }
 
 
     
@@ -8084,6 +12758,91 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary Bech32Prefix queries bech32Prefix
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bech32Prefix: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/auth/v1beta1/bech32`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Classes queries all NFT classes
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        classes: async (paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/nft/v1beta1/classes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
 
 
     
@@ -8267,14 +13026,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorDelegations queries all delegations of a given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8326,14 +13085,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorUnbondingDelegations queries all unbonding delegations of a given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8525,14 +13284,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
          * @summary DenomOwners queries for all account addresses that own a particular token denomination.
          * @param {string} denom denom defines the coin denomination to query all account holders for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8590,7 +13349,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8684,7 +13443,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8768,15 +13527,16 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Evidence queries evidence based on evidence hash.
-         * @param {string} evidenceHash evidence_hash defines the hash of the requested evidence.
+         * @param {string} hash hash defines the evidence hash of the requested evidence.  Since: cosmos-sdk 0.47
+         * @param {string} [evidenceHash] evidence_hash defines the hash of the requested evidence. Deprecated: Use hash, a HEX encoded string, instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        evidence: async (evidenceHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'evidenceHash' is not null or undefined
-            assertParamExists('evidence', 'evidenceHash', evidenceHash)
-            const localVarPath = `/cosmos/evidence/v1beta1/evidence/{evidence_hash}`
-                .replace(`{${"evidence_hash"}}`, encodeURIComponent(String(evidenceHash)));
+        evidence: async (hash: string, evidenceHash?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'hash' is not null or undefined
+            assertParamExists('evidence', 'hash', hash)
+            const localVarPath = `/cosmos/evidence/v1beta1/evidence/{hash}`
+                .replace(`{${"hash"}}`, encodeURIComponent(String(hash)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8787,6 +13547,10 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (evidenceHash !== undefined) {
+                localVarQueryParameter['evidence_hash'] = evidenceHash;
+            }
 
 
     
@@ -8835,6 +13599,490 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @summary Deposit queries single deposit information based proposalID, depositAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} depositor depositor defines the deposit addresses from the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Deposit: async (proposalId: string, depositor: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Deposit', 'proposalId', proposalId)
+            // verify required parameter 'depositor' is not null or undefined
+            assertParamExists('govV1Deposit', 'depositor', depositor)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)))
+                .replace(`{${"depositor"}}`, encodeURIComponent(String(depositor)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deposits queries all deposits of a single proposal.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Deposits: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Deposits', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/deposits`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Params queries all parameters of the gov module.
+         * @param {string} paramsType params_type defines which parameters to query for, can be one of \&quot;voting\&quot;, \&quot;tallying\&quot; or \&quot;deposit\&quot;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Params: async (paramsType: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paramsType' is not null or undefined
+            assertParamExists('govV1Params', 'paramsType', paramsType)
+            const localVarPath = `/cosmos/gov/v1/params/{params_type}`
+                .replace(`{${"params_type"}}`, encodeURIComponent(String(paramsType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Proposal queries proposal details based on ProposalID.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Proposal: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Proposal', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Proposals queries all proposals based on given status.
+         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {string} [voter] voter defines the voter address for the proposals.
+         * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Proposals: async (proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/gov/v1/proposals`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (proposalStatus !== undefined) {
+                localVarQueryParameter['proposal_status'] = proposalStatus;
+            }
+
+            if (voter !== undefined) {
+                localVarQueryParameter['voter'] = voter;
+            }
+
+            if (depositor !== undefined) {
+                localVarQueryParameter['depositor'] = depositor;
+            }
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary TallyResult queries the tally of a proposal vote.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1TallyResult: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1TallyResult', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/tally`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Vote queries voted information based on proposalID, voterAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} voter voter defines the voter address for the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Vote: async (proposalId: string, voter: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Vote', 'proposalId', proposalId)
+            // verify required parameter 'voter' is not null or undefined
+            assertParamExists('govV1Vote', 'voter', voter)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/votes/{voter}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)))
+                .replace(`{${"voter"}}`, encodeURIComponent(String(voter)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Votes queries votes of a given proposal.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Votes: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Votes', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/votes`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary GranteeGrants returns a list of `GrantAuthorization` by grantee.
+         * @param {string} grantee 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        granteeGrants: async (grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'grantee' is not null or undefined
+            assertParamExists('granteeGrants', 'grantee', grantee)
+            const localVarPath = `/cosmos/authz/v1beta1/grants/grantee/{grantee}`
+                .replace(`{${"grantee"}}`, encodeURIComponent(String(grantee)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary GranterGrants returns list of `GrantAuthorization`, granted by granter.
+         * @param {string} granter 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        granterGrants: async (granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'granter' is not null or undefined
+            assertParamExists('granterGrants', 'granter', granter)
+            const localVarPath = `/cosmos/authz/v1beta1/grants/granter/{granter}`
+                .replace(`{${"granter"}}`, encodeURIComponent(String(granter)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Returns list of `Authorization`, granted to the grantee by the granter.
          * @param {string} [granter] 
          * @param {string} [grantee] 
@@ -8843,7 +14091,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8871,6 +14119,437 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             if (msgTypeUrl !== undefined) {
                 localVarQueryParameter['msg_type_url'] = msgTypeUrl;
             }
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupInfo queries group info based on group id.
+         * @param {string} groupId group_id is the unique ID of the group.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupInfo: async (groupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupInfo', 'groupId', groupId)
+            const localVarPath = `/cosmos/group/v1/group_info/{group_id}`
+                .replace(`{${"group_id"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupMembers queries members of a group by group id.
+         * @param {string} groupId group_id is the unique ID of the group.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupMembers: async (groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupMembers', 'groupId', groupId)
+            const localVarPath = `/cosmos/group/v1/group_members/{group_id}`
+                .replace(`{${"group_id"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupPoliciesByAdmin queries group policies by admin address.
+         * @param {string} admin admin is the admin address of the group policy.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupPoliciesByAdmin: async (admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'admin' is not null or undefined
+            assertParamExists('groupPoliciesByAdmin', 'admin', admin)
+            const localVarPath = `/cosmos/group/v1/group_policies_by_admin/{admin}`
+                .replace(`{${"admin"}}`, encodeURIComponent(String(admin)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupPoliciesByGroup queries group policies by group id.
+         * @param {string} groupId group_id is the unique ID of the group policy\&#39;s group.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupPoliciesByGroup: async (groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupPoliciesByGroup', 'groupId', groupId)
+            const localVarPath = `/cosmos/group/v1/group_policies_by_group/{group_id}`
+                .replace(`{${"group_id"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupPolicyInfo queries group policy info based on account address of group policy.
+         * @param {string} address address is the account address of the group policy.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupPolicyInfo: async (address: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('groupPolicyInfo', 'address', address)
+            const localVarPath = `/cosmos/group/v1/group_policy_info/{address}`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Proposal queries a proposal based on proposal id.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupProposal: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('groupProposal', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/group/v1/proposal/{proposal_id}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary TallyResult returns the tally result of a proposal. If the proposal is still in voting period, then this query computes the current tally state, which might not be final. On the other hand, if the proposal is final, then it simply returns the `final_tally_result` state stored in the proposal itself.
+         * @param {string} proposalId proposal_id is the unique id of a proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupTallyResult: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('groupTallyResult', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/group/v1/proposals/{proposal_id}/tally`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupsByAdmin queries groups by admin address.
+         * @param {string} admin admin is the account address of a group\&#39;s admin.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsByAdmin: async (admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'admin' is not null or undefined
+            assertParamExists('groupsByAdmin', 'admin', admin)
+            const localVarPath = `/cosmos/group/v1/groups_by_admin/{admin}`
+                .replace(`{${"admin"}}`, encodeURIComponent(String(admin)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GroupsByMember queries groups by member address.
+         * @param {string} address address is the group member address.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsByMember: async (address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('groupsByMember', 'address', address)
+            const localVarPath = `/cosmos/group/v1/groups_by_member/{address}`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             if (paginationKey !== undefined) {
                 localVarQueryParameter['pagination.key'] = paginationKey;
@@ -8999,6 +14678,70 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @summary ModuleAccountByName returns the module account info by module name
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleAccountByName: async (name: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('moduleAccountByName', 'name', name)
+            const localVarPath = `/cosmos/auth/v1beta1/module_accounts/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary ModuleAccounts returns all the existing module accounts.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleAccounts: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/auth/v1beta1/module_accounts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.43
          * @summary ModuleVersions queries the list of module versions from state.
          * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
          * @param {*} [options] Override http request option.
@@ -9020,6 +14763,185 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             if (moduleName !== undefined) {
                 localVarQueryParameter['module_name'] = moduleName;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary NFT queries an NFT based on its class and id.
+         * @param {string} classId class_id associated with the nft
+         * @param {string} id id is a unique identifier of the NFT
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nFT: async (classId: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'classId' is not null or undefined
+            assertParamExists('nFT', 'classId', classId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('nFT', 'id', id)
+            const localVarPath = `/cosmos/nft/v1beta1/nfts/{class_id}/{id}`
+                .replace(`{${"class_id"}}`, encodeURIComponent(String(classId)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in ERC721Enumerable
+         * @param {string} [classId] class_id associated with the nft.
+         * @param {string} [owner] owner is the owner address of the nft.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nFTs: async (classId?: string, owner?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/nft/v1beta1/nfts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (classId !== undefined) {
+                localVarQueryParameter['class_id'] = classId;
+            }
+
+            if (owner !== undefined) {
+                localVarQueryParameter['owner'] = owner;
+            }
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721
+         * @param {string} owner owner is the owner address of the nft
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nftBalance: async (owner: string, classId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'owner' is not null or undefined
+            assertParamExists('nftBalance', 'owner', owner)
+            // verify required parameter 'classId' is not null or undefined
+            assertParamExists('nftBalance', 'classId', classId)
+            const localVarPath = `/cosmos/nft/v1beta1/balance/{owner}/{class_id}`
+                .replace(`{${"owner"}}`, encodeURIComponent(String(owner)))
+                .replace(`{${"class_id"}}`, encodeURIComponent(String(classId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721
+         * @param {string} classId class_id associated with the nft
+         * @param {string} id id is a unique identifier of the NFT
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        owner: async (classId: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'classId' is not null or undefined
+            assertParamExists('owner', 'classId', classId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('owner', 'id', id)
+            const localVarPath = `/cosmos/nft/v1beta1/owner/{class_id}/{id}`
+                .replace(`{${"class_id"}}`, encodeURIComponent(String(classId)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -9139,14 +15061,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9208,6 +15130,65 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @summary ProposalsByGroupPolicy queries proposals based on account address of group policy.
+         * @param {string} address address is the account address of the group policy related to proposals.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        proposalsByGroupPolicy: async (address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('proposalsByGroupPolicy', 'address', address)
+            const localVarPath = `/cosmos/group/v1/proposals_by_group_policy/{address}`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary Redelegations queries redelegations of given address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [srcValidatorAddr] src_validator_addr defines the validator address to redelegate from.
@@ -9216,7 +15197,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9242,6 +15223,66 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
 
             if (dstValidatorAddr !== undefined) {
                 localVarQueryParameter['dst_validator_addr'] = dstValidatorAddr;
+            }
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This query only returns denominations that have specific SendEnabled settings. Any denomination that does not have a specific setting will use the default params.default_send_enabled, and will not be returned by this query.  Since: cosmos-sdk 0.47
+         * @summary SendEnabled queries for SendEnabled entries.
+         * @param {Array<string>} [denoms] denoms is the specific denoms you want look up. Leave empty to get all entries.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendEnabled: async (denoms?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/bank/v1beta1/send_enabled`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (denoms) {
+                localVarQueryParameter['denoms'] = denoms;
             }
 
             if (paginationKey !== undefined) {
@@ -9316,7 +15357,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9395,14 +15436,112 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.47
+         * @summary SpendableBalanceByDenom queries the spendable balance of a single denom for a single account.
+         * @param {string} address address is the address to query balances for.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        spendableBalanceByDenom: async (address: string, denom?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('spendableBalanceByDenom', 'address', address)
+            const localVarPath = `/cosmos/bank/v1beta1/spendable_balances/{address}/by_denom`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (denom !== undefined) {
+                localVarQueryParameter['denom'] = denom;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
+         * @summary SpendableBalances queries the spendable balance of all coins for a single account.
+         * @param {string} address address is the address to query spendable balances for.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        spendableBalances: async (address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('spendableBalances', 'address', address)
+            const localVarPath = `/cosmos/bank/v1beta1/spendable_balances/{address}`
+                .replace(`{${"address"}}`, encodeURIComponent(String(address)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorValidators queries all validators info for given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9484,17 +15623,13 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
-         * @summary SupplyOf queries the supply of a single coin.
-         * @param {string} denom denom is the coin denom to query balances for.
+         * Since: cosmos-sdk 0.46
+         * @summary Subspaces queries for all registered subspaces and all keys for a subspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        supplyOf: async (denom: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'denom' is not null or undefined
-            assertParamExists('supplyOf', 'denom', denom)
-            const localVarPath = `/cosmos/bank/v1beta1/supply/{denom}`
-                .replace(`{${"denom"}}`, encodeURIComponent(String(denom)));
+        subspaces: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/params/v1beta1/subspaces`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9505,6 +15640,75 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Supply queries the number of NFTs from the given class, same as totalSupply of ERC721.
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        supply: async (classId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'classId' is not null or undefined
+            assertParamExists('supply', 'classId', classId)
+            const localVarPath = `/cosmos/nft/v1beta1/supply/{class_id}`
+                .replace(`{${"class_id"}}`, encodeURIComponent(String(classId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
+         * @summary SupplyOf queries the supply of a single coin.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        supplyOf: async (denom?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/bank/v1beta1/supply/by_denom`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (denom !== undefined) {
+                localVarQueryParameter['denom'] = denom;
+            }
 
 
     
@@ -9552,13 +15756,13 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary TotalSupply queries the total supply of all coins.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9646,7 +15850,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier
+         * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier This rpc is deprecated now that IBC has its own replacement (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
          * @param {string} lastHeight last height of the current chain must be sent in request as this is the height under which next consensus state is stored
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9747,14 +15951,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary ValidatorDelegations queries delegate info for given validator.
          * @param {string} validatorAddr validator_addr defines the validator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9793,6 +15997,40 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             if (paginationReverse !== undefined) {
                 localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary ValidatorDistributionInfo queries validator commission and self-delegation rewards for validator
+         * @param {string} validatorAddress validator_address defines the validator address to query for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validatorDistributionInfo: async (validatorAddress: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'validatorAddress' is not null or undefined
+            assertParamExists('validatorDistributionInfo', 'validatorAddress', validatorAddress)
+            const localVarPath = `/cosmos/distribution/v1beta1/validators/{validator_address}`
+                .replace(`{${"validator_address"}}`, encodeURIComponent(String(validatorAddress)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -9849,7 +16087,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9909,14 +16147,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary ValidatorUnbondingDelegations queries unbonding delegations of a validator.
          * @param {string} validatorAddr validator_addr defines the validator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9968,14 +16206,14 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary Validators queries all validators that match the given status.
          * @param {string} [status] status enables to query for validators matching a given status.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10031,7 +16269,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * 
          * @summary Vote queries voted information based on proposalID, voterAddr.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {string} voter voter defines the oter address for the proposals.
+         * @param {string} voter voter defines the voter address for the proposals.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10067,13 +16305,51 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @summary VoteByProposalVoter queries a vote by proposal id and voter.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {string} voter voter is a proposal voter account address.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        voteByProposalVoter: async (proposalId: string, voter: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('voteByProposalVoter', 'proposalId', proposalId)
+            // verify required parameter 'voter' is not null or undefined
+            assertParamExists('voteByProposalVoter', 'voter', voter)
+            const localVarPath = `/cosmos/group/v1/vote_by_proposal_voter/{proposal_id}/{voter}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)))
+                .replace(`{${"voter"}}`, encodeURIComponent(String(voter)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Votes queries votes of a given proposal.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10082,6 +16358,124 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('votes', 'proposalId', proposalId)
             const localVarPath = `/cosmos/gov/v1beta1/proposals/{proposal_id}/votes`
                 .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary VotesByProposal queries a vote by proposal id.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        votesByProposal: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('votesByProposal', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/group/v1/votes_by_proposal/{proposal_id}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary VotesByVoter queries a vote by voter.
+         * @param {string} voter voter is a proposal voter account address.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        votesByVoter: async (voter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'voter' is not null or undefined
+            assertParamExists('votesByVoter', 'voter', voter)
+            const localVarPath = `/cosmos/group/v1/votes_by_voter/{voter}`
+                .replace(`{${"voter"}}`, encodeURIComponent(String(voter)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10136,6 +16530,17 @@ export const QueryApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Class queries an NFT class based on its id
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async _class(classId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryClassResponseIsTheResponseTypeForTheQueryClassRPCMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator._class(classId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Account returns account details based on address.
          * @param {string} address address defines the address to query for.
          * @param {*} [options] Override http request option.
@@ -10146,13 +16551,36 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Accounts returns all the existing accounts
+         * Since: cosmos-sdk 0.46.2
+         * @summary AccountAddressByID returns account address based on account number.
+         * @param {string} id Deprecated, use account_id instead  id is the account number of the address to be queried. This field should have been an uint64 (like all account numbers), and will be updated to uint64 in a future version of the auth query.
+         * @param {string} [accountId] account_id is the account number of the address to be queried.  Since: cosmos-sdk 0.47
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async accountAddressByID(id: string, accountId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryAccountAddressByIDResponseIsTheResponseTypeForAccountAddressByIDRpcMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAddressByID(id, accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary AccountInfo queries account info which is common to all account types.
+         * @param {string} address address is the account address string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async accountInfo(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountInfo200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accountInfo(address, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.43
+         * @summary Accounts returns all the existing accounts.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10161,14 +16589,36 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Since: cosmos-sdk 0.46
+         * @summary AddressBytesToString converts Account Address bytes to string
+         * @param {string} addressBytes 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addressBytesToString(addressBytes: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressBytesToString200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addressBytesToString(addressBytes, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary AddressStringToBytes converts Address string to bytes
+         * @param {string} addressString 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addressStringToBytes(addressString: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressStringToBytes200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addressStringToBytes(addressString, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary AllBalances queries the balance of all coins for a single account.
          * @param {string} address address is the address to query balances for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10183,7 +16633,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10211,12 +16661,28 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Allowances200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary AllowancesByGranter returns all the grants given by an address
+         * @param {string} granter 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async allowancesByGranter(granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllowancesByGranter200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.allowancesByGranter(granter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10251,14 +16717,24 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Balance queries the balance of a single coin for a single account.
-         * @param {string} address address is the address to query balances for.
-         * @param {string} denom denom is the coin denom to query balances for.
+         * Since: cosmos-sdk 0.46
+         * @summary Returns the account with authority to conduct upgrades
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async balance(address: string, denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Balance200Response>> {
+        async authority(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryAuthorityResponseIsTheResponseTypeForQueryAuthority>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authority(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Balance queries the balance of a single coin for a single account.
+         * @param {string} address address is the address to query balances for.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async balance(address: string, denom?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Balance200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.balance(address, denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10270,6 +16746,31 @@ export const QueryApiFp = function(configuration?: Configuration) {
          */
         async bankParams(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankParams200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankParams(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary Bech32Prefix queries bech32Prefix
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bech32Prefix(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Bech32Prefix200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bech32Prefix(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Classes queries all NFT classes
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async classes(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.classes(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10328,14 +16829,14 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorDelegations queries all delegations of a given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10344,14 +16845,14 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorUnbondingDelegations queries all unbonding delegations of a given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10405,14 +16906,14 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
          * @summary DenomOwners queries for all account addresses that own a particular token denomination.
          * @param {string} denom denom defines the coin denomination to query all account holders for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10427,7 +16928,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10455,7 +16956,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10476,12 +16977,13 @@ export const QueryApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Evidence queries evidence based on evidence hash.
-         * @param {string} evidenceHash evidence_hash defines the hash of the requested evidence.
+         * @param {string} hash hash defines the evidence hash of the requested evidence.  Since: cosmos-sdk 0.47
+         * @param {string} [evidenceHash] evidence_hash defines the hash of the requested evidence. Deprecated: Use hash, a HEX encoded string, instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async evidence(evidenceHash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Evidence200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.evidence(evidenceHash, options);
+        async evidence(hash: string, evidenceHash?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Evidence200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.evidence(hash, evidenceHash, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10497,6 +16999,145 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Deposit queries single deposit information based proposalID, depositAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} depositor depositor defines the deposit addresses from the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposit200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Deposit(proposalId, depositor, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Deposits queries all deposits of a single proposal.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposits200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Params queries all parameters of the gov module.
+         * @param {string} paramsType params_type defines which parameters to query for, can be one of \&quot;voting\&quot;, \&quot;tallying\&quot; or \&quot;deposit\&quot;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Params(paramsType: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Params200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Params(paramsType, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Proposal queries proposal details based on ProposalID.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Proposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Proposal200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Proposal(proposalId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Proposals queries all proposals based on given status.
+         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {string} [voter] voter defines the voter address for the proposals.
+         * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Proposals200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary TallyResult queries the tally of a proposal vote.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1TallyResult(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1TallyResult200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1TallyResult(proposalId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Vote queries voted information based on proposalID, voterAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} voter voter defines the voter address for the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Vote(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Vote200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Vote(proposalId, voter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Votes queries votes of a given proposal.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Votes200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary GranteeGrants returns a list of `GrantAuthorization` by grantee.
+         * @param {string} grantee 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async granteeGrants(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GranteeGrants200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.granteeGrants(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary GranterGrants returns list of `GrantAuthorization`, granted by granter.
+         * @param {string} granter 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async granterGrants(granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GranterGrants200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.granterGrants(granter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Returns list of `Authorization`, granted to the grantee by the granter.
          * @param {string} [granter] 
          * @param {string} [grantee] 
@@ -10505,12 +17146,136 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Grants200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupInfo queries group info based on group id.
+         * @param {string} groupId group_id is the unique ID of the group.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupInfo(groupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupInfo200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupInfo(groupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupMembers queries members of a group by group id.
+         * @param {string} groupId group_id is the unique ID of the group.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupMembers(groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMembers200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupMembers(groupId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupPoliciesByAdmin queries group policies by admin address.
+         * @param {string} admin admin is the admin address of the group policy.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupPoliciesByAdmin(admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupPoliciesByAdmin200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPoliciesByAdmin(admin, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupPoliciesByGroup queries group policies by group id.
+         * @param {string} groupId group_id is the unique ID of the group policy\&#39;s group.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupPoliciesByGroup(groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupPoliciesByGroup200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPoliciesByGroup(groupId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupPolicyInfo queries group policy info based on account address of group policy.
+         * @param {string} address address is the account address of the group policy.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupPolicyInfo(address: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupPolicyInfo200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPolicyInfo(address, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Proposal queries a proposal based on proposal id.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupProposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupProposal200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupProposal(proposalId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary TallyResult returns the tally result of a proposal. If the proposal is still in voting period, then this query computes the current tally state, which might not be final. On the other hand, if the proposal is final, then it simply returns the `final_tally_result` state stored in the proposal itself.
+         * @param {string} proposalId proposal_id is the unique id of a proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupTallyResult(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupTallyResult200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupTallyResult(proposalId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupsByAdmin queries groups by admin address.
+         * @param {string} admin admin is the account address of a group\&#39;s admin.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupsByAdmin(admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupsByAdmin200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsByAdmin(admin, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary GroupsByMember queries groups by member address.
+         * @param {string} address address is the group member address.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupsByMember(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupsByMember200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsByMember(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10546,6 +17311,27 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary ModuleAccountByName returns the module account info by module name
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async moduleAccountByName(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModuleAccountByName200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.moduleAccountByName(name, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary ModuleAccounts returns all the existing module accounts.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async moduleAccounts(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModuleAccounts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.moduleAccounts(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.43
          * @summary ModuleVersions queries the list of module versions from state.
          * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
          * @param {*} [options] Override http request option.
@@ -10553,6 +17339,59 @@ export const QueryApiFp = function(configuration?: Configuration) {
          */
         async moduleVersions(moduleName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModuleVersions200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.moduleVersions(moduleName, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary NFT queries an NFT based on its class and id.
+         * @param {string} classId class_id associated with the nft
+         * @param {string} id id is a unique identifier of the NFT
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nFT(classId: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryNFTResponseIsTheResponseTypeForTheQueryNFTRPCMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nFT(classId, id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in ERC721Enumerable
+         * @param {string} [classId] class_id associated with the nft.
+         * @param {string} [owner] owner is the owner address of the nft.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nFTs(classId?: string, owner?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryNFTsResponseIsTheResponseTypeForTheQueryNFTsRPCMethods>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nFTs(classId, owner, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721
+         * @param {string} owner owner is the owner address of the nft
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nftBalance(owner: string, classId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryBalanceResponseIsTheResponseTypeForTheQueryBalanceRPCMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nftBalance(owner, classId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721
+         * @param {string} classId class_id associated with the nft
+         * @param {string} id id is a unique identifier of the NFT
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async owner(classId: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryOwnerResponseIsTheResponseTypeForTheQueryOwnerRPCMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.owner(classId, id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10591,14 +17430,14 @@ export const QueryApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10608,6 +17447,22 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary ProposalsByGroupPolicy queries proposals based on account address of group policy.
+         * @param {string} address address is the account address of the group policy related to proposals.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async proposalsByGroupPolicy(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProposalsByGroupPolicy200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.proposalsByGroupPolicy(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary Redelegations queries redelegations of given address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [srcValidatorAddr] src_validator_addr defines the validator address to redelegate from.
@@ -10616,12 +17471,28 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Redelegations200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This query only returns denominations that have specific SendEnabled settings. Any denomination that does not have a specific setting will use the default params.default_send_enabled, and will not be returned by this query.  Since: cosmos-sdk 0.47
+         * @summary SendEnabled queries for SendEnabled entries.
+         * @param {Array<string>} [denoms] denoms is the specific denoms you want look up. Leave empty to get all entries.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sendEnabled(denoms?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SendEnabled200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEnabled(denoms, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10642,7 +17513,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10661,14 +17532,42 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.47
+         * @summary SpendableBalanceByDenom queries the spendable balance of a single denom for a single account.
+         * @param {string} address address is the address to query balances for.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async spendableBalanceByDenom(address: string, denom?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendableBalanceByDenom200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.spendableBalanceByDenom(address, denom, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
+         * @summary SpendableBalances queries the spendable balance of all coins for a single account.
+         * @param {string} address address is the address to query spendable balances for.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async spendableBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendableBalances200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.spendableBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorValidators queries all validators info for given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10687,13 +17586,34 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary SupplyOf queries the supply of a single coin.
-         * @param {string} denom denom is the coin denom to query balances for.
+         * Since: cosmos-sdk 0.46
+         * @summary Subspaces queries for all registered subspaces and all keys for a subspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async supplyOf(denom: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SupplyOf200Response>> {
+        async subspaces(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subspaces200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.subspaces(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Supply queries the number of NFTs from the given class, same as totalSupply of ERC721.
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async supply(classId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuerySupplyResponseIsTheResponseTypeForTheQuerySupplyRPCMethod>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.supply(classId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
+         * @summary SupplyOf queries the supply of a single coin.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async supplyOf(denom?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SupplyOf200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.supplyOf(denom, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10709,13 +17629,13 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary TotalSupply queries the total supply of all coins.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10737,7 +17657,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier
+         * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier This rpc is deprecated now that IBC has its own replacement (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
          * @param {string} lastHeight last height of the current chain must be sent in request as this is the height under which next consensus state is stored
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10769,19 +17689,30 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary ValidatorDelegations queries delegate info for given validator.
          * @param {string} validatorAddr validator_addr defines the validator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary ValidatorDistributionInfo queries validator commission and self-delegation rewards for validator
+         * @param {string} validatorAddress validator_address defines the validator address to query for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async validatorDistributionInfo(validatorAddress: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorDistributionInfo200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.validatorDistributionInfo(validatorAddress, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10805,7 +17736,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10814,14 +17745,14 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary ValidatorUnbondingDelegations queries unbonding delegations of a validator.
          * @param {string} validatorAddr validator_addr defines the validator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10830,14 +17761,14 @@ export const QueryApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary Validators queries all validators that match the given status.
          * @param {string} [status] status enables to query for validators matching a given status.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10849,12 +17780,24 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * 
          * @summary Vote queries voted information based on proposalID, voterAddr.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {string} voter voter defines the oter address for the proposals.
+         * @param {string} voter voter defines the voter address for the proposals.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async vote(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Vote200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.vote(proposalId, voter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary VoteByProposalVoter queries a vote by proposal id and voter.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {string} voter voter is a proposal voter account address.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async voteByProposalVoter(proposalId: string, voter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VoteByProposalVoter200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.voteByProposalVoter(proposalId, voter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10865,12 +17808,44 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Votes200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary VotesByProposal queries a vote by proposal id.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async votesByProposal(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VotesByProposal200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.votesByProposal(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary VotesByVoter queries a vote by voter.
+         * @param {string} voter voter is a proposal voter account address.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async votesByVoter(voter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VotesByVoter200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.votesByVoter(voter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -10885,6 +17860,16 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @summary Class queries an NFT class based on its id
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        _class(classId: string, options?: any): AxiosPromise<QueryClassResponseIsTheResponseTypeForTheQueryClassRPCMethod> {
+            return localVarFp._class(classId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Account returns account details based on address.
          * @param {string} address address defines the address to query for.
          * @param {*} [options] Override http request option.
@@ -10894,13 +17879,34 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.account(address, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Accounts returns all the existing accounts
+         * Since: cosmos-sdk 0.46.2
+         * @summary AccountAddressByID returns account address based on account number.
+         * @param {string} id Deprecated, use account_id instead  id is the account number of the address to be queried. This field should have been an uint64 (like all account numbers), and will be updated to uint64 in a future version of the auth query.
+         * @param {string} [accountId] account_id is the account number of the address to be queried.  Since: cosmos-sdk 0.47
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accountAddressByID(id: string, accountId?: string, options?: any): AxiosPromise<QueryAccountAddressByIDResponseIsTheResponseTypeForAccountAddressByIDRpcMethod> {
+            return localVarFp.accountAddressByID(id, accountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary AccountInfo queries account info which is common to all account types.
+         * @param {string} address address is the account address string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accountInfo(address: string, options?: any): AxiosPromise<AccountInfo200Response> {
+            return localVarFp.accountInfo(address, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.43
+         * @summary Accounts returns all the existing accounts.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10908,14 +17914,34 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.accounts(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Since: cosmos-sdk 0.46
+         * @summary AddressBytesToString converts Account Address bytes to string
+         * @param {string} addressBytes 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addressBytesToString(addressBytes: string, options?: any): AxiosPromise<AddressBytesToString200Response> {
+            return localVarFp.addressBytesToString(addressBytes, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary AddressStringToBytes converts Address string to bytes
+         * @param {string} addressString 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addressStringToBytes(addressString: string, options?: any): AxiosPromise<AddressStringToBytes200Response> {
+            return localVarFp.addressStringToBytes(addressString, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary AllBalances queries the balance of all coins for a single account.
          * @param {string} address address is the address to query balances for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10929,7 +17955,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10955,12 +17981,27 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Allowances200Response> {
             return localVarFp.allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary AllowancesByGranter returns all the grants given by an address
+         * @param {string} granter 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        allowancesByGranter(granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<AllowancesByGranter200Response> {
+            return localVarFp.allowancesByGranter(granter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10991,14 +18032,23 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.authParams(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Balance queries the balance of a single coin for a single account.
-         * @param {string} address address is the address to query balances for.
-         * @param {string} denom denom is the coin denom to query balances for.
+         * Since: cosmos-sdk 0.46
+         * @summary Returns the account with authority to conduct upgrades
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        balance(address: string, denom: string, options?: any): AxiosPromise<Balance200Response> {
+        authority(options?: any): AxiosPromise<QueryAuthorityResponseIsTheResponseTypeForQueryAuthority> {
+            return localVarFp.authority(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Balance queries the balance of a single coin for a single account.
+         * @param {string} address address is the address to query balances for.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        balance(address: string, denom?: string, options?: any): AxiosPromise<Balance200Response> {
             return localVarFp.balance(address, denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11009,6 +18059,29 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          */
         bankParams(options?: any): AxiosPromise<BankParams200Response> {
             return localVarFp.bankParams(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary Bech32Prefix queries bech32Prefix
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bech32Prefix(options?: any): AxiosPromise<Bech32Prefix200Response> {
+            return localVarFp.bech32Prefix(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Classes queries all NFT classes
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        classes(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QueryClassesResponseIsTheResponseTypeForTheQueryClassesRPCMethod> {
+            return localVarFp.classes(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11061,14 +18134,14 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.delegationTotalRewards(delegatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorDelegations queries all delegations of a given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11076,14 +18149,14 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.delegatorDelegations(delegatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorUnbondingDelegations queries all unbonding delegations of a given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11132,14 +18205,14 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.denomMetadata(denom, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
          * @summary DenomOwners queries for all account addresses that own a particular token denomination.
          * @param {string} denom denom defines the coin denomination to query all account holders for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11153,7 +18226,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11179,7 +18252,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11198,12 +18271,13 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @summary Evidence queries evidence based on evidence hash.
-         * @param {string} evidenceHash evidence_hash defines the hash of the requested evidence.
+         * @param {string} hash hash defines the evidence hash of the requested evidence.  Since: cosmos-sdk 0.47
+         * @param {string} [evidenceHash] evidence_hash defines the hash of the requested evidence. Deprecated: Use hash, a HEX encoded string, instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        evidence(evidenceHash: string, options?: any): AxiosPromise<Evidence200Response> {
-            return localVarFp.evidence(evidenceHash, options).then((request) => request(axios, basePath));
+        evidence(hash: string, evidenceHash?: string, options?: any): AxiosPromise<Evidence200Response> {
+            return localVarFp.evidence(hash, evidenceHash, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11217,6 +18291,135 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @summary Deposit queries single deposit information based proposalID, depositAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} depositor depositor defines the deposit addresses from the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<Deposit200Response> {
+            return localVarFp.govV1Deposit(proposalId, depositor, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deposits queries all deposits of a single proposal.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Deposits200Response> {
+            return localVarFp.govV1Deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Params queries all parameters of the gov module.
+         * @param {string} paramsType params_type defines which parameters to query for, can be one of \&quot;voting\&quot;, \&quot;tallying\&quot; or \&quot;deposit\&quot;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Params(paramsType: string, options?: any): AxiosPromise<GovV1Params200Response> {
+            return localVarFp.govV1Params(paramsType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Proposal queries proposal details based on ProposalID.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Proposal(proposalId: string, options?: any): AxiosPromise<GovV1Proposal200Response> {
+            return localVarFp.govV1Proposal(proposalId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Proposals queries all proposals based on given status.
+         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {string} [voter] voter defines the voter address for the proposals.
+         * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GovV1Proposals200Response> {
+            return localVarFp.govV1Proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary TallyResult queries the tally of a proposal vote.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1TallyResult(proposalId: string, options?: any): AxiosPromise<GovV1TallyResult200Response> {
+            return localVarFp.govV1TallyResult(proposalId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Vote queries voted information based on proposalID, voterAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} voter voter defines the voter address for the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Vote(proposalId: string, voter: string, options?: any): AxiosPromise<GovV1Vote200Response> {
+            return localVarFp.govV1Vote(proposalId, voter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Votes queries votes of a given proposal.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GovV1Votes200Response> {
+            return localVarFp.govV1Votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary GranteeGrants returns a list of `GrantAuthorization` by grantee.
+         * @param {string} grantee 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        granteeGrants(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GranteeGrants200Response> {
+            return localVarFp.granteeGrants(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary GranterGrants returns list of `GrantAuthorization`, granted by granter.
+         * @param {string} granter 
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        granterGrants(granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GranterGrants200Response> {
+            return localVarFp.granterGrants(granter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Returns list of `Authorization`, granted to the grantee by the granter.
          * @param {string} [granter] 
          * @param {string} [grantee] 
@@ -11225,12 +18428,127 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Grants200Response> {
             return localVarFp.grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupInfo queries group info based on group id.
+         * @param {string} groupId group_id is the unique ID of the group.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupInfo(groupId: string, options?: any): AxiosPromise<GroupInfo200Response> {
+            return localVarFp.groupInfo(groupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupMembers queries members of a group by group id.
+         * @param {string} groupId group_id is the unique ID of the group.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupMembers(groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GroupMembers200Response> {
+            return localVarFp.groupMembers(groupId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupPoliciesByAdmin queries group policies by admin address.
+         * @param {string} admin admin is the admin address of the group policy.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupPoliciesByAdmin(admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GroupPoliciesByAdmin200Response> {
+            return localVarFp.groupPoliciesByAdmin(admin, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupPoliciesByGroup queries group policies by group id.
+         * @param {string} groupId group_id is the unique ID of the group policy\&#39;s group.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupPoliciesByGroup(groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GroupPoliciesByGroup200Response> {
+            return localVarFp.groupPoliciesByGroup(groupId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupPolicyInfo queries group policy info based on account address of group policy.
+         * @param {string} address address is the account address of the group policy.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupPolicyInfo(address: string, options?: any): AxiosPromise<GroupPolicyInfo200Response> {
+            return localVarFp.groupPolicyInfo(address, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Proposal queries a proposal based on proposal id.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupProposal(proposalId: string, options?: any): AxiosPromise<GroupProposal200Response> {
+            return localVarFp.groupProposal(proposalId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary TallyResult returns the tally result of a proposal. If the proposal is still in voting period, then this query computes the current tally state, which might not be final. On the other hand, if the proposal is final, then it simply returns the `final_tally_result` state stored in the proposal itself.
+         * @param {string} proposalId proposal_id is the unique id of a proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupTallyResult(proposalId: string, options?: any): AxiosPromise<GroupTallyResult200Response> {
+            return localVarFp.groupTallyResult(proposalId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupsByAdmin queries groups by admin address.
+         * @param {string} admin admin is the account address of a group\&#39;s admin.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsByAdmin(admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GroupsByAdmin200Response> {
+            return localVarFp.groupsByAdmin(admin, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GroupsByMember queries groups by member address.
+         * @param {string} address address is the group member address.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsByMember(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GroupsByMember200Response> {
+            return localVarFp.groupsByMember(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11262,6 +18580,25 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @summary ModuleAccountByName returns the module account info by module name
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleAccountByName(name: string, options?: any): AxiosPromise<ModuleAccountByName200Response> {
+            return localVarFp.moduleAccountByName(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary ModuleAccounts returns all the existing module accounts.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleAccounts(options?: any): AxiosPromise<ModuleAccounts200Response> {
+            return localVarFp.moduleAccounts(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.43
          * @summary ModuleVersions queries the list of module versions from state.
          * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
          * @param {*} [options] Override http request option.
@@ -11269,6 +18606,55 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          */
         moduleVersions(moduleName?: string, options?: any): AxiosPromise<ModuleVersions200Response> {
             return localVarFp.moduleVersions(moduleName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary NFT queries an NFT based on its class and id.
+         * @param {string} classId class_id associated with the nft
+         * @param {string} id id is a unique identifier of the NFT
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nFT(classId: string, id: string, options?: any): AxiosPromise<QueryNFTResponseIsTheResponseTypeForTheQueryNFTRPCMethod> {
+            return localVarFp.nFT(classId, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in ERC721Enumerable
+         * @param {string} [classId] class_id associated with the nft.
+         * @param {string} [owner] owner is the owner address of the nft.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nFTs(classId?: string, owner?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QueryNFTsResponseIsTheResponseTypeForTheQueryNFTsRPCMethods> {
+            return localVarFp.nFTs(classId, owner, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721
+         * @param {string} owner owner is the owner address of the nft
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nftBalance(owner: string, classId: string, options?: any): AxiosPromise<QueryBalanceResponseIsTheResponseTypeForTheQueryBalanceRPCMethod> {
+            return localVarFp.nftBalance(owner, classId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721
+         * @param {string} classId class_id associated with the nft
+         * @param {string} id id is a unique identifier of the NFT
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        owner(classId: string, id: string, options?: any): AxiosPromise<QueryOwnerResponseIsTheResponseTypeForTheQueryOwnerRPCMethod> {
+            return localVarFp.owner(classId, id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11303,14 +18689,14 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11319,6 +18705,21 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @summary ProposalsByGroupPolicy queries proposals based on account address of group policy.
+         * @param {string} address address is the account address of the group policy related to proposals.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        proposalsByGroupPolicy(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<ProposalsByGroupPolicy200Response> {
+            return localVarFp.proposalsByGroupPolicy(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary Redelegations queries redelegations of given address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [srcValidatorAddr] src_validator_addr defines the validator address to redelegate from.
@@ -11327,12 +18728,27 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Redelegations200Response> {
             return localVarFp.redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This query only returns denominations that have specific SendEnabled settings. Any denomination that does not have a specific setting will use the default params.default_send_enabled, and will not be returned by this query.  Since: cosmos-sdk 0.47
+         * @summary SendEnabled queries for SendEnabled entries.
+         * @param {Array<string>} [denoms] denoms is the specific denoms you want look up. Leave empty to get all entries.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendEnabled(denoms?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<SendEnabled200Response> {
+            return localVarFp.sendEnabled(denoms, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11351,7 +18767,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11368,14 +18784,40 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.slashingParams(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.47
+         * @summary SpendableBalanceByDenom queries the spendable balance of a single denom for a single account.
+         * @param {string} address address is the address to query balances for.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        spendableBalanceByDenom(address: string, denom?: string, options?: any): AxiosPromise<SpendableBalanceByDenom200Response> {
+            return localVarFp.spendableBalanceByDenom(address, denom, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
+         * @summary SpendableBalances queries the spendable balance of all coins for a single account.
+         * @param {string} address address is the address to query spendable balances for.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        spendableBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<SpendableBalances200Response> {
+            return localVarFp.spendableBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary DelegatorValidators queries all validators info for given delegator address.
          * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11392,13 +18834,32 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.stakingParams(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary SupplyOf queries the supply of a single coin.
-         * @param {string} denom denom is the coin denom to query balances for.
+         * Since: cosmos-sdk 0.46
+         * @summary Subspaces queries for all registered subspaces and all keys for a subspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        supplyOf(denom: string, options?: any): AxiosPromise<SupplyOf200Response> {
+        subspaces(options?: any): AxiosPromise<Subspaces200Response> {
+            return localVarFp.subspaces(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Supply queries the number of NFTs from the given class, same as totalSupply of ERC721.
+         * @param {string} classId class_id associated with the nft
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        supply(classId: string, options?: any): AxiosPromise<QuerySupplyResponseIsTheResponseTypeForTheQuerySupplyRPCMethod> {
+            return localVarFp.supply(classId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
+         * @summary SupplyOf queries the supply of a single coin.
+         * @param {string} [denom] denom is the coin denom to query balances for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        supplyOf(denom?: string, options?: any): AxiosPromise<SupplyOf200Response> {
             return localVarFp.supplyOf(denom, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11412,13 +18873,13 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.tallyResult(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary TotalSupply queries the total supply of all coins.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11438,7 +18899,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier
+         * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier This rpc is deprecated now that IBC has its own replacement (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
          * @param {string} lastHeight last height of the current chain must be sent in request as this is the height under which next consensus state is stored
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11467,19 +18928,29 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.validatorCommission(validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary ValidatorDelegations queries delegate info for given validator.
          * @param {string} validatorAddr validator_addr defines the validator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<QueryValidatorDelegationsResponseIsResponseTypeForTheQueryValidatorDelegationsRPCMethod> {
             return localVarFp.validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary ValidatorDistributionInfo queries validator commission and self-delegation rewards for validator
+         * @param {string} validatorAddress validator_address defines the validator address to query for.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validatorDistributionInfo(validatorAddress: string, options?: any): AxiosPromise<ValidatorDistributionInfo200Response> {
+            return localVarFp.validatorDistributionInfo(validatorAddress, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11501,7 +18972,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11509,14 +18980,14 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.validatorSlashes(validatorAddress, startingHeight, endingHeight, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary ValidatorUnbondingDelegations queries unbonding delegations of a validator.
          * @param {string} validatorAddr validator_addr defines the validator address to query for.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11524,14 +18995,14 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.validatorUnbondingDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
          * @summary Validators queries all validators that match the given status.
          * @param {string} [status] status enables to query for validators matching a given status.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11542,12 +19013,23 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * 
          * @summary Vote queries voted information based on proposalID, voterAddr.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {string} voter voter defines the oter address for the proposals.
+         * @param {string} voter voter defines the voter address for the proposals.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         vote(proposalId: string, voter: string, options?: any): AxiosPromise<Vote200Response> {
             return localVarFp.vote(proposalId, voter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary VoteByProposalVoter queries a vote by proposal id and voter.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {string} voter voter is a proposal voter account address.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        voteByProposalVoter(proposalId: string, voter: string, options?: any): AxiosPromise<VoteByProposalVoter200Response> {
+            return localVarFp.voteByProposalVoter(proposalId, voter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11557,12 +19039,42 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Votes200Response> {
             return localVarFp.votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary VotesByProposal queries a vote by proposal id.
+         * @param {string} proposalId proposal_id is the unique ID of a proposal.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        votesByProposal(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<VotesByProposal200Response> {
+            return localVarFp.votesByProposal(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary VotesByVoter queries a vote by voter.
+         * @param {string} voter voter is a proposal voter account address.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        votesByVoter(voter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<VotesByVoter200Response> {
+            return localVarFp.votesByVoter(voter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11576,6 +19088,18 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
 export class QueryApi extends BaseAPI {
     /**
      * 
+     * @summary Class queries an NFT class based on its id
+     * @param {string} classId class_id associated with the nft
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public _class(classId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration)._class(classId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Account returns account details based on address.
      * @param {string} address address defines the address to query for.
      * @param {*} [options] Override http request option.
@@ -11587,13 +19111,38 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Accounts returns all the existing accounts
+     * Since: cosmos-sdk 0.46.2
+     * @summary AccountAddressByID returns account address based on account number.
+     * @param {string} id Deprecated, use account_id instead  id is the account number of the address to be queried. This field should have been an uint64 (like all account numbers), and will be updated to uint64 in a future version of the auth query.
+     * @param {string} [accountId] account_id is the account number of the address to be queried.  Since: cosmos-sdk 0.47
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public accountAddressByID(id: string, accountId?: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).accountAddressByID(id, accountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.47
+     * @summary AccountInfo queries account info which is common to all account types.
+     * @param {string} address address is the account address string.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public accountInfo(address: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).accountInfo(address, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.43
+     * @summary Accounts returns all the existing accounts.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11603,14 +19152,38 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Since: cosmos-sdk 0.46
+     * @summary AddressBytesToString converts Account Address bytes to string
+     * @param {string} addressBytes 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public addressBytesToString(addressBytes: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).addressBytesToString(addressBytes, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary AddressStringToBytes converts Address string to bytes
+     * @param {string} addressString 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public addressStringToBytes(addressString: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).addressStringToBytes(addressString, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary AllBalances queries the balance of all coins for a single account.
      * @param {string} address address is the address to query balances for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11626,7 +19199,7 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11656,13 +19229,30 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
     public allowances(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).allowances(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary AllowancesByGranter returns all the grants given by an address
+     * @param {string} granter 
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public allowancesByGranter(granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).allowancesByGranter(granter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11700,15 +19290,26 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Balance queries the balance of a single coin for a single account.
-     * @param {string} address address is the address to query balances for.
-     * @param {string} denom denom is the coin denom to query balances for.
+     * Since: cosmos-sdk 0.46
+     * @summary Returns the account with authority to conduct upgrades
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public balance(address: string, denom: string, options?: AxiosRequestConfig) {
+    public authority(options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).authority(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Balance queries the balance of a single coin for a single account.
+     * @param {string} address address is the address to query balances for.
+     * @param {string} [denom] denom is the coin denom to query balances for.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public balance(address: string, denom?: string, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).balance(address, denom, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11721,6 +19322,33 @@ export class QueryApi extends BaseAPI {
      */
     public bankParams(options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).bankParams(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary Bech32Prefix queries bech32Prefix
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public bech32Prefix(options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).bech32Prefix(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Classes queries all NFT classes
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public classes(paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).classes(paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11784,14 +19412,14 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary DelegatorDelegations queries all delegations of a given delegator address.
      * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11801,14 +19429,14 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary DelegatorUnbondingDelegations queries all unbonding delegations of a given delegator address.
      * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11867,14 +19495,14 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
      * @summary DenomOwners queries for all account addresses that own a particular token denomination.
      * @param {string} denom denom defines the coin denomination to query all account holders for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11890,7 +19518,7 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11920,7 +19548,7 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -11943,13 +19571,14 @@ export class QueryApi extends BaseAPI {
     /**
      * 
      * @summary Evidence queries evidence based on evidence hash.
-     * @param {string} evidenceHash evidence_hash defines the hash of the requested evidence.
+     * @param {string} hash hash defines the evidence hash of the requested evidence.  Since: cosmos-sdk 0.47
+     * @param {string} [evidenceHash] evidence_hash defines the hash of the requested evidence. Deprecated: Use hash, a HEX encoded string, instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public evidence(evidenceHash: string, options?: AxiosRequestConfig) {
-        return QueryApiFp(this.configuration).evidence(evidenceHash, options).then((request) => request(this.axios, this.basePath));
+    public evidence(hash: string, evidenceHash?: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).evidence(hash, evidenceHash, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11966,6 +19595,155 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
+     * @summary Deposit queries single deposit information based proposalID, depositAddr.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {string} depositor depositor defines the deposit addresses from the proposals.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Deposit(proposalId, depositor, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deposits queries all deposits of a single proposal.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Params queries all parameters of the gov module.
+     * @param {string} paramsType params_type defines which parameters to query for, can be one of \&quot;voting\&quot;, \&quot;tallying\&quot; or \&quot;deposit\&quot;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Params(paramsType: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Params(paramsType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Proposal queries proposal details based on ProposalID.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Proposal(proposalId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Proposal(proposalId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Proposals queries all proposals based on given status.
+     * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * @param {string} [voter] voter defines the voter address for the proposals.
+     * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary TallyResult queries the tally of a proposal vote.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1TallyResult(proposalId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1TallyResult(proposalId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Vote queries voted information based on proposalID, voterAddr.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {string} voter voter defines the voter address for the proposals.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Vote(proposalId: string, voter: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Vote(proposalId, voter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Votes queries votes of a given proposal.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary GranteeGrants returns a list of `GrantAuthorization` by grantee.
+     * @param {string} grantee 
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public granteeGrants(grantee: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).granteeGrants(grantee, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary GranterGrants returns list of `GrantAuthorization`, granted by granter.
+     * @param {string} granter 
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public granterGrants(granter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).granterGrants(granter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Returns list of `Authorization`, granted to the grantee by the granter.
      * @param {string} [granter] 
      * @param {string} [grantee] 
@@ -11974,13 +19752,146 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
     public grants(granter?: string, grantee?: string, msgTypeUrl?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).grants(granter, grantee, msgTypeUrl, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupInfo queries group info based on group id.
+     * @param {string} groupId group_id is the unique ID of the group.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupInfo(groupId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupInfo(groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupMembers queries members of a group by group id.
+     * @param {string} groupId group_id is the unique ID of the group.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupMembers(groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupMembers(groupId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupPoliciesByAdmin queries group policies by admin address.
+     * @param {string} admin admin is the admin address of the group policy.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupPoliciesByAdmin(admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupPoliciesByAdmin(admin, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupPoliciesByGroup queries group policies by group id.
+     * @param {string} groupId group_id is the unique ID of the group policy\&#39;s group.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupPoliciesByGroup(groupId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupPoliciesByGroup(groupId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupPolicyInfo queries group policy info based on account address of group policy.
+     * @param {string} address address is the account address of the group policy.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupPolicyInfo(address: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupPolicyInfo(address, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Proposal queries a proposal based on proposal id.
+     * @param {string} proposalId proposal_id is the unique ID of a proposal.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupProposal(proposalId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupProposal(proposalId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary TallyResult returns the tally result of a proposal. If the proposal is still in voting period, then this query computes the current tally state, which might not be final. On the other hand, if the proposal is final, then it simply returns the `final_tally_result` state stored in the proposal itself.
+     * @param {string} proposalId proposal_id is the unique id of a proposal.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupTallyResult(proposalId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupTallyResult(proposalId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupsByAdmin queries groups by admin address.
+     * @param {string} admin admin is the account address of a group\&#39;s admin.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupsByAdmin(admin: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupsByAdmin(admin, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary GroupsByMember queries groups by member address.
+     * @param {string} address address is the group member address.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public groupsByMember(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).groupsByMember(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12019,6 +19930,29 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
+     * @summary ModuleAccountByName returns the module account info by module name
+     * @param {string} name 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public moduleAccountByName(name: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).moduleAccountByName(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary ModuleAccounts returns all the existing module accounts.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public moduleAccounts(options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).moduleAccounts(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.43
      * @summary ModuleVersions queries the list of module versions from state.
      * @param {string} [moduleName] module_name is a field to query a specific module consensus version from state. Leaving this empty will fetch the full list of module versions from state.
      * @param {*} [options] Override http request option.
@@ -12027,6 +19961,63 @@ export class QueryApi extends BaseAPI {
      */
     public moduleVersions(moduleName?: string, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).moduleVersions(moduleName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary NFT queries an NFT based on its class and id.
+     * @param {string} classId class_id associated with the nft
+     * @param {string} id id is a unique identifier of the NFT
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public nFT(classId: string, id: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).nFT(classId, id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in ERC721Enumerable
+     * @param {string} [classId] class_id associated with the nft.
+     * @param {string} [owner] owner is the owner address of the nft.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public nFTs(classId?: string, owner?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).nFTs(classId, owner, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721
+     * @param {string} owner owner is the owner address of the nft
+     * @param {string} classId class_id associated with the nft
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public nftBalance(owner: string, classId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).nftBalance(owner, classId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721
+     * @param {string} classId class_id associated with the nft
+     * @param {string} id id is a unique identifier of the NFT
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public owner(classId: string, id: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).owner(classId, id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12068,14 +20059,14 @@ export class QueryApi extends BaseAPI {
     /**
      * 
      * @summary Proposals queries all proposals based on given status.
-     * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @param {string} [voter] voter defines the voter address for the proposals.
      * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12086,6 +20077,23 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
+     * @summary ProposalsByGroupPolicy queries proposals based on account address of group policy.
+     * @param {string} address address is the account address of the group policy related to proposals.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public proposalsByGroupPolicy(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).proposalsByGroupPolicy(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary Redelegations queries redelegations of given address.
      * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
      * @param {string} [srcValidatorAddr] src_validator_addr defines the validator address to redelegate from.
@@ -12094,13 +20102,30 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
     public redelegations(delegatorAddr: string, srcValidatorAddr?: string, dstValidatorAddr?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).redelegations(delegatorAddr, srcValidatorAddr, dstValidatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This query only returns denominations that have specific SendEnabled settings. Any denomination that does not have a specific setting will use the default params.default_send_enabled, and will not be returned by this query.  Since: cosmos-sdk 0.47
+     * @summary SendEnabled queries for SendEnabled entries.
+     * @param {Array<string>} [denoms] denoms is the specific denoms you want look up. Leave empty to get all entries.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public sendEnabled(denoms?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).sendEnabled(denoms, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12122,7 +20147,7 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12143,14 +20168,44 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.47
+     * @summary SpendableBalanceByDenom queries the spendable balance of a single denom for a single account.
+     * @param {string} address address is the address to query balances for.
+     * @param {string} [denom] denom is the coin denom to query balances for.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public spendableBalanceByDenom(address: string, denom?: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).spendableBalanceByDenom(address, denom, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.  Since: cosmos-sdk 0.46
+     * @summary SpendableBalances queries the spendable balance of all coins for a single account.
+     * @param {string} address address is the address to query spendable balances for.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public spendableBalances(address: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).spendableBalances(address, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary DelegatorValidators queries all validators info for given delegator address.
      * @param {string} delegatorAddr delegator_addr defines the delegator address to query for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12171,14 +20226,37 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary SupplyOf queries the supply of a single coin.
-     * @param {string} denom denom is the coin denom to query balances for.
+     * Since: cosmos-sdk 0.46
+     * @summary Subspaces queries for all registered subspaces and all keys for a subspace.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public supplyOf(denom: string, options?: AxiosRequestConfig) {
+    public subspaces(options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).subspaces(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Supply queries the number of NFTs from the given class, same as totalSupply of ERC721.
+     * @param {string} classId class_id associated with the nft
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public supply(classId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).supply(classId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
+     * @summary SupplyOf queries the supply of a single coin.
+     * @param {string} [denom] denom is the coin denom to query balances for.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public supplyOf(denom?: string, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).supplyOf(denom, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -12195,13 +20273,13 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary TotalSupply queries the total supply of all coins.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12225,7 +20303,7 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
-     * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier
+     * @summary UpgradedConsensusState queries the consensus state that will serve as a trusted kernel for the next version of this chain. It will only be stored at the last height of this chain. UpgradedConsensusState RPC not supported with legacy querier This rpc is deprecated now that IBC has its own replacement (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
      * @param {string} lastHeight last height of the current chain must be sent in request as this is the height under which next consensus state is stored
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12260,20 +20338,32 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary ValidatorDelegations queries delegate info for given validator.
      * @param {string} validatorAddr validator_addr defines the validator address to query for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
     public validatorDelegations(validatorAddr: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).validatorDelegations(validatorAddr, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary ValidatorDistributionInfo queries validator commission and self-delegation rewards for validator
+     * @param {string} validatorAddress validator_address defines the validator address to query for.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public validatorDistributionInfo(validatorAddress: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).validatorDistributionInfo(validatorAddress, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12298,7 +20388,7 @@ export class QueryApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12308,14 +20398,14 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary ValidatorUnbondingDelegations queries unbonding delegations of a validator.
      * @param {string} validatorAddr validator_addr defines the validator address to query for.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12325,14 +20415,14 @@ export class QueryApi extends BaseAPI {
     }
 
     /**
-     * 
+     * When called from another module, this query might consume a high amount of gas if the pagination field is incorrectly set.
      * @summary Validators queries all validators that match the given status.
      * @param {string} [status] status enables to query for validators matching a given status.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12345,7 +20435,7 @@ export class QueryApi extends BaseAPI {
      * 
      * @summary Vote queries voted information based on proposalID, voterAddr.
      * @param {string} proposalId proposal_id defines the unique id of the proposal.
-     * @param {string} voter voter defines the oter address for the proposals.
+     * @param {string} voter voter defines the voter address for the proposals.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
@@ -12356,19 +20446,66 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
+     * @summary VoteByProposalVoter queries a vote by proposal id and voter.
+     * @param {string} proposalId proposal_id is the unique ID of a proposal.
+     * @param {string} voter voter is a proposal voter account address.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public voteByProposalVoter(proposalId: string, voter: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).voteByProposalVoter(proposalId, voter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Votes queries votes of a given proposal.
      * @param {string} proposalId proposal_id defines the unique id of the proposal.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QueryApi
      */
     public votes(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).votes(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary VotesByProposal queries a vote by proposal id.
+     * @param {string} proposalId proposal_id is the unique ID of a proposal.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public votesByProposal(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).votesByProposal(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary VotesByVoter queries a vote by voter.
+     * @param {string} voter voter is a proposal voter account address.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public votesByVoter(voter: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).votesByVoter(voter, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -12379,6 +20516,56 @@ export class QueryApi extends BaseAPI {
  */
 export const ServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary ABCIQuery defines a query handler that supports ABCI queries directly to the application, bypassing Tendermint completely. The ABCI query must contain a valid and supported path, including app, custom, p2p, and store.
+         * @param {string} [data] 
+         * @param {string} [path] 
+         * @param {string} [height] 
+         * @param {boolean} [prove] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        aBCIQuery: async (data?: string, path?: string, height?: string, prove?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cosmos/base/tendermint/v1beta1/abci_query`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (data !== undefined) {
+                localVarQueryParameter['data'] = data;
+            }
+
+            if (path !== undefined) {
+                localVarQueryParameter['path'] = path;
+            }
+
+            if (height !== undefined) {
+                localVarQueryParameter['height'] = height;
+            }
+
+            if (prove !== undefined) {
+                localVarQueryParameter['prove'] = prove;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
@@ -12450,6 +20637,65 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Since: cosmos-sdk 0.45.2
+         * @summary GetBlockWithTxs fetches a block with decoded txs.
+         * @param {string} height height is the height of the block to query.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBlockWithTxs: async (height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'height' is not null or undefined
+            assertParamExists('getBlockWithTxs', 'height', height)
+            const localVarPath = `/cosmos/tx/v1beta1/txs/block/{height}`
+                .replace(`{${"height"}}`, encodeURIComponent(String(height)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paginationKey !== undefined) {
+                localVarQueryParameter['pagination.key'] = paginationKey;
+            }
+
+            if (paginationOffset !== undefined) {
+                localVarQueryParameter['pagination.offset'] = paginationOffset;
+            }
+
+            if (paginationLimit !== undefined) {
+                localVarQueryParameter['pagination.limit'] = paginationLimit;
+            }
+
+            if (paginationCountTotal !== undefined) {
+                localVarQueryParameter['pagination.count_total'] = paginationCountTotal;
+            }
+
+            if (paginationReverse !== undefined) {
+                localVarQueryParameter['pagination.reverse'] = paginationReverse;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary GetLatestBlock returns the latest block.
          * @param {*} [options] Override http request option.
@@ -12486,7 +20732,7 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12636,12 +20882,14 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+         * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
+         * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTxsEvent: async (events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTxsEvent: async (events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/tx/v1beta1/txs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12682,6 +20930,14 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['order_by'] = orderBy;
             }
 
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -12701,7 +20957,7 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12788,6 +21044,150 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxDecode decodes the transaction.
+         * @param {TxDecodeRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txDecode: async (body: TxDecodeRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('txDecode', 'body', body)
+            const localVarPath = `/cosmos/tx/v1beta1/decode`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxDecodeAmino decodes an Amino transaction from encoded bytes to JSON.
+         * @param {TxDecodeAminoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txDecodeAmino: async (body: TxDecodeAminoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('txDecodeAmino', 'body', body)
+            const localVarPath = `/cosmos/tx/v1beta1/decode/amino`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxEncode encodes the transaction.
+         * @param {CosmosTxV1beta1TxEncodeRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txEncode: async (body: CosmosTxV1beta1TxEncodeRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('txEncode', 'body', body)
+            const localVarPath = `/cosmos/tx/v1beta1/encode`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxEncodeAmino encodes an Amino transaction from JSON to encoded bytes.
+         * @param {TxEncodeAminoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txEncodeAmino: async (body: TxEncodeAminoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('txEncodeAmino', 'body', body)
+            const localVarPath = `/cosmos/tx/v1beta1/encode/amino`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -12798,6 +21198,20 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
 export const ServiceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ServiceApiAxiosParamCreator(configuration)
     return {
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary ABCIQuery defines a query handler that supports ABCI queries directly to the application, bypassing Tendermint completely. The ABCI query must contain a valid and supported path, including app, custom, p2p, and store.
+         * @param {string} [data] 
+         * @param {string} [path] 
+         * @param {string} [height] 
+         * @param {boolean} [prove] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async aBCIQuery(data?: string, path?: string, height?: string, prove?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ABCIQuery200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aBCIQuery(data, path, height, prove, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
@@ -12821,6 +21235,22 @@ export const ServiceApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Since: cosmos-sdk 0.45.2
+         * @summary GetBlockWithTxs fetches a block with decoded txs.
+         * @param {string} height height is the height of the block to query.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBlockWithTxs(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetBlockWithTxsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getBlockWithTxs(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * 
          * @summary GetLatestBlock returns the latest block.
          * @param {*} [options] Override http request option.
@@ -12837,7 +21267,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12884,13 +21314,15 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+         * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
+         * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetTxsEventResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, options);
+        async getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetTxsEventResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, page, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -12901,7 +21333,7 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12920,6 +21352,50 @@ export const ServiceApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.simulate(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxDecode decodes the transaction.
+         * @param {TxDecodeRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async txDecode(body: TxDecodeRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1TxDecodeResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txDecode(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxDecodeAmino decodes an Amino transaction from encoded bytes to JSON.
+         * @param {TxDecodeAminoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async txDecodeAmino(body: TxDecodeAminoRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TxDecodeAmino200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txDecodeAmino(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxEncode encodes the transaction.
+         * @param {CosmosTxV1beta1TxEncodeRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async txEncode(body: CosmosTxV1beta1TxEncodeRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TxEncode200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txEncode(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxEncodeAmino encodes an Amino transaction from JSON to encoded bytes.
+         * @param {TxEncodeAminoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async txEncodeAmino(body: TxEncodeAminoRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TxEncodeAmino200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txEncodeAmino(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -12930,6 +21406,19 @@ export const ServiceApiFp = function(configuration?: Configuration) {
 export const ServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ServiceApiFp(configuration)
     return {
+        /**
+         * Since: cosmos-sdk 0.46
+         * @summary ABCIQuery defines a query handler that supports ABCI queries directly to the application, bypassing Tendermint completely. The ABCI query must contain a valid and supported path, including app, custom, p2p, and store.
+         * @param {string} [data] 
+         * @param {string} [path] 
+         * @param {string} [height] 
+         * @param {boolean} [prove] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        aBCIQuery(data?: string, path?: string, height?: string, prove?: boolean, options?: any): AxiosPromise<ABCIQuery200Response> {
+            return localVarFp.aBCIQuery(data, path, height, prove, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @summary BroadcastTx broadcast transaction.
@@ -12951,6 +21440,21 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getBlockByHeight(height, options).then((request) => request(axios, basePath));
         },
         /**
+         * Since: cosmos-sdk 0.45.2
+         * @summary GetBlockWithTxs fetches a block with decoded txs.
+         * @param {string} height height is the height of the block to query.
+         * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+         * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+         * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+         * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBlockWithTxs(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<CosmosTxV1beta1GetBlockWithTxsResponse> {
+            return localVarFp.getBlockWithTxs(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary GetLatestBlock returns the latest block.
          * @param {*} [options] Override http request option.
@@ -12966,7 +21470,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13009,13 +21513,15 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+         * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
+         * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options?: any): AxiosPromise<CosmosTxV1beta1GetTxsEventResponse> {
-            return localVarFp.getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, options).then((request) => request(axios, basePath));
+        getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options?: any): AxiosPromise<CosmosTxV1beta1GetTxsEventResponse> {
+            return localVarFp.getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, page, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -13025,7 +21531,7 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+         * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13042,6 +21548,46 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
         simulate(body: CosmosTxV1beta1SimulateRequest, options?: any): AxiosPromise<Simulate200Response> {
             return localVarFp.simulate(body, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxDecode decodes the transaction.
+         * @param {TxDecodeRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txDecode(body: TxDecodeRequest, options?: any): AxiosPromise<CosmosTxV1beta1TxDecodeResponse> {
+            return localVarFp.txDecode(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxDecodeAmino decodes an Amino transaction from encoded bytes to JSON.
+         * @param {TxDecodeAminoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txDecodeAmino(body: TxDecodeAminoRequest, options?: any): AxiosPromise<TxDecodeAmino200Response> {
+            return localVarFp.txDecodeAmino(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxEncode encodes the transaction.
+         * @param {CosmosTxV1beta1TxEncodeRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txEncode(body: CosmosTxV1beta1TxEncodeRequest, options?: any): AxiosPromise<TxEncode200Response> {
+            return localVarFp.txEncode(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Since: cosmos-sdk 0.47
+         * @summary TxEncodeAmino encodes an Amino transaction from JSON to encoded bytes.
+         * @param {TxEncodeAminoRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txEncodeAmino(body: TxEncodeAminoRequest, options?: any): AxiosPromise<TxEncodeAmino200Response> {
+            return localVarFp.txEncodeAmino(body, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -13052,6 +21598,21 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class ServiceApi extends BaseAPI {
+    /**
+     * Since: cosmos-sdk 0.46
+     * @summary ABCIQuery defines a query handler that supports ABCI queries directly to the application, bypassing Tendermint completely. The ABCI query must contain a valid and supported path, including app, custom, p2p, and store.
+     * @param {string} [data] 
+     * @param {string} [path] 
+     * @param {string} [height] 
+     * @param {boolean} [prove] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServiceApi
+     */
+    public aBCIQuery(data?: string, path?: string, height?: string, prove?: boolean, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).aBCIQuery(data, path, height, prove, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary BroadcastTx broadcast transaction.
@@ -13077,6 +21638,23 @@ export class ServiceApi extends BaseAPI {
     }
 
     /**
+     * Since: cosmos-sdk 0.45.2
+     * @summary GetBlockWithTxs fetches a block with decoded txs.
+     * @param {string} height height is the height of the block to query.
+     * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
+     * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
+     * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
+     * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServiceApi
+     */
+    public getBlockWithTxs(height: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).getBlockWithTxs(height, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 
      * @summary GetLatestBlock returns the latest block.
      * @param {*} [options] Override http request option.
@@ -13094,7 +21672,7 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
@@ -13145,14 +21723,16 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+     * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
+     * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', options?: AxiosRequestConfig) {
-        return ServiceApiFp(this.configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, options).then((request) => request(this.axios, this.basePath));
+    public getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, page, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13163,7 +21743,7 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationOffset] offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set.
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
-     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.
+     * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
@@ -13182,6 +21762,54 @@ export class ServiceApi extends BaseAPI {
      */
     public simulate(body: CosmosTxV1beta1SimulateRequest, options?: AxiosRequestConfig) {
         return ServiceApiFp(this.configuration).simulate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.47
+     * @summary TxDecode decodes the transaction.
+     * @param {TxDecodeRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServiceApi
+     */
+    public txDecode(body: TxDecodeRequest, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).txDecode(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.47
+     * @summary TxDecodeAmino decodes an Amino transaction from encoded bytes to JSON.
+     * @param {TxDecodeAminoRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServiceApi
+     */
+    public txDecodeAmino(body: TxDecodeAminoRequest, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).txDecodeAmino(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.47
+     * @summary TxEncode encodes the transaction.
+     * @param {CosmosTxV1beta1TxEncodeRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServiceApi
+     */
+    public txEncode(body: CosmosTxV1beta1TxEncodeRequest, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).txEncode(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Since: cosmos-sdk 0.47
+     * @summary TxEncodeAmino encodes an Amino transaction from JSON to encoded bytes.
+     * @param {TxEncodeAminoRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServiceApi
+     */
+    public txEncodeAmino(body: TxEncodeAminoRequest, options?: AxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).txEncodeAmino(body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

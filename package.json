@@ -1,7 +1,7 @@
 {
   "name": "@cosmos-client/core",
   "description": "REST API client for Cosmos SDK blockchain",
-  "version": "0.46.1",
+  "version": "0.47.1-rc1",
   "author": "CauchyE, Inc.",
   "bugs": {
     "url": "https://github.com/cosmos-client/cosmos-client-ts/issues"
@@ -24,7 +24,7 @@
     "bip32": "^2.0.6",
     "bip39": "^3.0.4",
     "process": "^0.11.10",
-    "protobufjs": "^6.11.2",
+    "protobufjs": "^6.11.3",
     "rxjs": "^7.4.0",
     "secp256k1": "^4.0.2",
     "tweetnacl": "^1.0.3"

@@ -15,12 +15,14 @@ export async function getLatestValidatorSet(
   paginationOffset?: bigint,
   paginationLimit?: bigint,
   paginationCountTotal?: boolean,
+  paginationReverse?: boolean
 ) {
   return new ServiceApi(undefined, sdk.url).getLatestValidatorSet(
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
     paginationCountTotal,
+    paginationReverse
   );
 }
 

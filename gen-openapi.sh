@@ -7,4 +7,4 @@ docker run --rm \
   -v ${PWD}:/local openapitools/openapi-generator-cli generate \
   -g typescript-axios -i /local/swagger.yaml -o /local/src/openapi/
 
-rm swagger.yaml
+# rm swagger.yaml
