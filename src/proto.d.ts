@@ -65664,9 +65664,6 @@ export namespace tendermint {
             /** Request info */
             info?: (tendermint.abci.IRequestInfo|null);
 
-            /** Request set_option */
-            set_option?: (tendermint.abci.IRequestSetOption|null);
-
             /** Request init_chain */
             init_chain?: (tendermint.abci.IRequestInitChain|null);
 
@@ -65699,6 +65696,12 @@ export namespace tendermint {
 
             /** Request apply_snapshot_chunk */
             apply_snapshot_chunk?: (tendermint.abci.IRequestApplySnapshotChunk|null);
+
+            /** Request prepare_proposal */
+            prepare_proposal?: (tendermint.abci.IRequestPrepareProposal|null);
+
+            /** Request process_proposal */
+            process_proposal?: (tendermint.abci.IRequestProcessProposal|null);
         }
 
         /** Represents a Request. */
@@ -65718,9 +65721,6 @@ export namespace tendermint {
 
             /** Request info. */
             public info?: (tendermint.abci.IRequestInfo|null);
-
-            /** Request set_option. */
-            public set_option?: (tendermint.abci.IRequestSetOption|null);
 
             /** Request init_chain. */
             public init_chain?: (tendermint.abci.IRequestInitChain|null);
@@ -65755,8 +65755,14 @@ export namespace tendermint {
             /** Request apply_snapshot_chunk. */
             public apply_snapshot_chunk?: (tendermint.abci.IRequestApplySnapshotChunk|null);
 
+            /** Request prepare_proposal. */
+            public prepare_proposal?: (tendermint.abci.IRequestPrepareProposal|null);
+
+            /** Request process_proposal. */
+            public process_proposal?: (tendermint.abci.IRequestProcessProposal|null);
+
             /** Request value. */
-            public value?: ("echo"|"flush"|"info"|"set_option"|"init_chain"|"query"|"begin_block"|"check_tx"|"deliver_tx"|"end_block"|"commit"|"list_snapshots"|"offer_snapshot"|"load_snapshot_chunk"|"apply_snapshot_chunk");
+            public value?: ("echo"|"flush"|"info"|"init_chain"|"query"|"begin_block"|"check_tx"|"deliver_tx"|"end_block"|"commit"|"list_snapshots"|"offer_snapshot"|"load_snapshot_chunk"|"apply_snapshot_chunk"|"prepare_proposal"|"process_proposal");
 
             /**
              * Encodes the specified Request message. Does not implicitly {@link tendermint.abci.Request.verify|verify} messages.
@@ -65993,6 +65999,9 @@ export namespace tendermint {
 
             /** RequestInfo p2p_version */
             p2p_version?: (Long|null);
+
+            /** RequestInfo abci_version */
+            abci_version?: (string|null);
         }
 
         /** Represents a RequestInfo. */
@@ -66012,6 +66021,9 @@ export namespace tendermint {
 
             /** RequestInfo p2p_version. */
             public p2p_version: Long;
+
+            /** RequestInfo abci_version. */
+            public abci_version: string;
 
             /**
              * Encodes the specified RequestInfo message. Does not implicitly {@link tendermint.abci.RequestInfo.verify|verify} messages.
@@ -66077,95 +66089,6 @@ export namespace tendermint {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a RequestSetOption. */
-        interface IRequestSetOption {
-
-            /** RequestSetOption key */
-            key?: (string|null);
-
-            /** RequestSetOption value */
-            value?: (string|null);
-        }
-
-        /** Represents a RequestSetOption. */
-        class RequestSetOption implements IRequestSetOption {
-
-            /**
-             * Constructs a new RequestSetOption.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: tendermint.abci.IRequestSetOption);
-
-            /** RequestSetOption key. */
-            public key: string;
-
-            /** RequestSetOption value. */
-            public value: string;
-
-            /**
-             * Encodes the specified RequestSetOption message. Does not implicitly {@link tendermint.abci.RequestSetOption.verify|verify} messages.
-             * @param message RequestSetOption message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: tendermint.abci.IRequestSetOption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified RequestSetOption message, length delimited. Does not implicitly {@link tendermint.abci.RequestSetOption.verify|verify} messages.
-             * @param message RequestSetOption message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: tendermint.abci.IRequestSetOption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a RequestSetOption message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns RequestSetOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestSetOption;
-
-            /**
-             * Decodes a RequestSetOption message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns RequestSetOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestSetOption;
-
-            /**
-             * Verifies a RequestSetOption message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a RequestSetOption message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns RequestSetOption
-             */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestSetOption;
-
-            /**
-             * Creates a plain object from a RequestSetOption message. Also converts values to other types if specified.
-             * @param message RequestSetOption
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: tendermint.abci.RequestSetOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this RequestSetOption to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a RequestInitChain. */
         interface IRequestInitChain {
 
@@ -66176,7 +66099,7 @@ export namespace tendermint {
             chain_id?: (string|null);
 
             /** RequestInitChain consensus_params */
-            consensus_params?: (tendermint.abci.IConsensusParams|null);
+            consensus_params?: (tendermint.types.IConsensusParams|null);
 
             /** RequestInitChain validators */
             validators?: (tendermint.abci.IValidatorUpdate[]|null);
@@ -66204,7 +66127,7 @@ export namespace tendermint {
             public chain_id: string;
 
             /** RequestInitChain consensus_params. */
-            public consensus_params?: (tendermint.abci.IConsensusParams|null);
+            public consensus_params?: (tendermint.types.IConsensusParams|null);
 
             /** RequestInitChain validators. */
             public validators: tendermint.abci.IValidatorUpdate[];
@@ -66390,10 +66313,10 @@ export namespace tendermint {
             header?: (tendermint.types.IHeader|null);
 
             /** RequestBeginBlock last_commit_info */
-            last_commit_info?: (tendermint.abci.ILastCommitInfo|null);
+            last_commit_info?: (tendermint.abci.ICommitInfo|null);
 
             /** RequestBeginBlock byzantine_validators */
-            byzantine_validators?: (tendermint.abci.IEvidence[]|null);
+            byzantine_validators?: (tendermint.abci.IMisbehavior[]|null);
         }
 
         /** Represents a RequestBeginBlock. */
@@ -66412,10 +66335,10 @@ export namespace tendermint {
             public header?: (tendermint.types.IHeader|null);
 
             /** RequestBeginBlock last_commit_info. */
-            public last_commit_info?: (tendermint.abci.ILastCommitInfo|null);
+            public last_commit_info?: (tendermint.abci.ICommitInfo|null);
 
             /** RequestBeginBlock byzantine_validators. */
-            public byzantine_validators: tendermint.abci.IEvidence[];
+            public byzantine_validators: tendermint.abci.IMisbehavior[];
 
             /**
              * Encodes the specified RequestBeginBlock message. Does not implicitly {@link tendermint.abci.RequestBeginBlock.verify|verify} messages.
@@ -67175,6 +67098,256 @@ export namespace tendermint {
             public toJSON(): { [k: string]: any };
         }
 
+        /** Properties of a RequestPrepareProposal. */
+        interface IRequestPrepareProposal {
+
+            /** RequestPrepareProposal max_tx_bytes */
+            max_tx_bytes?: (Long|null);
+
+            /** RequestPrepareProposal txs */
+            txs?: (Uint8Array[]|null);
+
+            /** RequestPrepareProposal local_last_commit */
+            local_last_commit?: (tendermint.abci.IExtendedCommitInfo|null);
+
+            /** RequestPrepareProposal misbehavior */
+            misbehavior?: (tendermint.abci.IMisbehavior[]|null);
+
+            /** RequestPrepareProposal height */
+            height?: (Long|null);
+
+            /** RequestPrepareProposal time */
+            time?: (google.protobuf.ITimestamp|null);
+
+            /** RequestPrepareProposal next_validators_hash */
+            next_validators_hash?: (Uint8Array|null);
+
+            /** RequestPrepareProposal proposer_address */
+            proposer_address?: (Uint8Array|null);
+        }
+
+        /** Represents a RequestPrepareProposal. */
+        class RequestPrepareProposal implements IRequestPrepareProposal {
+
+            /**
+             * Constructs a new RequestPrepareProposal.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: tendermint.abci.IRequestPrepareProposal);
+
+            /** RequestPrepareProposal max_tx_bytes. */
+            public max_tx_bytes: Long;
+
+            /** RequestPrepareProposal txs. */
+            public txs: Uint8Array[];
+
+            /** RequestPrepareProposal local_last_commit. */
+            public local_last_commit?: (tendermint.abci.IExtendedCommitInfo|null);
+
+            /** RequestPrepareProposal misbehavior. */
+            public misbehavior: tendermint.abci.IMisbehavior[];
+
+            /** RequestPrepareProposal height. */
+            public height: Long;
+
+            /** RequestPrepareProposal time. */
+            public time?: (google.protobuf.ITimestamp|null);
+
+            /** RequestPrepareProposal next_validators_hash. */
+            public next_validators_hash: Uint8Array;
+
+            /** RequestPrepareProposal proposer_address. */
+            public proposer_address: Uint8Array;
+
+            /**
+             * Encodes the specified RequestPrepareProposal message. Does not implicitly {@link tendermint.abci.RequestPrepareProposal.verify|verify} messages.
+             * @param message RequestPrepareProposal message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: tendermint.abci.IRequestPrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RequestPrepareProposal message, length delimited. Does not implicitly {@link tendermint.abci.RequestPrepareProposal.verify|verify} messages.
+             * @param message RequestPrepareProposal message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: tendermint.abci.IRequestPrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RequestPrepareProposal message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RequestPrepareProposal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestPrepareProposal;
+
+            /**
+             * Decodes a RequestPrepareProposal message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RequestPrepareProposal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestPrepareProposal;
+
+            /**
+             * Verifies a RequestPrepareProposal message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RequestPrepareProposal message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RequestPrepareProposal
+             */
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestPrepareProposal;
+
+            /**
+             * Creates a plain object from a RequestPrepareProposal message. Also converts values to other types if specified.
+             * @param message RequestPrepareProposal
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: tendermint.abci.RequestPrepareProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RequestPrepareProposal to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a RequestProcessProposal. */
+        interface IRequestProcessProposal {
+
+            /** RequestProcessProposal txs */
+            txs?: (Uint8Array[]|null);
+
+            /** RequestProcessProposal proposed_last_commit */
+            proposed_last_commit?: (tendermint.abci.ICommitInfo|null);
+
+            /** RequestProcessProposal misbehavior */
+            misbehavior?: (tendermint.abci.IMisbehavior[]|null);
+
+            /** RequestProcessProposal hash */
+            hash?: (Uint8Array|null);
+
+            /** RequestProcessProposal height */
+            height?: (Long|null);
+
+            /** RequestProcessProposal time */
+            time?: (google.protobuf.ITimestamp|null);
+
+            /** RequestProcessProposal next_validators_hash */
+            next_validators_hash?: (Uint8Array|null);
+
+            /** RequestProcessProposal proposer_address */
+            proposer_address?: (Uint8Array|null);
+        }
+
+        /** Represents a RequestProcessProposal. */
+        class RequestProcessProposal implements IRequestProcessProposal {
+
+            /**
+             * Constructs a new RequestProcessProposal.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: tendermint.abci.IRequestProcessProposal);
+
+            /** RequestProcessProposal txs. */
+            public txs: Uint8Array[];
+
+            /** RequestProcessProposal proposed_last_commit. */
+            public proposed_last_commit?: (tendermint.abci.ICommitInfo|null);
+
+            /** RequestProcessProposal misbehavior. */
+            public misbehavior: tendermint.abci.IMisbehavior[];
+
+            /** RequestProcessProposal hash. */
+            public hash: Uint8Array;
+
+            /** RequestProcessProposal height. */
+            public height: Long;
+
+            /** RequestProcessProposal time. */
+            public time?: (google.protobuf.ITimestamp|null);
+
+            /** RequestProcessProposal next_validators_hash. */
+            public next_validators_hash: Uint8Array;
+
+            /** RequestProcessProposal proposer_address. */
+            public proposer_address: Uint8Array;
+
+            /**
+             * Encodes the specified RequestProcessProposal message. Does not implicitly {@link tendermint.abci.RequestProcessProposal.verify|verify} messages.
+             * @param message RequestProcessProposal message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: tendermint.abci.IRequestProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RequestProcessProposal message, length delimited. Does not implicitly {@link tendermint.abci.RequestProcessProposal.verify|verify} messages.
+             * @param message RequestProcessProposal message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: tendermint.abci.IRequestProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RequestProcessProposal message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RequestProcessProposal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.RequestProcessProposal;
+
+            /**
+             * Decodes a RequestProcessProposal message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RequestProcessProposal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.RequestProcessProposal;
+
+            /**
+             * Verifies a RequestProcessProposal message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RequestProcessProposal message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RequestProcessProposal
+             */
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.RequestProcessProposal;
+
+            /**
+             * Creates a plain object from a RequestProcessProposal message. Also converts values to other types if specified.
+             * @param message RequestProcessProposal
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: tendermint.abci.RequestProcessProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RequestProcessProposal to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Response. */
         interface IResponse {
 
@@ -67189,9 +67362,6 @@ export namespace tendermint {
 
             /** Response info */
             info?: (tendermint.abci.IResponseInfo|null);
-
-            /** Response set_option */
-            set_option?: (tendermint.abci.IResponseSetOption|null);
 
             /** Response init_chain */
             init_chain?: (tendermint.abci.IResponseInitChain|null);
@@ -67225,6 +67395,12 @@ export namespace tendermint {
 
             /** Response apply_snapshot_chunk */
             apply_snapshot_chunk?: (tendermint.abci.IResponseApplySnapshotChunk|null);
+
+            /** Response prepare_proposal */
+            prepare_proposal?: (tendermint.abci.IResponsePrepareProposal|null);
+
+            /** Response process_proposal */
+            process_proposal?: (tendermint.abci.IResponseProcessProposal|null);
         }
 
         /** Represents a Response. */
@@ -67247,9 +67423,6 @@ export namespace tendermint {
 
             /** Response info. */
             public info?: (tendermint.abci.IResponseInfo|null);
-
-            /** Response set_option. */
-            public set_option?: (tendermint.abci.IResponseSetOption|null);
 
             /** Response init_chain. */
             public init_chain?: (tendermint.abci.IResponseInitChain|null);
@@ -67284,8 +67457,14 @@ export namespace tendermint {
             /** Response apply_snapshot_chunk. */
             public apply_snapshot_chunk?: (tendermint.abci.IResponseApplySnapshotChunk|null);
 
+            /** Response prepare_proposal. */
+            public prepare_proposal?: (tendermint.abci.IResponsePrepareProposal|null);
+
+            /** Response process_proposal. */
+            public process_proposal?: (tendermint.abci.IResponseProcessProposal|null);
+
             /** Response value. */
-            public value?: ("exception"|"echo"|"flush"|"info"|"set_option"|"init_chain"|"query"|"begin_block"|"check_tx"|"deliver_tx"|"end_block"|"commit"|"list_snapshots"|"offer_snapshot"|"load_snapshot_chunk"|"apply_snapshot_chunk");
+            public value?: ("exception"|"echo"|"flush"|"info"|"init_chain"|"query"|"begin_block"|"check_tx"|"deliver_tx"|"end_block"|"commit"|"list_snapshots"|"offer_snapshot"|"load_snapshot_chunk"|"apply_snapshot_chunk"|"prepare_proposal"|"process_proposal");
 
             /**
              * Encodes the specified Response message. Does not implicitly {@link tendermint.abci.Response.verify|verify} messages.
@@ -67701,106 +67880,11 @@ export namespace tendermint {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a ResponseSetOption. */
-        interface IResponseSetOption {
-
-            /** ResponseSetOption code */
-            code?: (number|null);
-
-            /** ResponseSetOption log */
-            log?: (string|null);
-
-            /** ResponseSetOption info */
-            info?: (string|null);
-        }
-
-        /** Represents a ResponseSetOption. */
-        class ResponseSetOption implements IResponseSetOption {
-
-            /**
-             * Constructs a new ResponseSetOption.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: tendermint.abci.IResponseSetOption);
-
-            /** ResponseSetOption code. */
-            public code: number;
-
-            /** ResponseSetOption log. */
-            public log: string;
-
-            /** ResponseSetOption info. */
-            public info: string;
-
-            /**
-             * Encodes the specified ResponseSetOption message. Does not implicitly {@link tendermint.abci.ResponseSetOption.verify|verify} messages.
-             * @param message ResponseSetOption message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: tendermint.abci.IResponseSetOption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResponseSetOption message, length delimited. Does not implicitly {@link tendermint.abci.ResponseSetOption.verify|verify} messages.
-             * @param message ResponseSetOption message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: tendermint.abci.IResponseSetOption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResponseSetOption message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResponseSetOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseSetOption;
-
-            /**
-             * Decodes a ResponseSetOption message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResponseSetOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseSetOption;
-
-            /**
-             * Verifies a ResponseSetOption message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResponseSetOption message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResponseSetOption
-             */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseSetOption;
-
-            /**
-             * Creates a plain object from a ResponseSetOption message. Also converts values to other types if specified.
-             * @param message ResponseSetOption
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: tendermint.abci.ResponseSetOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResponseSetOption to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a ResponseInitChain. */
         interface IResponseInitChain {
 
             /** ResponseInitChain consensus_params */
-            consensus_params?: (tendermint.abci.IConsensusParams|null);
+            consensus_params?: (tendermint.types.IConsensusParams|null);
 
             /** ResponseInitChain validators */
             validators?: (tendermint.abci.IValidatorUpdate[]|null);
@@ -67819,7 +67903,7 @@ export namespace tendermint {
             constructor(properties?: tendermint.abci.IResponseInitChain);
 
             /** ResponseInitChain consensus_params. */
-            public consensus_params?: (tendermint.abci.IConsensusParams|null);
+            public consensus_params?: (tendermint.types.IConsensusParams|null);
 
             /** ResponseInitChain validators. */
             public validators: tendermint.abci.IValidatorUpdate[];
@@ -68380,7 +68464,7 @@ export namespace tendermint {
             validator_updates?: (tendermint.abci.IValidatorUpdate[]|null);
 
             /** ResponseEndBlock consensus_param_updates */
-            consensus_param_updates?: (tendermint.abci.IConsensusParams|null);
+            consensus_param_updates?: (tendermint.types.IConsensusParams|null);
 
             /** ResponseEndBlock events */
             events?: (tendermint.abci.IEvent[]|null);
@@ -68399,7 +68483,7 @@ export namespace tendermint {
             public validator_updates: tendermint.abci.IValidatorUpdate[];
 
             /** ResponseEndBlock consensus_param_updates. */
-            public consensus_param_updates?: (tendermint.abci.IConsensusParams|null);
+            public consensus_param_updates?: (tendermint.types.IConsensusParams|null);
 
             /** ResponseEndBlock events. */
             public events: tendermint.abci.IEvent[];
@@ -68927,280 +69011,355 @@ export namespace tendermint {
             }
         }
 
-        /** Properties of a ConsensusParams. */
-        interface IConsensusParams {
+        /** Properties of a ResponsePrepareProposal. */
+        interface IResponsePrepareProposal {
 
-            /** ConsensusParams block */
-            block?: (tendermint.abci.IBlockParams|null);
-
-            /** ConsensusParams evidence */
-            evidence?: (tendermint.types.IEvidenceParams|null);
-
-            /** ConsensusParams validator */
-            validator?: (tendermint.types.IValidatorParams|null);
-
-            /** ConsensusParams version */
-            version?: (tendermint.types.IVersionParams|null);
+            /** ResponsePrepareProposal txs */
+            txs?: (Uint8Array[]|null);
         }
 
-        /** Represents a ConsensusParams. */
-        class ConsensusParams implements IConsensusParams {
+        /** Represents a ResponsePrepareProposal. */
+        class ResponsePrepareProposal implements IResponsePrepareProposal {
 
             /**
-             * Constructs a new ConsensusParams.
+             * Constructs a new ResponsePrepareProposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IConsensusParams);
+            constructor(properties?: tendermint.abci.IResponsePrepareProposal);
 
-            /** ConsensusParams block. */
-            public block?: (tendermint.abci.IBlockParams|null);
-
-            /** ConsensusParams evidence. */
-            public evidence?: (tendermint.types.IEvidenceParams|null);
-
-            /** ConsensusParams validator. */
-            public validator?: (tendermint.types.IValidatorParams|null);
-
-            /** ConsensusParams version. */
-            public version?: (tendermint.types.IVersionParams|null);
+            /** ResponsePrepareProposal txs. */
+            public txs: Uint8Array[];
 
             /**
-             * Encodes the specified ConsensusParams message. Does not implicitly {@link tendermint.abci.ConsensusParams.verify|verify} messages.
-             * @param message ConsensusParams message or plain object to encode
+             * Encodes the specified ResponsePrepareProposal message. Does not implicitly {@link tendermint.abci.ResponsePrepareProposal.verify|verify} messages.
+             * @param message ResponsePrepareProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IConsensusParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: tendermint.abci.IResponsePrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified ConsensusParams message, length delimited. Does not implicitly {@link tendermint.abci.ConsensusParams.verify|verify} messages.
-             * @param message ConsensusParams message or plain object to encode
+             * Encodes the specified ResponsePrepareProposal message, length delimited. Does not implicitly {@link tendermint.abci.ResponsePrepareProposal.verify|verify} messages.
+             * @param message ResponsePrepareProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IConsensusParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: tendermint.abci.IResponsePrepareProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a ConsensusParams message from the specified reader or buffer.
+             * Decodes a ResponsePrepareProposal message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns ConsensusParams
+             * @returns ResponsePrepareProposal
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ConsensusParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponsePrepareProposal;
 
             /**
-             * Decodes a ConsensusParams message from the specified reader or buffer, length delimited.
+             * Decodes a ResponsePrepareProposal message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns ConsensusParams
+             * @returns ResponsePrepareProposal
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ConsensusParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponsePrepareProposal;
 
             /**
-             * Verifies a ConsensusParams message.
+             * Verifies a ResponsePrepareProposal message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a ConsensusParams message from a plain object. Also converts values to their respective internal types.
+             * Creates a ResponsePrepareProposal message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns ConsensusParams
+             * @returns ResponsePrepareProposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.ConsensusParams;
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponsePrepareProposal;
 
             /**
-             * Creates a plain object from a ConsensusParams message. Also converts values to other types if specified.
-             * @param message ConsensusParams
+             * Creates a plain object from a ResponsePrepareProposal message. Also converts values to other types if specified.
+             * @param message ResponsePrepareProposal
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.ConsensusParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: tendermint.abci.ResponsePrepareProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this ConsensusParams to JSON.
+             * Converts this ResponsePrepareProposal to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a BlockParams. */
-        interface IBlockParams {
+        /** Properties of a ResponseProcessProposal. */
+        interface IResponseProcessProposal {
 
-            /** BlockParams max_bytes */
-            max_bytes?: (Long|null);
-
-            /** BlockParams max_gas */
-            max_gas?: (Long|null);
+            /** ResponseProcessProposal status */
+            status?: (tendermint.abci.ResponseProcessProposal.ProposalStatus|null);
         }
 
-        /** Represents a BlockParams. */
-        class BlockParams implements IBlockParams {
+        /** Represents a ResponseProcessProposal. */
+        class ResponseProcessProposal implements IResponseProcessProposal {
 
             /**
-             * Constructs a new BlockParams.
+             * Constructs a new ResponseProcessProposal.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IBlockParams);
+            constructor(properties?: tendermint.abci.IResponseProcessProposal);
 
-            /** BlockParams max_bytes. */
-            public max_bytes: Long;
-
-            /** BlockParams max_gas. */
-            public max_gas: Long;
+            /** ResponseProcessProposal status. */
+            public status: tendermint.abci.ResponseProcessProposal.ProposalStatus;
 
             /**
-             * Encodes the specified BlockParams message. Does not implicitly {@link tendermint.abci.BlockParams.verify|verify} messages.
-             * @param message BlockParams message or plain object to encode
+             * Encodes the specified ResponseProcessProposal message. Does not implicitly {@link tendermint.abci.ResponseProcessProposal.verify|verify} messages.
+             * @param message ResponseProcessProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: tendermint.abci.IResponseProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BlockParams message, length delimited. Does not implicitly {@link tendermint.abci.BlockParams.verify|verify} messages.
-             * @param message BlockParams message or plain object to encode
+             * Encodes the specified ResponseProcessProposal message, length delimited. Does not implicitly {@link tendermint.abci.ResponseProcessProposal.verify|verify} messages.
+             * @param message ResponseProcessProposal message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IBlockParams, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: tendermint.abci.IResponseProcessProposal, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a BlockParams message from the specified reader or buffer.
+             * Decodes a ResponseProcessProposal message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns BlockParams
+             * @returns ResponseProcessProposal
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.BlockParams;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ResponseProcessProposal;
 
             /**
-             * Decodes a BlockParams message from the specified reader or buffer, length delimited.
+             * Decodes a ResponseProcessProposal message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns BlockParams
+             * @returns ResponseProcessProposal
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.BlockParams;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ResponseProcessProposal;
 
             /**
-             * Verifies a BlockParams message.
+             * Verifies a ResponseProcessProposal message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a BlockParams message from a plain object. Also converts values to their respective internal types.
+             * Creates a ResponseProcessProposal message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns BlockParams
+             * @returns ResponseProcessProposal
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.BlockParams;
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.ResponseProcessProposal;
 
             /**
-             * Creates a plain object from a BlockParams message. Also converts values to other types if specified.
-             * @param message BlockParams
+             * Creates a plain object from a ResponseProcessProposal message. Also converts values to other types if specified.
+             * @param message ResponseProcessProposal
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.BlockParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: tendermint.abci.ResponseProcessProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this BlockParams to JSON.
+             * Converts this ResponseProcessProposal to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a LastCommitInfo. */
-        interface ILastCommitInfo {
+        namespace ResponseProcessProposal {
 
-            /** LastCommitInfo round */
+            /** ProposalStatus enum. */
+            enum ProposalStatus {
+                UNKNOWN = 0,
+                ACCEPT = 1,
+                REJECT = 2
+            }
+        }
+
+        /** Properties of a CommitInfo. */
+        interface ICommitInfo {
+
+            /** CommitInfo round */
             round?: (number|null);
 
-            /** LastCommitInfo votes */
+            /** CommitInfo votes */
             votes?: (tendermint.abci.IVoteInfo[]|null);
         }
 
-        /** Represents a LastCommitInfo. */
-        class LastCommitInfo implements ILastCommitInfo {
+        /** Represents a CommitInfo. */
+        class CommitInfo implements ICommitInfo {
 
             /**
-             * Constructs a new LastCommitInfo.
+             * Constructs a new CommitInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.ILastCommitInfo);
+            constructor(properties?: tendermint.abci.ICommitInfo);
 
-            /** LastCommitInfo round. */
+            /** CommitInfo round. */
             public round: number;
 
-            /** LastCommitInfo votes. */
+            /** CommitInfo votes. */
             public votes: tendermint.abci.IVoteInfo[];
 
             /**
-             * Encodes the specified LastCommitInfo message. Does not implicitly {@link tendermint.abci.LastCommitInfo.verify|verify} messages.
-             * @param message LastCommitInfo message or plain object to encode
+             * Encodes the specified CommitInfo message. Does not implicitly {@link tendermint.abci.CommitInfo.verify|verify} messages.
+             * @param message CommitInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.ILastCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: tendermint.abci.ICommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified LastCommitInfo message, length delimited. Does not implicitly {@link tendermint.abci.LastCommitInfo.verify|verify} messages.
-             * @param message LastCommitInfo message or plain object to encode
+             * Encodes the specified CommitInfo message, length delimited. Does not implicitly {@link tendermint.abci.CommitInfo.verify|verify} messages.
+             * @param message CommitInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.ILastCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: tendermint.abci.ICommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a LastCommitInfo message from the specified reader or buffer.
+             * Decodes a CommitInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns LastCommitInfo
+             * @returns CommitInfo
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.LastCommitInfo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.CommitInfo;
 
             /**
-             * Decodes a LastCommitInfo message from the specified reader or buffer, length delimited.
+             * Decodes a CommitInfo message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns LastCommitInfo
+             * @returns CommitInfo
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.LastCommitInfo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.CommitInfo;
 
             /**
-             * Verifies a LastCommitInfo message.
+             * Verifies a CommitInfo message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a LastCommitInfo message from a plain object. Also converts values to their respective internal types.
+             * Creates a CommitInfo message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns LastCommitInfo
+             * @returns CommitInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.LastCommitInfo;
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.CommitInfo;
 
             /**
-             * Creates a plain object from a LastCommitInfo message. Also converts values to other types if specified.
-             * @param message LastCommitInfo
+             * Creates a plain object from a CommitInfo message. Also converts values to other types if specified.
+             * @param message CommitInfo
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.LastCommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: tendermint.abci.CommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this LastCommitInfo to JSON.
+             * Converts this CommitInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an ExtendedCommitInfo. */
+        interface IExtendedCommitInfo {
+
+            /** ExtendedCommitInfo round */
+            round?: (number|null);
+
+            /** ExtendedCommitInfo votes */
+            votes?: (tendermint.abci.IExtendedVoteInfo[]|null);
+        }
+
+        /** Represents an ExtendedCommitInfo. */
+        class ExtendedCommitInfo implements IExtendedCommitInfo {
+
+            /**
+             * Constructs a new ExtendedCommitInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: tendermint.abci.IExtendedCommitInfo);
+
+            /** ExtendedCommitInfo round. */
+            public round: number;
+
+            /** ExtendedCommitInfo votes. */
+            public votes: tendermint.abci.IExtendedVoteInfo[];
+
+            /**
+             * Encodes the specified ExtendedCommitInfo message. Does not implicitly {@link tendermint.abci.ExtendedCommitInfo.verify|verify} messages.
+             * @param message ExtendedCommitInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: tendermint.abci.IExtendedCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ExtendedCommitInfo message, length delimited. Does not implicitly {@link tendermint.abci.ExtendedCommitInfo.verify|verify} messages.
+             * @param message ExtendedCommitInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: tendermint.abci.IExtendedCommitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an ExtendedCommitInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ExtendedCommitInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ExtendedCommitInfo;
+
+            /**
+             * Decodes an ExtendedCommitInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ExtendedCommitInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ExtendedCommitInfo;
+
+            /**
+             * Verifies an ExtendedCommitInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an ExtendedCommitInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ExtendedCommitInfo
+             */
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.ExtendedCommitInfo;
+
+            /**
+             * Creates a plain object from an ExtendedCommitInfo message. Also converts values to other types if specified.
+             * @param message ExtendedCommitInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: tendermint.abci.ExtendedCommitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ExtendedCommitInfo to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -69299,10 +69458,10 @@ export namespace tendermint {
         interface IEventAttribute {
 
             /** EventAttribute key */
-            key?: (Uint8Array|null);
+            key?: (string|null);
 
             /** EventAttribute value */
-            value?: (Uint8Array|null);
+            value?: (string|null);
 
             /** EventAttribute index */
             index?: (boolean|null);
@@ -69318,10 +69477,10 @@ export namespace tendermint {
             constructor(properties?: tendermint.abci.IEventAttribute);
 
             /** EventAttribute key. */
-            public key: Uint8Array;
+            public key: string;
 
             /** EventAttribute value. */
-            public value: Uint8Array;
+            public value: string;
 
             /** EventAttribute index. */
             public index: boolean;
@@ -69758,115 +69917,210 @@ export namespace tendermint {
             public toJSON(): { [k: string]: any };
         }
 
-        /** EvidenceType enum. */
-        enum EvidenceType {
-            UNKNOWN = 0,
-            DUPLICATE_VOTE = 1,
-            LIGHT_CLIENT_ATTACK = 2
-        }
+        /** Properties of an ExtendedVoteInfo. */
+        interface IExtendedVoteInfo {
 
-        /** Properties of an Evidence. */
-        interface IEvidence {
-
-            /** Evidence type */
-            type?: (tendermint.abci.EvidenceType|null);
-
-            /** Evidence validator */
+            /** ExtendedVoteInfo validator */
             validator?: (tendermint.abci.IValidator|null);
 
-            /** Evidence height */
-            height?: (Long|null);
+            /** ExtendedVoteInfo signed_last_block */
+            signed_last_block?: (boolean|null);
 
-            /** Evidence time */
-            time?: (google.protobuf.ITimestamp|null);
-
-            /** Evidence total_voting_power */
-            total_voting_power?: (Long|null);
+            /** ExtendedVoteInfo vote_extension */
+            vote_extension?: (Uint8Array|null);
         }
 
-        /** Represents an Evidence. */
-        class Evidence implements IEvidence {
+        /** Represents an ExtendedVoteInfo. */
+        class ExtendedVoteInfo implements IExtendedVoteInfo {
 
             /**
-             * Constructs a new Evidence.
+             * Constructs a new ExtendedVoteInfo.
              * @param [properties] Properties to set
              */
-            constructor(properties?: tendermint.abci.IEvidence);
+            constructor(properties?: tendermint.abci.IExtendedVoteInfo);
 
-            /** Evidence type. */
-            public type: tendermint.abci.EvidenceType;
-
-            /** Evidence validator. */
+            /** ExtendedVoteInfo validator. */
             public validator?: (tendermint.abci.IValidator|null);
 
-            /** Evidence height. */
-            public height: Long;
+            /** ExtendedVoteInfo signed_last_block. */
+            public signed_last_block: boolean;
 
-            /** Evidence time. */
-            public time?: (google.protobuf.ITimestamp|null);
-
-            /** Evidence total_voting_power. */
-            public total_voting_power: Long;
+            /** ExtendedVoteInfo vote_extension. */
+            public vote_extension: Uint8Array;
 
             /**
-             * Encodes the specified Evidence message. Does not implicitly {@link tendermint.abci.Evidence.verify|verify} messages.
-             * @param message Evidence message or plain object to encode
+             * Encodes the specified ExtendedVoteInfo message. Does not implicitly {@link tendermint.abci.ExtendedVoteInfo.verify|verify} messages.
+             * @param message ExtendedVoteInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: tendermint.abci.IEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: tendermint.abci.IExtendedVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Evidence message, length delimited. Does not implicitly {@link tendermint.abci.Evidence.verify|verify} messages.
-             * @param message Evidence message or plain object to encode
+             * Encodes the specified ExtendedVoteInfo message, length delimited. Does not implicitly {@link tendermint.abci.ExtendedVoteInfo.verify|verify} messages.
+             * @param message ExtendedVoteInfo message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: tendermint.abci.IEvidence, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: tendermint.abci.IExtendedVoteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes an Evidence message from the specified reader or buffer.
+             * Decodes an ExtendedVoteInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Evidence
+             * @returns ExtendedVoteInfo
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Evidence;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.ExtendedVoteInfo;
 
             /**
-             * Decodes an Evidence message from the specified reader or buffer, length delimited.
+             * Decodes an ExtendedVoteInfo message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Evidence
+             * @returns ExtendedVoteInfo
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Evidence;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.ExtendedVoteInfo;
 
             /**
-             * Verifies an Evidence message.
+             * Verifies an ExtendedVoteInfo message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates an Evidence message from a plain object. Also converts values to their respective internal types.
+             * Creates an ExtendedVoteInfo message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Evidence
+             * @returns ExtendedVoteInfo
              */
-            public static fromObject(object: { [k: string]: any }): tendermint.abci.Evidence;
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.ExtendedVoteInfo;
 
             /**
-             * Creates a plain object from an Evidence message. Also converts values to other types if specified.
-             * @param message Evidence
+             * Creates a plain object from an ExtendedVoteInfo message. Also converts values to other types if specified.
+             * @param message ExtendedVoteInfo
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: tendermint.abci.Evidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: tendermint.abci.ExtendedVoteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Evidence to JSON.
+             * Converts this ExtendedVoteInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** MisbehaviorType enum. */
+        enum MisbehaviorType {
+            UNKNOWN = 0,
+            DUPLICATE_VOTE = 1,
+            LIGHT_CLIENT_ATTACK = 2
+        }
+
+        /** Properties of a Misbehavior. */
+        interface IMisbehavior {
+
+            /** Misbehavior type */
+            type?: (tendermint.abci.MisbehaviorType|null);
+
+            /** Misbehavior validator */
+            validator?: (tendermint.abci.IValidator|null);
+
+            /** Misbehavior height */
+            height?: (Long|null);
+
+            /** Misbehavior time */
+            time?: (google.protobuf.ITimestamp|null);
+
+            /** Misbehavior total_voting_power */
+            total_voting_power?: (Long|null);
+        }
+
+        /** Represents a Misbehavior. */
+        class Misbehavior implements IMisbehavior {
+
+            /**
+             * Constructs a new Misbehavior.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: tendermint.abci.IMisbehavior);
+
+            /** Misbehavior type. */
+            public type: tendermint.abci.MisbehaviorType;
+
+            /** Misbehavior validator. */
+            public validator?: (tendermint.abci.IValidator|null);
+
+            /** Misbehavior height. */
+            public height: Long;
+
+            /** Misbehavior time. */
+            public time?: (google.protobuf.ITimestamp|null);
+
+            /** Misbehavior total_voting_power. */
+            public total_voting_power: Long;
+
+            /**
+             * Encodes the specified Misbehavior message. Does not implicitly {@link tendermint.abci.Misbehavior.verify|verify} messages.
+             * @param message Misbehavior message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: tendermint.abci.IMisbehavior, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Misbehavior message, length delimited. Does not implicitly {@link tendermint.abci.Misbehavior.verify|verify} messages.
+             * @param message Misbehavior message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: tendermint.abci.IMisbehavior, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Misbehavior message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Misbehavior
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tendermint.abci.Misbehavior;
+
+            /**
+             * Decodes a Misbehavior message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Misbehavior
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tendermint.abci.Misbehavior;
+
+            /**
+             * Verifies a Misbehavior message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Misbehavior message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Misbehavior
+             */
+            public static fromObject(object: { [k: string]: any }): tendermint.abci.Misbehavior;
+
+            /**
+             * Creates a plain object from a Misbehavior message. Also converts values to other types if specified.
+             * @param message Misbehavior
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: tendermint.abci.Misbehavior, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Misbehavior to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -70033,20 +70287,6 @@ export namespace tendermint {
             public info(request: tendermint.abci.IRequestInfo): Promise<tendermint.abci.ResponseInfo>;
 
             /**
-             * Calls SetOption.
-             * @param request RequestSetOption message or plain object
-             * @param callback Node-style callback called with the error, if any, and ResponseSetOption
-             */
-            public setOption(request: tendermint.abci.IRequestSetOption, callback: tendermint.abci.ABCIApplication.SetOptionCallback): void;
-
-            /**
-             * Calls SetOption.
-             * @param request RequestSetOption message or plain object
-             * @returns Promise
-             */
-            public setOption(request: tendermint.abci.IRequestSetOption): Promise<tendermint.abci.ResponseSetOption>;
-
-            /**
              * Calls DeliverTx.
              * @param request RequestDeliverTx message or plain object
              * @param callback Node-style callback called with the error, if any, and ResponseDeliverTx
@@ -70199,6 +70439,34 @@ export namespace tendermint {
              * @returns Promise
              */
             public applySnapshotChunk(request: tendermint.abci.IRequestApplySnapshotChunk): Promise<tendermint.abci.ResponseApplySnapshotChunk>;
+
+            /**
+             * Calls PrepareProposal.
+             * @param request RequestPrepareProposal message or plain object
+             * @param callback Node-style callback called with the error, if any, and ResponsePrepareProposal
+             */
+            public prepareProposal(request: tendermint.abci.IRequestPrepareProposal, callback: tendermint.abci.ABCIApplication.PrepareProposalCallback): void;
+
+            /**
+             * Calls PrepareProposal.
+             * @param request RequestPrepareProposal message or plain object
+             * @returns Promise
+             */
+            public prepareProposal(request: tendermint.abci.IRequestPrepareProposal): Promise<tendermint.abci.ResponsePrepareProposal>;
+
+            /**
+             * Calls ProcessProposal.
+             * @param request RequestProcessProposal message or plain object
+             * @param callback Node-style callback called with the error, if any, and ResponseProcessProposal
+             */
+            public processProposal(request: tendermint.abci.IRequestProcessProposal, callback: tendermint.abci.ABCIApplication.ProcessProposalCallback): void;
+
+            /**
+             * Calls ProcessProposal.
+             * @param request RequestProcessProposal message or plain object
+             * @returns Promise
+             */
+            public processProposal(request: tendermint.abci.IRequestProcessProposal): Promise<tendermint.abci.ResponseProcessProposal>;
         }
 
         namespace ABCIApplication {
@@ -70223,13 +70491,6 @@ export namespace tendermint {
              * @param [response] ResponseInfo
              */
             type InfoCallback = (error: (Error|null), response?: tendermint.abci.ResponseInfo) => void;
-
-            /**
-             * Callback as used by {@link tendermint.abci.ABCIApplication#setOption}.
-             * @param error Error, if any
-             * @param [response] ResponseSetOption
-             */
-            type SetOptionCallback = (error: (Error|null), response?: tendermint.abci.ResponseSetOption) => void;
 
             /**
              * Callback as used by {@link tendermint.abci.ABCIApplication#deliverTx}.
@@ -70307,6 +70568,20 @@ export namespace tendermint {
              * @param [response] ResponseApplySnapshotChunk
              */
             type ApplySnapshotChunkCallback = (error: (Error|null), response?: tendermint.abci.ResponseApplySnapshotChunk) => void;
+
+            /**
+             * Callback as used by {@link tendermint.abci.ABCIApplication#prepareProposal}.
+             * @param error Error, if any
+             * @param [response] ResponsePrepareProposal
+             */
+            type PrepareProposalCallback = (error: (Error|null), response?: tendermint.abci.ResponsePrepareProposal) => void;
+
+            /**
+             * Callback as used by {@link tendermint.abci.ABCIApplication#processProposal}.
+             * @param error Error, if any
+             * @param [response] ResponseProcessProposal
+             */
+            type ProcessProposalCallback = (error: (Error|null), response?: tendermint.abci.ResponseProcessProposal) => void;
         }
     }
 
@@ -72619,9 +72894,6 @@ export namespace tendermint {
 
             /** BlockParams max_gas */
             max_gas?: (Long|null);
-
-            /** BlockParams time_iota_ms */
-            time_iota_ms?: (Long|null);
         }
 
         /** Represents a BlockParams. */
@@ -72638,9 +72910,6 @@ export namespace tendermint {
 
             /** BlockParams max_gas. */
             public max_gas: Long;
-
-            /** BlockParams time_iota_ms. */
-            public time_iota_ms: Long;
 
             /**
              * Encodes the specified BlockParams message. Does not implicitly {@link tendermint.types.BlockParams.verify|verify} messages.
@@ -72887,8 +73156,8 @@ export namespace tendermint {
         /** Properties of a VersionParams. */
         interface IVersionParams {
 
-            /** VersionParams app_version */
-            app_version?: (Long|null);
+            /** VersionParams app */
+            app?: (Long|null);
         }
 
         /** Represents a VersionParams. */
@@ -72900,8 +73169,8 @@ export namespace tendermint {
              */
             constructor(properties?: tendermint.types.IVersionParams);
 
-            /** VersionParams app_version. */
-            public app_version: Long;
+            /** VersionParams app. */
+            public app: Long;
 
             /**
              * Encodes the specified VersionParams message. Does not implicitly {@link tendermint.types.VersionParams.verify|verify} messages.
