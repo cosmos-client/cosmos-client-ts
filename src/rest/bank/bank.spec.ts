@@ -15,8 +15,8 @@ describe('bank', () => {
 
     expect(address.toString()).toBe('cosmos14ynfqqa6j5k3kcqm2ymf3l66d9x07ysxgnvdyx');
 
-    const fromAddress = address;
-    const toAddress = address;
+    const fromAddress = address.toString();
+    const toAddress = address.toString();
 
     // get account info
     const account = await cosmosclient.rest.auth
@@ -31,8 +31,8 @@ describe('bank', () => {
 
     // build tx
     const msgSend = new cosmosclient.proto.cosmos.bank.v1beta1.MsgSend({
-      from_address: fromAddress.toString(),
-      to_address: toAddress.toString(),
+      from_address: fromAddress,
+      to_address: toAddress,
       amount: [{ denom: 'token', amount: '1' }],
     });
 

@@ -1,7 +1,7 @@
 import { QueryApi } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
 
-export function allowance(sdk: CosmosSDK, granter: AccAddress, grantee: AccAddress) {
+export function allowance(sdk: CosmosSDK, granter: string, grantee: string) {
   return new QueryApi(undefined, sdk.url).allowance(granter.toString(), grantee.toString());
 }
 
