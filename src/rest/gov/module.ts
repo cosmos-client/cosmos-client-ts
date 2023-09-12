@@ -1,6 +1,5 @@
 import { QueryApi } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
-import { AccAddress } from '../../types';
 
 export function params(sdk: CosmosSDK, paramsType: string) {
   return new QueryApi(undefined, sdk.url).govParams(paramsType);
@@ -54,8 +53,8 @@ export function deposits(
   );
 }
 
-export function deposit(sdk: CosmosSDK, proposalID: string, depositor: AccAddress) {
-  return new QueryApi(undefined, sdk.url).deposit(proposalID, depositor.toString());
+export function deposit(sdk: CosmosSDK, proposalID: string, depositor: string) {
+  return new QueryApi(undefined, sdk.url).deposit(proposalID, depositor);
 }
 
 export function tallyresult(sdk: CosmosSDK, proposalID: string) {
@@ -79,6 +78,6 @@ export function votes(
   );
 }
 
-export function vote(sdk: CosmosSDK, proposalID: string, voter: AccAddress) {
+export function vote(sdk: CosmosSDK, proposalID: string, voter: string) {
   return new QueryApi(undefined, sdk.url).vote(proposalID, voter.toString());
 }

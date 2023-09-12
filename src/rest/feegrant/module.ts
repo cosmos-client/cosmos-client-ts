@@ -1,6 +1,5 @@
 import { QueryApi } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
-import { AccAddress } from '../../types';
 
 export function allowance(sdk: CosmosSDK, granter: AccAddress, grantee: AccAddress) {
   return new QueryApi(undefined, sdk.url).allowance(granter.toString(), grantee.toString());
@@ -8,14 +7,14 @@ export function allowance(sdk: CosmosSDK, granter: AccAddress, grantee: AccAddre
 
 export function allowances(
   sdk: CosmosSDK,
-  grantee: AccAddress,
+  grantee: string,
   paginationKey?: string,
   paginationOffset?: bigint,
   paginationLimit?: bigint,
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).allowances(
-    grantee.toString(),
+    grantee,
     paginationKey,
     paginationOffset?.toString(),
     paginationLimit?.toString(),
