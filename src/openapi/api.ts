@@ -2798,10 +2798,10 @@ export interface CosmosGovV1Proposal {
     'status'?: CosmosGovV1ProposalStatusEnum;
     /**
      * 
-     * @type {GovV1Proposals200ResponseProposalsInnerFinalTallyResult}
+     * @type {GovV1Proposal200ResponseProposalsInnerFinalTallyResult}
      * @memberof CosmosGovV1Proposal
      */
-    'final_tally_result'?: GovV1Proposals200ResponseProposalsInnerFinalTallyResult;
+    'final_tally_result'?: GovV1Proposal200ResponseProposalsInnerFinalTallyResult;
     /**
      * submit_time is the time of proposal submission.
      * @type {string}
@@ -2958,10 +2958,10 @@ export interface CosmosGovV1QueryParamsResponse {
 export interface CosmosGovV1QueryProposalResponse {
     /**
      * 
-     * @type {GovV1Proposals200ResponseProposalsInner}
+     * @type {GovV1Proposal200ResponseProposalsInner}
      * @memberof CosmosGovV1QueryProposalResponse
      */
-    'proposal'?: GovV1Proposals200ResponseProposalsInner;
+    'proposal'?: GovV1Proposal200ResponseProposalsInner;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
@@ -2971,10 +2971,10 @@ export interface CosmosGovV1QueryProposalResponse {
 export interface CosmosGovV1QueryProposalsResponse {
     /**
      * proposals defines all the requested governance proposals.
-     * @type {Array<GovV1Proposals200ResponseProposalsInner>}
+     * @type {Array<GovV1Proposal200ResponseProposalsInner>}
      * @memberof CosmosGovV1QueryProposalsResponse
      */
-    'proposals'?: Array<GovV1Proposals200ResponseProposalsInner>;
+    'proposals'?: Array<GovV1Proposal200ResponseProposalsInner>;
     /**
      * 
      * @type {Accounts200ResponsePagination}
@@ -7819,124 +7819,124 @@ export interface GovV1Params200ResponseVotingParams {
     'voting_period'?: string;
 }
 /**
- * QueryProposalResponse is the response type for the Query/Proposal RPC method.
+ * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
  * @export
  * @interface GovV1Proposal200Response
  */
 export interface GovV1Proposal200Response {
     /**
-     * 
-     * @type {GovV1Proposals200ResponseProposalsInner}
+     * proposals defines all the requested governance proposals.
+     * @type {Array<GovV1Proposal200ResponseProposalsInner>}
      * @memberof GovV1Proposal200Response
      */
-    'proposal'?: GovV1Proposals200ResponseProposalsInner;
-}
-/**
- * QueryProposalsResponse is the response type for the Query/Proposals RPC method.
- * @export
- * @interface GovV1Proposals200Response
- */
-export interface GovV1Proposals200Response {
-    /**
-     * proposals defines all the requested governance proposals.
-     * @type {Array<GovV1Proposals200ResponseProposalsInner>}
-     * @memberof GovV1Proposals200Response
-     */
-    'proposals'?: Array<GovV1Proposals200ResponseProposalsInner>;
+    'proposals'?: Array<GovV1Proposal200ResponseProposalsInner>;
     /**
      * 
      * @type {Accounts200ResponsePagination}
-     * @memberof GovV1Proposals200Response
+     * @memberof GovV1Proposal200Response
      */
     'pagination'?: Accounts200ResponsePagination;
 }
 /**
+ * QueryProposalResponse is the response type for the Query/Proposal RPC method.
+ * @export
+ * @interface GovV1Proposal200Response1
+ */
+export interface GovV1Proposal200Response1 {
+    /**
+     * 
+     * @type {GovV1Proposal200ResponseProposalsInner}
+     * @memberof GovV1Proposal200Response1
+     */
+    'proposal'?: GovV1Proposal200ResponseProposalsInner;
+}
+/**
  * Proposal defines the core field members of a governance proposal.
  * @export
- * @interface GovV1Proposals200ResponseProposalsInner
+ * @interface GovV1Proposal200ResponseProposalsInner
  */
-export interface GovV1Proposals200ResponseProposalsInner {
+export interface GovV1Proposal200ResponseProposalsInner {
     /**
      * id defines the unique id of the proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'id'?: string;
     /**
      * messages are the arbitrary messages to be executed if the proposal passes.
      * @type {Array<AccountInfo200ResponseInfoPubKey>}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'messages'?: Array<AccountInfo200ResponseInfoPubKey>;
     /**
      * status defines the proposal status.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
-    'status'?: GovV1Proposals200ResponseProposalsInnerStatusEnum;
+    'status'?: GovV1Proposal200ResponseProposalsInnerStatusEnum;
     /**
      * 
-     * @type {GovV1Proposals200ResponseProposalsInnerFinalTallyResult}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @type {GovV1Proposal200ResponseProposalsInnerFinalTallyResult}
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
-    'final_tally_result'?: GovV1Proposals200ResponseProposalsInnerFinalTallyResult;
+    'final_tally_result'?: GovV1Proposal200ResponseProposalsInnerFinalTallyResult;
     /**
      * submit_time is the time of proposal submission.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'submit_time'?: string;
     /**
      * deposit_end_time is the end time for deposition.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'deposit_end_time'?: string;
     /**
      * total_deposit is the total deposit on the proposal.
      * @type {Array<AllBalances200ResponseBalancesInner>}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'total_deposit'?: Array<AllBalances200ResponseBalancesInner>;
     /**
      * voting_start_time is the starting time to vote on a proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'voting_start_time'?: string;
     /**
      * voting_end_time is the end time of voting on a proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'voting_end_time'?: string;
     /**
      * metadata is any arbitrary metadata attached to the proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'metadata'?: string;
     /**
      * Since: cosmos-sdk 0.47
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'title'?: string;
     /**
      * Since: cosmos-sdk 0.47
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'summary'?: string;
     /**
      * Since: cosmos-sdk 0.47
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInner
+     * @memberof GovV1Proposal200ResponseProposalsInner
      */
     'proposer'?: string;
 }
 
-export const GovV1Proposals200ResponseProposalsInnerStatusEnum = {
+export const GovV1Proposal200ResponseProposalsInnerStatusEnum = {
     Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
     DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
     VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
@@ -7945,36 +7945,36 @@ export const GovV1Proposals200ResponseProposalsInnerStatusEnum = {
     Failed: 'PROPOSAL_STATUS_FAILED'
 } as const;
 
-export type GovV1Proposals200ResponseProposalsInnerStatusEnum = typeof GovV1Proposals200ResponseProposalsInnerStatusEnum[keyof typeof GovV1Proposals200ResponseProposalsInnerStatusEnum];
+export type GovV1Proposal200ResponseProposalsInnerStatusEnum = typeof GovV1Proposal200ResponseProposalsInnerStatusEnum[keyof typeof GovV1Proposal200ResponseProposalsInnerStatusEnum];
 
 /**
  * final_tally_result is the final tally result of the proposal. When querying a proposal via gRPC, this field is not populated until the proposal\'s voting period has ended.
  * @export
- * @interface GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+ * @interface GovV1Proposal200ResponseProposalsInnerFinalTallyResult
  */
-export interface GovV1Proposals200ResponseProposalsInnerFinalTallyResult {
+export interface GovV1Proposal200ResponseProposalsInnerFinalTallyResult {
     /**
      * yes_count is the number of yes votes on a proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     * @memberof GovV1Proposal200ResponseProposalsInnerFinalTallyResult
      */
     'yes_count'?: string;
     /**
      * abstain_count is the number of abstain votes on a proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     * @memberof GovV1Proposal200ResponseProposalsInnerFinalTallyResult
      */
     'abstain_count'?: string;
     /**
      * no_count is the number of no votes on a proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     * @memberof GovV1Proposal200ResponseProposalsInnerFinalTallyResult
      */
     'no_count'?: string;
     /**
      * no_with_veto_count is the number of no with veto votes on a proposal.
      * @type {string}
-     * @memberof GovV1Proposals200ResponseProposalsInnerFinalTallyResult
+     * @memberof GovV1Proposal200ResponseProposalsInnerFinalTallyResult
      */
     'no_with_veto_count'?: string;
 }
@@ -13599,44 +13599,6 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary Deposit queries single deposit information based proposalID, depositAddr.
-         * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {string} depositor depositor defines the deposit addresses from the proposals.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        govV1Deposit: async (proposalId: string, depositor: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govV1Deposit', 'proposalId', proposalId)
-            // verify required parameter 'depositor' is not null or undefined
-            assertParamExists('govV1Deposit', 'depositor', depositor)
-            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}`
-                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)))
-                .replace(`{${"depositor"}}`, encodeURIComponent(String(depositor)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Deposits queries all deposits of a single proposal.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -13647,9 +13609,9 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govV1Deposits: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        govV1Deposit: async (proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govV1Deposits', 'proposalId', proposalId)
+            assertParamExists('govV1Deposit', 'proposalId', proposalId)
             const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/deposits`
                 .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -13682,6 +13644,44 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             if (paginationReverse !== undefined) {
                 localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deposit queries single deposit information based proposalID, depositAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} depositor depositor defines the deposit addresses from the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Deposit_1: async (proposalId: string, depositor: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Deposit_1', 'proposalId', proposalId)
+            // verify required parameter 'depositor' is not null or undefined
+            assertParamExists('govV1Deposit_1', 'depositor', depositor)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)))
+                .replace(`{${"depositor"}}`, encodeURIComponent(String(depositor)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -13730,42 +13730,8 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary Proposal queries proposal details based on ProposalID.
-         * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        govV1Proposal: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'proposalId' is not null or undefined
-            assertParamExists('govV1Proposal', 'proposalId', proposalId)
-            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}`
-                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {GovV1ProposalProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -13776,7 +13742,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govV1Proposals: async (proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        govV1Proposal: async (proposalStatus?: GovV1ProposalProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/gov/v1/proposals`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13820,6 +13786,40 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
             if (paginationReverse !== undefined) {
                 localVarQueryParameter['pagination.reverse'] = paginationReverse;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Proposal queries proposal details based on ProposalID.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Proposal_2: async (proposalId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'proposalId' is not null or undefined
+            assertParamExists('govV1Proposal_2', 'proposalId', proposalId)
+            const localVarPath = `/cosmos/gov/v1/proposals/{proposal_id}`
+                .replace(`{${"proposal_id"}}`, encodeURIComponent(String(proposalId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -15061,7 +15061,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {ProposalsProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -15072,7 +15072,7 @@ export const QueryApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposals: async (proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        proposals: async (proposalStatus?: ProposalsProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/gov/v1beta1/proposals`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -16999,18 +16999,6 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Deposit queries single deposit information based proposalID, depositAddr.
-         * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {string} depositor depositor defines the deposit addresses from the proposals.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async govV1Deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposit200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Deposit(proposalId, depositor, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Deposits queries all deposits of a single proposal.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -17021,8 +17009,20 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govV1Deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposits200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+        async govV1Deposit(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposits200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Deposit(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Deposit queries single deposit information based proposalID, depositAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} depositor depositor defines the deposit addresses from the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Deposit_1(proposalId: string, depositor: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Deposit200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Deposit_1(proposalId, depositor, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -17038,19 +17038,8 @@ export const QueryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Proposal queries proposal details based on ProposalID.
-         * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async govV1Proposal(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Proposal200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Proposal(proposalId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {GovV1ProposalProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -17061,8 +17050,19 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async govV1Proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Proposals200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+        async govV1Proposal(proposalStatus?: GovV1ProposalProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Proposal200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Proposal(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Proposal queries proposal details based on ProposalID.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async govV1Proposal_2(proposalId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GovV1Proposal200Response1>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.govV1Proposal_2(proposalId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -17430,7 +17430,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {ProposalsProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -17441,7 +17441,7 @@ export const QueryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Proposals200Response>> {
+        async proposals(proposalStatus?: ProposalsProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Proposals200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -18291,17 +18291,6 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @summary Deposit queries single deposit information based proposalID, depositAddr.
-         * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {string} depositor depositor defines the deposit addresses from the proposals.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        govV1Deposit(proposalId: string, depositor: string, options?: any): AxiosPromise<Deposit200Response> {
-            return localVarFp.govV1Deposit(proposalId, depositor, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Deposits queries all deposits of a single proposal.
          * @param {string} proposalId proposal_id defines the unique id of the proposal.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -18312,8 +18301,19 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govV1Deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Deposits200Response> {
-            return localVarFp.govV1Deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        govV1Deposit(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Deposits200Response> {
+            return localVarFp.govV1Deposit(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deposit queries single deposit information based proposalID, depositAddr.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {string} depositor depositor defines the deposit addresses from the proposals.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Deposit_1(proposalId: string, depositor: string, options?: any): AxiosPromise<Deposit200Response> {
+            return localVarFp.govV1Deposit_1(proposalId, depositor, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -18327,18 +18327,8 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @summary Proposal queries proposal details based on ProposalID.
-         * @param {string} proposalId proposal_id defines the unique id of the proposal.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        govV1Proposal(proposalId: string, options?: any): AxiosPromise<GovV1Proposal200Response> {
-            return localVarFp.govV1Proposal(proposalId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {GovV1ProposalProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -18349,8 +18339,18 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        govV1Proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GovV1Proposals200Response> {
-            return localVarFp.govV1Proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        govV1Proposal(proposalStatus?: GovV1ProposalProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<GovV1Proposal200Response> {
+            return localVarFp.govV1Proposal(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Proposal queries proposal details based on ProposalID.
+         * @param {string} proposalId proposal_id defines the unique id of the proposal.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        govV1Proposal_2(proposalId: string, options?: any): AxiosPromise<GovV1Proposal200Response1> {
+            return localVarFp.govV1Proposal_2(proposalId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -18689,7 +18689,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @summary Proposals queries all proposals based on given status.
-         * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+         * @param {ProposalsProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
          * @param {string} [voter] voter defines the voter address for the proposals.
          * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
          * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -18700,7 +18700,7 @@ export const QueryApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Proposals200Response> {
+        proposals(proposalStatus?: ProposalsProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: any): AxiosPromise<Proposals200Response> {
             return localVarFp.proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19595,19 +19595,6 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
-     * @summary Deposit queries single deposit information based proposalID, depositAddr.
-     * @param {string} proposalId proposal_id defines the unique id of the proposal.
-     * @param {string} depositor depositor defines the deposit addresses from the proposals.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public govV1Deposit(proposalId: string, depositor: string, options?: AxiosRequestConfig) {
-        return QueryApiFp(this.configuration).govV1Deposit(proposalId, depositor, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Deposits queries all deposits of a single proposal.
      * @param {string} proposalId proposal_id defines the unique id of the proposal.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -19619,8 +19606,21 @@ export class QueryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public govV1Deposits(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
-        return QueryApiFp(this.configuration).govV1Deposits(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    public govV1Deposit(proposalId: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Deposit(proposalId, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deposit queries single deposit information based proposalID, depositAddr.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {string} depositor depositor defines the deposit addresses from the proposals.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Deposit_1(proposalId: string, depositor: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Deposit_1(proposalId, depositor, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -19637,20 +19637,8 @@ export class QueryApi extends BaseAPI {
 
     /**
      * 
-     * @summary Proposal queries proposal details based on ProposalID.
-     * @param {string} proposalId proposal_id defines the unique id of the proposal.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QueryApi
-     */
-    public govV1Proposal(proposalId: string, options?: AxiosRequestConfig) {
-        return QueryApiFp(this.configuration).govV1Proposal(proposalId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Proposals queries all proposals based on given status.
-     * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * @param {GovV1ProposalProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @param {string} [voter] voter defines the voter address for the proposals.
      * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -19662,8 +19650,20 @@ export class QueryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public govV1Proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
-        return QueryApiFp(this.configuration).govV1Proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    public govV1Proposal(proposalStatus?: GovV1ProposalProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Proposal(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Proposal queries proposal details based on ProposalID.
+     * @param {string} proposalId proposal_id defines the unique id of the proposal.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QueryApi
+     */
+    public govV1Proposal_2(proposalId: string, options?: AxiosRequestConfig) {
+        return QueryApiFp(this.configuration).govV1Proposal_2(proposalId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -20059,7 +20059,7 @@ export class QueryApi extends BaseAPI {
     /**
      * 
      * @summary Proposals queries all proposals based on given status.
-     * @param {'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED'} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
+     * @param {ProposalsProposalStatusEnum} [proposalStatus] proposal_status defines the status of the proposals.   - PROPOSAL_STATUS_UNSPECIFIED: PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status.  - PROPOSAL_STATUS_DEPOSIT_PERIOD: PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit period.  - PROPOSAL_STATUS_VOTING_PERIOD: PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting period.  - PROPOSAL_STATUS_PASSED: PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has passed.  - PROPOSAL_STATUS_REJECTED: PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has been rejected.  - PROPOSAL_STATUS_FAILED: PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has failed.
      * @param {string} [voter] voter defines the voter address for the proposals.
      * @param {string} [depositor] depositor defines the deposit addresses from the proposals.
      * @param {string} [paginationKey] key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.
@@ -20071,7 +20071,7 @@ export class QueryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof QueryApi
      */
-    public proposals(proposalStatus?: 'PROPOSAL_STATUS_UNSPECIFIED' | 'PROPOSAL_STATUS_DEPOSIT_PERIOD' | 'PROPOSAL_STATUS_VOTING_PERIOD' | 'PROPOSAL_STATUS_PASSED' | 'PROPOSAL_STATUS_REJECTED' | 'PROPOSAL_STATUS_FAILED', voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
+    public proposals(proposalStatus?: ProposalsProposalStatusEnum, voter?: string, depositor?: string, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, options?: AxiosRequestConfig) {
         return QueryApiFp(this.configuration).proposals(proposalStatus, voter, depositor, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -20509,6 +20509,31 @@ export class QueryApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const GovV1ProposalProposalStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed: 'PROPOSAL_STATUS_PASSED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Failed: 'PROPOSAL_STATUS_FAILED'
+} as const;
+export type GovV1ProposalProposalStatusEnum = typeof GovV1ProposalProposalStatusEnum[keyof typeof GovV1ProposalProposalStatusEnum];
+/**
+ * @export
+ */
+export const ProposalsProposalStatusEnum = {
+    Unspecified: 'PROPOSAL_STATUS_UNSPECIFIED',
+    DepositPeriod: 'PROPOSAL_STATUS_DEPOSIT_PERIOD',
+    VotingPeriod: 'PROPOSAL_STATUS_VOTING_PERIOD',
+    Passed: 'PROPOSAL_STATUS_PASSED',
+    Rejected: 'PROPOSAL_STATUS_REJECTED',
+    Failed: 'PROPOSAL_STATUS_FAILED'
+} as const;
+export type ProposalsProposalStatusEnum = typeof ProposalsProposalStatusEnum[keyof typeof ProposalsProposalStatusEnum];
+
 
 /**
  * ServiceApi - axios parameter creator
@@ -20883,13 +20908,13 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
          * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
-         * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+         * @param {GetTxsEventOrderByEnum} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
          * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
          * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTxsEvent: async (events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTxsEvent: async (events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: GetTxsEventOrderByEnum, page?: string, limit?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/cosmos/tx/v1beta1/txs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -21315,13 +21340,13 @@ export const ServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
          * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
-         * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+         * @param {GetTxsEventOrderByEnum} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
          * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
          * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetTxsEventResponse>> {
+        async getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: GetTxsEventOrderByEnum, page?: string, limit?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CosmosTxV1beta1GetTxsEventResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, page, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -21514,13 +21539,13 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
          * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
-         * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+         * @param {GetTxsEventOrderByEnum} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
          * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
          * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options?: any): AxiosPromise<CosmosTxV1beta1GetTxsEventResponse> {
+        getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: GetTxsEventOrderByEnum, page?: string, limit?: string, options?: any): AxiosPromise<CosmosTxV1beta1GetTxsEventResponse> {
             return localVarFp.getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, page, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -21724,14 +21749,14 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [paginationLimit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {boolean} [paginationCountTotal] count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set.
      * @param {boolean} [paginationReverse] reverse is set to true if results are to be returned in the descending order.  Since: cosmos-sdk 0.43
-     * @param {'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC'} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
+     * @param {GetTxsEventOrderByEnum} [orderBy]  - ORDER_BY_UNSPECIFIED: ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.  - ORDER_BY_ASC: ORDER_BY_ASC defines ascending order  - ORDER_BY_DESC: ORDER_BY_DESC defines descending order
      * @param {string} [page] page is the page number to query, starts at 1. If not provided, will default to first page.
      * @param {string} [limit] limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServiceApi
      */
-    public getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC', page?: string, limit?: string, options?: AxiosRequestConfig) {
+    public getTxsEvent(events?: Array<string>, paginationKey?: string, paginationOffset?: string, paginationLimit?: string, paginationCountTotal?: boolean, paginationReverse?: boolean, orderBy?: GetTxsEventOrderByEnum, page?: string, limit?: string, options?: AxiosRequestConfig) {
         return ServiceApiFp(this.configuration).getTxsEvent(events, paginationKey, paginationOffset, paginationLimit, paginationCountTotal, paginationReverse, orderBy, page, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -21812,5 +21837,15 @@ export class ServiceApi extends BaseAPI {
         return ServiceApiFp(this.configuration).txEncodeAmino(body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const GetTxsEventOrderByEnum = {
+    Unspecified: 'ORDER_BY_UNSPECIFIED',
+    Asc: 'ORDER_BY_ASC',
+    Desc: 'ORDER_BY_DESC'
+} as const;
+export type GetTxsEventOrderByEnum = typeof GetTxsEventOrderByEnum[keyof typeof GetTxsEventOrderByEnum];
 
 

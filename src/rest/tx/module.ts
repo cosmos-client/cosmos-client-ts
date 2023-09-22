@@ -3,6 +3,7 @@ import {
   ServiceApi,
   BroadcastTxRequest,
   BroadcastTxRequestModeEnum as BroadcastTxMode,
+  GetTxsEventOrderByEnum,
 } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
 
@@ -20,11 +21,11 @@ export function getTxsEvent(
   sdk: CosmosSDK,
   events?: string[],
   paginationKey?: string,
-  paginationOffset?: bigint,
-  paginationLimit?: bigint,
+  paginationOffset?: string,
+  paginationLimit?: string,
   paginationCountTotal?: boolean,
   paginationReverse?: boolean,
-  orderBy?: 'ORDER_BY_UNSPECIFIED' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC',
+  orderBy?: GetTxsEventOrderByEnum,
   page?: string, 
   limit?: string
 ) {

@@ -13632,7 +13632,7 @@ paths:
   /cosmos/gov/v1/proposals:
     get:
       summary: Proposals queries all proposals based on given status.
-      operationId: GovV1Proposals
+      operationId: GovV1Proposal
       responses:
         '200':
           description: A successful response.
@@ -14739,7 +14739,7 @@ paths:
   /cosmos/gov/v1/proposals/{proposal_id}/deposits:
     get:
       summary: Deposits queries all deposits of a single proposal.
-      operationId: GovV1Deposits
+      operationId: GovV1Deposit
       responses:
         '200':
           description: A successful response.
