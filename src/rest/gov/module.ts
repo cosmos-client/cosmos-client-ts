@@ -1,8 +1,13 @@
 import { GovV1ProposalProposalStatusEnum, QueryApi } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
 
+// deprecated gov/v1beta1
 export function params(sdk: CosmosSDK, paramsType: string) {
   return new QueryApi(undefined, sdk.url).govParams(paramsType);
+}
+
+export function govV1Params(sdk: CosmosSDK, paramsType: string) {
+  return new QueryApi(undefined, sdk.url).govV1Params(paramsType);
 }
 
 // deprecated gov/v1beta1
