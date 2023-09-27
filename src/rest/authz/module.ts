@@ -1,11 +1,10 @@
 import { QueryApi } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
-import { AccAddress } from '../../types';
 
 export function grants(
   sdk: CosmosSDK,
-  granter: AccAddress,
-  grantee: AccAddress,
+  granter: string,
+  grantee: string,
   msgTypeUrl?: string,
   paginationKey?: string,
   paginationOffset?: bigint,
@@ -13,8 +12,8 @@ export function grants(
   paginationCountTotal?: boolean,
 ) {
   return new QueryApi(undefined, sdk.url).grants(
-    granter.toString(),
-    grantee.toString(),
+    granter,
+    grantee,
     msgTypeUrl,
     paginationKey,
     paginationOffset?.toString(),

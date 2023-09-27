@@ -39,7 +39,7 @@ npx pbts \
   -o ./src/proto.d.ts \
   ./src/proto.js
 
-echo Edit proto.d.ts to resolve the conflict of `tendermint` namespace.
-echo Require to rename `cometbft` proto
+echo Edit proto.d.ts to resolve the conflict of tendermint namespace.
+echo Require to rename cometbft proto
 
 rm -r ./proto

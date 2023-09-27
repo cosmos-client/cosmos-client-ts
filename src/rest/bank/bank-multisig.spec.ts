@@ -29,8 +29,8 @@ describe('bank', () => {
     });
     const address = cosmosclient.AccAddress.fromPublicKey(multisigPubKey);
 
-    const fromAddress = address;
-    const toAddress = address;
+    const fromAddress = address.toString();
+    const toAddress = address.toString();
 
     // get account info
     const account = await cosmosclient.rest.auth
@@ -45,8 +45,8 @@ describe('bank', () => {
 
     // build tx
     const msgSend = new cosmosclient.proto.cosmos.bank.v1beta1.MsgSend({
-      from_address: fromAddress.toString(),
-      to_address: toAddress.toString(),
+      from_address: fromAddress,
+      to_address: toAddress,
       amount: [{ denom: 'token', amount: '1' }],
     });
 

@@ -1,9 +1,8 @@
 import { QueryApi } from '../../openapi/api';
 import { CosmosSDK } from '../../sdk';
-import { AccAddress } from '../../types';
 
-export function account(sdk: CosmosSDK, address: AccAddress) {
-  return new QueryApi(undefined, sdk.url).account(address.toString());
+export function account(sdk: CosmosSDK, address: string) {
+  return new QueryApi(undefined, sdk.url).account(address);
 }
 
 export function params(sdk: CosmosSDK) {

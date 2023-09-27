@@ -182,7 +182,7 @@ export function instanceToProtoAny(value: { constructor: Function }) {
 
   const typeURL = constructor && config.codecMaps.inv.get(constructor);
   if (!typeURL) {
-    throw Error(`This type is not registered: ${typeURL}`);
+    throw Error(`This type is not registered: ${constructor}`);
   }
 
   const packed = new google.protobuf.Any({
