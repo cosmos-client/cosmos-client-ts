@@ -33,3 +33,15 @@ export function supplyOf(sdk: CosmosSDK, denom: string) {
 export function totalSupply(sdk: CosmosSDK) {
   return new QueryApi(undefined, sdk.url).totalSupply();
 }
+
+export function denomOwners(sdk: CosmosSDK,denom: string) {
+  return new QueryApi(undefined, sdk.url).denomOwners(denom);
+}
+
+export function denomMetadata(sdk: CosmosSDK,denom: string) {
+  return new QueryApi(undefined, sdk.url).denomMetadata(denom);
+}
+
+export function denomsMetadata(sdk: CosmosSDK) {
+  return new QueryApi(undefined, sdk.url).denomsMetadata();
+}
